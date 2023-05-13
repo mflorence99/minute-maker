@@ -1,7 +1,17 @@
+import { RootModule } from './app/module';
+
+import { environment } from './app/environment';
+
+import * as Sentry from '@sentry/angular-ivy';
+
+import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { AppModule } from './app/app.module';
+if (environment.production) enableProdMode();
 
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+platformBrowserDynamic()
+  .bootstrapModule(RootModule)
+  .catch((error) => {
+    console.error(error);
+    Sentry.captureException(error);
+  });

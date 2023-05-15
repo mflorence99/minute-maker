@@ -1,10 +1,16 @@
+import { InitializerService } from './services/initializer';
 import { RootPage } from './pages/root/page';
 
 import { environment } from './environment';
+import { initializeAppProvider } from './services/initializer';
 
+import * as Sentry from '@sentry/angular-ivy';
+
+import { APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { ErrorHandler } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
@@ -43,7 +49,6 @@ const STATES_SAVED = [];
     NgxsModule.forRoot(STATES, {
       developmentMode: !environment.production
     }),
-    NgxsLoggerPluginModule.forRoot({ collapsed: false }),
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production
     }),
@@ -51,11 +56,25 @@ const STATES_SAVED = [];
     NgxsStoragePluginModule.forRoot({
       key: STATES_SAVED
     }),
-
+    NgxsLoggerPluginModule.forRoot({ collapsed: false }),
     RouterModule.forRoot(ROUTES)
   ],
 
-  providers: []
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeAppProvider,
+      deps: [InitializerService],
+      multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        logErrors: true,
+        showDialog: false
+      })
+    }
+  ]
 })
 export class RootModule {
   constructor(library: FaIconLibrary) {

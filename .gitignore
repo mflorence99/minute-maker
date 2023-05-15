@@ -1,6 +1,10 @@
 /.angular
+/coverage
 /dist
 /node_modules
+/reports
 /src-tauri/target
+
 **/*.log
 .eslintcache
+junit.xml

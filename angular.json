@@ -21,8 +21,8 @@
             "production": {
               "budgets": [
                 {
-                  "maximumError": "1mb",
-                  "maximumWarning": "500kb",
+                  "maximumError": "5mb",
+                  "maximumWarning": "1mb",
                   "type": "initial"
                 },
                 {
@@ -44,7 +44,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": ["src/app/globals.scss"],
-            "tsConfig": "tsconfig.json"
+            "tsConfig": "tsconfig.app.json"
           }
         },
         "extract-i18n": {

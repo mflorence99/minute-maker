@@ -7,8 +7,8 @@
     "distDir": "../dist/minute-maker"
   },
   "package": {
-    "productName": "minute-maker",
-    "version": "0.1.0"
+    "productName": "Minute Maker",
+    "version": "../package.json"
   },
   "tauri": {
     "allowlist": {

@@ -1,11 +1,18 @@
 {
-  "extends": ["eslint-config-mflorence99", "eslint-config-prettier"],
+  "extends": [
+    "eslint-config-mflorence99",
+    "eslint-config-prettier",
+    "plugin:jest/all",
+    "plugin:jest-extended/all"
+  ],
   "parserOptions": {
-    "project": ["./tsconfig.json"]
+    "project": ["./tsconfig.app.json", "./tsconfig.spec.json"]
   },
   "plugins": [
     "eslint-plugin-import",
     "eslint-plugin-import-splitnsort",
+    "eslint-plugin-jest",
+    "eslint-plugin-jest-extended",
     "eslint-plugin-prefer-arrow"
   ],
   "root": true

@@ -1,3 +1,4 @@
+/* eslint-disable jest/require-hook */
 import { RootModule } from './app/module';
 
 import { environment } from './app/environment';

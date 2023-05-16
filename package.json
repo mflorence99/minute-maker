@@ -15,7 +15,7 @@
     "ng": "ng",
     "start": "ng serve",
     "tauri": "tauri",
-    "test": "jest --runInBand --coverage"
+    "test": "jest --runInBand --silent --detectOpenHandles"
   },
   "dependencies": {
     "@angular/animations": "^16",
@@ -78,6 +78,7 @@
     "jest-extended": "^3",
     "jest-junit": "^16",
     "jest-preset-angular": "^13",
+    "jsome": "^2.5.0",
     "ng-mocks": "^14",
     "postcss": "^8",
     "prettier": "^2",

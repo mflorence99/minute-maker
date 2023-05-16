@@ -12,7 +12,10 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true
+      "fs": {
+        "all": true,
+        "scope": ["$APPCONFIG/minute-maker/.config-dev/*"]
+      }
     },
     "bundle": {
       "active": true,

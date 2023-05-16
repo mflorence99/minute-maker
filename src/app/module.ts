@@ -1,5 +1,6 @@
 import { InitializerService } from './services/initializer';
 import { RootPage } from './pages/root/page';
+import { StorageService } from './services/storage';
 
 import { environment } from './environment';
 import { initializeAppProvider } from './services/initializer';
@@ -22,6 +23,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RouterModule } from '@angular/router';
+import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
 
 const COMPONENTS = [];
 
@@ -66,6 +68,10 @@ const STATES_SAVED = [];
       useFactory: initializeAppProvider,
       deps: [InitializerService],
       multi: true
+    },
+    {
+      provide: STORAGE_ENGINE,
+      useClass: StorageService
     },
     {
       provide: ErrorHandler,

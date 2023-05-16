@@ -3,27 +3,20 @@ import { RootPage } from './page';
 
 import 'jest-extended';
 
-import { TestBed } from '@angular/core/testing';
+import { MockBuilder } from 'ng-mocks';
+import { MockRender } from 'ng-mocks';
 
-import { ngMocks } from 'ng-mocks';
+describe('RootPage', () => {
+  beforeEach(() => MockBuilder(RootPage, RootModule));
 
-function setup(): RootPage {
-  TestBed.configureTestingModule(
-    ngMocks.guts([RootPage], RootModule)
-  ).compileComponents();
-  return TestBed.createComponent(RootPage).componentInstance;
-}
-
-describe('the RootPage', () => {
   it('should create the page', () => {
-    expect.assertions(1);
-    const page = setup();
-    expect(page).toBeTruthy();
+    const fixture = MockRender(RootPage);
+    expect(fixture).toBeDefined();
   });
 
   it('should load the environment as a property', () => {
-    expect.assertions(1);
-    const page = setup();
+    const fixture = MockRender(RootPage);
+    const page = fixture.point.componentInstance;
     expect(page.env.production).toBeFalse();
   });
 });

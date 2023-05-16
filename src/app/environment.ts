@@ -3,6 +3,8 @@ import PACKAGE from '../../package.json';
 const isDev = ['localhost', '127.0.0.1'].includes(location.hostname);
 
 export const environment = {
+  mode: (): string => (environment.production ? 'prod' : 'dev'),
+
   package: {
     author: PACKAGE.author,
     name: PACKAGE.name,

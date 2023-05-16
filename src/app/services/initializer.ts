@@ -1,10 +1,13 @@
+import { StorageService } from './storage';
+
 import { environment } from '../environment';
 
 import * as Sentry from '@sentry/angular-ivy';
 
-import { EMPTY } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { forkJoin } from 'rxjs';
 
 export function initializeAppProvider(
   initializer: InitializerService
@@ -29,6 +32,7 @@ export class InitializerService {
       });
     }
 
-    return EMPTY;
+    // 👉 initialize services
+    return forkJoin([StorageService.initialize() /* , ... */]);
   }
 }

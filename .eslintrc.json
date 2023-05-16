@@ -15,5 +15,13 @@
     "eslint-plugin-jest-extended",
     "eslint-plugin-prefer-arrow"
   ],
-  "root": true
+  "root": true,
+  "rules": {
+    "jest/no-hooks": "off",
+    "jest/no-test-return-statement": "off",
+    "jest/require-hook": "off",
+    "jest/prefer-expect-assertions": "off",
+    "jest/prefer-lowercase-title": ["error", { "ignore": ["describe"] }],
+    "no-constant-condition": ["error", { "checkLoops": false }]
+  }
 }

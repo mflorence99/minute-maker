@@ -1,7 +1,6 @@
 import { environment } from '../environment';
 
 import { BaseDirectory } from '@tauri-apps/api/fs';
-import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StorageEngine } from '@ngxs/storage-plugin';
 
@@ -10,9 +9,8 @@ import { from } from 'rxjs';
 import { readTextFile } from '@tauri-apps/api/fs';
 import { writeTextFile } from '@tauri-apps/api/fs';
 
-@Injectable({ providedIn: 'root' })
 export class StorageService implements StorageEngine {
-  static #dir = `${environment.package.name}/.config-${environment.mode()}`;
+  static #dir = `${environment.package.name}/${environment.mode()}`;
 
   static #fn = `${StorageService.#dir}/storage.json`;
 

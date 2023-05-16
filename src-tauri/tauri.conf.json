@@ -14,7 +14,14 @@
     "allowlist": {
       "fs": {
         "all": true,
-        "scope": ["$APPCONFIG/minute-maker/.config-dev/*"]
+        "scope": [
+          "$APPCONFIG/minute-maker/dev/*",
+          "$APPCONFIG/minute-maker/prod/*",
+          "$APPCONFIG/minute-maker/*"
+        ]
+      },
+      "window": {
+        "all": true
       }
     },
     "bundle": {
@@ -22,9 +29,11 @@
       "category": "DeveloperTool",
       "copyright": "",
       "deb": {
-        "depends": []
+        "depends": [
+        ]
       },
-      "externalBin": [],
+      "externalBin": [
+      ],
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -37,11 +46,13 @@
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
-        "frameworks": [],
+        "frameworks": [
+        ],
         "providerShortName": null,
         "signingIdentity": null
       },
-      "resources": [],
+      "resources": [
+      ],
       "shortDescription": "",
       "targets": "all",
       "windows": {

@@ -1,6 +1,7 @@
 import { InitializerService } from './services/initializer';
 import { RootPage } from './pages/root/page';
 import { StorageService } from './services/storage';
+import { WindowState } from './state/window';
 
 import { environment } from './environment';
 import { initializeAppProvider } from './services/initializer';
@@ -33,8 +34,8 @@ const PAGES = [RootPage];
 
 const ROUTES = [];
 
-const STATES = [];
-const STATES_SAVED = [];
+const STATES = [WindowState];
+const STATES_SAVED = [WindowState];
 
 @NgModule({
   bootstrap: [RootPage],

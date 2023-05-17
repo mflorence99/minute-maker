@@ -1,9 +1,13 @@
 import { environment } from '../environment';
 
+import * as Sentry from '@sentry/angular-ivy';
+
 import { BaseDirectory } from '@tauri-apps/api/fs';
 import { Observable } from 'rxjs';
+import { PhysicalSize } from '@tauri-apps/api/window';
 import { StorageEngine } from '@ngxs/storage-plugin';
 
+import { appWindow } from '@tauri-apps/api/window';
 import { createDir } from '@tauri-apps/api/fs';
 import { from } from 'rxjs';
 import { readTextFile } from '@tauri-apps/api/fs';
@@ -26,8 +30,25 @@ export class StorageService implements StorageEngine {
     return readTextFile(StorageService.#fn, {
       dir: BaseDirectory.AppConfig
     })
-      .then((contents) => (StorageService.#state = JSON.parse(contents)))
-      .catch(() => ({}));
+      .then((contents) => {
+        StorageService.#state = JSON.parse(contents);
+        // /////////////////////////////////////////////////////////////////
+        if (StorageService.#state?.['window']) {
+          const window = JSON.parse(StorageService.#state['window']);
+          const size = window['outerSize'];
+          if (size)
+            appWindow.setSize(new PhysicalSize(size.width, size.height));
+        }
+        // /////////////////////////////////////////////////////////////////
+        return StorageService.#state;
+      })
+      .catch((error) => {
+        console.error(`🔥 ${error.message}`);
+        Sentry.captureMessage(
+          `StorageService.#deserialize failed withx ${error.message}`
+        );
+        return {};
+      });
   }
 
   async clear(): Promise<void> {

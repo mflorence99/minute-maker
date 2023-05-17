@@ -36,6 +36,7 @@
           },
           "defaultConfiguration": "production",
           "options": {
+            "allowedCommonJsDependencies": ["deep-equal"],
             "assets": ["src/favicon.ico", "src/assets"],
             "index": "src/index.html",
             "inlineStyleLanguage": "scss",

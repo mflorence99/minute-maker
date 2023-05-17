@@ -19,12 +19,9 @@
   "rules": {
     "jest/no-hooks": "off",
     "jest/no-test-return-statement": "off",
-    "jest/unbound-method": "off",
     "jest/require-hook": "off",
     "jest/prefer-expect-assertions": "off",
     "jest/prefer-lowercase-title": ["error", { "ignore": ["describe"] }],
-    "no-constant-condition": ["error", { "checkLoops": false }],
-    "@typescript-eslint/no-misused-promises": "off",
-    "@typescript-eslint/unbound-method": "off"
+    "no-constant-condition": ["error", { "checkLoops": false }]
   }
 }

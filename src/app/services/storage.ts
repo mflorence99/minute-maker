@@ -45,7 +45,7 @@ export class StorageService implements StorageEngine {
       .catch((error) => {
         console.error(`🔥 ${error.message}`);
         Sentry.captureMessage(
-          `StorageService.#deserialize failed withx ${error.message}`
+          `StorageService.#deserialize failed with ${error.message}`
         );
         return {};
       });

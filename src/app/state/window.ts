@@ -1,3 +1,5 @@
+import { environment } from '../environment';
+
 import { Action } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { LogicalSize } from '@tauri-apps/api/window';
@@ -11,6 +13,7 @@ import { Subject } from 'rxjs';
 
 import { appWindow } from '@tauri-apps/api/window';
 import { debounceTime } from 'rxjs';
+import { delay } from 'rxjs';
 import { patch } from '@ngxs/store/operators';
 
 import deepEqual from 'deep-equal';
@@ -46,7 +49,7 @@ export class WindowState implements NgxsOnInit {
   constructor(store: Store) {
     // 👇 dequeue move, resize actions
     this.#queue$
-      .pipe(debounceTime(500))
+      .pipe(environment.production ? debounceTime(500) : delay(0))
       .subscribe((action) => store.dispatch(action));
   }
 
@@ -67,26 +70,29 @@ export class WindowState implements NgxsOnInit {
   }
 
   ngxsOnInit(ctx: StateContext<WindowStateModel>): void {
-    // 🔥 Tauri does not appear to fire move events!
-    appWindow.onMoved(() => {
-      Promise.all([appWindow.outerPosition()]).then(([position]) => {
+    appWindow.onMoved(() => this.onMovedHandler(ctx));
+    appWindow.onResized(() => this.onResizedHandler(ctx));
+  }
+
+  // 🔥 Tauri does not appear to fire move events!
+  onMovedHandler(ctx: StateContext<WindowStateModel>): void {
+    Promise.all([appWindow.outerPosition()]).then(([position]) => {
+      const state = ctx.getState();
+      if (!deepEqual(state.position, position))
+        this.#queue$.next(new SetPosition(position));
+    });
+  }
+
+  onResizedHandler(ctx: StateContext<WindowStateModel>): void {
+    Promise.all([appWindow.innerSize(), appWindow.outerSize()]).then(
+      ([innerSize, outerSize]) => {
         const state = ctx.getState();
-        if (!deepEqual(state.position, position))
-          this.#queue$.next(new SetPosition(position));
-      });
-    });
-    // 👇 if the size has changed, record it
-    appWindow.onResized(() => {
-      Promise.all([appWindow.innerSize(), appWindow.outerSize()]).then(
-        ([innerSize, outerSize]) => {
-          const state = ctx.getState();
-          if (
-            !deepEqual(state.innerSize, innerSize) ||
-            !deepEqual(state.outerSize, outerSize)
-          )
-            this.#queue$.next(new SetSize(innerSize, outerSize));
-        }
-      );
-    });
+        if (
+          !deepEqual(state.innerSize, innerSize) ||
+          !deepEqual(state.outerSize, outerSize)
+        )
+          this.#queue$.next(new SetSize(innerSize, outerSize));
+      }
+    );
   }
 }

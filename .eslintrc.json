@@ -17,6 +17,8 @@
   ],
   "root": true,
   "rules": {
+    "jest/max-expects": "off",
+    "jest/no-done-callback": "off",
     "jest/no-hooks": "off",
     "jest/no-test-return-statement": "off",
     "jest/require-hook": "off",

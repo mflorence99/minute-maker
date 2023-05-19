@@ -1,4 +1,6 @@
+/.angular
+/coverage
 /dist
 /node_modules
-/src-tauri
-
+/reports
+/src-tauri/target

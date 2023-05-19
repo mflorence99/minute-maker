@@ -1,4 +1,4 @@
-import { StorageService } from './storage';
+import { FsStorageEngine } from '../state/storage';
 
 import { environment } from '../environment';
 
@@ -8,6 +8,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { forkJoin } from 'rxjs';
+import { from } from 'rxjs';
+import { mergeMap } from 'rxjs';
 
 export function initializeAppProvider(
   initializer: InitializerService
@@ -33,6 +35,32 @@ export class InitializerService {
     }
 
     // 👉 initialize services
-    return forkJoin([StorageService.initialize() /* , ... */]);
+    return forkJoin([FsStorageEngine.initialize() /* , ... */]).pipe(
+      mergeMap(([state]) => this.#initializeWindowState(state))
+    );
+  }
+
+  // 🔥 NOTE: we use this plugin now instead:
+  //    https://github.com/tauri-apps/plugins-workspace/tree/v1/plugins/window-state
+  #initializeWindowState(state: any): Observable<any> {
+    /* if (state?.['window']) {
+      const window = JSON.parse(state['window']);
+      console.log(
+        '%cWindow initialized:',
+        'color: aqua',
+        `inner[${window.innerSize.width}, ${window.innerSize.height}]wh`,
+        `position[${window.position.x}, ${window.position.y}]xy`
+      );
+      return from(
+        Promise.all([
+          appWindow.setPosition(
+            new PhysicalPosition(window.position.x, window.position.y)
+          ),
+          appWindow.setSize(
+            new PhysicalSize(window.innerSize.width, window.innerSize.height)
+          )
+        ])
+      );
+    } else */ return from([state]);
   }
 }

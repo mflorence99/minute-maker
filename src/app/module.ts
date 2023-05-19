@@ -1,6 +1,6 @@
+import { FsStorageEngine } from './state/storage';
 import { InitializerService } from './services/initializer';
 import { RootPage } from './pages/root/page';
-import { StorageService } from './services/storage';
 import { WindowState } from './state/window';
 
 import { environment } from './environment';
@@ -72,7 +72,7 @@ const STATES_SAVED = [WindowState];
     },
     {
       provide: STORAGE_ENGINE,
-      useClass: StorageService
+      useClass: FsStorageEngine
     },
     {
       provide: ErrorHandler,

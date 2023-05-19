@@ -2,7 +2,6 @@ import { environment } from '../environment';
 
 import { Action } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { LogicalSize } from '@tauri-apps/api/window';
 import { NgxsOnInit } from '@ngxs/store';
 import { PhysicalPosition } from '@tauri-apps/api/window';
 import { PhysicalSize } from '@tauri-apps/api/window';
@@ -18,6 +17,12 @@ import { patch } from '@ngxs/store/operators';
 
 import deepEqual from 'deep-equal';
 
+// 🔥 we built this state so we could restore the window state
+//    on app restart, then we discovered thus plugin:
+//    https://github.com/tauri-apps/plugins-workspace/tree/v1/plugins/window-state
+
+// 👇 so now this is just a reference implementation for state and state tests
+
 export class SetPosition {
   static readonly type = '[Window] SetPosition';
   constructor(public position: PhysicalPosition) {}
@@ -25,11 +30,11 @@ export class SetPosition {
 
 export class SetSize {
   static readonly type = '[Window] SetSize';
-  constructor(public innerSize: LogicalSize, public outerSize: PhysicalSize) {}
+  constructor(public innerSize: PhysicalSize, public outerSize: PhysicalSize) {}
 }
 
 export interface WindowStateModel {
-  innerSize: Partial<LogicalSize>;
+  innerSize: Partial<PhysicalSize>;
   outerSize: Partial<PhysicalSize>;
   position: Partial<PhysicalPosition>;
 }
@@ -77,6 +82,11 @@ export class WindowState implements NgxsOnInit {
   // 🔥 Tauri does not appear to fire move events!
   onMovedHandler(ctx: StateContext<WindowStateModel>): void {
     Promise.all([appWindow.outerPosition()]).then(([position]) => {
+      console.log(
+        '%cWindow moved:',
+        'color: lime',
+        `[${position.x}, ${position.y}]xy`
+      );
       const state = ctx.getState();
       if (!deepEqual(state.position, position))
         this.#queue$.next(new SetPosition(position));
@@ -86,6 +96,12 @@ export class WindowState implements NgxsOnInit {
   onResizedHandler(ctx: StateContext<WindowStateModel>): void {
     Promise.all([appWindow.innerSize(), appWindow.outerSize()]).then(
       ([innerSize, outerSize]) => {
+        console.log(
+          '%cWindow resized:',
+          'color: gold',
+          `inner[${innerSize.width}, ${innerSize.height}]wh`,
+          `outer[${outerSize.width}, ${outerSize.height}]wh`
+        );
         const state = ctx.getState();
         if (
           !deepEqual(state.innerSize, innerSize) ||

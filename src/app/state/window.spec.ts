@@ -5,7 +5,6 @@ import { WindowStateModel } from './window';
 
 import 'jest-extended';
 
-import { LogicalSize } from '@tauri-apps/api/window';
 import { NgxsModule } from '@ngxs/store';
 import { PhysicalPosition } from '@tauri-apps/api/window';
 import { PhysicalSize } from '@tauri-apps/api/window';
@@ -32,7 +31,7 @@ import { mockIPC } from '@tauri-apps/api/mocks';
   }
 */
 
-const theInnerSize = new LogicalSize(10, 20);
+const theInnerSize = new PhysicalSize(10, 20);
 const theOuterSize = new PhysicalSize(30, 40);
 const thePosition = new PhysicalPosition(100, 200);
 
@@ -46,13 +45,13 @@ describe('WindowState', () => {
       const action = `${cmd}.${args.__tauriModule}.${args.message.data?.cmd?.type}`;
       switch (action) {
         case 'tauri.Window.innerSize':
-          return new Promise((resolve) => resolve(theInnerSize));
+          return Promise.resolve(theInnerSize);
         case 'tauri.Window.outerSize':
-          return new Promise((resolve) => resolve(theOuterSize));
+          return Promise.resolve(theOuterSize);
         case 'tauri.Window.outerPosition':
-          return new Promise((resolve) => resolve(thePosition));
+          return Promise.resolve(thePosition);
         default:
-          return undefined;
+          return Promise.resolve(undefined);
       }
     });
   });
@@ -78,17 +77,10 @@ describe('WindowState', () => {
   });
 
   it('invokes callbacks on window move and resize', (done) => {
-    const ctx = {
-      getState: (): WindowStateModel => ({
-        innerSize: { height: 0, width: 0 },
-        outerSize: { height: 0, width: 0 },
-        position: { x: 0, y: 0 }
-      })
-    };
     const store = TestBed.inject(Store);
     const window = TestBed.inject(WindowState);
-    const window$ = store.select(WindowState);
-    window$.subscribe((state) => {
+    // 👇 the state will eventually change
+    store.select(WindowState).subscribe((state) => {
       expect(state.position.x).toBe(thePosition.x);
       expect(state.position.y).toBe(thePosition.y);
       expect(state.innerSize.width).toBe(theInnerSize.width);
@@ -97,6 +89,14 @@ describe('WindowState', () => {
       expect(state.outerSize.height).toBe(theOuterSize.height);
       done();
     });
+    // 👇 invoke onMoved and inResized callbacks directly
+    const ctx = {
+      getState: (): WindowStateModel => ({
+        innerSize: { height: 0, width: 0 },
+        outerSize: { height: 0, width: 0 },
+        position: { x: 0, y: 0 }
+      })
+    };
     window.onMovedHandler(ctx as any);
     window.onResizedHandler(ctx as any);
   });

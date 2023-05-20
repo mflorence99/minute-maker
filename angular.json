@@ -36,7 +36,7 @@
           },
           "defaultConfiguration": "production",
           "options": {
-            "allowedCommonJsDependencies": ["deep-equal"],
+            "allowedCommonJsDependencies": ["deep-equal", "wavesurfer.js"],
             "assets": ["src/favicon.ico", "src/assets"],
             "index": "src/index.html",
             "inlineStyleLanguage": "scss",

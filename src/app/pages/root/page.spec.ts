@@ -11,12 +11,6 @@ describe('RootPage', () => {
 
   it('should create the page', () => {
     const fixture = MockRender(RootPage);
-    expect(fixture).toBeDefined();
-  });
-
-  it('should load the environment as a property', () => {
-    const fixture = MockRender(RootPage);
-    const page = fixture.point.componentInstance;
-    expect(page.env.production).toBeFalse();
+    expect(fixture.point.componentInstance).toBeDefined();
   });
 });

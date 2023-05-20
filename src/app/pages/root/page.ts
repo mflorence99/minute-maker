@@ -1,5 +1,3 @@
-import { environment } from '../../environment';
-
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './page.html',
   styleUrls: ['./page.scss']
 })
-export class RootPage {
-  env = environment;
-}
+export class RootPage {}

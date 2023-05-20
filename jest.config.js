@@ -7,7 +7,7 @@ module.exports = {
     'default',
     ['jest-junit', { outputDirectory: './reports/junit' }]
   ],
-  roots: ['./src/'],
+  roots: ['./src'],
   setupFilesAfterEnv: [
     'jest-extended/all',
     'jest-preset-angular',

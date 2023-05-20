@@ -13,6 +13,7 @@ import { Subject } from 'rxjs';
 import { appWindow } from '@tauri-apps/api/window';
 import { debounceTime } from 'rxjs';
 import { delay } from 'rxjs';
+import { inject } from '@angular/core';
 import { patch } from '@ngxs/store/operators';
 
 import deepEqual from 'deep-equal';
@@ -51,7 +52,8 @@ export interface WindowStateModel {
 export class WindowState implements NgxsOnInit {
   #queue$ = new Subject();
 
-  constructor(store: Store) {
+  constructor() {
+    const store = inject(Store);
     // 👇 dequeue move, resize actions
     this.#queue$
       .pipe(environment.production ? debounceTime(500) : delay(0))

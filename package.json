@@ -15,7 +15,7 @@
     "ng": "ng",
     "start": "ng serve",
     "tauri": "tauri",
-    "test": "jest --detectOpenHandles --runInBand --silent",
+    "test": "jest --detectOpenHandles --silent --verbose",
     "test:only": "jest --coverage=false -- %1"
   },
   "dependencies": {
@@ -54,6 +54,7 @@
     "tauri-plugin-window-state-api": "github:tauri-apps/tauri-plugin-window-state",
     "tslib": "^2",
     "typeface-roboto": "^1",
+    "wavesurfer.js": "^6",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
@@ -68,6 +69,7 @@
     "@tauri-apps/cli": "^1",
     "@types/deep-equal": "^1",
     "@types/jest": "^29",
+    "@types/wavesurfer.js": "^6",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "eslint": "^8",

@@ -1,6 +1,7 @@
 import { FsStorageEngine } from './state/storage';
 import { InitializerService } from './services/initializer';
 import { RootPage } from './pages/root/page';
+import { WaveSurferComponent } from './components/wavesurfer';
 import { WindowState } from './state/window';
 
 import { environment } from './environment';
@@ -26,7 +27,7 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RouterModule } from '@angular/router';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
 
-const COMPONENTS = [];
+const COMPONENTS = [WaveSurferComponent];
 
 const DIRECTIVES = [];
 

@@ -5,5 +5,5 @@
     "module": "CommonJs"
   },
   "files": ["src/test.ts"],
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
+  "include": ["src/**/*.spec.ts", "**/__mocks__/*.ts", "src/**/*.d.ts"]
 }

@@ -1,5 +1,9 @@
 <main>
-  <mm-wavesurfer />
+  <mm-wavesurfer
+    (audioprocess)="process($event)"
+    (ready)="ready()"
+    audioFile="./assets/minutes.mp3"
+  />
 </main>
 
 <router-outlet></router-outlet>

@@ -21,6 +21,8 @@ jest.mock('wavesurfer.js', () => {
 describe('WaveSurferComponent', () => {
   beforeEach(() => MockBuilder(WaveSurferComponent, RootModule));
 
+  afterEach(() => jest.resetAllMocks());
+
   it('should create the component', () => {
     const fixture = MockRender(WaveSurferComponent);
     const self = fixture.point.componentInstance;
@@ -30,6 +32,7 @@ describe('WaveSurferComponent', () => {
   it('loaded an audio file', () => {
     const fixture = MockRender(WaveSurferComponent);
     const self = fixture.point.componentInstance;
+    self.audioFile = './assets/minutes.mp3';
     expect(self.wavesurfer.load).toHaveBeenCalledOnceWith(
       './assets/minutes.mp3'
     );

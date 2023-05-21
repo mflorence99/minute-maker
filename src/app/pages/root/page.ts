@@ -5,4 +5,11 @@ import { Component } from '@angular/core';
   templateUrl: './page.html',
   styleUrls: ['./page.scss']
 })
-export class RootPage {}
+export class RootPage {
+  process(arg): void {
+    console.log(`PROCESS ${arg}`);
+  }
+  ready(): void {
+    console.log('READY!');
+  }
+}

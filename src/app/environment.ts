@@ -1,6 +1,6 @@
 import PACKAGE from '../../package.json';
 
-const isDev = ['localhost', '127.0.0.1'].includes(location.hostname);
+const IS_DEV = ['localhost', '127.0.0.1'].includes(location.hostname);
 
 export const environment = {
   mode: (): string => (environment.production ? 'prod' : 'dev'),
@@ -17,5 +17,5 @@ export const environment = {
     version: PACKAGE.version
   },
 
-  production: !isDev
+  production: !IS_DEV
 };

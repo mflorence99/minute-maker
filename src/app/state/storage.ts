@@ -15,13 +15,13 @@ import { writeTextFile } from '@tauri-apps/api/fs';
 //    so in order to preserve synchronous semantics, the store is
 //    mirrored in the private #cache
 
-const cache: Record<string, any> = {};
-const dir = `${environment.package.name}/${environment.mode()}`;
-const fn = `${dir}/storage.json`;
+const CACHE: Record<string, any> = {};
+const DIR = `${environment.package.name}/${environment.mode()}`;
+const FN = `${DIR}/storage.json`;
 
 export class FsStorageEngine implements StorageEngine {
   get length(): number {
-    return Object.keys(cache).length;
+    return Object.keys(CACHE).length;
   }
 
   static initialize(): Observable<Record<string, any>> {
@@ -29,14 +29,14 @@ export class FsStorageEngine implements StorageEngine {
   }
 
   static #deserialize(): Promise<Record<string, any>> {
-    return readTextFile(fn, {
+    return readTextFile(FN, {
       dir: BaseDirectory.AppConfig
     })
       .then((contents) => {
-        for (const key in cache) delete cache[key];
+        for (const key in CACHE) delete CACHE[key];
         const parsed = JSON.parse(contents);
-        for (const key in parsed) cache[key] = parsed[key];
-        return cache;
+        for (const key in parsed) CACHE[key] = parsed[key];
+        return CACHE;
       })
       .catch((error) => {
         console.error(`🔥 ${error.message}`);
@@ -46,30 +46,30 @@ export class FsStorageEngine implements StorageEngine {
   }
 
   async clear(): Promise<void> {
-    for (const key in cache) delete cache[key];
+    for (const key in CACHE) delete CACHE[key];
     await this.#serialize();
   }
 
   getItem(key: string): any {
-    return cache[key];
+    return CACHE[key];
   }
 
   async removeItem(key: string): Promise<void> {
-    delete cache[key];
+    delete CACHE[key];
     await this.#serialize();
   }
 
   async setItem(key: string, value: any): Promise<void> {
-    cache[key] = value;
+    CACHE[key] = value;
     await this.#serialize();
   }
 
   async #serialize(): Promise<void> {
-    await createDir(dir, {
+    await createDir(DIR, {
       dir: BaseDirectory.AppConfig,
       recursive: true
     });
-    await writeTextFile(fn, JSON.stringify(cache), {
+    await writeTextFile(FN, JSON.stringify(CACHE), {
       dir: BaseDirectory.AppConfig
     });
   }

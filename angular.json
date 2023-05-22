@@ -44,7 +44,7 @@
             "outputPath": "dist/minute-maker",
             "polyfills": ["zone.js"],
             "scripts": [],
-            "styles": ["src/app/globals.scss"],
+            "styles": ["src/app/styles.scss"],
             "tsConfig": "tsconfig.app.json"
           }
         },

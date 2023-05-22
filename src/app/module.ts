@@ -2,6 +2,11 @@ import { FsStorageEngine } from './state/storage';
 import { InitializerService } from './services/initializer';
 import { RootPage } from './pages/root/page';
 import { WaveSurferComponent } from './components/wavesurfer';
+import { WaveSurferCursorComponent } from './components/wavesurfer-cursor';
+import { WaveSurferMarkersComponent } from './components/wavesurfer-markers';
+import { WaveSurferMinimapComponent } from './components/wavesurfer-minimap';
+import { WaveSurferSpectrogramComponent } from './components/wavesurfer-spectrogram';
+import { WaveSurferTimelineComponent } from './components/wavesurfer-timeline';
 import { WindowState } from './state/window';
 
 import { environment } from './environment';
@@ -27,7 +32,14 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RouterModule } from '@angular/router';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
 
-const COMPONENTS = [WaveSurferComponent];
+const COMPONENTS = [
+  WaveSurferComponent,
+  WaveSurferCursorComponent,
+  WaveSurferMarkersComponent,
+  WaveSurferMinimapComponent,
+  WaveSurferSpectrogramComponent,
+  WaveSurferTimelineComponent
+];
 
 const DIRECTIVES = [];
 

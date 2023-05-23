@@ -22,7 +22,7 @@ import WaveSurfer from 'wavesurfer.js';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-wavesurfer',
-  template: ` <ng-content />`,
+  template: `<ng-content />`,
   styles: [
     `
       :host {
@@ -91,7 +91,11 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     });
     // 👇 bind any events
     Object.getOwnPropertyNames(this)
-      .filter((prop) => this[prop] instanceof WatchableEventEmitter)
+      .filter(
+        (prop) =>
+          this[prop] instanceof WatchableEventEmitter &&
+          this[prop].subscriberCount > 0
+      )
       .forEach((prop) => {
         this.wavesurfer.on(kebabasize(prop), (args) => this[prop].emit(args));
       });

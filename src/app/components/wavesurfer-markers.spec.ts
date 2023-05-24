@@ -17,8 +17,6 @@ jest.mock('wavesurfer.js/dist/plugin/wavesurfer.markers.min.js', () => {
 describe('WaveSurferMarkersComponent', () => {
   beforeEach(() => MockBuilder(WaveSurferMarkersComponent, RootModule));
 
-  afterEach(() => jest.resetAllMocks());
-
   it('should create the component', () => {
     const fixture = MockRender(WaveSurferMarkersComponent);
     const self = fixture.point.componentInstance;

@@ -17,8 +17,6 @@ jest.mock('wavesurfer.js/dist/plugin/wavesurfer.spectrogram.min.js', () => {
 describe('WaveSurferSpectrogramComponent', () => {
   beforeEach(() => MockBuilder(WaveSurferSpectrogramComponent, RootModule));
 
-  afterEach(() => jest.resetAllMocks());
-
   it('should create the component', () => {
     const fixture = MockRender(WaveSurferSpectrogramComponent);
     const self = fixture.point.componentInstance;

@@ -27,11 +27,11 @@ import TimelinePlugin from 'wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js
 export class WaveSurferTimelineComponent implements WaveSurferPlugin {
   @Input() params: TimelinePluginParams = {};
 
-  #host: ElementRef = inject(ElementRef);
+  #host: HTMLElement = inject(ElementRef).nativeElement;
 
   create(): PluginDefinition {
     return TimelinePlugin.create({
-      container: this.#host.nativeElement,
+      container: this.#host,
       ...this.params
     });
   }

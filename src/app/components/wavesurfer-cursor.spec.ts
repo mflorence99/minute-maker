@@ -17,8 +17,6 @@ jest.mock('wavesurfer.js/dist/plugin/wavesurfer.cursor.min.js', () => {
 describe('WaveSurfeCursorrComponent', () => {
   beforeEach(() => MockBuilder(WaveSurferCursorComponent, RootModule));
 
-  afterEach(() => jest.resetAllMocks());
-
   it('should create the component', () => {
     const fixture = MockRender(WaveSurferCursorComponent);
     const self = fixture.point.componentInstance;

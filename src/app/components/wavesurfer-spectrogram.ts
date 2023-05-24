@@ -27,11 +27,11 @@ import SpectrogramPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.spectrogram.
 export class WaveSurferSpectrogramComponent implements WaveSurferPlugin {
   @Input() params: SpectrogramPluginParams = {};
 
-  #host: ElementRef = inject(ElementRef);
+  #host: HTMLElement = inject(ElementRef).nativeElement;
 
   create(): PluginDefinition {
     return SpectrogramPlugin.create({
-      container: this.#host.nativeElement,
+      container: this.#host,
       ...this.params
     });
   }

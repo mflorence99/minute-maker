@@ -186,9 +186,18 @@ main {
 }
 
 mm-wavesurfer {
+  display: flex;
+  flex-direction: column;
   width: 480px;
 
+  --wavesurfer-waveColor: red;
+
+  > * {
+    order: 1;
+  }
+
   wave {
+    order: 0;
     overflow: unset !important;
   }
 }

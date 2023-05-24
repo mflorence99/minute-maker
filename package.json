@@ -44,6 +44,7 @@
     "@ngxs/router-plugin": "^3",
     "@ngxs/storage-plugin": "^3",
     "@ngxs/store": "^3",
+    "@qiwi/deep-proxy": "^2",
     "@sentry/angular-ivy": "^7",
     "@sentry/browser": "^7",
     "@sentry/tracing": "^7",

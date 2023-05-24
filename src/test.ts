@@ -34,16 +34,6 @@ Object.defineProperty(Element.prototype, 'scrollTo', {
 
 Object.defineProperty(window, 'CSS', { value: null });
 
-Object.defineProperty(window, 'getComputedStyle', {
-  value: () => {
-    return {
-      appearance: ['-webkit-appearance'],
-      display: 'none',
-      getPropertyValue: (): string => '#123456'
-    };
-  }
-});
-
 Object.defineProperty(window, 'IntersectionObserver', {
   value: class {
     disconnect(): any {}

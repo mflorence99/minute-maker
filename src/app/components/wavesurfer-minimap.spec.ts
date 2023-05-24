@@ -17,8 +17,6 @@ jest.mock('wavesurfer.js/dist/plugin/wavesurfer.minimap.min.js', () => {
 describe('WaveSurferMinimapComponent', () => {
   beforeEach(() => MockBuilder(WaveSurferMinimapComponent, RootModule));
 
-  afterEach(() => jest.resetAllMocks());
-
   it('should create the component', () => {
     const fixture = MockRender(WaveSurferMinimapComponent);
     const self = fixture.point.componentInstance;

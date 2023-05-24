@@ -17,8 +17,6 @@ jest.mock('wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js', () => {
 describe('WaveSurferTimelineComponent', () => {
   beforeEach(() => MockBuilder(WaveSurferTimelineComponent, RootModule));
 
-  afterEach(() => jest.resetAllMocks());
-
   it('should create the component', () => {
     const fixture = MockRender(WaveSurferTimelineComponent);
     const self = fixture.point.componentInstance;

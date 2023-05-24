@@ -27,11 +27,11 @@ import MinimapPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.minimap.min.js';
 export class WaveSurferMinimapComponent implements WaveSurferPlugin {
   @Input() params: MinimapPluginParams = {};
 
-  #host: ElementRef = inject(ElementRef);
+  #host: HTMLElement = inject(ElementRef).nativeElement;
 
   create(): PluginDefinition {
     return MinimapPlugin.create({
-      container: this.#host.nativeElement,
+      container: this.#host,
       ...this.params
     });
   }

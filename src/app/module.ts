@@ -5,6 +5,7 @@ import { WaveSurferComponent } from './components/wavesurfer';
 import { WaveSurferCursorComponent } from './components/wavesurfer-cursor';
 import { WaveSurferMarkersComponent } from './components/wavesurfer-markers';
 import { WaveSurferMinimapComponent } from './components/wavesurfer-minimap';
+import { WaveSurferRegionsComponent } from './components/wavesurfer-regions';
 import { WaveSurferSpectrogramComponent } from './components/wavesurfer-spectrogram';
 import { WaveSurferTimelineComponent } from './components/wavesurfer-timeline';
 import { WindowState } from './state/window';
@@ -23,6 +24,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
@@ -38,6 +40,7 @@ const COMPONENTS = [
   WaveSurferMarkersComponent,
   WaveSurferMinimapComponent,
   WaveSurferSpectrogramComponent,
+  WaveSurferRegionsComponent,
   WaveSurferTimelineComponent
 ];
 
@@ -62,6 +65,7 @@ const STATES_SAVED = [WindowState];
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
+    MatButtonModule,
     NgxsModule.forRoot(STATES, {
       developmentMode: !environment.production
     }),

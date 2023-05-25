@@ -1,3 +1,4 @@
+import { CSSVariableProxy } from '../utils';
 import { WaveSurferPlugin } from './wavesurfer-plugin';
 import { WaveSurferPluginComponent } from './wavesurfer-plugin';
 
@@ -29,10 +30,17 @@ export class WaveSurferTimelineComponent implements WaveSurferPlugin {
 
   #host: HTMLElement = inject(ElementRef).nativeElement;
 
+  #proxy = new CSSVariableProxy<TimelinePluginParams>(
+    this.#host,
+    'wavesurfer-timeline'
+  );
+
   create(): PluginDefinition {
-    return TimelinePlugin.create({
-      container: this.#host,
-      ...this.params
-    });
+    return TimelinePlugin.create(
+      this.#proxy.proxyFactory({
+        container: this.#host,
+        ...this.params
+      })
+    );
   }
 }

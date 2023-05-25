@@ -8,38 +8,26 @@ import { ViewChild } from '@angular/core';
   template: `
     <main>
       <mm-wavesurfer
-        (markerClick)="xxx($event)"
-        (markerContextmenu)="xxx($event)"
-        (markerDrag)="xxx($event)"
-        (markerDrop)="xxx($event)"
+        #wavesurfer
+        (regionIn)="xxx($event)"
         [audioFile]="'./assets/minutes.mp3'"
-        ><mm-wavesurfer-cursor
-          [params]="{
-            opacity: 1,
-            showTime: true,
-            customShowTimeStyle: {
-              'background-color': '#000',
-              'color': '#fff',
-              'padding': '2px',
-              'font-size': '10px'
-            }
-          }" /><mm-wavesurfer-markers
-          [markers]="[
-            {
-              time: 0,
-              draggable: true,
-              label: 'Begin',
-              color: '#ff990a'
-            },
-            {
-              time: 100,
-              label: 'V2',
-              color: '#00ffcc',
-              position: 'top',
-              preventContextMenu: true
-            }
-          ]" /><mm-wavesurfer-timeline
-      /></mm-wavesurfer>
+        [params]="{
+          backend: 'MediaElementWebAudio',
+          barGap: 2,
+          barRadius: 3,
+          barWidth: 3,
+          scrollParent: true
+        }">
+        <mm-wavesurfer-cursor [params]="{ opacity: 1, showTime: true }" />
+        <mm-wavesurfer-timeline />
+      </mm-wavesurfer>
+
+      <button
+        (click)="wavesurfer.wavesurfer.playPause()"
+        color="primary"
+        mat-flat-button>
+        Play/Pause
+      </button>
     </main>
   `
 })

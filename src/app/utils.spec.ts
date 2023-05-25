@@ -28,8 +28,8 @@ describe('CSSVariableProxy', () => {
       }
     };
     expect(params.b.d.e).toBe(3);
-    const proxy = new CSSVariableProxy<typeof params>(null);
-    const proxied = proxy.proxyFactory('test', params);
+    const proxy = new CSSVariableProxy<typeof params>(null, 'test');
+    const proxied = proxy.proxyFactory(params);
     expect(proxied.b.c).toBe(2);
     expect(proxied.b.d.e).toBe('#123456');
   });

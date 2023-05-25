@@ -1,3 +1,4 @@
+import { CSSVariableProxy } from '../utils';
 import { WaveSurferPlugin } from './wavesurfer-plugin';
 import { WaveSurferPluginComponent } from './wavesurfer-plugin';
 
@@ -29,10 +30,17 @@ export class WaveSurferSpectrogramComponent implements WaveSurferPlugin {
 
   #host: HTMLElement = inject(ElementRef).nativeElement;
 
+  #proxy = new CSSVariableProxy<SpectrogramPluginParams>(
+    this.#host,
+    'wavesurfer-spectrogram'
+  );
+
   create(): PluginDefinition {
-    return SpectrogramPlugin.create({
-      container: this.#host,
-      ...this.params
-    });
+    return SpectrogramPlugin.create(
+      this.#proxy.proxyFactory({
+        container: this.#host,
+        ...this.params
+      })
+    );
   }
 }

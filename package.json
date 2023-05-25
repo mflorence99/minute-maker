@@ -13,6 +13,7 @@
     "clean": "rm -rf node_modules && rm -f package-lock.json && npm install && npm outdated",
     "lint": "eslint --ext ts ./src",
     "ng": "ng",
+    "prettier": "prettier --write .",
     "start": "ng serve",
     "tauri": "tauri",
     "test": "jest --detectOpenHandles --silent --verbose",

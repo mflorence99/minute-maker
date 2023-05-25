@@ -92,28 +92,6 @@ $dark-app-theme: mat.define-dark-theme(
   padding: 0;
 }
 
-::-webkit-input-placeholder {
-  color: var(--mat-gray-600);
-}
-
-::-moz-placeholder {
-  color: var(--mat-gray-600);
-}
-
-::-webkit-scrollbar {
-  height: 0.5rem;
-  width: 0.5rem;
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--mat-grey-700);
-  border-radius: 0.25rem;
-}
-
 :focus {
   outline: 0;
 }
@@ -190,7 +168,17 @@ mm-wavesurfer {
   flex-direction: column;
   width: 480px;
 
-  --wavesurfer-waveColor: red;
+  --wavesurfer-cursorColor: var(--mat-gray-50);
+  --wavesurfer-progressColor: var(--mat-gray-50);
+  --wavesurfer-waveColor: var(--mat-gray-500);
+
+  --wavesurfer-cursor-color: var(--mat-gray-50);
+  --wavesurfer-cursor-customShowTimeStyle-color: red;
+
+  --wavesurfer-timeline-primaryColor: var(--mat-gray-50);
+  --wavesurfer-timeline-primaryFontColor: var(--mat-gray-50);
+  --wavesurfer-timeline-secondaryColor: var(--mat-gray-50);
+  --wavesurfer-timeline-secondaryFontColor: var(--mat-gray-50);
 
   > * {
     order: 1;
@@ -198,7 +186,5 @@ mm-wavesurfer {
 
   wave {
     order: 0;
-    overflow: unset !important;
   }
 }
-

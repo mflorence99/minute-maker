@@ -16,6 +16,7 @@ import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Output } from '@angular/core';
 import { QueryList } from '@angular/core';
+import { RegionParams } from 'wavesurfer.js/dist/plugin/wavesurfer.regions.min.js';
 import { WaveSurferParams } from 'wavesurfer.js/types/params';
 
 import { combineLatest } from 'rxjs';
@@ -27,7 +28,9 @@ import WaveSurfer from 'wavesurfer.js';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-wavesurfer',
-  template: `<ng-content />`
+  template: `
+    <ng-content />
+  `
 })
 export class WaveSurferComponent
   implements AfterContentInit, OnDestroy, OnInit
@@ -49,6 +52,17 @@ export class WaveSurferComponent
   @Output() pause = new WatchableEventEmitter<void>();
   @Output() play = new WatchableEventEmitter<void>();
   @Output() ready = new WatchableEventEmitter<void>();
+  @Output() regionClick = new WatchableEventEmitter<RegionParams>();
+  @Output() regionCreated = new WatchableEventEmitter<RegionParams>();
+  @Output() regionDblclick = new WatchableEventEmitter<RegionParams>();
+  @Output() regionIn = new WatchableEventEmitter<RegionParams>();
+  @Output() regionMouseenter = new WatchableEventEmitter<RegionParams>();
+  @Output() regionMouseleave = new WatchableEventEmitter<RegionParams>();
+  @Output() regionOut = new WatchableEventEmitter<RegionParams>();
+  @Output() regionPlay = new WatchableEventEmitter<RegionParams>();
+  @Output() regionRemoved = new WatchableEventEmitter<RegionParams>();
+  @Output() regionUpdateEnd = new WatchableEventEmitter<RegionParams>();
+  @Output() regionUpdated = new WatchableEventEmitter<RegionParams>();
   @Output() scroll = new WatchableEventEmitter<Event>();
   @Output() seek = new WatchableEventEmitter<number>();
   @Output() volume = new WatchableEventEmitter<number>();
@@ -66,7 +80,7 @@ export class WaveSurferComponent
 
   #audioFile: string;
   #host: HTMLElement = inject(ElementRef).nativeElement;
-  #proxy = new CSSVariableProxy<WaveSurferParams>(this.#host);
+  #proxy = new CSSVariableProxy<WaveSurferParams>(this.#host, 'wavesurfer');
   #ready$ = new BehaviorSubject<boolean>(false);
 
   @Input() get audioFile(): string {
@@ -84,18 +98,15 @@ export class WaveSurferComponent
 
   ngOnInit(): void {
     // 👇 create the WaveSurfer
-    this.wavesurfer = new WaveSurfer({
-      container: this.#host,
-      ...this.params
-    });
+    this.wavesurfer = new WaveSurfer(
+      this.#proxy.proxyFactory({
+        container: this.#host,
+        ...this.params
+      })
+    );
     // 👇 need to know when WaveSurfer is ready
     this.wavesurfer.on('ready', () => this.#ready$.next(true));
-    // 👇 initialize the WaveSurfer with a proxy of its params
-    if (this.wavesurfer['params'])
-      this.wavesurfer['params'] = this.#proxy.proxyFactory(
-        'wavesurfer',
-        this.wavesurfer['params']
-      );
+    // 👇 initialize the WaveSurfer
     this.wavesurfer.init();
     // 👇 load the audio file
     if (this.#audioFile) this.wavesurfer.load(this.#audioFile);
@@ -124,14 +135,11 @@ export class WaveSurferComponent
         const changed = new Set(plugins.map((plugin) => plugin.name));
         const difference = current.filter((x) => !changed.has(x));
         difference.forEach((name) => this.wavesurfer.destroyPlugin(name));
-        // 👇 add and initialize each pluginwith a proxy of its params
+        // 👇 add and initialize each plugin
         plugins.forEach((plugin) => {
+          // 🔥 yes we know we can chain these but splitting
+          //    them made the tests easier to write!
           this.wavesurfer.addPlugin(plugin);
-          if (this.wavesurfer[plugin.name]?.['params'])
-            this.wavesurfer[plugin.name]['params'] = this.#proxy.proxyFactory(
-              `wavesurfer-${plugin.name}`,
-              this.wavesurfer[plugin.name]['params']
-            );
           this.wavesurfer.initPlugin(plugin.name);
         });
       }

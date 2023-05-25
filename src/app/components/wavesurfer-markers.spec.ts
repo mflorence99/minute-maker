@@ -24,24 +24,26 @@ describe('WaveSurferMarkersComponent', () => {
   });
 
   it('can configure the plugin with markers', () => {
-    const markers = [
-      {
-        time: 5.5,
-        label: 'V1',
-        color: '#ff990a'
-      },
-      {
-        time: 10,
-        label: 'V2',
-        color: '#00ffcc',
-        position: 'top'
-      }
-    ];
+    const params = {
+      markers: [
+        {
+          time: 5.5,
+          label: 'V1',
+          color: '#ff990a'
+        },
+        {
+          time: 10,
+          label: 'V2',
+          color: '#00ffcc',
+          position: 'top'
+        }
+      ]
+    };
     const fixture = MockRender(WaveSurferMarkersComponent, {
-      markers
+      params
     });
     const self = fixture.point.componentInstance;
     self.create();
-    expect(MarkersPlugin.create).toHaveBeenCalledWith({ markers });
+    expect(MarkersPlugin.create).toHaveBeenCalledWith(params);
   });
 });

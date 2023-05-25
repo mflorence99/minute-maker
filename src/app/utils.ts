@@ -7,15 +7,29 @@ import { THandlerContext } from '@qiwi/deep-proxy';
 // 👇 wrapper for DeepProxy to substitute CSS variables for
 //    equivalent properties
 export class CSSVariableProxy<T = any> {
+  baseName: string;
+
   #host: HTMLElement;
   #styles: CSSStyleDeclaration;
 
-  constructor(host: HTMLElement) {
+  constructor(host: HTMLElement, baseName: string) {
+    this.baseName = baseName;
     this.#host = host;
     this.#styles = getComputedStyle(this.#host);
+    // 👇 this is the polyfill that propagates a DeepProxy through
+    //    Object.assign, as required by WaveSurfer
+    if (typeof Object['__assign__'] != 'function') {
+      Object['__assign__'] = Object.assign;
+      Object.assign = function (target, ...varArgs): Object {
+        let proxy;
+        for (const arg of varArgs) proxy = arg?.__DEEP_PROXY__;
+        Object['__assign__'](target, ...varArgs);
+        return proxy ? proxy.proxyFactory(target) : target;
+      };
+    }
   }
 
-  proxyFactory(baseName: string, target: any): T {
+  proxyFactory(target: any): T {
     return new DeepProxy(
       target,
       ({
@@ -27,6 +41,7 @@ export class CSSVariableProxy<T = any> {
         PROXY
       }: THandlerContext<any>) => {
         if (trapName === 'get') {
+          if (key === '__DEEP_PROXY__') return this;
           if (
             typeof value === 'object' &&
             value !== null &&
@@ -34,10 +49,11 @@ export class CSSVariableProxy<T = any> {
           )
             return PROXY;
           const nm = path.length
-            ? `--${baseName}-${path.join('-')}-${String(key)}`
-            : `--${baseName}-${String(key)}`;
-          const prop = this.#styles.getPropertyValue(nm);
-          if (prop) return prop;
+            ? `--${this.baseName}-${path.join('-')}-${String(key)}`
+            : `--${this.baseName}-${String(key)}`;
+          value = this.#styles.getPropertyValue(nm);
+          // 👉 this is the CSS variable corresponding to the value
+          if (value) return value;
         }
         return DEFAULT;
       }

@@ -17,6 +17,18 @@
   ],
   "root": true,
   "rules": {
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "format": ["camelCase", "UPPER_CASE", "snake_case"],
+        "leadingUnderscore": "allow",
+        "selector": "default"
+      },
+      {
+        "format": ["PascalCase"],
+        "selector": "typeLike"
+      }
+    ],
     "@typescript-eslint/unbound-method": "off",
     "jest/max-expects": "off",
     "jest/no-done-callback": "off",

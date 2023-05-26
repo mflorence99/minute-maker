@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 
 import { forkJoin } from 'rxjs';
 import { from } from 'rxjs';
+import { invoke } from '@tauri-apps/api/tauri';
 import { mergeMap } from 'rxjs';
 
 export function initializeAppProvider(
@@ -20,10 +21,18 @@ export function initializeAppProvider(
 @Injectable({ providedIn: 'root' })
 export class InitializerService {
   initialize(): Observable<any> {
-    if (environment.production)
-      console.log('%cPRODUCTION', 'color: darkorange');
-    else console.log('%cLOCALHOST', 'color: dodgerblue');
-    console.log(environment.package);
+    // 👇 initialize the environment from Tauri
+    // 🙈 https://github.com/tauri-apps/tauri/discussions/2873
+    const envInitialized = invoke('get_environment_variable', {
+      name: 'OPEN_AI_KEY'
+    }).then((openAIKey) => {
+      environment.env.OPEN_AI_KEY = openAIKey;
+      // 👇 log the environment
+      if (environment.production)
+        console.log('%cPRODUCTION', 'color: darkorange');
+      else console.log('%cLOCALHOST', 'color: dodgerblue');
+      console.log(environment);
+    });
 
     // 👉 initialize Sentry.io
     if (environment.production) {
@@ -35,7 +44,7 @@ export class InitializerService {
     }
 
     // 👉 initialize services
-    return forkJoin([FsStorageEngine.initialize() /* , ... */]).pipe(
+    return forkJoin([FsStorageEngine.initialize(), from(envInitialized)]).pipe(
       mergeMap(([state]) => this.#initializeWindowState(state))
     );
   }

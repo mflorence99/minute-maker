@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { DeepProxy } from '@qiwi/deep-proxy';
 import { EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';

@@ -5,6 +5,10 @@ const IS_DEV = ['localhost', '127.0.0.1'].includes(location.hostname);
 export const environment = {
   mode: (): string => (environment.production ? 'prod' : 'dev'),
 
+  env: {
+    OPEN_AI_KEY: null
+  },
+
   package: {
     author: PACKAGE.author,
     name: PACKAGE.name,

@@ -52,6 +52,7 @@
     "@tauri-apps/api": "^1",
     "deep-equal": "^2",
     "material-design-icons": "^3",
+    "openai": "^3",
     "rxjs": "^7",
     "tauri-plugin-window-state-api": "github:tauri-apps/tauri-plugin-window-state",
     "tslib": "^2",

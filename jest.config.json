@@ -1,6 +1,9 @@
 {
   "collectCoverage": true,
-  "collectCoverageFrom": ["./src/app/**/*.ts", "!./src/app/**/module.ts"],
+  "collectCoverageFrom": [
+    "./renderer/app/**/*.ts",
+    "!./renderer/app/**/module.ts"
+  ],
   "coverageReporters": ["json-summary", "text", "html"],
   "preset": "jest-preset-angular",
   "reporters": [
@@ -12,14 +15,22 @@
       }
     ]
   ],
-  "roots": ["./src"],
+  "roots": ["<rootDir>/renderer"],
   "setupFilesAfterEnv": [
     "jest-extended/all",
     "jest-preset-angular",
     "zone.js",
     "zone.js/testing",
-    "<rootDir>/src/test.ts"
+    "<rootDir>/renderer/test.ts"
   ],
   "testMatch": ["**/+(*.)+(spec).+(ts)"],
-  "testResultsProcessor": "jest-junit"
+  "testResultsProcessor": "jest-junit",
+  "transform": {
+    "^.+\\.tsx?$": [
+      "jest-preset-angular",
+      {
+        "tsconfig": "<rootDir>/renderer/tsconfig.spec.json"
+      }
+    ]
+  }
 }

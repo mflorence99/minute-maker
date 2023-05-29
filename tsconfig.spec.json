@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "outDir": "./out-tsc/spec",
-    "module": "CommonJs"
-  },
-  "files": ["src/test.ts"],
-  "include": ["src/**/*.spec.ts", "**/__mocks__/*.ts", "src/**/*.d.ts"]
-}

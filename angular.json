@@ -41,15 +41,15 @@
               "openai",
               "wavesurfer.js"
             ],
-            "assets": ["src/favicon.ico", "src/assets"],
-            "index": "src/index.html",
+            "assets": ["renderer/favicon.ico", "renderer/assets"],
+            "index": "renderer/index.html",
             "inlineStyleLanguage": "scss",
-            "main": "src/main.ts",
-            "outputPath": "dist/minute-maker",
+            "main": "renderer/main.ts",
+            "outputPath": "dist/renderer",
             "polyfills": ["zone.js"],
             "scripts": [],
-            "styles": ["src/app/styles.scss"],
-            "tsConfig": "tsconfig.app.json"
+            "styles": ["renderer/app/styles.scss"],
+            "tsConfig": "renderer/tsconfig.app.json"
           }
         },
         "extract-i18n": {
@@ -79,7 +79,7 @@
           "style": "scss"
         }
       },
-      "sourceRoot": "src"
+      "sourceRoot": "renderer"
     }
   },
   "version": 1

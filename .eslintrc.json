@@ -6,7 +6,7 @@
     "plugin:jest-extended/all"
   ],
   "parserOptions": {
-    "project": ["./tsconfig.app.json", "./tsconfig.spec.json"]
+    "project": ["renderer/tsconfig.app.json", "renderer/tsconfig.spec.json"]
   },
   "plugins": [
     "eslint-plugin-import",
@@ -20,9 +20,14 @@
     "@typescript-eslint/naming-convention": [
       "error",
       {
-        "format": ["camelCase", "UPPER_CASE", "snake_case"],
+        "format": ["camelCase", "UPPER_CASE", "snake_case", "PascalCase"],
         "leadingUnderscore": "allow",
         "selector": "default"
+      },
+      {
+        "format": null,
+        "modifiers": ["requiresQuotes"],
+        "selector": "property"
       },
       {
         "format": ["PascalCase"],
@@ -31,6 +36,8 @@
     ],
     "@typescript-eslint/unbound-method": "off",
     "jest/max-expects": "off",
+    "jest/no-conditional-expect": "off",
+    "jest/no-disabled-tests": "off",
     "jest/no-done-callback": "off",
     "jest/no-hooks": "off",
     "jest/no-test-return-statement": "off",

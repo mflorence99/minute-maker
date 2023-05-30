@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "importHelpers": true,
+    "lib": ["es2022", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "../dist/main",
+    "sourceMap": true,
+    "target": "es2022"
+  },
+  "include": ["**/*.ts"]
+}

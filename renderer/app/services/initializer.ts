@@ -19,7 +19,7 @@ export class InitializerService {
     if (environment.production)
       console.log('%cPRODUCTION', 'color: darkorange');
     else console.log('%cLOCALHOST', 'color: dodgerblue');
-    console.log(environment);
+    console.table(environment);
 
     // 👉 initialize Sentry.io
     if (environment.production) {

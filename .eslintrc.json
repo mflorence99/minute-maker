@@ -6,7 +6,11 @@
     "plugin:jest-extended/all"
   ],
   "parserOptions": {
-    "project": ["renderer/tsconfig.app.json", "renderer/tsconfig.spec.json"]
+    "project": [
+      "main/tsconfig.json",
+      "renderer/tsconfig.app.json",
+      "renderer/tsconfig.spec.json"
+    ]
   },
   "plugins": [
     "eslint-plugin-import",

@@ -1,12 +1,18 @@
 import PACKAGE from '../../package.json';
 
+import { isBrowser } from 'browser-or-node';
+import { isNode } from 'browser-or-node';
+
 const IS_DEV = ['localhost', '127.0.0.1'].includes(location.hostname);
 
 export const environment = {
+  isBrowser: isBrowser,
+  isNode: isNode,
+
   mode: (): string => (environment.production ? 'prod' : 'dev'),
 
   env: {
-    OPEN_AI_KEY: process?.env['OPEN_AI_KEY']
+    OPEN_AI_KEY: isNode ? process.env['OPEN_AI_KEY'] : null
   },
 
   package: {

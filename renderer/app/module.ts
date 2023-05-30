@@ -1,5 +1,7 @@
 import { InitializerService } from './services/initializer';
 import { RootPage } from './pages/root/page';
+import { WaveSurferComponent } from './components/wavesurfer';
+import { WaveSurferTimelineComponent } from './components/wavesurfer-timeline';
 
 import { environment } from './environment';
 import { initializeAppProvider } from './services/initializer';
@@ -23,7 +25,7 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RouterModule } from '@angular/router';
 
-const COMPONENTS = [];
+const COMPONENTS = [WaveSurferComponent, WaveSurferTimelineComponent];
 
 const DIRECTIVES = [];
 

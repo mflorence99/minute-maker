@@ -2,6 +2,8 @@ import { WatchableEventEmitter } from '../utils';
 import { WaveSurferPlugin } from './wavesurfer-plugin';
 import { WaveSurferPluginComponent } from './wavesurfer-plugin';
 
+import { kebabasize } from '../utils';
+
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ElementRef } from '@angular/core';
@@ -33,7 +35,7 @@ export class WaveSurferTimelineComponent
 {
   @Input() options: Partial<TimelinePluginOptions> = {};
 
-  @Output() ready = new WatchableEventEmitter<number>();
+  @Output() ready = new WatchableEventEmitter<void>();
 
   plugin: TimelinePlugin;
 
@@ -60,8 +62,8 @@ export class WaveSurferTimelineComponent
           this[prop] instanceof WatchableEventEmitter &&
           this[prop].subscriberCount > 0
       )
-      .forEach((prop: any) => {
-        this.plugin.on(prop, (args) => this[prop].emit(args));
+      .forEach((prop) => {
+        this.plugin.on(kebabasize(prop), (args) => this[prop].emit(args));
       });
   }
 }

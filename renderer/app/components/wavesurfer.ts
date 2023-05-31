@@ -2,6 +2,8 @@ import { WatchableEventEmitter } from '../utils';
 import { WaveSurferPlugin } from './wavesurfer-plugin';
 import { WaveSurferPluginComponent } from './wavesurfer-plugin';
 
+import { kebabasize } from '../utils';
+
 import { AfterViewInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
@@ -95,6 +97,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
   }
 
   // 👇 ngAfterViewInit FOLLOWS ngAfterContentInit
+  //    and BOTH have to be satisfied for this to work
   ngAfterViewInit(): void {
     // 👇 create the WaveSurfer
     this.wavesurfer = WaveSurfer.create({
@@ -112,8 +115,8 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
           this[prop] instanceof WatchableEventEmitter &&
           this[prop].subscriberCount > 0
       )
-      .forEach((prop: any) => {
-        this.wavesurfer.on(prop, (args) => this[prop].emit(args));
+      .forEach((prop) => {
+        this.wavesurfer.on(kebabasize(prop), (args) => this[prop].emit(args));
       });
   }
 

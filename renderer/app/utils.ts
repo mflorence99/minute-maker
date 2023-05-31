@@ -19,3 +19,11 @@ export class WatchableEventEmitter<T> extends EventEmitter<T> {
     super.unsubscribe();
   }
 }
+
+// 🙈 https://stackoverflow.com/questions/63116039/camelcase-to-kebab-case
+export function kebabasize(camelCase): any {
+  return camelCase.replace(
+    /[A-Z]+(?![a-z])|[A-Z]/g,
+    ($: string, ofs) => (ofs ? '-' : '') + $.toLowerCase()
+  );
+}

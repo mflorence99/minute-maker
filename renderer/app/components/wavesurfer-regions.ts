@@ -1,7 +1,10 @@
+import { WatchableEventEmitter } from '../utils';
 import { WaveSurferComponent } from './wavesurfer';
 import { WaveSurferPlugin } from './wavesurfer-plugin';
 import { WaveSurferPluginComponent } from './wavesurfer-plugin';
 import { WaveSurferRegionComponent } from './wavesurfer-region';
+
+import { kebabasize } from '../utils';
 
 import { AfterContentInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -11,7 +14,9 @@ import { GenericPlugin } from 'wavesurfer.js/dist/base-plugin';
 import { Input } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { Output } from '@angular/core';
 import { QueryList } from '@angular/core';
+import { Region } from 'wavesurfer.js/dist/plugins/regions';
 import { RegionsPluginOptions } from 'wavesurfer.js/dist/plugins/regions';
 
 import { combineLatest } from 'rxjs';
@@ -48,6 +53,11 @@ export class WaveSurferRegionsComponent
 {
   @Input() options: Partial<RegionsPluginOptions> = undefined;
 
+  @Output() regionClicked = new WatchableEventEmitter<Region>();
+  @Output() regionCreated = new WatchableEventEmitter<Region>();
+  @Output() regionEntered = new WatchableEventEmitter<Region>();
+  @Output() regionUpdated = new WatchableEventEmitter<Region>();
+
   @ContentChildren(WaveSurferRegionComponent)
   regions$: QueryList<WaveSurferRegionComponent>;
 
@@ -78,10 +88,28 @@ export class WaveSurferRegionsComponent
   }
 
   ngOnDestroy(): void {
+    this.plugin.clearRegions();
     this.plugin.destroy();
   }
 
   ngOnInit(): void {
     this.plugin = RegionsPlugin.create(this.options);
+    // 👇 bind any events
+    Object.getOwnPropertyNames(this)
+      .filter(
+        (prop) =>
+          this[prop] instanceof WatchableEventEmitter &&
+          this[prop].subscriberCount > 0
+      )
+      // 👇 regionEntered is special!
+      .filter((prop) => {
+        if (prop === 'regionEntered') {
+          this.wavesurfer.timeupdate.subscribe(console.log);
+          return false;
+        } else return true;
+      })
+      .forEach((prop) => {
+        this.plugin.on(kebabasize(prop), (args) => this[prop].emit(args));
+      });
   }
 }

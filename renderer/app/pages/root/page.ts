@@ -4,7 +4,9 @@ import { Component } from '@angular/core';
   selector: 'mm-root',
   template: `
     <main>
-      <mm-wavesurfer [audioFile]="'./assets/minutes.mp3'">
+      <mm-wavesurfer
+        [audioFile]="'./assets/minutes.mp3'"
+        [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }">
         <mm-wavesurfer-timeline
           (ready)="xxx('time-line-ready', $event)"></mm-wavesurfer-timeline>
       </mm-wavesurfer>

@@ -94,6 +94,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     if (this.wavesurfer) this.wavesurfer.setOptions(this.#options);
   }
 
+  // 👇 ngAfterViewInit FOLLOWS ngAfterContentInit
   ngAfterViewInit(): void {
     // 👇 create the WaveSurfer
     this.wavesurfer = WaveSurfer.create({

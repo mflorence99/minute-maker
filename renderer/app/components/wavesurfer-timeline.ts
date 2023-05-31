@@ -43,7 +43,9 @@ export class WaveSurferTimelineComponent
     return this.plugin;
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.plugin.destroy();
+  }
 
   ngOnInit(): void {
     // 👇 create the plugin

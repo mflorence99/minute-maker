@@ -1,4 +1,8 @@
+import { OpenAIService } from '../../services/open-ai';
+
 import { Component } from '@angular/core';
+
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'mm-root',
@@ -18,6 +22,8 @@ import { Component } from '@angular/core';
   `
 })
 export class RootPage {
+  #openai = inject(OpenAIService);
+
   xxx(key, event): void {
     console.log(key, event);
   }

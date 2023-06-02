@@ -16,8 +16,6 @@ import { QueryList } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { WaveSurferOptions } from 'wavesurfer.js';
 
-import { inject } from '@angular/core';
-
 import WaveSurfer from 'wavesurfer.js';
 
 @Component({
@@ -75,7 +73,6 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
   wavesurfer: WaveSurfer;
 
   #audioFile: string;
-  #host = inject(ElementRef);
   #options: Partial<WaveSurferOptions> = {};
 
   @Input() get audioFile(): string {

@@ -7,11 +7,8 @@ import 'jest-extended';
 import { MockBuilder } from 'ng-mocks';
 import { MockRender } from 'ng-mocks';
 
-import { ngMocks } from 'ng-mocks';
-
+import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline';
 import WaveSurfer from 'wavesurfer.js';
-
-jest.mock('wavesurfer.js');
 
 WaveSurfer.create = jest.fn((): any => {
   const ons = {};
@@ -22,16 +19,18 @@ WaveSurfer.create = jest.fn((): any => {
   };
 });
 
-jest.mock('wavesurfer.js/dist/plugins/timeline', () => {
+TimelinePlugin.create = jest.fn((): any => {
   return {
-    create: jest.fn((): any => null)
+    destroy: jest.fn()
   };
 });
 
 describe('WaveSurferComponent', () => {
-  beforeEach(() => {
-    return MockBuilder(WaveSurferComponent, RootModule);
-  });
+  beforeEach(() =>
+    MockBuilder(WaveSurferComponent, RootModule).keep(
+      WaveSurferTimelineComponent
+    )
+  );
 
   it('should create the component', () => {
     const fixture = MockRender(WaveSurferComponent);
@@ -61,11 +60,10 @@ describe('WaveSurferComponent', () => {
     expect(self.wavesurfer.on).toHaveBeenCalledWith('zoom', expect.anything());
   });
 
-  it.skip('will load plugins from ContentChildren', () => {
-    const fixture = MockRender<WaveSurferComponent>(
+  it('will load plugins from ContentChildren', () => {
+    MockRender<WaveSurferComponent>(
       `<mm-wavesurfer><mm-wavesurfer-timeline /></mm-wavesurfer>`
     );
-    const timeline = ngMocks.findInstance(fixture, WaveSurferTimelineComponent);
-    expect(timeline.create).toHaveBeenCalledWith();
+    expect(TimelinePlugin.create).toHaveBeenCalledWith(expect.anything());
   });
 });

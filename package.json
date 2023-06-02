@@ -43,6 +43,7 @@
     "@fortawesome/pro-light-svg-icons": "^6",
     "@fortawesome/pro-regular-svg-icons": "^6",
     "@fortawesome/pro-solid-svg-icons": "^6",
+    "@google-cloud/speech": "^5.5.0",
     "@ngxs/devtools-plugin": "^3",
     "@ngxs/logger-plugin": "^3",
     "@ngxs/router-plugin": "^3",

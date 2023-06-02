@@ -8,9 +8,9 @@ import { MockRender } from 'ng-mocks';
 
 import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline';
 
-jest.mock('wavesurfer.js/dist/plugins/timeline', () => {
+TimelinePlugin.create = jest.fn((): any => {
   return {
-    create: jest.fn((): any => null)
+    destroy: jest.fn()
   };
 });
 

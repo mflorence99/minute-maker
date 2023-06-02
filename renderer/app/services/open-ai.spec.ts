@@ -1,6 +1,45 @@
 import { OpenAIService } from './open-ai';
 
-// 🔥 we are testing the REAL API
+jest.mock('openai', () => {
+  return {
+    // 👇 mock configuration
+    Configuration: jest.fn(),
+
+    // 👇 mock API
+    OpenAIApi: jest.fn().mockImplementation(() => {
+      return {
+        createChatCompletion: (): any =>
+          Promise.resolve({
+            data: {
+              choices: [
+                { finish_reason: 'stop', message: { content: 'OpenAI' } }
+              ]
+            }
+          }),
+
+        createCompletion: (): any =>
+          Promise.resolve({
+            data: {
+              choices: [{ finish_reason: 'stop', text: 'My name is Mark' }]
+            }
+          }),
+
+        listModels: (): any =>
+          Promise.resolve({
+            data: {
+              data: [
+                { id: 'this' },
+                { id: 'that' },
+                { id: 'gpt-3.5-turbo' },
+                { id: 'text-davinci-003' },
+                { id: 'whisper-1' }
+              ]
+            }
+          })
+      };
+    })
+  };
+});
 
 describe('OpenAIService', () => {
   it("calls OpenAI's listModels", () => {

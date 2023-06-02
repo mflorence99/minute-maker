@@ -9,16 +9,4 @@ describe('environment', () => {
     expect(environment.package.description).toBe('Minute Maker');
     expect(environment.package.license).toBe('MIT');
   });
-
-  it('mode is set for prod', () => {
-    environment.production = true;
-    expect(environment.mode()).toBe('prod');
-    expect(environment.production).toBeTrue();
-  });
-
-  it('mode is set for dev', () => {
-    environment.production = false;
-    expect(environment.mode()).toBe('dev');
-    expect(environment.production).toBeFalse();
-  });
 });

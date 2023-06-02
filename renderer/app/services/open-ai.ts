@@ -19,14 +19,14 @@ export type CompletionResponse = {
 
 @Injectable({ providedIn: 'root' })
 export class OpenAIService {
-  #configuration: Configuration;
   #openai: OpenAIApi;
 
   constructor() {
-    this.#configuration = new Configuration({
-      apiKey: environment.env.OPEN_AI_KEY
-    });
-    this.#openai = new OpenAIApi(this.#configuration);
+    this.#openai = new OpenAIApi(
+      new Configuration({
+        apiKey: environment.env.OPEN_AI_KEY
+      })
+    );
   }
 
   async chatCompletion(

@@ -5,6 +5,7 @@ import { WaveSurferPluginComponent } from './wavesurfer-plugin';
 import { WaveSurferRegionComponent } from './wavesurfer-region';
 
 import { kebabasize } from '../utils';
+import { untilDestroyed } from '../utils';
 
 import { AfterContentInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -20,6 +21,7 @@ import { Region } from 'wavesurfer.js/dist/plugins/regions';
 import { RegionsPluginOptions } from 'wavesurfer.js/dist/plugins/regions';
 
 import { combineLatest } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs';
 import { filter } from 'rxjs';
 import { forwardRef } from '@angular/core';
 import { inject } from '@angular/core';
@@ -65,6 +67,8 @@ export class WaveSurferRegionsComponent
 
   wavesurfer = inject(WaveSurferComponent);
 
+  #untilDestroyed = untilDestroyed();
+
   create(): GenericPlugin {
     return this.plugin;
   }
@@ -76,6 +80,7 @@ export class WaveSurferRegionsComponent
       this.wavesurfer.ready
     ])
       .pipe(
+        this.#untilDestroyed(),
         filter(([_, ready]) => ready),
         map(([regions]) => regions)
       )
@@ -102,14 +107,26 @@ export class WaveSurferRegionsComponent
           this[prop].subscriberCount > 0
       )
       // 👇 regionEntered is special!
-      .filter((prop) => {
-        if (prop === 'regionEntered') {
-          this.wavesurfer.timeupdate.subscribe(console.log);
-          return false;
-        } else return true;
-      })
+      .filter((prop) => this.#handleRegionEntered(prop))
       .forEach((prop) => {
         this.plugin.on(kebabasize(prop), (args) => this[prop].emit(args));
       });
+  }
+
+  #handleRegionEntered(prop): boolean {
+    if (prop === 'regionEntered') {
+      this.wavesurfer.timeupdate
+        .pipe(
+          this.#untilDestroyed(),
+          map((ts: number) =>
+            this.plugin
+              .getRegions()
+              .find((region) => ts >= region.start && ts < region.end)
+          ),
+          distinctUntilChanged()
+        )
+        .subscribe((region) => this.regionEntered.emit(region));
+      return false;
+    } else return true;
   }
 }

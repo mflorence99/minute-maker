@@ -1,4 +1,4 @@
-import PACKAGE from '#app/package';
+import PACKAGE from '#mm/package';
 
 export const environment = {
   env: {

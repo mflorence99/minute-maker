@@ -4,7 +4,7 @@ import { EMPTY } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { environment } from '#app/environment';
+import { environment } from '#mm/environment';
 
 export function initializeAppProvider(
   initializer: InitializerService

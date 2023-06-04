@@ -3,10 +3,10 @@ import 'jest-extended';
 import { BehaviorSubject } from 'rxjs';
 import { MockBuilder } from 'ng-mocks';
 import { MockRender } from 'ng-mocks';
-import { RootModule } from '#app/module';
+import { RootModule } from '#mm/module';
 import { Subject } from 'rxjs';
-import { WaveSurferComponent } from '#app/components/wavesurfer';
-import { WaveSurferRegionsComponent } from '#app/components/wavesurfer-regions';
+import { WaveSurferComponent } from '#mm/components/wavesurfer';
+import { WaveSurferRegionsComponent } from '#mm/components/wavesurfer-regions';
 
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions';
 import WaveSurfer from 'wavesurfer.js';

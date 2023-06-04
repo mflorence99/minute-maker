@@ -2,8 +2,8 @@ import 'jest-extended';
 
 import { MockBuilder } from 'ng-mocks';
 import { MockRender } from 'ng-mocks';
-import { RootModule } from '#app/module';
-import { WaveSurferTimelineComponent } from '#app/components/wavesurfer-timeline';
+import { RootModule } from '#mm/module';
+import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline';
 
 import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline';
 

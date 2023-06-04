@@ -8,12 +8,12 @@ import { OnDestroy } from '@angular/core';
 import { Output } from '@angular/core';
 import { QueryList } from '@angular/core';
 import { ViewChild } from '@angular/core';
-import { WatchableEventEmitter } from '#app/utils';
+import { WatchableEventEmitter } from '#mm/utils';
 import { WaveSurferOptions } from 'wavesurfer.js';
-import { WaveSurferPlugin } from '#app/components/wavesurfer-plugin';
-import { WaveSurferPluginComponent } from '#app/components/wavesurfer-plugin';
+import { WaveSurferPlugin } from '#mm/components/wavesurfer-plugin';
+import { WaveSurferPluginComponent } from '#mm/components/wavesurfer-plugin';
 
-import { kebabasize } from '#app/utils';
+import { kebabasize } from '#mm/utils';
 
 import WaveSurfer from 'wavesurfer.js';
 

@@ -1,9 +1,9 @@
 import 'jest-extended';
 
-import { InitializerService } from '#app/services/initializer';
+import { InitializerService } from '#mm/services/initializer';
 
-import { environment } from '#app/environment';
-import { initializeAppProvider } from '#app/services/initializer';
+import { environment } from '#mm/environment';
+import { initializeAppProvider } from '#mm/services/initializer';
 import { lastValueFrom } from 'rxjs';
 
 describe('InitializerService', () => {

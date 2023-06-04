@@ -7,13 +7,13 @@ import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Output } from '@angular/core';
 import { TimelinePluginOptions } from 'wavesurfer.js/dist/plugins/timeline';
-import { WatchableEventEmitter } from '#app/utils';
-import { WaveSurferPlugin } from '#app/components/wavesurfer-plugin';
-import { WaveSurferPluginComponent } from '#app/components/wavesurfer-plugin';
+import { WatchableEventEmitter } from '#mm/utils';
+import { WaveSurferPlugin } from '#mm/components/wavesurfer-plugin';
+import { WaveSurferPluginComponent } from '#mm/components/wavesurfer-plugin';
 
 import { forwardRef } from '@angular/core';
 import { inject } from '@angular/core';
-import { kebabasize } from '#app/utils';
+import { kebabasize } from '#mm/utils';
 
 import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline';
 

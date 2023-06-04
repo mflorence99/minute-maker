@@ -1,9 +1,9 @@
 import * as Sentry from '@sentry/angular-ivy';
 
-import { RootModule } from '#app/module';
+import { RootModule } from '#mm/module';
 
 import { enableProdMode } from '@angular/core';
-import { environment } from '#app/environment';
+import { environment } from '#mm/environment';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 if (environment.production) enableProdMode();

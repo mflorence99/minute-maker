@@ -23,14 +23,14 @@
     "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
     "paths": {
-      "#app/common": ["./app/common.ts"],
-      "#app/components/*": ["./app/components/*"],
-      "#app/environment": ["./app/environment.ts"],
-      "#app/module": ["./app/module.ts"],
-      "#app/package": ["../package.json"],
-      "#app/pages/*": ["./app/pages/*"],
-      "#app/services/*": ["./app/services/*"],
-      "#app/utils": ["./app/utils.ts"]
+      "#mm/common": ["./app/common.ts"],
+      "#mm/components/*": ["./app/components/*"],
+      "#mm/environment": ["./app/environment.ts"],
+      "#mm/module": ["./app/module.ts"],
+      "#mm/package": ["../package.json"],
+      "#mm/pages/*": ["./app/pages/*"],
+      "#mm/services/*": ["./app/services/*"],
+      "#mm/utils": ["./app/utils.ts"]
     },
     "resolveJsonModule": true,
     "sourceMap": true,

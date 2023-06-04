@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 
 // 👇 https://sambleckley.com/writing/angular-mixed-type-contentchildren-that-share-an-interface.html
 
-export interface WaveSurferPlugin {
+export type WaveSurferPlugin = {
   create(): GenericPlugin;
-}
+};
 
 @Injectable()
 export class WaveSurferPluginComponent {}

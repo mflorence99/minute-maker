@@ -6,14 +6,14 @@
   ],
   "coverageReporters": ["json-summary", "text", "html"],
   "moduleNameMapper": {
-    "^#app/common$": "<rootDir>/renderer/app/common.ts",
-    "^#app/components/(.*)$": "<rootDir>/renderer/app/components/$1",
-    "^#app/environment$": "<rootDir>/renderer/app/environment.ts",
-    "^#app/module$": "<rootDir>/renderer/app/module.ts",
-    "^#app/package$": "<rootDir>/package.json",
-    "^#app/pages/(.*)$": "<rootDir>/renderer/app/pages/$1",
-    "^#app/services/(.*)$": "<rootDir>/renderer/app/services/$1",
-    "^#app/utils$": "<rootDir>/renderer/app/utils.ts"
+    "^#mm/common$": "<rootDir>/renderer/app/common.ts",
+    "^#mm/components/(.*)$": "<rootDir>/renderer/app/components/$1",
+    "^#mm/environment$": "<rootDir>/renderer/app/environment.ts",
+    "^#mm/module$": "<rootDir>/renderer/app/module.ts",
+    "^#mm/package$": "<rootDir>/package.json",
+    "^#mm/pages/(.*)$": "<rootDir>/renderer/app/pages/$1",
+    "^#mm/services/(.*)$": "<rootDir>/renderer/app/services/$1",
+    "^#mm/utils$": "<rootDir>/renderer/app/utils.ts"
   },
   "preset": "jest-preset-angular",
   "reporters": [

@@ -163,6 +163,7 @@ ul {
 main {
   align-items: center;
   display: grid;
+  grid-template-rows: 1fr 1fr;
   height: 100%;
   justify-content: center;
 }

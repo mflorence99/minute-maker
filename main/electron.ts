@@ -60,6 +60,7 @@ app.on('ready', () => {
       })
     );
   }
+  globalThis.theWindow = theWindow;
   // 👇 save the window bounds when they change
   const setBounds = (): void =>
     store.set('theWindow.bounds', theWindow.getBounds());

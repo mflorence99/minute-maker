@@ -54,6 +54,16 @@ Object.defineProperty(window, 'TextEncoder', {
 
 Object.defineProperty(window, 'WaveSurfer', { value: null });
 
+Object.defineProperty(window, 'require', {
+  value: () => {
+    return {
+      ipcRender: {
+        send: jest.fn
+      }
+    };
+  }
+});
+
 TestBed.initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting()

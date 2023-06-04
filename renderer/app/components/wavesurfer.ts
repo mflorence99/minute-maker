@@ -1,9 +1,3 @@
-import { WatchableEventEmitter } from '../utils';
-import { WaveSurferPlugin } from './wavesurfer-plugin';
-import { WaveSurferPluginComponent } from './wavesurfer-plugin';
-
-import { kebabasize } from '../utils';
-
 import { AfterViewInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
@@ -14,7 +8,12 @@ import { OnDestroy } from '@angular/core';
 import { Output } from '@angular/core';
 import { QueryList } from '@angular/core';
 import { ViewChild } from '@angular/core';
+import { WatchableEventEmitter } from '#app/utils';
 import { WaveSurferOptions } from 'wavesurfer.js';
+import { WaveSurferPlugin } from '#app/components/wavesurfer-plugin';
+import { WaveSurferPluginComponent } from '#app/components/wavesurfer-plugin';
+
+import { kebabasize } from '#app/utils';
 
 import WaveSurfer from 'wavesurfer.js';
 

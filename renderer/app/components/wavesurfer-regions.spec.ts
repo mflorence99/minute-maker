@@ -1,13 +1,12 @@
-import { RootModule } from '../module';
-import { WaveSurferComponent } from './wavesurfer';
-import { WaveSurferRegionsComponent } from './wavesurfer-regions';
-
 import 'jest-extended';
 
 import { BehaviorSubject } from 'rxjs';
 import { MockBuilder } from 'ng-mocks';
 import { MockRender } from 'ng-mocks';
+import { RootModule } from '#app/module';
 import { Subject } from 'rxjs';
+import { WaveSurferComponent } from '#app/components/wavesurfer';
+import { WaveSurferRegionsComponent } from '#app/components/wavesurfer-regions';
 
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions';
 import WaveSurfer from 'wavesurfer.js';

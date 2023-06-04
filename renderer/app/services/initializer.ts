@@ -1,10 +1,10 @@
-import { environment } from '../environment';
-
 import * as Sentry from '@sentry/angular-ivy';
 
 import { EMPTY } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { environment } from '#app/environment';
 
 export function initializeAppProvider(
   initializer: InitializerService
@@ -18,7 +18,7 @@ export class InitializerService {
     // 👇 log the environment
     if (environment.production)
       console.log('%cPRODUCTION', 'color: darkorange');
-    else console.log('%cLOCALHOST', 'color: dodgerblue');
+    else console.log('%cDEVELOPMENT', 'color: dodgerblue');
     console.table(environment);
 
     // 👉 initialize Sentry.io

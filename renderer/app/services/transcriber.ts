@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
+import { TranscriptionContext } from '#app/common';
 
-import { v1p1beta1 } from '@google-cloud/speech/';
+// 🔥 to avoid webpack errors
+const ipcRenderer = window.require('electron').ipcRenderer;
 
 @Injectable({ providedIn: 'root' })
 export class TranscriberService {
-  #client: v1p1beta1.SpeechClient;
-
-  constructor() {
-    this.#client = new v1p1beta1.SpeechClient();
+  transcribe(context: TranscriptionContext): void {
+    ipcRenderer.send('google-speech/transcriber', context);
   }
 }

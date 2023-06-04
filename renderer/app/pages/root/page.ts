@@ -1,6 +1,7 @@
-import { OpenAIService } from '../../services/open-ai';
-
 import { Component } from '@angular/core';
+import { OpenAIService } from '#app/services/openai';
+import { TranscriberService } from '#app/services/transcriber';
+import { TranscriptionContext } from '#app/common';
 
 import { inject } from '@angular/core';
 
@@ -23,6 +24,11 @@ import { inject } from '@angular/core';
 })
 export class RootPage {
   #openai = inject(OpenAIService);
+  #transcriber = inject(TranscriberService);
+
+  constructor() {
+    this.#transcriber.transcribe({ title: 'xxx' } as TranscriptionContext);
+  }
 
   xxx(key, event): void {
     console.log(key, event);

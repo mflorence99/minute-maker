@@ -1,3 +1,8 @@
+import './context-menu';
+import './google-speech';
+
+import { store } from './local-storage';
+
 import * as path from 'path';
 import * as url from 'url';
 
@@ -6,31 +11,7 @@ import { Rectangle } from 'electron';
 
 import { app } from 'electron';
 
-import ContextMenu from 'electron-context-menu';
-import Store from 'electron-store';
-
-const isDev = process.env['DEV_MODE'] === '1';
-
-// 👇 local config storage
-const store = new Store({
-  name: isDev ? 'config.dev' : 'config.prod'
-});
-
-// 👇 context menu
-ContextMenu({
-  prepend: (dflt, params, window: BrowserWindow) => [
-    {
-      click: (): void => window.webContents.toggleDevTools(),
-      label: 'Toggle dev tools',
-      visible: isDev
-    },
-    {
-      click: (): void => window.webContents.reload(),
-      label: 'Reload the app',
-      visible: isDev
-    }
-  ]
-});
+import isDev from 'electron-is-dev';
 
 app.on('ready', () => {
   // 👇 get the last-used window bounds
@@ -45,6 +26,7 @@ app.on('ready', () => {
     height: bounds.height,
     resizable: true,
     webPreferences: {
+      additionalArguments: isDev ? ['DEV_MODE'] : null,
       contextIsolation: false,
       nodeIntegration: true,
       sandbox: false,
@@ -64,7 +46,6 @@ app.on('ready', () => {
         pathname: path.join(),
         port: 4200,
         protocol: 'http:',
-        query: { isDev: true },
         slashes: true
       })
     );

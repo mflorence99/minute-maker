@@ -1,13 +1,3 @@
-import { InitializerService } from './services/initializer';
-import { RootPage } from './pages/root/page';
-import { WaveSurferComponent } from './components/wavesurfer';
-import { WaveSurferRegionComponent } from './components/wavesurfer-region';
-import { WaveSurferRegionsComponent } from './components/wavesurfer-regions';
-import { WaveSurferTimelineComponent } from './components/wavesurfer-timeline';
-
-import { environment } from './environment';
-import { initializeAppProvider } from './services/initializer';
-
 import * as Sentry from '@sentry/angular-ivy';
 
 import { APP_INITIALIZER } from '@angular/core';
@@ -18,6 +8,7 @@ import { ErrorHandler } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
+import { InitializerService } from '#app/services/initializer';
 import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
@@ -25,7 +16,15 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { RootPage } from '#app/pages/root/page';
 import { RouterModule } from '@angular/router';
+import { WaveSurferComponent } from '#app/components/wavesurfer';
+import { WaveSurferRegionComponent } from '#app/components/wavesurfer-region';
+import { WaveSurferRegionsComponent } from '#app/components/wavesurfer-regions';
+import { WaveSurferTimelineComponent } from '#app/components/wavesurfer-timeline';
+
+import { environment } from '#app/environment';
+import { initializeAppProvider } from '#app/services/initializer';
 
 const COMPONENTS = [
   WaveSurferComponent,

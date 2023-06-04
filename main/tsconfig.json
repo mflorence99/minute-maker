@@ -6,8 +6,10 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "../dist/main",
-    "sourceMap": true,
-    "target": "es2022"
+    "paths": {
+      "#app/common": ["./common.ts"]
+    },
+    "target": "es2019"
   },
-  "include": ["**/*.ts"]
+  "include": ["./**/*.ts"]
 }

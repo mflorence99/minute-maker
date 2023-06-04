@@ -1,4 +1,4 @@
-import { TranscriberService } from './transcriber';
+import { TranscriberService } from '#app/services/transcriber';
 
 // 🔥 currently testing REAL API
 

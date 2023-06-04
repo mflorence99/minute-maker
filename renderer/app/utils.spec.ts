@@ -1,8 +1,8 @@
-import { WatchableEventEmitter } from './utils';
-
-import { kebabasize } from './utils';
-
 import 'jest-extended';
+
+import { WatchableEventEmitter } from '#app/utils';
+
+import { kebabasize } from '#app/utils';
 
 describe('WatchableEventEmitter', () => {
   it('counts the number of active subscribers', () => {

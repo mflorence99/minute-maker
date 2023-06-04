@@ -1,10 +1,9 @@
-import { RootModule } from '../module';
-import { WaveSurferRegionComponent } from './wavesurfer-region';
-
 import 'jest-extended';
 
 import { MockBuilder } from 'ng-mocks';
 import { MockRender } from 'ng-mocks';
+import { RootModule } from '#app/module';
+import { WaveSurferRegionComponent } from '#app/components/wavesurfer-region';
 
 describe('WaveSurferRegionComponent', () => {
   beforeEach(() => MockBuilder(WaveSurferRegionComponent, RootModule));

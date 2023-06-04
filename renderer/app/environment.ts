@@ -1,4 +1,4 @@
-import PACKAGE from '../../package.json';
+import PACKAGE from '#app/package';
 
 export const environment = {
   env: {
@@ -17,5 +17,5 @@ export const environment = {
     version: PACKAGE.version
   },
 
-  production: !window['DEV_MODE']
+  production: !process.argv.includes('DEV_MODE')
 };

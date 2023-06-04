@@ -1,6 +1,6 @@
-import { environment } from './environment';
-
 import 'jest-extended';
+
+import { environment } from '#app/environment';
 
 describe('environment', () => {
   it('should be initialized correctly', () => {

@@ -1,8 +1,8 @@
-import { environment } from '../environment';
-
 import { Configuration } from 'openai';
 import { Injectable } from '@angular/core';
 import { OpenAIApi } from 'openai';
+
+import { environment } from '#app/environment';
 
 export type CompletionRequest = {
   max_tokens?: number;

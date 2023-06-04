@@ -1,4 +1,4 @@
-import { OpenAIService } from './open-ai';
+import { OpenAIService } from '#app/services/openai';
 
 jest.mock('openai', () => {
   return {

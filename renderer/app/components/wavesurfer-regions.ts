@@ -1,12 +1,3 @@
-import { WatchableEventEmitter } from '../utils';
-import { WaveSurferComponent } from './wavesurfer';
-import { WaveSurferPlugin } from './wavesurfer-plugin';
-import { WaveSurferPluginComponent } from './wavesurfer-plugin';
-import { WaveSurferRegionComponent } from './wavesurfer-region';
-
-import { kebabasize } from '../utils';
-import { untilDestroyed } from '../utils';
-
 import { AfterContentInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
@@ -19,14 +10,21 @@ import { Output } from '@angular/core';
 import { QueryList } from '@angular/core';
 import { Region } from 'wavesurfer.js/dist/plugins/regions';
 import { RegionsPluginOptions } from 'wavesurfer.js/dist/plugins/regions';
+import { WatchableEventEmitter } from '#app/utils';
+import { WaveSurferComponent } from '#app/components/wavesurfer';
+import { WaveSurferPlugin } from '#app/components/wavesurfer-plugin';
+import { WaveSurferPluginComponent } from '#app/components/wavesurfer-plugin';
+import { WaveSurferRegionComponent } from '#app/components/wavesurfer-region';
 
 import { combineLatest } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs';
 import { filter } from 'rxjs';
 import { forwardRef } from '@angular/core';
 import { inject } from '@angular/core';
+import { kebabasize } from '#app/utils';
 import { map } from 'rxjs';
 import { startWith } from 'rxjs';
+import { untilDestroyed } from '#app/utils';
 
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions';
 

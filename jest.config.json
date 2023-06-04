@@ -5,6 +5,16 @@
     "!./renderer/app/**/module.ts"
   ],
   "coverageReporters": ["json-summary", "text", "html"],
+  "moduleNameMapper": {
+    "^#app/common$": "<rootDir>/renderer/app/common.ts",
+    "^#app/components/(.*)$": "<rootDir>/renderer/app/components/$1",
+    "^#app/environment$": "<rootDir>/renderer/app/environment.ts",
+    "^#app/module$": "<rootDir>/renderer/app/module.ts",
+    "^#app/package$": "<rootDir>/package.json",
+    "^#app/pages/(.*)$": "<rootDir>/renderer/app/pages/$1",
+    "^#app/services/(.*)$": "<rootDir>/renderer/app/services/$1",
+    "^#app/utils$": "<rootDir>/renderer/app/utils.ts"
+  },
   "preset": "jest-preset-angular",
   "reporters": [
     "default",

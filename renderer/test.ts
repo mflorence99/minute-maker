@@ -48,23 +48,18 @@ Object.defineProperty(window, 'ResizeObserver', {
 
 // 🙈 https://github.com/angular/angular/issues/48748
 Object.defineProperty(window, 'TextEncoder', {
-  writable: true,
   value: TextEncoder
 });
 
 Object.defineProperty(window, 'WaveSurfer', { value: null });
 
-// 🔥 assuming only electron is required!
-Object.defineProperty(window, 'require', {
-  value: () => {
-    return {
-      ipcRender: {
-        invoke: jest.fn,
-        on: jest.fn,
-        removeListener: jest.fn,
-        send: jest.fn
-      }
-    };
+// 🙈 ipc is normally set by preload.ts
+Object.defineProperty(window, 'ipc', {
+  value: {
+    invoke: jest.fn,
+    on: jest.fn,
+    removeListener: jest.fn,
+    send: jest.fn
   }
 });
 

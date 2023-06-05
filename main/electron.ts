@@ -5,13 +5,12 @@ import './openai';
 
 import { store } from './local-storage';
 
-import * as path from 'path';
-import * as url from 'url';
-
 import { BrowserWindow } from 'electron';
 import { Rectangle } from 'electron';
 
 import { app } from 'electron';
+import { format } from 'url';
+import { join } from 'path';
 
 import isDev from 'electron-is-dev';
 
@@ -29,8 +28,9 @@ app.on('ready', () => {
     resizable: true,
     webPreferences: {
       contextIsolation: false,
-      nodeIntegration: true,
-      sandbox: false,
+      nodeIntegration: false,
+      preload: join(__dirname, 'preload.js'),
+      sandbox: true,
       scrollBounce: true,
       spellcheck: true,
       webSecurity: true
@@ -42,9 +42,9 @@ app.on('ready', () => {
   // 👇 load from Angular's dev server in dev mode
   if (isDev) {
     theWindow.loadURL(
-      url.format({
+      format({
         hostname: 'localhost',
-        pathname: path.join(),
+        pathname: join(),
         port: 4200,
         protocol: 'http:',
         query: { isDev: true },
@@ -56,8 +56,8 @@ app.on('ready', () => {
   // 👇 load from compiled build id prod mode
   else {
     theWindow.loadURL(
-      url.format({
-        pathname: path.join(__dirname, 'index.html'),
+      format({
+        pathname: join(__dirname, 'index.html'),
         protocol: 'file:',
         slashes: true
       })

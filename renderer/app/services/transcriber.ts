@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { TranscriberRequest } from '#mm/common';
 import { TranscriberResponse } from '#mm/common';
 
-// 🔥 to avoid webpack errors
-const ipcRenderer = window.require('electron').ipcRenderer;
+// 🙈 preload.ts
+declare const ipc /* 🔥 typeof ipcRenderer */;
 
 @Injectable({ providedIn: 'root' })
 export class TranscriberService {
@@ -19,12 +19,12 @@ export class TranscriberService {
         observer.next(response);
         if (response.progressPercent === 100) observer.complete();
       }
-      ipcRenderer.on(Channels.transcriberResponse, listener);
-      ipcRenderer.send(Channels.transcriberRequest, request);
+      ipc.on(Channels.transcriberResponse, listener);
+      ipc.send(Channels.transcriberRequest, request);
       // 👇 teardown logic
       return () => {
-        ipcRenderer.send(Channels.transcriberCancel, { name });
-        ipcRenderer.removeListener(Channels.transcriberResponse, listener);
+        ipc.send(Channels.transcriberCancel, { name });
+        ipc.removeListener(Channels.transcriberResponse, listener);
       };
     });
   }

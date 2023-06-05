@@ -1,6 +1,7 @@
-export {};
+/* eslint-disable no-var */
+import { ipcRenderer } from 'electron';
 
 declare global {
-  // eslint-disable-next-line no-var
   var jsome: Function;
+  var ipc: typeof ipcRenderer;
 }

@@ -5,8 +5,6 @@ import { TranscriberTranscription } from './common';
 import { ipcMain } from 'electron';
 import { v1p1beta1 } from '@google-cloud/speech';
 
-import jsome from 'jsome';
-
 ipcMain.on(
   Channels.transcriberRequest,
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -34,50 +32,41 @@ ipcMain.on(
     const poller = pollOperationProgress(client, operation);
     const [[response]] = await Promise.all([transcriber, poller]);
 
-    // 👇 we need only look at the last result
-    //    https://cloud.google.com/speech-to-text/docs/multiple-voices
-
-    let currentSpeakerTag = null;
-    let currentStartTime = null;
-    const currentSpeech: string[] = [];
-    const transcription: TranscriberTranscription[] = [];
-    const wordsInfo =
-      response.results[response.results.length - 1].alternatives[0].words;
-
-    // 👇 iterate over all the words
-    wordsInfo.forEach((info) => {
-      jsome(info);
-      const speakerTag = request.speakers[Number(info.speakerTag) - 1];
-      if (speakerTag !== currentSpeakerTag) {
-        if (currentSpeakerTag)
-          transcription.push({
-            speaker: currentSpeakerTag,
-            speech: currentSpeech.join(' '),
-            start: currentStartTime
-          });
-        currentSpeakerTag = speakerTag;
-        currentStartTime = null;
-        currentSpeech.length = 0;
-      }
-      if (!currentStartTime)
-        currentStartTime = Number(info.startTime.seconds ?? 0);
-      currentSpeech.push(info.word);
-    });
-
-    // 👇 don't forget the last one!
-    transcription.push({
-      speaker: currentSpeakerTag,
-      speech: currentSpeech.join(' '),
-      start: currentStartTime
-    });
-
     // 👇 return the transcription to the caller
     globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
       progressPercent: 100,
-      transcription
+      transcription: makeTranscription(request, response)
     });
   }
 );
+
+function makeTranscription(request, response): TranscriberTranscription[] {
+  let speaker = null;
+  let start = 0;
+  const speech: string[] = [];
+  // 👇 we need only look at the last result
+  //    https://cloud.google.com/speech-to-text/docs/multiple-voices
+  const infos =
+    response.results[response.results.length - 1].alternatives[0].words;
+  // 👇 add a terminal object
+  infos.push({});
+  return infos.reduce((transcription, info) => {
+    const nextSpeaker = request.speakers[Number(info.speakerTag) - 1];
+    if (nextSpeaker !== speaker) {
+      if (speaker)
+        transcription.push({
+          speaker: speaker,
+          speech: speech.join(' '),
+          start: start
+        });
+      speaker = nextSpeaker;
+      start = Number(info.startTime?.seconds ?? 0);
+      speech.length = 0;
+    }
+    speech.push(info.word);
+    return transcription;
+  }, []);
+}
 
 async function pollOperationProgress(
   client: v1p1beta1.SpeechClient,

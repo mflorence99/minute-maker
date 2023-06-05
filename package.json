@@ -20,8 +20,7 @@
     "prettier": "prettier --write .",
     "start": "ng serve",
     "test": "jest --detectOpenHandles --silent --verbose",
-    "test:only": "jest --coverage=false -- %1",
-    "watch:main": "tsc --watch -p main/tsconfig.json"
+    "test:only": "jest --coverage=false -- %1"
   },
   "dependencies": {
     "@angular/animations": "^16",

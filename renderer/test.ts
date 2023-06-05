@@ -59,6 +59,9 @@ Object.defineProperty(window, 'require', {
   value: () => {
     return {
       ipcRender: {
+        invoke: jest.fn,
+        on: jest.fn,
+        removeListener: jest.fn,
         send: jest.fn
       }
     };

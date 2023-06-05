@@ -9,6 +9,8 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 
 @Injectable({ providedIn: 'root' })
 export class TranscriberService {
+  //
+  //
   transcribe(request: TranscriberRequest): Observable<TranscriberResponse> {
     return new Observable((observer) => {
       let name;

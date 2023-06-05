@@ -1,10 +1,6 @@
 import PACKAGE from '#mm/package';
 
 export const environment = {
-  env: {
-    OPEN_AI_KEY: process.env['OPEN_AI_KEY']
-  },
-
   package: {
     author: PACKAGE.author,
     name: PACKAGE.name,
@@ -17,5 +13,5 @@ export const environment = {
     version: PACKAGE.version
   },
 
-  production: !process.argv.includes('DEV_MODE')
+  production: !location.search.includes('isDev=true')
 };

@@ -1,6 +1,7 @@
 import './_globals';
 import './context-menu';
 import './google-speech';
+import './openai';
 
 import { store } from './local-storage';
 
@@ -27,7 +28,6 @@ app.on('ready', () => {
     height: bounds.height,
     resizable: true,
     webPreferences: {
-      additionalArguments: isDev ? ['DEV_MODE'] : null,
       contextIsolation: false,
       nodeIntegration: true,
       sandbox: false,
@@ -47,6 +47,7 @@ app.on('ready', () => {
         pathname: path.join(),
         port: 4200,
         protocol: 'http:',
+        query: { isDev: true },
         slashes: true
       })
     );

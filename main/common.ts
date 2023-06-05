@@ -1,4 +1,8 @@
 export enum Channels {
+  openaiChatCompletion = 'openai/chat-completion',
+  openaiCompletion = 'openai/completion',
+  openaiListModels = 'openai/list-models',
+
   transcriberCancel = '@google-speech/transcriber/cancel',
   transcriberRequest = '@google-speech/transcriber/request',
   transcriberResponse = '@google-speech/transcriber/response'

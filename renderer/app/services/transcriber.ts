@@ -11,11 +11,19 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 export class TranscriberService {
   transcribe(request: TranscriberRequest): Observable<TranscriberResponse> {
     return new Observable((observer) => {
-      ipcRenderer.on(Channels.transcriberResponse, (event, response) => {
+      let name;
+      function listener(event, response): void {
+        name = response.name;
         observer.next(response);
         if (response.progressPercent === 100) observer.complete();
-      });
+      }
+      ipcRenderer.on(Channels.transcriberResponse, listener);
       ipcRenderer.send(Channels.transcriberRequest, request);
+      // 👇 teardown logic
+      return () => {
+        ipcRenderer.send(Channels.transcriberCancel, { name });
+        ipcRenderer.removeListener(Channels.transcriberResponse, listener);
+      };
     });
   }
 }

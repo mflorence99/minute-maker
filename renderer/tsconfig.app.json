@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app"
   },
-  "files": ["./main.ts"],
+  "files": ["./main.ts", "../main/common.ts"],
   "exclude": ["./test.ts", "./**/*.spec.ts"],
   "include": ["./**/*.ts"]
 }

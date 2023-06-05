@@ -1,9 +1,15 @@
 import { Channels } from './common';
+import { TranscriberCancel } from './common';
 import { TranscriberRequest } from './common';
 import { TranscriberTranscription } from './common';
 
 import { ipcMain } from 'electron';
+import { readFileSync } from 'fs';
 import { v1p1beta1 } from '@google-cloud/speech';
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟩 transcription request
+// //////////////////////////////////////////////////////////////////////////
 
 ipcMain.on(
   Channels.transcriberRequest,
@@ -14,7 +20,7 @@ ipcMain.on(
     // 👇 call Google to begin transcription
     const [operation] = await client.longRunningRecognize({
       audio: {
-        uri: request.audio.gcsuri
+        content: readFileSync(request.audio.fileName).toString('base64')
       },
       config: {
         enableAutomaticPunctuation: true,
@@ -34,11 +40,33 @@ ipcMain.on(
 
     // 👇 return the transcription to the caller
     globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
+      name: operation.name,
       progressPercent: 100,
       transcription: makeTranscription(request, response)
     });
   }
 );
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟥 cancel transcription
+// //////////////////////////////////////////////////////////////////////////
+
+ipcMain.on(
+  Channels.transcriberCancel,
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  async (event, request: TranscriberCancel): Promise<void> => {
+    const client = new v1p1beta1.SpeechClient().operationsClient;
+    try {
+      await client.cancelOperation(request as any);
+    } catch (error) {
+      jsome(`🔥 ${error.message}`);
+    }
+  }
+);
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟦 helper functions
+// //////////////////////////////////////////////////////////////////////////
 
 function makeTranscription(request, response): TranscriberTranscription[] {
   let speaker = null;
@@ -82,6 +110,7 @@ async function pollOperationProgress(
     // 👇 1. metadata doesn't seem to be typed properly
     //    2. seems to be 0% all the way to the end, when it jumps to 100%
     globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
+      name: operation.name,
       progressPercent: (<any>metadata).progressPercent,
       speech: null
     });

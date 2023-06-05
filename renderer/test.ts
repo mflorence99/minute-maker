@@ -54,6 +54,7 @@ Object.defineProperty(window, 'TextEncoder', {
 
 Object.defineProperty(window, 'WaveSurfer', { value: null });
 
+// 🔥 assuming only electron is required!
 Object.defineProperty(window, 'require', {
   value: () => {
     return {

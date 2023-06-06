@@ -48,7 +48,8 @@ Object.defineProperty(window, 'ResizeObserver', {
 
 // 🙈 https://github.com/angular/angular/issues/48748
 Object.defineProperty(window, 'TextEncoder', {
-  value: TextEncoder
+  value: TextEncoder,
+  writable: true
 });
 
 Object.defineProperty(window, 'WaveSurfer', { value: null });

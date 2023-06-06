@@ -11,58 +11,67 @@ import { v1p1beta1 } from '@google-cloud/speech';
 // 🟩 transcription request
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.on(
-  Channels.transcriberRequest,
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  async (event, request: TranscriberRequest): Promise<void> => {
-    const client = new v1p1beta1.SpeechClient();
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+ipcMain.on(Channels.transcriberRequest, longRunningRecognize);
 
-    // 👇 call Google to begin transcription
-    const [operation] = await client.longRunningRecognize({
-      audio: {
-        content: readFileSync(request.audio.fileName).toString('base64')
-      },
-      config: {
-        enableAutomaticPunctuation: true,
-        enableWordTimeOffsets: true,
-        diarizationSpeakerCount: request.speakers.length,
-        enableSpeakerDiarization: true,
-        encoding: request.audio.encoding,
-        languageCode: 'en-US',
-        sampleRateHertz: request.audio.sampleRateHertz
-      }
-    });
+// 👇 exported for tests
+export async function longRunningRecognize(
+  event,
+  request: TranscriberRequest
+): Promise<void> {
+  const client = new v1p1beta1.SpeechClient();
 
-    // 👇 call Google to begin transcription
-    const transcriber = operation.promise();
-    const poller = pollOperationProgress(client, operation);
-    const [[response]] = await Promise.all([transcriber, poller]);
+  // 👇 call Google to begin transcription
+  const [operation] = await client.longRunningRecognize({
+    audio: {
+      // 👇 audio content not important for tests
+      content: request.audio?.fileName
+        ? readFileSync(request.audio.fileName).toString('base64')
+        : null
+    },
+    config: {
+      enableAutomaticPunctuation: true,
+      enableWordTimeOffsets: true,
+      diarizationSpeakerCount: request.speakers.length,
+      enableSpeakerDiarization: true,
+      encoding: request.audio?.encoding ?? 'MP3',
+      languageCode: 'en-US',
+      sampleRateHertz: request.audio?.sampleRateHertz ?? 16000
+    }
+  });
 
-    // 👇 return the transcription to the caller
-    globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
-      name: operation.name,
-      progressPercent: 100,
-      transcription: makeTranscription(request, response)
-    });
-  }
-);
+  // 👇 call Google to begin transcription
+  const transcriber = operation.promise();
+  const poller = pollOperationProgress(client, operation);
+  const [[response]] = await Promise.all([transcriber, poller]);
+
+  // 👇 return the transcription to the caller
+  globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
+    name: operation.name,
+    progressPercent: 100,
+    transcription: makeTranscription(request, response)
+  });
+}
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟥 cancel transcription
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.on(
-  Channels.transcriberCancel,
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  async (event, request: TranscriberCancel): Promise<void> => {
-    const client = new v1p1beta1.SpeechClient().operationsClient;
-    try {
-      await client.cancelOperation(request as any);
-    } catch (error) {
-      console.log(`🔥 ${error.message}`);
-    }
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+ipcMain.on(Channels.transcriberCancel, cancelOperation);
+
+// 👇 exported for tests
+export async function cancelOperation(
+  event,
+  request: TranscriberCancel
+): Promise<void> {
+  const client = new v1p1beta1.SpeechClient();
+  try {
+    await client.cancelOperation(request as any);
+  } catch (error) {
+    console.log(`🔥 ${error.message}`);
   }
-);
+}
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟦 helper functions

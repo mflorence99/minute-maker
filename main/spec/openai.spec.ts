@@ -1,3 +1,5 @@
+import { chatCompletion } from '../app/openai';
+import { completion } from '../app/openai';
 import { listModels } from '../app/openai';
 
 import 'jest-extended';
@@ -60,5 +62,23 @@ describe('openai', () => {
         ])
       );
     });
+  });
+
+  it("calls OpenAI's createChatCompletion", () => {
+    return chatCompletion(null, { prompt: 'What is your name?' }).then(
+      (response) => {
+        expect(response.finish_reason).toBe('stop');
+        expect(response.text).toContain('OpenAI');
+      }
+    );
+  });
+
+  it("calls OpenAI's createCompletion", () => {
+    return completion(null, { prompt: 'What is your name?' }).then(
+      (response) => {
+        expect(response.finish_reason).toBe('stop');
+        expect(response.text).toContain('My name is');
+      }
+    );
   });
 });

@@ -18,7 +18,7 @@ ipcMain.on(
     // 👇 create the OpenAI client
     const openai = new OpenAIApi(
       new Configuration({
-        apiKey: process.env.OPEN_AI_KEY
+        apiKey: process.env['OPEN_AI_KEY']
       })
     );
     // 👇 these are the request defaults
@@ -55,7 +55,7 @@ ipcMain.on(
     // 👇 create the OpenAI client
     const openai = new OpenAIApi(
       new Configuration({
-        apiKey: process.env.OPEN_AI_KEY
+        apiKey: process.env['OPEN_AI_KEY']
       })
     );
     // 👇 these are the request defaults
@@ -82,18 +82,17 @@ ipcMain.on(
 // 🟩 listModels request
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.on(
-  Channels.openaiListModels,
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  async (): Promise<string[]> => {
-    // 👇 create the OpenAI client
-    const openai = new OpenAIApi(
-      new Configuration({
-        apiKey: process.env.OPEN_AI_KEY
-      })
-    );
-    // 👇 ready to call OpenAI
-    const response = await openai.listModels();
-    return response.data.data.map((data) => data.id).sort();
-  }
-);
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+ipcMain.on(Channels.openaiListModels, listModels);
+
+export async function listModels(): Promise<string[]> {
+  // 👇 create the OpenAI client
+  const openai = new OpenAIApi(
+    new Configuration({
+      apiKey: process.env['OPEN_AI_KEY']
+    })
+  );
+  // 👇 ready to call OpenAI
+  const response = await openai.listModels();
+  return response.data.data.map((data) => data.id).sort();
+}

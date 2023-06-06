@@ -53,16 +53,6 @@ Object.defineProperty(window, 'TextEncoder', {
 
 Object.defineProperty(window, 'WaveSurfer', { value: null });
 
-// 🙈 ipc is normally set by preload.ts
-Object.defineProperty(window, 'ipc', {
-  value: {
-    invoke: jest.fn,
-    on: jest.fn,
-    removeListener: jest.fn,
-    send: jest.fn
-  }
-});
-
 TestBed.initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting()

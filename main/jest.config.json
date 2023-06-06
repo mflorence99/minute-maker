@@ -1,9 +1,6 @@
 {
   "collectCoverage": true,
-  "collectCoverageFrom": [
-    "<rootDir>/app/**/*.ts",
-    "!<rootDir>/app/**/module.ts"
-  ],
+  "collectCoverageFrom": ["<rootDir>/app/**/*.ts", "!<rootDir>/app/preload.ts"],
   "coverageReporters": ["json-summary", "text"],
   "preset": "ts-jest",
   "roots": ["<rootDir>/"],

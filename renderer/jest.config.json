@@ -1,9 +1,6 @@
 {
   "collectCoverage": true,
-  "collectCoverageFrom": [
-    "<rootDir>/app/**/*.ts",
-    "!<rootDir>/app/**/module.ts"
-  ],
+  "collectCoverageFrom": ["<rootDir>/app/**/*.ts", "!<rootDir>/app/module.ts"],
   "coverageReporters": ["json-summary", "text"],
   "moduleNameMapper": {
     "^#mm/common$": "<rootDir>/app/common.ts",

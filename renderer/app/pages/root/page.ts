@@ -34,7 +34,7 @@ export class RootPage {
   }
 
   transcribe(): void {
-    const config = {
+    const request = {
       audio: {
         encoding: 'MP3',
         fileName:
@@ -48,6 +48,6 @@ export class RootPage {
       subject: 'Test Minutes'
     };
 
-    this.#transcriber.transcribe(config).subscribe(console.log);
+    this.#transcriber.transcribe(request).subscribe(console.log);
   }
 }

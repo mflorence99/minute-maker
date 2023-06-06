@@ -59,7 +59,7 @@ ipcMain.on(
     try {
       await client.cancelOperation(request as any);
     } catch (error) {
-      jsome(`🔥 ${error.message}`);
+      console.log(`🔥 ${error.message}`);
     }
   }
 );

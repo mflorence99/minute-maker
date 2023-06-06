@@ -1,4 +1,3 @@
-import './_globals';
 import './context-menu';
 import './google-speech';
 import './openai';

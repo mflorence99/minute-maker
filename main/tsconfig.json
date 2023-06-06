@@ -5,9 +5,6 @@
     "lib": ["es2022", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "../dist/main",
     "target": "es2022"
-  },
-  "files": ["./_globals.d.ts"],
-  "include": ["./**/*.ts"]
+  }
 }

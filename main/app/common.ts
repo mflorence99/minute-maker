@@ -3,9 +3,11 @@ export enum Channels {
   openaiCompletion = 'openai/completion',
   openaiListModels = 'openai/list-models',
 
-  transcriberCancel = '@google-speech/transcriber/cancel',
-  transcriberRequest = '@google-speech/transcriber/request',
-  transcriberResponse = '@google-speech/transcriber/response'
+  transcriberCancel = 'google-speech/transcriber/cancel',
+  transcriberRequest = 'google-speech/transcriber/request',
+  transcriberResponse = 'google-speech/transcriber/response',
+
+  uploaderRequest = 'google-storage/uploader/request'
 }
 
 export type OpenAIRequest = {
@@ -28,7 +30,8 @@ export type TranscriberCancel = {
 export type TranscriberRequest = {
   audio: {
     encoding: any;
-    fileName: string;
+    fileName?: string;
+    gcsuri?: string;
     sampleRateHertz: number;
   };
   date: string;
@@ -48,4 +51,10 @@ export type TranscriberTranscription = {
   speaker: string;
   speech: string;
   start: number;
+};
+
+export type UploaderRequest = {
+  bucketName: string;
+  destFileName: string;
+  filePath: string;
 };

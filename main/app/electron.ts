@@ -1,5 +1,6 @@
 import './context-menu';
 import './google-speech';
+import './google-storage';
 import './openai';
 
 import { store } from './local-storage';

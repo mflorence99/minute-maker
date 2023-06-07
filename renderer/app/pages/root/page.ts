@@ -9,7 +9,7 @@ import { inject } from '@angular/core';
   template: `
     <main>
       <mm-wavesurfer
-        [audioFile]="'./assets/short.mp3'"
+        [audioFile]="'./assets/minutes.mp3'"
         [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }">
         <mm-wavesurfer-regions
           (regionEntered)="event('region-entered', $event)">
@@ -37,8 +37,7 @@ export class RootPage {
     const request = {
       audio: {
         encoding: 'MP3',
-        fileName:
-          '/home/mflo/mflorence99/minute-maker/renderer/assets/short.mp3',
+        gcsuri: 'gs://washington-app-319514.appspot.com/minutes.mp3',
         sampleRateHertz: 32000
       },
       date: '2023-05-02T09:36',

@@ -24,10 +24,12 @@ export async function longRunningRecognize(
   // 👇 call Google to begin transcription
   const [operation] = await client.longRunningRecognize({
     audio: {
-      // 👇 audio content not important for tests
+      // 👇 content only works for "short" files, otherwise
+      //    must use data in GCS bucket
       content: request.audio?.fileName
         ? readFileSync(request.audio.fileName).toString('base64')
-        : null
+        : null,
+      uri: request.audio?.gcsuri
     },
     config: {
       enableAutomaticPunctuation: true,

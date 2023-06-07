@@ -1,6 +1,13 @@
 {
   "collectCoverage": true,
-  "collectCoverageFrom": ["<rootDir>/app/**/*.ts", "!<rootDir>/app/preload.ts"],
+  "collectCoverageFrom": [
+    "<rootDir>/app/**/*.ts",
+    "!<rootDir>/app/common.ts",
+    "!<rootDir>/app/context-menu.ts",
+    "!<rootDir>/app/electron.ts",
+    "!<rootDir>/app/local-storage.ts",
+    "!<rootDir>/app/preload.ts"
+  ],
   "coverageReporters": ["json-summary", "text"],
   "preset": "ts-jest",
   "roots": ["<rootDir>/"],

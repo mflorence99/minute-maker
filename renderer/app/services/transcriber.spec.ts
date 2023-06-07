@@ -19,6 +19,13 @@ describe('TranscriberService', () => {
     expect(transcriber).toBeDefined();
   });
 
+  it('can cancel an on-going transcription', () => {
+    const transcriber = new TranscriberService();
+    const request = { name: 'Bob' };
+    transcriber.cancelTranscription(request);
+    expect(ipc.send).toHaveBeenCalledWith(Channels.transcriberCancel, request);
+  });
+
   it('creates an Observer of a transcription', (done) => {
     const transcriber = new TranscriberService();
     // 👇 the request is not important

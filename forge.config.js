@@ -1,6 +1,4 @@
 module.exports = {
-  packagerConfig: {},
-  rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
@@ -18,5 +16,7 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {}
     }
-  ]
+  ],
+  packagerConfig: {},
+  rebuildConfig: {}
 };

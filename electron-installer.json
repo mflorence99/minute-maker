@@ -1,7 +1,7 @@
 {
   "dest": "installers/",
   "categories": ["Utility"],
-  "icon": "renderer/assets/ternimal.png",
+  "icon": "renderer/assets/meeting.png",
   "name": "minute-maker",
   "productName": "Minute Maker",
   "lintianOverrides": ["changelog-file-missing-in-native-package"]

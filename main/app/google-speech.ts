@@ -11,8 +11,7 @@ import { v1p1beta1 } from '@google-cloud/speech';
 // 🟩 transcription request
 // //////////////////////////////////////////////////////////////////////////
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
-ipcMain.on(Channels.transcriberRequest, longRunningRecognize);
+ipcMain.handle(Channels.transcriberRequest, longRunningRecognize);
 
 // 👇 exported for tests
 export async function longRunningRecognize(
@@ -20,6 +19,7 @@ export async function longRunningRecognize(
   request: TranscriberRequest
 ): Promise<void> {
   const client = new v1p1beta1.SpeechClient();
+  console.log(`👉 ${Channels.transcriberRequest} ${JSON.stringify(request)}`);
 
   // 👇 call Google to begin transcription
   const [operation] = await client.longRunningRecognize({
@@ -47,6 +47,8 @@ export async function longRunningRecognize(
   const poller = pollOperationProgress(client, operation);
   const [[response]] = await Promise.all([transcriber, poller]);
 
+  console.log(`👈 ${Channels.transcriberResponse} 100%`);
+
   // 👇 return the transcription to the caller
   globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
     name: operation.name,
@@ -59,8 +61,7 @@ export async function longRunningRecognize(
 // 🟥 cancel transcription
 // //////////////////////////////////////////////////////////////////////////
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
-ipcMain.on(Channels.transcriberCancel, cancelOperation);
+ipcMain.handle(Channels.transcriberCancel, cancelOperation);
 
 // 👇 exported for tests
 export async function cancelOperation(
@@ -69,6 +70,7 @@ export async function cancelOperation(
 ): Promise<void> {
   const client = new v1p1beta1.SpeechClient();
   try {
+    console.log(`👉 ${Channels.transcriberCancel} ${JSON.stringify(request)}`);
     await client.cancelOperation(request as any);
   } catch (error) {
     console.log(`🔥 ${error.message}`);
@@ -120,9 +122,11 @@ async function pollOperationProgress(
     if (latestResponse.done) break;
     // 👇 1. metadata doesn't seem to be typed properly
     //    2. seems to be 0% all the way to the end, when it jumps to 100%
+    const progressPercent = (<any>metadata).progressPercent ?? 0;
+    console.log(`👈 ${Channels.transcriberResponse} ${progressPercent}%`);
     globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
       name: operation.name,
-      progressPercent: (<any>metadata).progressPercent,
+      progressPercent,
       speech: null
     });
     // 👇 wait before polling again

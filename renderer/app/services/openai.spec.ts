@@ -10,11 +10,6 @@ Object.defineProperty(window, 'ipc', {
 declare const ipc;
 
 describe('OpenAIService', () => {
-  it('can be initialized', () => {
-    const openai = new OpenAIService();
-    expect(openai).toBeDefined();
-  });
-
   it('invokes the openaiChatCompletion channel', () => {
     const openai = new OpenAIService();
     const request = { prompt: 'hello!' };

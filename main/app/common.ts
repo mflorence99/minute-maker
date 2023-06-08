@@ -1,4 +1,9 @@
 export enum Channels {
+  localStorageClear = 'local-storage/clear',
+  localStorageGetItem = 'local-storage/getItem',
+  localStorageRemoveItem = 'local-storage/removeItem',
+  localStorageSetItem = 'local-storage/setItem',
+
   openaiChatCompletion = 'openai/chat-completion',
   openaiCompletion = 'openai/completion',
   openaiListModels = 'openai/list-models',
@@ -57,4 +62,8 @@ export type UploaderRequest = {
   bucketName: string;
   destFileName: string;
   filePath: string;
+};
+
+export type UploaderResponse = {
+  gcsuri: string;
 };

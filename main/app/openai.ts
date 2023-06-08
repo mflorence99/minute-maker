@@ -11,14 +11,14 @@ import { ipcMain } from 'electron';
 // 🟩 chatCompletion request
 // //////////////////////////////////////////////////////////////////////////
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
-ipcMain.on(Channels.openaiChatCompletion, chatCompletion);
+ipcMain.handle(Channels.openaiChatCompletion, chatCompletion);
 
 // 👇 exported for tests
 export async function chatCompletion(
   event,
   _request: OpenAIRequest
 ): Promise<OpenAIResponse> {
+  console.log(`👉 ${Channels.openaiChatCompletion} ${trunc(_request.prompt)}`);
   // 👇 create the OpenAI client
   const openai = new OpenAIApi(
     new Configuration({
@@ -35,30 +35,36 @@ export async function chatCompletion(
   // 👇 simplify the API to look the same as "completion"
   const { prompt, ...request } = _request;
   // 👇 ready to call OpenAI
-  const response = await openai.createChatCompletion({
+  const _response = await openai.createChatCompletion({
     messages: [{ content: prompt, role: 'user' }],
     ...request,
     ...dflt
   });
   // 👇 just extract the important bits
-  return {
-    finish_reason: response.data.choices[0].finish_reason as any,
-    text: response.data.choices[0].message.content
+  const response = {
+    finish_reason: _response.data.choices[0].finish_reason as any,
+    text: _response.data.choices[0].message.content
   };
+  console.log(
+    `👈 ${Channels.openaiChatCompletion} ${response.finish_reason} ${trunc(
+      response.text
+    )}`
+  );
+  return response;
 }
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 completion request
 // //////////////////////////////////////////////////////////////////////////
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
-ipcMain.on(Channels.openaiCompletion, completion);
+ipcMain.handle(Channels.openaiCompletion, completion);
 
 // 👇 exported for tests
 export async function completion(
   event,
   request: OpenAIRequest
 ): Promise<OpenAIResponse> {
+  console.log(`👉 ${Channels.openaiCompletion} ${trunc(request.prompt)}`);
   // 👇 create the OpenAI client
   const openai = new OpenAIApi(
     new Configuration({
@@ -73,23 +79,28 @@ export async function completion(
     top_p: 1
   };
   // 👇 ready to call OpenAI
-  const response = await openai.createCompletion({
+  const _response = await openai.createCompletion({
     ...request,
     ...dflt
   });
   // 👇 just extract the important bits
-  return {
-    finish_reason: response.data.choices[0].finish_reason as any,
-    text: response.data.choices[0].text
+  const response = {
+    finish_reason: _response.data.choices[0].finish_reason as any,
+    text: _response.data.choices[0].text
   };
+  console.log(
+    `👈 ${Channels.openaiCompletion} ${response.finish_reason} ${trunc(
+      response.text
+    )}`
+  );
+  return response;
 }
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 listModels request
 // //////////////////////////////////////////////////////////////////////////
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
-ipcMain.on(Channels.openaiListModels, listModels);
+ipcMain.handle(Channels.openaiListModels, listModels);
 
 // 👇 exported for tests
 export async function listModels(): Promise<string[]> {
@@ -100,6 +111,17 @@ export async function listModels(): Promise<string[]> {
     })
   );
   // 👇 ready to call OpenAI
+  console.log(`👉 ${Channels.openaiListModels}`);
   const response = await openai.listModels();
-  return response.data.data.map((data) => data.id).sort();
+  const models = response.data.data.map((data) => data.id).sort();
+  console.log(`👈 ${Channels.openaiListModels}\n${models.join('\n')}`);
+  return models;
+}
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟦 helper functions
+// //////////////////////////////////////////////////////////////////////////
+
+function trunc(text: string, maxlen = 100): string {
+  return text.length < maxlen ? text : `${text.substring(0, maxlen)}...`;
 }

@@ -10,6 +10,7 @@
     "^#mm/package$": "<rootDir>/../package.json",
     "^#mm/pages/(.*)$": "<rootDir>/app/pages/$1",
     "^#mm/services/(.*)$": "<rootDir>/app/services/$1",
+    "^#mm/state/(.*)$": "<rootDir>/app/state/$1",
     "^#mm/utils$": "<rootDir>/app/utils.ts"
   },
   "preset": "jest-preset-angular",

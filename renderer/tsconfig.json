@@ -30,6 +30,7 @@
       "#mm/package": ["../package.json"],
       "#mm/pages/*": ["./app/pages/*"],
       "#mm/services/*": ["./app/services/*"],
+      "#mm/state/*": ["./app/state/*"],
       "#mm/utils": ["./app/utils.ts"]
     },
     "resolveJsonModule": true,

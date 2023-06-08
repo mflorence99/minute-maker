@@ -6,7 +6,7 @@ import 'jest-extended';
 
 jest.mock('electron', () => ({
   ipcMain: {
-    on: jest.fn()
+    handle: jest.fn()
   }
 }));
 

@@ -7,6 +7,7 @@
     "^#mm/package$": "<rootDir>/package.json",
     "^#mm/pages/(.*)$": "<rootDir>/renderer/app/pages/$1",
     "^#mm/services/(.*)$": "<rootDir>/renderer/app/services/$1",
+    "^#mm/state/(.*)$": "<rootDir>/renderer/app/state/$1",
     "^#mm/utils$": "<rootDir>/renderer/app/utils.ts"
   },
   "preset": "jest-preset-angular",

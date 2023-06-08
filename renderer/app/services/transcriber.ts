@@ -12,7 +12,7 @@ declare const ipc /* 🔥 typeof ipcRenderer */;
 export class TranscriberService {
   // 👇 cancel transcription
   cancelTranscription(request: TranscriberCancel): void {
-    ipc.send(Channels.transcriberCancel, request);
+    ipc.invoke(Channels.transcriberCancel, request);
   }
 
   // 👇 perform transcription
@@ -25,10 +25,10 @@ export class TranscriberService {
         if (response.progressPercent === 100) observer.complete();
       }
       ipc.on(Channels.transcriberResponse, listener);
-      ipc.send(Channels.transcriberRequest, request);
+      ipc.invoke(Channels.transcriberRequest, request);
       // 👇 teardown logic
       return () => {
-        ipc.send(Channels.transcriberCancel, { name });
+        ipc.invoke(Channels.transcriberCancel, { name });
         ipc.removeListener(Channels.transcriberResponse, listener);
       };
     });

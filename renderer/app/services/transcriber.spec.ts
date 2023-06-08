@@ -5,25 +5,23 @@ const transcription = { name: 'Bob', progressPercent: 100 };
 
 Object.defineProperty(window, 'ipc', {
   value: {
+    invoke: jest.fn(),
     on: jest.fn((channel, listener) => listener('event', transcription)),
-    removeListener: jest.fn(),
-    send: jest.fn()
+    removeListener: jest.fn()
   }
 });
 
 declare const ipc;
 
 describe('TranscriberService', () => {
-  it('can be initialized', () => {
-    const transcriber = new TranscriberService();
-    expect(transcriber).toBeDefined();
-  });
-
   it('can cancel an on-going transcription', () => {
     const transcriber = new TranscriberService();
     const request = { name: 'Bob' };
     transcriber.cancelTranscription(request);
-    expect(ipc.send).toHaveBeenCalledWith(Channels.transcriberCancel, request);
+    expect(ipc.invoke).toHaveBeenCalledWith(
+      Channels.transcriberCancel,
+      request
+    );
   });
 
   it('creates an Observer of a transcription', (done) => {
@@ -39,7 +37,7 @@ describe('TranscriberService', () => {
       Channels.transcriberResponse,
       expect.anything()
     );
-    expect(ipc.send).toHaveBeenCalledWith(
+    expect(ipc.invoke).toHaveBeenCalledWith(
       Channels.transcriberRequest,
       expect.anything()
     );

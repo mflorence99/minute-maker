@@ -6,3 +6,5 @@
 /main/coverage
 /node_modules
 /renderer/coverage
+
+out/

@@ -44,7 +44,11 @@
             "outputPath": "dist/renderer",
             "polyfills": ["zone.js"],
             "scripts": [],
-            "styles": ["renderer/app/styles.scss"],
+            "styles": [
+              "renderer/app/colors.scss",
+              "renderer/app/globals.scss",
+              "renderer/app/styles.scss"
+            ],
             "tsConfig": "renderer/tsconfig.app.json"
           }
         },

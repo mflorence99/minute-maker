@@ -18,7 +18,8 @@
     "eslint-plugin-import-splitnsort",
     "eslint-plugin-jest",
     "eslint-plugin-jest-extended",
-    "eslint-plugin-prefer-arrow"
+    "eslint-plugin-prefer-arrow",
+    "eslint-plugin-prettier"
   ],
   "root": true,
   "rules": {

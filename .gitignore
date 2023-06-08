@@ -2,9 +2,11 @@
 .eslintcache
 
 /.angular
+/coverage
 /dist
+/installers
 /main/coverage
 /node_modules
+/package
 /renderer/coverage
-
-out/
+/temp

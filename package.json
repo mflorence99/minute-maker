@@ -79,6 +79,7 @@
     "@types/jest": "^29",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
+    "dayjs": "^1",
     "electron": "^25.1.0",
     "electron-installer-debian": "^3",
     "electron-packager": "^17",

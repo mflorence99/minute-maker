@@ -49,10 +49,10 @@ export type TranscriberRequest = {
 export interface TranscriberResponse {
   name: string;
   progressPercent: number;
-  transcription: TranscriberTranscription[];
+  transcription: Transcription[];
 }
 
-export type TranscriberTranscription = {
+export type Transcription = {
   speaker: string;
   speech: string;
   start: number;

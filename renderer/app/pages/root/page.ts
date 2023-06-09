@@ -21,6 +21,13 @@ import { inject } from '@angular/core';
           (ready)="event('timeline-ready', $event)"></mm-wavesurfer-timeline>
       </mm-wavesurfer>
 
+      <mm-transcription
+        [startDate]="date"
+        [transcription]="[
+          { speaker: 'Bob', start: 0, speech: 'Hello' },
+          { speaker: 'Fred', start: 66, speech: 'Goodbye' }
+        ]" />
+
       <article class="buttons">
         <button (click)="transcribe()" color="primary" mat-raised-button>
           Transcribe
@@ -36,6 +43,8 @@ import { inject } from '@angular/core';
   `
 })
 export class RootPage {
+  date = new Date();
+
   #openai = inject(OpenAIService);
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);

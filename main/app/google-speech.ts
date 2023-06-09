@@ -1,7 +1,7 @@
 import { Channels } from './common';
 import { TranscriberCancel } from './common';
 import { TranscriberRequest } from './common';
-import { TranscriberTranscription } from './common';
+import { Transcription } from './common';
 
 import { ipcMain } from 'electron';
 import { readFileSync } from 'fs';
@@ -81,7 +81,7 @@ export async function cancelOperation(
 // 🟦 helper functions
 // //////////////////////////////////////////////////////////////////////////
 
-function makeTranscription(request, response): TranscriberTranscription[] {
+function makeTranscription(request, response): Transcription[] {
   let speaker = null;
   let start = 0;
   const speech: string[] = [];

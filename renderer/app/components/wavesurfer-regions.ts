@@ -40,13 +40,7 @@ import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions';
   template: `
     <ng-content />
   `,
-  styles: [
-    `
-      host {
-        display: none;
-      }
-    `
-  ]
+  styles: ['host { display: none; }']
 })
 export class WaveSurferRegionsComponent
   implements AfterContentInit, OnDestroy, OnInit, WaveSurferPlugin

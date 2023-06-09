@@ -18,15 +18,18 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RootPage } from '#mm/pages/root/page';
 import { RouterModule } from '@angular/router';
+import { TranscriptionComponent } from '#mm/components/transcription';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
 import { WaveSurferRegionsComponent } from '#mm/components/wavesurfer-regions';
 import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline';
 
 import { environment } from '#mm/environment';
+import { faTriangle } from '@fortawesome/pro-solid-svg-icons';
 import { initializeAppProvider } from '#mm/services/initializer';
 
 const COMPONENTS = [
+  TranscriptionComponent,
   WaveSurferComponent,
   WaveSurferRegionComponent,
   WaveSurferRegionsComponent,
@@ -87,6 +90,6 @@ const STATES_SAVED = [];
 export class RootModule {
   constructor(library: FaIconLibrary) {
     // 👇 must add icons we use right here
-    library.addIcons();
+    library.addIcons(faTriangle);
   }
 }

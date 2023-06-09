@@ -8,6 +8,10 @@ main {
   height: 100%;
   justify-content: center;
 
+  mm-transcription {
+    width: 480px;
+  }
+
   mm-wavesurfer {
     width: 480px;
   }

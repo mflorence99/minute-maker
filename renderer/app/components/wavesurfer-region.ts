@@ -7,13 +7,7 @@ import { RegionParams } from 'wavesurfer.js/dist/plugins/regions';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-wavesurfer-region',
   template: ``,
-  styles: [
-    `
-      host {
-        display: none;
-      }
-    `
-  ]
+  styles: ['host { display: none; }']
 })
 export class WaveSurferRegionComponent {
   @Input() params: Partial<RegionParams> = {};

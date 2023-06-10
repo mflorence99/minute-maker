@@ -36,7 +36,7 @@
           },
           "defaultConfiguration": "production",
           "options": {
-            "allowedCommonJsDependencies": ["openai", "wavesurfer.js"],
+            "allowedCommonJsDependencies": ["dayjs", "openai", "wavesurfer.js"],
             "assets": ["renderer/favicon.ico", "renderer/assets"],
             "index": "renderer/index.html",
             "inlineStyleLanguage": "scss",

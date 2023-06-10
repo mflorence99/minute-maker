@@ -31,8 +31,11 @@ describe('google-storage', () => {
       destFileName: 'test.mp3',
       filePath: '/home/mflo/mflorence99/minute-maker/renderer/assets/short.mp3'
     };
-    const { gcsuri } = await upload(null, request);
+    const { gcsuri, url } = await upload(null, request);
     expect(gcsuri).toBe(`gs://${request.bucketName}/${request.destFileName}`);
+    expect(url).toBe(
+      `https://storage.googleapis.com/${request.bucketName}/${request.destFileName}`
+    );
     expect(mockUpload).toHaveBeenCalledWith(
       request.filePath,
       expect.objectContaining({ destination: request.destFileName })

@@ -66,4 +66,5 @@ export type UploaderRequest = {
 
 export type UploaderResponse = {
   gcsuri: string;
+  url: string;
 };

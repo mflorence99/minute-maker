@@ -24,7 +24,8 @@ export async function upload(
   console.log(`👉 ${Channels.uploaderRequest} ${JSON.stringify(request)}`);
   await storage.bucket(request.bucketName).upload(request.filePath, options);
   const response = {
-    gcsuri: `gs://${request.bucketName}/${request.destFileName}`
+    gcsuri: `gs://${request.bucketName}/${request.destFileName}`,
+    url: `https://storage.googleapis.com/${request.bucketName}/${request.destFileName}`
   };
   console.log(`👈 ${Channels.uploaderRequest} ${JSON.stringify(response)}`);
   return response;

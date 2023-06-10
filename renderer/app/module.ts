@@ -18,6 +18,8 @@ import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RootPage } from '#mm/pages/root/page';
 import { RouterModule } from '@angular/router';
+import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
+import { StorageEngine } from '#mm/state/storage-engine';
 import { TranscriptionComponent } from '#mm/components/transcription';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
@@ -84,6 +86,10 @@ const STATES_SAVED = [];
         logErrors: true,
         showDialog: false
       })
+    },
+    {
+      provide: STORAGE_ENGINE,
+      useClass: StorageEngine
     }
   ]
 })

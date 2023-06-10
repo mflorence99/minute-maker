@@ -10,7 +10,7 @@ Object.defineProperty(window, 'ipc', {
 declare const ipc;
 
 describe('OpenAIService', () => {
-  it('invokes the uploaderRequest channel', () => {
+  it('uses the uploaderRequest channel to upload a file', () => {
     const uploader = new UploaderService();
     const request = {
       bucketName: 'staging.washington-app-319514.appspot.com',

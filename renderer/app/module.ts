@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { InitializerService } from '#mm/services/initializer';
 import { MatButtonModule } from '@angular/material/button';
+import { MinutesState } from '#mm/state/minutes';
 import { NgModule } from '@angular/core';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
@@ -44,7 +45,7 @@ const PAGES = [RootPage];
 
 const ROUTES = [];
 
-const STATES = [];
+const STATES = [MinutesState];
 const STATES_SAVED = [];
 
 @NgModule({

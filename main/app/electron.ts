@@ -1,4 +1,5 @@
 import './context-menu';
+import './fs';
 import './google-speech';
 import './google-storage';
 import './openai';

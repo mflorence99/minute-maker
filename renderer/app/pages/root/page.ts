@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FSService } from '#mm/services/fs';
 import { OpenAIService } from '#mm/services/openai';
 import { TranscriberService } from '#mm/services/transcriber';
 import { UploaderService } from '#mm/services/uploader';
@@ -39,12 +40,18 @@ import { inject } from '@angular/core';
           List Models
         </button>
       </article>
+
+      <article class="buttons">
+        <button (click)="openFile()" mat-raised-button>Open File</button>
+        <button (click)="saveFileAs()" mat-raised-button>Save File</button>
+      </article>
     </main>
   `
 })
 export class RootPage {
   date = new Date();
 
+  #fs = inject(FSService);
   #openai = inject(OpenAIService);
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
@@ -55,6 +62,25 @@ export class RootPage {
 
   listModels(): void {
     this.#openai.listModels().then(console.log);
+  }
+
+  openFile(): void {
+    this.#fs
+      .openFile({
+        filters: [{ extensions: ['json'], name: 'Minutes' }],
+        title: 'My Open File'
+      })
+      .then(console.log);
+  }
+
+  saveFileAs(): void {
+    this.#fs
+      .saveFileAs('data', {
+        defaultPath: '/home/mflo/mflorence99/minute-maker/temp',
+        filters: [{ extensions: ['txt'], name: 'Crap files' }],
+        title: 'My Save File As'
+      })
+      .then(console.log);
   }
 
   transcribe(): void {

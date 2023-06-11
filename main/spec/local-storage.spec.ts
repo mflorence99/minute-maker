@@ -14,7 +14,7 @@ jest.mock('electron', () => ({
 jest.mock('electron-is-dev', () => true);
 
 jest.mock('electron-store', () => {
-  return jest.fn().mockImplementation(() => {
+  return jest.fn(() => {
     let store = {};
     return {
       clear: jest.fn(() => (store = {})),

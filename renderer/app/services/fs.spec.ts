@@ -10,17 +10,17 @@ Object.defineProperty(window, 'ipc', {
 declare const ipc;
 
 describe('FSService', () => {
+  it('uses the fsChooseFile channel to choose a file', () => {
+    const fs = new FSService();
+    const options = { title: 'My Open File Dialog' };
+    fs.chooseFile(options);
+    expect(ipc.invoke).toHaveBeenCalledWith(Channels.fsChooseFile, options);
+  });
+
   it('uses the fsLoadFile channel to load a file', () => {
     const fs = new FSService();
     fs.loadFile(__filename);
     expect(ipc.invoke).toHaveBeenCalledWith(Channels.fsLoadFile, __filename);
-  });
-
-  it('uses the fsLocateFile channel to locate a file', () => {
-    const fs = new FSService();
-    const options = { title: 'My Open File Dialog' };
-    fs.locateFile(options);
-    expect(ipc.invoke).toHaveBeenCalledWith(Channels.fsLocateFile, options);
   });
 
   it('uses the fsOpenFile channel to open a file', () => {

@@ -53,7 +53,7 @@ const mockLongRunningRecognize = jest.fn(() => {
 jest.mock('@google-cloud/speech', () => {
   return {
     v1p1beta1: {
-      SpeechClient: jest.fn().mockImplementation(() => {
+      SpeechClient: jest.fn(() => {
         return {
           cancelOperation: mockCancelOperation,
 

@@ -1,6 +1,6 @@
 export enum Channels {
+  fsChooseFile = 'fs/chooseFile',
   fsLoadFile = 'fs/loadFile',
-  fsLocateFile = 'fs/locateFile',
   fsOpenFile = 'fs/OpenFile',
   fsSaveFile = 'fs/saveFile',
   fsSaveFileAs = 'fs/saveFileAs',

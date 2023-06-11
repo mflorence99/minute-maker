@@ -9,12 +9,12 @@ declare const ipc /* 🔥 typeof ipcRenderer */;
 
 @Injectable({ providedIn: 'root' })
 export class FSService {
-  loadFile(path: string): Promise<String> {
-    return ipc.invoke(Channels.fsLoadFile, path);
+  chooseFile(options: OpenDialogOptions): Promise<string> {
+    return ipc.invoke(Channels.fsChooseFile, options);
   }
 
-  locateFile(options: OpenDialogOptions): Promise<string> {
-    return ipc.invoke(Channels.fsLocateFile, options);
+  loadFile(path: string): Promise<String> {
+    return ipc.invoke(Channels.fsLoadFile, path);
   }
 
   openFile(options: OpenDialogOptions): Promise<OpenFileResponse> {
@@ -25,7 +25,7 @@ export class FSService {
     return ipc.invoke(Channels.fsSaveFile, path, data);
   }
 
-  saveFileAs(data: string, options: SaveDialogOptions): Promise<void> {
+  saveFileAs(data: string, options: SaveDialogOptions): Promise<string> {
     return ipc.invoke(Channels.fsSaveFileAs, data, options);
   }
 }

@@ -16,7 +16,7 @@ jest.mock('openai', () => {
     Configuration: jest.fn(),
 
     // 👇 mock API
-    OpenAIApi: jest.fn().mockImplementation(() => {
+    OpenAIApi: jest.fn(() => {
       return {
         createChatCompletion: (): any =>
           Promise.resolve({

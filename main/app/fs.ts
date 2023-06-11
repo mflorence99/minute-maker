@@ -10,6 +10,7 @@ import { writeFileSync } from 'fs';
 
 // 🔥 text files ONLY!
 
+ipcMain.handle(Channels.fsChooseFile, chooseFile);
 ipcMain.handle(Channels.fsLoadFile, loadFile);
 ipcMain.handle(Channels.fsOpenFile, openFile);
 ipcMain.handle(Channels.fsSaveFile, saveFile);
@@ -17,11 +18,7 @@ ipcMain.handle(Channels.fsSaveFileAs, saveFileAs);
 
 // 👇 exported for tests
 
-export function loadFile(event, path: string): string {
-  return readFileSync(path, { encoding: 'utf8' });
-}
-
-export function locateFile(event, options: OpenDialogOptions): string {
+export function chooseFile(event, options: OpenDialogOptions): string {
   const paths = dialog.showOpenDialogSync(globalThis.theWindow, {
     ...options,
     properties: ['openFile']
@@ -29,8 +26,12 @@ export function locateFile(event, options: OpenDialogOptions): string {
   return paths?.[0];
 }
 
+export function loadFile(event, path: string): string {
+  return readFileSync(path, { encoding: 'utf8' });
+}
+
 export function openFile(event, options: OpenDialogOptions): OpenFileResponse {
-  const path = locateFile(event, options);
+  const path = chooseFile(event, options);
   return path ? { data: loadFile(event, path), path } : null;
 }
 
@@ -42,10 +43,11 @@ export function saveFileAs(
   event,
   data: string,
   options: SaveDialogOptions
-): void {
+): string {
   const path = dialog.showSaveDialogSync(globalThis.theWindow, {
     ...options,
     properties: ['showOverwriteConfirmation']
   });
-  return path ? saveFile(event, path, data) : null;
+  if (path) saveFile(event, path, data);
+  return path;
 }

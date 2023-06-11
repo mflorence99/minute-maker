@@ -2,17 +2,18 @@ import { upload } from '../app/google-storage';
 
 import 'jest-extended';
 
+import { Storage } from '@google-cloud/storage';
+
 jest.mock('electron', () => ({
   ipcMain: {
     handle: jest.fn()
   }
 }));
 
-const mockUpload = jest.fn(() => Promise.resolve());
-
 jest.mock('@google-cloud/storage', () => {
+  const mockUpload = jest.fn(() => Promise.resolve());
   return {
-    Storage: jest.fn().mockImplementation(() => {
+    Storage: jest.fn(() => {
       return {
         bucket: jest.fn(() => {
           return {
@@ -26,6 +27,7 @@ jest.mock('@google-cloud/storage', () => {
 
 describe('google-storage', () => {
   it('can upload a file', async () => {
+    const storage = new Storage();
     const request = {
       bucketName: 'staging.washington-app-319514.appspot.com',
       destFileName: 'test.mp3',
@@ -36,7 +38,7 @@ describe('google-storage', () => {
     expect(url).toBe(
       `https://storage.googleapis.com/${request.bucketName}/${request.destFileName}`
     );
-    expect(mockUpload).toHaveBeenCalledWith(
+    expect(storage.bucket(request.bucketName).upload).toHaveBeenCalledWith(
       request.filePath,
       expect.objectContaining({ destination: request.destFileName })
     );

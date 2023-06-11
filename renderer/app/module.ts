@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/angular-ivy';
 
 import { APP_INITIALIZER } from '@angular/core';
+import { AppState } from '#mm/state/app';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -45,8 +46,8 @@ const PAGES = [RootPage];
 
 const ROUTES = [];
 
-const STATES = [MinutesState];
-const STATES_SAVED = [];
+const STATES = [AppState, MinutesState];
+const STATES_SAVED = [AppState];
 
 @NgModule({
   bootstrap: [RootPage],

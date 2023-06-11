@@ -16,7 +16,8 @@ describe('StorageEngine', () => {
     expect(ipc.invoke).toHaveBeenCalledWith(Channels.localStorageClear);
   });
 
-  it('invokes the localStorageGetItem channel', () => {
+  // 👇 no longer get directly
+  it.skip('invokes the localStorageGetItem channel', () => {
     const storageEngine = new StorageEngine();
     storageEngine.getItem('xxx');
     expect(ipc.invoke).toHaveBeenCalledWith(

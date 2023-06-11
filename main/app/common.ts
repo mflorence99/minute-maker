@@ -9,6 +9,7 @@ export enum Channels {
   localStorageGetItem = 'local-storage/getItem',
   localStorageRemoveItem = 'local-storage/removeItem',
   localStorageSetItem = 'local-storage/setItem',
+  localStorageStore = 'local-storage/store',
 
   openaiChatCompletion = 'openai/chat-completion',
   openaiCompletion = 'openai/completion',

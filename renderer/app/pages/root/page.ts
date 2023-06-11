@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FSService } from '#mm/services/fs';
+import { LoadMinutes } from '#mm/state/app';
 import { OpenAIService } from '#mm/services/openai';
+import { Store } from '@ngxs/store';
 import { TranscriberService } from '#mm/services/transcriber';
 import { UploaderService } from '#mm/services/uploader';
 
@@ -53,6 +55,7 @@ export class RootPage {
 
   #fs = inject(FSService);
   #openai = inject(OpenAIService);
+  #store = inject(Store);
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
 
@@ -65,12 +68,7 @@ export class RootPage {
   }
 
   openFile(): void {
-    this.#fs
-      .openFile({
-        filters: [{ extensions: ['json'], name: 'Minutes' }],
-        title: 'My Open File'
-      })
-      .then(console.log);
+    this.#store.dispatch(new LoadMinutes());
   }
 
   saveFileAs(): void {

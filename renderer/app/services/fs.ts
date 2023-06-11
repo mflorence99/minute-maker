@@ -13,7 +13,7 @@ export class FSService {
     return ipc.invoke(Channels.fsChooseFile, options);
   }
 
-  loadFile(path: string): Promise<String> {
+  loadFile(path: string): Promise<string> {
     return ipc.invoke(Channels.fsLoadFile, path);
   }
 

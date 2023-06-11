@@ -11,6 +11,6 @@ if (environment.production) enableProdMode();
 platformBrowserDynamic()
   .bootstrapModule(RootModule)
   .catch((error) => {
-    console.error(error);
+    console.error(`🔥 ${error.message}`);
     Sentry.captureException(error);
   });

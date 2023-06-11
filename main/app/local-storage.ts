@@ -13,6 +13,7 @@ ipcMain.handle(Channels.localStorageClear, localStorageClear);
 ipcMain.handle(Channels.localStorageGetItem, localStorageGetItem);
 ipcMain.handle(Channels.localStorageRemoveItem, localStorageRemoveItem);
 ipcMain.handle(Channels.localStorageSetItem, localStorageSetItem);
+ipcMain.handle(Channels.localStorageStore, localStorageStore);
 
 // 👇 exported for tests
 
@@ -30,4 +31,8 @@ export function localStorageRemoveItem(event, key: string): void {
 
 export function localStorageSetItem(event, key: string, value: any): void {
   store.set(key, value);
+}
+
+export function localStorageStore(_event): Record<string, any> {
+  return store.store;
 }

@@ -1,10 +1,6 @@
 import { Channels } from '#mm/common';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { StorageEngine as NGXSStorageEngine } from '@ngxs/storage-plugin';
-
-import { from } from 'rxjs';
-import { tap } from 'rxjs';
 
 // 🙈 preload.ts
 declare const ipc /* 🔥 typeof ipcRenderer */;
@@ -19,13 +15,11 @@ const CACHE: Record<string, any> = {};
 export class StorageEngine implements NGXSStorageEngine {
   length: number;
 
-  static initialize(): Observable<Record<string, any>> {
-    return from(ipc.invoke(Channels.localStorageStore)).pipe(
-      tap((store: Record<string, any>) => {
-        for (const key in CACHE) delete CACHE[key];
-        for (const key in store) CACHE[key] = store[key];
-      })
-    );
+  static initialize(): Promise<Record<string, any>> {
+    return ipc.invoke(Channels.localStorageStore).then((store) => {
+      for (const key in CACHE) delete CACHE[key];
+      for (const key in store) CACHE[key] = store[key];
+    });
   }
 
   clear(): void {

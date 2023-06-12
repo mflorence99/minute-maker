@@ -23,8 +23,8 @@ export type Minutes = {
 export type MinutesStateModel = Minutes;
 
 @State<MinutesStateModel>({
-  name: 'minutes',
-  defaults: null
+  name: 'minutes'
+  // defaults: null
 })
 @Injectable()
 export class MinutesState {

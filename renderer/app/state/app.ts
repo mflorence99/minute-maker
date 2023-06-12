@@ -27,10 +27,10 @@ export type AppStateModel = {
 };
 
 @State<AppStateModel>({
-  name: 'app',
-  defaults: {
-    pathToMinutes: null
-  }
+  name: 'app'
+  // defaults: {
+  //   pathToMinutes: null
+  // }
 })
 @Injectable()
 export class AppState implements NgxsOnInit {
@@ -40,8 +40,14 @@ export class AppState implements NgxsOnInit {
   @Action(LoadMinutes) async loadMinutes(
     ctx: StateContext<AppStateModel>
   ): Promise<void> {
-    const path = await this.#fs.chooseFile({ title: 'Open Minutes' });
-    if (path) this.#loadMinutes(ctx, path);
+    const path = await this.#fs.chooseFile({
+      filters: [{ extensions: ['json'], name: 'Minutes' }],
+      title: 'Open Minutes'
+    });
+    if (path) {
+      ctx.setState(patch({ pathToMinutes: path }));
+      this.#loadMinutes(ctx, path);
+    }
   }
 
   ngxsOnInit(ctx: StateContext<AppStateModel>): void {
@@ -69,7 +75,6 @@ export class AppState implements NgxsOnInit {
       const raw = await this.#fs.loadFile(path);
       const minutes: Minutes = JSON.parse(raw);
       ctx.dispatch(new SetMinutes(minutes));
-      ctx.setState(patch({ pathToMinutes: path }));
     } catch (error) {
       // 👇 this should never happen, unless the file is corrupted
       //    outside of the app

@@ -1,8 +1,8 @@
 import * as Sentry from '@sentry/angular-ivy';
 
+import { EMPTY } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StorageEngine } from '#mm/state/storage-engine';
 
 import { environment } from '#mm/environment';
 
@@ -30,6 +30,6 @@ export class InitializerService {
       });
     }
 
-    return StorageEngine.initialize();
+    return EMPTY;
   }
 }

@@ -1,4 +1,8 @@
+import { z } from 'zod';
+
 export enum Channels {
+  dialogShowErrorBox = 'dialog/showErrorBox',
+
   fsChooseFile = 'fs/chooseFile',
   fsLoadFile = 'fs/loadFile',
   fsOpenFile = 'fs/OpenFile',
@@ -21,6 +25,27 @@ export enum Channels {
 
   uploaderRequest = 'google-storage/uploader/request'
 }
+
+export const TranscriptionSchema = z.object({
+  speaker: z.string(),
+  speech: z.string(),
+  start: z.number()
+});
+
+export const MinutesSchema = z.object({
+  audio: z.object({
+    gcsuri: z.string().url(),
+    url: z.string().url()
+  }),
+  subject: z.string(),
+  subtitle: z.string(),
+  title: z.string(),
+  transcription: TranscriptionSchema.array()
+});
+
+export type Minutes = z.infer<typeof MinutesSchema>;
+
+export type Transcription = z.infer<typeof TranscriptionSchema>;
 
 export type FileFilter = {
   extensions: string[];
@@ -75,12 +100,6 @@ export type TranscriberResponse = {
   name: string;
   progressPercent: number;
   transcription: Transcription[];
-};
-
-export type Transcription = {
-  speaker: string;
-  speech: string;
-  start: number;
 };
 
 export type UploaderRequest = {

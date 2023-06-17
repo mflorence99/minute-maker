@@ -20,7 +20,7 @@
     "jest-preset-angular",
     "zone.js",
     "zone.js/testing",
-    "<rootDir>/renderer/test.ts"
+    "<rootDir>/renderer/app/test.ts"
   ],
   "testMatch": ["**/+(*.)+(spec).+(ts)"],
   "transform": {

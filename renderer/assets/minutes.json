@@ -1,0 +1,10 @@
+{
+  "audio": {
+    "gcsuri": "gs://washington-app-319514.appspot.com/minutes.mp3",
+    "url": "https://washington-app-319514.appspot.com/minutes.mp3"
+  },
+  "subject": "Test Minutes",
+  "subtitle": "Meeting Minutes Test",
+  "title": "Zoning Board of Adjustment",
+  "transcription": []
+}

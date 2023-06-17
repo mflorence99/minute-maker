@@ -1,6 +1,10 @@
 {
   "collectCoverage": true,
-  "collectCoverageFrom": ["<rootDir>/app/**/*.ts", "!<rootDir>/app/module.ts"],
+  "collectCoverageFrom": [
+    "<rootDir>/app/**/*.ts",
+    "!<rootDir>/app/main.ts",
+    "!<rootDir>/app/module.ts"
+  ],
   "coverageReporters": ["json-summary", "text"],
   "moduleNameMapper": {
     "^#mm/common$": "<rootDir>/app/common.ts",
@@ -23,7 +27,7 @@
     "jest-preset-angular",
     "zone.js",
     "zone.js/testing",
-    "<rootDir>/test.ts"
+    "<rootDir>/app/test.ts"
   ],
   "testMatch": ["**/+(*.)+(spec).+(ts)"],
   "transform": {

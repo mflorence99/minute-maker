@@ -40,7 +40,7 @@
             "assets": ["renderer/favicon.ico", "renderer/assets"],
             "index": "renderer/index.html",
             "inlineStyleLanguage": "scss",
-            "main": "renderer/main.ts",
+            "main": "renderer/app/main.ts",
             "outputPath": "dist/renderer",
             "polyfills": ["zone.js"],
             "scripts": [],

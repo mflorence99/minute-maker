@@ -4,6 +4,6 @@
     "outDir": "./out-tsc/spec",
     "module": "CommonJs"
   },
-  "files": ["./test.ts", "../main/app/common.ts"],
+  "files": ["./app/test.ts", "../main/app/common.ts"],
   "include": ["./**/*.spec.ts"]
 }

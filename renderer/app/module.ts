@@ -1,6 +1,5 @@
 import * as Sentry from '@sentry/angular-ivy';
 
-import { APP_INITIALIZER } from '@angular/core';
 import { AppState } from '#mm/state/app';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,7 +8,6 @@ import { ErrorHandler } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { InitializerService } from '#mm/services/initializer';
 import { MatButtonModule } from '@angular/material/button';
 import { MinutesState } from '#mm/state/minutes';
 import { NgModule } from '@angular/core';
@@ -30,7 +28,6 @@ import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline'
 
 import { environment } from '#mm/environment';
 import { faTriangle } from '@fortawesome/pro-solid-svg-icons';
-import { initializeAppProvider } from '#mm/services/initializer';
 
 const COMPONENTS = [
   TranscriptionComponent,
@@ -76,12 +73,6 @@ const STATES_SAVED = [AppState];
   ],
 
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeAppProvider,
-      deps: [InitializerService],
-      multi: true
-    },
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({

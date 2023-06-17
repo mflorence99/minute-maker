@@ -23,14 +23,14 @@ export class LoadMinutes {
 }
 
 export type AppStateModel = {
-  pathToMinutes: string;
+  pathToMinutes: string | undefined;
 };
 
 @State<AppStateModel>({
-  name: 'app'
-  // defaults: {
-  //   pathToMinutes: null
-  // }
+  name: 'app',
+  defaults: {
+    pathToMinutes: null
+  }
 })
 @Injectable()
 export class AppState implements NgxsOnInit {
@@ -75,7 +75,7 @@ export class AppState implements NgxsOnInit {
       const raw = await this.#fs.loadFile(path);
       const minutes: Minutes = JSON.parse(raw);
       ctx.dispatch(new SetMinutes(minutes));
-    } catch (error) {
+    } catch (error: any) {
       // 👇 this should never happen, unless the file is corrupted
       //    outside of the app
       console.error(`🔥 ${error.message}`);

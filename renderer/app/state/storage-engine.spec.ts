@@ -3,45 +3,27 @@ import { StorageEngine } from '#mm/state/storage-engine';
 
 Object.defineProperty(window, 'ipc', {
   value: {
-    invoke: jest.fn()
+    invoke: jest.fn(() => Promise.resolve({}))
   }
 });
 
 declare const ipc;
 
 describe('StorageEngine', () => {
-  it('invokes the localStorageClear channel', () => {
-    const storageEngine = new StorageEngine();
-    storageEngine.clear();
-    expect(ipc.invoke).toHaveBeenCalledWith(Channels.localStorageClear);
+  it('can be initialized', () => {
+    StorageEngine.initialize();
+    expect(ipc.invoke).toHaveBeenCalledWith(Channels.localStorageStore);
   });
 
-  // 👇 no longer get directly
-  it.skip('invokes the localStorageGetItem channel', () => {
-    const storageEngine = new StorageEngine();
-    storageEngine.getItem('xxx');
-    expect(ipc.invoke).toHaveBeenCalledWith(
-      Channels.localStorageGetItem,
-      'xxx'
-    );
-  });
-
-  it('invokes the localStorageRemoveItem channel', () => {
-    const storageEngine = new StorageEngine();
-    storageEngine.removeItem('xxx');
-    expect(ipc.invoke).toHaveBeenCalledWith(
-      Channels.localStorageRemoveItem,
-      'xxx'
-    );
-  });
-
-  it('invokes the localStorageSetItem channel', () => {
+  it('can pass a smoke test', () => {
     const storageEngine = new StorageEngine();
     storageEngine.setItem('xxx', 'yyy');
-    expect(ipc.invoke).toHaveBeenCalledWith(
-      Channels.localStorageSetItem,
-      'xxx',
-      'yyy'
-    );
+    expect(storageEngine.getItem('xxx')).toBe('yyy');
+    storageEngine.clear();
+    expect(storageEngine.getItem('xxx')).toBeUndefined();
+    storageEngine.setItem('xxx', 'zzz');
+    expect(storageEngine.getItem('xxx')).toBe('zzz');
+    storageEngine.removeItem('xxx');
+    expect(storageEngine.getItem('xxx')).toBeUndefined();
   });
 });

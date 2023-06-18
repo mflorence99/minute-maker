@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FSService } from '#mm/services/fs';
 import { LoadMinutes } from '#mm/state/app';
+import { MetadataService } from '#mm/services/metadata';
 import { OpenAIService } from '#mm/services/openai';
 import { Store } from '@ngxs/store';
 import { TranscriberService } from '#mm/services/transcriber';
@@ -46,6 +47,7 @@ import { inject } from '@angular/core';
       <article class="buttons">
         <button (click)="openFile()" mat-raised-button>Open File</button>
         <button (click)="saveFileAs()" mat-raised-button>Save File</button>
+        <button (click)="metadata()" mat-raised-button>Metadata</button>
       </article>
     </main>
   `
@@ -54,6 +56,7 @@ export class RootPage {
   date = new Date();
 
   #fs = inject(FSService);
+  #metadata = inject(MetadataService);
   #openai = inject(OpenAIService);
   #store = inject(Store);
   #transcriber = inject(TranscriberService);
@@ -65,6 +68,14 @@ export class RootPage {
 
   listModels(): void {
     this.#openai.listModels().then(console.log);
+  }
+
+  metadata(): void {
+    this.#metadata
+      .parseFile(
+        '/home/mflo/mflorence99/minute-maker/renderer/assets/minutes.mp3'
+      )
+      .then(console.log);
   }
 
   openFile(): void {
@@ -86,7 +97,7 @@ export class RootPage {
       audio: {
         encoding: 'MP3',
         gcsuri: 'gs://washington-app-319514.appspot.com/short.mp3',
-        sampleRateHertz: 32000
+        sampleRateHertz: 22100
       },
       date: '2023-05-02T09:36',
       title: 'Zoning Board of Adjustment',

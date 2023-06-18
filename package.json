@@ -39,6 +39,7 @@
     "electron-squirrel-startup": "^1",
     "electron-store": "^8",
     "jsome": "^2",
+    "music-metadata": "^7",
     "openai": "^3",
     "zod": "^3"
   },

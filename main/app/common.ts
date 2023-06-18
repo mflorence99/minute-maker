@@ -18,6 +18,8 @@ export enum Channels {
   localStorageSetItem = 'local-storage/setItem',
   localStorageStore = 'local-storage/store',
 
+  metadataParseFile = 'audio-metadata/parseFile',
+
   openaiChatCompletion = 'openai/chat-completion',
   openaiCompletion = 'openai/completion',
   openaiListModels = 'openai/list-models',
@@ -30,6 +32,16 @@ export enum Channels {
 }
 
 // 👇 request/response types for above channels
+
+export type AudioMetadata = {
+  bitrate: number;
+  codec: string;
+  duration: number;
+  extension: string;
+  lossless: boolean;
+  numberOfChannels: number;
+  sampleRate: number;
+};
 
 export type FileFilter = {
   extensions: string[];

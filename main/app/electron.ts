@@ -1,3 +1,4 @@
+import './audio-metadata';
 import './context-menu';
 import './dialog';
 import './fs';

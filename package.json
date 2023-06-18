@@ -114,7 +114,7 @@
     "tslib": "^2",
     "typeface-roboto": "^1",
     "typescript": "^5",
-    "wavesurfer.js": "^7.0.0-beta.8",
+    "wavesurfer.js": "^7.0.0-beta.9",
     "zone.js": "~0.13.1"
   }
 }

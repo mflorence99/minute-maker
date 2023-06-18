@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+// 🔥 there are two common.ts, one under main, the other under renderer
+//    one of them is a symlink!
+
 export enum Channels {
   dialogShowErrorBox = 'dialog/showErrorBox',
 
@@ -26,26 +29,7 @@ export enum Channels {
   uploaderRequest = 'google-storage/uploader/request'
 }
 
-export const TranscriptionSchema = z.object({
-  speaker: z.string(),
-  speech: z.string(),
-  start: z.number()
-});
-
-export const MinutesSchema = z.object({
-  audio: z.object({
-    gcsuri: z.string().url(),
-    url: z.string().url()
-  }),
-  subject: z.string(),
-  subtitle: z.string(),
-  title: z.string(),
-  transcription: TranscriptionSchema.array()
-});
-
-export type Minutes = z.infer<typeof MinutesSchema>;
-
-export type Transcription = z.infer<typeof TranscriptionSchema>;
+// 👇 request/response types for above channels
 
 export type FileFilter = {
   extensions: string[];
@@ -112,3 +96,27 @@ export type UploaderResponse = {
   gcsuri: string;
   url: string;
 };
+
+// 👇 schema for minutes
+
+export const TranscriptionSchema = z.object({
+  speaker: z.string(),
+  speech: z.string(),
+  start: z.number()
+});
+
+export const MinutesSchema = z.object({
+  audio: z.object({
+    gcsuri: z.string().url(),
+    url: z.string().url()
+  }),
+  date: z.coerce.date(),
+  subject: z.string(),
+  subtitle: z.string(),
+  title: z.string(),
+  transcription: TranscriptionSchema.array()
+});
+
+export type Minutes = z.infer<typeof MinutesSchema>;
+
+export type Transcription = z.infer<typeof TranscriptionSchema>;

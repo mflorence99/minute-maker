@@ -13,5 +13,10 @@ export const environment = {
     version: PACKAGE.version
   },
 
-  production: !location.search.includes('isDev=true')
+  production: !location.search.includes('isDev=true'),
+
+  settings: {
+    maxRecentPaths: 32,
+    saveFileInterval: 10000
+  }
 };

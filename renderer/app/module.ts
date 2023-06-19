@@ -16,6 +16,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { RecentsState } from '#mm/state/recents';
 import { RootPage } from '#mm/pages/root/page';
 import { RouterModule } from '@angular/router';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
@@ -43,8 +44,8 @@ const PAGES = [RootPage];
 
 const ROUTES = [];
 
-const STATES = [AppState, MinutesState];
-const STATES_SAVED = [AppState];
+const STATES = [AppState, MinutesState, RecentsState];
+const STATES_SAVED = [AppState, RecentsState];
 
 @NgModule({
   bootstrap: [RootPage],

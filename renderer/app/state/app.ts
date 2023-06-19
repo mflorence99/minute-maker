@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/angular-ivy';
 
 import { Action } from '@ngxs/store';
+import { AddRecent } from '#mm/state/recents';
 import { DialogService } from '#mm/services/dialog';
 import { FSService } from '#mm/services/fs';
 import { Injectable } from '@angular/core';
@@ -14,6 +15,7 @@ import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 
 import { debounceTime } from 'rxjs';
+import { environment } from '#mm/environment';
 import { filter } from 'rxjs';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
@@ -63,7 +65,7 @@ export class AppState implements NgxsOnInit {
       .pipe(
         map((minutes) => [minutes, ctx.getState().pathToMinutes]),
         filter(([minutes, path]) => !!(minutes && path)),
-        debounceTime(10000)
+        debounceTime(environment.settings.saveFileInterval)
       )
       .subscribe(([minutes, path]) => {
         this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
@@ -78,6 +80,7 @@ export class AppState implements NgxsOnInit {
       const raw = await this.#fs.loadFile(path);
       const minutes: Minutes = MinutesSchema.parse(JSON.parse(raw));
       ctx.dispatch(new SetMinutes(minutes));
+      ctx.dispatch(new AddRecent(path));
     } catch (error: any) {
       console.error(`🔥 ${error.message}`);
       Sentry.captureException(error);

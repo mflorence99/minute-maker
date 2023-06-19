@@ -39,8 +39,8 @@ import { inject } from '@angular/core';
         <button (click)="upload()" color="accent" mat-raised-button>
           Upload
         </button>
-        <button (click)="listModels()" color="warn" mat-raised-button>
-          List Models
+        <button (click)="chatCompletion()" color="warn" mat-raised-button>
+          Chat Completion
         </button>
       </article>
 
@@ -62,12 +62,16 @@ export class RootPage {
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
 
-  event(key, event): void {
-    console.log(key, event);
+  chatCompletion(): void {
+    this.#openai
+      .chatCompletion({
+        prompt: `Convert this into grammatical English: \n\n I no work no more`
+      })
+      .then(console.log);
   }
 
-  listModels(): void {
-    this.#openai.listModels().then(console.log);
+  event(key, event): void {
+    console.log(key, event);
   }
 
   metadata(): void {

@@ -38,6 +38,7 @@
     "electron-is-dev": "^2",
     "electron-squirrel-startup": "^1",
     "electron-store": "^8",
+    "exponential-backoff": "^3",
     "jsome": "^2",
     "music-metadata": "^7",
     "openai": "^3",

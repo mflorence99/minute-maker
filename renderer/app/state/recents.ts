@@ -64,7 +64,7 @@ export class RecentsState {
     // 👇 the first entry is always "this one"
     //    so quick exit unless there are 2 or more 🔥
     if (recents.length <= 1) return [];
-    // 👇
+    // 👇 watch out: must process minutes as an observable
     const paths = recents.slice(1);
     return paths.map(
       (path): Observable<Minutes> =>

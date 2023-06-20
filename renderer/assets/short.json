@@ -1,0 +1,11 @@
+{
+  "audio": {
+    "gcsuri": "gs://washington-app-319514.appspot.com/short.mp3",
+    "url": "https://washington-app-319514.appspot.com/short.mp3"
+  },
+  "date": "2023-06-18T08:41:00.000Z",
+  "subject": "Short Minutes",
+  "subtitle": "Meeting Minutes Test",
+  "title": "Zoning Board of Adjustment (Short)",
+  "transcription": []
+}

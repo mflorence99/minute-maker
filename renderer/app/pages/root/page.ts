@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { FSService } from '#mm/services/fs';
 import { LoadMinutes } from '#mm/state/app';
 import { MetadataService } from '#mm/services/metadata';
+import { Minutes } from '#mm/common';
+import { Observable } from 'rxjs';
 import { OpenAIService } from '#mm/services/openai';
+import { RecentsState } from '#mm/state/recents';
+import { Select } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { TranscriberService } from '#mm/services/transcriber';
 import { UploaderService } from '#mm/services/uploader';
@@ -32,7 +36,7 @@ import { inject } from '@angular/core';
           { speaker: 'Fred', start: 66, speech: 'Goodbye' }
         ]" />
 
-      <article class="buttons">
+      <section class="buttons">
         <button (click)="transcribe()" color="primary" mat-raised-button>
           Transcribe
         </button>
@@ -42,17 +46,24 @@ import { inject } from '@angular/core';
         <button (click)="chatCompletion()" color="warn" mat-raised-button>
           Chat Completion
         </button>
-      </article>
-
-      <article class="buttons">
         <button (click)="openFile()" mat-raised-button>Open File</button>
         <button (click)="saveFileAs()" mat-raised-button>Save File</button>
         <button (click)="metadata()" mat-raised-button>Metadata</button>
-      </article>
+      </section>
+
+      <ul class="recents">
+        <li *ngFor="let minutes$ of recentMinutes$ | async">
+          <ng-container *ngIf="minutes$ | async as minutes">
+            <p>{{ minutes.title }}</p>
+          </ng-container>
+        </li>
+      </ul>
     </main>
   `
 })
 export class RootPage {
+  @Select(RecentsState.minutes) recentMinutes$: Observable<Promise<Minutes>[]>;
+
   date = new Date();
 
   #fs = inject(FSService);

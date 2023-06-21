@@ -14,6 +14,6 @@ export async function metadataParseFile(
   fileName: string
 ): Promise<AudioMetadata> {
   const metadata = await parseFile(fileName);
-  const extension = extname(fileName).substring(1).toUpperCase();
-  return { ...metadata.format, extension } as AudioMetadata;
+  const encoding = extname(fileName).substring(1).toUpperCase();
+  return { ...metadata.format, encoding } as AudioMetadata;
 }

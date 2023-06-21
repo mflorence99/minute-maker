@@ -71,7 +71,7 @@ export type AudioMetadata = {
   bitrate: number;
   codec: string;
   duration: number;
-  extension: string;
+  encoding: string;
   lossless: boolean;
   numberOfChannels: number;
   sampleRate: number;
@@ -119,11 +119,7 @@ export type TranscriberRequest = {
     gcsuri?: string;
     sampleRateHertz: number;
   };
-  date: string;
   speakers: string[];
-  subject: string;
-  subtitle: string;
-  title: string;
 };
 
 export type TranscriberResponse = {

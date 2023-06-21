@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FSService } from '#mm/services/fs';
-import { LoadMinutes } from '#mm/state/app';
 import { MetadataService } from '#mm/services/metadata';
 import { Minutes } from '#mm/common';
+import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
 import { OpenAIService } from '#mm/services/openai';
+import { OpenMinutes } from '#mm/state/app';
 import { RecentsState } from '#mm/state/recents';
 import { Select } from '@ngxs/store';
 import { Store } from '@ngxs/store';
@@ -37,7 +38,7 @@ import { inject } from '@angular/core';
         ]" />
 
       <section class="buttons">
-        <button (click)="transcribe()" color="primary" mat-raised-button>
+        <!-- <button (click)="transcribe()" color="primary" mat-raised-button>
           Transcribe
         </button>
         <button (click)="upload()" color="accent" mat-raised-button>
@@ -45,10 +46,15 @@ import { inject } from '@angular/core';
         </button>
         <button (click)="chatCompletion()" color="warn" mat-raised-button>
           Chat Completion
+        </button> -->
+        <button (click)="openMinutes()" color="primary" mat-raised-button>
+          Open Minutes
         </button>
-        <button (click)="openFile()" mat-raised-button>Open File</button>
-        <button (click)="saveFileAs()" mat-raised-button>Save File</button>
-        <button (click)="metadata()" mat-raised-button>Metadata</button>
+        <button (click)="newMinutes()" color="accent" mat-raised-button>
+          New Minutes
+        </button>
+        <!-- <button (click)="saveFileAs()" mat-raised-button>Save File</button>
+        <button (click)="metadata()" mat-raised-button>Metadata</button> -->
       </section>
 
       <ul class="recents">
@@ -120,8 +126,12 @@ export class RootPage {
       .then(console.log);
   }
 
-  openFile(): void {
-    this.#store.dispatch(new LoadMinutes());
+  newMinutes(): void {
+    this.#store.dispatch(new NewMinutes());
+  }
+
+  openMinutes(): void {
+    this.#store.dispatch(new OpenMinutes());
   }
 
   saveFileAs(): void {
@@ -141,11 +151,7 @@ export class RootPage {
         gcsuri: 'gs://washington-app-319514.appspot.com/short.mp3',
         sampleRateHertz: 22100
       },
-      date: '2023-05-02T09:36',
-      title: 'Zoning Board of Adjustment',
-      speakers: ['Fred'],
-      subtitle: 'Meeting Minutes Test',
-      subject: 'Test Minutes'
+      speakers: ['Fred', 'Bob']
     };
     this.#transcriber.transcribe(request).subscribe(console.log);
   }

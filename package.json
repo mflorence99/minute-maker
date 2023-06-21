@@ -116,6 +116,7 @@
     "tslib": "^2",
     "typeface-roboto": "^1",
     "typescript": "^5",
+    "uuid": "^9",
     "wavesurfer.js": "^7.0.0-beta.9",
     "zone.js": "~0.13.1"
   }

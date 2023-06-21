@@ -18,6 +18,6 @@ describe('fs', () => {
       '/home/mflo/mflorence99/minute-maker/renderer/assets/short.mp3';
     const metadata = await metadataParseFile(null, fileName);
     expect(metadata.bitrate).toBe(100);
-    expect(metadata.extension).toBe('MP3');
+    expect(metadata.encoding).toBe('MP3');
   });
 });

@@ -27,8 +27,9 @@ import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
 import { WaveSurferRegionsComponent } from '#mm/components/wavesurfer-regions';
 import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline';
 
-import { environment } from '#mm/environment';
 import { faTriangle } from '@fortawesome/pro-solid-svg-icons';
+
+import isDev from '#mm/is-dev';
 
 const COMPONENTS = [
   TranscriptionComponent,
@@ -60,10 +61,10 @@ const STATES_SAVED = [AppState, RecentsState];
     FormsModule,
     MatButtonModule,
     NgxsModule.forRoot(STATES, {
-      developmentMode: !environment.production
+      developmentMode: isDev
     }),
     NgxsReduxDevtoolsPluginModule.forRoot({
-      disabled: environment.production
+      disabled: !isDev
     }),
     NgxsRouterPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({

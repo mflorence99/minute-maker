@@ -2,7 +2,7 @@
   "moduleNameMapper": {
     "^#mm/common$": "<rootDir>/renderer/app/common.ts",
     "^#mm/components/(.*)$": "<rootDir>/renderer/app/components/$1",
-    "^#mm/environment$": "<rootDir>/renderer/app/environment.ts",
+    "^#mm/is-dev$": "<rootDir>/renderer/app/is-dev.ts",
     "^#mm/module$": "<rootDir>/renderer/app/module.ts",
     "^#mm/package$": "<rootDir>/package.json",
     "^#mm/pages/(.*)$": "<rootDir>/renderer/app/pages/$1",

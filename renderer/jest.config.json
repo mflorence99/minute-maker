@@ -2,6 +2,7 @@
   "collectCoverage": true,
   "collectCoverageFrom": [
     "<rootDir>/app/**/*.ts",
+    "!<rootDir>/app/common.ts",
     "!<rootDir>/app/main.ts",
     "!<rootDir>/app/module.ts"
   ],
@@ -9,7 +10,7 @@
   "moduleNameMapper": {
     "^#mm/common$": "<rootDir>/app/common.ts",
     "^#mm/components/(.*)$": "<rootDir>/app/components/$1",
-    "^#mm/environment$": "<rootDir>/app/environment.ts",
+    "^#mm/is-dev$": "<rootDir>/app/is-dev.ts",
     "^#mm/module$": "<rootDir>/app/module.ts",
     "^#mm/package$": "<rootDir>/../package.json",
     "^#mm/pages/(.*)$": "<rootDir>/app/pages/$1",

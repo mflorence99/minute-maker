@@ -66,7 +66,7 @@ app.on('ready', () => {
       })
     );
   }
-  // 👇 dveryone needs to see this
+  // 👇 everyone needs to see this
   globalThis.theWindow = theWindow;
   // 👇 save the window bounds when they change
   const setBounds = (): void =>

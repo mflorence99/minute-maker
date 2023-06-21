@@ -1,5 +1,6 @@
 import { Action } from '@ngxs/store';
 import { Channels } from '#mm/common';
+import { ENV } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Observable } from 'rxjs';
@@ -8,7 +9,6 @@ import { State } from '@ngxs/store';
 import { StateContext } from '@ngxs/store';
 
 import { catchError } from 'rxjs';
-import { environment } from '#mm/environment';
 import { from } from 'rxjs';
 import { insertItem } from '@ngxs/store/operators';
 import { map } from 'rxjs';
@@ -43,7 +43,7 @@ export class RecentsState {
   ): void {
     const recents = ctx.getState();
     // 👇 trim list if full
-    if (recents.length >= environment.settings.maxRecentPaths)
+    if (recents.length >= ENV.settings.maxRecentPaths)
       ctx.setState(removeItem(recents.length - 1));
     // 👇 remove any duplicate item
     const ix = recents.findIndex((recent) => recent === action.path);
@@ -62,7 +62,7 @@ export class RecentsState {
     recents: RecentsStateModel
   ): Observable<Minutes>[] {
     // 👇 the first entry is always "this one"
-    //    so quick exit unless there are 2 or more 🔥
+    //    so quick exit unless there are 2 or more
     if (recents.length <= 1) return [];
     // 👇 watch out: must process minutes as an observable
     const paths = recents.slice(1);

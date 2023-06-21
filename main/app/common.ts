@@ -1,7 +1,41 @@
+import PACKAGE from '../../package.json';
+
+import { BackoffOptions } from 'exponential-backoff';
+
 import { z } from 'zod';
 
 // 🔥 there are two common.ts, one under main, the other under renderer
 //    one of them is a symlink!
+
+export const ENV = {
+  package: {
+    author: PACKAGE.author,
+    name: PACKAGE.name,
+    description: PACKAGE.description,
+    license: PACKAGE.license,
+    repository: {
+      type: PACKAGE.repository.type,
+      url: PACKAGE.repository.url
+    },
+    version: PACKAGE.version
+  },
+
+  settings: {
+    backoffOptions: {
+      delayFirstAttempt: true,
+      jitter: 'full',
+      maxDelay: 30000
+    } as BackoffOptions,
+    maxRecentPaths: 32,
+    openaiDefaults: {
+      temperature: 0.5,
+      top_p: 1
+    },
+    saveFileInterval: 10000
+  }
+};
+
+// 👇 Electron main/renderer channels
 
 export enum Channels {
   dialogShowErrorBox = 'dialog/showErrorBox',
@@ -109,7 +143,7 @@ export type UploaderResponse = {
   url: string;
 };
 
-// 👇 schema for minutes
+// 👇 schema for minutes and their transcription
 
 export const TranscriptionSchema = z.object({
   speaker: z.string(),

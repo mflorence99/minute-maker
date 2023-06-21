@@ -25,7 +25,7 @@
     "paths": {
       "#mm/common": ["./app/common.ts"],
       "#mm/components/*": ["./app/components/*"],
-      "#mm/environment": ["./app/environment.ts"],
+      "#mm/is-dev": ["./app/is-dev.ts"],
       "#mm/module": ["./app/module.ts"],
       "#mm/package": ["../package.json"],
       "#mm/pages/*": ["./app/pages/*"],

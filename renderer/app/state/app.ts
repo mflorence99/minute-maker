@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/angular-ivy';
 import { Action } from '@ngxs/store';
 import { AddRecent } from '#mm/state/recents';
 import { DialogService } from '#mm/services/dialog';
+import { ENV } from '#mm/common';
 import { FSService } from '#mm/services/fs';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
@@ -15,7 +16,6 @@ import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 
 import { debounceTime } from 'rxjs';
-import { environment } from '#mm/environment';
 import { filter } from 'rxjs';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
@@ -65,7 +65,7 @@ export class AppState implements NgxsOnInit {
       .pipe(
         map((minutes) => [minutes, ctx.getState().pathToMinutes]),
         filter(([minutes, path]) => !!(minutes && path)),
-        debounceTime(environment.settings.saveFileInterval)
+        debounceTime(ENV.settings.saveFileInterval)
       )
       .subscribe(([minutes, path]) => {
         this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));

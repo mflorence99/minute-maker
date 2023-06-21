@@ -1,25 +1,27 @@
 import * as Sentry from '@sentry/angular-ivy';
 
+import { ENV } from '#mm/common';
 import { RootModule } from '#mm/module';
 import { StorageEngine } from '#mm/state/storage-engine';
 
 import { enableProdMode } from '@angular/core';
-import { environment } from '#mm/environment';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-if (environment.production) enableProdMode();
+import isDev from '#mm/is-dev';
 
-// 👇 log the environment
-if (environment.production) console.log('%cPRODUCTION', 'color: darkorange');
+if (!isDev) enableProdMode();
+
+// 👇 log the ENV
+if (!isDev) console.log('%cPRODUCTION', 'color: darkorange');
 else console.log('%cDEVELOPMENT', 'color: dodgerblue');
-console.table(environment);
+console.table(ENV);
 
 // 👉 initialize Sentry.io
-if (environment.production) {
+if (!isDev) {
   Sentry.init({
     debug: true,
     dsn: 'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
-    release: `Minute Maker v${environment.package.version}`
+    release: `Minute Maker v${ENV.package.version}`
   });
 }
 

@@ -1,7 +1,11 @@
 import { Channels } from './common';
+import { ENV } from './common';
 import { OpenAIRequest } from './common';
 import { OpenAIResponse } from './common';
 
+import * as Sentry from '@sentry/angular-ivy';
+
+import { BackoffOptions } from 'exponential-backoff';
 import { Configuration } from 'openai';
 import { OpenAIApi } from 'openai';
 
@@ -28,21 +32,22 @@ export async function chatCompletion(
   );
   // 👇 these are the request defaults
   const dflt = {
-    model: 'gpt-3.5-turbo-16k',
-    temperature: 0.5,
-    top_p: 1
+    ...ENV.settings.openaiDefaults,
+    model: 'gpt-3.5-turbo-16k'
   };
   // 👇 simplify the API to look the same as "completion"
   const { prompt, ...request } = _request;
   // 👇 ready to call OpenAI
   let response;
   try {
-    const _response = await backOff(() =>
-      openai.createChatCompletion({
-        messages: [{ content: prompt, role: 'user' }],
-        ...request,
-        ...dflt
-      })
+    const _response = await backOff(
+      () =>
+        openai.createChatCompletion({
+          messages: [{ content: prompt, role: 'user' }],
+          ...request,
+          ...dflt
+        }),
+      backoffOptions()
     );
     response = {
       finish_reason: _response.data.choices[0].finish_reason as any,
@@ -80,19 +85,20 @@ export async function completion(
   );
   // 👇 these are the request defaults
   const dflt = {
+    ...ENV.settings.openaiDefaults,
     max_tokens: 2048,
-    model: 'text-davinci-003',
-    temperature: 0.5,
-    top_p: 1
+    model: 'text-davinci-003'
   };
   // 👇 ready to call OpenAI
   let response;
   try {
-    const _response = await backOff(() =>
-      openai.createCompletion({
-        ...request,
-        ...dflt
-      })
+    const _response = await backOff(
+      () =>
+        openai.createCompletion({
+          ...request,
+          ...dflt
+        }),
+      backoffOptions()
     );
     response = {
       finish_reason: _response.data.choices[0].finish_reason as any,
@@ -135,6 +141,18 @@ export async function listModels(): Promise<string[]> {
 // //////////////////////////////////////////////////////////////////////////
 // 🟦 helper functions
 // //////////////////////////////////////////////////////////////////////////
+
+function backoffOptions(): BackoffOptions {
+  return {
+    ...ENV.settings.backoffOptions,
+    retry: (error: any): boolean => {
+      console.error(`🔥 ${error.message}`);
+      Sentry.captureException(error);
+      // 🙈 https://help.openai.com/en/articles/5955604-how-can-i-solve-429-too-many-requests-errors
+      return /(rate limit)|(too many)/i.test(error.message);
+    }
+  };
+}
 
 function trunc(text: string, maxlen = 100): string {
   return text.length < maxlen ? text : `${text.substring(0, maxlen)}...`;

@@ -59,7 +59,34 @@ import { inject } from '@angular/core';
         </li>
       </ul>
     </main>
-  `
+  `,
+  styles: [
+    `
+      main {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        height: 100%;
+        justify-content: center;
+
+        mm-transcription {
+          width: 480px;
+        }
+
+        mm-wavesurfer {
+          width: 480px;
+        }
+
+        .buttons {
+          display: flex;
+          flex-flow: row wrap;
+          gap: 2rem;
+          justify-content: center;
+        }
+      }
+    `
+  ]
 })
 export class RootPage {
   @Select(RecentsState.minutes) recentMinutes$: Observable<Promise<Minutes>[]>;

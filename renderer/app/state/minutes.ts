@@ -16,9 +16,7 @@ export type MinutesStateModel = Minutes;
 })
 @Injectable()
 export class MinutesState {
-  //
-
-  @Action(SetMinutes) setMinutes({ setState }, action: SetMinutes): void {
-    setState(action.minutes);
+  @Action(SetMinutes) setMinutes({ setState }, { minutes }): void {
+    setState(minutes);
   }
 }

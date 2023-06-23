@@ -5,7 +5,7 @@ import { OpenFileResponse } from '#mm/common';
 import { SaveDialogOptions } from '#mm/common';
 
 // 🙈 preload.ts
-declare const ipc /* 🔥 typeof ipcRenderer */;
+declare const ipc /* 👈 typeof ipcRenderer */;
 
 @Injectable({ providedIn: 'root' })
 export class FSService {

@@ -6,7 +6,7 @@ import { TranscriberRequest } from '#mm/common';
 import { TranscriberResponse } from '#mm/common';
 
 // 🙈 preload.ts
-declare const ipc /* 🔥 typeof ipcRenderer */;
+declare const ipc /* 👈 typeof ipcRenderer */;
 
 @Injectable({ providedIn: 'root' })
 export class TranscriberService {

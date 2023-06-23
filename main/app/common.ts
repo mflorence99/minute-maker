@@ -4,7 +4,7 @@ import { BackoffOptions } from 'exponential-backoff';
 
 import { z } from 'zod';
 
-// 🔥 there are two common.ts, one under main, the other under renderer
+// 🕥 there are two common.ts, one under main, the other under renderer
 //    one of them is a symlink!
 
 // //////////////////////////////////////////////////////////////////////////

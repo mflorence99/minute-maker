@@ -8,6 +8,8 @@ import { OpenAIService } from '#mm/services/openai';
 import { OpenMinutes } from '#mm/state/app';
 import { RecentsState } from '#mm/state/recents';
 import { Select } from '@ngxs/store';
+import { StatusState } from '#mm/state/status';
+import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { TranscriberService } from '#mm/services/transcriber';
 import { UploaderService } from '#mm/services/uploader';
@@ -96,6 +98,7 @@ import { inject } from '@angular/core';
 })
 export class RootPage {
   @Select(RecentsState.minutes) recentMinutes$: Observable<Promise<Minutes>[]>;
+  @Select(StatusState) status$: Observable<StatusStateModel>;
 
   date = new Date();
 
@@ -105,6 +108,10 @@ export class RootPage {
   #store = inject(Store);
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
+
+  constructor() {
+    this.status$.subscribe(console.log);
+  }
 
   chatCompletion(): void {
     this.#openai

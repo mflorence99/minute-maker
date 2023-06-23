@@ -2,9 +2,11 @@ import { Action } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { State } from '@ngxs/store';
 
+import { patch } from '@ngxs/store/operators';
+
 export class SetConfig {
   static readonly type = '[Config] SetConfig';
-  constructor(public config: ConfigStateModel) {}
+  constructor(public config: Partial<ConfigStateModel>) {}
 }
 
 export type ConfigStateModel = {
@@ -20,9 +22,8 @@ export type ConfigStateModel = {
 })
 @Injectable()
 export class ConfigState {
-  //
-
-  @Action(SetConfig) setConfig({ setState }, action: SetConfig): void {
-    setState(action.config);
+  // 👇 NOTE: utility action, as not all have to be set at once
+  @Action(SetConfig) setConfig({ setState }, {config}): void {
+    setState(patch(config));
   }
 }

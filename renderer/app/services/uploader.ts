@@ -4,7 +4,7 @@ import { UploaderRequest } from '#mm/common';
 import { UploaderResponse } from '#mm/common';
 
 // 🙈 preload.ts
-declare const ipc /* 🔥 typeof ipcRenderer */;
+declare const ipc /* 👈 typeof ipcRenderer */;
 
 // https://storage.googleapis.com/washington-app-319514.appspot.com/minutes.mp3
 

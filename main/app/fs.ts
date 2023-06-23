@@ -8,7 +8,7 @@ import { ipcMain } from 'electron';
 import { readFileSync } from 'fs';
 import { writeFileSync } from 'fs';
 
-// 🔥 text files ONLY!
+// 🕥 text files ONLY!
 
 ipcMain.handle(Channels.fsChooseFile, chooseFile);
 ipcMain.handle(Channels.fsLoadFile, loadFile);
@@ -55,7 +55,7 @@ export function saveFileAs(
   return path;
 }
 
-// 🔥 appears to be a problem where a null or undefined defaultPath
+// 🕥 appears to be a problem where a null or undefined defaultPath
 //    throws an exception
 function cleanOptions(options: OpenDialogOptions | SaveDialogOptions): void {
   if (options.hasOwnProperty('defaultPath') && options.defaultPath == null)

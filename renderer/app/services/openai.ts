@@ -4,7 +4,7 @@ import { OpenAIRequest } from '#mm/common';
 import { OpenAIResponse } from '#mm/common';
 
 // 🙈 preload.ts
-declare const ipc /* 🔥 typeof ipcRenderer */;
+declare const ipc /* 👈 typeof ipcRenderer */;
 
 @Injectable({ providedIn: 'root' })
 export class OpenAIService {

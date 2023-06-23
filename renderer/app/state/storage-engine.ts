@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { StorageEngine as NGXSStorageEngine } from '@ngxs/storage-plugin';
 
 // 🙈 preload.ts
-declare const ipc /* 🔥 typeof ipcRenderer */;
+declare const ipc /* 👈 typeof ipcRenderer */;
 
-// 🔥 we believe the NGXS AsyncStorageEngine is no longer supported
+// 🕥 we believe the NGXS AsyncStorageEngine is no longer supported
 //    so in order to preserve synchronous semantics, the store is
 //    mirrored in the internal CACHE
 

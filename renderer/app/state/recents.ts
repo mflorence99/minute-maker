@@ -16,7 +16,7 @@ import { removeItem } from '@ngxs/store/operators';
 
 // 👇 we SHOULD be calling FSService, but we can't inject it
 //    here as the "minutes" selector must be static
-declare const ipc /* 🔥 typeof ipcRenderer */;
+declare const ipc /* 👈 typeof ipcRenderer */;
 
 export class AddRecent {
   static readonly type = '[Recents] AddRecent';
@@ -36,19 +36,16 @@ export type RecentsStateModel = string[];
 })
 @Injectable()
 export class RecentsState {
-  @Action(AddRecent) addRecent(
-    { getState, setState },
-    action: AddRecent
-  ): void {
+  @Action(AddRecent) addRecent({ getState, setState }, { path }): void {
     const recents = getState();
     // 👇 trim list if full
     if (recents.length >= Constants.maxRecentPaths)
       setState(removeItem(recents.length - 1));
     // 👇 remove any duplicate item
-    const ix = recents.findIndex((recent) => recent === action.path);
+    const ix = recents.findIndex((recent) => recent === path);
     if (ix !== -1) setState(removeItem(ix));
     // 👇 put this one at the head
-    setState(insertItem(action.path, 0));
+    setState(insertItem(path, 0));
   }
 
   @Action(ClearRecents) clearRecents({ setState }): void {

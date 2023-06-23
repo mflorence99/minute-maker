@@ -20,6 +20,7 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RecentsState } from '#mm/state/recents';
 import { RootPage } from '#mm/pages/root/page';
 import { RouterModule } from '@angular/router';
+import { StatusState } from '#mm/state/status';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
 import { StorageEngine } from '#mm/state/storage-engine';
 import { TranscriptionComponent } from '#mm/components/transcription';
@@ -46,7 +47,7 @@ const PAGES = [RootPage];
 
 const ROUTES = [];
 
-const STATES = [AppState, ConfigState, MinutesState, RecentsState];
+const STATES = [AppState, ConfigState, MinutesState, RecentsState, StatusState];
 const STATES_SAVED = [AppState, ConfigState, RecentsState];
 
 @NgModule({

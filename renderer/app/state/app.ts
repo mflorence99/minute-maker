@@ -1,5 +1,6 @@
 import { Action } from '@ngxs/store';
 import { AddRecent } from '#mm/state/recents';
+import { ClearStatus } from '#mm/state/status';
 import { ConfigState } from '#mm/state/config';
 import { Constants } from '#mm/common';
 import { DialogService } from '#mm/services/dialog';
@@ -11,6 +12,7 @@ import { MinutesSchema } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { NgxsOnInit } from '@ngxs/store';
 import { SetMinutes } from '#mm/state/minutes';
+import { SetStatus } from '#mm/state/status';
 import { State } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { UploaderService } from '#mm/services/uploader';
@@ -58,16 +60,27 @@ export class AppState implements NgxsOnInit {
       title: 'Open Audio Recording'
     });
     if (path) {
-      // 👇 we'll use the snapshot b/c who knows where we are now
-      const config = this.#store.selectSnapshot(ConfigState);
-      const upload = await this.#uploader.upload({
-        bucketName: config.bucketName,
-        destFileName: `${uuidv4()}.mp3`,
-        filePath: path
-      });
-      console.log(upload);
-      const metadata = await this.#metadata.parseFile(path);
-      console.log(metadata);
+      this.#store.dispatch(
+        new SetStatus({ status: 'Uploading audio recording', working: true })
+      );
+      try {
+        // 👇 we'll use the snapshot b/c who knows where we are now
+        const config = this.#store.selectSnapshot(ConfigState);
+        // 👇 extract the audio metadata
+        const metadata = await this.#metadata.parseFile(path);
+        console.log(metadata);
+        // 👇 upload the audio to GCS
+        const upload = await this.#uploader.upload({
+          bucketName: config.bucketName,
+          destFileName: `${uuidv4()}.mp3`,
+          filePath: path
+        });
+        console.log(upload);
+      } catch (error) {
+        this.#store.dispatch(new SetStatus({ error }));
+      } finally {
+        this.#store.dispatch(new ClearStatus());
+      }
     }
   }
 
@@ -111,8 +124,7 @@ export class AppState implements NgxsOnInit {
     try {
       const raw = await this.#fs.loadFile(path);
       const minutes: Minutes = MinutesSchema.parse(JSON.parse(raw));
-      this.#store.dispatch(new SetMinutes(minutes));
-      this.#store.dispatch(new AddRecent(path));
+      this.#store.dispatch([new SetMinutes(minutes), new AddRecent(path)]);
     } catch (error: any) {
       this.#dialog.showErrorBox(
         'Invalid Minutes Project File',

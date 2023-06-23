@@ -34,6 +34,11 @@ export class OpenMinutes {
   constructor() {}
 }
 
+export class SaveMinutes {
+  static readonly type = '[App] SaveMinutes';
+  constructor(public saveAs = false) {}
+}
+
 export type AppStateModel = {
   pathToMinutes: string;
 };
@@ -52,7 +57,7 @@ export class AppState implements NgxsOnInit {
   #store = inject(Store);
   #uploader = inject(UploaderService);
 
-  @Action(NewMinutes) async newMinutes({ getState }): Promise<void> {
+  @Action(NewMinutes) async newMinutes({ getState, setState }): Promise<void> {
     // 🔥 locked into MP3 only for now
     const path = await this.#fs.chooseFile({
       defaultPath: getState().pathToMinutes,
@@ -68,14 +73,25 @@ export class AppState implements NgxsOnInit {
         const config = this.#store.selectSnapshot(ConfigState);
         // 👇 extract the audio metadata
         const metadata = await this.#metadata.parseFile(path);
-        console.log(metadata);
         // 👇 upload the audio to GCS
         const upload = await this.#uploader.upload({
           bucketName: config.bucketName,
           destFileName: `${uuidv4()}.mp3`,
           filePath: path
         });
-        console.log(upload);
+        // 👇 construct a bare-bones Minutes
+        const minutes: Minutes = {
+          audio: {
+            encoding: metadata.encoding,
+            gcsuri: upload.gcsuri,
+            sampleRateHertz: metadata.sampleRate,
+            url: upload.url
+          },
+          date: new Date(),
+          title: '--Untitled--'
+        };
+        setState(patch({ pathToMinutes: null }));
+        this.#store.dispatch(new SetMinutes(minutes));
       } catch (error) {
         this.#store.dispatch(new SetStatus({ error }));
       } finally {
@@ -99,6 +115,21 @@ export class AppState implements NgxsOnInit {
     }
   }
 
+  @Action(SaveMinutes) async saveMinutes(
+    { getState },
+    { saveAs }
+  ): Promise<void> {
+    const minutes = this.#store.selectSnapshot(MinutesState);
+    let path = getState().pathToMinutes;
+    if (saveAs || !path)
+      path = await this.#fs.saveFileAs(JSON.stringify(minutes), {
+        defaultPath: getState().pathToMinutes,
+        filters: [{ extensions: ['json'], name: 'Minutes' }],
+        title: 'Save Minutes'
+      });
+    else await this.#fs.saveFile(path, JSON.stringify(minutes));
+  }
+
   ngxsOnInit({ getState }): void {
     // 👇 load the last-used minutes, if any
     const path = getState().pathToMinutes;
@@ -116,7 +147,7 @@ export class AppState implements NgxsOnInit {
         debounceTime(Constants.saveFileInterval)
       )
       .subscribe(([minutes, path]) => {
-        this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
+        this.#fs.saveFile(path, JSON.stringify(minutes));
       });
   }
 

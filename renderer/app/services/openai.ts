@@ -8,6 +8,8 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 
 @Injectable({ providedIn: 'root' })
 export class OpenAIService {
+  //
+
   chatCompletion(request: OpenAIRequest): Promise<OpenAIResponse> {
     return ipc.invoke(Channels.openaiChatCompletion, request);
   }

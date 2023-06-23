@@ -10,6 +10,8 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 
 @Injectable({ providedIn: 'root' })
 export class TranscriberService {
+  //
+  
   // 👇 cancel transcription
   cancelTranscription(request: TranscriberCancel): void {
     ipc.invoke(Channels.transcriberCancel, request);

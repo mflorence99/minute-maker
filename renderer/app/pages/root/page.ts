@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { FSService } from '#mm/services/fs';
 import { MetadataService } from '#mm/services/metadata';
 import { Minutes } from '#mm/common';
+import { MinutesState } from '#mm/state/minutes';
 import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
 import { OpenAIService } from '#mm/services/openai';
 import { OpenMinutes } from '#mm/state/app';
 import { RecentsState } from '#mm/state/recents';
+import { SaveMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
 import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
@@ -21,7 +23,7 @@ import { inject } from '@angular/core';
   template: `
     <main>
       <mm-wavesurfer
-        [audioFile]="'./assets/short.mp3'"
+        [audioFile]="audioURL$ | async"
         [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }">
         <mm-wavesurfer-regions
           (regionEntered)="event('region-entered', $event)">
@@ -54,6 +56,9 @@ import { inject } from '@angular/core';
         </button>
         <button (click)="newMinutes()" color="accent" mat-raised-button>
           New Minutes
+        </button>
+        <button (click)="saveMinutes()" color="warn" mat-raised-button>
+          Save Minutes
         </button>
         <!-- <button (click)="saveFileAs()" mat-raised-button>Save File</button>
         <button (click)="metadata()" mat-raised-button>Metadata</button> -->
@@ -97,7 +102,10 @@ import { inject } from '@angular/core';
   ]
 })
 export class RootPage {
-  @Select(RecentsState.minutes) recentMinutes$: Observable<Promise<Minutes>[]>;
+  @Select(MinutesState.audioURL) audioURL$: Observable<string>;
+  @Select(RecentsState.minutes) recentMinutes$: Observable<
+    Observable<Minutes>[]
+  >;
   @Select(StatusState) status$: Observable<StatusStateModel>;
 
   date = new Date();
@@ -141,14 +149,8 @@ export class RootPage {
     this.#store.dispatch(new OpenMinutes());
   }
 
-  saveFileAs(): void {
-    this.#fs
-      .saveFileAs('data', {
-        defaultPath: '/home/mflo/mflorence99/minute-maker/temp',
-        filters: [{ extensions: ['txt'], name: 'Crap files' }],
-        title: 'My Save File As'
-      })
-      .then(console.log);
+  saveMinutes(): void {
+    this.#store.dispatch(new SaveMinutes());
   }
 
   transcribe(): void {

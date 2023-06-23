@@ -1,3 +1,4 @@
+import './_jsome';
 import './audio-metadata';
 import './context-menu';
 import './dialog';

@@ -36,6 +36,8 @@ export type RecentsStateModel = string[];
 })
 @Injectable()
 export class RecentsState {
+  //
+
   @Action(AddRecent) addRecent({ getState, setState }, { path }): void {
     const recents = getState();
     // 👇 trim list if full

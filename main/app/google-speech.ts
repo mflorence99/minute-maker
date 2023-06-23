@@ -7,6 +7,8 @@ import { ipcMain } from 'electron';
 import { readFileSync } from 'fs';
 import { v1p1beta1 } from '@google-cloud/speech';
 
+import jsome from 'jsome';
+
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 transcription request
 // //////////////////////////////////////////////////////////////////////////
@@ -19,7 +21,7 @@ export async function longRunningRecognize(
   request: TranscriberRequest
 ): Promise<void> {
   const client = new v1p1beta1.SpeechClient();
-  console.log(`👉 ${Channels.transcriberRequest} ${JSON.stringify(request)}`);
+  jsome([`👉 ${Channels.transcriberRequest}`, request]);
 
   // 👇 call Google to begin transcription
   const [operation] = await client.longRunningRecognize({
@@ -47,7 +49,7 @@ export async function longRunningRecognize(
   const poller = pollOperationProgress(client, operation);
   const [[response]] = await Promise.all([transcriber, poller]);
 
-  console.log(`👈 ${Channels.transcriberResponse} 100%`);
+  jsome(`👈 ${Channels.transcriberResponse} 100%`);
 
   // 👇 return the transcription to the caller
   globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
@@ -70,7 +72,7 @@ export async function cancelOperation(
 ): Promise<void> {
   const client = new v1p1beta1.SpeechClient();
   try {
-    console.log(`👉 ${Channels.transcriberCancel} ${JSON.stringify(request)}`);
+    jsome([`👉 ${Channels.transcriberCancel}`, request]);
     await client.cancelOperation(request as any);
   } catch (error) {
     console.log(`🔥 ${error.message}`);

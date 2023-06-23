@@ -9,6 +9,8 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 
 @Injectable({ providedIn: 'root' })
 export class FSService {
+  //
+
   chooseFile(options: OpenDialogOptions): Promise<string> {
     return ipc.invoke(Channels.fsChooseFile, options);
   }

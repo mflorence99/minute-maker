@@ -12,6 +12,8 @@ import { OpenAIApi } from 'openai';
 import { backOff } from 'exponential-backoff';
 import { ipcMain } from 'electron';
 
+import jsome from 'jsome';
+
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 chatCompletion request
 // //////////////////////////////////////////////////////////////////////////
@@ -23,7 +25,7 @@ export async function chatCompletion(
   event,
   _request: OpenAIRequest
 ): Promise<OpenAIResponse> {
-  console.log(`👉 ${Channels.openaiChatCompletion} ${trunc(_request.prompt)}`);
+  jsome([`👉 ${Channels.openaiChatCompletion}`, `${trunc(_request.prompt)}`]);
   // 👇 create the OpenAI client
   const openai = new OpenAIApi(
     new Configuration({
@@ -57,11 +59,11 @@ export async function chatCompletion(
     response = { finish_reason: error.message };
   }
   // 👇 return synthesized response
-  console.log(
-    `👈 ${Channels.openaiChatCompletion} ${response.finish_reason} ${trunc(
-      response.text
-    )}`
-  );
+  jsome([
+    `👈 ${Channels.openaiChatCompletion}`,
+    `${response.finish_reason}`,
+    `${trunc(response.text)}`
+  ]);
   return response;
 }
 
@@ -76,7 +78,7 @@ export async function completion(
   event,
   request: OpenAIRequest
 ): Promise<OpenAIResponse> {
-  console.log(`👉 ${Channels.openaiCompletion} ${trunc(request.prompt)}`);
+  jsome([`👉 ${Channels.openaiCompletion}`, `${trunc(request.prompt)}`]);
   // 👇 create the OpenAI client
   const openai = new OpenAIApi(
     new Configuration({
@@ -108,11 +110,11 @@ export async function completion(
     response = { finish_reason: error.message };
   }
   // 👇 return synthesized response
-  console.log(
-    `👈 ${Channels.openaiCompletion} ${response.finish_reason} ${trunc(
-      response.text
-    )}`
-  );
+  jsome([
+    `👈 ${Channels.openaiCompletion}`,
+    `${response.finish_reason}`,
+    `${trunc(response.text)}`
+  ]);
   return response;
 }
 
@@ -131,10 +133,10 @@ export async function listModels(): Promise<string[]> {
     })
   );
   // 👇 ready to call OpenAI
-  console.log(`👉 ${Channels.openaiListModels}`);
+  jsome(`👉 ${Channels.openaiListModels}`);
   const response = await openai.listModels();
   const models = response.data.data.map((data) => data.id).sort();
-  console.log(`👈 ${Channels.openaiListModels}\n${models.join('\n')}`);
+  jsome([`👈 ${Channels.openaiListModels}`, models]);
   return models;
 }
 

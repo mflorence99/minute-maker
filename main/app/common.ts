@@ -72,6 +72,7 @@ export enum Channels {
   transcriberRequest = 'google-speech/transcriber/request',
   transcriberResponse = 'google-speech/transcriber/response',
 
+  uploaderEnableCORS = 'google-storage/uploader/enableCORS',
   uploaderRequest = 'google-storage/uploader/request'
 }
 
@@ -163,14 +164,16 @@ export const TranscriptionSchema = z.object({
 
 export const MinutesSchema = z.object({
   audio: z.object({
+    encoding: z.string(),
     gcsuri: z.string().url(),
+    sampleRateHertz: z.number(),
     url: z.string().url()
   }),
   date: z.coerce.date(),
-  subject: z.string(),
-  subtitle: z.string(),
+  subject: z.string().optional(),
+  subtitle: z.string().optional(),
   title: z.string(),
-  transcription: TranscriptionSchema.array()
+  transcription: TranscriptionSchema.array().optional()
 });
 
 export type Minutes = z.infer<typeof MinutesSchema>;

@@ -1,0 +1,17 @@
+{
+  "configurations": [
+    {
+      "args": ["."],
+      "cwd": "${workspaceFolder}",
+      "name": "Debug Main Process",
+      "outputCapture": "std",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "type": "node",
+      "windows": {
+        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+      }
+    }
+  ],
+  "version": "0.2.0"
+}

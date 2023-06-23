@@ -1,9 +1,9 @@
 import { Channels } from './common';
-import { ENV } from './common';
+import { Constants } from './common';
 import { OpenAIRequest } from './common';
 import { OpenAIResponse } from './common';
 
-import * as Sentry from '@sentry/angular-ivy';
+import * as Sentry from '@sentry/node';
 
 import { BackoffOptions } from 'exponential-backoff';
 import { Configuration } from 'openai';
@@ -32,7 +32,7 @@ export async function chatCompletion(
   );
   // 👇 these are the request defaults
   const dflt = {
-    ...ENV.settings.openaiDefaults,
+    ...Constants.openaiDefaults,
     model: 'gpt-3.5-turbo-16k'
   };
   // 👇 simplify the API to look the same as "completion"
@@ -85,7 +85,7 @@ export async function completion(
   );
   // 👇 these are the request defaults
   const dflt = {
-    ...ENV.settings.openaiDefaults,
+    ...Constants.openaiDefaults,
     max_tokens: 2048,
     model: 'text-davinci-003'
   };
@@ -144,7 +144,7 @@ export async function listModels(): Promise<string[]> {
 
 function backoffOptions(): BackoffOptions {
   return {
-    ...ENV.settings.backoffOptions,
+    ...Constants.backoffOptions,
     retry: (error: any): boolean => {
       console.error(`🔥 ${error.message}`);
       Sentry.captureException(error);

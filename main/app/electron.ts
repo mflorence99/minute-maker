@@ -6,7 +6,12 @@ import './google-speech';
 import './google-storage';
 import './openai';
 
+import { Constants } from './common';
+import { Package } from './common';
+
 import { store } from './local-storage';
+
+import * as Sentry from '@sentry/node';
 
 import { BrowserWindow } from 'electron';
 import { Rectangle } from 'electron';
@@ -16,6 +21,24 @@ import { format } from 'url';
 import { join } from 'path';
 
 import isDev from 'electron-is-dev';
+import jsome from 'jsome';
+
+// 👇 log the environment
+if (!isDev) {
+  jsome({ Package: { ...Package } });
+  jsome({ Constants: { ...Constants } });
+}
+
+// 👉 initialize Sentry.io
+if (!isDev) {
+  Sentry.init({
+    debug: true,
+    dsn: Constants.sentryDSN,
+    release: `Minute Maker v${Package.version}`
+  });
+}
+
+// 👇 ready to rock!
 
 app.on('ready', () => {
   // 👇 get the last-used window bounds
@@ -76,6 +99,8 @@ app.on('ready', () => {
   // 👇 configure the window
   theWindow.setMenu(null);
 });
+
+// 🔥 need to do something here to save unsaved data
 
 app.on('window-all-closed', () => {
   app.quit();

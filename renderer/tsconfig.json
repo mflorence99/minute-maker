@@ -15,6 +15,7 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
+    "inlineSourceMap": true,
     "lib": ["ES2022", "dom"],
     "module": "ES2022",
     "moduleResolution": "node",
@@ -34,7 +35,6 @@
       "#mm/utils": ["./app/utils.ts"]
     },
     "resolveJsonModule": true,
-    "sourceMap": true,
     "target": "ES2022",
     "useDefineForClassFields": false
   }

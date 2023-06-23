@@ -45,7 +45,7 @@ import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions';
 export class WaveSurferRegionsComponent
   implements AfterContentInit, OnDestroy, OnInit, WaveSurferPlugin
 {
-  @Input() options: Partial<RegionsPluginOptions> = undefined;
+  @Input() options: Partial<RegionsPluginOptions>;
 
   @Output() regionClicked = new WatchableEventEmitter<Region>();
   @Output() regionCreated = new WatchableEventEmitter<Region>();

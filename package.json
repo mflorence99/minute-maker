@@ -8,7 +8,7 @@
     "url": "https://github.com/mflorence99/minute-maker.git"
   },
   "author": "Mark Florence",
-  "main": "./dist/main/electron.js",
+  "main": "./dist/main/app/electron.js",
   "scripts": {
     "build": "rm -rf dist && npm run build:main && npm run build:renderer",
     "build:main": "tsc -p main/tsconfig.app.json",
@@ -18,7 +18,7 @@
     "clean:jest": "jest --clearCache",
     "deb64:installer": "electron-installer-debian --src package/ternimal-linux-x64/ --arch amd64 --config electron-installer.json",
     "deb64:package": "npm run build && rm -rf temp && mkdir temp && cp -R dist/ temp/dist && cp -R node_modules/ temp/ && cp package.json temp/ && rm -rf package && electron-packager ./temp --out=package",
-    "electron:main": "npm run build:main && electron .",
+    "electron:main": "npm run build:main -- --incremental && electron .",
     "electron:renderer": "ng serve",
     "eslint": "eslint --ext ts --fix ./main ./renderer",
     "lint": "npm run eslint && npm run prettier && npm run stylelint",
@@ -34,6 +34,7 @@
   "dependencies": {
     "@google-cloud/speech": "^5.5.0",
     "@google-cloud/storage": "^6",
+    "@sentry/node": "^7",
     "electron-context-menu": "^3",
     "electron-is-dev": "^2",
     "electron-squirrel-startup": "^1",

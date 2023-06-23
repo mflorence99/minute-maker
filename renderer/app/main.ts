@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/angular-ivy';
 
-import { ENV } from '#mm/common';
+import { Constants } from '#mm/common';
+import { Package } from '#mm/common';
 import { RootModule } from '#mm/module';
 import { StorageEngine } from '#mm/state/storage-engine';
 
@@ -11,17 +12,18 @@ import isDev from '#mm/is-dev';
 
 if (!isDev) enableProdMode();
 
-// 👇 log the ENV
+// 👇 log the environment
 if (!isDev) console.log('%cPRODUCTION', 'color: darkorange');
 else console.log('%cDEVELOPMENT', 'color: dodgerblue');
-console.table(ENV);
+console.table(Package);
+console.table(Constants);
 
 // 👉 initialize Sentry.io
 if (!isDev) {
   Sentry.init({
     debug: true,
-    dsn: 'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
-    release: `Minute Maker v${ENV.package.version}`
+    dsn: Constants.sentryDSN,
+    release: `Minute Maker v${Package.version}`
   });
 }
 

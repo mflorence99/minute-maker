@@ -4,6 +4,7 @@ import { AppState } from '#mm/state/app';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { ConfigState } from '#mm/state/config';
 import { ErrorHandler } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -45,8 +46,8 @@ const PAGES = [RootPage];
 
 const ROUTES = [];
 
-const STATES = [AppState, MinutesState, RecentsState];
-const STATES_SAVED = [AppState, RecentsState];
+const STATES = [AppState, ConfigState, MinutesState, RecentsState];
+const STATES_SAVED = [AppState, ConfigState, RecentsState];
 
 @NgModule({
   bootstrap: [RootPage],

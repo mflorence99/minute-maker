@@ -1,9 +1,8 @@
-import * as Sentry from '@sentry/angular-ivy';
-
 import { Action } from '@ngxs/store';
 import { AddRecent } from '#mm/state/recents';
+import { ConfigState } from '#mm/state/config';
+import { Constants } from '#mm/common';
 import { DialogService } from '#mm/services/dialog';
-import { ENV } from '#mm/common';
 import { FSService } from '#mm/services/fs';
 import { Injectable } from '@angular/core';
 import { MetadataService } from '#mm/services/metadata';
@@ -13,7 +12,6 @@ import { MinutesState } from '#mm/state/minutes';
 import { NgxsOnInit } from '@ngxs/store';
 import { SetMinutes } from '#mm/state/minutes';
 import { State } from '@ngxs/store';
-import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { UploaderService } from '#mm/services/uploader';
 
@@ -35,15 +33,13 @@ export class OpenMinutes {
 }
 
 export type AppStateModel = {
-  bucketName: string;
   pathToMinutes: string;
 };
 
 @State<AppStateModel>({
   name: 'app',
   defaults: {
-    bucketName: 'staging.washington-app-319514.appspot.com',
-    pathToMinutes: undefined
+    pathToMinutes: null
   }
 })
 @Injectable()
@@ -54,18 +50,18 @@ export class AppState implements NgxsOnInit {
   #store = inject(Store);
   #uploader = inject(UploaderService);
 
-  @Action(NewMinutes) async newMinutes(
-    ctx: StateContext<AppStateModel>
-  ): Promise<void> {
+  @Action(NewMinutes) async newMinutes({ getState }): Promise<void> {
     // 🔥 locked into MP3 only for now
     const path = await this.#fs.chooseFile({
-      defaultPath: ctx.getState().pathToMinutes,
+      defaultPath: getState().pathToMinutes,
       filters: [{ extensions: ['mp3'], name: 'Audio Recording' }],
       title: 'Open Audio Recording'
     });
     if (path) {
+      // 👇 we'll use the snapshot b/c who knows where we are now
+      const config = this.#store.selectSnapshot(ConfigState);
       const upload = await this.#uploader.upload({
-        bucketName: ctx.getState().bucketName,
+        bucketName: config.bucketName,
         destFileName: `${uuidv4()}.mp3`,
         filePath: path
       });
@@ -75,50 +71,49 @@ export class AppState implements NgxsOnInit {
     }
   }
 
-  @Action(OpenMinutes) async openMinutes(
-    ctx: StateContext<AppStateModel>
-  ): Promise<void> {
+  @Action(OpenMinutes) async openMinutes({
+    getState,
+    setState
+  }): Promise<void> {
     const path = await this.#fs.chooseFile({
-      defaultPath: ctx.getState().pathToMinutes,
+      defaultPath: getState().pathToMinutes,
       filters: [{ extensions: ['json'], name: 'Minutes' }],
       title: 'Open Minutes'
     });
     if (path) {
-      ctx.setState(patch({ pathToMinutes: path }));
-      this.#loadMinutes(ctx, path);
+      setState(patch({ pathToMinutes: path }));
+      this.#loadMinutes(path);
     }
   }
 
-  ngxsOnInit(ctx: StateContext<AppStateModel>): void {
+  ngxsOnInit({ getState }): void {
     // 👇 load the last-used minutes, if any
-    const path = ctx.getState().pathToMinutes;
-    if (path) this.#loadMinutes(ctx, path);
+    const path = getState().pathToMinutes;
+    if (path) this.#loadMinutes(path);
     // 👇 save the minutes periodically
     const minutes$ = this.#store.select(MinutesState);
     minutes$
       .pipe(
-        map((minutes) => [minutes, ctx.getState().pathToMinutes]),
+        map((minutes) => {
+          // 👇 we'll use the snapshot b/c who knows where we are now
+          const state = this.#store.selectSnapshot(AppState);
+          return [minutes, state.pathToMinutes];
+        }),
         filter(([minutes, path]) => !!(minutes && path)),
-        debounceTime(ENV.settings.saveFileInterval)
+        debounceTime(Constants.saveFileInterval)
       )
       .subscribe(([minutes, path]) => {
         this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
       });
   }
 
-  async #loadMinutes(
-    ctx: StateContext<AppStateModel>,
-    path: string
-  ): Promise<void> {
+  async #loadMinutes(path: string): Promise<void> {
     try {
       const raw = await this.#fs.loadFile(path);
       const minutes: Minutes = MinutesSchema.parse(JSON.parse(raw));
-      ctx.dispatch(new SetMinutes(minutes));
-      ctx.dispatch(new AddRecent(path));
+      this.#store.dispatch(new SetMinutes(minutes));
+      this.#store.dispatch(new AddRecent(path));
     } catch (error: any) {
-      console.error(`🔥 ${error.message}`);
-      Sentry.captureException(error);
-      // 👇 show an error message
       this.#dialog.showErrorBox(
         'Invalid Minutes Project File',
         `The file must be valid JSON, as created by this application.`

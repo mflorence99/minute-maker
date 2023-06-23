@@ -1,12 +1,11 @@
 import { Action } from '@ngxs/store';
 import { Channels } from '#mm/common';
-import { ENV } from '#mm/common';
+import { Constants } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Observable } from 'rxjs';
 import { Selector } from '@ngxs/store';
 import { State } from '@ngxs/store';
-import { StateContext } from '@ngxs/store';
 
 import { catchError } from 'rxjs';
 import { from } from 'rxjs';
@@ -38,24 +37,22 @@ export type RecentsStateModel = string[];
 @Injectable()
 export class RecentsState {
   @Action(AddRecent) addRecent(
-    ctx: StateContext<RecentsStateModel>,
+    { getState, setState },
     action: AddRecent
   ): void {
-    const recents = ctx.getState();
+    const recents = getState();
     // 👇 trim list if full
-    if (recents.length >= ENV.settings.maxRecentPaths)
-      ctx.setState(removeItem(recents.length - 1));
+    if (recents.length >= Constants.maxRecentPaths)
+      setState(removeItem(recents.length - 1));
     // 👇 remove any duplicate item
     const ix = recents.findIndex((recent) => recent === action.path);
-    if (ix !== -1) ctx.setState(removeItem(ix));
+    if (ix !== -1) setState(removeItem(ix));
     // 👇 put this one at the head
-    ctx.setState(insertItem(action.path, 0));
+    setState(insertItem(action.path, 0));
   }
 
-  @Action(ClearRecents) clearRecents(
-    ctx: StateContext<RecentsStateModel>
-  ): void {
-    ctx.setState([]);
+  @Action(ClearRecents) clearRecents({ setState }): void {
+    setState([]);
   }
 
   @Selector() static minutes(

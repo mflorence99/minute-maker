@@ -7,35 +7,45 @@ import { z } from 'zod';
 // 🔥 there are two common.ts, one under main, the other under renderer
 //    one of them is a symlink!
 
-export const ENV = {
-  package: {
-    author: PACKAGE.author,
-    name: PACKAGE.name,
-    description: PACKAGE.description,
-    license: PACKAGE.license,
-    repository: {
-      type: PACKAGE.repository.type,
-      url: PACKAGE.repository.url
-    },
-    version: PACKAGE.version
-  },
+// //////////////////////////////////////////////////////////////////////////
+// 🟪 package details
+// //////////////////////////////////////////////////////////////////////////
 
-  settings: {
-    backoffOptions: {
-      delayFirstAttempt: true,
-      jitter: 'full',
-      maxDelay: 30000
-    } as BackoffOptions,
-    maxRecentPaths: 32,
-    openaiDefaults: {
-      temperature: 0.5,
-      top_p: 1
-    },
-    saveFileInterval: 10000
-  }
+export const Package = {
+  author: PACKAGE.author,
+  name: PACKAGE.name,
+  description: PACKAGE.description,
+  license: PACKAGE.license,
+  repository: {
+    type: PACKAGE.repository.type,
+    url: PACKAGE.repository.url
+  },
+  version: PACKAGE.version
 };
 
-// 👇 Electron main/renderer channels
+// //////////////////////////////////////////////////////////////////////////
+// 🟧 settings NOT expected to be configured by user
+// //////////////////////////////////////////////////////////////////////////
+
+export const Constants = {
+  backoffOptions: {
+    delayFirstAttempt: true,
+    jitter: 'full',
+    maxDelay: 30000
+  } as BackoffOptions,
+  maxRecentPaths: 32,
+  openaiDefaults: {
+    temperature: 0.5,
+    top_p: 1
+  },
+  saveFileInterval: 10000,
+  sentryDSN:
+    'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734'
+};
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟩 Electron main/renderer channels
+// //////////////////////////////////////////////////////////////////////////
 
 export enum Channels {
   dialogShowErrorBox = 'dialog/showErrorBox',
@@ -65,7 +75,9 @@ export enum Channels {
   uploaderRequest = 'google-storage/uploader/request'
 }
 
-// 👇 request/response types for above channels
+// //////////////////////////////////////////////////////////////////////////
+// 🟦 request/response types for above channels
+// //////////////////////////////////////////////////////////////////////////
 
 export type AudioMetadata = {
   bitrate: number;
@@ -139,7 +151,9 @@ export type UploaderResponse = {
   url: string;
 };
 
-// 👇 schema for minutes and their transcription
+// //////////////////////////////////////////////////////////////////////////
+// 🟥 zod-validated schema for minutes and their transcription
+// //////////////////////////////////////////////////////////////////////////
 
 export const TranscriptionSchema = z.object({
   speaker: z.string(),

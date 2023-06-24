@@ -9,26 +9,35 @@ import dayjs from 'dayjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-transcription',
   template: `
-    <table>
-      <tbody>
-        <tr
-          *ngFor="let tx of transcription; let ix = index; trackBy: trackByTx"
-          (click)="txIndex = ix">
-          <td [ngClass]="{ current: ix === txIndex }" class="marker">
-            <fa-icon
-              [fixedWidth]="true"
-              [icon]="['fas', 'triangle']"
-              [rotate]="90" />
-          </td>
-          <td class="start">{{ makeStartTime(tx.start) }}</td>
-          <td class="speaker">{{ tx.speaker }}</td>
-          <td class="speech">{{ tx.speech }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <article>
+      <table>
+        <tbody>
+          <tr
+            *ngFor="let tx of transcription; let ix = index; trackBy: trackByTx"
+            (click)="txIndex = ix">
+            <td [ngClass]="{ current: ix === txIndex }" class="marker">
+              <fa-icon
+                [fixedWidth]="true"
+                [icon]="['fas', 'triangle']"
+                [rotate]="90" />
+            </td>
+            <td class="start">{{ makeStartTime(tx.start) }}</td>
+            <td class="speaker">{{ tx.speaker }}</td>
+            <td class="speech">{{ tx.speech }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
   `,
   styles: [
     `
+      article {
+        border: 1px dotted;
+        height: 100%;
+        overflow-y: scroll;
+        width: 100%;
+      }
+
       table {
         border-collapse: collapse;
         width: 100%;
@@ -64,7 +73,11 @@ import dayjs from 'dayjs';
       }
 
       tr {
-        border: 1px dotted;
+        vertical-align: top;
+      }
+
+      tr:not(:last-child) {
+        border-bottom: 1px dotted;
       }
     `
   ]

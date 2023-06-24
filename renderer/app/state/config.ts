@@ -40,7 +40,7 @@ export class ConfigState implements NgxsOnInit {
     setState(patch(config));
   }
 
-  ngxsOnInit({ getState }): void {
+  ngxsOnInit(): void {
     const bucketName$ = this.#store.select(ConfigState.bucketName);
     // 🙈 https://stackoverflow.com/questions/43881504/how-to-await-inside-rxjs-subscribe-method
     bucketName$

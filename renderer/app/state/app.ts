@@ -15,13 +15,17 @@ import { SetMinutes } from '#mm/state/minutes';
 import { SetStatus } from '#mm/state/status';
 import { State } from '@ngxs/store';
 import { Store } from '@ngxs/store';
+import { TranscriberService } from '#mm/services/transcriber';
 import { UploaderService } from '#mm/services/uploader';
 
+import { catchError } from 'rxjs';
 import { debounceTime } from 'rxjs';
 import { filter } from 'rxjs';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
+import { of } from 'rxjs';
 import { patch } from '@ngxs/store/operators';
+import { tap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 export class NewMinutes {
@@ -37,6 +41,11 @@ export class OpenMinutes {
 export class SaveMinutes {
   static readonly type = '[App] SaveMinutes';
   constructor(public saveAs = false) {}
+}
+
+export class TranscribeMinutes {
+  static readonly type = '[App] TranscribeMinutes';
+  constructor() {}
 }
 
 export type AppStateModel = {
@@ -55,6 +64,7 @@ export class AppState implements NgxsOnInit {
   #fs = inject(FSService);
   #metadata = inject(MetadataService);
   #store = inject(Store);
+  #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
 
   @Action(NewMinutes) async newMinutes({ getState, setState }): Promise<void> {
@@ -116,18 +126,52 @@ export class AppState implements NgxsOnInit {
   }
 
   @Action(SaveMinutes) async saveMinutes(
-    { getState },
+    { getState, setState },
     { saveAs }
   ): Promise<void> {
     const minutes = this.#store.selectSnapshot(MinutesState);
     let path = getState().pathToMinutes;
-    if (saveAs || !path)
+    if (saveAs || !path) {
       path = await this.#fs.saveFileAs(JSON.stringify(minutes), {
         defaultPath: getState().pathToMinutes,
         filters: [{ extensions: ['json'], name: 'Minutes' }],
         title: 'Save Minutes'
       });
-    else await this.#fs.saveFile(path, JSON.stringify(minutes));
+      setState(patch({ pathToMinutes: path }));
+    } else await this.#fs.saveFile(path, JSON.stringify(minutes));
+  }
+
+  @Action(TranscribeMinutes) transcribeMinutes(): void {
+    const minutes = this.#store.selectSnapshot(MinutesState);
+    const request = { audio: { ...minutes.audio }, speakers: minutes.speakers };
+    this.#store.dispatch(
+      new SetStatus({ status: 'Transcribing minutes', working: true })
+    );
+    this.#transcriber
+      .transcribe(request)
+      .pipe(
+        tap((tx) => {
+          this.#store.dispatch(
+            new SetStatus({
+              status: `Transcribing minutes: ${tx.progressPercent}% complete`
+            })
+          );
+        }),
+        filter((tx) => tx.progressPercent === 100),
+        catchError((error) => {
+          this.#store.dispatch(new SetStatus({ error }));
+          return of(null);
+        })
+      )
+      .subscribe((tx) => {
+        if (tx) {
+          this.#store.dispatch(
+            new SetMinutes({ transcription: tx.transcription })
+          );
+          // 👇 finally
+          this.#store.dispatch(new ClearStatus());
+        }
+      });
   }
 
   ngxsOnInit({ getState }): void {

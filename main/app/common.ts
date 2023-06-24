@@ -40,7 +40,8 @@ export const Constants = {
   },
   saveFileInterval: 10000,
   sentryDSN:
-    'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734'
+    'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
+  transcriptionPollInterval: 10000
 };
 
 // //////////////////////////////////////////////////////////////////////////
@@ -170,6 +171,7 @@ export const MinutesSchema = z.object({
     url: z.string().url()
   }),
   date: z.coerce.date(),
+  speakers: z.string().array().optional(),
   subject: z.string().optional(),
   subtitle: z.string().optional(),
   title: z.string(),

@@ -94,6 +94,22 @@ $dark-app-theme: mat.define-dark-theme(
   outline: 0;
 }
 
+// 👇 we can get away with this scrollbar style b/c of Electron
+//    we only need support Chrome
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--mat-grey-700);
+}
+
 a {
   color: var(--primary-color);
   cursor: pointer;

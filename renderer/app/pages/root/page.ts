@@ -1,6 +1,6 @@
+import { AppState } from '#mm/state/app';
+import { AppStateModel } from '#mm/state/app';
 import { Component } from '@angular/core';
-import { FSService } from '#mm/services/fs';
-import { MetadataService } from '#mm/services/metadata';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { NewMinutes } from '#mm/state/app';
@@ -10,11 +10,12 @@ import { OpenMinutes } from '#mm/state/app';
 import { RecentsState } from '#mm/state/recents';
 import { SaveMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
+import { SetMinutes } from '#mm/state/minutes';
 import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
-import { TranscriberService } from '#mm/services/transcriber';
-import { UploaderService } from '#mm/services/uploader';
+import { TranscribeMinutes } from '#mm/state/app';
+import { Transcription } from '#mm/common';
 
 import { inject } from '@angular/core';
 
@@ -22,35 +23,18 @@ import { inject } from '@angular/core';
   selector: 'mm-root',
   template: `
     <main>
+      <header>{{ (app$ | async).pathToMinutes }}</header>
       <mm-wavesurfer
         [audioFile]="audioURL$ | async"
         [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }">
-        <mm-wavesurfer-regions
-          (regionEntered)="event('region-entered', $event)">
-          <mm-wavesurfer-region
-            [params]="{ start: 30, end: 40, color: 'red' }" />
-        </mm-wavesurfer-regions>
-        <mm-wavesurfer-timeline
-          (ready)="event('timeline-ready', $event)"></mm-wavesurfer-timeline>
+        <mm-wavesurfer-timeline></mm-wavesurfer-timeline>
       </mm-wavesurfer>
 
       <mm-transcription
         [startDate]="date"
-        [transcription]="[
-          { speaker: 'Bob', start: 0, speech: 'Hello' },
-          { speaker: 'Fred', start: 66, speech: 'Goodbye' }
-        ]" />
+        [transcription]="transcription$ | async" />
 
       <section class="buttons">
-        <!-- <button (click)="transcribe()" color="primary" mat-raised-button>
-          Transcribe
-        </button>
-        <button (click)="upload()" color="accent" mat-raised-button>
-          Upload
-        </button>
-        <button (click)="chatCompletion()" color="warn" mat-raised-button>
-          Chat Completion
-        </button> -->
         <button (click)="openMinutes()" color="primary" mat-raised-button>
           Open Minutes
         </button>
@@ -60,8 +44,10 @@ import { inject } from '@angular/core';
         <button (click)="saveMinutes()" color="warn" mat-raised-button>
           Save Minutes
         </button>
-        <!-- <button (click)="saveFileAs()" mat-raised-button>Save File</button>
-        <button (click)="metadata()" mat-raised-button>Metadata</button> -->
+        <button (click)="transcribe()" mat-raised-button>
+          Transcribe Minutes
+        </button>
+        <button (click)="chatCompletion()" mat-raised-button>AI Minutes</button>
       </section>
 
       <ul class="recents">
@@ -71,6 +57,8 @@ import { inject } from '@angular/core';
           </ng-container>
         </li>
       </ul>
+
+      <footer>{{ (status$ | async).status }}</footer>
     </main>
   `,
   styles: [
@@ -84,6 +72,7 @@ import { inject } from '@angular/core';
         justify-content: center;
 
         mm-transcription {
+          height: 320px;
           width: 480px;
         }
 
@@ -102,43 +91,34 @@ import { inject } from '@angular/core';
   ]
 })
 export class RootPage {
+  @Select(AppState) app$: Observable<AppStateModel>;
   @Select(MinutesState.audioURL) audioURL$: Observable<string>;
   @Select(RecentsState.minutes) recentMinutes$: Observable<
     Observable<Minutes>[]
   >;
   @Select(StatusState) status$: Observable<StatusStateModel>;
+  @Select(MinutesState.transcription) transcription$: Observable<
+    Transcription[]
+  >;
 
   date = new Date();
 
-  #fs = inject(FSService);
-  #metadata = inject(MetadataService);
   #openai = inject(OpenAIService);
   #store = inject(Store);
-  #transcriber = inject(TranscriberService);
-  #uploader = inject(UploaderService);
 
   constructor() {
     this.status$.subscribe(console.log);
   }
 
   chatCompletion(): void {
-    this.#openai
-      .chatCompletion({
-        prompt: `Convert this into grammatical English: \n\n I no work no more`
-      })
-      .then(console.log);
-  }
-
-  event(key, event): void {
-    console.log(key, event);
-  }
-
-  metadata(): void {
-    this.#metadata
-      .parseFile(
-        '/home/mflo/mflorence99/minute-maker/renderer/assets/minutes.mp3'
-      )
-      .then(console.log);
+    const minutes = this.#store.selectSnapshot(MinutesState);
+    if (minutes?.transcription.length > 0) {
+      this.#openai
+        .chatCompletion({
+          prompt: `Summarize my statement in the first person:\n\n${minutes.transcription[0].speech}`
+        })
+        .then(console.log);
+    }
   }
 
   newMinutes(): void {
@@ -154,23 +134,8 @@ export class RootPage {
   }
 
   transcribe(): void {
-    const request = {
-      audio: {
-        encoding: 'MP3',
-        gcsuri: 'gs://washington-app-319514.appspot.com/short.mp3',
-        sampleRateHertz: 22100
-      },
-      speakers: ['Fred', 'Bob']
-    };
-    this.#transcriber.transcribe(request).subscribe(console.log);
-  }
-
-  upload(): void {
-    const request = {
-      bucketName: 'staging.washington-app-319514.appspot.com',
-      destFileName: 'test.mp3',
-      filePath: '/home/mflo/mflorence99/minute-maker/renderer/assets/short.mp3'
-    };
-    this.#uploader.upload(request);
+    // 🔥 hack until we can edit the minutes
+    this.#store.dispatch(new SetMinutes({ speakers: ['AOH'] }));
+    this.#store.dispatch(new TranscribeMinutes());
   }
 }

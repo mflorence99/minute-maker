@@ -11,7 +11,7 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 @Injectable({ providedIn: 'root' })
 export class TranscriberService {
   //
-  
+
   // 👇 cancel transcription
   cancelTranscription(request: TranscriberCancel): void {
     ipc.invoke(Channels.transcriberCancel, request);
@@ -27,7 +27,11 @@ export class TranscriberService {
         if (response.progressPercent === 100) observer.complete();
       }
       ipc.on(Channels.transcriberResponse, listener);
-      ipc.invoke(Channels.transcriberRequest, request);
+      try {
+        ipc.invoke(Channels.transcriberRequest, request);
+      } catch (error) {
+        observer.error(error);
+      }
       // 👇 teardown logic
       return () => {
         ipc.invoke(Channels.transcriberCancel, { name });

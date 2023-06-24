@@ -84,7 +84,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   set audioFile(audioFile: string) {
     this.#audioFile = audioFile;
-    if (this.wavesurfer) this.wavesurfer.load(this.#audioFile);
+    if (this.wavesurfer && audioFile) this.wavesurfer.load(this.#audioFile);
   }
 
   set options(options: Partial<WaveSurferOptions>) {

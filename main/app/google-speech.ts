@@ -1,4 +1,5 @@
 import { Channels } from './common';
+import { Constants } from './common';
 import { TranscriberCancel } from './common';
 import { TranscriberRequest } from './common';
 import { Transcription } from './common';
@@ -40,6 +41,7 @@ export async function longRunningRecognize(
       enableSpeakerDiarization: true,
       encoding: request.audio?.encoding ?? 'MP3',
       languageCode: 'en-US',
+      model: 'phone_call',
       sampleRateHertz: request.audio?.sampleRateHertz ?? 16000
     }
   });
@@ -132,7 +134,7 @@ async function pollOperationProgress(
       speech: null
     });
     // 👇 wait before polling again
-    await sleep(1000);
+    await sleep(Constants.transcriptionPollInterval);
   } while (true);
 }
 

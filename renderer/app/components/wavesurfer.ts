@@ -1,5 +1,6 @@
 import { AfterViewInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { ClearStatus } from '#mm/state/status';
 import { Component } from '@angular/core';
 import { ContentChildren } from '@angular/core';
 import { ElementRef } from '@angular/core';
@@ -7,12 +8,15 @@ import { Input } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Output } from '@angular/core';
 import { QueryList } from '@angular/core';
+import { SetStatus } from '#mm/state/status';
+import { Store } from '@ngxs/store';
 import { ViewChild } from '@angular/core';
 import { WatchableEventEmitter } from '#mm/utils';
 import { WaveSurferOptions } from 'wavesurfer.js';
 import { WaveSurferPlugin } from '#mm/components/wavesurfer-plugin';
 import { WaveSurferPluginComponent } from '#mm/components/wavesurfer-plugin';
 
+import { inject } from '@angular/core';
 import { kebabasize } from '#mm/utils';
 
 import WaveSurfer from 'wavesurfer.js';
@@ -73,6 +77,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   #audioFile: string;
   #options: Partial<WaveSurferOptions> = {};
+  #store = inject(Store);
 
   @Input() get audioFile(): string {
     return this.#audioFile;
@@ -84,7 +89,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   set audioFile(audioFile: string) {
     this.#audioFile = audioFile;
-    if (this.wavesurfer && audioFile) this.wavesurfer.load(this.#audioFile);
+    if (this.wavesurfer && this.#audioFile) this.#loadAudioFile();
   }
 
   set options(options: Partial<WaveSurferOptions>) {
@@ -103,7 +108,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
       ...this.options
     });
     // 👇 load the audio file
-    if (this.#audioFile) this.wavesurfer.load(this.#audioFile);
+    if (this.#audioFile) this.#loadAudioFile();
     // 👇 bind any events
     Object.getOwnPropertyNames(this)
       .filter(
@@ -118,5 +123,19 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.wavesurfer.destroy();
+  }
+
+  #loadAudioFile(): void {
+    this.#store.dispatch(
+      new SetStatus({ status: 'Loading audio into player', working: true })
+    );
+    try {
+      this.wavesurfer.once('ready', () =>
+        this.#store.dispatch(new ClearStatus())
+      );
+      this.wavesurfer.load(this.#audioFile);
+    } catch (error) {
+      this.#store.dispatch(new SetStatus({ error }));
+    }
   }
 }

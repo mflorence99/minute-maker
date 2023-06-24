@@ -45,15 +45,15 @@ export class StatusState {
   }
 
   // 👇 NOTE: utility action, as not all have to be set at once
-  @Action(SetStatus) setStatus({ setState }, { status }): void {
+  @Action(SetStatus) async setStatus({ setState }, { status }): Promise<void> {
     if (status.error) {
-      this.#dialog.showErrorBox(
+      await this.#dialog.showErrorBox(
         'An error occured. Please retry.',
         status.error.message
       );
+      setState(StatusState.defaultStatus());
       console.error(`🔥 ${status.error.message}`);
       Sentry.captureException(status.error);
-    }
-    setState(patch(status));
+    } else setState(patch(status));
   }
 }

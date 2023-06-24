@@ -3,8 +3,6 @@ import { Constants } from './common';
 import { OpenAIRequest } from './common';
 import { OpenAIResponse } from './common';
 
-import * as Sentry from '@sentry/node';
-
 import { BackoffOptions } from 'exponential-backoff';
 import { Configuration } from 'openai';
 import { OpenAIApi } from 'openai';
@@ -147,9 +145,8 @@ export async function listModels(): Promise<string[]> {
 function backoffOptions(): BackoffOptions {
   return {
     ...Constants.backoffOptions,
-    retry: (error: any): boolean => {
-      console.error(`🔥 ${error.message}`);
-      Sentry.captureException(error);
+    retry: (error): boolean => {
+      jsome(`🔥 ${error.message}`, error);
       // 🙈 https://help.openai.com/en/articles/5955604-how-can-i-solve-429-too-many-requests-errors
       return /(rate limit)|(too many)/i.test(error.message);
     }

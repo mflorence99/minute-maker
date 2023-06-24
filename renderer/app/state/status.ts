@@ -19,7 +19,7 @@ export class SetStatus {
 }
 
 export type StatusStateModel = {
-  error: Error;
+  error: Partial<Error>;
   status: string;
   working: boolean;
 };

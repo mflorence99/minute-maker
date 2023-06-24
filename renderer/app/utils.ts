@@ -11,8 +11,8 @@ export class WatchableEventEmitter<T = any> extends EventEmitter<T> {
   subscriberCount = 0;
 
   override subscribe(
-    next?: (value: any) => void,
-    error?: (error: any) => void,
+    next?: (value) => void,
+    error?: (error) => void,
     complete?: () => void
   ): Subscription {
     ++this.subscriberCount;

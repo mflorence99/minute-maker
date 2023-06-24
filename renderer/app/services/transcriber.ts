@@ -12,12 +12,10 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 export class TranscriberService {
   //
 
-  // 👇 cancel transcription
-  cancelTranscription(request: TranscriberCancel): void {
-    ipc.invoke(Channels.transcriberCancel, request);
+  cancelTranscription(request: TranscriberCancel): Promise<void> {
+    return ipc.invoke(Channels.transcriberCancel, request);
   }
 
-  // 👇 perform transcription
   transcribe(request: TranscriberRequest): Observable<TranscriberResponse> {
     return new Observable((observer) => {
       let name;

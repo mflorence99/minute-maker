@@ -3,7 +3,6 @@ import { AddRecent } from '#mm/state/recents';
 import { ClearStatus } from '#mm/state/status';
 import { ConfigState } from '#mm/state/config';
 import { Constants } from '#mm/common';
-import { DialogService } from '#mm/services/dialog';
 import { FSService } from '#mm/services/fs';
 import { Injectable } from '@angular/core';
 import { MetadataService } from '#mm/services/metadata';
@@ -28,6 +27,11 @@ import { patch } from '@ngxs/store/operators';
 import { tap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
+export class CancelTranscription {
+  static readonly type = '[App] CancelTranscription';
+  constructor() {}
+}
+
 export class NewMinutes {
   static readonly type = '[App] NewMinutes';
   constructor() {}
@@ -50,22 +54,33 @@ export class TranscribeMinutes {
 
 export type AppStateModel = {
   pathToMinutes: string;
+  transcriptionName: string;
 };
 
 @State<AppStateModel>({
   name: 'app',
   defaults: {
-    pathToMinutes: null
+    pathToMinutes: null,
+    transcriptionName: null
   }
 })
 @Injectable()
 export class AppState implements NgxsOnInit {
-  #dialog = inject(DialogService);
   #fs = inject(FSService);
   #metadata = inject(MetadataService);
   #store = inject(Store);
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
+
+  @Action(CancelTranscription) async cancelTransription({
+    getState
+  }): Promise<void> {
+    const transcriptionName = getState().transcriptionName;
+    if (transcriptionName) {
+      await this.#transcriber.cancelTranscription({ name: transcriptionName });
+      this.#store.dispatch(new ClearStatus());
+    }
+  }
 
   @Action(NewMinutes) async newMinutes({ getState, setState }): Promise<void> {
     // 🔥 locked into MP3 only for now
@@ -141,7 +156,7 @@ export class AppState implements NgxsOnInit {
     } else await this.#fs.saveFile(path, JSON.stringify(minutes));
   }
 
-  @Action(TranscribeMinutes) transcribeMinutes(): void {
+  @Action(TranscribeMinutes) transcribeMinutes({ setState }): void {
     const minutes = this.#store.selectSnapshot(MinutesState);
     const request = { audio: { ...minutes.audio }, speakers: minutes.speakers };
     this.#store.dispatch(
@@ -151,6 +166,7 @@ export class AppState implements NgxsOnInit {
       .transcribe(request)
       .pipe(
         tap((tx) => {
+          setState(patch({ transcriptionName: tx.name }));
           this.#store.dispatch(
             new SetStatus({
               status: `Transcribing minutes: ${tx.progressPercent}% complete`
@@ -169,6 +185,7 @@ export class AppState implements NgxsOnInit {
             new SetMinutes({ transcription: tx.transcription })
           );
           // 👇 finally
+          setState(patch({ transcriptionName: null }));
           this.#store.dispatch(new ClearStatus());
         }
       });
@@ -200,10 +217,14 @@ export class AppState implements NgxsOnInit {
       const raw = await this.#fs.loadFile(path);
       const minutes: Minutes = MinutesSchema.parse(JSON.parse(raw));
       this.#store.dispatch([new SetMinutes(minutes), new AddRecent(path)]);
-    } catch (error: any) {
-      this.#dialog.showErrorBox(
-        'Invalid Minutes Project File',
-        `The file must be valid JSON, as created by this application.`
+    } catch (error) {
+      this.#store.dispatch(
+        new SetStatus({
+          error: {
+            message:
+              'The minutes file must be valid JSON, as created by this application'
+          }
+        })
       );
     }
   }

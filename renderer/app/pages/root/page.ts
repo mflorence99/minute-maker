@@ -1,5 +1,6 @@
 import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
+import { CancelTranscription } from '#mm/state/app';
 import { Component } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
@@ -46,6 +47,9 @@ import { inject } from '@angular/core';
         </button>
         <button (click)="transcribe()" mat-raised-button>
           Transcribe Minutes
+        </button>
+        <button (click)="cancelTranscription()" mat-raised-button>
+          Cancel Transcription
         </button>
         <button (click)="chatCompletion()" mat-raised-button>AI Minutes</button>
       </section>
@@ -108,6 +112,10 @@ export class RootPage {
 
   constructor() {
     this.status$.subscribe(console.log);
+  }
+
+  cancelTranscription(): void {
+    this.#store.dispatch(new CancelTranscription());
   }
 
   chatCompletion(): void {

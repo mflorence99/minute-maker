@@ -43,6 +43,7 @@
             "main": "renderer/app/main.ts",
             "outputPath": "dist/renderer",
             "polyfills": ["zone.js"],
+            "preserveSymlinks": true,
             "scripts": [],
             "styles": [
               "renderer/app/colors.scss",

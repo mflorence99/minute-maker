@@ -27,13 +27,21 @@ export const Package = {
 // 🟧 settings NOT expected to be configured by user
 // //////////////////////////////////////////////////////////////////////////
 
+const backoffOptions: BackoffOptions = {
+  delayFirstAttempt: true,
+  jitter: 'full',
+  maxDelay: 30000
+};
+
+// 👇 all this so we can access the strategy at runtime eg: in UI
+export const rephraseStrategies = ['brevity', 'accuracy'] as const;
+export type RephraseStrategy = (typeof rephraseStrategies)[number];
+const rephraseStrategy: RephraseStrategy = 'accuracy';
+
 export const Constants = {
-  backoffOptions: {
-    delayFirstAttempt: true,
-    jitter: 'full',
-    maxDelay: 30000
-  } as BackoffOptions,
+  backoffOptions,
   maxRecentPaths: 32,
+  maxUndoStackSize: 7,
   openaiDefaults: {
     temperature: 0.5,
     top_p: 1
@@ -41,6 +49,7 @@ export const Constants = {
   saveFileInterval: 10000,
   sentryDSN:
     'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
+  rephraseStrategy,
   transcriptionPollInterval: 10000
 };
 
@@ -158,6 +167,7 @@ export type UploaderResponse = {
 // //////////////////////////////////////////////////////////////////////////
 
 export const TranscriptionSchema = z.object({
+  rephrased: z.boolean().optional(),
   speaker: z.string(),
   speech: z.string(),
   start: z.number()

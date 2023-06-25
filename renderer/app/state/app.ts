@@ -10,11 +10,14 @@ import { Minutes } from '#mm/common';
 import { MinutesSchema } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { NgxsOnInit } from '@ngxs/store';
+import { OpenAIService } from '#mm/services/openai';
+import { RephraseStrategy } from '#mm/common';
 import { SetMinutes } from '#mm/state/minutes';
 import { SetStatus } from '#mm/state/status';
 import { State } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { TranscriberService } from '#mm/services/transcriber';
+import { UpdateTranscription } from '#mm/state/minutes';
 import { UploaderService } from '#mm/services/uploader';
 
 import { catchError } from 'rxjs';
@@ -47,6 +50,11 @@ export class SaveMinutes {
   constructor(public saveAs = false) {}
 }
 
+export class RephraseTranscription {
+  static readonly type = '[App] RephraseTranscription';
+  constructor(public rephraseStrategy: RephraseStrategy, public ix: number) {}
+}
+
 export class TranscribeMinutes {
   static readonly type = '[App] TranscribeMinutes';
   constructor() {}
@@ -68,11 +76,12 @@ export type AppStateModel = {
 export class AppState implements NgxsOnInit {
   #fs = inject(FSService);
   #metadata = inject(MetadataService);
+  #openai = inject(OpenAIService);
   #store = inject(Store);
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
 
-  @Action(CancelTranscription) async cancelTransription({
+  @Action(CancelTranscription) async cancelTranscription({
     getState
   }): Promise<void> {
     const transcriptionName = getState().transcriptionName;
@@ -94,7 +103,6 @@ export class AppState implements NgxsOnInit {
         new SetStatus({ status: 'Uploading audio recording', working: true })
       );
       try {
-        // 👇 we'll use the snapshot b/c who knows where we are now
         const config = this.#store.selectSnapshot(ConfigState);
         // 👇 extract the audio metadata
         const metadata = await this.#metadata.parseFile(path);
@@ -137,6 +145,32 @@ export class AppState implements NgxsOnInit {
     if (path) {
       setState(patch({ pathToMinutes: path }));
       this.#loadMinutes(path);
+    }
+  }
+
+  @Action(RephraseTranscription) async rephraseTranscription(
+    ctx,
+    { rephraseStrategy, ix }
+  ): Promise<void> {
+    const config = this.#store.selectSnapshot(ConfigState);
+    const minutes = this.#store.selectSnapshot(MinutesState);
+    this.#store.dispatch(
+      new SetStatus({ status: 'Rephrasing transcription', working: true })
+    );
+    try {
+      const speech = minutes.transcription[ix].speech;
+      const response = await this.#openai.chatCompletion({
+        prompt: `${config.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`
+      });
+      if (response.finish_reason === 'length')
+        throw new Error('This speech is too long to rephrase');
+      this.#store.dispatch(
+        new UpdateTranscription({ rephrased: true, speech: response.text }, ix)
+      );
+    } catch (error) {
+      this.#store.dispatch(new SetStatus({ error }));
+    } finally {
+      this.#store.dispatch(new ClearStatus());
     }
   }
 

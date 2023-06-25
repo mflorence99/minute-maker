@@ -1,6 +1,7 @@
 import { Action } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { NgxsOnInit } from '@ngxs/store';
+import { RephraseStrategy } from '#mm/common';
 import { Selector } from '@ngxs/store';
 import { State } from '@ngxs/store';
 import { Store } from '@ngxs/store';
@@ -15,15 +16,22 @@ export class SetConfig {
   constructor(public config: Partial<ConfigStateModel>) {}
 }
 
+type RephraseStrategyPrompts = Record<RephraseStrategy, string>;
+
 export type ConfigStateModel = {
   bucketName: string;
+  rephraseStrategyPrompts: RephraseStrategyPrompts;
 };
 
 @State<ConfigStateModel>({
   name: 'config',
   defaults: {
-    // 🔥 convenient just for now
-    bucketName: 'washington-app-319514.appspot.com'
+    bucketName: 'washington-app-319514.appspot.com', // 🔥 convenient for now
+    rephraseStrategyPrompts: {
+      accuracy:
+        'Rephrase my statement in the first person, using grammatical English and paragraphs:',
+      brevity: 'Summarize my statement in the first person'
+    }
   }
 })
 @Injectable()

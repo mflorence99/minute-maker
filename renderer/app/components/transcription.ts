@@ -23,7 +23,7 @@ import dayjs from 'dayjs';
             </td>
             <td class="start">{{ makeStartTime(tx.start) }}</td>
             <td class="speaker">{{ tx.speaker }}</td>
-            <td class="speech">{{ tx.speech }}</td>
+            <td [innerHTML]="asParagraphs(tx.speech)" class="speech"></td>
           </tr>
         </tbody>
       </table>
@@ -68,7 +68,6 @@ import dayjs from 'dayjs';
 
       td.start {
         font-family: monospace;
-        font-size: smaller;
         white-space: nowrap;
       }
 
@@ -87,6 +86,11 @@ export class TranscriptionComponent {
   @Input({ required: true }) transcription: Transcription[];
 
   txIndex = 0;
+
+  // 🔥 very temporary
+  asParagraphs(text: string): string {
+    return text.replaceAll('\n\n', '<br><br>');
+  }
 
   makeStartTime(seconds: number): string {
     return dayjs(this.startDate).add(seconds, 'second').format('hh:mm:ssa');

@@ -29,7 +29,9 @@ import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
 import { WaveSurferRegionsComponent } from '#mm/components/wavesurfer-regions';
 import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline';
 
+import { faRedo } from '@fortawesome/pro-duotone-svg-icons';
 import { faTriangle } from '@fortawesome/pro-solid-svg-icons';
+import { faUndo } from '@fortawesome/pro-duotone-svg-icons';
 
 import isDev from '#mm/is-dev';
 
@@ -93,6 +95,6 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState];
 export class RootModule {
   constructor(library: FaIconLibrary) {
     // 👇 must add icons we use right here
-    library.addIcons(faTriangle);
+    library.addIcons(faRedo, faTriangle, faUndo);
   }
 }

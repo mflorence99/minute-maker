@@ -6,17 +6,20 @@ import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
-import { OpenAIService } from '#mm/services/openai';
 import { OpenMinutes } from '#mm/state/app';
 import { RecentsState } from '#mm/state/recents';
+import { Redo } from '#mm/state/minutes';
+import { RephraseTranscription } from '#mm/state/app';
 import { SaveMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
 import { SetMinutes } from '#mm/state/minutes';
+import { SplitTranscription } from '#mm/state/minutes';
 import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { TranscribeMinutes } from '#mm/state/app';
 import { Transcription } from '#mm/common';
+import { Undo } from '#mm/state/minutes';
 
 import { inject } from '@angular/core';
 
@@ -45,13 +48,27 @@ import { inject } from '@angular/core';
         <button (click)="saveMinutes()" color="warn" mat-raised-button>
           Save Minutes
         </button>
+
         <button (click)="transcribe()" mat-raised-button>
           Transcribe Minutes
         </button>
         <button (click)="cancelTranscription()" mat-raised-button>
           Cancel Transcription
         </button>
-        <button (click)="chatCompletion()" mat-raised-button>AI Minutes</button>
+        <button (click)="rephraseTranscription()" mat-raised-button>
+          Rephrase Transcription
+        </button>
+
+        <button (click)="splitTranscription()" mat-raised-button>
+          Split Transcription
+        </button>
+
+        <button (click)="redo()" mat-icon-button>
+          <fa-icon [icon]="['fad', 'redo']" size="2x"></fa-icon>
+        </button>
+        <button (click)="undo()" mat-icon-button>
+          <fa-icon [icon]="['fad', 'undo']" size="2x"></fa-icon>
+        </button>
       </section>
 
       <ul class="recents">
@@ -89,6 +106,7 @@ import { inject } from '@angular/core';
           flex-flow: row wrap;
           gap: 2rem;
           justify-content: center;
+          width: 440px;
         }
       }
     `
@@ -107,7 +125,6 @@ export class RootPage {
 
   date = new Date();
 
-  #openai = inject(OpenAIService);
   #store = inject(Store);
 
   constructor() {
@@ -118,17 +135,6 @@ export class RootPage {
     this.#store.dispatch(new CancelTranscription());
   }
 
-  chatCompletion(): void {
-    const minutes = this.#store.selectSnapshot(MinutesState);
-    if (minutes?.transcription.length > 0) {
-      this.#openai
-        .chatCompletion({
-          prompt: `Summarize my statement in the first person:\n\n${minutes.transcription[0].speech}`
-        })
-        .then(console.log);
-    }
-  }
-
   newMinutes(): void {
     this.#store.dispatch(new NewMinutes());
   }
@@ -137,13 +143,30 @@ export class RootPage {
     this.#store.dispatch(new OpenMinutes());
   }
 
+  redo(): void {
+    this.#store.dispatch(new Redo());
+  }
+
+  rephraseTranscription(): void {
+    this.#store.dispatch(new RephraseTranscription('accuracy', 0));
+  }
+
   saveMinutes(): void {
     this.#store.dispatch(new SaveMinutes());
+  }
+
+  splitTranscription(): void {
+    // 🔥 hack until we can edit the minutes
+    this.#store.dispatch(new SplitTranscription(0, 25));
   }
 
   transcribe(): void {
     // 🔥 hack until we can edit the minutes
     this.#store.dispatch(new SetMinutes({ speakers: ['AOH'] }));
     this.#store.dispatch(new TranscribeMinutes());
+  }
+
+  undo(): void {
+    this.#store.dispatch(new Undo());
   }
 }

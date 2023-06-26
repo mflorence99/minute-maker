@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+// 🔥 sucks we have to do this 👆 but ngxs destructure appears untyped
+
 import { Action } from '@ngxs/store';
 import { Constants } from '#mm/common';
 import { Injectable } from '@angular/core';
@@ -8,6 +11,7 @@ import { Transcription } from '#mm/common';
 
 import { insertItem } from '@ngxs/store/operators';
 import { patch } from '@ngxs/store/operators';
+import { removeItem } from '@ngxs/store/operators';
 import { updateItem } from '@ngxs/store/operators';
 
 class UndoableAction {
@@ -87,6 +91,37 @@ export class MinutesState {
     dispatch(new CanDo(false, false));
   }
 
+  @Action(JoinTranscriptions) joinTranscriptions(
+    { dispatch, getState, setState },
+    { ix, iy, undoing }
+  ): void {
+    // 🔥 for now, must be two adjacent transcriptions
+    if (iy !== ix + 1) throw new Error('JoinTransriptions must be adjacent!');
+    // 👇 capture the new speech
+    const speech1 = getState().transcription[ix].speech;
+    const speech2 = getState().transcription[ix + 1].speech;
+    // 👇 put the inverse action onto the undo stack
+    if (!undoing) {
+      redoStack.length = 0;
+      while (undoStack.length >= Constants.maxUndoStackSize) undoStack.shift();
+      undoStack.push([
+        new SplitTranscription(ix, speech1.length, true),
+        new JoinTranscriptions(ix, ix + 1, true)
+      ]);
+      dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
+    }
+    // 👇 now do the action
+    setState(
+      patch({
+        transcription: updateItem(
+          ix,
+          patch({ speech: `${speech1} ${speech2}` })
+        )
+      })
+    );
+    setState(patch({ transcription: removeItem(ix + 1) }));
+  }
+
   @Action(Redo) redo({ dispatch }): void {
     // 👇 quick return if nothing to redo
     if (redoStack.length === 0) return;
@@ -110,8 +145,19 @@ export class MinutesState {
     { dispatch, getState, setState },
     { ix, pos, undoing }
   ): void {
-    // 👇 now do the action
+    // 👇 capture the original
     const original: Transcription = { ...getState().transcription[ix] };
+    // 👇 put the inverse action onto the undo stack
+    if (!undoing) {
+      redoStack.length = 0;
+      while (undoStack.length >= Constants.maxUndoStackSize) undoStack.shift();
+      undoStack.push([
+        new JoinTranscriptions(ix, ix + 1, true),
+        new SplitTranscription(ix, pos, true)
+      ]);
+      dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
+    }
+    // 👇 now do the action
     setState(
       patch({
         transcription: updateItem(

@@ -2,6 +2,7 @@ import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
 import { CancelTranscription } from '#mm/state/app';
 import { Component } from '@angular/core';
+import { JoinTranscriptions } from '#mm/state/minutes';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { NewMinutes } from '#mm/state/app';
@@ -48,21 +49,30 @@ import { inject } from '@angular/core';
         <button (click)="saveMinutes()" color="warn" mat-raised-button>
           Save Minutes
         </button>
+      </section>
 
+      <section class="buttons">
         <button (click)="transcribe()" mat-raised-button>
           Transcribe Minutes
         </button>
         <button (click)="cancelTranscription()" mat-raised-button>
           Cancel Transcription
         </button>
+      </section>
+
+      <section class="buttons">
         <button (click)="rephraseTranscription()" mat-raised-button>
-          Rephrase Transcription
+          Rephrase #0
         </button>
-
         <button (click)="splitTranscription()" mat-raised-button>
-          Split Transcription
+          Split #0
         </button>
+        <button (click)="joinTranscriptions()" mat-raised-button>
+          Join #0
+        </button>
+      </section>
 
+      <section class="buttons">
         <button (click)="redo()" mat-icon-button>
           <fa-icon [icon]="['fad', 'redo']" size="2x"></fa-icon>
         </button>
@@ -106,7 +116,6 @@ import { inject } from '@angular/core';
           flex-flow: row wrap;
           gap: 2rem;
           justify-content: center;
-          width: 440px;
         }
       }
     `
@@ -133,6 +142,11 @@ export class RootPage {
 
   cancelTranscription(): void {
     this.#store.dispatch(new CancelTranscription());
+  }
+
+  joinTranscriptions(): void {
+    // 🔥 hack until we can edit the minutes
+    this.#store.dispatch(new JoinTranscriptions(0, 1));
   }
 
   newMinutes(): void {

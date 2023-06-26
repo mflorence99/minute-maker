@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { OpenMinutes } from '#mm/state/app';
 import { RecentsState } from '#mm/state/recents';
 import { Redo } from '#mm/state/minutes';
+import { RemoveTranscription } from '#mm/state/minutes';
 import { RephraseTranscription } from '#mm/state/app';
 import { SaveMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
@@ -69,6 +70,9 @@ import { inject } from '@angular/core';
         </button>
         <button (click)="joinTranscriptions()" mat-raised-button>
           Join #0
+        </button>
+        <button (click)="removeTranscription()" mat-raised-button>
+          Remove #0
         </button>
       </section>
 
@@ -145,8 +149,7 @@ export class RootPage {
   }
 
   joinTranscriptions(): void {
-    // 🔥 hack until we can edit the minutes
-    this.#store.dispatch(new JoinTranscriptions(0, 1));
+    this.#store.dispatch(new JoinTranscriptions(0));
   }
 
   newMinutes(): void {
@@ -161,6 +164,10 @@ export class RootPage {
     this.#store.dispatch(new Redo());
   }
 
+  removeTranscription(): void {
+    this.#store.dispatch(new RemoveTranscription(0));
+  }
+
   rephraseTranscription(): void {
     this.#store.dispatch(new RephraseTranscription('accuracy', 0));
   }
@@ -170,12 +177,10 @@ export class RootPage {
   }
 
   splitTranscription(): void {
-    // 🔥 hack until we can edit the minutes
     this.#store.dispatch(new SplitTranscription(0, 25));
   }
 
   transcribe(): void {
-    // 🔥 hack until we can edit the minutes
     this.#store.dispatch(new SetMinutes({ speakers: ['AOH'] }));
     this.#store.dispatch(new TranscribeMinutes());
   }

@@ -28,9 +28,20 @@ export class ClearStacks {
   constructor() {}
 }
 
+export class InsertTranscription extends UndoableAction {
+  static readonly type = '[Minutes] InsertTranscription';
+  constructor(
+    public transcription: Partial<Transcription>,
+    public ix: number,
+    undoing = false
+  ) {
+    super(undoing);
+  }
+}
+
 export class JoinTranscriptions extends UndoableAction {
   static readonly type = '[Minutes] JoinTranscriptions';
-  constructor(public ix: number, public iy: number, undoing = false) {
+  constructor(public ix: number, undoing = false) {
     super(undoing);
   }
 }
@@ -38,6 +49,13 @@ export class JoinTranscriptions extends UndoableAction {
 export class Redo {
   static readonly type = '[Minutes] Redo';
   constructor() {}
+}
+
+export class RemoveTranscription extends UndoableAction {
+  static readonly type = '[Minutes] RemoveTranscription';
+  constructor(public ix: number, undoing = false) {
+    super(undoing);
+  }
 }
 
 export class SetMinutes {
@@ -91,12 +109,29 @@ export class MinutesState {
     this.#store.dispatch(new CanDo(false, false));
   }
 
+  @Action(InsertTranscription) insertTranscription(
+    { setState }: StateContext<MinutesStateModel>,
+    { transcription, ix, undoing }: InsertTranscription
+  ): void {
+    // 👇 put the inverse action onto the undo stack
+    if (!undoing)
+      this.#stackUndoActions([
+        new RemoveTranscription(ix, true),
+        new InsertTranscription(transcription, ix, true)
+      ]);
+    // 👇 now do the action
+    setState(
+      patch({
+        transcription: insertItem(transcription, ix)
+      })
+    );
+  }
+
+  // 🔥 for now, must be two adjacent transcriptions
   @Action(JoinTranscriptions) joinTranscriptions(
     { getState, setState }: StateContext<MinutesStateModel>,
-    { ix, iy, undoing }: JoinTranscriptions
+    { ix, undoing }: JoinTranscriptions
   ): void {
-    // 🔥 for now, must be two adjacent transcriptions
-    if (iy !== ix + 1) throw new Error('JoinTransriptions must be adjacent!');
     // 👇 capture the new speech
     const speech1 = getState().transcription[ix].speech;
     const speech2 = getState().transcription[ix + 1].speech;
@@ -105,7 +140,7 @@ export class MinutesState {
     if (!undoing)
       this.#stackUndoActions([
         new SplitTranscription(ix, speech1.length, true),
-        new JoinTranscriptions(ix, ix + 1, true)
+        new JoinTranscriptions(ix, true)
       ]);
     // 👇 now do the action
     setState(
@@ -127,6 +162,22 @@ export class MinutesState {
     this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
   }
 
+  @Action(RemoveTranscription) removeTranscription(
+    { getState, setState }: StateContext<MinutesStateModel>,
+    { ix, undoing }: RemoveTranscription
+  ): void {
+    // 👇 capture the original
+    const original: Transcription = { ...getState().transcription[ix] };
+    // 👇 put the inverse action onto the undo stack
+    if (!undoing)
+      this.#stackUndoActions([
+        new InsertTranscription(original, ix, true),
+        new RemoveTranscription(ix, true)
+      ]);
+    // 👇 now do the action
+    setState(patch({ transcription: removeItem(ix) }));
+  }
+
   // 👇 NOTE: utility action, as not all have to be set at once
   @Action(SetMinutes) setMinutes({ setState }, { minutes }: SetMinutes): void {
     if (minutes.audio) setState({ audio: patch(minutes.audio) });
@@ -144,7 +195,7 @@ export class MinutesState {
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#stackUndoActions([
-        new JoinTranscriptions(ix, ix + 1, true),
+        new JoinTranscriptions(ix, true),
         new SplitTranscription(ix, pos, true)
       ]);
     // 👇 now do the action
@@ -159,7 +210,7 @@ export class MinutesState {
     setState(
       patch({
         transcription: insertItem(
-          { ...original, speech: original.speech.substring(pos).trim() },
+          { speech: original.speech.substring(pos).trim() },
           ix + 1
         )
       })

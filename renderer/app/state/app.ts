@@ -169,7 +169,7 @@ export class AppState implements NgxsOnInit {
       if (response.finish_reason === 'length')
         throw new Error('This speech is too long to rephrase');
       this.#store.dispatch(
-        new UpdateTranscription({ rephrased: true, speech: response.text }, ix)
+        new UpdateTranscription({ speech: response.text }, ix)
       );
     } catch (error) {
       this.#store.dispatch(new SetStatus({ error }));

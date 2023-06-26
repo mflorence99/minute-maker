@@ -93,7 +93,9 @@ export class TranscriptionComponent {
   }
 
   makeStartTime(seconds: number): string {
-    return dayjs(this.startDate).add(seconds, 'second').format('hh:mm:ssa');
+    return seconds != null
+      ? dayjs(this.startDate).add(seconds, 'second').format('hh:mm:ssa')
+      : '';
   }
 
   trackByTx(ix, tx: Transcription): string {

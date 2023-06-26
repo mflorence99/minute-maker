@@ -167,10 +167,9 @@ export type UploaderResponse = {
 // //////////////////////////////////////////////////////////////////////////
 
 export const TranscriptionSchema = z.object({
-  rephrased: z.boolean().optional(),
-  speaker: z.string(),
+  speaker: z.string().optional(),
   speech: z.string(),
-  start: z.number()
+  start: z.number().optional()
 });
 
 export const MinutesSchema = z.object({

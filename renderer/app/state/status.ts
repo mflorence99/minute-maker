@@ -45,7 +45,10 @@ export class StatusState {
   }
 
   // 👇 NOTE: utility action, as not all have to be set at once
-  @Action(SetStatus) async setStatus({ setState }, { status }): Promise<void> {
+  @Action(SetStatus) async setStatus(
+    { setState },
+    { status }: SetStatus
+  ): Promise<void> {
     if (status.error) {
       await this.#dialog.showErrorBox(
         'An error occured. Please retry.',

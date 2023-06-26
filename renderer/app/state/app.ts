@@ -15,6 +15,7 @@ import { RephraseStrategy } from '#mm/common';
 import { SetMinutes } from '#mm/state/minutes';
 import { SetStatus } from '#mm/state/status';
 import { State } from '@ngxs/store';
+import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { TranscriberService } from '#mm/services/transcriber';
 import { UpdateTranscription } from '#mm/state/minutes';
@@ -83,7 +84,7 @@ export class AppState implements NgxsOnInit {
 
   @Action(CancelTranscription) async cancelTranscription({
     getState
-  }): Promise<void> {
+  }: StateContext<AppStateModel>): Promise<void> {
     const transcriptionName = getState().transcriptionName;
     if (transcriptionName) {
       await this.#transcriber.cancelTranscription({ name: transcriptionName });
@@ -91,7 +92,10 @@ export class AppState implements NgxsOnInit {
     }
   }
 
-  @Action(NewMinutes) async newMinutes({ getState, setState }): Promise<void> {
+  @Action(NewMinutes) async newMinutes({
+    getState,
+    setState
+  }: StateContext<AppStateModel>): Promise<void> {
     // 🔥 locked into MP3 only for now
     const path = await this.#fs.chooseFile({
       defaultPath: getState().pathToMinutes,
@@ -136,7 +140,7 @@ export class AppState implements NgxsOnInit {
   @Action(OpenMinutes) async openMinutes({
     getState,
     setState
-  }): Promise<void> {
+  }: StateContext<AppStateModel>): Promise<void> {
     const path = await this.#fs.chooseFile({
       defaultPath: getState().pathToMinutes,
       filters: [{ extensions: ['json'], name: 'Minutes' }],
@@ -149,8 +153,8 @@ export class AppState implements NgxsOnInit {
   }
 
   @Action(RephraseTranscription) async rephraseTranscription(
-    ctx,
-    { rephraseStrategy, ix }
+    ctx: StateContext<AppStateModel>,
+    { rephraseStrategy, ix }: RephraseTranscription
   ): Promise<void> {
     const config = this.#store.selectSnapshot(ConfigState);
     const minutes = this.#store.selectSnapshot(MinutesState);
@@ -175,8 +179,8 @@ export class AppState implements NgxsOnInit {
   }
 
   @Action(SaveMinutes) async saveMinutes(
-    { getState, setState },
-    { saveAs }
+    { getState, setState }: StateContext<AppStateModel>,
+    { saveAs }: SaveMinutes
   ): Promise<void> {
     const minutes = this.#store.selectSnapshot(MinutesState);
     let path = getState().pathToMinutes;
@@ -190,7 +194,9 @@ export class AppState implements NgxsOnInit {
     } else await this.#fs.saveFile(path, JSON.stringify(minutes));
   }
 
-  @Action(TranscribeMinutes) transcribeMinutes({ setState }): void {
+  @Action(TranscribeMinutes) transcribeMinutes({
+    setState
+  }: StateContext<AppStateModel>): void {
     const minutes = this.#store.selectSnapshot(MinutesState);
     const request = { audio: { ...minutes.audio }, speakers: minutes.speakers };
     this.#store.dispatch(

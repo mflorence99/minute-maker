@@ -1,12 +1,10 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-// 🔥 sucks we have to do this 👆 but ngxs destructure appears untyped
-
 import { Action } from '@ngxs/store';
 import { Constants } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Selector } from '@ngxs/store';
 import { State } from '@ngxs/store';
+import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { Transcription } from '#mm/common';
 
@@ -94,8 +92,8 @@ export class MinutesState {
   }
 
   @Action(JoinTranscriptions) joinTranscriptions(
-    { getState, setState },
-    { ix, iy, undoing }
+    { getState, setState }: StateContext<MinutesStateModel>,
+    { ix, iy, undoing }: JoinTranscriptions
   ): void {
     // 🔥 for now, must be two adjacent transcriptions
     if (iy !== ix + 1) throw new Error('JoinTransriptions must be adjacent!');
@@ -130,7 +128,7 @@ export class MinutesState {
   }
 
   // 👇 NOTE: utility action, as not all have to be set at once
-  @Action(SetMinutes) setMinutes({ setState }, { minutes }): void {
+  @Action(SetMinutes) setMinutes({ setState }, { minutes }: SetMinutes): void {
     if (minutes.audio) setState({ audio: patch(minutes.audio) });
     setState(patch(minutes));
     // 👇 this action clears the undo/redo stacks
@@ -138,8 +136,8 @@ export class MinutesState {
   }
 
   @Action(SplitTranscription) splitTranscription(
-    { getState, setState },
-    { ix, pos, undoing }
+    { getState, setState }: StateContext<MinutesStateModel>,
+    { ix, pos, undoing }: SplitTranscription
   ): void {
     // 👇 capture the original
     const original: Transcription = { ...getState().transcription[ix] };
@@ -186,13 +184,15 @@ export class MinutesState {
   }
 
   @Action(UpdateTranscription) updateTranscription(
-    { getState, setState },
-    { transcription, ix, undoing }
+    { getState, setState }: StateContext<MinutesStateModel>,
+    { transcription, ix, undoing }: UpdateTranscription
   ): void {
+    // 👇 capture the original
+    const original: Transcription = { ...getState().transcription[ix] };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#stackUndoActions([
-        new UpdateTranscription(getState().transcription[ix], ix, true),
+        new UpdateTranscription(original, ix, true),
         new UpdateTranscription(transcription, ix, true)
       ]);
     // 👇 now do the action

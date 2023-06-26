@@ -6,6 +6,7 @@ import { Minutes } from '#mm/common';
 import { Observable } from 'rxjs';
 import { Selector } from '@ngxs/store';
 import { State } from '@ngxs/store';
+import { StateContext } from '@ngxs/store';
 
 import { catchError } from 'rxjs';
 import { from } from 'rxjs';
@@ -38,7 +39,10 @@ export type RecentsStateModel = string[];
 export class RecentsState {
   //
 
-  @Action(AddRecent) addRecent({ getState, setState }, { path }): void {
+  @Action(AddRecent) addRecent(
+    { getState, setState }: StateContext<RecentsStateModel>,
+    { path }: AddRecent
+  ): void {
     const recents = getState();
     // 👇 trim list if full
     if (recents.length >= Constants.maxRecentPaths)

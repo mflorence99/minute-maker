@@ -44,7 +44,7 @@ export class ConfigState implements NgxsOnInit {
   }
 
   // 👇 NOTE: utility action, as not all have to be set at once
-  @Action(SetConfig) setConfig({ setState }, { config }): void {
+  @Action(SetConfig) setConfig({ setState }, { config }: SetConfig): void {
     setState(patch(config));
   }
 

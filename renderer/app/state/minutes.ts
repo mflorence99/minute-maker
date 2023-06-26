@@ -7,8 +7,10 @@ import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Selector } from '@ngxs/store';
 import { State } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { Transcription } from '#mm/common';
 
+import { inject } from '@angular/core';
 import { insertItem } from '@ngxs/store/operators';
 import { patch } from '@ngxs/store/operators';
 import { removeItem } from '@ngxs/store/operators';
@@ -79,20 +81,20 @@ const undoStack: UndoableAction[][] = [];
 })
 @Injectable()
 export class MinutesState {
-  //
+  #store = inject(Store);
 
   @Selector() static audioURL(minutes: MinutesStateModel): string {
     return minutes?.audio?.url;
   }
 
-  @Action(ClearStacks) clearStacks({ dispatch }): void {
+  @Action(ClearStacks) clearStacks(): void {
     redoStack.length = 0;
     undoStack.length = 0;
-    dispatch(new CanDo(false, false));
+    this.#store.dispatch(new CanDo(false, false));
   }
 
   @Action(JoinTranscriptions) joinTranscriptions(
-    { dispatch, getState, setState },
+    { getState, setState },
     { ix, iy, undoing }
   ): void {
     // 🔥 for now, must be two adjacent transcriptions
@@ -100,63 +102,53 @@ export class MinutesState {
     // 👇 capture the new speech
     const speech1 = getState().transcription[ix].speech;
     const speech2 = getState().transcription[ix + 1].speech;
+    const speech = `${speech1} ${speech2}`;
     // 👇 put the inverse action onto the undo stack
-    if (!undoing) {
-      redoStack.length = 0;
-      while (undoStack.length >= Constants.maxUndoStackSize) undoStack.shift();
-      undoStack.push([
+    if (!undoing)
+      this.#stackUndoActions([
         new SplitTranscription(ix, speech1.length, true),
         new JoinTranscriptions(ix, ix + 1, true)
       ]);
-      dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
-    }
     // 👇 now do the action
     setState(
       patch({
-        transcription: updateItem(
-          ix,
-          patch({ speech: `${speech1} ${speech2}` })
-        )
+        transcription: updateItem(ix, patch({ speech }))
       })
     );
     setState(patch({ transcription: removeItem(ix + 1) }));
   }
 
-  @Action(Redo) redo({ dispatch }): void {
+  @Action(Redo) redo(): void {
     // 👇 quick return if nothing to redo
     if (redoStack.length === 0) return;
     // 👇 execute the redo operation
     const [undoAction, redoAction] = redoStack.pop();
-    dispatch(redoAction);
+    this.#store.dispatch(redoAction);
     // 👇 put the undo action onto its stack
     undoStack.push([undoAction, redoAction]);
-    dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
+    this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
   }
 
   // 👇 NOTE: utility action, as not all have to be set at once
-  @Action(SetMinutes) setMinutes({ dispatch, setState }, { minutes }): void {
+  @Action(SetMinutes) setMinutes({ setState }, { minutes }): void {
     if (minutes.audio) setState({ audio: patch(minutes.audio) });
     setState(patch(minutes));
     // 👇 this action clears the undo/redo stacks
-    dispatch(new ClearStacks());
+    this.#store.dispatch(new ClearStacks());
   }
 
   @Action(SplitTranscription) splitTranscription(
-    { dispatch, getState, setState },
+    { getState, setState },
     { ix, pos, undoing }
   ): void {
     // 👇 capture the original
     const original: Transcription = { ...getState().transcription[ix] };
     // 👇 put the inverse action onto the undo stack
-    if (!undoing) {
-      redoStack.length = 0;
-      while (undoStack.length >= Constants.maxUndoStackSize) undoStack.shift();
-      undoStack.push([
+    if (!undoing)
+      this.#stackUndoActions([
         new JoinTranscriptions(ix, ix + 1, true),
         new SplitTranscription(ix, pos, true)
       ]);
-      dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
-    }
     // 👇 now do the action
     setState(
       patch({
@@ -182,32 +174,35 @@ export class MinutesState {
     return minutes?.transcription ?? [];
   }
 
-  @Action(Undo) undo({ dispatch }): void {
+  @Action(Undo) undo(): void {
     // 👇 quick return if nothing to undo
     if (undoStack.length === 0) return;
     // 👇 execute the undo operation
     const [undoAction, redoAction] = undoStack.pop();
-    dispatch(undoAction);
+    this.#store.dispatch(undoAction);
     // 👇 put the redo action onto its stack
     redoStack.push([undoAction, redoAction]);
-    dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
+    this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
   }
 
   @Action(UpdateTranscription) updateTranscription(
-    { dispatch, getState, setState },
+    { getState, setState },
     { transcription, ix, undoing }
   ): void {
     // 👇 put the inverse action onto the undo stack
-    if (!undoing) {
-      redoStack.length = 0;
-      while (undoStack.length >= Constants.maxUndoStackSize) undoStack.shift();
-      undoStack.push([
+    if (!undoing)
+      this.#stackUndoActions([
         new UpdateTranscription(getState().transcription[ix], ix, true),
         new UpdateTranscription(transcription, ix, true)
       ]);
-      dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
-    }
     // 👇 now do the action
     setState(patch({ transcription: updateItem(ix, patch(transcription)) }));
+  }
+
+  #stackUndoActions(actions: UndoableAction[]): void {
+    redoStack.length = 0;
+    while (undoStack.length >= Constants.maxUndoStackSize) undoStack.shift();
+    undoStack.push(actions);
+    this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
   }
 }

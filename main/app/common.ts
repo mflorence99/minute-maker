@@ -59,6 +59,9 @@ export const Constants = {
 // //////////////////////////////////////////////////////////////////////////
 
 export enum Channels {
+  appBeforeQuit = 'app/beforeQuit',
+  appQuit = 'app/quit',
+
   dialogShowErrorBox = 'dialog/showErrorBox',
 
   fsChooseFile = 'fs/chooseFile',

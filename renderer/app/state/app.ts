@@ -1,5 +1,6 @@
 import { Action } from '@ngxs/store';
 import { AddRecent } from '#mm/state/recents';
+import { Channels } from '#mm/common';
 import { ClearStatus } from '#mm/state/status';
 import { ConfigState } from '#mm/state/config';
 import { ConfigStateModel } from '#mm/state/config';
@@ -34,6 +35,9 @@ import { patch } from '@ngxs/store/operators';
 import { pluckTranscription } from '#mm/utils';
 import { tap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
+
+// 🙈 preload.ts
+declare const ipc /* 👈 typeof ipcRenderer */;
 
 export class CancelTranscription {
   static readonly type = '[App] CancelTranscription';
@@ -252,6 +256,15 @@ export class AppState implements NgxsOnInit {
     // 👇 load the last-used minutes, if any
     const path = getState().pathToMinutes;
     if (path) this.#loadMinutes(path);
+    // 👇 save the minutes before quitting
+    ipc.on(Channels.appBeforeQuit, async () => {
+      const minutes =
+        this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
+      const state = this.#store.selectSnapshot<AppStateModel>(AppState);
+      if (state.pathToMinutes)
+        await this.#fs.saveFile(state.pathToMinutes, JSON.stringify(minutes));
+      ipc.send(Channels.appQuit);
+    });
     // 👇 save the minutes periodically
     const minutes$ = this.#store.select(MinutesState);
     minutes$

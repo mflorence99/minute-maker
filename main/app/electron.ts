@@ -7,6 +7,7 @@ import './google-speech';
 import './google-storage';
 import './openai';
 
+import { Channels } from './common';
 import { Constants } from './common';
 import { Package } from './common';
 
@@ -19,6 +20,7 @@ import { Rectangle } from 'electron';
 
 import { app } from 'electron';
 import { format } from 'url';
+import { ipcMain } from 'electron';
 import { join } from 'path';
 
 import isDev from 'electron-is-dev';
@@ -99,10 +101,11 @@ app.on('ready', () => {
   theWindow.on('resize', setBounds);
   // 👇 configure the window
   theWindow.setMenu(null);
-});
-
-// 🔥 need to do something here to save unsaved data
-
-app.on('window-all-closed', () => {
-  app.quit();
+  // 👇 perform quit actions
+  ipcMain.on(Channels.appQuit, () => app.exit());
+  globalThis.theWindow.on('close', (event) => {
+    console.log('CLOSING!');
+    event.preventDefault();
+    globalThis.theWindow.webContents.send(Channels.appBeforeQuit);
+  });
 });

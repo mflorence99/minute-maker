@@ -1,18 +1,14 @@
 import { AgendaItem } from '#mm/common';
-import { DestroyRef } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { MinutesStateModel } from '#mm/state/minutes';
 import { OperatorFunction } from 'rxjs';
-import { Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { Transcription } from '#mm/common';
 
-import { inject } from '@angular/core';
 import { map } from 'rxjs';
 import { pairwise } from 'rxjs';
 import { pipe } from 'rxjs';
 import { startWith } from 'rxjs';
-import { takeUntil } from 'rxjs';
 
 // 🙈 https://stackoverflow.com/questions/33441393/is-there-a-way-to-check-for-output-wire-up-from-within-a-component-in-angular
 export class WatchableEventEmitter<T = any> extends EventEmitter<T> {
@@ -59,14 +55,14 @@ export function pluckTranscription(
   else throw new Error(`Operation not supported for item #${ix}`);
 }
 
-// 🙈 https://netbasal.com/getting-to-know-the-destroyref-provider-in-angular-9791aa096d77
-export function untilDestroyed(): any {
-  const subject = new Subject();
-  inject(DestroyRef).onDestroy(() => {
-    subject.next(true);
-    subject.complete();
-  });
-  return () => takeUntil(subject.asObservable());
+// 🙈 https://stackoverflow.com/questions/14368596/how-can-i-check-that-two-objects-have-the-same-set-of-property-names
+export function objectsHaveSameKeys(...objects): boolean {
+  const allKeys = objects.reduce(
+    (keys, object) => keys.concat(Object.keys(object)),
+    []
+  );
+  const union = new Set(allKeys);
+  return objects.every((object) => union.size === Object.keys(object).length);
 }
 
 // 🙈 https://stackoverflow.com/questions/50059622

@@ -12,6 +12,8 @@ import { UpdateTranscription } from '#mm/state/minutes';
 import { debounce } from 'rxjs';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
+import { objectsHaveSameKeys } from '#mm/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { timer } from 'rxjs';
 import { withPreviousItem } from '#mm/utils';
 
@@ -37,8 +39,10 @@ import dayjs from 'dayjs';
             <ng-container *ngIf="tx.type === 'AG'">
               <td class="title" colspan="3">
                 <textarea
-                  #editable
-                  (input)="updateAgendaItem(editable.value, ix)"
+                  #agendaItemTitle
+                  (input)="
+                    updateAgendaItem({ title: agendaItemTitle.value }, ix)
+                  "
                   [value]="tx.title"
                   autocomplete="off"
                   autocorrect="on"
@@ -51,11 +55,27 @@ import dayjs from 'dayjs';
 
             <ng-container *ngIf="tx.type === 'TX'">
               <td class="start">{{ makeStartTime(tx.start) }}</td>
-              <td class="speaker">{{ tx.speaker }}</td>
+              <td>
+                <input
+                  #transcriptionSpeaker
+                  (input)="
+                    updateTranscription(
+                      { speaker: transcriptionSpeaker.value },
+                      ix
+                    )
+                  "
+                  [value]="tx.speaker"
+                  list="transcriptionSpeakers" />
+              </td>
               <td class="speech">
                 <textarea
-                  #editable
-                  (input)="updateTranscription(editable.value, ix)"
+                  #transcriptionSpeech
+                  (input)="
+                    updateTranscription(
+                      { speech: transcriptionSpeech.value },
+                      ix
+                    )
+                  "
                   [value]="tx.speech"
                   autocomplete="off"
                   autocorrect="on"
@@ -69,6 +89,12 @@ import dayjs from 'dayjs';
         </tbody>
       </table>
     </article>
+
+    <datalist id="transcriptionSpeakers">
+      <option value="Tom"></option>
+      <option value="Dick"></option>
+      <option value="Harry"></option>
+    </datalist>
   `,
   styles: [
     `
@@ -77,6 +103,15 @@ import dayjs from 'dayjs';
         height: 100%;
         overflow-y: scroll;
         width: 100%;
+      }
+
+      input {
+        background-color: var(--background-color);
+        border: none;
+        color: var(--text-color);
+        font-family: inherit;
+        font-weight: bold;
+        width: 7rem;
       }
 
       table {
@@ -96,11 +131,6 @@ import dayjs from 'dayjs';
         &.current {
           opacity: 1;
         }
-      }
-
-      td.speaker {
-        font-weight: bold;
-        white-space: nowrap;
       }
 
       td.speech,
@@ -157,9 +187,12 @@ export class TranscriptionComponent {
     // 👇 all this to make sure that when we switch rows, we don't debounce
     this.#updateBuffer$
       .pipe(
+        takeUntilDestroyed(),
         withPreviousItem<UpdateAgendaItem | UpdateTranscription>(),
         debounce(({ previous, current }) =>
-          previous?.ix !== current.ix
+          !previous ||
+          previous.ix !== current.ix ||
+          !objectsHaveSameKeys(previous, current)
             ? timer(0)
             : timer(Constants.editDebounceTime)
         ),
@@ -178,13 +211,13 @@ export class TranscriptionComponent {
     return tx.id;
   }
 
-  updateAgendaItem(title: string, ix: number): void {
-    const action = new UpdateAgendaItem({ title }, ix);
+  updateAgendaItem(update: any, ix: number): void {
+    const action = new UpdateAgendaItem(update, ix);
     this.#updateBuffer$.next(action);
   }
 
-  updateTranscription(speech: string, ix: number): void {
-    const action = new UpdateTranscription({ speech }, ix);
+  updateTranscription(update: any, ix: number): void {
+    const action = new UpdateTranscription(update, ix);
     this.#updateBuffer$.next(action);
   }
 }

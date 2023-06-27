@@ -2,6 +2,7 @@ import { AfterContentInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ContentChildren } from '@angular/core';
+import { DestroyRef } from '@angular/core';
 import { GenericPlugin } from 'wavesurfer.js/dist/base-plugin';
 import { Input } from '@angular/core';
 import { OnDestroy } from '@angular/core';
@@ -24,7 +25,7 @@ import { inject } from '@angular/core';
 import { kebabasize } from '#mm/utils';
 import { map } from 'rxjs';
 import { startWith } from 'rxjs';
-import { untilDestroyed } from '#mm/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions';
 
@@ -59,7 +60,7 @@ export class WaveSurferRegionsComponent
 
   wavesurfer = inject(WaveSurferComponent);
 
-  #untilDestroyed = untilDestroyed();
+  #destroyRef = inject(DestroyRef);
 
   create(): GenericPlugin {
     return this.plugin;
@@ -72,7 +73,7 @@ export class WaveSurferRegionsComponent
       this.wavesurfer.ready
     ])
       .pipe(
-        this.#untilDestroyed(),
+        takeUntilDestroyed(this.#destroyRef),
         filter(([_, ready]) => ready),
         map(([regions]) => regions)
       )
@@ -109,7 +110,7 @@ export class WaveSurferRegionsComponent
     if (prop === 'regionEntered') {
       this.wavesurfer.timeupdate
         .pipe(
-          this.#untilDestroyed(),
+          takeUntilDestroyed(this.#destroyRef),
           map((ts: number) =>
             this.plugin
               .getRegions()

@@ -40,6 +40,7 @@ const rephraseStrategy: RephraseStrategy = 'accuracy';
 
 export const Constants = {
   backoffOptions,
+  editDebounceTime: 1000,
   maxRecentPaths: 32,
   maxUndoStackSize: 7,
   openaiDefaults: {
@@ -137,7 +138,7 @@ export type TranscriberCancel = {
 
 export type TranscriberRequest = {
   audio: {
-    encoding: any;
+    encoding: any; // 👈 yes really -- no access to Google's encoding
     fileName?: string;
     gcsuri?: string;
     sampleRateHertz: number;
@@ -166,10 +167,18 @@ export type UploaderResponse = {
 // 🟥 zod-validated schema for minutes and their transcription
 // //////////////////////////////////////////////////////////////////////////
 
+export const AgendaItemSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  type: z.literal('AG')
+});
+
 export const TranscriptionSchema = z.object({
-  speaker: z.string().optional(),
+  id: z.number(),
+  speaker: z.string(),
   speech: z.string(),
-  start: z.number().optional()
+  start: z.number(),
+  type: z.literal('TX')
 });
 
 export const MinutesSchema = z.object({
@@ -180,12 +189,18 @@ export const MinutesSchema = z.object({
     url: z.string().url()
   }),
   date: z.coerce.date(),
+  nextTranscriptionID: z.number().optional(),
   speakers: z.string().array().optional(),
   subject: z.string().optional(),
   subtitle: z.string().optional(),
   title: z.string(),
-  transcription: TranscriptionSchema.array().optional()
+  transcription: z
+    .discriminatedUnion('type', [AgendaItemSchema, TranscriptionSchema])
+    .array()
+    .optional()
 });
+
+export type AgendaItem = z.infer<typeof AgendaItemSchema>;
 
 export type Minutes = z.infer<typeof MinutesSchema>;
 

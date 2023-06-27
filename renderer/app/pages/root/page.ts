@@ -2,6 +2,7 @@ import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
 import { CancelTranscription } from '#mm/state/app';
 import { Component } from '@angular/core';
+import { InsertAgendaItem } from '#mm/state/minutes';
 import { JoinTranscriptions } from '#mm/state/minutes';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
@@ -73,6 +74,9 @@ import { inject } from '@angular/core';
         </button>
         <button (click)="removeTranscription()" mat-raised-button>
           Remove #0
+        </button>
+        <button (click)="insertAgendaItem()" mat-raised-button>
+          Agenda #0
         </button>
       </section>
 
@@ -146,6 +150,12 @@ export class RootPage {
 
   cancelTranscription(): void {
     this.#store.dispatch(new CancelTranscription());
+  }
+
+  insertAgendaItem(): void {
+    this.#store.dispatch(
+      new InsertAgendaItem({ title: 'Deliberative Session' }, 0)
+    );
   }
 
   joinTranscriptions(): void {

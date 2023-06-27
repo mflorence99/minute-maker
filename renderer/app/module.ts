@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/angular-ivy';
 
 import { AppState } from '#mm/state/app';
+import { AutosizeModule } from 'ngx-autosize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -58,6 +59,7 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState];
   declarations: [...COMPONENTS, ...DIRECTIVES, ...PAGES],
 
   imports: [
+    AutosizeModule,
     BrowserAnimationsModule,
     BrowserModule,
     CommonModule,

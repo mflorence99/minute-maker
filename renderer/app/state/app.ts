@@ -2,6 +2,7 @@ import { Action } from '@ngxs/store';
 import { AddRecent } from '#mm/state/recents';
 import { ClearStatus } from '#mm/state/status';
 import { ConfigState } from '#mm/state/config';
+import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
 import { FSService } from '#mm/services/fs';
 import { Injectable } from '@angular/core';
@@ -9,6 +10,7 @@ import { MetadataService } from '#mm/services/metadata';
 import { Minutes } from '#mm/common';
 import { MinutesSchema } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
+import { MinutesStateModel } from '#mm/state/minutes';
 import { NgxsOnInit } from '@ngxs/store';
 import { OpenAIService } from '#mm/services/openai';
 import { RephraseStrategy } from '#mm/common';
@@ -17,6 +19,7 @@ import { SetStatus } from '#mm/state/status';
 import { State } from '@ngxs/store';
 import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
+import { TranscriberRequest } from '#mm/common';
 import { TranscriberService } from '#mm/services/transcriber';
 import { UpdateTranscription } from '#mm/state/minutes';
 import { UploaderService } from '#mm/services/uploader';
@@ -28,6 +31,7 @@ import { inject } from '@angular/core';
 import { map } from 'rxjs';
 import { of } from 'rxjs';
 import { patch } from '@ngxs/store/operators';
+import { pluckTranscription } from '#mm/utils';
 import { tap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -107,7 +111,8 @@ export class AppState implements NgxsOnInit {
         new SetStatus({ status: 'Uploading audio recording', working: true })
       );
       try {
-        const config = this.#store.selectSnapshot(ConfigState);
+        const config =
+          this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
         // 👇 extract the audio metadata
         const metadata = await this.#metadata.parseFile(path);
         // 👇 upload the audio to GCS
@@ -156,13 +161,13 @@ export class AppState implements NgxsOnInit {
     ctx: StateContext<AppStateModel>,
     { rephraseStrategy, ix }: RephraseTranscription
   ): Promise<void> {
-    const config = this.#store.selectSnapshot(ConfigState);
-    const minutes = this.#store.selectSnapshot(MinutesState);
+    const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
+    const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
     this.#store.dispatch(
       new SetStatus({ status: 'Rephrasing transcription', working: true })
     );
     try {
-      const speech = minutes.transcription[ix].speech;
+      const speech = pluckTranscription(minutes, ix).speech;
       const response = await this.#openai.chatCompletion({
         prompt: `${config.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`
       });
@@ -182,7 +187,7 @@ export class AppState implements NgxsOnInit {
     { getState, setState }: StateContext<AppStateModel>,
     { saveAs }: SaveMinutes
   ): Promise<void> {
-    const minutes = this.#store.selectSnapshot(MinutesState);
+    const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
     let path = getState().pathToMinutes;
     if (saveAs || !path) {
       path = await this.#fs.saveFileAs(JSON.stringify(minutes), {
@@ -197,8 +202,11 @@ export class AppState implements NgxsOnInit {
   @Action(TranscribeMinutes) transcribeMinutes({
     setState
   }: StateContext<AppStateModel>): void {
-    const minutes = this.#store.selectSnapshot(MinutesState);
-    const request = { audio: { ...minutes.audio }, speakers: minutes.speakers };
+    const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
+    const request = {
+      audio: { ...minutes.audio },
+      speakers: minutes.speakers
+    } as TranscriberRequest;
     this.#store.dispatch(
       new SetStatus({ status: 'Transcribing minutes', working: true })
     );
@@ -221,8 +229,17 @@ export class AppState implements NgxsOnInit {
       )
       .subscribe((tx) => {
         if (tx) {
+          let nextTranscriptionID = minutes.nextTranscriptionID ?? 0;
+          // 👇 make sure they're typed right and propery ID'd
+          tx.transcription.forEach((t) => {
+            t.id = ++nextTranscriptionID;
+            t.type = 'TX';
+          });
           this.#store.dispatch(
-            new SetMinutes({ transcription: tx.transcription })
+            new SetMinutes({
+              nextTranscriptionID,
+              transcription: tx.transcription
+            })
           );
           // 👇 finally
           setState(patch({ transcriptionName: null }));
@@ -241,7 +258,7 @@ export class AppState implements NgxsOnInit {
       .pipe(
         map((minutes) => {
           // 👇 we'll use the snapshot b/c who knows where we are now
-          const state = this.#store.selectSnapshot(AppState);
+          const state = this.#store.selectSnapshot<AppStateModel>(AppState);
           return [minutes, state.pathToMinutes];
         }),
         filter(([minutes, path]) => !!(minutes && path)),

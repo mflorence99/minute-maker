@@ -1,4 +1,5 @@
 import { Action } from '@ngxs/store';
+import { AgendaItem } from '#mm/common';
 import { Constants } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
@@ -11,6 +12,8 @@ import { Transcription } from '#mm/common';
 import { inject } from '@angular/core';
 import { insertItem } from '@ngxs/store/operators';
 import { patch } from '@ngxs/store/operators';
+import { pluckAgendaItem } from '#mm/utils';
+import { pluckTranscription } from '#mm/utils';
 import { removeItem } from '@ngxs/store/operators';
 import { updateItem } from '@ngxs/store/operators';
 
@@ -26,6 +29,17 @@ export class CanDo {
 export class ClearStacks {
   static readonly type = '[Undo] ClearStacks';
   constructor() {}
+}
+
+export class InsertAgendaItem extends UndoableAction {
+  static readonly type = '[Minutes] InsertAgendaItem';
+  constructor(
+    public agendaItem: Partial<AgendaItem>,
+    public ix: number,
+    undoing = false
+  ) {
+    super(undoing);
+  }
 }
 
 export class InsertTranscription extends UndoableAction {
@@ -51,6 +65,13 @@ export class Redo {
   constructor() {}
 }
 
+export class RemoveAgendaItem extends UndoableAction {
+  static readonly type = '[Minutes] RemoveAgendaItem';
+  constructor(public ix: number, undoing = false) {
+    super(undoing);
+  }
+}
+
 export class RemoveTranscription extends UndoableAction {
   static readonly type = '[Minutes] RemoveTranscription';
   constructor(public ix: number, undoing = false) {
@@ -73,6 +94,17 @@ export class SplitTranscription extends UndoableAction {
 export class Undo {
   static readonly type = '[Minutes] Undo';
   constructor() {}
+}
+
+export class UpdateAgendaItem extends UndoableAction {
+  static readonly type = '[Minutes] UpdateAgendaItem';
+  constructor(
+    public agendaItem: Partial<AgendaItem>,
+    public ix: number,
+    undoing = false
+  ) {
+    super(undoing);
+  }
 }
 
 export class UpdateTranscription extends UndoableAction {
@@ -109,8 +141,31 @@ export class MinutesState {
     this.#store.dispatch(new CanDo(false, false));
   }
 
+  @Action(InsertAgendaItem) insertAgendaItem(
+    { getState, setState }: StateContext<MinutesStateModel>,
+    { agendaItem, ix, undoing }: InsertAgendaItem
+  ): void {
+    // 👇 put the inverse action onto the undo stack
+    if (!undoing)
+      this.#stackUndoActions([
+        new RemoveAgendaItem(ix, true),
+        new InsertAgendaItem(agendaItem, ix, true)
+      ]);
+    // 👇 now do the action
+    const nextTranscriptionID = Number(getState().nextTranscriptionID) + 1;
+    setState(
+      patch({
+        nextTranscriptionID,
+        transcription: insertItem(
+          { ...agendaItem, id: nextTranscriptionID, type: 'AG' },
+          ix
+        )
+      })
+    );
+  }
+
   @Action(InsertTranscription) insertTranscription(
-    { setState }: StateContext<MinutesStateModel>,
+    { getState, setState }: StateContext<MinutesStateModel>,
     { transcription, ix, undoing }: InsertTranscription
   ): void {
     // 👇 put the inverse action onto the undo stack
@@ -120,9 +175,14 @@ export class MinutesState {
         new InsertTranscription(transcription, ix, true)
       ]);
     // 👇 now do the action
+    const nextTranscriptionID = Number(getState().nextTranscriptionID) + 1;
     setState(
       patch({
-        transcription: insertItem(transcription, ix)
+        nextTranscriptionID,
+        transcription: insertItem(
+          { ...transcription, id: nextTranscriptionID, type: 'TX' },
+          ix
+        )
       })
     );
   }
@@ -133,8 +193,9 @@ export class MinutesState {
     { ix, undoing }: JoinTranscriptions
   ): void {
     // 👇 capture the new speech
-    const speech1 = getState().transcription[ix].speech;
-    const speech2 = getState().transcription[ix + 1].speech;
+    const state = getState();
+    const speech1 = pluckTranscription(state, ix).speech;
+    const speech2 = pluckTranscription(state, ix + 1).speech;
     const speech = `${speech1} ${speech2}`;
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
@@ -162,12 +223,30 @@ export class MinutesState {
     this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
   }
 
+  @Action(RemoveAgendaItem) removeAgendaItem(
+    { getState, setState }: StateContext<MinutesStateModel>,
+    { ix, undoing }: RemoveAgendaItem
+  ): void {
+    // 👇 capture the original
+    const state = getState();
+    const original: AgendaItem = { ...pluckAgendaItem(state, ix) };
+    // 👇 put the inverse action onto the undo stack
+    if (!undoing)
+      this.#stackUndoActions([
+        new InsertAgendaItem(original, ix, true),
+        new RemoveAgendaItem(ix, true)
+      ]);
+    // 👇 now do the action
+    setState(patch({ transcription: removeItem(ix) }));
+  }
+
   @Action(RemoveTranscription) removeTranscription(
     { getState, setState }: StateContext<MinutesStateModel>,
     { ix, undoing }: RemoveTranscription
   ): void {
     // 👇 capture the original
-    const original: Transcription = { ...getState().transcription[ix] };
+    const state = getState();
+    const original: Transcription = { ...pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#stackUndoActions([
@@ -191,7 +270,8 @@ export class MinutesState {
     { ix, pos, undoing }: SplitTranscription
   ): void {
     // 👇 capture the original
-    const original: Transcription = { ...getState().transcription[ix] };
+    const state = getState();
+    const original: Transcription = { ...pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#stackUndoActions([
@@ -207,10 +287,16 @@ export class MinutesState {
         )
       })
     );
+    const nextTranscriptionID = Number(getState().nextTranscriptionID) + 1;
     setState(
       patch({
+        nextTranscriptionID,
         transcription: insertItem(
-          { speech: original.speech.substring(pos).trim() },
+          {
+            speech: original.speech.substring(pos).trim(),
+            id: nextTranscriptionID,
+            type: 'TX'
+          },
           ix + 1
         )
       })
@@ -219,7 +305,7 @@ export class MinutesState {
 
   @Selector() static transcription(
     minutes: MinutesStateModel
-  ): Transcription[] {
+  ): (AgendaItem | Transcription)[] {
     return minutes?.transcription ?? [];
   }
 
@@ -234,12 +320,30 @@ export class MinutesState {
     this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
   }
 
+  @Action(UpdateAgendaItem) updateAgendaItem(
+    { getState, setState }: StateContext<MinutesStateModel>,
+    { agendaItem, ix, undoing }: UpdateAgendaItem
+  ): void {
+    // 👇 capture the original
+    const state = getState();
+    const original: AgendaItem = { ...pluckAgendaItem(state, ix) };
+    // 👇 put the inverse action onto the undo stack
+    if (!undoing)
+      this.#stackUndoActions([
+        new UpdateAgendaItem(original, ix, true),
+        new UpdateAgendaItem(agendaItem, ix, true)
+      ]);
+    // 👇 now do the action
+    setState(patch({ transcription: updateItem(ix, patch(agendaItem)) }));
+  }
+
   @Action(UpdateTranscription) updateTranscription(
     { getState, setState }: StateContext<MinutesStateModel>,
     { transcription, ix, undoing }: UpdateTranscription
   ): void {
     // 👇 capture the original
-    const original: Transcription = { ...getState().transcription[ix] };
+    const state = getState();
+    const original: Transcription = { ...pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#stackUndoActions([

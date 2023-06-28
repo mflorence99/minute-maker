@@ -131,15 +131,27 @@ const undoStack: UndoableAction[][] = [];
 export class MinutesState {
   #store = inject(Store);
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟪 @Select(MinutesState.audioURL) audioURL$
+  // //////////////////////////////////////////////////////////////////////////
+
   @Selector() static audioURL(minutes: MinutesStateModel): string {
     return minutes?.audio?.url;
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 ClearStacks
+  // //////////////////////////////////////////////////////////////////////////
 
   @Action(ClearStacks) clearStacks(): void {
     redoStack.length = 0;
     undoStack.length = 0;
     this.#store.dispatch(new CanDo(false, false));
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 InsertAgendaItem
+  // //////////////////////////////////////////////////////////////////////////
 
   @Action(InsertAgendaItem) insertAgendaItem(
     { getState, setState }: StateContext<MinutesStateModel>,
@@ -164,6 +176,10 @@ export class MinutesState {
     );
   }
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 InsertTranscription
+  // //////////////////////////////////////////////////////////////////////////
+
   @Action(InsertTranscription) insertTranscription(
     { getState, setState }: StateContext<MinutesStateModel>,
     { transcription, ix, undoing }: InsertTranscription
@@ -187,7 +203,11 @@ export class MinutesState {
     );
   }
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 JoinTranscriptions
   // 🔥 for now, must be two adjacent transcriptions
+  // //////////////////////////////////////////////////////////////////////////
+
   @Action(JoinTranscriptions) joinTranscriptions(
     { getState, setState }: StateContext<MinutesStateModel>,
     { ix, undoing }: JoinTranscriptions
@@ -212,6 +232,10 @@ export class MinutesState {
     setState(patch({ transcription: removeItem(ix + 1) }));
   }
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 Redo
+  // //////////////////////////////////////////////////////////////////////////
+
   @Action(Redo) redo(): void {
     // 👇 quick return if nothing to redo
     if (redoStack.length === 0) return;
@@ -222,6 +246,10 @@ export class MinutesState {
     undoStack.push([undoAction, redoAction]);
     this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 RemoveAgendaItem
+  // //////////////////////////////////////////////////////////////////////////
 
   @Action(RemoveAgendaItem) removeAgendaItem(
     { getState, setState }: StateContext<MinutesStateModel>,
@@ -240,6 +268,10 @@ export class MinutesState {
     setState(patch({ transcription: removeItem(ix) }));
   }
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 RemoveTranscription
+  // //////////////////////////////////////////////////////////////////////////
+
   @Action(RemoveTranscription) removeTranscription(
     { getState, setState }: StateContext<MinutesStateModel>,
     { ix, undoing }: RemoveTranscription
@@ -257,6 +289,10 @@ export class MinutesState {
     setState(patch({ transcription: removeItem(ix) }));
   }
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 SetMinutes
+  // //////////////////////////////////////////////////////////////////////////
+
   // 👇 NOTE: utility action, as not all have to be set at once
   @Action(SetMinutes) setMinutes({ setState }, { minutes }: SetMinutes): void {
     if (minutes.audio) setState({ audio: patch(minutes.audio) });
@@ -264,6 +300,10 @@ export class MinutesState {
     // 👇 this action clears the undo/redo stacks
     this.#store.dispatch(new ClearStacks());
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 SplitTranscription
+  // //////////////////////////////////////////////////////////////////////////
 
   @Action(SplitTranscription) splitTranscription(
     { getState, setState }: StateContext<MinutesStateModel>,
@@ -303,11 +343,19 @@ export class MinutesState {
     );
   }
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟪 @Select(MinutesState.transcription) transcription$
+  // //////////////////////////////////////////////////////////////////////////
+
   @Selector() static transcription(
     minutes: MinutesStateModel
   ): (AgendaItem | Transcription)[] {
     return minutes?.transcription ?? [];
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 Undo
+  // //////////////////////////////////////////////////////////////////////////
 
   @Action(Undo) undo(): void {
     // 👇 quick return if nothing to undo
@@ -319,6 +367,10 @@ export class MinutesState {
     redoStack.push([undoAction, redoAction]);
     this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 UpdateAgendaItem
+  // //////////////////////////////////////////////////////////////////////////
 
   @Action(UpdateAgendaItem) updateAgendaItem(
     { getState, setState }: StateContext<MinutesStateModel>,
@@ -337,6 +389,10 @@ export class MinutesState {
     setState(patch({ transcription: updateItem(ix, patch(agendaItem)) }));
   }
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 UpdateTranscription
+  // //////////////////////////////////////////////////////////////////////////
+
   @Action(UpdateTranscription) updateTranscription(
     { getState, setState }: StateContext<MinutesStateModel>,
     { transcription, ix, undoing }: UpdateTranscription
@@ -353,6 +409,10 @@ export class MinutesState {
     // 👇 now do the action
     setState(patch({ transcription: updateItem(ix, patch(transcription)) }));
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟦 helper methods
+  // //////////////////////////////////////////////////////////////////////////
 
   #stackUndoActions(actions: UndoableAction[]): void {
     redoStack.length = 0;

@@ -13,12 +13,14 @@ import isDev from '#mm/is-dev';
 if (!isDev) enableProdMode();
 
 // 👇 log the environment
+
 if (!isDev) console.log('%cPRODUCTION', 'color: darkorange');
 else console.log('%cDEVELOPMENT', 'color: dodgerblue');
 console.table(Package);
 console.table(Constants);
 
 // 👉 initialize Sentry.io
+
 if (!isDev) {
   Sentry.init({
     debug: true,
@@ -29,6 +31,7 @@ if (!isDev) {
 
 // 👇 make sure async storage engine is initialized BEFORE lauching Angular
 //    this is the ONLY way that NGXS saved state works
+
 StorageEngine.initialize()
   .then(() => {
     platformBrowserDynamic().bootstrapModule(RootModule);

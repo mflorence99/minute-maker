@@ -3,7 +3,10 @@ import { BrowserWindow } from 'electron';
 import ContextMenu from 'electron-context-menu';
 import isDev from 'electron-is-dev';
 
-// 👇 context menu
+// //////////////////////////////////////////////////////////////////////////
+// 🟩 ContextMenu configuration
+// //////////////////////////////////////////////////////////////////////////
+
 ContextMenu({
   prepend: (dflt, params, window: BrowserWindow) => [
     {

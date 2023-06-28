@@ -5,10 +5,13 @@ import { extname } from 'path';
 import { ipcMain } from 'electron';
 import { parseFile } from 'music-metadata';
 
+// //////////////////////////////////////////////////////////////////////////
+// 🟩 Channels.metadataParseFile --> metadataParseFile
+// //////////////////////////////////////////////////////////////////////////
+
 ipcMain.handle(Channels.metadataParseFile, metadataParseFile);
 
 // 👇 exported for tests
-
 export async function metadataParseFile(
   event,
   fileName: string

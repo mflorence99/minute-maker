@@ -11,7 +11,7 @@ import { v1p1beta1 } from '@google-cloud/speech';
 import jsome from 'jsome';
 
 // //////////////////////////////////////////////////////////////////////////
-// 🟩 transcription request
+// 🟩 Channels.transcriberRequest --> longRunningRecognize
 // //////////////////////////////////////////////////////////////////////////
 
 ipcMain.handle(Channels.transcriberRequest, longRunningRecognize);
@@ -62,7 +62,7 @@ export async function longRunningRecognize(
 }
 
 // //////////////////////////////////////////////////////////////////////////
-// 🟥 cancel transcription
+// 🟩 Channels.transcriberCancel --> cancelOperation)
 // //////////////////////////////////////////////////////////////////////////
 
 ipcMain.handle(Channels.transcriberCancel, cancelOperation);

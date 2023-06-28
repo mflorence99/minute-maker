@@ -18,6 +18,7 @@ export class TranscriberService {
 
   transcribe(request: TranscriberRequest): Observable<TranscriberResponse> {
     return new Observable((observer) => {
+      // 👇 listen for transcriber responses
       let name;
       function listener(event, response): void {
         name = response.name;
@@ -25,11 +26,14 @@ export class TranscriberService {
         if (response.progressPercent === 100) observer.complete();
       }
       ipc.on(Channels.transcriberResponse, listener);
+
+      // 👇 start transcription
       try {
         ipc.invoke(Channels.transcriberRequest, request);
       } catch (error) {
         observer.error(error);
       }
+      
       // 👇 teardown logic
       return () => {
         ipc.invoke(Channels.transcriberCancel, { name });

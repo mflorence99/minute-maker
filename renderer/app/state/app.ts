@@ -90,6 +90,10 @@ export class AppState implements NgxsOnInit {
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 CancelTranscription
+  // //////////////////////////////////////////////////////////////////////////
+
   @Action(CancelTranscription) async cancelTranscription({
     getState
   }: StateContext<AppStateModel>): Promise<void> {
@@ -99,6 +103,10 @@ export class AppState implements NgxsOnInit {
       this.#store.dispatch(new ClearStatus());
     }
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 NewMinutes
+  // //////////////////////////////////////////////////////////////////////////
 
   @Action(NewMinutes) async newMinutes({
     getState,
@@ -146,6 +154,10 @@ export class AppState implements NgxsOnInit {
     }
   }
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 OpenMinutes
+  // //////////////////////////////////////////////////////////////////////////
+
   @Action(OpenMinutes) async openMinutes({
     getState,
     setState
@@ -160,6 +172,10 @@ export class AppState implements NgxsOnInit {
       this.#loadMinutes(path);
     }
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 RephraseTranscription (via OpenAI)
+  // //////////////////////////////////////////////////////////////////////////
 
   @Action(RephraseTranscription) async rephraseTranscription(
     ctx: StateContext<AppStateModel>,
@@ -187,6 +203,10 @@ export class AppState implements NgxsOnInit {
     }
   }
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 SaveMinutes
+  // //////////////////////////////////////////////////////////////////////////
+
   @Action(SaveMinutes) async saveMinutes(
     { getState, setState }: StateContext<AppStateModel>,
     { saveAs }: SaveMinutes
@@ -202,6 +222,10 @@ export class AppState implements NgxsOnInit {
       setState(patch({ pathToMinutes: path }));
     } else await this.#fs.saveFile(path, JSON.stringify(minutes));
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 TranscribeMinutes (via Google speech-to-text)
+  // //////////////////////////////////////////////////////////////////////////
 
   @Action(TranscribeMinutes) transcribeMinutes({
     setState
@@ -252,6 +276,10 @@ export class AppState implements NgxsOnInit {
       });
   }
 
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟫 Initialization
+  // //////////////////////////////////////////////////////////////////////////
+
   ngxsOnInit({ getState }): void {
     // 👇 load the last-used minutes, if any
     const path = getState().pathToMinutes;
@@ -281,6 +309,10 @@ export class AppState implements NgxsOnInit {
         this.#fs.saveFile(path, JSON.stringify(minutes));
       });
   }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟦 helper methods
+  // //////////////////////////////////////////////////////////////////////////
 
   async #loadMinutes(path: string): Promise<void> {
     try {

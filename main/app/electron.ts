@@ -51,6 +51,7 @@ app.on('ready', () => {
     x: undefined,
     y: undefined
   }) as Rectangle;
+
   // 👇 the one and only window
   const theWindow = new BrowserWindow({
     height: bounds.height,
@@ -68,6 +69,7 @@ app.on('ready', () => {
     x: bounds.x,
     y: bounds.y
   });
+
   // 👇 load from Angular's dev server in dev mode
   if (isDev) {
     theWindow.loadURL(
@@ -82,6 +84,7 @@ app.on('ready', () => {
     );
     theWindow.webContents.openDevTools();
   }
+
   // 👇 load from compiled build id prod mode
   else {
     theWindow.loadURL(
@@ -92,15 +95,19 @@ app.on('ready', () => {
       })
     );
   }
+
   // 👇 everyone needs to see this
   globalThis.theWindow = theWindow;
+
   // 👇 save the window bounds when they change
   const setBounds = (): void =>
     store.set('theWindow.bounds', theWindow.getBounds());
   theWindow.on('move', setBounds);
   theWindow.on('resize', setBounds);
+
   // 👇 configure the window
   theWindow.setMenu(null);
+
   // 👇 perform quit actions
   ipcMain.on(Channels.appQuit, () => app.exit());
   globalThis.theWindow.on('close', (event) => {

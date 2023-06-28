@@ -20,6 +20,7 @@ import { SplitTranscription } from '#mm/state/minutes';
 import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
+import { SummarizeMinutes } from '#mm/state/app';
 import { TranscribeMinutes } from '#mm/state/app';
 import { Transcription } from '#mm/common';
 import { Undo } from '#mm/state/minutes';
@@ -59,6 +60,9 @@ import { inject } from '@angular/core';
         </button>
         <button (click)="cancelTranscription()" mat-raised-button>
           Cancel Transcription
+        </button>
+        <button (click)="summarizeMinutes()" mat-raised-button>
+          Summarize Minutes
         </button>
       </section>
 
@@ -188,6 +192,10 @@ export class RootPage {
 
   splitTranscription(): void {
     this.#store.dispatch(new SplitTranscription(0, 25));
+  }
+
+  summarizeMinutes(): void {
+    this.#store.dispatch(new SummarizeMinutes('paragraphs'));
   }
 
   transcribe(): void {

@@ -38,6 +38,11 @@ export const rephraseStrategies = ['brevity', 'accuracy'] as const;
 export type RephraseStrategy = (typeof rephraseStrategies)[number];
 const rephraseStrategy: RephraseStrategy = 'accuracy';
 
+// 👇 all this so we can access the strategy at runtime eg: in UI
+export const summaryStrategies = ['bullets', 'paragraphs'] as const;
+export type SummaryStrategy = (typeof summaryStrategies)[number];
+const summaryStrategy: SummaryStrategy = 'paragraphs';
+
 export const Constants = {
   backoffOptions,
   editDebounceTime: 1000,
@@ -47,10 +52,11 @@ export const Constants = {
     temperature: 0.5,
     top_p: 1
   },
+  rephraseStrategy,
   saveFileInterval: 10000,
   sentryDSN:
     'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
-  rephraseStrategy,
+  summaryStrategy,
   transcriptionPollInterval: 10000
 };
 
@@ -176,6 +182,11 @@ export const AgendaItemSchema = z.object({
   type: z.literal('AG')
 });
 
+export const SummarySchema = z.object({
+  section: z.string(),
+  summary: z.string()
+});
+
 export const TranscriptionSchema = z.object({
   id: z.number(),
   speaker: z.string(),
@@ -196,6 +207,8 @@ export const MinutesSchema = z.object({
   speakers: z.string().array().optional(),
   subject: z.string().optional(),
   subtitle: z.string().optional(),
+  summary: SummarySchema.array().optional(),
+  summaryStrategy: z.enum(summaryStrategies).optional(),
   title: z.string(),
   transcription: z
     .discriminatedUnion('type', [AgendaItemSchema, TranscriptionSchema])
@@ -206,5 +219,7 @@ export const MinutesSchema = z.object({
 export type AgendaItem = z.infer<typeof AgendaItemSchema>;
 
 export type Minutes = z.infer<typeof MinutesSchema>;
+
+export type Summary = z.infer<typeof SummarySchema>;
 
 export type Transcription = z.infer<typeof TranscriptionSchema>;

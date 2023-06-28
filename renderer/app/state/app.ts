@@ -20,6 +20,8 @@ import { SetStatus } from '#mm/state/status';
 import { State } from '@ngxs/store';
 import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
+import { Summary } from '#mm/common';
+import { SummaryStrategy } from '#mm/common';
 import { TranscriberRequest } from '#mm/common';
 import { TranscriberService } from '#mm/services/transcriber';
 import { Transcription } from '#mm/common';
@@ -57,6 +59,11 @@ export class OpenMinutes {
 export class SaveMinutes {
   static readonly type = '[App] SaveMinutes';
   constructor(public saveAs = false) {}
+}
+
+export class SummarizeMinutes {
+  static readonly type = '[App] SummarizeMinutes';
+  constructor(public summaryStrategy: SummaryStrategy) {}
 }
 
 export class RephraseTranscription {
@@ -221,6 +228,58 @@ export class AppState implements NgxsOnInit {
       });
       setState(patch({ pathToMinutes: path }));
     } else await this.#fs.saveFile(path, JSON.stringify(minutes));
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 RephraseTranscription (via OpenAI)
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Action(SummarizeMinutes) async summarizeMinutes(
+    ctx: StateContext<AppStateModel>,
+    { summaryStrategy }: SummarizeMinutes
+  ): Promise<void> {
+    const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
+    const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
+    this.#store.dispatch(
+      new SetStatus({ status: 'Summarizing minutes', working: true })
+    );
+    // 👇 first, just attach a section to each transcription where the
+    //    section is the most recent agenda item
+    let section = '';
+    const withSections = minutes.transcription.reduce((acc, tx) => {
+      if (tx.type === 'AG') section = tx.title;
+      else if (tx.type === 'TX') acc.push({ section, tx });
+      return acc;
+    }, []);
+    // 👇 create raw summaries of minutes by section
+    const bySection: Record<string, Transcription[]> = withSections.reduce(
+      (acc, withSection) => {
+        const { section, tx } = withSection;
+        acc[section] = acc[section] ?? [];
+        acc[section].push(`${tx.speaker} says: ${tx.speech}`);
+        return acc;
+      },
+      {}
+    );
+    // 👇 perform the summary for each section
+    try {
+      const summary: Summary[] = [];
+      for (const [section, texts] of Object.entries(bySection)) {
+        const response = await this.#openai.chatCompletion({
+          prompt: `${
+            config.summaryStrategyPrompts[summaryStrategy]
+          }:\n\n${texts.join('\n')}`
+        });
+        if (response.finish_reason === 'length')
+          throw new Error('This section is too long to rephrase');
+        summary.push({ section, summary: response.text });
+      }
+      this.#store.dispatch(new SetMinutes({ summary, summaryStrategy }));
+    } catch (error) {
+      this.#store.dispatch(new SetStatus({ error }));
+    } finally {
+      this.#store.dispatch(new ClearStatus());
+    }
   }
 
   // //////////////////////////////////////////////////////////////////////////

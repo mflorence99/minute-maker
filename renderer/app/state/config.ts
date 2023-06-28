@@ -5,6 +5,7 @@ import { RephraseStrategy } from '#mm/common';
 import { Selector } from '@ngxs/store';
 import { State } from '@ngxs/store';
 import { Store } from '@ngxs/store';
+import { SummaryStrategy } from '#mm/common';
 import { UploaderService } from '#mm/services/uploader';
 
 import { inject } from '@angular/core';
@@ -17,10 +18,12 @@ export class SetConfig {
 }
 
 type RephraseStrategyPrompts = Record<RephraseStrategy, string>;
+type SummaryStrategyPrompts = Record<SummaryStrategy, string>;
 
 export type ConfigStateModel = {
   bucketName: string;
   rephraseStrategyPrompts: RephraseStrategyPrompts;
+  summaryStrategyPrompts: SummaryStrategyPrompts;
 };
 
 @State<ConfigStateModel>({
@@ -29,8 +32,13 @@ export type ConfigStateModel = {
     bucketName: 'washington-app-319514.appspot.com', // 🔥 convenient for now
     rephraseStrategyPrompts: {
       accuracy:
-        'Rephrase my statement in the first person, using grammatical English and paragraphs:',
+        'Rephrase my statement in the first person, using grammatical English and paragraphs',
       brevity: 'Summarize my statement in the first person'
+    },
+    summaryStrategyPrompts: {
+      bullets: 'Summarize this discussion into a few bullet points',
+      paragraphs:
+        'Summarize this discussion into a paragraphs for a professional reader'
     }
   }
 })

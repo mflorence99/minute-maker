@@ -27,7 +27,7 @@ import isDev from 'electron-is-dev';
 import jsome from 'jsome';
 
 // 👇 log the environment
-if (!isDev) {
+if (isDev) {
   jsome({ Package: { ...Package } });
   jsome({ Constants: { ...Constants } });
 }
@@ -109,9 +109,13 @@ app.on('ready', () => {
   theWindow.setMenu(null);
 
   // 👇 perform quit actions
-  ipcMain.on(Channels.appQuit, () => app.exit());
+  ipcMain.on(Channels.appQuit, () => {
+    jsome('🔥 ... exit');
+    app.exit();
+  });
+
   globalThis.theWindow.on('close', (event) => {
-    console.log('CLOSING!');
+    jsome('🔥 Exiting ...');
     event.preventDefault();
     globalThis.theWindow.webContents.send(Channels.appBeforeQuit);
   });

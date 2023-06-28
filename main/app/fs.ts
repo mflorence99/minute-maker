@@ -3,10 +3,14 @@ import { OpenDialogOptions } from './common';
 import { OpenFileResponse } from './common';
 import { SaveDialogOptions } from './common';
 
+import { trunc } from './utils';
+
 import { dialog } from 'electron';
 import { ipcMain } from 'electron';
 import { readFileSync } from 'fs';
 import { writeFileSync } from 'fs';
+
+import jsome from 'jsome';
 
 // 🔥 only text files are handled
 
@@ -34,7 +38,9 @@ ipcMain.handle(Channels.fsLoadFile, loadFile);
 
 // 👇 exported for tests
 export function loadFile(event, path: string): string {
-  return readFileSync(path, { encoding: 'utf8' });
+  const data = readFileSync(path, { encoding: 'utf8' });
+  jsome(`👈 readFileSync ${path} --> ${trunc(data)}`);
+  return data;
 }
 
 // //////////////////////////////////////////////////////////////////////////
@@ -58,6 +64,7 @@ ipcMain.handle(Channels.fsSaveFile, saveFile);
 
 // 👇 exported for tests
 export function saveFile(event, path: string, data: string): void {
+  jsome(`👈 writeFileSync ${path} <-- ${trunc(data)}`);
   return writeFileSync(path, data, { encoding: 'utf8' });
 }
 

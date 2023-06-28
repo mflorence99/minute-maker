@@ -3,6 +3,8 @@ import { Constants } from './common';
 import { OpenAIRequest } from './common';
 import { OpenAIResponse } from './common';
 
+import { trunc } from './utils';
+
 import { BackoffOptions } from 'exponential-backoff';
 import { Configuration } from 'openai';
 import { OpenAIApi } from 'openai';
@@ -151,8 +153,4 @@ function backoffOptions(): BackoffOptions {
       return /(rate limit)|(too many)/i.test(error.message);
     }
   };
-}
-
-function trunc(text: string, maxlen = 100): string {
-  return text.length < maxlen ? text : `${text.substring(0, maxlen)}...`;
 }

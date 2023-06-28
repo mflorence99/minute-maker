@@ -12,8 +12,6 @@ import { Transcription } from '#mm/common';
 import { inject } from '@angular/core';
 import { insertItem } from '@ngxs/store/operators';
 import { patch } from '@ngxs/store/operators';
-import { pluckAgendaItem } from '#mm/utils';
-import { pluckTranscription } from '#mm/utils';
 import { removeItem } from '@ngxs/store/operators';
 import { updateItem } from '@ngxs/store/operators';
 
@@ -214,8 +212,8 @@ export class MinutesState {
   ): void {
     // 👇 capture the new speech
     const state = getState();
-    const speech1 = pluckTranscription(state, ix).speech;
-    const speech2 = pluckTranscription(state, ix + 1).speech;
+    const speech1 = this.#pluckTranscription(state, ix).speech;
+    const speech2 = this.#pluckTranscription(state, ix + 1).speech;
     const speech = `${speech1} ${speech2}`;
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
@@ -257,7 +255,7 @@ export class MinutesState {
   ): void {
     // 👇 capture the original
     const state = getState();
-    const original: AgendaItem = { ...pluckAgendaItem(state, ix) };
+    const original: AgendaItem = { ...this.#pluckAgendaItem(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#stackUndoActions([
@@ -278,7 +276,7 @@ export class MinutesState {
   ): void {
     // 👇 capture the original
     const state = getState();
-    const original: Transcription = { ...pluckTranscription(state, ix) };
+    const original: Transcription = { ...this.#pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#stackUndoActions([
@@ -311,7 +309,7 @@ export class MinutesState {
   ): void {
     // 👇 capture the original
     const state = getState();
-    const original: Transcription = { ...pluckTranscription(state, ix) };
+    const original: Transcription = { ...this.#pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#stackUndoActions([
@@ -378,7 +376,7 @@ export class MinutesState {
   ): void {
     // 👇 capture the original
     const state = getState();
-    const original: AgendaItem = { ...pluckAgendaItem(state, ix) };
+    const original: AgendaItem = { ...this.#pluckAgendaItem(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#stackUndoActions([
@@ -399,7 +397,7 @@ export class MinutesState {
   ): void {
     // 👇 capture the original
     const state = getState();
-    const original: Transcription = { ...pluckTranscription(state, ix) };
+    const original: Transcription = { ...this.#pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#stackUndoActions([
@@ -413,6 +411,18 @@ export class MinutesState {
   // //////////////////////////////////////////////////////////////////////////
   // 🟦 helper methods
   // //////////////////////////////////////////////////////////////////////////
+
+  #pluckAgendaItem(state: MinutesStateModel, ix: number): AgendaItem {
+    if (state.transcription[ix].type === 'AG')
+      return state.transcription[ix] as any as AgendaItem;
+    else throw new Error(`Operation not supported for item #${ix}`);
+  }
+
+  #pluckTranscription(state: MinutesStateModel, ix: number): Transcription {
+    if (state.transcription[ix].type === 'TX')
+      return state.transcription[ix] as any as Transcription;
+    else throw new Error(`Operation not supported for item #${ix}`);
+  }
 
   #stackUndoActions(actions: UndoableAction[]): void {
     redoStack.length = 0;

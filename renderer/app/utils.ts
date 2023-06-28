@@ -1,9 +1,6 @@
-import { AgendaItem } from '#mm/common';
 import { EventEmitter } from '@angular/core';
-import { MinutesStateModel } from '#mm/state/minutes';
 import { OperatorFunction } from 'rxjs';
 import { Subscription } from 'rxjs';
-import { Transcription } from '#mm/common';
 
 import { map } from 'rxjs';
 import { pairwise } from 'rxjs';
@@ -46,28 +43,6 @@ export function kebabasize(camelCase: string): any {
 }
 
 // //////////////////////////////////////////////////////////////////////////
-// 🟦 pluckAgendaItem, pluckTranscription (for type safety)
-// //////////////////////////////////////////////////////////////////////////
-
-export function pluckAgendaItem(
-  state: MinutesStateModel,
-  ix: number
-): AgendaItem {
-  if (state.transcription[ix].type === 'AG')
-    return state.transcription[ix] as any as AgendaItem;
-  else throw new Error(`Operation not supported for item #${ix}`);
-}
-
-export function pluckTranscription(
-  state: MinutesStateModel,
-  ix: number
-): Transcription {
-  if (state.transcription[ix].type === 'TX')
-    return state.transcription[ix] as any as Transcription;
-  else throw new Error(`Operation not supported for item #${ix}`);
-}
-
-// //////////////////////////////////////////////////////////////////////////
 // 🟦 objectsHaveSameKeys
 // //////////////////////////////////////////////////////////////////////////
 
@@ -95,7 +70,7 @@ export function withPreviousItem<T>(): OperatorFunction<
     pairwise(),
     map(([previous, current]) => ({
       previous,
-      current: current
+      current
     }))
   );
 }

@@ -22,6 +22,7 @@ import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { TranscriberRequest } from '#mm/common';
 import { TranscriberService } from '#mm/services/transcriber';
+import { Transcription } from '#mm/common';
 import { UpdateTranscription } from '#mm/state/minutes';
 import { UploaderService } from '#mm/services/uploader';
 
@@ -32,7 +33,6 @@ import { inject } from '@angular/core';
 import { map } from 'rxjs';
 import { of } from 'rxjs';
 import { patch } from '@ngxs/store/operators';
-import { pluckTranscription } from '#mm/utils';
 import { tap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -187,7 +187,7 @@ export class AppState implements NgxsOnInit {
       new SetStatus({ status: 'Rephrasing transcription', working: true })
     );
     try {
-      const speech = pluckTranscription(minutes, ix).speech;
+      const speech = this.#pluckTranscription(minutes, ix).speech;
       const response = await this.#openai.chatCompletion({
         prompt: `${config.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`
       });
@@ -329,5 +329,11 @@ export class AppState implements NgxsOnInit {
         })
       );
     }
+  }
+
+  #pluckTranscription(state: MinutesStateModel, ix: number): Transcription {
+    if (state.transcription[ix].type === 'TX')
+      return state.transcription[ix] as any as Transcription;
+    else throw new Error(`Operation not supported for item #${ix}`);
   }
 }

@@ -14,7 +14,8 @@ WaveSurfer.create = jest.fn((): any => {
   return {
     destroy: jest.fn(),
     load: jest.fn(),
-    on: jest.fn((event, fn): any => (ons[event] = fn))
+    on: jest.fn((event, fn): any => (ons[event] = fn)),
+    once: jest.fn((event, fn): any => (ons[event] = fn))
   };
 });
 

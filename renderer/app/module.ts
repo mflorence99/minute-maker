@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { ConfigState } from '#mm/state/config';
 import { ErrorHandler } from '@angular/core';
+import { ExporterComponent } from '#mm/components/exporter';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
@@ -38,6 +39,7 @@ import { faUndo } from '@fortawesome/pro-duotone-svg-icons';
 import isDev from '#mm/is-dev';
 
 const COMPONENTS = [
+  ExporterComponent,
   SummaryComponent,
   TranscriptionComponent,
   WaveSurferComponent,

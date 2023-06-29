@@ -221,13 +221,13 @@ export class AppState implements NgxsOnInit {
     const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
     let path = getState().pathToMinutes;
     if (saveAs || !path) {
-      path = await this.#fs.saveFileAs(JSON.stringify(minutes), {
+      path = await this.#fs.saveFileAs(JSON.stringify(minutes, null, 2), {
         defaultPath: getState().pathToMinutes,
         filters: [{ extensions: ['json'], name: 'Minutes' }],
         title: 'Save Minutes'
       });
       setState(patch({ pathToMinutes: path }));
-    } else await this.#fs.saveFile(path, JSON.stringify(minutes));
+    } else await this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -349,7 +349,10 @@ export class AppState implements NgxsOnInit {
         this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
       const state = this.#store.selectSnapshot<AppStateModel>(AppState);
       if (state.pathToMinutes)
-        await this.#fs.saveFile(state.pathToMinutes, JSON.stringify(minutes));
+        await this.#fs.saveFile(
+          state.pathToMinutes,
+          JSON.stringify(minutes, null, 2)
+        );
       ipc.send(Channels.appQuit);
     });
     // 👇 save the minutes periodically
@@ -365,7 +368,7 @@ export class AppState implements NgxsOnInit {
         debounceTime(Constants.saveFileInterval)
       )
       .subscribe(([minutes, path]) => {
-        this.#fs.saveFile(path, JSON.stringify(minutes));
+        this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
       });
   }
 
@@ -379,6 +382,7 @@ export class AppState implements NgxsOnInit {
       const minutes: Minutes = MinutesSchema.parse(JSON.parse(raw));
       this.#store.dispatch([new SetMinutes(minutes), new AddRecent(path)]);
     } catch (error) {
+      console.error(error);
       this.#store.dispatch(
         new SetStatus({
           error: {

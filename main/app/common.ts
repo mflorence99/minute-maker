@@ -191,7 +191,7 @@ export const TranscriptionSchema = z.object({
   id: z.number(),
   speaker: z.string(),
   speech: z.string(),
-  start: z.number(),
+  start: z.number().optional(),
   type: z.literal('TX')
 });
 

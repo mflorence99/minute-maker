@@ -57,6 +57,7 @@ import { inject } from '@angular/core';
         <button (click)="saveMinutes()" color="warn" mat-raised-button>
           Save Minutes
         </button>
+        <button (click)="exporter.export()" mat-raised-button>Export</button>
       </section>
 
       <section class="buttons">
@@ -108,6 +109,8 @@ import { inject } from '@angular/core';
 
       <footer>{{ (status$ | async).status }}</footer>
     </main>
+
+    <mm-exporter #exporter />
   `,
   styles: [
     `

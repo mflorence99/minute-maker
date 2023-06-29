@@ -292,7 +292,7 @@ export class AppState implements NgxsOnInit {
     const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
     const request = {
       audio: { ...minutes.audio },
-      speakers: minutes.speakers
+      numSpeakers: minutes.numSpeakers
     } as TranscriberRequest;
     this.#store.dispatch(
       new SetStatus({ status: 'Transcribing minutes', working: true })

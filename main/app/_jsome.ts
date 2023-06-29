@@ -5,16 +5,16 @@ import jsome from 'jsome';
 // //////////////////////////////////////////////////////////////////////////
 
 jsome.colors = {
-  num: 'cyan', // stands for numbers
-  str: ['yellow', 'bold'], // stands for strings
-  bool: 'white', // stands for booleans
-  regex: 'blue', // stands for regular expressions
-  undef: 'grey', // stands for undefined
-  null: 'grey', // stands for null
-  attr: 'green', // objects attributes -> { attr : value }
-  quot: 'yellow', // strings quotes -> "..."
-  punc: 'yellow', // commas seperating arrays and objects values -> [ , , , ]
-  brack: 'yellow' // for both {} and []
+  num: 'cyan',
+  str: 'white',
+  bool: 'white',
+  regex: 'blue',
+  undef: 'grey',
+  null: 'grey',
+  attr: 'green',
+  quot: 'yellow',
+  punc: 'yellow',
+  brack: 'yellow'
 };
 
 jsome.params.async = true;

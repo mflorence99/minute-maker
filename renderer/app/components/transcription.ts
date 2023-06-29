@@ -1,23 +1,15 @@
 import { AgendaItem } from '#mm/common';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
-import { Constants } from '#mm/common';
+import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { Subject } from 'rxjs';
+import { MinutesState } from '#mm/state/minutes';
+import { Output } from '@angular/core';
 import { Transcription } from '#mm/common';
 import { UpdateAgendaItem } from '#mm/state/minutes';
 import { UpdateTranscription } from '#mm/state/minutes';
 
-import { debounce } from 'rxjs';
 import { inject } from '@angular/core';
-import { map } from 'rxjs';
-import { objectsHaveSameKeys } from '#mm/utils';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { timer } from 'rxjs';
-import { withPreviousItem } from '#mm/utils';
-
-import dayjs from 'dayjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,7 +20,7 @@ import dayjs from 'dayjs';
         <tbody>
           <tr
             *ngFor="let tx of transcription; let ix = index; trackBy: trackByTx"
-            (click)="txIndex = ix">
+            (click)="selected.emit((txIndex = ix))">
             <td [ngClass]="{ current: ix === txIndex }" class="marker">
               <fa-icon
                 [fixedWidth]="true"
@@ -37,7 +29,7 @@ import dayjs from 'dayjs';
             </td>
 
             <ng-container *ngIf="tx.type === 'AG'">
-              <td class="title" colspan="3">
+              <td class="title" colspan="2">
                 <textarea
                   #agendaItemTitle
                   (input)="
@@ -54,7 +46,6 @@ import dayjs from 'dayjs';
             </ng-container>
 
             <ng-container *ngIf="tx.type === 'TX'">
-              <td class="start">{{ makeStartTime(tx.start) }}</td>
               <td>
                 <input
                   #transcriptionSpeaker
@@ -64,8 +55,7 @@ import dayjs from 'dayjs';
                       ix
                     )
                   "
-                  [value]="tx.speaker"
-                  list="transcriptionSpeakers" />
+                  [value]="tx.speaker" />
               </td>
               <td class="speech">
                 <textarea
@@ -89,12 +79,6 @@ import dayjs from 'dayjs';
         </tbody>
       </table>
     </article>
-
-    <datalist id="transcriptionSpeakers">
-      <option value="Tom"></option>
-      <option value="Dick"></option>
-      <option value="Harry"></option>
-    </datalist>
   `,
   styles: [
     `
@@ -138,11 +122,6 @@ import dayjs from 'dayjs';
         width: 100%;
       }
 
-      td.start {
-        font-family: monospace;
-        white-space: nowrap;
-      }
-
       tr {
         vertical-align: top;
       }
@@ -175,37 +154,14 @@ import dayjs from 'dayjs';
   ]
 })
 export class TranscriptionComponent {
+  @Output() selected = new EventEmitter<number>();
+
   @Input({ required: true }) startDate: Date;
   @Input({ required: true }) transcription: (AgendaItem | Transcription)[];
 
   txIndex = 0;
 
-  #store = inject(Store);
-  #updateBuffer$ = new Subject<UpdateAgendaItem | UpdateTranscription>();
-
-  constructor() {
-    // 👇 all this to make sure that when we switch rows, we don't debounce
-    this.#updateBuffer$
-      .pipe(
-        takeUntilDestroyed(),
-        withPreviousItem<UpdateAgendaItem | UpdateTranscription>(),
-        debounce(({ previous, current }) =>
-          !previous ||
-          previous.ix !== current.ix ||
-          !objectsHaveSameKeys(previous, current)
-            ? timer(0)
-            : timer(Constants.editDebounceTime)
-        ),
-        map(({ current }) => current)
-      )
-      .subscribe((action) => this.#store.dispatch(action));
-  }
-
-  makeStartTime(seconds: number): string {
-    return seconds != null
-      ? dayjs(this.startDate).add(seconds, 'second').format('hh:mm:ssa')
-      : '';
-  }
+  #minutesState = inject(MinutesState);
 
   trackByTx(ix, tx: AgendaItem | Transcription): number {
     return tx.id;
@@ -213,11 +169,11 @@ export class TranscriptionComponent {
 
   updateAgendaItem(update: any, ix: number): void {
     const action = new UpdateAgendaItem(update, ix);
-    this.#updateBuffer$.next(action);
+    this.#minutesState.updateBuffer$.next(action);
   }
 
   updateTranscription(update: any, ix: number): void {
     const action = new UpdateTranscription(update, ix);
-    this.#updateBuffer$.next(action);
+    this.#minutesState.updateBuffer$.next(action);
   }
 }

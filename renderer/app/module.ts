@@ -24,6 +24,7 @@ import { RouterModule } from '@angular/router';
 import { StatusState } from '#mm/state/status';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
 import { StorageEngine } from '#mm/state/storage-engine';
+import { SummaryComponent } from '#mm/components/summary';
 import { TranscriptionComponent } from '#mm/components/transcription';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
@@ -37,6 +38,7 @@ import { faUndo } from '@fortawesome/pro-duotone-svg-icons';
 import isDev from '#mm/is-dev';
 
 const COMPONENTS = [
+  SummaryComponent,
   TranscriptionComponent,
   WaveSurferComponent,
   WaveSurferRegionComponent,

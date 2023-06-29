@@ -1,3 +1,4 @@
+import { AgendaItem } from '#mm/common';
 import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
 import { CancelTranscription } from '#mm/state/app';
@@ -21,6 +22,7 @@ import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { SummarizeMinutes } from '#mm/state/app';
+import { Summary } from '#mm/common';
 import { TranscribeMinutes } from '#mm/state/app';
 import { Transcription } from '#mm/common';
 import { Undo } from '#mm/state/minutes';
@@ -39,8 +41,11 @@ import { inject } from '@angular/core';
       </mm-wavesurfer>
 
       <mm-transcription
+        (selected)="txIndex = $event"
         [startDate]="date"
         [transcription]="transcription$ | async" />
+
+      <mm-summary [summary]="summary$ | async" />
 
       <section class="buttons">
         <button (click)="openMinutes()" color="primary" mat-raised-button>
@@ -68,19 +73,19 @@ import { inject } from '@angular/core';
 
       <section class="buttons">
         <button (click)="rephraseTranscription()" mat-raised-button>
-          Rephrase #0
+          Rephrase #{{ txIndex }}
         </button>
         <button (click)="splitTranscription()" mat-raised-button>
-          Split #0
+          Split #{{ txIndex }}
         </button>
         <button (click)="joinTranscriptions()" mat-raised-button>
-          Join #0
+          Join #{{ txIndex }}
         </button>
         <button (click)="removeTranscription()" mat-raised-button>
-          Remove #0
+          Remove #{{ txIndex }}
         </button>
         <button (click)="insertAgendaItem()" mat-raised-button>
-          Agenda #0
+          Agenda #{{ txIndex }}
         </button>
       </section>
 
@@ -114,6 +119,7 @@ import { inject } from '@angular/core';
         height: 100%;
         justify-content: center;
 
+        mm-summary,
         mm-transcription {
           height: 320px;
           width: 480px;
@@ -140,11 +146,14 @@ export class RootPage {
     Observable<Minutes>[]
   >;
   @Select(StatusState) status$: Observable<StatusStateModel>;
+  @Select(MinutesState.summary) summary$: Observable<Summary[]>;
   @Select(MinutesState.transcription) transcription$: Observable<
-    Transcription[]
+    (AgendaItem | Transcription)[]
   >;
 
   date = new Date();
+
+  txIndex = 0;
 
   #store = inject(Store);
 
@@ -158,12 +167,12 @@ export class RootPage {
 
   insertAgendaItem(): void {
     this.#store.dispatch(
-      new InsertAgendaItem({ title: 'Deliberative Session' }, 0)
+      new InsertAgendaItem({ title: '--Untitled--' }, this.txIndex)
     );
   }
 
   joinTranscriptions(): void {
-    this.#store.dispatch(new JoinTranscriptions(0));
+    this.#store.dispatch(new JoinTranscriptions(this.txIndex));
   }
 
   newMinutes(): void {
@@ -179,11 +188,11 @@ export class RootPage {
   }
 
   removeTranscription(): void {
-    this.#store.dispatch(new RemoveTranscription(0));
+    this.#store.dispatch(new RemoveTranscription(this.txIndex));
   }
 
   rephraseTranscription(): void {
-    this.#store.dispatch(new RephraseTranscription('accuracy', 0));
+    this.#store.dispatch(new RephraseTranscription('accuracy', this.txIndex));
   }
 
   saveMinutes(): void {
@@ -191,7 +200,7 @@ export class RootPage {
   }
 
   splitTranscription(): void {
-    this.#store.dispatch(new SplitTranscription(0, 25));
+    this.#store.dispatch(new SplitTranscription(this.txIndex, 25));
   }
 
   summarizeMinutes(): void {
@@ -199,7 +208,8 @@ export class RootPage {
   }
 
   transcribe(): void {
-    this.#store.dispatch(new SetMinutes({ speakers: ['AOH'] }));
+    // 🔥 TEMPORARY
+    this.#store.dispatch(new SetMinutes({ numSpeakers: 4 }));
     this.#store.dispatch(new TranscribeMinutes());
   }
 

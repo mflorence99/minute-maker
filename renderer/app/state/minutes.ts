@@ -3,17 +3,26 @@ import { AgendaItem } from '#mm/common';
 import { Constants } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
+import { NgxsOnInit } from '@ngxs/store';
 import { Selector } from '@ngxs/store';
 import { State } from '@ngxs/store';
 import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
+import { Subject } from 'rxjs';
+import { Summary } from '#mm/common';
 import { Transcription } from '#mm/common';
 
+import { debounce } from 'rxjs';
 import { inject } from '@angular/core';
 import { insertItem } from '@ngxs/store/operators';
+import { map } from 'rxjs';
+import { objectsHaveSameKeys } from '#mm/utils';
 import { patch } from '@ngxs/store/operators';
 import { removeItem } from '@ngxs/store/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { timer } from 'rxjs';
 import { updateItem } from '@ngxs/store/operators';
+import { withPreviousItem } from '#mm/utils';
 
 class UndoableAction {
   constructor(public undoing: boolean) {}
@@ -105,6 +114,17 @@ export class UpdateAgendaItem extends UndoableAction {
   }
 }
 
+export class UpdateSummary extends UndoableAction {
+  static readonly type = '[Minutes] UpdateSummary';
+  constructor(
+    public summary: Partial<Summary>,
+    public ix: number,
+    undoing = false
+  ) {
+    super(undoing);
+  }
+}
+
 export class UpdateTranscription extends UndoableAction {
   static readonly type = '[Minutes] UpdateTranscription';
   constructor(
@@ -126,7 +146,11 @@ const undoStack: UndoableAction[][] = [];
   defaults: null
 })
 @Injectable()
-export class MinutesState {
+export class MinutesState implements NgxsOnInit {
+  updateBuffer$ = new Subject<
+    UpdateAgendaItem | UpdateSummary | UpdateTranscription
+  >();
+
   #store = inject(Store);
 
   // //////////////////////////////////////////////////////////////////////////
@@ -342,6 +366,14 @@ export class MinutesState {
   }
 
   // //////////////////////////////////////////////////////////////////////////
+  // 🟪 @Select(MinutesState.summary) summary$
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Selector() static summary(minutes: MinutesStateModel): Summary[] {
+    return minutes?.summary ?? [];
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
   // 🟪 @Select(MinutesState.transcription) transcription$
   // //////////////////////////////////////////////////////////////////////////
 
@@ -388,6 +420,27 @@ export class MinutesState {
   }
 
   // //////////////////////////////////////////////////////////////////////////
+  // 🟩 UpdateSummary
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Action(UpdateSummary) updateSummary(
+    { getState, setState }: StateContext<MinutesStateModel>,
+    { summary, ix, undoing }: UpdateSummary
+  ): void {
+    // 👇 capture the original
+    const state = getState();
+    const original: Summary = { ...state.summary[ix] };
+    // 👇 put the inverse action onto the undo stack
+    if (!undoing)
+      this.#stackUndoActions([
+        new UpdateSummary(original, ix, true),
+        new UpdateSummary(summary, ix, true)
+      ]);
+    // 👇 now do the action
+    setState(patch({ summary: updateItem(ix, patch(summary)) }));
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
   // 🟩 UpdateTranscription
   // //////////////////////////////////////////////////////////////////////////
 
@@ -406,6 +459,28 @@ export class MinutesState {
       ]);
     // 👇 now do the action
     setState(patch({ transcription: updateItem(ix, patch(transcription)) }));
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟫 Initialization
+  // //////////////////////////////////////////////////////////////////////////
+
+  ngxsOnInit(): void {
+    // 👇 all this to make sure that when we switch rows, we don't debounce
+    this.updateBuffer$
+      .pipe(
+        takeUntilDestroyed(),
+        withPreviousItem<UpdateAgendaItem | UpdateTranscription>(),
+        debounce(({ previous, current }) =>
+          !previous ||
+          previous.ix !== current.ix ||
+          !objectsHaveSameKeys(previous, current)
+            ? timer(0)
+            : timer(Constants.updateBufferDebounceTime)
+        ),
+        map(({ current }) => current)
+      )
+      .subscribe((action) => this.#store.dispatch(action));
   }
 
   // //////////////////////////////////////////////////////////////////////////

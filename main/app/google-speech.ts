@@ -37,7 +37,7 @@ export async function longRunningRecognize(
     config: {
       enableAutomaticPunctuation: true,
       enableWordTimeOffsets: true,
-      diarizationSpeakerCount: request.speakers.length,
+      diarizationSpeakerCount: request.numSpeakers,
       enableSpeakerDiarization: true,
       encoding: request.audio?.encoding ?? 'MP3',
       languageCode: 'en-US',
@@ -89,6 +89,7 @@ function makeTranscription(request, response): Transcription[] {
   let speaker = null;
   let start = 0;
   const speech: string[] = [];
+
   // 👇 we need only look at the last result
   //    https://cloud.google.com/speech-to-text/docs/multiple-voices
   const infos =
@@ -96,7 +97,7 @@ function makeTranscription(request, response): Transcription[] {
   // 👇 add a terminal object
   infos.push({});
   return infos.reduce((transcription, info) => {
-    const nextSpeaker = request.speakers[Number(info.speakerTag) - 1];
+    const nextSpeaker = `Speaker ${info.speakerTag}`;
     if (nextSpeaker !== speaker) {
       if (speaker)
         transcription.push({

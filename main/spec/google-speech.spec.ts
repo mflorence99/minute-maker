@@ -69,12 +69,12 @@ jest.mock('@google-cloud/speech', () => {
 
 describe('google-speech', () => {
   it('calls SpeechClient longRunningRecognize', async () => {
-    const request = { speakers: ['Bob', 'Ted', 'Carol', 'Alice'] };
+    const request = { numSpeakers: 4 };
     await longRunningRecognize(null, request as any);
     expect(mockLongRunningRecognize).toHaveBeenCalledWith(
       expect.objectContaining({
         config: expect.objectContaining({
-          diarizationSpeakerCount: request.speakers.length
+          diarizationSpeakerCount: request.numSpeakers
         })
       })
     );

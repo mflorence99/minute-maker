@@ -45,7 +45,6 @@ const summaryStrategy: SummaryStrategy = 'paragraphs';
 
 export const Constants = {
   backoffOptions,
-  editDebounceTime: 1000,
   maxRecentPaths: 32,
   maxUndoStackSize: 7,
   openaiDefaults: {
@@ -57,7 +56,8 @@ export const Constants = {
   sentryDSN:
     'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
   summaryStrategy,
-  transcriptionPollInterval: 10000
+  transcriptionPollInterval: 10000,
+  updateBufferDebounceTime: 1000
 };
 
 // //////////////////////////////////////////////////////////////////////////
@@ -152,7 +152,7 @@ export type TranscriberRequest = {
     gcsuri?: string;
     sampleRateHertz: number;
   };
-  speakers: string[];
+  numSpeakers: number;
 };
 
 export type TranscriberResponse = {
@@ -204,7 +204,7 @@ export const MinutesSchema = z.object({
   }),
   date: z.coerce.date(),
   nextTranscriptionID: z.number().optional(),
-  speakers: z.string().array().optional(),
+  numSpeakers: z.number().optional(),
   subject: z.string().optional(),
   subtitle: z.string().optional(),
   summary: SummarySchema.array().optional(),

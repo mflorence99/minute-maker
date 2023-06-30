@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { MinutesState } from '#mm/state/minutes';
 import { Store } from '@ngxs/store';
 
+import { asBullets } from '#mm/utils';
 import { asParagraphs } from '#mm/utils';
 import { inject } from '@angular/core';
 import { saveAs } from 'file-saver';
@@ -26,6 +27,7 @@ export class ExporterComponent {
     const env = nunjucks.configure('./assets', { autoescape: false });
     const result = env.render('template.njk', {
       asParagraphs,
+      asBullets,
       dayjs,
       minutes,
       test: [1, 2, 3]

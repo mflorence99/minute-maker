@@ -38,7 +38,7 @@ export type ConfigStateModel = {
     summaryStrategyPrompts: {
       bullets: 'Summarize this discussion into a few bullet points',
       paragraphs:
-        'Summarize this discussion into a paragraphs for a professional reader'
+        'Using the past tense, summarize this discussion into short paragraphs for a professional reader'
     }
   }
 })

@@ -120,7 +120,7 @@
           {% for attendees in [minutes.present, minutes.absent, minutes.visitors] %}
             <td>
               {% for attendee in attendees %}
-                <li>{{ attendee.name }}, {{ attendee.title }}</li>
+                <div>{{ attendee.name }}, {{ attendee.title }}</div>
               {% else %}
                 None
               {% endfor %}
@@ -136,7 +136,11 @@
       {% if summ.section %}
         <h3>{{ summ.section }}</h3>
       {% endif %} 
-      {{ asParagraphs(summ.summary) }} 
+      {% if minutes.summaryStrategy == 'paragraphs' %}
+        {{ asParagraphs(summ.summary) }} 
+      {% elif minutes.summaryStrategy == 'bullets' %}
+        {{ asBullets(summ.summary) }} 
+      {% endif %} 
     {% endfor %}
 
     <h2>Transcript</h2>

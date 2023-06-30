@@ -1,11 +1,27 @@
 <html>
   <head>
-    <title>{{ minutes.subject }}</title>
+    <title>
+      {{ minutes.subject }} {{ dayjs(minutes.date).format('YYYY-MM-DD') }}
+    </title>
+
     <style>
       body {
         font-family: sans-serif;
-        font-size: 14px;
+        font-size: 16px;
         margin: 2rem;
+      }
+
+      table.attendees td:not(:first-child) {
+        padding-left: 2rem;
+      }
+
+      table.attendees td.title {
+        font-size: larger;
+        font-weight: bold;
+      }
+
+      table.attendees tr {
+        vertical-align: top;
       }
 
       table.disclaimer {
@@ -37,14 +53,25 @@
         white-space: nowrap;
       }
 
+      table.minutes td.speech {
+        width: 100%;
+      }
+
       table.minutes td.timestamp {
         white-space: nowrap;
+      }
+
+      table.minutes td.title {
+        font-size: larger;
+        font-weight: bold;
+        text-transform: uppercase;
       }
 
       table.minutes tr {
         vertical-align: top;
       }
     </style>
+
   </head>
 
   <body>
@@ -64,7 +91,7 @@
         <td style="width: 100%">
           These minutes were produced by the ZBA's
           <a href="https://github.com/mflorence99">Minute Maker</a>
-          open-source software, harnessing
+          open-source software, leveraging
           <a href="https://cloud.google.com/speech-to-text/docs/how-to">
             Google's Speech-to-text
           </a>
@@ -73,7 +100,7 @@
             Open AI’s GPT 3.5 16k
           </a>
           model to convert the transcription into grammatical sentences and
-          paragraphs and to automatically generate a Summary of Proceedings from
+          paragraphs and to automatically generate a summary from
           the transcript.
         </td>
       </tr>
@@ -81,14 +108,64 @@
 
     <h1>{{ minutes.subject }}</h1>
 
-    <h2>Summary of Proceedings</h2>
+    <table class="attendees">
 
-    <% for summ in [{summary: 'xxx'}] %> 
-      <% if summ.section %>
+      <tr>
+        <td class="title">Present</td>
+        <td class="title">Absent</td>
+        <td class="title">Visitors</td>
+      <tr>
+
+        <tr>
+          {% for attendees in [minutes.present, minutes.absent, minutes.visitors] %}
+            <td>
+              {% for attendee in attendees %}
+                <li>{{ attendee.name }}, {{ attendee.title }}</li>
+              {% else %}
+                None
+              {% endfor %}
+            </td>
+          {% endfor %}
+        </tr>
+
+    </table>
+
+    <h2>Summary</h2>
+
+    {% for summ in minutes.summary %} 
+      {% if summ.section %}
         <h3>{{ summ.section }}</h3>
-      <% endif %> 
-      dumped: {{ summ | dump }} 
-    <% endfor %>
+      {% endif %} 
+      {{ asParagraphs(summ.summary) }} 
+    {% endfor %}
 
+    <h2>Transcript</h2>
+
+    <table class="minutes">
+      {% for tx in minutes.transcription %}
+        <tr>
+
+          {% if tx.type == 'AG' %}
+            <td class="title" colspan="3">
+              {{ tx.title }}
+            </td>
+
+          {% elif tx.type == 'TX'  %}
+            <td class="timestamp">
+              {% if tx.start != null %}
+                {{ dayjs(minutes.date).add(tx.start, 's').format('h:mm a') }}
+              {% endif %}
+            </td>
+            <td class="speaker">
+              {{ tx.speaker }}
+            </td>
+            <td class="speech">
+              {{ asParagraphs(tx.speech) }}
+            </td>
+          {% endif %}
+
+        </tr>
+      {% endfor %}
+    </table>
   </body>
 </html>

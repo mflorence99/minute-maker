@@ -27,12 +27,16 @@ export class ExporterComponent {
     const result = env.render('template.njk', {
       asParagraphs,
       dayjs,
-      minutes
+      minutes,
+      test: [1, 2, 3]
     });
     // 👇 export the resulting HTML
     const blob = new Blob([result], {
       type: 'text/plain;charset=utf-8'
     });
-    saveAs(blob, `${minutes.subject}.html`);
+    saveAs(
+      blob,
+      `${minutes.subject} ${dayjs(minutes.date).format('YYYY-MM-DD')}.html`
+    );
   }
 }

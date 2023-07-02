@@ -4,6 +4,7 @@
     "<rootDir>/app/**/*.ts",
     "!<rootDir>/app/common.ts",
     "!<rootDir>/app/main.ts",
+    "!<rootDir>/app/test.ts",
     "!<rootDir>/app/module.ts"
   ],
   "coverageReporters": ["json-summary", "text"],

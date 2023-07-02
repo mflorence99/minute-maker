@@ -35,7 +35,7 @@ export class StatusState {
   static defaultStatus(): StatusStateModel {
     return {
       error: null,
-      status: '',
+      status: null,
       working: false
     };
   }

@@ -1,6 +1,5 @@
 import { Action } from '@ngxs/store';
 import { AgendaItem } from '#mm/common';
-import { Clear as ClearUndoStacks } from '#mm/state/undo';
 import { Constants } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
@@ -280,8 +279,6 @@ export class MinutesState implements NgxsOnInit {
   @Action(SetMinutes) setMinutes({ setState }, { minutes }: SetMinutes): void {
     if (minutes.audio) setState({ audio: patch(minutes.audio) });
     setState(patch(minutes));
-    // 👇 this action clears the undo/redo stacks
-    this.#store.dispatch(new ClearUndoStacks());
   }
 
   // //////////////////////////////////////////////////////////////////////////

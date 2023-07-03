@@ -1,6 +1,7 @@
 import { Action } from '@ngxs/store';
 import { AddRecent } from '#mm/state/recents';
 import { Channels } from '#mm/common';
+import { Clear as ClearUndoStacks } from '#mm/state/undo';
 import { ClearStatus } from '#mm/state/status';
 import { ConfigState } from '#mm/state/config';
 import { ConfigStateModel } from '#mm/state/config';
@@ -153,6 +154,8 @@ export class AppState implements NgxsOnInit {
         };
         setState(patch({ pathToMinutes: null }));
         this.#store.dispatch(new SetMinutes(minutes));
+        // 👇 clear the undo stacks as this is new data
+        this.#store.dispatch(new ClearUndoStacks());
       } catch (error) {
         this.#store.dispatch(new SetStatus({ error }));
       } finally {
@@ -177,6 +180,8 @@ export class AppState implements NgxsOnInit {
     if (path) {
       setState(patch({ pathToMinutes: path }));
       this.#loadMinutes(path);
+      // 👇 clear the undo stacks as this is new data
+      this.#store.dispatch(new ClearUndoStacks());
     }
   }
 

@@ -96,7 +96,12 @@ export class UndoState {
       setState(
         patch({ undoStack: removeItem(getState().undoStack.length - 1) })
       );
-    setState(patch({ undoStack: insertItem(undoable, 0) }));
+    // 🙈 https://stackoverflow.com/questions/61101108/ngxs-how-to-package-an-action-so-that-it-can-be-dispatched-remotely
+    const withType = undoable.map((action) => {
+      const type = action.__proto__.constructor.type;
+      return { type, ...action };
+    });
+    setState(patch({ undoStack: insertItem(withType, 0) }));
   }
 
   // //////////////////////////////////////////////////////////////////////////

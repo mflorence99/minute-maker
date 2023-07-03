@@ -33,7 +33,7 @@ export class TranscriberService {
       } catch (error) {
         observer.error(error);
       }
-      
+
       // 👇 teardown logic
       return () => {
         ipc.invoke(Channels.transcriberCancel, { name });

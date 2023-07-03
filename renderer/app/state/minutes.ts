@@ -1,16 +1,19 @@
 import { Action } from '@ngxs/store';
 import { AgendaItem } from '#mm/common';
+import { Clear as ClearUndoStacks } from '#mm/state/undo';
 import { Constants } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { NgxsOnInit } from '@ngxs/store';
 import { Selector } from '@ngxs/store';
+import { Stack as StackUndoable } from '#mm/state/undo';
 import { State } from '@ngxs/store';
 import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 import { Summary } from '#mm/common';
 import { Transcription } from '#mm/common';
+import { UndoableAction } from '#mm/state/undo';
 
 import { debounce } from 'rxjs';
 import { inject } from '@angular/core';
@@ -23,20 +26,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { timer } from 'rxjs';
 import { updateItem } from '@ngxs/store/operators';
 import { withPreviousItem } from '#mm/utils';
-
-class UndoableAction {
-  constructor(public undoing: boolean) {}
-}
-
-export class CanDo {
-  static readonly type = '[Minutes] CanDo';
-  constructor(public canMinutes: boolean, public canRedo: boolean) {}
-}
-
-export class ClearStacks {
-  static readonly type = '[Undo] ClearStacks';
-  constructor() {}
-}
 
 export class InsertAgendaItem extends UndoableAction {
   static readonly type = '[Minutes] InsertAgendaItem';
@@ -67,11 +56,6 @@ export class JoinTranscriptions extends UndoableAction {
   }
 }
 
-export class Redo {
-  static readonly type = '[Minutes] Redo';
-  constructor() {}
-}
-
 export class RemoveAgendaItem extends UndoableAction {
   static readonly type = '[Minutes] RemoveAgendaItem';
   constructor(public ix: number, undoing = false) {
@@ -96,11 +80,6 @@ export class SplitTranscription extends UndoableAction {
   constructor(public ix: number, public pos: number, undoing = false) {
     super(undoing);
   }
-}
-
-export class Undo {
-  static readonly type = '[Minutes] Undo';
-  constructor() {}
 }
 
 export class UpdateAgendaItem extends UndoableAction {
@@ -138,9 +117,6 @@ export class UpdateTranscription extends UndoableAction {
 
 export type MinutesStateModel = Minutes;
 
-const redoStack: UndoableAction[][] = [];
-const undoStack: UndoableAction[][] = [];
-
 @State<MinutesStateModel>({
   name: 'minutes',
   defaults: null
@@ -162,16 +138,6 @@ export class MinutesState implements NgxsOnInit {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟩 ClearStacks
-  // //////////////////////////////////////////////////////////////////////////
-
-  @Action(ClearStacks) clearStacks(): void {
-    redoStack.length = 0;
-    undoStack.length = 0;
-    this.#store.dispatch(new CanDo(false, false));
-  }
-
-  // //////////////////////////////////////////////////////////////////////////
   // 🟩 InsertAgendaItem
   // //////////////////////////////////////////////////////////////////////////
 
@@ -181,10 +147,12 @@ export class MinutesState implements NgxsOnInit {
   ): void {
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
-      this.#stackUndoActions([
-        new RemoveAgendaItem(ix, true),
-        new InsertAgendaItem(agendaItem, ix, true)
-      ]);
+      this.#store.dispatch(
+        new StackUndoable([
+          new RemoveAgendaItem(ix, true),
+          new InsertAgendaItem(agendaItem, ix, true)
+        ])
+      );
     // 👇 now do the action
     const nextTranscriptionID = Number(getState().nextTranscriptionID) + 1;
     setState(
@@ -208,10 +176,12 @@ export class MinutesState implements NgxsOnInit {
   ): void {
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
-      this.#stackUndoActions([
-        new RemoveTranscription(ix, true),
-        new InsertTranscription(transcription, ix, true)
-      ]);
+      this.#store.dispatch(
+        new StackUndoable([
+          new RemoveTranscription(ix, true),
+          new InsertTranscription(transcription, ix, true)
+        ])
+      );
     // 👇 now do the action
     const nextTranscriptionID = Number(getState().nextTranscriptionID) + 1;
     setState(
@@ -241,10 +211,12 @@ export class MinutesState implements NgxsOnInit {
     const speech = `${speech1} ${speech2}`;
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
-      this.#stackUndoActions([
-        new SplitTranscription(ix, speech1.length, true),
-        new JoinTranscriptions(ix, true)
-      ]);
+      this.#store.dispatch(
+        new StackUndoable([
+          new SplitTranscription(ix, speech1.length, true),
+          new JoinTranscriptions(ix, true)
+        ])
+      );
     // 👇 now do the action
     setState(
       patch({
@@ -252,21 +224,6 @@ export class MinutesState implements NgxsOnInit {
       })
     );
     setState(patch({ transcription: removeItem(ix + 1) }));
-  }
-
-  // //////////////////////////////////////////////////////////////////////////
-  // 🟩 Redo
-  // //////////////////////////////////////////////////////////////////////////
-
-  @Action(Redo) redo(): void {
-    // 👇 quick return if nothing to redo
-    if (redoStack.length === 0) return;
-    // 👇 execute the redo operation
-    const [undoAction, redoAction] = redoStack.pop();
-    this.#store.dispatch(redoAction);
-    // 👇 put the undo action onto its stack
-    undoStack.push([undoAction, redoAction]);
-    this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -282,10 +239,12 @@ export class MinutesState implements NgxsOnInit {
     const original: AgendaItem = { ...this.#pluckAgendaItem(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
-      this.#stackUndoActions([
-        new InsertAgendaItem(original, ix, true),
-        new RemoveAgendaItem(ix, true)
-      ]);
+      this.#store.dispatch(
+        new StackUndoable([
+          new InsertAgendaItem(original, ix, true),
+          new RemoveAgendaItem(ix, true)
+        ])
+      );
     // 👇 now do the action
     setState(patch({ transcription: removeItem(ix) }));
   }
@@ -303,10 +262,12 @@ export class MinutesState implements NgxsOnInit {
     const original: Transcription = { ...this.#pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
-      this.#stackUndoActions([
-        new InsertTranscription(original, ix, true),
-        new RemoveTranscription(ix, true)
-      ]);
+      this.#store.dispatch(
+        new StackUndoable([
+          new InsertTranscription(original, ix, true),
+          new RemoveTranscription(ix, true)
+        ])
+      );
     // 👇 now do the action
     setState(patch({ transcription: removeItem(ix) }));
   }
@@ -320,7 +281,7 @@ export class MinutesState implements NgxsOnInit {
     if (minutes.audio) setState({ audio: patch(minutes.audio) });
     setState(patch(minutes));
     // 👇 this action clears the undo/redo stacks
-    this.#store.dispatch(new ClearStacks());
+    this.#store.dispatch(new ClearUndoStacks());
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -336,10 +297,12 @@ export class MinutesState implements NgxsOnInit {
     const original: Transcription = { ...this.#pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
-      this.#stackUndoActions([
-        new JoinTranscriptions(ix, true),
-        new SplitTranscription(ix, pos, true)
-      ]);
+      this.#store.dispatch(
+        new StackUndoable([
+          new JoinTranscriptions(ix, true),
+          new SplitTranscription(ix, pos, true)
+        ])
+      );
     // 👇 now do the action
     setState(
       patch({
@@ -384,21 +347,6 @@ export class MinutesState implements NgxsOnInit {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟩 Undo
-  // //////////////////////////////////////////////////////////////////////////
-
-  @Action(Undo) undo(): void {
-    // 👇 quick return if nothing to undo
-    if (undoStack.length === 0) return;
-    // 👇 execute the undo operation
-    const [undoAction, redoAction] = undoStack.pop();
-    this.#store.dispatch(undoAction);
-    // 👇 put the redo action onto its stack
-    redoStack.push([undoAction, redoAction]);
-    this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
-  }
-
-  // //////////////////////////////////////////////////////////////////////////
   // 🟩 UpdateAgendaItem
   // //////////////////////////////////////////////////////////////////////////
 
@@ -411,10 +359,12 @@ export class MinutesState implements NgxsOnInit {
     const original: AgendaItem = { ...this.#pluckAgendaItem(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
-      this.#stackUndoActions([
-        new UpdateAgendaItem(original, ix, true),
-        new UpdateAgendaItem(agendaItem, ix, true)
-      ]);
+      this.#store.dispatch(
+        new StackUndoable([
+          new UpdateAgendaItem(original, ix, true),
+          new UpdateAgendaItem(agendaItem, ix, true)
+        ])
+      );
     // 👇 now do the action
     setState(patch({ transcription: updateItem(ix, patch(agendaItem)) }));
   }
@@ -432,10 +382,12 @@ export class MinutesState implements NgxsOnInit {
     const original: Summary = { ...state.summary[ix] };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
-      this.#stackUndoActions([
-        new UpdateSummary(original, ix, true),
-        new UpdateSummary(summary, ix, true)
-      ]);
+      this.#store.dispatch(
+        new StackUndoable([
+          new UpdateSummary(original, ix, true),
+          new UpdateSummary(summary, ix, true)
+        ])
+      );
     // 👇 now do the action
     setState(patch({ summary: updateItem(ix, patch(summary)) }));
   }
@@ -453,10 +405,12 @@ export class MinutesState implements NgxsOnInit {
     const original: Transcription = { ...this.#pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
-      this.#stackUndoActions([
-        new UpdateTranscription(original, ix, true),
-        new UpdateTranscription(transcription, ix, true)
-      ]);
+      this.#store.dispatch(
+        new StackUndoable([
+          new UpdateTranscription(original, ix, true),
+          new UpdateTranscription(transcription, ix, true)
+        ])
+      );
     // 👇 now do the action
     setState(patch({ transcription: updateItem(ix, patch(transcription)) }));
   }
@@ -497,12 +451,5 @@ export class MinutesState implements NgxsOnInit {
     if (state.transcription[ix].type === 'TX')
       return state.transcription[ix] as any as Transcription;
     else throw new Error(`Operation not supported for item #${ix}`);
-  }
-
-  #stackUndoActions(actions: UndoableAction[]): void {
-    redoStack.length = 0;
-    while (undoStack.length >= Constants.maxUndoStackSize) undoStack.shift();
-    undoStack.push(actions);
-    this.#store.dispatch(new CanDo(undoStack.length > 0, redoStack.length > 0));
   }
 }

@@ -11,7 +11,7 @@ import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
 import { OpenMinutes } from '#mm/state/app';
 import { RecentsState } from '#mm/state/recents';
-import { Redo } from '#mm/state/minutes';
+import { Redo } from '#mm/state/undo';
 import { RemoveTranscription } from '#mm/state/minutes';
 import { RephraseTranscription } from '#mm/state/app';
 import { SaveMinutes } from '#mm/state/app';
@@ -25,7 +25,7 @@ import { SummarizeMinutes } from '#mm/state/app';
 import { Summary } from '#mm/common';
 import { TranscribeMinutes } from '#mm/state/app';
 import { Transcription } from '#mm/common';
-import { Undo } from '#mm/state/minutes';
+import { Undo } from '#mm/state/undo';
 
 import { inject } from '@angular/core';
 

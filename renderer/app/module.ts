@@ -27,6 +27,7 @@ import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
 import { StorageEngine } from '#mm/state/storage-engine';
 import { SummaryComponent } from '#mm/components/summary';
 import { TranscriptionComponent } from '#mm/components/transcription';
+import { UndoState } from '#mm/state/undo';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
 import { WaveSurferRegionsComponent } from '#mm/components/wavesurfer-regions';
@@ -54,8 +55,15 @@ const PAGES = [RootPage];
 
 const ROUTES = [];
 
-const STATES = [AppState, ConfigState, MinutesState, RecentsState, StatusState];
-const STATES_SAVED = [AppState, ConfigState, RecentsState];
+const STATES = [
+  AppState,
+  ConfigState,
+  MinutesState,
+  RecentsState,
+  StatusState,
+  UndoState
+];
+const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
 
 @NgModule({
   bootstrap: [RootPage],

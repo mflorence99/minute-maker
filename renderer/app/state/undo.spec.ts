@@ -33,7 +33,7 @@ const defaultState = {
   undoStack: [[new Doit(1), new Undoit('x')]]
 };
 
-describe('ConfigState', () => {
+describe('UndoState', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NgxsModule.forRoot([UndoState])]

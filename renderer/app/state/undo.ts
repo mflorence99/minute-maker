@@ -72,15 +72,15 @@ export class UndoState {
   // //////////////////////////////////////////////////////////////////////////
 
   @Action(Redo) redo({ getState, setState }): void {
-    // 👇 quick return if nothing to redo
-    if (getState().redoStack.length === 0) return;
-    // 👇 execute the redo operation
-    const [undoAction, redoAction] = getState().redoStack[0];
-    setState(patch({ redoStack: removeItem(0) }));
-    this.#store.dispatch(redoAction);
-    // 👇 put the undo action onto its stack
-    setState(patch({ undoStack: insertItem([undoAction, redoAction], 0) }));
-    this.#store.dispatch(new CanDo(this.cando()));
+    if (getState().redoStack.length > 0) {
+      // 👇 execute the redo operation
+      const [undoAction, redoAction] = getState().redoStack[0];
+      setState(patch({ redoStack: removeItem(0) }));
+      this.#store.dispatch(redoAction);
+      // 👇 put the undo action onto its stack
+      setState(patch({ undoStack: insertItem([undoAction, redoAction], 0) }));
+      this.#store.dispatch(new CanDo(this.cando()));
+    }
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -102,15 +102,15 @@ export class UndoState {
   // //////////////////////////////////////////////////////////////////////////
 
   @Action(Undo) undo({ getState, setState }): void {
-    // 👇 quick return if nothing to undo
-    if (getState().undoStack.length === 0) return;
-    // 👇 execute the undo operation
-    const [undoAction, redoAction] = getState().undoStack[0];
-    setState(patch({ undoStack: removeItem(0) }));
-    this.#store.dispatch(undoAction);
-    // 👇 put the redo action onto its stack
-    setState(patch({ redoStack: insertItem([undoAction, redoAction], 0) }));
-    this.#store.dispatch(new CanDo(this.cando()));
+    if (getState().undoStack.length > 0) {
+      // 👇 execute the undo operation
+      const [undoAction, redoAction] = getState().undoStack[0];
+      setState(patch({ undoStack: removeItem(0) }));
+      this.#store.dispatch(undoAction);
+      // 👇 put the redo action onto its stack
+      setState(patch({ redoStack: insertItem([undoAction, redoAction], 0) }));
+      this.#store.dispatch(new CanDo(this.cando()));
+    }
   }
 
   // //////////////////////////////////////////////////////////////////////////

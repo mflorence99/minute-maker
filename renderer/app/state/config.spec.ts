@@ -30,7 +30,7 @@ describe('ConfigState', () => {
     store.reset({ ...store.snapshot(), config: defaultState });
   });
 
-  it('can select a bucketName', () => {
+  it('can select the bucketName', () => {
     const bucketName = store.selectSnapshot(ConfigState.bucketName);
     expect(bucketName).toBe('xxx');
   });
@@ -42,7 +42,7 @@ describe('ConfigState', () => {
   });
 
   it('runs initialization code as expected', (done) => {
-    configState.ngxsOnInit();
+    configState.ngxsOnInit(); // 👈 need this to set state from ConfigState
     setTimeout(() => {
       expect(mockUploader.enableCORS).toHaveBeenCalledWith('xxx');
       done();

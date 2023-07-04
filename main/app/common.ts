@@ -46,7 +46,7 @@ const summaryStrategy: SummaryStrategy = 'paragraphs';
 export const Constants = {
   backoffOptions,
   maxRecentPaths: 32,
-  maxUndoStackSize: 7,
+  maxUndoStackDepth: 7,
   openaiDefaults: {
     temperature: 0.5,
     top_p: 1

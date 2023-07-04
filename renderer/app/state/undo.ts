@@ -9,9 +9,11 @@ import { insertItem } from '@ngxs/store/operators';
 import { patch } from '@ngxs/store/operators';
 import { removeItem } from '@ngxs/store/operators';
 
+export type Candoable = [canDo: boolean, canRedo: boolean];
+
 export class CanDo {
   static readonly type = '[Undo] CanDo';
-  constructor(public canMinutes: boolean, public canRedo: boolean) {}
+  constructor(public can: Candoable) {}
 }
 
 export class Clear {
@@ -62,7 +64,7 @@ export class UndoState {
 
   @Action(Clear) clear({ setState }): void {
     setState({ redoStack: [], undoStack: [] });
-    this.#store.dispatch(new CanDo(false, false));
+    this.#store.dispatch(new CanDo(this.cando()));
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -78,12 +80,7 @@ export class UndoState {
     this.#store.dispatch(redoAction);
     // 👇 put the undo action onto its stack
     setState(patch({ undoStack: insertItem([undoAction, redoAction], 0) }));
-    this.#store.dispatch(
-      new CanDo(
-        getState().undoStack.length > 0,
-        getState().redoStack.length > 0
-      )
-    );
+    this.#store.dispatch(new CanDo(this.cando()));
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -92,16 +89,12 @@ export class UndoState {
 
   @Action(Stack) stack({ getState, setState }, { undoable }): void {
     setState(patch({ redoStack: [] }));
-    while (getState().undoStack.length >= Constants.maxUndoStackSize)
+    while (getState().undoStack.length >= Constants.maxUndoStackDepth)
       setState(
         patch({ undoStack: removeItem(getState().undoStack.length - 1) })
       );
-    // 🙈 https://stackoverflow.com/questions/61101108/ngxs-how-to-package-an-action-so-that-it-can-be-dispatched-remotely
-    const withType = undoable.map((action) => {
-      const type = action.__proto__.constructor.type;
-      return { type, ...action };
-    });
-    setState(patch({ undoStack: insertItem(withType, 0) }));
+    setState(patch({ undoStack: insertItem(this.withType(undoable), 0) }));
+    this.#store.dispatch(new CanDo(this.cando()));
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -117,11 +110,23 @@ export class UndoState {
     this.#store.dispatch(undoAction);
     // 👇 put the redo action onto its stack
     setState(patch({ redoStack: insertItem([undoAction, redoAction], 0) }));
-    this.#store.dispatch(
-      new CanDo(
-        getState().undoStack.length > 0,
-        getState().redoStack.length > 0
-      )
-    );
+    this.#store.dispatch(new CanDo(this.cando()));
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟦 Helper methods
+  // //////////////////////////////////////////////////////////////////////////
+
+  cando(): Candoable {
+    const state = this.#store.selectSnapshot(UndoState);
+    return [state.undoStack.length > 0, state.redoStack.length > 0];
+  }
+
+  // 🙈 https://stackoverflow.com/questions/61101108/ngxs-how-to-package-an-action-so-that-it-can-be-dispatched-remotely
+  withType(undoable: any): any {
+    return undoable.map((action) => {
+      const type = action.__proto__.constructor.type;
+      return { type, ...action };
+    });
   }
 }

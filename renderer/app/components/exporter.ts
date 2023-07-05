@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { MinutesState } from '#mm/state/minutes';
+import { SetStatus } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 
 import { asBullets } from '#mm/utils';
@@ -21,24 +22,28 @@ export class ExporterComponent {
   #store = inject(Store);
 
   export(): void {
-    // 👇 grab the latest minutes
-    const minutes = this.#store.selectSnapshot(MinutesState);
-    // 👇 prepare the export from the minutes and the template
-    const env = nunjucks.configure('./assets', { autoescape: false });
-    const result = env.render('template.njk', {
-      asParagraphs,
-      asBullets,
-      dayjs,
-      minutes,
-      test: [1, 2, 3]
-    });
-    // 👇 export the resulting HTML
-    const blob = new Blob([result], {
-      type: 'text/plain;charset=utf-8'
-    });
-    saveAs(
-      blob,
-      `${minutes.subject} ${dayjs(minutes.date).format('YYYY-MM-DD')}.html`
-    );
+    try {
+      // 👇 grab the latest minutes
+      const minutes = this.#store.selectSnapshot(MinutesState);
+      // 👇 prepare the export from the minutes and the template
+      const env = nunjucks.configure('./assets', { autoescape: false });
+      const result = env.render('template.njk', {
+        asParagraphs,
+        asBullets,
+        dayjs,
+        minutes,
+        test: [1, 2, 3]
+      });
+      // 👇 export the resulting HTML
+      const blob = new Blob([result], {
+        type: 'text/plain;charset=utf-8'
+      });
+      saveAs(
+        blob,
+        `${minutes.subject} ${dayjs(minutes.date).format('YYYY-MM-DD')}.html`
+      );
+    } catch (error) {
+      this.#store.dispatch(new SetStatus({ error }));
+    }
   }
 }

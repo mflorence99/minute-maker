@@ -8,10 +8,7 @@ import { CommonModule } from '@angular/common';
 import { ConfigState } from '#mm/state/config';
 import { ErrorHandler } from '@angular/core';
 import { ExporterComponent } from '#mm/components/exporter';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MinutesState } from '#mm/state/minutes';
 import { NgModule } from '@angular/core';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
@@ -27,15 +24,16 @@ import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
 import { StorageEngine } from '#mm/state/storage-engine';
 import { SummaryComponent } from '#mm/components/summary';
 import { TranscriptionComponent } from '#mm/components/transcription';
+import { TuiButtonModule } from '@taiga-ui/core';
+import { TuiRootModule } from '@taiga-ui/core';
+import { TuiScrollbarModule } from '@taiga-ui/core';
+import { TuiSvgModule } from '@taiga-ui/core';
+import { TuiThemeNightModule } from '@taiga-ui/core';
 import { UndoState } from '#mm/state/undo';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
 import { WaveSurferRegionsComponent } from '#mm/components/wavesurfer-regions';
 import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline';
-
-import { faRedo } from '@fortawesome/pro-duotone-svg-icons';
-import { faTriangle } from '@fortawesome/pro-solid-svg-icons';
-import { faUndo } from '@fortawesome/pro-duotone-svg-icons';
 
 import isDev from '#mm/is-dev';
 
@@ -75,9 +73,7 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
     BrowserAnimationsModule,
     BrowserModule,
     CommonModule,
-    FontAwesomeModule,
     FormsModule,
-    MatButtonModule,
     NgxsModule.forRoot(STATES, {
       developmentMode: isDev
     }),
@@ -89,7 +85,12 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
       key: STATES_SAVED
     }),
     NgxsLoggerPluginModule.forRoot({ collapsed: false }),
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    TuiButtonModule,
+    TuiRootModule,
+    TuiScrollbarModule,
+    TuiSvgModule,
+    TuiThemeNightModule
   ],
 
   providers: [
@@ -106,9 +107,4 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
     }
   ]
 })
-export class RootModule {
-  constructor(library: FaIconLibrary) {
-    // 👇 must add icons we use right here
-    library.addIcons(faRedo, faTriangle, faUndo);
-  }
-}
+export class RootModule {}

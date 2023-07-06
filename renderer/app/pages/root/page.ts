@@ -32,85 +32,104 @@ import { inject } from '@angular/core';
 @Component({
   selector: 'mm-root',
   template: `
-    <main>
-      <header>{{ (app$ | async).pathToMinutes }}</header>
-      <mm-wavesurfer
-        [audioFile]="audioURL$ | async"
-        [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }">
-        <mm-wavesurfer-timeline></mm-wavesurfer-timeline>
-      </mm-wavesurfer>
+    <tui-theme-night />
+    <tui-root>
+      <main>
+        <header>{{ (app$ | async).pathToMinutes }}</header>
+        <mm-wavesurfer
+          [audioFile]="audioURL$ | async"
+          [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }">
+          <mm-wavesurfer-timeline></mm-wavesurfer-timeline>
+        </mm-wavesurfer>
 
-      <mm-transcription
-        (selected)="txIndex = $event"
-        [startDate]="date"
-        [transcription]="transcription$ | async" />
+        <mm-transcription
+          (selected)="txIndex = $event"
+          [startDate]="date"
+          [transcription]="transcription$ | async" />
 
-      <mm-summary [summary]="summary$ | async" />
+        <mm-summary [summary]="summary$ | async" />
 
-      <section class="buttons">
-        <button (click)="openMinutes()" color="primary" mat-raised-button>
-          Open Minutes
-        </button>
-        <button (click)="newMinutes()" color="accent" mat-raised-button>
-          New Minutes
-        </button>
-        <button (click)="saveMinutes()" color="warn" mat-raised-button>
-          Save Minutes
-        </button>
-        <button (click)="exporter.export()" mat-raised-button>Export</button>
-      </section>
+        <section class="buttons">
+          <button (click)="openMinutes()" appearance="primary" tuiButton>
+            Open Minutes
+          </button>
+          <button (click)="newMinutes()" appearance="secondary" tuiButton>
+            New Minutes
+          </button>
+          <button
+            (click)="saveMinutes()"
+            appearance="secondary-destructive"
+            tuiButton>
+            Save Minutes
+          </button>
+          <button (click)="exporter.export()" appearance="accent" tuiButton>
+            Export
+          </button>
+        </section>
 
-      <section class="buttons">
-        <button (click)="transcribe()" mat-raised-button>
-          Transcribe Minutes
-        </button>
-        <button (click)="cancelTranscription()" mat-raised-button>
-          Cancel Transcription
-        </button>
-        <button (click)="summarizeMinutes()" mat-raised-button>
-          Summarize Minutes
-        </button>
-      </section>
+        <section class="buttons">
+          <button (click)="transcribe()" appearance="outline" tuiButton>
+            Transcribe Minutes
+          </button>
+          <button
+            (click)="cancelTranscription()"
+            appearance="outline"
+            tuiButton>
+            Cancel Transcription
+          </button>
+          <button (click)="summarizeMinutes()" appearance="outline" tuiButton>
+            Summarize Minutes
+          </button>
+        </section>
 
-      <section class="buttons">
-        <button (click)="rephraseTranscription()" mat-raised-button>
-          Rephrase #{{ txIndex }}
-        </button>
-        <button (click)="splitTranscription()" mat-raised-button>
-          Split #{{ txIndex }}
-        </button>
-        <button (click)="joinTranscriptions()" mat-raised-button>
-          Join #{{ txIndex }}
-        </button>
-        <button (click)="removeTranscription()" mat-raised-button>
-          Remove #{{ txIndex }}
-        </button>
-        <button (click)="insertAgendaItem()" mat-raised-button>
-          Agenda #{{ txIndex }}
-        </button>
-      </section>
+        <section class="buttons">
+          <button
+            (click)="rephraseTranscription()"
+            appearance="outline"
+            tuiButton>
+            Rephrase #{{ txIndex }}
+          </button>
+          <button (click)="splitTranscription()" appearance="outline" tuiButton>
+            Split #{{ txIndex }}
+          </button>
+          <button (click)="joinTranscriptions()" appearance="outline" tuiButton>
+            Join #{{ txIndex }}
+          </button>
+          <button
+            (click)="removeTranscription()"
+            appearance="outline"
+            tuiButton>
+            Remove #{{ txIndex }}
+          </button>
+          <button (click)="insertAgendaItem()" appearance="outline" tuiButton>
+            Agenda #{{ txIndex }}
+          </button>
+        </section>
 
-      <section class="buttons">
-        <button (click)="redo()" mat-icon-button>
-          <fa-icon [icon]="['fad', 'redo']" size="2x"></fa-icon>
-        </button>
-        <button (click)="undo()" mat-icon-button>
-          <fa-icon [icon]="['fad', 'undo']" size="2x"></fa-icon>
-        </button>
-      </section>
+        <section class="buttons">
+          <button
+            (click)="redo()"
+            icon="tuiIconCornerUpRightLarge"
+            tuiIconButton></button>
+          <button
+            (click)="undo()"
+            icon="tuiIconCornerUpLeftLarge"
+            tuiIconButton></button>
+        </section>
 
-      <ul class="recents">
-        <li *ngFor="let minutes$ of recentMinutes$ | async">
-          <ng-container *ngIf="minutes$ | async as minutes">
-            <p>{{ minutes.title }}</p>
-          </ng-container>
-        </li>
-      </ul>
+        <ul class="recents">
+          <li *ngFor="let minutes$ of recentMinutes$ | async">
+            <ng-container *ngIf="minutes$ | async as minutes">
+              <p>{{ minutes.title }}</p>
+            </ng-container>
+          </li>
+        </ul>
 
-      <footer>{{ (status$ | async).status }}</footer>
-    </main>
+        <footer>{{ (status$ | async).status }}</footer>
+      </main>
 
-    <mm-exporter #exporter />
+      <mm-exporter #exporter />
+    </tui-root>
   `,
   styles: [
     `

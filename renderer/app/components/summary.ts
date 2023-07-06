@@ -13,17 +13,17 @@ import { inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-summary',
   template: `
-    <article>
+    <tui-scrollbar>
       <table>
         <tbody>
           <tr
             *ngFor="let summ of summary; let ix = index; trackBy: trackByIx"
             (click)="selected.emit((summIndex = ix))">
-            <td [ngClass]="{ current: ix === summIndex }" class="marker">
-              <fa-icon
-                [fixedWidth]="true"
-                [icon]="['fas', 'triangle']"
-                [rotate]="90" />
+            <td>
+              <tui-svg
+                [ngClass]="{ current: ix === summIndex }"
+                class="marker"
+                src="tuiIconArrowRightLarge" />
             </td>
 
             <td class="summary">
@@ -42,17 +42,10 @@ import { inject } from '@angular/core';
           </tr>
         </tbody>
       </table>
-    </article>
+    </tui-scrollbar>
   `,
   styles: [
     `
-      article {
-        border: 1px dotted;
-        height: 100%;
-        overflow-y: scroll;
-        width: 100%;
-      }
-
       header {
         font-size: larger;
         font-weight: bold;
@@ -70,16 +63,6 @@ import { inject } from '@angular/core';
         padding: 4px;
       }
 
-      td.marker {
-        color: var(--accent-color);
-        opacity: 0;
-        transition: opacity 0.5s;
-
-        &.current {
-          opacity: 1;
-        }
-      }
-
       td.summary {
         width: 100%;
       }
@@ -93,13 +76,29 @@ import { inject } from '@angular/core';
       }
 
       textarea {
-        background-color: var(--background-color);
+        background-color: inherit;
         border: none;
-        color: var(--text-color);
+        color: inherit;
         font-family: inherit;
         height: 100%;
         resize: none;
         width: 100%;
+      }
+
+      tui-scrollbar {
+        border: 1px dotted;
+        height: 100%;
+        width: 100%;
+      }
+
+      tui-svg.marker {
+        color: var(--tui-primary);
+        opacity: 0;
+        transition: opacity 0.5s;
+
+        &.current {
+          opacity: 1;
+        }
       }
     `
   ]

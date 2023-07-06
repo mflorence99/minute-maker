@@ -50,21 +50,30 @@ export class InsertTranscription extends UndoableAction {
 
 export class JoinTranscriptions extends UndoableAction {
   static readonly type = '[Minutes] JoinTranscriptions';
-  constructor(public ix: number, undoing = false) {
+  constructor(
+    public ix: number,
+    undoing = false
+  ) {
     super(undoing);
   }
 }
 
 export class RemoveAgendaItem extends UndoableAction {
   static readonly type = '[Minutes] RemoveAgendaItem';
-  constructor(public ix: number, undoing = false) {
+  constructor(
+    public ix: number,
+    undoing = false
+  ) {
     super(undoing);
   }
 }
 
 export class RemoveTranscription extends UndoableAction {
   static readonly type = '[Minutes] RemoveTranscription';
-  constructor(public ix: number, undoing = false) {
+  constructor(
+    public ix: number,
+    undoing = false
+  ) {
     super(undoing);
   }
 }
@@ -76,7 +85,11 @@ export class SetMinutes {
 
 export class SplitTranscription extends UndoableAction {
   static readonly type = '[Minutes] SplitTranscription';
-  constructor(public ix: number, public pos: number, undoing = false) {
+  constructor(
+    public ix: number,
+    public pos: number,
+    undoing = false
+  ) {
     super(undoing);
   }
 }

@@ -43,18 +43,27 @@
               "openai",
               "wavesurfer.js"
             ],
-            "assets": ["renderer/favicon.ico", "renderer/assets"],
+            "assets": [
+              "renderer/favicon.ico",
+              "renderer/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@taiga-ui/icons/src",
+                "output": "assets/taiga-ui/icons"
+              }
+            ],
             "index": "renderer/index.html",
-            "inlineStyleLanguage": "scss",
+            "inlineStyleLanguage": "less",
             "main": "renderer/app/main.ts",
             "outputPath": "dist/renderer",
             "polyfills": ["zone.js"],
             "preserveSymlinks": true,
             "scripts": [],
             "styles": [
-              "renderer/app/colors.scss",
-              "renderer/app/globals.scss",
-              "renderer/app/styles.scss"
+              "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+              "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
+              "node_modules/@taiga-ui/styles/taiga-ui-global.less",
+              "renderer/app/styles.less"
             ],
             "tsConfig": "renderer/tsconfig.app.json"
           }

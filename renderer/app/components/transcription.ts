@@ -15,17 +15,17 @@ import { inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-transcription',
   template: `
-    <article>
+    <tui-scrollbar>
       <table>
         <tbody>
           <tr
             *ngFor="let tx of transcription; let ix = index; trackBy: trackByTx"
             (click)="selected.emit((txIndex = ix))">
-            <td [ngClass]="{ current: ix === txIndex }" class="marker">
-              <fa-icon
-                [fixedWidth]="true"
-                [icon]="['fas', 'triangle']"
-                [rotate]="90" />
+            <td>
+              <tui-svg
+                [ngClass]="{ current: ix === txIndex }"
+                class="marker"
+                src="tuiIconArrowRightLarge" />
             </td>
 
             <ng-container *ngIf="tx.type === 'AG'">
@@ -78,21 +78,14 @@ import { inject } from '@angular/core';
           </tr>
         </tbody>
       </table>
-    </article>
+    </tui-scrollbar>
   `,
   styles: [
     `
-      article {
-        border: 1px dotted;
-        height: 100%;
-        overflow-y: scroll;
-        width: 100%;
-      }
-
       input {
-        background-color: var(--background-color);
+        background-color: inherit;
         border: none;
-        color: var(--text-color);
+        color: inherit;
         font-family: inherit;
         font-weight: bold;
         width: 7rem;
@@ -105,16 +98,6 @@ import { inject } from '@angular/core';
 
       td {
         padding: 4px;
-      }
-
-      td.marker {
-        color: var(--accent-color);
-        opacity: 0;
-        transition: opacity 0.5s;
-
-        &.current {
-          opacity: 1;
-        }
       }
 
       td.speech,
@@ -131,9 +114,9 @@ import { inject } from '@angular/core';
       }
 
       textarea {
-        background-color: var(--background-color);
+        background-color: inherit;
         border: none;
-        color: var(--text-color);
+        color: inherit;
         font-family: inherit;
         resize: none;
         width: 100%;
@@ -149,6 +132,22 @@ import { inject } from '@angular/core';
         height: 1.125rem;
         overflow: hidden;
         text-transform: uppercase;
+      }
+
+      tui-scrollbar {
+        border: 1px dotted;
+        height: 100%;
+        width: 100%;
+      }
+
+      tui-svg.marker {
+        color: var(--tui-primary);
+        opacity: 0;
+        transition: opacity 0.5s;
+
+        &.current {
+          opacity: 1;
+        }
       }
     `
   ]

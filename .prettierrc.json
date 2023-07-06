@@ -4,7 +4,6 @@
   "bracketSpacing": true,
   "endOfLine": "lf",
   "htmlWhitespaceSensitivity": "ignore",
-  "order": "alphabetical",
   "printWidth": 80,
   "proseWrap": "never",
   "quoteProps": "consistent",

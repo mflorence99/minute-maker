@@ -2,6 +2,7 @@
   "collectCoverage": true,
   "collectCoverageFrom": [
     "<rootDir>/app/**/*.ts",
+    "!<rootDir>/app/_jsome.ts",
     "!<rootDir>/app/common.ts",
     "!<rootDir>/app/context-menu.ts",
     "!<rootDir>/app/electron.ts",

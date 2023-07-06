@@ -119,23 +119,28 @@ async function pollOperationProgress(
   operation
 ): Promise<void> {
   do {
-    // 👇 how far along are we?
-    const response = await client.checkLongRunningRecognizeProgress(
-      operation.name
-    );
-    const { latestResponse, metadata } = response;
-    if (latestResponse.done) break;
-    // 👇 1. metadata doesn't seem to be typed properly
-    //    2. seems to be 0% all the way to the end, when it jumps to 100%
-    const progressPercent = (<any>metadata).progressPercent ?? 0;
-    console.log(`👈 ${Channels.transcriberResponse} ${progressPercent}%`);
-    globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
-      name: operation.name,
-      progressPercent,
-      speech: null
-    });
-    // 👇 wait before polling again
-    await sleep(Constants.transcriptionPollInterval);
+    try {
+      // 👇 how far along are we?
+      const response = await client.checkLongRunningRecognizeProgress(
+        operation.name
+      );
+      const { latestResponse, metadata } = response;
+      if (latestResponse.done) break;
+      // 👇 1. metadata doesn't seem to be typed properly
+      //    2. seems to be 0% all the way to the end, when it jumps to 100%
+      const progressPercent = (<any>metadata).progressPercent ?? 0;
+      console.log(`👈 ${Channels.transcriberResponse} ${progressPercent}%`);
+      globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
+        name: operation.name,
+        progressPercent,
+        speech: null
+      });
+      // 👇 wait before polling again
+      await sleep(Constants.transcriptionPollInterval);
+    } catch (error) {
+      jsome(`🔥 ${error.message}`);
+      break;
+    }
   } while (true);
 }
 

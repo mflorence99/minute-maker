@@ -1,4 +1,5 @@
 import { Channels } from './common';
+import { Constants } from './common';
 import { UploaderRequest } from './common';
 import { UploaderResponse } from './common';
 
@@ -40,16 +41,11 @@ export async function upload(
 ipcMain.handle(Channels.uploaderEnableCORS, enableCORS);
 
 // 👇 exported for tests
-export async function enableCORS(event, bucketName: string): Promise<void> {
+export async function enableCORS(event, bucketName: string): Promise<any> {
   const storage = new Storage();
-  const cors = {
-    maxAgeSeconds: 3600,
-    method: ['GET'],
-    origin: ['*'],
-    responseHeader: ['Content-Type']
-  };
   jsome([`👉 ${Channels.uploaderEnableCORS}`, bucketName]);
-  await storage.bucket(bucketName).setCorsConfiguration([cors]);
+  await storage.bucket(bucketName).setCorsConfiguration(Constants.corsOptions);
   const [metadata] = await storage.bucket(bucketName).getMetadata();
   jsome([`👈 ${Channels.uploaderEnableCORS}`, metadata.cors]);
+  return metadata;
 }

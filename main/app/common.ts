@@ -1,6 +1,7 @@
 import PACKAGE from '../../package.json';
 
 import { BackoffOptions } from 'exponential-backoff';
+import { Cors } from '@google-cloud/storage/build/src/storage';
 
 import { z } from 'zod';
 
@@ -33,6 +34,15 @@ const backoffOptions: BackoffOptions = {
   maxDelay: 30000
 };
 
+const corsOptions: Cors[] = [
+  {
+    maxAgeSeconds: 3600,
+    method: ['GET'],
+    origin: ['*'],
+    responseHeader: ['Content-Type']
+  }
+];
+
 // 👇 all this so we can access the strategy at runtime eg: in UI
 export const rephraseStrategies = ['brevity', 'accuracy'] as const;
 export type RephraseStrategy = (typeof rephraseStrategies)[number];
@@ -45,6 +55,7 @@ const summaryStrategy: SummaryStrategy = 'paragraphs';
 
 export const Constants = {
   backoffOptions,
+  corsOptions,
   maxRecentPaths: 32,
   maxUndoStackDepth: 7,
   openaiDefaults: {

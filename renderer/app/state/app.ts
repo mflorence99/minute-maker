@@ -69,10 +69,7 @@ export class SummarizeMinutes {
 
 export class RephraseTranscription {
   static readonly type = '[App] RephraseTranscription';
-  constructor(
-    public rephraseStrategy: RephraseStrategy,
-    public ix: number
-  ) {}
+  constructor(public rephraseStrategy: RephraseStrategy, public ix: number) {}
 }
 
 export class TranscribeMinutes {

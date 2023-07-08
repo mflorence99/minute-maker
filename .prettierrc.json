@@ -6,6 +6,7 @@
   "htmlWhitespaceSensitivity": "ignore",
   "printWidth": 80,
   "proseWrap": "never",
+  "order": "alphabetical",
   "quoteProps": "consistent",
   "semi": true,
   "singleQuote": true,

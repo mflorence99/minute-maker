@@ -44,40 +44,61 @@ import { inject } from '@angular/core';
 
         <mm-transcription
           (selected)="txIndex = $event"
-          [startDate]="date"
           [transcription]="transcription$ | async" />
 
         <mm-summary [summary]="summary$ | async" />
 
         <section class="buttons">
-          <button (click)="openMinutes()" appearance="primary" tuiButton>
+          <button
+            (click)="openMinutes()"
+            appearance="primary"
+            tuiButton
+            size="s">
             Open Minutes
           </button>
-          <button (click)="newMinutes()" appearance="secondary" tuiButton>
+          <button
+            (click)="newMinutes()"
+            appearance="secondary"
+            tuiButton
+            size="s">
             New Minutes
           </button>
           <button
             (click)="saveMinutes()"
             appearance="secondary-destructive"
-            tuiButton>
+            tuiButton
+            size="s">
             Save Minutes
           </button>
-          <button (click)="exporter.export()" appearance="accent" tuiButton>
+          <button
+            (click)="exporter.export()"
+            appearance="accent"
+            tuiButton
+            size="s">
             Export
           </button>
         </section>
 
         <section class="buttons">
-          <button (click)="transcribe()" appearance="outline" tuiButton>
+          <button
+            (click)="transcribe()"
+            appearance="outline"
+            tuiButton
+            size="s">
             Transcribe Minutes
           </button>
           <button
             (click)="cancelTranscription()"
             appearance="outline"
-            tuiButton>
+            tuiButton
+            size="s">
             Cancel Transcription
           </button>
-          <button (click)="summarizeMinutes()" appearance="outline" tuiButton>
+          <button
+            (click)="summarizeMinutes()"
+            appearance="outline"
+            tuiButton
+            size="s">
             Summarize Minutes
           </button>
         </section>
@@ -86,22 +107,36 @@ import { inject } from '@angular/core';
           <button
             (click)="rephraseTranscription()"
             appearance="outline"
-            tuiButton>
+            tuiButton
+            size="s">
             Rephrase #{{ txIndex }}
           </button>
-          <button (click)="splitTranscription()" appearance="outline" tuiButton>
+          <button
+            (click)="splitTranscription()"
+            appearance="outline"
+            tuiButton
+            size="s">
             Split #{{ txIndex }}
           </button>
-          <button (click)="joinTranscriptions()" appearance="outline" tuiButton>
+          <button
+            (click)="joinTranscriptions()"
+            appearance="outline"
+            tuiButton
+            size="s">
             Join #{{ txIndex }}
           </button>
           <button
             (click)="removeTranscription()"
             appearance="outline"
-            tuiButton>
+            tuiButton
+            size="s">
             Remove #{{ txIndex }}
           </button>
-          <button (click)="insertAgendaItem()" appearance="outline" tuiButton>
+          <button
+            (click)="insertAgendaItem()"
+            appearance="outline"
+            tuiButton
+            size="s">
             Agenda #{{ txIndex }}
           </button>
         </section>
@@ -110,11 +145,13 @@ import { inject } from '@angular/core';
           <button
             (click)="redo()"
             icon="tuiIconCornerUpRightLarge"
-            tuiIconButton></button>
+            tuiIconButton
+            size="s"></button>
           <button
             (click)="undo()"
             icon="tuiIconCornerUpLeftLarge"
-            tuiIconButton></button>
+            tuiIconButton
+            size="s"></button>
         </section>
 
         <ul class="recents">
@@ -172,8 +209,6 @@ export class RootPage {
   @Select(MinutesState.transcription) transcription$: Observable<
     (AgendaItem | Transcription)[]
   >;
-
-  date = new Date();
 
   txIndex = 0;
 

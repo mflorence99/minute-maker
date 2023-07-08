@@ -155,7 +155,6 @@ import { inject } from '@angular/core';
 export class TranscriptionComponent {
   @Output() selected = new EventEmitter<number>();
 
-  @Input({ required: true }) startDate: Date;
   @Input({ required: true }) transcription: (AgendaItem | Transcription)[];
 
   txIndex = 0;

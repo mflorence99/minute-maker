@@ -2,11 +2,11 @@
   "extends": "stylelint-config-standard",
   "overrides": [
     {
-      "files": ["**/*.scss"],
-      "customSyntax": "postcss-scss"
+      "files": ["**/*.less"],
+      "customSyntax": "postcss-less"
     }
   ],
-  "plugins": ["stylelint-order", "stylelint-scss"],
+  "plugins": ["stylelint-order", "stylelint-less"],
   "rules": {
     "at-rule-no-unknown": null,
     "block-closing-brace-empty-line-before": null,

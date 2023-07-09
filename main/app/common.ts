@@ -72,6 +72,16 @@ export const Constants = {
 };
 
 // //////////////////////////////////////////////////////////////////////////
+// 🟩 Electron menu IDs
+// //////////////////////////////////////////////////////////////////////////
+
+export enum MenuID {
+  open = 'menu/open',
+  redo = 'menu/redo',
+  undo = 'menu/undo'
+}
+
+// //////////////////////////////////////////////////////////////////////////
 // 🟩 Electron main/renderer channels
 // //////////////////////////////////////////////////////////////////////////
 
@@ -92,6 +102,9 @@ export enum Channels {
   localStorageRemoveItem = 'local-storage/removeItem',
   localStorageSetItem = 'local-storage/setItem',
   localStorageStore = 'local-storage/store',
+
+  menuEnable = 'menu/enable',
+  menuSelected = 'menu/selected',
 
   metadataParseFile = 'audio-metadata/parseFile',
 

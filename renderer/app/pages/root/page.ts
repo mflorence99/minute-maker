@@ -5,6 +5,7 @@ import { CancelTranscription } from '#mm/state/app';
 import { Component } from '@angular/core';
 import { InsertAgendaItem } from '#mm/state/minutes';
 import { JoinTranscriptions } from '#mm/state/minutes';
+import { MenuService } from '#mm/services/menu';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { NewMinutes } from '#mm/state/app';
@@ -212,6 +213,7 @@ export class RootPage {
 
   txIndex = 0;
 
+  #menu = inject(MenuService);
   #store = inject(Store);
 
   constructor() {

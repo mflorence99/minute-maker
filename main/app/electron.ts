@@ -5,17 +5,20 @@ import './dialog';
 import './fs';
 import './google-speech';
 import './google-storage';
+import './menu';
 import './openai';
 
 import { Channels } from './common';
 import { Constants } from './common';
 import { Package } from './common';
 
+import { menuTemplate } from './menu';
 import { store } from './local-storage';
 
 import * as Sentry from '@sentry/node';
 
 import { BrowserWindow } from 'electron';
+import { Menu } from 'electron';
 import { Rectangle } from 'electron';
 
 import { app } from 'electron';
@@ -70,6 +73,10 @@ app.on('ready', () => {
     y: bounds.y
   });
 
+  // 👇 configure the menu
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+
   // 👇 load from Angular's dev server in dev mode
   if (isDev) {
     theWindow.loadURL(
@@ -104,9 +111,6 @@ app.on('ready', () => {
     store.set('theWindow.bounds', theWindow.getBounds());
   theWindow.on('move', setBounds);
   theWindow.on('resize', setBounds);
-
-  // 👇 configure the window
-  theWindow.setMenu(null);
 
   // 👇 perform quit actions
   ipcMain.on(Channels.appQuit, () => {

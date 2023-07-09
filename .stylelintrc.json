@@ -4,9 +4,13 @@
     {
       "files": ["**/*.less"],
       "customSyntax": "postcss-less"
+    },
+    {
+      "files": ["**/*.ts"],
+      "customSyntax": "postcss-angular"
     }
   ],
-  "plugins": ["stylelint-order", "stylelint-less"],
+  "plugins": ["stylelint-order"],
   "rules": {
     "at-rule-no-unknown": null,
     "block-closing-brace-empty-line-before": null,
@@ -15,11 +19,11 @@
     "declaration-colon-newline-after": null,
     "function-no-unknown": null,
     "no-descending-specificity": null,
+    "no-empty-source": null,
     "no-invalid-position-at-import-rule": null,
     "order/order": ["custom-properties", "declarations"],
     "order/properties-alphabetical-order": true,
     "rule-empty-line-before": null,
-    "scss/at-rule-no-unknown": true,
     "selector-pseudo-element-no-unknown": [
       true,
       {
@@ -30,6 +34,14 @@
       true,
       {
         "ignore": "custom-elements"
+      }
+    ],
+    "unit-allowed-list": [
+      ["rem", "%", "s"],
+      {
+        "ignoreProperties": {
+          "px": ["/^border/"]
+        }
       }
     ],
     "value-keyword-case": null

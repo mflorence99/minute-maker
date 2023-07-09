@@ -36,7 +36,7 @@ import WaveSurfer from 'wavesurfer.js';
       figure {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 0.5rem;
 
         > * {
           width: 100%;

@@ -180,12 +180,12 @@ import { inject } from '@angular/core';
 
         mm-summary,
         mm-transcription {
-          height: 320px;
-          width: 480px;
+          height: 25rem;
+          width: 40rem;
         }
 
         mm-wavesurfer {
-          width: 480px;
+          width: 40rem;
         }
 
         .buttons {

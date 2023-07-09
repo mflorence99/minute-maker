@@ -60,7 +60,7 @@ import { inject } from '@angular/core';
       }
 
       td {
-        padding: 4px;
+        padding: 0.25rem;
       }
 
       td.summary {

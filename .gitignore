@@ -2,6 +2,7 @@
 .eslintcache
 
 /.angular
+/.postcss-angular
 /coverage
 /dist
 /installers

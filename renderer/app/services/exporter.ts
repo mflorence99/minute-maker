@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy } from '@angular/core';
-import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MinutesState } from '#mm/state/minutes';
 import { SetStatus } from '#mm/state/status';
 import { Store } from '@ngxs/store';
@@ -12,13 +11,8 @@ import { saveAs } from 'file-saver';
 import dayjs from 'dayjs';
 import nunjucks from 'nunjucks';
 
-@Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'mm-exporter',
-  template: ``,
-  styles: ['host { display: none; }']
-})
-export class ExporterComponent {
+@Injectable({ providedIn: 'root' })
+export class ExporterService {
   #store = inject(Store);
 
   export(): void {

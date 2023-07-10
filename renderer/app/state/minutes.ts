@@ -26,6 +26,11 @@ import { timer } from 'rxjs';
 import { updateItem } from '@ngxs/store/operators';
 import { withPreviousItem } from '#mm/utils';
 
+export class ClearMinutes {
+  static readonly type = '[Minutes] ClearMinutes';
+  constructor() {}
+}
+
 export class InsertAgendaItem extends UndoableAction {
   static readonly type = '[Minutes] InsertAgendaItem';
   constructor(
@@ -134,6 +139,14 @@ export class MinutesState implements NgxsOnInit {
 
   @Selector() static audioURL(minutes: MinutesStateModel): string {
     return minutes?.audio?.url;
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 ClearMinutes
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Action(ClearMinutes) clearMinutes({ setState }): void {
+    setState(null);
   }
 
   // //////////////////////////////////////////////////////////////////////////

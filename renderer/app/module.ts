@@ -7,7 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { ConfigState } from '#mm/state/config';
 import { ErrorHandler } from '@angular/core';
-import { ExporterComponent } from '#mm/components/exporter';
 import { FormsModule } from '@angular/forms';
 import { MinutesState } from '#mm/state/minutes';
 import { NgModule } from '@angular/core';
@@ -38,7 +37,6 @@ import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline'
 import isDev from '#mm/is-dev';
 
 const COMPONENTS = [
-  ExporterComponent,
   SummaryComponent,
   TranscriptionComponent,
   WaveSurferComponent,

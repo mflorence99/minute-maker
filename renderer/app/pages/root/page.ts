@@ -71,13 +71,6 @@ import { inject } from '@angular/core';
             size="s">
             Save Minutes
           </button>
-          <button
-            (click)="exporter.export()"
-            appearance="accent"
-            tuiButton
-            size="s">
-            Export
-          </button>
         </section>
 
         <section class="buttons">
@@ -165,8 +158,6 @@ import { inject } from '@angular/core';
 
         <footer>{{ (status$ | async).status }}</footer>
       </main>
-
-      <mm-exporter #exporter />
     </tui-root>
   `,
   styles: [

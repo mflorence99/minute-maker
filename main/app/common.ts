@@ -76,8 +76,13 @@ export const Constants = {
 // //////////////////////////////////////////////////////////////////////////
 
 export enum MenuID {
+  close = 'menu/close',
+  export = 'menu/export',
+  new = 'menu/new',
   open = 'menu/open',
   redo = 'menu/redo',
+  save = 'menu/save',
+  saveAs = 'menu/saveAs',
   undo = 'menu/undo'
 }
 

@@ -2,10 +2,12 @@ import { Action } from '@ngxs/store';
 import { AddRecent } from '#mm/state/recents';
 import { Channels } from '#mm/common';
 import { Clear as ClearUndoStacks } from '#mm/state/undo';
+import { ClearMinutes } from '#mm/state/minutes';
 import { ClearStatus } from '#mm/state/status';
 import { ConfigState } from '#mm/state/config';
 import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
+import { ExporterService } from '#mm/services/exporter';
 import { FSService } from '#mm/services/fs';
 import { Injectable } from '@angular/core';
 import { MetadataService } from '#mm/services/metadata';
@@ -44,6 +46,16 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 
 export class CancelTranscription {
   static readonly type = '[App] CancelTranscription';
+  constructor() {}
+}
+
+export class CloseMinutes {
+  static readonly type = '[App] CloseMinutes';
+  constructor() {}
+}
+
+export class ExportMinutes {
+  static readonly type = '[App] ExportMinutes';
   constructor() {}
 }
 
@@ -91,6 +103,7 @@ export type AppStateModel = {
 })
 @Injectable()
 export class AppState implements NgxsOnInit {
+  #exporter = inject(ExporterService);
   #fs = inject(FSService);
   #metadata = inject(MetadataService);
   #openai = inject(OpenAIService);
@@ -110,6 +123,27 @@ export class AppState implements NgxsOnInit {
       await this.#transcriber.cancelTranscription({ name: transcriptionName });
       this.#store.dispatch(new ClearStatus());
     }
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 CloseMinutes
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Action(CloseMinutes) closeMinutes({
+    setState
+  }: StateContext<AppStateModel>): void {
+    this.#store.dispatch(new SaveMinutes()).subscribe(() => {
+      this.#store.dispatch(new ClearMinutes());
+      setState(patch({ pathToMinutes: null }));
+    });
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 ExportMinutes
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Action(ExportMinutes) exportMinutes(): void {
+    this.#exporter.export();
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -231,7 +265,7 @@ export class AppState implements NgxsOnInit {
         filters: [{ extensions: ['json'], name: 'Minutes' }],
         title: 'Save Minutes'
       });
-      setState(patch({ pathToMinutes: path }));
+      if (path) setState(patch({ pathToMinutes: path }));
     } else await this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
   }
 

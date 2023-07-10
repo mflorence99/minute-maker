@@ -42,7 +42,6 @@
     "electron-store": "^8",
     "exponential-backoff": "^3",
     "jsome": "^2",
-    "memoizee": "^0.4.15",
     "music-metadata": "^7",
     "openai": "^3",
     "sharp": "^0.32.1",

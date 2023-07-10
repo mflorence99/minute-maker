@@ -32,14 +32,53 @@ export function menuSelected(menuItem): void {
 
 export const menuTemplate = [
   {
-    label: 'Minutes',
+    label: 'File',
     submenu: [
+      {
+        accelerator: 'CmdOrCtrl+N',
+        click: menuSelected,
+        enabled: true,
+        id: MenuID.new,
+        label: 'New Minutes from MP3 File...'
+      },
+      { type: 'separator' },
       {
         accelerator: 'CmdOrCtrl+O',
         click: menuSelected,
-        enabled: false,
+        enabled: true,
+        icon: tuiSVGtoPNG('tuiIconBookOpen'),
         id: MenuID.open,
-        label: 'Open Minutes JSON File'
+        label: 'Open Minutes JSON File...'
+      },
+      { type: 'separator' },
+      {
+        accelerator: 'CmdOrCtrl+S',
+        click: menuSelected,
+        enabled: false,
+        icon: tuiSVGtoPNG('tuiIconSave'),
+        id: MenuID.save,
+        label: 'Save Minutes'
+      },
+      {
+        accelerator: 'CmdOrCtrl+Shift+S',
+        click: menuSelected,
+        enabled: false,
+        id: MenuID.saveAs,
+        label: 'Save Minutes As...'
+      },
+      {
+        click: menuSelected,
+        enabled: false,
+        icon: tuiSVGtoPNG('tuiIconCode'),
+        id: MenuID.export,
+        label: 'Export Minutes As HTML...'
+      },
+      { type: 'separator' },
+      {
+        click: menuSelected,
+        enabled: false,
+        id: MenuID.close,
+        label: 'Close Minutes'
       }
     ]
   },

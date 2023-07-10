@@ -66,6 +66,7 @@ import { inject } from '@angular/core';
                       ix
                     )
                   "
+                  [mmRephraseable]="ix"
                   [value]="tx.speech"
                   autocomplete="off"
                   autocorrect="on"

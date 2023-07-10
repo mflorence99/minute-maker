@@ -16,6 +16,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RecentsState } from '#mm/state/recents';
+import { RephraseableDirective } from '#mm/directives/rephraseable';
 import { RootPage } from '#mm/pages/root/page';
 import { RouterModule } from '@angular/router';
 import { StatusState } from '#mm/state/status';
@@ -45,7 +46,7 @@ const COMPONENTS = [
   WaveSurferTimelineComponent
 ];
 
-const DIRECTIVES = [];
+const DIRECTIVES = [RephraseableDirective];
 
 const PAGES = [RootPage];
 

@@ -8,14 +8,10 @@ import { JoinTranscriptions } from '#mm/state/minutes';
 import { MenuService } from '#mm/services/menu';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
-import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
-import { OpenMinutes } from '#mm/state/app';
 import { RecentsState } from '#mm/state/recents';
-import { Redo } from '#mm/state/undo';
 import { RemoveTranscription } from '#mm/state/minutes';
 import { RephraseTranscription } from '#mm/state/app';
-import { SaveMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
 import { SetMinutes } from '#mm/state/minutes';
 import { SplitTranscription } from '#mm/state/minutes';
@@ -26,7 +22,6 @@ import { SummarizeMinutes } from '#mm/state/app';
 import { Summary } from '#mm/common';
 import { TranscribeMinutes } from '#mm/state/app';
 import { Transcription } from '#mm/common';
-import { Undo } from '#mm/state/undo';
 
 import { inject } from '@angular/core';
 
@@ -48,30 +43,6 @@ import { inject } from '@angular/core';
           [transcription]="transcription$ | async" />
 
         <mm-summary [summary]="summary$ | async" />
-
-        <section class="buttons">
-          <button
-            (click)="openMinutes()"
-            appearance="primary"
-            tuiButton
-            size="s">
-            Open Minutes
-          </button>
-          <button
-            (click)="newMinutes()"
-            appearance="secondary"
-            tuiButton
-            size="s">
-            New Minutes
-          </button>
-          <button
-            (click)="saveMinutes()"
-            appearance="secondary-destructive"
-            tuiButton
-            size="s">
-            Save Minutes
-          </button>
-        </section>
 
         <section class="buttons">
           <button
@@ -133,19 +104,6 @@ import { inject } from '@angular/core';
             size="s">
             Agenda #{{ txIndex }}
           </button>
-        </section>
-
-        <section class="buttons">
-          <button
-            (click)="redo()"
-            icon="tuiIconCornerUpRightLarge"
-            tuiIconButton
-            size="s"></button>
-          <button
-            (click)="undo()"
-            icon="tuiIconCornerUpLeftLarge"
-            tuiIconButton
-            size="s"></button>
         </section>
 
         <ul class="recents">
@@ -225,28 +183,12 @@ export class RootPage {
     this.#store.dispatch(new JoinTranscriptions(this.txIndex));
   }
 
-  newMinutes(): void {
-    this.#store.dispatch(new NewMinutes());
-  }
-
-  openMinutes(): void {
-    this.#store.dispatch(new OpenMinutes());
-  }
-
-  redo(): void {
-    this.#store.dispatch(new Redo());
-  }
-
   removeTranscription(): void {
     this.#store.dispatch(new RemoveTranscription(this.txIndex));
   }
 
   rephraseTranscription(): void {
     this.#store.dispatch(new RephraseTranscription('accuracy', this.txIndex));
-  }
-
-  saveMinutes(): void {
-    this.#store.dispatch(new SaveMinutes());
   }
 
   splitTranscription(): void {
@@ -261,9 +203,5 @@ export class RootPage {
     // 🔥 TEMPORARY
     this.#store.dispatch(new SetMinutes({ numSpeakers: 4 }));
     this.#store.dispatch(new TranscribeMinutes());
-  }
-
-  undo(): void {
-    this.#store.dispatch(new Undo());
   }
 }

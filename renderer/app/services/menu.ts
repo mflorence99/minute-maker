@@ -9,6 +9,7 @@ import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
 import { OpenMinutes } from '#mm/state/app';
 import { Redo } from '#mm/state/undo';
+import { RephraseTranscription } from '#mm/state/app';
 import { SaveMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
 import { Store } from '@ngxs/store';
@@ -30,12 +31,16 @@ export class MenuService {
 
   constructor() {
     this.#dispatch();
+    this.#monitorElementState();
     this.#monitorMinutesState();
     this.#monitorUndoState();
   }
 
   #dispatch(): void {
-    ipc.on(Channels.menuSelected, (event, id) => {
+    ipc.on(Channels.menuSelected, (event, id, x, y) => {
+      const element =
+        x && y ? (document.elementFromPoint(x, y) as HTMLElement) : null;
+      let ix;
       switch (id) {
         case MenuID.close:
           this.#store.dispatch(new CloseMinutes());
@@ -52,6 +57,16 @@ export class MenuService {
         case MenuID.redo:
           this.#store.dispatch(new Redo());
           break;
+        case MenuID.rephraseAccuracy:
+          ix = this.#getRephraseableIndex(element);
+          if (!isNaN(ix))
+            this.#store.dispatch(new RephraseTranscription('accuracy', ix));
+          break;
+        case MenuID.rephraseBrevity:
+          ix = this.#getRephraseableIndex(element);
+          if (!isNaN(ix))
+            this.#store.dispatch(new RephraseTranscription('brevity', ix));
+          break;
         case MenuID.save:
           this.#store.dispatch(new SaveMinutes());
           break;
@@ -62,6 +77,20 @@ export class MenuService {
           this.#store.dispatch(new Undo());
           break;
       }
+    });
+  }
+
+  #getRephraseableIndex(element: HTMLElement): number {
+    return Number(element.getAttribute('ng-reflect-mm-rephraseable') ?? NaN);
+  }
+
+  #monitorElementState(): void {
+    window.addEventListener('pointerdown', (event: MouseEvent) => {
+      const element = event.target as HTMLElement;
+      ipc.send(Channels.menuEnable, {
+        [MenuID.rephraseAccuracy]: !isNaN(this.#getRephraseableIndex(element)),
+        [MenuID.rephraseBrevity]: !isNaN(this.#getRephraseableIndex(element))
+      });
     });
   }
 

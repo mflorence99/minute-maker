@@ -105,7 +105,6 @@ export const menuTemplate = [
       { role: 'cut' },
       { role: 'copy' },
       { role: 'paste' },
-      { role: 'delete' },
       { type: 'separator' },
       { role: 'selectAll' }
     ]

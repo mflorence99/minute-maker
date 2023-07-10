@@ -4,7 +4,6 @@
     "<rootDir>/app/**/*.ts",
     "!<rootDir>/app/_jsome.ts",
     "!<rootDir>/app/common.ts",
-    "!<rootDir>/app/context-menu.ts",
     "!<rootDir>/app/electron.ts",
     "!<rootDir>/app/preload.ts"
   ],

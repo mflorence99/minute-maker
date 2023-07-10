@@ -81,6 +81,8 @@ export enum MenuID {
   new = 'menu/new',
   open = 'menu/open',
   redo = 'menu/redo',
+  rephraseAccuracy = 'menu/rephrase/accuracy',
+  rephraseBrevity = 'menu/rephrase/brevity',
   save = 'menu/save',
   saveAs = 'menu/saveAs',
   undo = 'menu/undo'

@@ -1,7 +1,7 @@
 import { Channels } from './common';
 import { MenuID } from './common';
 
-import { toPNG } from './utils';
+import { tuiSVGtoPNG } from './utils';
 
 import { Menu } from 'electron';
 import { MenuItem } from 'electron';
@@ -30,7 +30,7 @@ export function menuSelected(menuItem): void {
 // 🟪 Electron menu template
 // //////////////////////////////////////////////////////////////////////////
 
-export const menuTemplate: any = [
+export const menuTemplate = [
   {
     label: 'Minutes',
     submenu: [
@@ -39,7 +39,7 @@ export const menuTemplate: any = [
         click: menuSelected,
         enabled: false,
         id: MenuID.open,
-        label: 'Open minutes'
+        label: 'Open Minutes JSON File'
       }
     ]
   },
@@ -50,7 +50,7 @@ export const menuTemplate: any = [
         accelerator: 'CmdOrCtrl+Z',
         click: menuSelected,
         enabled: false,
-        icon: toPNG('tuiIconXOctagon', 24, 24),
+        icon: tuiSVGtoPNG('tuiIconCornerUpLeft'),
         id: MenuID.undo,
         label: 'Undo'
       },
@@ -58,13 +58,33 @@ export const menuTemplate: any = [
         accelerator: 'CmdOrCtrl+Y',
         click: menuSelected,
         enabled: false,
+        icon: tuiSVGtoPNG('tuiIconCornerUpRight'),
         id: MenuID.redo,
         label: 'Redo'
-      }
+      },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' },
+      { role: 'delete' },
+      { type: 'separator' },
+      { role: 'selectAll' }
     ]
   },
-  { role: 'viewMenu' },
-  { role: 'windowMenu' }
+  {
+    label: 'View',
+    submenu: [
+      { icon: tuiSVGtoPNG('tuiIconRefreshCw'), role: 'reload' },
+      { role: 'forceReload' },
+      { icon: tuiSVGtoPNG('tuiIconTool'), role: 'toggleDevTools' },
+      { type: 'separator' },
+      { role: 'togglefullscreen' }
+    ]
+  },
+  {
+    label: 'Window',
+    submenu: [{ role: 'minimize' }, { role: 'close' }]
+  }
 ];
 
 // //////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,8 @@
 import { Channels } from './common';
 import { MenuID } from './common';
 
+import { tuiSVGtoPNGfromCache } from './utils';
+
 import { BrowserWindow } from 'electron';
 
 import { ipcMain } from 'electron';
@@ -33,25 +35,29 @@ export function menuSelected(menuItem): void {
 ContextMenu({
   prepend: (actions, params, window: BrowserWindow) => [
     {
-      click: (): void => window.webContents.toggleDevTools(),
-      label: 'Toggle dev tools',
+      click: (): void => window.webContents.reload(),
+      icon: tuiSVGtoPNGfromCache('tuiIconRefreshCw'),
+      label: 'Reload',
       visible: isDev
     },
     {
-      click: (): void => window.webContents.reload(),
-      label: 'Reload the app',
+      click: (): void => window.webContents.toggleDevTools(),
+      icon: tuiSVGtoPNGfromCache('tuiIconTool'),
+      label: 'Toggle Developer Tools',
       visible: isDev
     },
-    actions.separator(),
+    { type: 'separator' },
     {
       click: menuSelected,
       enabled: itemsEnabled[MenuID.undo],
+      icon: tuiSVGtoPNGfromCache('tuiIconCornerUpLeft'),
       id: MenuID.undo,
       label: 'Undo'
     },
     {
       click: menuSelected,
       enabled: itemsEnabled[MenuID.redo],
+      icon: tuiSVGtoPNGfromCache('tuiIconCornerUpRight'),
       id: MenuID.redo,
       label: 'Redo'
     }

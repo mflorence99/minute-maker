@@ -40,6 +40,12 @@
         "selector": "typeLike"
       }
     ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ],
     "@typescript-eslint/unbound-method": "off",
     "jest/max-expects": "off",
     "jest/no-conditional-expect": "off",

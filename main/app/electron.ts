@@ -13,6 +13,7 @@ import { Constants } from './common';
 import { Package } from './common';
 
 import { menuTemplate } from './menu';
+import { resolveAllPromises } from './utils';
 import { store } from './local-storage';
 
 import * as Sentry from '@sentry/node';
@@ -46,7 +47,7 @@ if (!isDev) {
 
 // 👇 ready to rock!
 
-app.on('ready', () => {
+app.on('ready', async () => {
   // 👇 get the last-used window bounds
   const bounds = store.get('theWindow.bounds', {
     height: 600,
@@ -74,7 +75,8 @@ app.on('ready', () => {
   });
 
   // 👇 configure the menu
-  const menu = Menu.buildFromTemplate(menuTemplate);
+  const resolved = await resolveAllPromises(menuTemplate);
+  const menu = Menu.buildFromTemplate(resolved);
   Menu.setApplicationMenu(menu);
 
   // 👇 load from Angular's dev server in dev mode

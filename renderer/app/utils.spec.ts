@@ -2,8 +2,6 @@ import 'jest-extended';
 
 import { WatchableEventEmitter } from '#mm/utils';
 
-import { asBullets } from '#mm/utils';
-import { asParagraphs } from '#mm/utils';
 import { bufferCount } from 'rxjs';
 import { from } from 'rxjs';
 import { kebabasize } from '#mm/utils';
@@ -46,22 +44,6 @@ describe('function kebabasize', () => {
       'person20-address',
       'user-api20-endpoint'
     ]);
-  });
-});
-
-describe('function asParagraphs', () => {
-  it('correctly converts text into HTML', () => {
-    const text = 'hello\n\nworld';
-    const html = '<p>hello</p><p>world</p>';
-    expect(asParagraphs(text)).toBe(html);
-  });
-});
-
-describe('function asBullets', () => {
-  it('correctly converts text into HTML', () => {
-    const text = '- item1\n- item2\n- item3';
-    const html = '<li>item1\n<li>item2\n<li>item3';
-    expect(asBullets(text)).toBe(html);
   });
 });
 

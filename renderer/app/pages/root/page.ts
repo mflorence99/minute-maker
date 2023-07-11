@@ -196,7 +196,7 @@ export class RootPage {
   }
 
   summarizeMinutes(): void {
-    this.#store.dispatch(new SummarizeMinutes('paragraphs'));
+    this.#store.dispatch(new SummarizeMinutes('bullets'));
   }
 
   transcribe(): void {

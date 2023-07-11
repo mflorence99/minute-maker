@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { ConfigState } from '#mm/state/config';
 import { ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MarkdownModule } from 'ngx-markdown';
 import { MinutesState } from '#mm/state/minutes';
 import { NgModule } from '@angular/core';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
@@ -73,6 +74,7 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
     BrowserModule,
     CommonModule,
     FormsModule,
+    MarkdownModule.forRoot(),
     NgxsModule.forRoot(STATES, {
       developmentMode: isDev
     }),

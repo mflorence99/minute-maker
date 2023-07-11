@@ -136,11 +136,7 @@
       {% if summ.section %}
         <h3>{{ summ.section }}</h3>
       {% endif %} 
-      {% if minutes.summaryStrategy == 'paragraphs' %}
-        {{ asParagraphs(summ.summary) }} 
-      {% elif minutes.summaryStrategy == 'bullets' %}
-        {{ asBullets(summ.summary) }} 
-      {% endif %} 
+      {{ fromMarkdown(summ.summary) }} 
     {% endfor %}
 
     <h2>Transcript</h2>
@@ -164,7 +160,7 @@
               {{ tx.speaker }}
             </td>
             <td class="speech">
-              {{ asParagraphs(tx.speech) }}
+              {{ fromMarkdown(tx.speech) }}
             </td>
           {% endif %}
 

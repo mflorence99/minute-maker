@@ -9,6 +9,7 @@ import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
 import { OpenMinutes } from '#mm/state/app';
 import { Redo } from '#mm/state/undo';
+import { RephraseableDirective } from '#mm/directives/rephraseable';
 import { RephraseTranscription } from '#mm/state/app';
 import { SaveMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
@@ -16,6 +17,7 @@ import { Store } from '@ngxs/store';
 import { Undo } from '#mm/state/undo';
 import { UndoState } from '#mm/state/undo';
 import { UndoStateModel } from '#mm/state/undo';
+import { WINDOW } from '@ng-web-apis/common';
 
 import { inject } from '@angular/core';
 
@@ -28,6 +30,7 @@ export class MenuService {
   @Select(UndoState) undo$: Observable<UndoStateModel>;
 
   #store = inject(Store);
+  #window = inject(WINDOW);
 
   constructor() {
     this.#dispatch();
@@ -37,10 +40,7 @@ export class MenuService {
   }
 
   #dispatch(): void {
-    ipc.on(Channels.menuSelected, (event, id, x, y) => {
-      const element =
-        x && y ? (document.elementFromPoint(x, y) as HTMLElement) : null;
-      let ix;
+    ipc.on(Channels.menuSelected, (event, id: MenuID, x: number, y: number) => {
       switch (id) {
         case MenuID.close:
           this.#store.dispatch(new CloseMinutes());
@@ -58,14 +58,18 @@ export class MenuService {
           this.#store.dispatch(new Redo());
           break;
         case MenuID.rephraseAccuracy:
-          ix = this.#getRephraseableIndex(element);
-          if (!isNaN(ix))
-            this.#store.dispatch(new RephraseTranscription('accuracy', ix));
+          {
+            const ix = this.#getRephraseableIndex(this.#elementFromPoint(x, y));
+            if (!isNaN(ix))
+              this.#store.dispatch(new RephraseTranscription('accuracy', ix));
+          }
           break;
         case MenuID.rephraseBrevity:
-          ix = this.#getRephraseableIndex(element);
-          if (!isNaN(ix))
-            this.#store.dispatch(new RephraseTranscription('brevity', ix));
+          {
+            const ix = this.#getRephraseableIndex(this.#elementFromPoint(x, y));
+            if (!isNaN(ix))
+              this.#store.dispatch(new RephraseTranscription('brevity', ix));
+          }
           break;
         case MenuID.save:
           this.#store.dispatch(new SaveMinutes());
@@ -80,12 +84,19 @@ export class MenuService {
     });
   }
 
+  #elementFromPoint(x: number, y: number): HTMLElement {
+    return x && y
+      ? (this.#window.document.elementFromPoint(x, y) as HTMLElement)
+      : null;
+  }
+
   #getRephraseableIndex(element: HTMLElement): number {
-    return Number(element.getAttribute('ng-reflect-mm-rephraseable') ?? NaN);
+    const rephraseable = element?.['mmRephraseable'] as RephraseableDirective;
+    return Number(rephraseable?.mmRephraseable ?? NaN);
   }
 
   #monitorElementState(): void {
-    window.addEventListener('pointerdown', (event: MouseEvent) => {
+    this.#window.addEventListener('pointerdown', (event: MouseEvent) => {
       const element = event.target as HTMLElement;
       ipc.send(Channels.menuEnable, {
         [MenuID.rephraseAccuracy]: !isNaN(this.#getRephraseableIndex(element)),

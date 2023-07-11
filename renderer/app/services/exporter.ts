@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
+import { MarkdownService } from 'ngx-markdown';
 import { MinutesState } from '#mm/state/minutes';
 import { SetStatus } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 
-import { asBullets } from '#mm/utils';
-import { asParagraphs } from '#mm/utils';
 import { inject } from '@angular/core';
 import { saveAs } from 'file-saver';
 
@@ -13,6 +12,7 @@ import nunjucks from 'nunjucks';
 
 @Injectable({ providedIn: 'root' })
 export class ExporterService {
+  #markdown = inject(MarkdownService);
   #store = inject(Store);
 
   export(): void {
@@ -22,11 +22,9 @@ export class ExporterService {
       // 👇 prepare the export from the minutes and the template
       const env = nunjucks.configure('./assets', { autoescape: false });
       const result = env.render('template.njk', {
-        asParagraphs,
-        asBullets,
         dayjs,
-        minutes,
-        test: [1, 2, 3]
+        fromMarkdown: this.#markdown.parse.bind(this.#markdown),
+        minutes
       });
       // 👇 export the resulting HTML
       const blob = new Blob([result], {

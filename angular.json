@@ -40,7 +40,6 @@
               "dayjs",
               "file-saver",
               "nunjucks",
-              "openai",
               "wavesurfer.js"
             ],
             "assets": [
@@ -58,7 +57,7 @@
             "outputPath": "dist/renderer",
             "polyfills": ["zone.js"],
             "preserveSymlinks": true,
-            "scripts": [],
+            "scripts": ["node_modules/marked/marked.min.js"],
             "styles": [
               "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
               "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
@@ -92,7 +91,7 @@
       "root": "",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "less"
         }
       },
       "sourceRoot": "renderer"

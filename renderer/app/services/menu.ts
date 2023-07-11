@@ -2,6 +2,10 @@ import { Channels } from '#mm/common';
 import { CloseMinutes } from '#mm/state/app';
 import { ExportMinutes } from '#mm/state/app';
 import { Injectable } from '@angular/core';
+import { InsertableDirective } from '#mm/directives/insertable';
+import { InsertAgendaItem } from '#mm/state/minutes';
+import { JoinableDirective } from '#mm/directives/joinable';
+import { JoinTranscriptions } from '#mm/state/minutes';
 import { MenuID } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
@@ -9,10 +13,14 @@ import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
 import { OpenMinutes } from '#mm/state/app';
 import { Redo } from '#mm/state/undo';
+import { RemovableDirective } from '#mm/directives/removable';
+import { RemoveAgendaItem } from '#mm/state/minutes';
 import { RephraseableDirective } from '#mm/directives/rephraseable';
 import { RephraseTranscription } from '#mm/state/app';
 import { SaveMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
+import { SplittableDirective } from '#mm/directives/splittable';
+import { SplitTranscription } from '#mm/state/minutes';
 import { Store } from '@ngxs/store';
 import { Undo } from '#mm/state/undo';
 import { UndoState } from '#mm/state/undo';
@@ -48,6 +56,21 @@ export class MenuService {
         case MenuID.export:
           this.#store.dispatch(new ExportMinutes());
           break;
+        case MenuID.insert:
+          {
+            const ix = this.#getInsertableIndex(this.#elementFromPoint(x, y));
+            if (!isNaN(ix))
+              this.#store.dispatch(
+                new InsertAgendaItem({ title: 'New Agenda Item' }, ix)
+              );
+          }
+          break;
+        case MenuID.join:
+          {
+            const ix = this.#getJoinableIndex(this.#elementFromPoint(x, y));
+            if (!isNaN(ix)) this.#store.dispatch(new JoinTranscriptions(ix));
+          }
+          break;
         case MenuID.new:
           this.#store.dispatch(new NewMinutes());
           break;
@@ -56,6 +79,12 @@ export class MenuService {
           break;
         case MenuID.redo:
           this.#store.dispatch(new Redo());
+          break;
+        case MenuID.remove:
+          {
+            const ix = this.#getRemovableIndex(this.#elementFromPoint(x, y));
+            if (!isNaN(ix)) this.#store.dispatch(new RemoveAgendaItem(ix));
+          }
           break;
         case MenuID.rephraseAccuracy:
           {
@@ -77,6 +106,16 @@ export class MenuService {
         case MenuID.saveAs:
           this.#store.dispatch(new SaveMinutes(true));
           break;
+        case MenuID.split:
+          {
+            const element = this.#elementFromPoint(x, y);
+            const ix = this.#getSplittableIndex(element);
+            if (!isNaN(ix)) {
+              const iy = element.selectionStart;
+              this.#store.dispatch(new SplitTranscription(ix, iy));
+            }
+          }
+          break;
         case MenuID.undo:
           this.#store.dispatch(new Undo());
           break;
@@ -84,10 +123,25 @@ export class MenuService {
     });
   }
 
-  #elementFromPoint(x: number, y: number): HTMLElement {
+  #elementFromPoint(x: number, y: number): HTMLTextAreaElement {
     return x && y
-      ? (this.#window.document.elementFromPoint(x, y) as HTMLElement)
+      ? (this.#window.document.elementFromPoint(x, y) as HTMLTextAreaElement)
       : null;
+  }
+
+  #getInsertableIndex(element: HTMLElement): number {
+    const insertable = element?.['mmInsertable'] as InsertableDirective;
+    return Number(insertable?.mmInsertable ?? NaN);
+  }
+
+  #getJoinableIndex(element: HTMLElement): number {
+    const joinable = element?.['mmJoinable'] as JoinableDirective;
+    return Number(joinable?.mmJoinable ?? NaN);
+  }
+
+  #getRemovableIndex(element: HTMLElement): number {
+    const removable = element?.['mmRemovable'] as RemovableDirective;
+    return Number(removable?.mmRemovable ?? NaN);
   }
 
   #getRephraseableIndex(element: HTMLElement): number {
@@ -95,12 +149,21 @@ export class MenuService {
     return Number(rephraseable?.mmRephraseable ?? NaN);
   }
 
+  #getSplittableIndex(element: HTMLElement): number {
+    const splittable = element?.['mmSplittable'] as SplittableDirective;
+    return Number(splittable?.mmSplittable ?? NaN);
+  }
+
   #monitorElementState(): void {
     this.#window.addEventListener('pointerdown', (event: MouseEvent) => {
       const element = event.target as HTMLElement;
       ipc.send(Channels.menuEnable, {
+        [MenuID.insert]: !isNaN(this.#getInsertableIndex(element)),
+        [MenuID.join]: !isNaN(this.#getJoinableIndex(element)),
+        [MenuID.remove]: !isNaN(this.#getRemovableIndex(element)),
         [MenuID.rephraseAccuracy]: !isNaN(this.#getRephraseableIndex(element)),
-        [MenuID.rephraseBrevity]: !isNaN(this.#getRephraseableIndex(element))
+        [MenuID.rephraseBrevity]: !isNaN(this.#getRephraseableIndex(element)),
+        [MenuID.split]: !isNaN(this.#getSplittableIndex(element))
       });
     });
   }

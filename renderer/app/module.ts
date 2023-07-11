@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { ConfigState } from '#mm/state/config';
 import { ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { InsertableDirective } from '#mm/directives/insertable';
+import { JoinableDirective } from '#mm/directives/joinable';
 import { MarkdownModule } from 'ngx-markdown';
 import { MinutesState } from '#mm/state/minutes';
 import { NgModule } from '@angular/core';
@@ -17,9 +19,11 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RecentsState } from '#mm/state/recents';
+import { RemovableDirective } from '#mm/directives/removable';
 import { RephraseableDirective } from '#mm/directives/rephraseable';
 import { RootPage } from '#mm/pages/root/page';
 import { RouterModule } from '@angular/router';
+import { SplittableDirective } from '#mm/directives/splittable';
 import { StatusState } from '#mm/state/status';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
 import { StorageEngine } from '#mm/state/storage-engine';
@@ -47,7 +51,13 @@ const COMPONENTS = [
   WaveSurferTimelineComponent
 ];
 
-const DIRECTIVES = [RephraseableDirective];
+const DIRECTIVES = [
+  InsertableDirective,
+  JoinableDirective,
+  RemovableDirective,
+  RephraseableDirective,
+  SplittableDirective
+];
 
 const PAGES = [RootPage];
 

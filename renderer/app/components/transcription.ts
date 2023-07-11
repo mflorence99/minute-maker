@@ -35,6 +35,7 @@ import { inject } from '@angular/core';
                   (input)="
                     updateAgendaItem({ title: agendaItemTitle.value }, ix)
                   "
+                  [mmRemovable]="ix"
                   [value]="tx.title"
                   autocomplete="off"
                   autocorrect="on"
@@ -66,7 +67,12 @@ import { inject } from '@angular/core';
                       ix
                     )
                   "
+                  [mmInsertable]="ix"
+                  [mmJoinable]="
+                    transcription[ix + 1]?.type === 'TX' ? ix : null
+                  "
                   [mmRephraseable]="ix"
+                  [mmSplittable]="ix"
                   [value]="tx.speech"
                   autocomplete="off"
                   autocorrect="on"
@@ -132,7 +138,6 @@ import { inject } from '@angular/core';
         font-weight: bold;
         height: 1.125rem;
         overflow: hidden;
-        text-transform: uppercase;
       }
 
       tui-scrollbar {

@@ -313,7 +313,7 @@ export class AppState implements NgxsOnInit {
           throw new Error('This section is too long to rephrase');
         summary.push({ section, summary: response.text });
       }
-      this.#store.dispatch(new SetMinutes({ summary, summaryStrategy }));
+      this.#store.dispatch(new SetMinutes({ summary }));
     } catch (error) {
       this.#store.dispatch(new SetStatus({ error }));
     } finally {

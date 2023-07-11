@@ -3,18 +3,13 @@ import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
 import { CancelTranscription } from '#mm/state/app';
 import { Component } from '@angular/core';
-import { InsertAgendaItem } from '#mm/state/minutes';
-import { JoinTranscriptions } from '#mm/state/minutes';
 import { MenuService } from '#mm/services/menu';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { Observable } from 'rxjs';
 import { RecentsState } from '#mm/state/recents';
-import { RemoveTranscription } from '#mm/state/minutes';
-import { RephraseTranscription } from '#mm/state/app';
 import { Select } from '@ngxs/store';
 import { SetMinutes } from '#mm/state/minutes';
-import { SplitTranscription } from '#mm/state/minutes';
 import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
@@ -47,62 +42,24 @@ import { inject } from '@angular/core';
         <section class="buttons">
           <button
             (click)="transcribe()"
-            appearance="outline"
+            appearance="primary"
             tuiButton
             size="s">
             Transcribe Minutes
           </button>
           <button
             (click)="cancelTranscription()"
-            appearance="outline"
+            appearance="secondary"
             tuiButton
             size="s">
             Cancel Transcription
           </button>
           <button
             (click)="summarizeMinutes()"
-            appearance="outline"
+            appearance="accent"
             tuiButton
             size="s">
             Summarize Minutes
-          </button>
-        </section>
-
-        <section class="buttons">
-          <button
-            (click)="rephraseTranscription()"
-            appearance="outline"
-            tuiButton
-            size="s">
-            Rephrase #{{ txIndex }}
-          </button>
-          <button
-            (click)="splitTranscription()"
-            appearance="outline"
-            tuiButton
-            size="s">
-            Split #{{ txIndex }}
-          </button>
-          <button
-            (click)="joinTranscriptions()"
-            appearance="outline"
-            tuiButton
-            size="s">
-            Join #{{ txIndex }}
-          </button>
-          <button
-            (click)="removeTranscription()"
-            appearance="outline"
-            tuiButton
-            size="s">
-            Remove #{{ txIndex }}
-          </button>
-          <button
-            (click)="insertAgendaItem()"
-            appearance="outline"
-            tuiButton
-            size="s">
-            Agenda #{{ txIndex }}
           </button>
         </section>
 
@@ -173,30 +130,8 @@ export class RootPage {
     this.#store.dispatch(new CancelTranscription());
   }
 
-  insertAgendaItem(): void {
-    this.#store.dispatch(
-      new InsertAgendaItem({ title: '--Untitled--' }, this.txIndex)
-    );
-  }
-
-  joinTranscriptions(): void {
-    this.#store.dispatch(new JoinTranscriptions(this.txIndex));
-  }
-
-  removeTranscription(): void {
-    this.#store.dispatch(new RemoveTranscription(this.txIndex));
-  }
-
-  rephraseTranscription(): void {
-    this.#store.dispatch(new RephraseTranscription('accuracy', this.txIndex));
-  }
-
-  splitTranscription(): void {
-    this.#store.dispatch(new SplitTranscription(this.txIndex, 25));
-  }
-
   summarizeMinutes(): void {
-    this.#store.dispatch(new SummarizeMinutes('bullets'));
+    this.#store.dispatch(new SummarizeMinutes('paragraphs'));
   }
 
   transcribe(): void {

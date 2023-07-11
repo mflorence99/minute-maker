@@ -51,7 +51,6 @@ import { inject } from '@angular/core';
         font-weight: bold;
         height: 1.75rem;
         overflow: hidden;
-        text-transform: uppercase;
       }
 
       table {

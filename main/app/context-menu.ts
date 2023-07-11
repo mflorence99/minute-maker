@@ -81,6 +81,31 @@ ContextMenu({
         enabled: itemsEnabled[MenuID.rephraseBrevity],
         id: MenuID.rephraseBrevity,
         label: 'Rephrase for Brevity'
+      },
+      { type: 'separator' },
+      {
+        click: clicker,
+        enabled: itemsEnabled[MenuID.insert],
+        id: MenuID.insert,
+        label: 'Insert Agenda Item Above'
+      },
+      {
+        click: clicker,
+        enabled: itemsEnabled[MenuID.remove],
+        id: MenuID.remove,
+        label: 'Remove Agenda Item'
+      },
+      {
+        click: clicker,
+        enabled: itemsEnabled[MenuID.split],
+        id: MenuID.split,
+        label: 'Split Transcription at Cursor'
+      },
+      {
+        click: clicker,
+        enabled: itemsEnabled[MenuID.join],
+        id: MenuID.join,
+        label: 'Join to next Transcription'
       }
     ];
   },

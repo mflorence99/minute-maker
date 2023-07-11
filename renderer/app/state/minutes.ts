@@ -328,6 +328,7 @@ export class MinutesState implements NgxsOnInit {
         nextTranscriptionID,
         transcription: insertItem(
           {
+            speaker: '',
             speech: original.speech.substring(pos).trim(),
             id: nextTranscriptionID,
             type: 'TX'

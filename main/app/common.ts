@@ -78,13 +78,17 @@ export const Constants = {
 export enum MenuID {
   close = 'menu/close',
   export = 'menu/export',
+  insert = 'menu/insert',
+  join = 'menu/join',
   new = 'menu/new',
   open = 'menu/open',
   redo = 'menu/redo',
+  remove = 'menu/remove',
   rephraseAccuracy = 'menu/rephrase/accuracy',
   rephraseBrevity = 'menu/rephrase/brevity',
   save = 'menu/save',
   saveAs = 'menu/saveAs',
+  split = 'menu/split',
   undo = 'menu/undo'
 }
 
@@ -246,7 +250,6 @@ export const MinutesSchema = z.object({
   subject: z.string().optional(),
   subtitle: z.string().optional(),
   summary: SummarySchema.array().optional(),
-  summaryStrategy: z.enum(summaryStrategies).optional(),
   title: z.string(),
   transcription: z
     .discriminatedUnion('type', [AgendaItemSchema, TranscriptionSchema])

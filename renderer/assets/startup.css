@@ -1,8 +1,3 @@
-body {
-  /* 👇 must match app body */
-  background-color: #222222;
-}
-
 .startup-loading {
   align-items: center;
   display: flex;

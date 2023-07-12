@@ -22,8 +22,7 @@ import { inject } from '@angular/core';
 @Component({
   selector: 'mm-root',
   template: `
-    <tui-theme-night />
-    <tui-root tuiMode="onDark">
+    <tui-root>
       <main>
         <header>{{ (app$ | async).pathToMinutes }}</header>
         <mm-wavesurfer

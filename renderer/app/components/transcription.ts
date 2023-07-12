@@ -29,7 +29,7 @@ import { inject } from '@angular/core';
             </td>
 
             <ng-container *ngIf="tx.type === 'AG'">
-              <td class="title" colspan="2">
+              <td colspan="2" width="100%">
                 <textarea
                   #agendaItemTitle
                   (input)="
@@ -39,9 +39,10 @@ import { inject } from '@angular/core';
                   [value]="tx.title"
                   autocomplete="off"
                   autocorrect="on"
-                  class="title"
+                  class="heading"
                   rows="1"
                   spellcheck="true"
+                  style="width: calc(100% - 1rem)"
                   wrap="off"></textarea>
               </td>
             </ng-container>
@@ -56,9 +57,11 @@ import { inject } from '@angular/core';
                       ix
                     )
                   "
-                  [value]="tx.speaker" />
+                  [value]="tx.speaker"
+                  style="font-weight: bold; width: 7rem" />
               </td>
-              <td class="speech">
+
+              <td width="100%">
                 <textarea
                   #transcriptionSpeech
                   (input)="
@@ -77,8 +80,8 @@ import { inject } from '@angular/core';
                   autocomplete="off"
                   autocorrect="on"
                   autosize
-                  class="speech"
                   spellcheck="true"
+                  style="width: calc(100% - 1rem)"
                   wrap="soft"></textarea>
               </td>
             </ng-container>
@@ -86,77 +89,7 @@ import { inject } from '@angular/core';
         </tbody>
       </table>
     </tui-scrollbar>
-  `,
-  styles: [
-    `
-      input {
-        background-color: inherit;
-        border: none;
-        color: inherit;
-        font-family: inherit;
-        font-weight: bold;
-        width: 7rem;
-      }
-
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-
-      td {
-        padding: 0.25rem;
-      }
-
-      td.speech,
-      td.title {
-        width: 100%;
-      }
-
-      tr {
-        vertical-align: top;
-      }
-
-      tr:not(:last-child) {
-        border-bottom: 1px dotted;
-      }
-
-      textarea {
-        background-color: inherit;
-        border: none;
-        color: inherit;
-        font-family: inherit;
-        resize: none;
-        width: 100%;
-      }
-
-      textarea.speech {
-        height: 100%;
-      }
-
-      textarea.title {
-        font-size: larger;
-        font-weight: bold;
-        height: 1.125rem;
-        overflow: hidden;
-      }
-
-      tui-scrollbar {
-        border: 1px dotted;
-        height: 100%;
-        width: 100%;
-      }
-
-      tui-svg.marker {
-        color: var(--tui-primary);
-        opacity: 0;
-        transition: opacity 0.5s;
-
-        &.current {
-          opacity: 1;
-        }
-      }
-    `
-  ]
+  `
 })
 export class TranscriptionComponent {
   @Output() selected = new EventEmitter<number>();

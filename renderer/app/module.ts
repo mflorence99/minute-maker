@@ -16,13 +16,11 @@ import { NgModule } from '@angular/core';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RecentsState } from '#mm/state/recents';
 import { RemovableDirective } from '#mm/directives/removable';
 import { RephraseableDirective } from '#mm/directives/rephraseable';
 import { RootPage } from '#mm/pages/root/page';
-import { RouterModule } from '@angular/router';
 import { SplittableDirective } from '#mm/directives/splittable';
 import { StatusState } from '#mm/state/status';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
@@ -61,8 +59,6 @@ const DIRECTIVES = [
 
 const PAGES = [RootPage];
 
-const ROUTES = [];
-
 const STATES = [
   AppState,
   ConfigState,
@@ -91,12 +87,10 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: !isDev
     }),
-    NgxsRouterPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
       key: STATES_SAVED
     }),
     NgxsLoggerPluginModule.forRoot({ collapsed: false }),
-    RouterModule.forRoot(ROUTES),
     TuiButtonModule,
     TuiRootModule,
     TuiScrollbarModule,

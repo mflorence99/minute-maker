@@ -40,7 +40,7 @@
       ["deg", "rem", "%", "s"],
       {
         "ignoreProperties": {
-          "px": ["/^border/"]
+          "px": ["/^border/", "/^outline/"]
         }
       }
     ],

@@ -3,7 +3,6 @@ import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
 import { CancelTranscription } from '#mm/state/app';
 import { Component } from '@angular/core';
-import { MenuService } from '#mm/services/menu';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { Observable } from 'rxjs';
@@ -24,7 +23,7 @@ import { inject } from '@angular/core';
   selector: 'mm-root',
   template: `
     <tui-theme-night />
-    <tui-root>
+    <tui-root tuiMode="onDark">
       <main>
         <header>{{ (app$ | async).pathToMinutes }}</header>
         <mm-wavesurfer
@@ -74,36 +73,7 @@ import { inject } from '@angular/core';
         <footer>{{ (status$ | async).status }}</footer>
       </main>
     </tui-root>
-  `,
-  styles: [
-    `
-      main {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        height: 100%;
-        justify-content: center;
-
-        mm-summary,
-        mm-transcription {
-          height: 25rem;
-          width: 40rem;
-        }
-
-        mm-wavesurfer {
-          width: 40rem;
-        }
-
-        .buttons {
-          display: flex;
-          flex-flow: row wrap;
-          gap: 2rem;
-          justify-content: center;
-        }
-      }
-    `
-  ]
+  `
 })
 export class RootPage {
   @Select(AppState) app$: Observable<AppStateModel>;
@@ -119,7 +89,6 @@ export class RootPage {
 
   txIndex = 0;
 
-  #menu = inject(MenuService);
   #store = inject(Store);
 
   constructor() {

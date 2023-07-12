@@ -28,6 +28,7 @@ export function menuSelected(x, y): any {
       globalThis.theWindow.webContents.send(
         Channels.menuSelected,
         menuItem.id,
+        menuItem.data,
         x,
         y
       );

@@ -12,6 +12,8 @@ import { MinutesStateModel } from '#mm/state/minutes';
 import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
 import { OpenMinutes } from '#mm/state/app';
+import { RecentsState } from '#mm/state/recents';
+import { RecentsStateModel } from '#mm/state/recents';
 import { Redo } from '#mm/state/undo';
 import { RemovableDirective } from '#mm/directives/removable';
 import { RemoveAgendaItem } from '#mm/state/minutes';
@@ -22,6 +24,7 @@ import { Select } from '@ngxs/store';
 import { SplittableDirective } from '#mm/directives/splittable';
 import { SplitTranscription } from '#mm/state/minutes';
 import { Store } from '@ngxs/store';
+import { SubmenuItem } from '#mm/common';
 import { Undo } from '#mm/state/undo';
 import { UndoState } from '#mm/state/undo';
 import { UndoStateModel } from '#mm/state/undo';
@@ -32,9 +35,13 @@ import { inject } from '@angular/core';
 // 🙈 preload.ts
 declare const ipc /* 👈 typeof ipcRenderer */;
 
+// 👇 this service is not used by any component; instead it is a
+//    dispatcher for menu tasks and is injected into the root module
+
 @Injectable({ providedIn: 'root' })
 export class MenuService {
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
+  @Select(RecentsState) recents$: Observable<RecentsStateModel>;
   @Select(UndoState) undo$: Observable<UndoStateModel>;
 
   #store = inject(Store);
@@ -44,83 +51,94 @@ export class MenuService {
     this.#dispatch();
     this.#monitorElementState();
     this.#monitorMinutesState();
+    this.#monitorRecentsState();
     this.#monitorUndoState();
   }
 
   #dispatch(): void {
-    ipc.on(Channels.menuSelected, (event, id: MenuID, x: number, y: number) => {
-      switch (id) {
-        case MenuID.close:
-          this.#store.dispatch(new CloseMinutes());
-          break;
-        case MenuID.export:
-          this.#store.dispatch(new ExportMinutes());
-          break;
-        case MenuID.insert:
-          {
-            const ix = this.#getInsertableIndex(this.#elementFromPoint(x, y));
-            if (!isNaN(ix))
-              this.#store.dispatch(
-                new InsertAgendaItem({ title: 'New Agenda Item' }, ix)
-              );
-          }
-          break;
-        case MenuID.join:
-          {
-            const ix = this.#getJoinableIndex(this.#elementFromPoint(x, y));
-            if (!isNaN(ix)) this.#store.dispatch(new JoinTranscriptions(ix));
-          }
-          break;
-        case MenuID.new:
-          this.#store.dispatch(new NewMinutes());
-          break;
-        case MenuID.open:
-          this.#store.dispatch(new OpenMinutes());
-          break;
-        case MenuID.redo:
-          this.#store.dispatch(new Redo());
-          break;
-        case MenuID.remove:
-          {
-            const ix = this.#getRemovableIndex(this.#elementFromPoint(x, y));
-            if (!isNaN(ix)) this.#store.dispatch(new RemoveAgendaItem(ix));
-          }
-          break;
-        case MenuID.rephraseAccuracy:
-          {
-            const ix = this.#getRephraseableIndex(this.#elementFromPoint(x, y));
-            if (!isNaN(ix))
-              this.#store.dispatch(new RephraseTranscription('accuracy', ix));
-          }
-          break;
-        case MenuID.rephraseBrevity:
-          {
-            const ix = this.#getRephraseableIndex(this.#elementFromPoint(x, y));
-            if (!isNaN(ix))
-              this.#store.dispatch(new RephraseTranscription('brevity', ix));
-          }
-          break;
-        case MenuID.save:
-          this.#store.dispatch(new SaveMinutes());
-          break;
-        case MenuID.saveAs:
-          this.#store.dispatch(new SaveMinutes(true));
-          break;
-        case MenuID.split:
-          {
-            const element = this.#elementFromPoint(x, y);
-            const ix = this.#getSplittableIndex(element);
-            if (!isNaN(ix)) {
-              const iy = element.selectionStart;
-              this.#store.dispatch(new SplitTranscription(ix, iy));
+    ipc.on(
+      Channels.menuSelected,
+      (event, id: MenuID, data: string, x: number, y: number) => {
+        switch (id) {
+          case MenuID.close:
+            this.#store.dispatch(new CloseMinutes());
+            break;
+          case MenuID.export:
+            this.#store.dispatch(new ExportMinutes());
+            break;
+          case MenuID.insert:
+            {
+              const ix = this.#getInsertableIndex(this.#elementFromPoint(x, y));
+              if (!isNaN(ix))
+                this.#store.dispatch(
+                  new InsertAgendaItem({ title: 'New Agenda Item' }, ix)
+                );
             }
-          }
-          break;
-        case MenuID.undo:
-          this.#store.dispatch(new Undo());
-          break;
+            break;
+          case MenuID.join:
+            {
+              const ix = this.#getJoinableIndex(this.#elementFromPoint(x, y));
+              if (!isNaN(ix)) this.#store.dispatch(new JoinTranscriptions(ix));
+            }
+            break;
+          case MenuID.new:
+            this.#store.dispatch(new NewMinutes());
+            break;
+          case MenuID.open:
+            this.#store.dispatch(new OpenMinutes());
+            break;
+          case MenuID.redo:
+            this.#store.dispatch(new Redo());
+            break;
+          case MenuID.recents:
+            this.#store.dispatch(new OpenMinutes(data));
+            break;
+          case MenuID.remove:
+            {
+              const ix = this.#getRemovableIndex(this.#elementFromPoint(x, y));
+              if (!isNaN(ix)) this.#store.dispatch(new RemoveAgendaItem(ix));
+            }
+            break;
+          case MenuID.rephraseAccuracy:
+            {
+              const ix = this.#getRephraseableIndex(
+                this.#elementFromPoint(x, y)
+              );
+              if (!isNaN(ix))
+                this.#store.dispatch(new RephraseTranscription('accuracy', ix));
+            }
+            break;
+          case MenuID.rephraseBrevity:
+            {
+              const ix = this.#getRephraseableIndex(
+                this.#elementFromPoint(x, y)
+              );
+              if (!isNaN(ix))
+                this.#store.dispatch(new RephraseTranscription('brevity', ix));
+            }
+            break;
+          case MenuID.save:
+            this.#store.dispatch(new SaveMinutes());
+            break;
+          case MenuID.saveAs:
+            this.#store.dispatch(new SaveMinutes(true));
+            break;
+          case MenuID.split:
+            {
+              const element = this.#elementFromPoint(x, y);
+              const ix = this.#getSplittableIndex(element);
+              if (!isNaN(ix)) {
+                const iy = element.selectionStart;
+                this.#store.dispatch(new SplitTranscription(ix, iy));
+              }
+            }
+            break;
+          case MenuID.undo:
+            this.#store.dispatch(new Undo());
+            break;
+        }
       }
-    });
+    );
   }
 
   #elementFromPoint(x: number, y: number): HTMLTextAreaElement {
@@ -172,9 +190,27 @@ export class MenuService {
     this.minutes$.subscribe((state) => {
       ipc.send(Channels.menuEnable, {
         [MenuID.close]: !!state,
-        [MenuID.export]: state?.transcription && state?.summary,
+        [MenuID.export]: !!state?.transcription && !!state?.summary,
         [MenuID.save]: !!state,
         [MenuID.saveAs]: !!state
+      });
+    });
+  }
+
+  #monitorRecentsState(): void {
+    this.recents$.subscribe((paths) => {
+      ipc.send(Channels.menuEnable, {
+        [MenuID.recents]:
+          paths.length < 2
+            ? false
+            : // 👇 in this case, we build a submenu of recent items
+              paths.map(
+                (path): SubmenuItem => ({
+                  data: path,
+                  id: MenuID.recents,
+                  label: path
+                })
+              )
       });
     });
   }

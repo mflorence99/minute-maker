@@ -49,6 +49,11 @@ export class CancelTranscription {
   constructor() {}
 }
 
+export class ClearApp {
+  static readonly type = '[App] ClearApp';
+  constructor() {}
+}
+
 export class CloseMinutes {
   static readonly type = '[App] CloseMinutes';
   constructor() {}
@@ -66,7 +71,7 @@ export class NewMinutes {
 
 export class OpenMinutes {
   static readonly type = '[App] OpenMinutes';
-  constructor() {}
+  constructor(public path: string = null) {}
 }
 
 export class SaveMinutes {
@@ -126,15 +131,24 @@ export class AppState implements NgxsOnInit {
   }
 
   // //////////////////////////////////////////////////////////////////////////
+  // 🟩 ClearApp
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Action(ClearApp) clearApp({ setState }: StateContext<AppStateModel>): void {
+    setState({ pathToMinutes: null, transcriptionName: null });
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
   // 🟩 CloseMinutes
   // //////////////////////////////////////////////////////////////////////////
 
-  @Action(CloseMinutes) closeMinutes({
-    setState
-  }: StateContext<AppStateModel>): void {
+  @Action(CloseMinutes) closeMinutes(): void {
     this.#store.dispatch(new SaveMinutes()).subscribe(() => {
-      this.#store.dispatch(new ClearMinutes());
-      setState(patch({ pathToMinutes: null }));
+      this.#store.dispatch([
+        new ClearApp(),
+        new ClearMinutes(),
+        new ClearUndoStacks()
+      ]);
     });
   }
 
@@ -151,8 +165,7 @@ export class AppState implements NgxsOnInit {
   // //////////////////////////////////////////////////////////////////////////
 
   @Action(NewMinutes) async newMinutes({
-    getState,
-    setState
+    getState
   }: StateContext<AppStateModel>): Promise<void> {
     // 🔥 locked into MP3 only for now
     const path = await this.#fs.chooseFile({
@@ -186,8 +199,7 @@ export class AppState implements NgxsOnInit {
           date: new Date(),
           title: '--Untitled--'
         };
-        setState(patch({ pathToMinutes: null }));
-        this.#store.dispatch(new SetMinutes(minutes));
+        this.#store.dispatch([new ClearApp(), new SetMinutes(minutes)]);
         // 👇 clear the undo stacks as this is new data
         this.#store.dispatch(new ClearUndoStacks());
       } catch (error) {
@@ -202,15 +214,17 @@ export class AppState implements NgxsOnInit {
   // 🟩 OpenMinutes
   // //////////////////////////////////////////////////////////////////////////
 
-  @Action(OpenMinutes) async openMinutes({
-    getState,
-    setState
-  }: StateContext<AppStateModel>): Promise<void> {
-    const path = await this.#fs.chooseFile({
-      defaultPath: getState().pathToMinutes,
-      filters: [{ extensions: ['json'], name: 'Minutes' }],
-      title: 'Open Minutes'
-    });
+  @Action(OpenMinutes) async openMinutes(
+    { getState, setState }: StateContext<AppStateModel>,
+    { path }: OpenMinutes
+  ): Promise<void> {
+    if (!path) {
+      path = await this.#fs.chooseFile({
+        defaultPath: getState().pathToMinutes,
+        filters: [{ extensions: ['json'], name: 'Minutes' }],
+        title: 'Open Minutes'
+      });
+    }
     if (path) {
       setState(patch({ pathToMinutes: path }));
       this.#loadMinutes(path);

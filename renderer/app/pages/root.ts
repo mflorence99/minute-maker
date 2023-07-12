@@ -1,10 +1,9 @@
 import { AgendaItem } from '#mm/common';
-import { AppState } from '#mm/state/app';
-import { AppStateModel } from '#mm/state/app';
 import { CancelTranscription } from '#mm/state/app';
 import { Component } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
+import { MinutesStateModel } from '#mm/state/minutes';
 import { Observable } from 'rxjs';
 import { RecentsState } from '#mm/state/recents';
 import { Select } from '@ngxs/store';
@@ -22,11 +21,11 @@ import { inject } from '@angular/core';
 @Component({
   selector: 'mm-root',
   template: `
-    <tui-root>
+    <tui-root *ngIf="minutes$ | async as minutes; else getStarted">
       <main>
-        <header>{{ (app$ | async).pathToMinutes }}</header>
+        <header>{{ minutes.title }}</header>
         <mm-wavesurfer
-          [audioFile]="audioURL$ | async"
+          [audioFile]="minutes.audio.url"
           [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }">
           <mm-wavesurfer-timeline></mm-wavesurfer-timeline>
         </mm-wavesurfer>
@@ -72,11 +71,20 @@ import { inject } from '@angular/core';
         <footer>{{ (status$ | async).status }}</footer>
       </main>
     </tui-root>
+
+    <ng-template #getStarted>
+      <tui-block-status>
+        <img tuiSlot="top" src="./assets/meeting.png" />
+
+        <h4>Not found</h4>
+
+        Try to find by number
+      </tui-block-status>
+    </ng-template>
   `
 })
 export class RootPage {
-  @Select(AppState) app$: Observable<AppStateModel>;
-  @Select(MinutesState.audioURL) audioURL$: Observable<string>;
+  @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
   @Select(RecentsState.minutes) recentMinutes$: Observable<
     Observable<Minutes>[]
   >;

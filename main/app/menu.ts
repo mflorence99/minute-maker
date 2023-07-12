@@ -1,5 +1,6 @@
 import { Channels } from './common';
 import { MenuID } from './common';
+import { SubmenuItem } from './common';
 
 import { tuiSVGtoPNG } from './utils';
 
@@ -14,16 +15,41 @@ import { ipcMain } from 'electron';
 
 ipcMain.on(Channels.menuEnable, menuEnable);
 
-export function menuEnable(event, settings: Record<string, boolean>): void {
-  Object.entries(settings).forEach(([id, enabled]) => {
+export function menuEnable(
+  event,
+  settings: Record<string, boolean | SubmenuItem[]>
+): void {
+  Object.entries(settings).forEach(([id, submenu]) => {
     const menuItem = findMenuItem(id);
-    if (menuItem) menuItem.enabled = enabled;
+    if (menuItem) {
+      menuItem.enabled = !!submenu;
+      // 👇 try to modify the submenu, if one existed in the template
+      if (Array.isArray(submenu) && menuItem.submenu) {
+        // 🔥 clear doesn't work for some reason, so we only append
+        //    SubmenuItems not already present
+        // menuItem.submenu.clear();
+        const present = new Set(
+          menuItem.submenu.items.map((item) => item.label)
+        );
+        submenu
+          .filter((item) => !present.has(item.label))
+          .forEach((item) =>
+            menuItem.submenu.append(
+              new MenuItem({ ...item, click: menuSelected })
+            )
+          );
+      }
+    }
   });
 }
 
 export function menuSelected(menuItem): void {
   if (menuItem.enabled)
-    globalThis.theWindow.webContents.send(Channels.menuSelected, menuItem.id);
+    globalThis.theWindow.webContents.send(
+      Channels.menuSelected,
+      menuItem.id,
+      menuItem.data
+    );
 }
 
 // //////////////////////////////////////////////////////////////////////////
@@ -49,6 +75,12 @@ export const menuTemplate = [
         icon: tuiSVGtoPNG('tuiIconBookOpen'),
         id: MenuID.open,
         label: 'Open Minutes JSON File...'
+      },
+      {
+        enabled: false,
+        id: MenuID.recents,
+        label: 'Recent Minutes...',
+        submenu: []
       },
       { type: 'separator' },
       {

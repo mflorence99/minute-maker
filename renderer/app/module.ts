@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { InsertableDirective } from '#mm/directives/insertable';
 import { JoinableDirective } from '#mm/directives/joinable';
 import { MarkdownModule } from 'ngx-markdown';
+import { MenuService } from '#mm/services/menu';
 import { MinutesState } from '#mm/state/minutes';
 import { NgModule } from '@angular/core';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
@@ -20,13 +21,14 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { RecentsState } from '#mm/state/recents';
 import { RemovableDirective } from '#mm/directives/removable';
 import { RephraseableDirective } from '#mm/directives/rephraseable';
-import { RootPage } from '#mm/pages/root/page';
+import { RootPage } from '#mm/pages/root';
 import { SplittableDirective } from '#mm/directives/splittable';
 import { StatusState } from '#mm/state/status';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
 import { StorageEngine } from '#mm/state/storage-engine';
 import { SummaryComponent } from '#mm/components/summary';
 import { TranscriptionComponent } from '#mm/components/transcription';
+import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import { TuiButtonModule } from '@taiga-ui/core';
 import { TuiRootModule } from '@taiga-ui/core';
 import { TuiScrollbarModule } from '@taiga-ui/core';
@@ -91,6 +93,7 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
       key: STATES_SAVED
     }),
     NgxsLoggerPluginModule.forRoot({ collapsed: false }),
+    TuiBlockStatusModule,
     TuiButtonModule,
     TuiRootModule,
     TuiScrollbarModule,
@@ -112,4 +115,6 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
     }
   ]
 })
-export class RootModule {}
+export class RootModule {
+  constructor(private menu: MenuService) {}
+}

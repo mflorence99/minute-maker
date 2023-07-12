@@ -82,6 +82,7 @@ export enum MenuID {
   join = 'menu/join',
   new = 'menu/new',
   open = 'menu/open',
+  recents = 'menu/recents',
   redo = 'menu/redo',
   remove = 'menu/remove',
   rephraseAccuracy = 'menu/rephrase/accuracy',
@@ -91,6 +92,14 @@ export enum MenuID {
   split = 'menu/split',
   undo = 'menu/undo'
 }
+
+// 👆 when one of the above has a dynamic submenu
+
+export type SubmenuItem = {
+  data: string;
+  id: MenuID;
+  label: string;
+};
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 Electron main/renderer channels

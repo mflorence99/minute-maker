@@ -82,7 +82,7 @@ export class RecentsState {
       (path): Observable<Minutes> =>
         from(ipc.invoke(Channels.fsLoadFile, path)).pipe(
           map((raw: string) => JSON.parse(raw)),
-          catchError(() => of(null))
+          catchError(() => of([]))
         )
     );
   }

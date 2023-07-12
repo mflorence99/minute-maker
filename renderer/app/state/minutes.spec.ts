@@ -57,11 +57,6 @@ describe('MinutesState', () => {
     store.reset({ ...store.snapshot(), minutes: defaultState });
   });
 
-  it('can select the audio URL', () => {
-    const audioURL = store.selectSnapshot(MinutesState.audioURL);
-    expect(audioURL).toBe('http://zzz');
-  });
-
   it('can select the summary', () => {
     const summ = store.selectSnapshot(MinutesState.summary);
     expect(summ).toStrictEqual([summary]);

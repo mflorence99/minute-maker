@@ -30,8 +30,8 @@ import { SummaryComponent } from '#mm/components/summary';
 import { TranscriptionComponent } from '#mm/components/transcription';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import { TuiButtonModule } from '@taiga-ui/core';
+import { TuiLoaderModule } from '@taiga-ui/core';
 import { TuiRootModule } from '@taiga-ui/core';
-import { TuiScrollbarModule } from '@taiga-ui/core';
 import { TuiSvgModule } from '@taiga-ui/core';
 import { TuiTabsModule } from '@taiga-ui/kit';
 import { TuiThemeNightModule } from '@taiga-ui/core';
@@ -96,8 +96,8 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
     NgxsLoggerPluginModule.forRoot({ collapsed: false }),
     TuiBlockStatusModule,
     TuiButtonModule,
+    TuiLoaderModule,
     TuiRootModule,
-    TuiScrollbarModule,
     TuiSvgModule,
     TuiTabsModule,
     TuiThemeNightModule

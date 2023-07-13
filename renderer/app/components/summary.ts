@@ -13,39 +13,37 @@ import { inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-summary',
   template: `
-    <tui-scrollbar>
-      <table>
-        <tbody>
-          <tr
-            *ngFor="let summ of summary; let ix = index; trackBy: trackByIx"
-            (click)="selected.emit((summIndex = ix))">
-            <td>
-              <tui-svg
-                [ngClass]="{ current: ix === summIndex }"
-                class="marker"
-                src="tuiIconArrowRightLarge" />
-            </td>
+    <table>
+      <tbody>
+        <tr
+          *ngFor="let summ of summary; let ix = index; trackBy: trackByIx"
+          (click)="selected.emit((summIndex = ix))">
+          <td>
+            <tui-svg
+              [ngClass]="{ current: ix === summIndex }"
+              class="marker"
+              src="tuiIconArrowRightLarge" />
+          </td>
 
-            <td width="100%">
-              <div *ngIf="summ.section" class="heading">
-                {{ summ.section }}
-              </div>
+          <td width="100%">
+            <div *ngIf="summ.section" class="heading">
+              {{ summ.section }}
+            </div>
 
-              <textarea
-                #summText
-                (input)="updateSummary({ summary: summText.value }, ix)"
-                [value]="summ.summary"
-                autocomplete="off"
-                autocorrect="on"
-                autosize
-                spellcheck="true"
-                style="width: calc(100% - 1rem)"
-                wrap="soft"></textarea>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </tui-scrollbar>
+            <textarea
+              #summText
+              (input)="updateSummary({ summary: summText.value }, ix)"
+              [value]="summ.summary"
+              autocomplete="off"
+              autocorrect="on"
+              autosize
+              spellcheck="true"
+              style="width: calc(100% - 1rem)"
+              wrap="soft"></textarea>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   `
 })
 export class SummaryComponent {

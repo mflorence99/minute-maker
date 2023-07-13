@@ -46,7 +46,12 @@ import { delay } from 'rxjs';
           [ngClass]="{ data: true, hidden: tabIndex !== 1 }"
           [summary]="summary$ | async" />
 
-        <footer class="footer">{{ status?.status }}</footer>
+        <footer class="footer">
+          <ng-container *ngIf="status$ | async as status">
+            <progress *ngIf="!!status.working"></progress>
+            <label>{{ status.status }}</label>
+          </ng-container>
+        </footer>
       </main>
     </tui-root>
 
@@ -71,6 +76,7 @@ export class RootPage {
   txIndex = 0;
 
   constructor() {
+    // 👇 induce a delay to prevent Angular change detection errors
     this.status$.pipe(delay(0)).subscribe((status) => {
       this.status = status;
     });

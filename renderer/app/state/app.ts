@@ -179,7 +179,10 @@ export class AppState implements NgxsOnInit {
     });
     if (path) {
       this.#store.dispatch(
-        new SetStatus({ status: 'Uploading audio recording', working: true })
+        new SetStatus({
+          status: 'Uploading audio recording',
+          working: 'upload'
+        })
       );
       try {
         const config =
@@ -248,7 +251,11 @@ export class AppState implements NgxsOnInit {
     const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
     const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
     this.#store.dispatch(
-      new SetStatus({ status: 'Rephrasing transcription', working: true })
+      new SetStatus({
+        ix,
+        status: 'Rephrasing transcription',
+        working: 'rephrase'
+      })
     );
     try {
       const speech = this.#pluckTranscription(minutes, ix).speech;
@@ -298,7 +305,10 @@ export class AppState implements NgxsOnInit {
     const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
     const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
     this.#store.dispatch(
-      new SetStatus({ status: 'Summarizing minutes', working: true })
+      new SetStatus({
+        status: 'Summarizing minutes',
+        working: 'summary'
+      })
     );
     // 👇 first, just attach a section to each transcription where the
     //    section is the most recent agenda item
@@ -352,7 +362,10 @@ export class AppState implements NgxsOnInit {
       numSpeakers: minutes.numSpeakers
     } as TranscriberRequest;
     this.#store.dispatch(
-      new SetStatus({ status: 'Transcribing minutes', working: true })
+      new SetStatus({
+        status: 'Transcribing minutes',
+        working: 'transcription'
+      })
     );
     this.#transcriber
       .transcribe(request)

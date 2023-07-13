@@ -20,8 +20,9 @@ export class SetStatus {
 
 export type StatusStateModel = {
   error: Partial<Error>;
+  ix: number;
   status: string;
-  working: boolean;
+  working: 'audio' | 'rephrase' | 'summary' | 'transcription' | 'upload';
 };
 
 @State<StatusStateModel>({
@@ -35,8 +36,9 @@ export class StatusState {
   static defaultStatus(): StatusStateModel {
     return {
       error: null,
+      ix: null,
       status: null,
-      working: false
+      working: null
     };
   }
 

@@ -23,6 +23,8 @@ import { SaveMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
 import { SplittableDirective } from '#mm/directives/splittable';
 import { SplitTranscription } from '#mm/state/minutes';
+import { StatusState } from '#mm/state/status';
+import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { SubmenuItem } from '#mm/common';
 import { Undo } from '#mm/state/undo';
@@ -42,6 +44,7 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 export class MenuService {
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
   @Select(RecentsState) recents$: Observable<RecentsStateModel>;
+  @Select(StatusState) status$: Observable<StatusStateModel>;
   @Select(UndoState) undo$: Observable<UndoStateModel>;
 
   #store = inject(Store);
@@ -52,6 +55,7 @@ export class MenuService {
     this.#monitorElementState();
     this.#monitorMinutesState();
     this.#monitorRecentsState();
+    this.#monitorStatusState();
     this.#monitorUndoState();
   }
 
@@ -175,12 +179,17 @@ export class MenuService {
   #monitorElementState(): void {
     this.#window.addEventListener('pointerdown', (event: MouseEvent) => {
       const element = event.target as HTMLElement;
+      const status = this.#store.selectSnapshot(StatusState);
       ipc.send(Channels.menuEnable, {
         [MenuID.insert]: !isNaN(this.#getInsertableIndex(element)),
         [MenuID.join]: !isNaN(this.#getJoinableIndex(element)),
         [MenuID.remove]: !isNaN(this.#getRemovableIndex(element)),
-        [MenuID.rephraseAccuracy]: !isNaN(this.#getRephraseableIndex(element)),
-        [MenuID.rephraseBrevity]: !isNaN(this.#getRephraseableIndex(element)),
+        [MenuID.rephraseAccuracy]:
+          !isNaN(this.#getRephraseableIndex(element)) &&
+          status.working !== 'rephrase',
+        [MenuID.rephraseBrevity]:
+          !isNaN(this.#getRephraseableIndex(element)) &&
+          status.working !== 'rephrase',
         [MenuID.split]: !isNaN(this.#getSplittableIndex(element))
       });
     });
@@ -215,11 +224,20 @@ export class MenuService {
     });
   }
 
-  #monitorUndoState(): void {
-    this.undo$.subscribe((state) => {
+  #monitorStatusState(): void {
+    this.status$.subscribe((status) => {
       ipc.send(Channels.menuEnable, {
-        [MenuID.redo]: state.redoStack.length > 0,
-        [MenuID.undo]: state.undoStack.length > 0
+        [MenuID.rephraseAccuracy]: status.working !== 'rephrase',
+        [MenuID.rephraseBrevity]: status.working !== 'rephrase'
+      });
+    });
+  }
+
+  #monitorUndoState(): void {
+    this.undo$.subscribe((undo) => {
+      ipc.send(Channels.menuEnable, {
+        [MenuID.redo]: undo.redoStack.length > 0,
+        [MenuID.undo]: undo.undoStack.length > 0
       });
     });
   }

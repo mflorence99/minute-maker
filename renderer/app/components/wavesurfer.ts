@@ -131,7 +131,10 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   #loadAudioFile(): void {
     this.#store.dispatch(
-      new SetStatus({ status: 'Loading audio into player', working: true })
+      new SetStatus({
+        status: 'Loading audio into player',
+        working: 'audio'
+      })
     );
     try {
       this.wavesurfer.once('ready', () =>

@@ -33,6 +33,7 @@ import { TuiButtonModule } from '@taiga-ui/core';
 import { TuiRootModule } from '@taiga-ui/core';
 import { TuiScrollbarModule } from '@taiga-ui/core';
 import { TuiSvgModule } from '@taiga-ui/core';
+import { TuiTabsModule } from '@taiga-ui/kit';
 import { TuiThemeNightModule } from '@taiga-ui/core';
 import { UndoState } from '#mm/state/undo';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
@@ -98,6 +99,7 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
     TuiRootModule,
     TuiScrollbarModule,
     TuiSvgModule,
+    TuiTabsModule,
     TuiThemeNightModule
   ],
 

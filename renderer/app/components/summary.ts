@@ -27,9 +27,9 @@ import { inject } from '@angular/core';
             </td>
 
             <td width="100%">
-              <header *ngIf="summ.section" class="heading">
+              <div *ngIf="summ.section" class="heading">
                 {{ summ.section }}
-              </header>
+              </div>
 
               <textarea
                 #summText

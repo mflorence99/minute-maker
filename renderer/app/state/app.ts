@@ -101,10 +101,7 @@ export type AppStateModel = {
 
 @State<AppStateModel>({
   name: 'app',
-  defaults: {
-    pathToMinutes: null,
-    transcriptionName: null
-  }
+  defaults: AppState.defaultApp()
 })
 @Injectable()
 export class AppState implements NgxsOnInit {
@@ -115,6 +112,13 @@ export class AppState implements NgxsOnInit {
   #store = inject(Store);
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
+
+  static defaultApp(): AppStateModel {
+    return {
+      pathToMinutes: null,
+      transcriptionName: null
+    };
+  }
 
   // //////////////////////////////////////////////////////////////////////////
   // 🟩 CancelTranscription
@@ -135,7 +139,7 @@ export class AppState implements NgxsOnInit {
   // //////////////////////////////////////////////////////////////////////////
 
   @Action(ClearApp) clearApp({ setState }: StateContext<AppStateModel>): void {
-    setState({ pathToMinutes: null, transcriptionName: null });
+    setState(AppState.defaultApp());
   }
 
   // //////////////////////////////////////////////////////////////////////////

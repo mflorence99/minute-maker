@@ -45,7 +45,7 @@
     "jsome": "^2",
     "music-metadata": "^7",
     "openai": "^3",
-    "sharp": "^0.32.1",
+    "sharp": "^0.32.2",
     "zod": "^3"
   },
   "devDependencies": {

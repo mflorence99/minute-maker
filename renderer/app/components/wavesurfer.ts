@@ -41,6 +41,10 @@ import WaveSurfer from 'wavesurfer.js';
         > * {
           width: 100%;
         }
+
+        audio {
+          height: 2rem;
+        }
       }
     `
   ]

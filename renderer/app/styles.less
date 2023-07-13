@@ -7,9 +7,14 @@
   color: var(--tui-accent);
 }
 
-audio {
-  height: 2rem;
-  width: 0;
+header {
+  padding-top: 0.5rem;
+  text-align: center;
+  width: 100%;
+
+  > * {
+    margin: 0;
+  }
 }
 
 input {
@@ -19,9 +24,71 @@ input {
   font-family: inherit;
 }
 
+main {
+  display: block;
+  height: 100%;
+  left: calc((100% - 40rem) / 2);
+  position: absolute;
+  width: 40rem;
+
+  .data {
+    display: block;
+    height: calc(100% - 25rem);
+    opacity: 1;
+    position: absolute;
+    top: 22rem;
+    transition: opacity 0.25s linear;
+    width: 100%;
+    z-index: 1;
+
+    &.hidden {
+      opacity: 0;
+      z-index: -1;
+    }
+  }
+
+  .footer {
+    bottom: 2rem;
+    display: block;
+    height: 2rem;
+    position: absolute;
+    width: 100%;
+  }
+
+  .header {
+    display: block;
+    height: 3rem;
+    position: absolute;
+    width: 100%;
+  }
+
+  .tabs {
+    display: block;
+    height: 5rem;
+    position: absolute;
+    top: 17rem;
+    width: 100%;
+  }
+
+  .wavesurfer {
+    display: block;
+    height: 14rem;
+    position: absolute;
+    top: 3rem;
+    width: 100%;
+  }
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
+
+  .heading {
+    font-size: larger;
+    font-weight: bold;
+    height: 1.75rem;
+    overflow: hidden;
+  }
 
   tr {
     vertical-align: top;
@@ -36,6 +103,10 @@ textarea {
   resize: none;
 }
 
+tui-root {
+  height: 100%;
+}
+
 tui-scrollbar {
   height: 100%;
 }
@@ -46,40 +117,5 @@ tui-svg.marker {
 
   &.current {
     opacity: 1;
-  }
-}
-
-.heading {
-  font-size: larger;
-  font-weight: bold;
-  height: 1.75rem;
-  overflow: hidden;
-}
-
-// 🔥 TBD!!!
-
-main {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  height: 100%;
-  justify-content: center;
-
-  mm-summary,
-  mm-transcription {
-    height: 25rem;
-    width: 40rem;
-  }
-
-  mm-wavesurfer {
-    width: 40rem;
-  }
-
-  .buttons {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 2rem;
-    justify-content: center;
   }
 }

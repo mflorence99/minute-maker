@@ -36,18 +36,23 @@ import { inject } from '@angular/core';
 
         <nav class="tabs">
           <tui-tabs [(activeItemIndex)]="tabIndex">
+            <button tuiTab>Metadata</button>
             <button tuiTab>Transcription</button>
             <button tuiTab>Summary</button>
           </tui-tabs>
         </nav>
 
+        <mm-metadata
+          [ngClass]="{ data: true, hidden: tabIndex !== 0 }"
+          [minutes]="minutes" />
+
         <mm-transcription
           (selected)="txIndex = $event"
-          [ngClass]="{ data: true, hidden: tabIndex !== 0 }"
+          [ngClass]="{ data: true, hidden: tabIndex !== 1 }"
           [transcription]="transcription$ | async" />
 
         <mm-summary
-          [ngClass]="{ data: true, hidden: tabIndex !== 1 }"
+          [ngClass]="{ data: true, hidden: tabIndex !== 2 }"
           [summary]="summary$ | async" />
 
         <footer class="footer">

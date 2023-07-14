@@ -128,7 +128,7 @@ export type MinutesStateModel = Minutes;
 @Injectable()
 export class MinutesState implements NgxsOnInit {
   updateBuffer$ = new Subject<
-    UpdateAgendaItem | UpdateSummary | UpdateTranscription
+    SetMinutes | UpdateAgendaItem | UpdateSummary | UpdateTranscription
   >();
 
   #store = inject(Store);

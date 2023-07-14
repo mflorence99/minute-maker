@@ -85,6 +85,8 @@
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
     "dayjs": "^1",
+    "deep-copy": "^1",
+    "deep-equal": "^2",
     "electron": "^25",
     "electron-installer-debian": "^3",
     "electron-packager": "^17",

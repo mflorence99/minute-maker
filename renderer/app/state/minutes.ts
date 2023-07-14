@@ -26,6 +26,9 @@ import { timer } from 'rxjs';
 import { updateItem } from '@ngxs/store/operators';
 import { withPreviousItem } from '#mm/utils';
 
+import deepCopy from 'deep-copy';
+import deepEqual from 'deep-equal';
+
 export class ClearMinutes {
   static readonly type = '[Minutes] ClearMinutes';
   constructor() {}
@@ -97,6 +100,13 @@ export class UpdateAgendaItem extends UndoableAction {
   }
 }
 
+export class UpdateDetails extends UndoableAction {
+  static readonly type = '[Minutes] UpdateDetails';
+  constructor(public details: Partial<Minutes>, undoing = false) {
+    super(undoing);
+  }
+}
+
 export class UpdateSummary extends UndoableAction {
   static readonly type = '[Minutes] UpdateSummary';
   constructor(
@@ -128,7 +138,7 @@ export type MinutesStateModel = Minutes;
 @Injectable()
 export class MinutesState implements NgxsOnInit {
   updateBuffer$ = new Subject<
-    SetMinutes | UpdateAgendaItem | UpdateSummary | UpdateTranscription
+    UpdateAgendaItem | UpdateDetails | UpdateSummary | UpdateTranscription
   >();
 
   #store = inject(Store);
@@ -373,6 +383,35 @@ export class MinutesState implements NgxsOnInit {
   }
 
   // //////////////////////////////////////////////////////////////////////////
+  // 🟩 UpdateDetails
+  //    the big difference between this and SetMinutes is that it is undoable
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Action(UpdateDetails) updateDetails(
+    { getState, setState },
+    { details, undoing }: UpdateDetails
+  ): void {
+    // 👇 capture the original
+    const state = getState();
+    const original: Partial<Minutes> = {
+      ...this.#pluckDetails(state, details)
+    };
+    // 👇 only if there's a delta
+    if (!deepEqual(original, details)) {
+      // 👇 put the inverse action onto the undo stack
+      if (!undoing)
+        this.#store.dispatch(
+          new StackUndoable([
+            new UpdateDetails(original, true),
+            new UpdateDetails(details, true)
+          ])
+        );
+      // 👇 now do the action
+      setState(patch(details));
+    }
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
   // 🟩 UpdateSummary
   // //////////////////////////////////////////////////////////////////////////
 
@@ -448,6 +487,17 @@ export class MinutesState implements NgxsOnInit {
     if (state.transcription[ix].type === 'AG')
       return state.transcription[ix] as any as AgendaItem;
     else throw new Error(`Operation not supported for item #${ix}`);
+  }
+
+  #pluckDetails(
+    state: MinutesStateModel,
+    details: Partial<Minutes>
+  ): Partial<Minutes> {
+    const clone = deepCopy(state);
+    return Object.keys(details).reduce((plucked, key) => {
+      plucked[key] = clone[key];
+      return plucked;
+    }, {});
   }
 
   #pluckTranscription(state: MinutesStateModel, ix: number): Transcription {

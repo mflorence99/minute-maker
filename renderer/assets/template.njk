@@ -118,7 +118,7 @@
           {% for attendees in [minutes.present, minutes.absent, minutes.visitors] %}
             <td>
               {% for attendee in attendees %}
-                <div>{{ attendee.name }}, {{ attendee.title }}</div>
+                <div>{{ attendee }}</div>
               {% else %}
                 None
               {% endfor %}

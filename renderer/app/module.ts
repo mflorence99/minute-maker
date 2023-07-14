@@ -37,17 +37,24 @@ import { TUI_FIRST_DAY_OF_WEEK } from '@taiga-ui/core';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import { TuiButtonModule } from '@taiga-ui/core';
 import { TuiDayOfWeek } from '@taiga-ui/cdk';
+import { TuiHintModule } from '@taiga-ui/core';
 import { TuiInputDateTimeModule } from '@taiga-ui/kit';
 import { TuiInputModule } from '@taiga-ui/kit';
+import { TuiInputNumberModule } from '@taiga-ui/kit';
+import { TuiInputTagModule } from '@taiga-ui/kit';
+import { TuiLabelModule } from '@taiga-ui/core';
 import { TuiLoaderModule } from '@taiga-ui/core';
 import { TuiRootModule } from '@taiga-ui/core';
 import { TuiSvgModule } from '@taiga-ui/core';
 import { TuiTabsModule } from '@taiga-ui/kit';
+import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { UndoState } from '#mm/state/undo';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
 import { WaveSurferRegionsComponent } from '#mm/components/wavesurfer-regions';
 import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline';
+
+import { tuiInputNumberOptionsProvider } from '@taiga-ui/kit';
 
 import isDev from '#mm/is-dev';
 
@@ -105,12 +112,17 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
     ReactiveFormsModule,
     TuiBlockStatusModule,
     TuiButtonModule,
+    TuiHintModule,
     TuiInputDateTimeModule,
     TuiInputModule,
+    TuiInputNumberModule,
+    TuiInputTagModule,
+    TuiLabelModule,
     TuiLoaderModule,
     TuiRootModule,
     TuiSvgModule,
-    TuiTabsModule
+    TuiTabsModule,
+    TuiTextfieldControllerModule
   ],
 
   providers: [
@@ -125,6 +137,10 @@ const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
       provide: STORAGE_ENGINE,
       useClass: StorageEngine
     },
+    tuiInputNumberOptionsProvider({
+      decimal: 'never',
+      step: 1
+    }),
     { provide: TUI_DATE_FORMAT, useValue: 'MDY' },
     { provide: TUI_DATE_SEPARATOR, useValue: '/' },
     {

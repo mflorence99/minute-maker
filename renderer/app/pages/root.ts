@@ -36,7 +36,7 @@ import { inject } from '@angular/core';
 
         <nav class="tabs">
           <tui-tabs [(activeItemIndex)]="tabIndex">
-            <button tuiTab>Metadata</button>
+            <button tuiTab>Meeting Details</button>
             <button tuiTab>Transcription</button>
             <button tuiTab>Summary</button>
           </tui-tabs>

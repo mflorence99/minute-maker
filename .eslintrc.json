@@ -46,6 +46,7 @@
         "checksVoidReturn": false
       }
     ],
+    "@typescript-eslint/no-duplicate-type-constituents": "off",
     "@typescript-eslint/unbound-method": "off",
     "jest/max-expects": "off",
     "jest/no-conditional-expect": "off",

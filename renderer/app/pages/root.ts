@@ -4,14 +4,18 @@ import { AppStateModel } from '#mm/state/app';
 import { Component } from '@angular/core';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
+import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
+import { OpenMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
 import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
+import { Store } from '@ngxs/store';
 import { Summary } from '#mm/common';
 import { Transcription } from '#mm/common';
 
 import { delay } from 'rxjs';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'mm-root',
@@ -58,6 +62,18 @@ import { delay } from 'rxjs';
     <ng-template #getStarted>
       <tui-block-status>
         <img tuiSlot="top" src="./assets/meeting.png" />
+        <h4>To get started ...</h4>
+        <p>
+          You can perform these actions at anytime from the
+          <b>File</b>
+          menu.
+        </p>
+        <button (click)="newMinutes()" appearance="primary" size="m" tuiButton>
+          New Minutes from MP3 Audio
+        </button>
+        <button (click)="openMinutes()" appearance="accent" size="m" tuiButton>
+          Open Minutes JSON File
+        </button>
       </tui-block-status>
     </ng-template>
   `
@@ -75,10 +91,20 @@ export class RootPage {
   tabIndex = 0;
   txIndex = 0;
 
+  #store = inject(Store);
+
   constructor() {
     // 👇 induce a delay to prevent Angular change detection errors
     this.status$.pipe(delay(0)).subscribe((status) => {
       this.status = status;
     });
+  }
+
+  newMinutes(): void {
+    this.#store.dispatch(new NewMinutes());
+  }
+
+  openMinutes(): void {
+    this.#store.dispatch(new OpenMinutes());
   }
 }

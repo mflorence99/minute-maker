@@ -1,5 +1,6 @@
 import { Action } from '@ngxs/store';
 import { AddRecent } from '#mm/state/recents';
+import { AudioMetadataService } from '#mm/services/audio-metadata';
 import { Channels } from '#mm/common';
 import { Clear as ClearUndoStacks } from '#mm/state/undo';
 import { ClearMinutes } from '#mm/state/minutes';
@@ -7,10 +8,10 @@ import { ClearStatus } from '#mm/state/status';
 import { ConfigState } from '#mm/state/config';
 import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
+import { DialogService } from '#mm/services/dialog';
 import { ExporterService } from '#mm/services/exporter';
 import { FSService } from '#mm/services/fs';
 import { Injectable } from '@angular/core';
-import { MetadataService } from '#mm/services/metadata';
 import { Minutes } from '#mm/common';
 import { MinutesSchema } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
@@ -105,9 +106,10 @@ export type AppStateModel = {
 })
 @Injectable()
 export class AppState implements NgxsOnInit {
+  #dialog = inject(DialogService);
   #exporter = inject(ExporterService);
   #fs = inject(FSService);
-  #metadata = inject(MetadataService);
+  #metadata = inject(AudioMetadataService);
   #openai = inject(OpenAIService);
   #store = inject(Store);
   #transcriber = inject(TranscriberService);
@@ -304,6 +306,18 @@ export class AppState implements NgxsOnInit {
   ): Promise<void> {
     const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
     const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
+    if (minutes.summary) {
+      // 👇 warn about overwrite
+      const button = await this.#dialog.showMessageBox({
+        buttons: ['Proceed', 'Cancel'],
+        message:
+          'This action will overwrite the existing summary and cannot be undone.',
+        title: 'Are you sure you wish to proceed?',
+        type: 'question'
+      });
+      if (button === 1) return;
+    }
+    // 👇 prepare to summarize
     this.#store.dispatch(
       new SetStatus({
         status: 'Summarizing minutes',
@@ -353,10 +367,22 @@ export class AppState implements NgxsOnInit {
   // 🟩 TranscribeMinutes (via Google speech-to-text)
   // //////////////////////////////////////////////////////////////////////////
 
-  @Action(TranscribeMinutes) transcribeMinutes({
+  @Action(TranscribeMinutes) async transcribeMinutes({
     setState
-  }: StateContext<AppStateModel>): void {
+  }: StateContext<AppStateModel>): Promise<void> {
     const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
+    // 👇 warn about overwrite
+    if (minutes.transcription) {
+      const button = await this.#dialog.showMessageBox({
+        buttons: ['Proceed', 'Cancel'],
+        message:
+          'This action will overwrite the existing transcription and cannot be undone.',
+        title: 'Are you sure you wish to proceed?',
+        type: 'question'
+      });
+      if (button === 1) return;
+    }
+    // 👇 construct request
     const request = {
       audio: { ...minutes.audio },
       numSpeakers: minutes.numSpeakers
@@ -367,6 +393,7 @@ export class AppState implements NgxsOnInit {
         working: 'transcription'
       })
     );
+    // 👇 initiate transcription
     this.#transcriber
       .transcribe(request)
       .pipe(

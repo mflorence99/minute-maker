@@ -27,6 +27,8 @@ import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { SubmenuItem } from '#mm/common';
+import { SummarizeMinutes } from '#mm/state/app';
+import { TranscribeMinutes } from '#mm/state/app';
 import { Undo } from '#mm/state/undo';
 import { UndoState } from '#mm/state/undo';
 import { UndoStateModel } from '#mm/state/undo';
@@ -137,6 +139,15 @@ export class MenuService {
               }
             }
             break;
+          case MenuID.summarizeBullets:
+            this.#store.dispatch(new SummarizeMinutes('bullets'));
+            break;
+          case MenuID.summarizeParagraphs:
+            this.#store.dispatch(new SummarizeMinutes('paragraphs'));
+            break;
+          case MenuID.transcribe:
+            this.#store.dispatch(new TranscribeMinutes());
+            break;
           case MenuID.undo:
             this.#store.dispatch(new Undo());
             break;
@@ -201,7 +212,10 @@ export class MenuService {
         [MenuID.close]: !!state,
         [MenuID.export]: !!state?.transcription && !!state?.summary,
         [MenuID.save]: !!state,
-        [MenuID.saveAs]: !!state
+        [MenuID.saveAs]: !!state,
+        [MenuID.summarizeBullets]: !!state,
+        [MenuID.summarizeParagraphs]: !!state,
+        [MenuID.transcribe]: !!state
       });
     });
   }

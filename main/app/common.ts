@@ -90,6 +90,9 @@ export enum MenuID {
   save = 'menu/save',
   saveAs = 'menu/saveAs',
   split = 'menu/split',
+  summarizeBullets = 'menu/summarize/bullets',
+  summarizeParagraphs = 'menu/summarize/paragraphs',
+  transcribe = 'menu/transcribe',
   undo = 'menu/undo'
 }
 
@@ -110,6 +113,7 @@ export enum Channels {
   appQuit = 'app/quit',
 
   dialogShowErrorBox = 'dialog/showErrorBox',
+  dialogShowMessageBox = 'dialog/showMessageBox',
 
   fsChooseFile = 'fs/chooseFile',
   fsLoadFile = 'fs/loadFile',
@@ -157,6 +161,13 @@ export type AudioMetadata = {
 export type FileFilter = {
   extensions: string[];
   name: string;
+};
+
+export type MessageBoxOptions = {
+  buttons: string[];
+  message: string;
+  title?: string;
+  type?: 'none' | 'info' | 'error' | 'question' | 'warning';
 };
 
 export type OpenAIRequest = {

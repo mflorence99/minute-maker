@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 declare const ipc /* 👈 typeof ipcRenderer */;
 
 @Injectable({ providedIn: 'root' })
-export class MetadataService {
+export class AudioMetadataService {
   //
 
   parseFile(fileName: string): Promise<AudioMetadata> {

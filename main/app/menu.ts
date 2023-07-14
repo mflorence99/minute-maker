@@ -65,7 +65,7 @@ export const menuTemplate = [
         click: menuSelected,
         enabled: true,
         id: MenuID.new,
-        label: 'New Minutes from MP3 File...'
+        label: 'New Minutes from MP3 Audio...'
       },
       { type: 'separator' },
       {
@@ -149,6 +149,29 @@ export const menuTemplate = [
       { icon: tuiSVGtoPNG('tuiIconTool'), role: 'toggleDevTools' },
       { type: 'separator' },
       { role: 'togglefullscreen' }
+    ]
+  },
+  {
+    label: 'Run',
+    submenu: [
+      {
+        click: menuSelected,
+        enabled: false,
+        id: MenuID.transcribe,
+        label: 'Transcribe Audio'
+      },
+      {
+        click: menuSelected,
+        enabled: false,
+        id: MenuID.summarizeBullets,
+        label: 'Summarize Transcription into Bullet Points'
+      },
+      {
+        click: menuSelected,
+        enabled: false,
+        id: MenuID.summarizeParagraphs,
+        label: 'Summarize Transcription into Paragraphs'
+      }
     ]
   },
   {

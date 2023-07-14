@@ -1,10 +1,10 @@
 import 'jest-extended';
 
 import { AppState } from '#mm/state/app';
+import { AudioMetadataService } from '#mm/services/audio-metadata';
 import { CancelTranscription } from '#mm/state/app';
 import { ConfigState } from '#mm/state/config';
 import { FSService } from '#mm/services/fs';
-import { MetadataService } from '#mm/services/metadata';
 import { MinutesState } from '#mm/state/minutes';
 import { NewMinutes } from '#mm/state/app';
 import { NgxsModule } from '@ngxs/store';
@@ -96,7 +96,7 @@ describe('AppState', () => {
       imports: [NgxsModule.forRoot([AppState, ConfigState, MinutesState])],
       providers: [
         { provide: FSService, useValue: mockFS },
-        { provide: MetadataService, useValue: mockMetadata },
+        { provide: AudioMetadataService, useValue: mockMetadata },
         { provide: OpenAIService, useValue: mockOpenAI },
         { provide: TranscriberService, useValue: mockTranscriber },
         { provide: UploaderService, useValue: mockUploader }

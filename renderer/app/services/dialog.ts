@@ -1,5 +1,6 @@
 import { Channels } from '#mm/common';
 import { Injectable } from '@angular/core';
+import { MessageBoxOptions } from '#mm/common';
 
 // 🙈 preload.ts
 declare const ipc /* 👈 typeof ipcRenderer */;
@@ -10,5 +11,9 @@ export class DialogService {
 
   showErrorBox(title: string, contents: string): Promise<void> {
     return ipc.invoke(Channels.dialogShowErrorBox, title, contents);
+  }
+
+  showMessageBox(options: MessageBoxOptions): Promise<number> {
+    return ipc.invoke(Channels.dialogShowMessageBox, options);
   }
 }

@@ -34,6 +34,7 @@ import { UploaderService } from '#mm/services/uploader';
 
 import { catchError } from 'rxjs';
 import { debounceTime } from 'rxjs';
+import { emptyMinutes } from '#mm/common';
 import { filter } from 'rxjs';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
@@ -199,14 +200,13 @@ export class AppState implements NgxsOnInit {
         });
         // 👇 construct a bare-bones Minutes
         const minutes: Minutes = {
+          ...emptyMinutes(),
           audio: {
             encoding: metadata.encoding,
             gcsuri: upload.gcsuri,
             sampleRateHertz: metadata.sampleRate,
             url: upload.url
-          },
-          date: new Date(),
-          title: '--Untitled--'
+          }
         };
         this.#store.dispatch([new ClearApp(), new SetMinutes(minutes)]);
         // 👇 clear the undo stacks as this is new data

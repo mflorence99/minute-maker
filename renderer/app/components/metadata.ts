@@ -10,6 +10,7 @@ import { OnInit } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
 import { UpdateDetails } from '#mm/state/minutes';
 
+import { emptyMinutes } from '#mm/common';
 import { inject } from '@angular/core';
 
 @Component({
@@ -45,23 +46,23 @@ import { inject } from '@angular/core';
 
       <label tuiLabel="Members Present">
         <tui-input-tag
-          formControlName="present"
-          tuiHintContent="Separate name, title etc with a dash"
-          [tuiTextfieldLabelOutside]="true"></tui-input-tag>
+          [tuiHintContent]="inputTagHint"
+          [tuiTextfieldLabelOutside]="true"
+          formControlName="present"></tui-input-tag>
       </label>
 
       <label tuiLabel="Members Absent">
         <tui-input-tag
-          formControlName="absent"
-          tuiHintContent="Separate name, title etc with a dash"
-          [tuiTextfieldLabelOutside]="true"></tui-input-tag>
+          [tuiHintContent]="inputTagHint"
+          [tuiTextfieldLabelOutside]="true"
+          formControlName="absent"></tui-input-tag>
       </label>
 
       <label tuiLabel="Visitors">
         <tui-input-tag
-          formControlName="visitors"
-          tuiHintContent="Separate name, title etc with a dash"
-          [tuiTextfieldLabelOutside]="true"></tui-input-tag>
+          [tuiHintContent]="inputTagHint"
+          [tuiTextfieldLabelOutside]="true"
+          formControlName="visitors"></tui-input-tag>
       </label>
     </form>
   `,
@@ -90,15 +91,28 @@ import { inject } from '@angular/core';
 export class MetadataComponent implements OnChanges, OnInit {
   @Input({ required: true }) minutes: Minutes;
 
+  inputTagHint = 'Separate name, title etc with a dash; hit ENTER after each';
+
   metadata: FormGroup;
 
   #minutesState = inject(MinutesState);
 
   ngOnChanges(changes: SimpleChanges): void {
-    // 👇 keep it simple: there's only one input, and fields in "minutes"
-    //    but not in the form will be ignored
     if (Object.values(changes).some((change) => !change.firstChange)) {
-      this.metadata.patchValue(this.minutes);
+      const dflt = emptyMinutes();
+      this.metadata.setValue(
+        {
+          absent: this.minutes.absent ?? dflt.absent,
+          date: this.minutes.date ?? dflt.date,
+          numSpeakers: this.minutes.numSpeakers ?? dflt.numSpeakers,
+          present: this.minutes.present ?? dflt.present,
+          subject: this.minutes.subject ?? dflt.subject,
+          subtitle: this.minutes.subtitle ?? dflt.subtitle,
+          title: this.minutes.title ?? dflt.title,
+          visitors: this.minutes.visitors ?? dflt.visitors
+        },
+        { emitEvent: false }
+      );
     }
   }
 

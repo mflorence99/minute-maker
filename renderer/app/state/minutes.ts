@@ -392,22 +392,23 @@ export class MinutesState implements NgxsOnInit {
     { details, undoing }: UpdateDetails
   ): void {
     // 👇 capture the original
-    const state = getState();
+    const state = deepCopy(getState());
+    const changes = deepCopy(details);
     const original: Partial<Minutes> = {
-      ...this.#pluckDetails(state, details)
+      ...this.#pluckOriginalFromChanges(state, changes)
     };
     // 👇 only if there's a delta
-    if (!deepEqual(original, details)) {
+    if (!deepEqual(original, changes)) {
       // 👇 put the inverse action onto the undo stack
       if (!undoing)
         this.#store.dispatch(
           new StackUndoable([
             new UpdateDetails(original, true),
-            new UpdateDetails(details, true)
+            new UpdateDetails(changes, true)
           ])
         );
       // 👇 now do the action
-      setState(patch(details));
+      setState(patch(changes));
     }
   }
 
@@ -489,15 +490,17 @@ export class MinutesState implements NgxsOnInit {
     else throw new Error(`Operation not supported for item #${ix}`);
   }
 
-  #pluckDetails(
+  #pluckOriginalFromChanges(
     state: MinutesStateModel,
-    details: Partial<Minutes>
+    changes: Partial<Minutes>
   ): Partial<Minutes> {
-    const clone = deepCopy(state);
-    return Object.keys(details).reduce((plucked, key) => {
-      plucked[key] = clone[key];
+    // 👇 pluck only the original of the changed details
+    const original = Object.keys(changes).reduce((plucked, key) => {
+      if (!deepEqual(changes[key], state[key])) plucked[key] = state[key];
+      else delete changes[key];
       return plucked;
     }, {});
+    return original;
   }
 
   #pluckTranscription(state: MinutesStateModel, ix: number): Transcription {

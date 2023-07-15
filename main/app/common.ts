@@ -280,3 +280,22 @@ export type Minutes = z.infer<typeof MinutesSchema>;
 export type Summary = z.infer<typeof SummarySchema>;
 
 export type Transcription = z.infer<typeof TranscriptionSchema>;
+
+// //////////////////////////////////////////////////////////////////////////
+// 🔳 create default, empty newMinutes
+// //////////////////////////////////////////////////////////////////////////
+
+export const emptyMinutes = (): Minutes => ({
+  absent: [],
+  audio: {},
+  date: new Date(),
+  nextTranscriptionID: 0,
+  numSpeakers: 1,
+  present: [],
+  subject: '',
+  subtitle: '',
+  summary: [],
+  title: '',
+  transcription: [],
+  visitors: []
+});

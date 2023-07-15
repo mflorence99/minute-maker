@@ -38,6 +38,8 @@
           "options": {
             "allowedCommonJsDependencies": [
               "dayjs",
+              "deep-copy",
+              "deep-equal",
               "file-saver",
               "nunjucks",
               "text-mask-core",

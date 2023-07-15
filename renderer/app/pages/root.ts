@@ -17,13 +17,18 @@ import { Transcription } from '#mm/common';
 import { delay } from 'rxjs';
 import { inject } from '@angular/core';
 
+import dayjs from 'dayjs';
+
 @Component({
   selector: 'mm-root',
   template: `
     <tui-root *ngIf="minutes$ | async as minutes; else getStarted">
       <main>
         <header>
-          <h2>{{ minutes.title }}</h2>
+          <h2>
+            {{ minutes.title }} &bull;
+            {{ dayjs(minutes.date).format('MMMM D, YYYY') }}
+          </h2>
           <pre>{{ (app$ | async).pathToMinutes }}</pre>
         </header>
 
@@ -92,6 +97,7 @@ export class RootPage {
     (AgendaItem | Transcription)[]
   >;
 
+  dayjs = dayjs;
   status: StatusStateModel;
   tabIndex = 0;
   txIndex = 0;

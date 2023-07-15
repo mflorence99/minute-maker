@@ -37,7 +37,7 @@ export async function longRunningRecognize(
     config: {
       enableAutomaticPunctuation: true,
       enableWordTimeOffsets: true,
-      diarizationSpeakerCount: request.numSpeakers,
+      diarizationSpeakerCount: request.numSpeakers || 1,
       enableSpeakerDiarization: true,
       encoding: request.audio?.encoding ?? 'MP3',
       languageCode: 'en-US',

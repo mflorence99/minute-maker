@@ -258,7 +258,7 @@ export const MinutesSchema = z.object({
     sampleRateHertz: z.number(),
     url: z.string().url()
   }),
-  date: z.coerce.date().optional(),
+  date: z.coerce.date(),
   nextTranscriptionID: z.number().optional(),
   numSpeakers: z.number().optional(),
   present: z.string().array().optional(),

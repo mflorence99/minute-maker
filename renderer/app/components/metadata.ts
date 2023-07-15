@@ -9,6 +9,7 @@ import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
 import { UpdateDetails } from '#mm/state/minutes';
+import { Validators } from '@angular/forms';
 
 import { emptyMinutes } from '#mm/common';
 import { inject } from '@angular/core';
@@ -104,7 +105,7 @@ export class MetadataComponent implements OnChanges, OnInit {
         {
           absent: this.minutes.absent ?? dflt.absent,
           date: this.minutes.date ?? dflt.date,
-          numSpeakers: this.minutes.numSpeakers ?? dflt.numSpeakers,
+          numSpeakers: this.minutes.numSpeakers || dflt.numSpeakers,
           present: this.minutes.present ?? dflt.present,
           subject: this.minutes.subject ?? dflt.subject,
           subtitle: this.minutes.subtitle ?? dflt.subtitle,
@@ -120,14 +121,15 @@ export class MetadataComponent implements OnChanges, OnInit {
     // 👇 create the form
     this.metadata = new FormGroup({
       absent: new FormControl(this.minutes.absent),
-      date: new FormControl(this.minutes.date),
+      date: new FormControl(this.minutes.date, Validators.required),
       numSpeakers: new FormControl(
-        this.minutes.numSpeakers || this.minutes.present?.length || 1
+        this.minutes.numSpeakers || this.minutes.present?.length || 1,
+        Validators.required
       ),
       present: new FormControl(this.minutes.present),
       subject: new FormControl(this.minutes.subject),
       subtitle: new FormControl(this.minutes.subtitle),
-      title: new FormControl(this.minutes.title),
+      title: new FormControl(this.minutes.title, Validators.required),
       visitors: new FormControl(this.minutes.visitors)
     });
     // 👇 watch for changes and update accordingly

@@ -45,26 +45,22 @@ import { inject } from '@angular/core';
         </tui-input-number>
       </article>
 
-      <label tuiLabel="Members Present">
-        <tui-input-tag
-          [tuiHintContent]="inputTagHint"
-          [tuiTextfieldLabelOutside]="true"
-          formControlName="present"></tui-input-tag>
-      </label>
-
-      <label tuiLabel="Members Absent">
-        <tui-input-tag
-          [tuiHintContent]="inputTagHint"
-          [tuiTextfieldLabelOutside]="true"
-          formControlName="absent"></tui-input-tag>
-      </label>
-
-      <label tuiLabel="Visitors">
-        <tui-input-tag
-          [tuiHintContent]="inputTagHint"
-          [tuiTextfieldLabelOutside]="true"
-          formControlName="visitors"></tui-input-tag>
-      </label>
+      <ng-container
+        *ngFor="
+          let inputTag of [
+            ['Members Present', 'present'],
+            ['Members Absent', 'absent'],
+            ['Visitors', 'visitors']
+          ]
+        ">
+        <label [tuiLabel]="inputTag[0]">
+          <tui-input-tag
+            mmDragDroppable
+            [formControlName]="inputTag[1]"
+            [tuiHintContent]="'Separate name, title etc with a dash'"
+            [tuiTextfieldLabelOutside]="true"></tui-input-tag>
+        </label>
+      </ng-container>
     </form>
   `,
   styles: [
@@ -91,8 +87,6 @@ import { inject } from '@angular/core';
 })
 export class MetadataComponent implements OnChanges, OnInit {
   @Input({ required: true }) minutes: Minutes;
-
-  inputTagHint = 'Separate name, title etc with a dash; hit ENTER after each';
 
   metadata: FormGroup;
 

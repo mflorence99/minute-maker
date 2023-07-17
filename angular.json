@@ -60,7 +60,10 @@
             "outputPath": "dist/renderer",
             "polyfills": ["zone.js"],
             "preserveSymlinks": true,
-            "scripts": ["node_modules/marked/marked.min.js"],
+            "scripts": [
+              "node_modules/geteventlisteners/src/getEventListeners.js",
+              "node_modules/marked/marked.min.js"
+            ],
             "styles": [
               "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
               "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",

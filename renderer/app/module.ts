@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { ConfigState } from '#mm/state/config';
 import { DateTimeTransformer } from '#mm/services/datetime-transformer';
+import { DragDroppableDirective } from '#mm/directives/drag-droppable';
 import { ErrorHandler } from '@angular/core';
 import { InsertableDirective } from '#mm/directives/insertable';
 import { JoinableDirective } from '#mm/directives/joinable';
@@ -69,6 +70,7 @@ const COMPONENTS = [
 ];
 
 const DIRECTIVES = [
+  DragDroppableDirective,
   InsertableDirective,
   JoinableDirective,
   RemovableDirective,

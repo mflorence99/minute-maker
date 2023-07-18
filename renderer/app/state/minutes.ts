@@ -340,7 +340,7 @@ export class MinutesState implements NgxsOnInit {
           {
             end: original.end,
             id: nextTranscriptionID,
-            speaker: '',
+            speaker: '???',
             speech: speech2,
             start: splitTime,
             type: 'TX'

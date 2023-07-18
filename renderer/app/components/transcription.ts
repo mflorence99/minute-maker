@@ -12,6 +12,7 @@ import { StatusStateModel } from '#mm/state/status';
 import { Transcription } from '#mm/common';
 import { UpdateAgendaItem } from '#mm/state/minutes';
 import { UpdateTranscription } from '#mm/state/minutes';
+import { WINDOW } from '@ng-web-apis/common';
 
 import { inject } from '@angular/core';
 
@@ -23,15 +24,10 @@ import { inject } from '@angular/core';
       <tbody>
         <tr
           *ngFor="let tx of transcription; let ix = index; trackBy: trackByTx"
-          (click)="onSelected(tx, ix)">
-          <td>
-            <tui-svg
-              [ngClass]="{ current: ix === txIndex }"
-              class="marker"
-              src="tuiIconArrowRightLarge" />
-          </td>
-
+          (click)="onSelected(tx)"
+          [id]="'TX' + tx.id">
           <ng-container *ngIf="tx.type === 'AG'">
+            <td></td>
             <td colspan="2" width="100%">
               <textarea
                 #agendaItemTitle
@@ -49,6 +45,13 @@ import { inject } from '@angular/core';
           </ng-container>
 
           <ng-container *ngIf="tx.type === 'TX'">
+            <td>
+              <tui-svg
+                [ngClass]="{ current: tx.id === currentTx?.id }"
+                class="marker"
+                src="tuiIconArrowRightLarge" />
+            </td>
+
             <td>
               <input
                 #transcriptionSpeaker
@@ -106,12 +109,23 @@ export class TranscriptionComponent {
 
   @Input({ required: true }) transcription: (AgendaItem | Transcription)[];
 
-  txIndex = 0;
-
+  #currentTx: Transcription;
   #minutesState = inject(MinutesState);
+  #window = inject(WINDOW);
 
-  onSelected(tx: AgendaItem | Transcription, ix: number): void {
-    this.txIndex = ix;
+  @Input() get currentTx(): Transcription {
+    return this.#currentTx;
+  }
+
+  set currentTx(currentTx: Transcription) {
+    this.#currentTx = currentTx;
+    if (currentTx) {
+      const row = this.#window.document.querySelector(`#TX${currentTx.id}`);
+      if (row) row.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  onSelected(tx: AgendaItem | Transcription): void {
     if (tx.type === 'TX') this.selected.emit(tx);
   }
 

@@ -1,6 +1,7 @@
 import { AfterContentInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
+import { Constants } from '#mm/common';
 import { ContentChildren } from '@angular/core';
 import { DestroyRef } from '@angular/core';
 import { GenericPlugin } from 'wavesurfer.js/dist/base-plugin';
@@ -26,6 +27,7 @@ import { kebabasize } from '#mm/utils';
 import { map } from 'rxjs';
 import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { throttleTime } from 'rxjs';
 
 import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions';
 
@@ -57,7 +59,7 @@ export class WaveSurferRegionsComponent
   regions$: QueryList<WaveSurferRegionComponent>;
 
   plugin: RegionsPlugin;
-
+  regionByID: Record<string, Region> = {};
   wavesurfer = inject(WaveSurferComponent);
 
   #destroyRef = inject(DestroyRef);
@@ -78,9 +80,13 @@ export class WaveSurferRegionsComponent
         map(([regions]) => regions)
       )
       .subscribe((regions) => {
+        // 👇 easiest to wipe the old regions ...
         this.plugin.clearRegions();
+        this.regionByID = {};
+        // 👇 ... and create the new ones afresh
         regions.forEach((region) => {
-          this.plugin.addRegion(region.params);
+          const obj = this.plugin.addRegion(region.params);
+          if (region.params.id) this.regionByID[region.params.id] = obj;
         });
       });
   }
@@ -111,6 +117,7 @@ export class WaveSurferRegionsComponent
       this.wavesurfer.timeupdate
         .pipe(
           takeUntilDestroyed(this.#destroyRef),
+          throttleTime(Constants.timeupdateThrottleInterval),
           map((ts: number) =>
             this.plugin
               .getRegions()

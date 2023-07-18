@@ -12,7 +12,10 @@ import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { Summary } from '#mm/common';
+import { SwitchTab } from '#mm/state/app';
 import { Transcription } from '#mm/common';
+import { ViewChild } from '@angular/core';
+import { WaveSurferComponent } from '#mm/components/wavesurfer';
 
 import { delay } from 'rxjs';
 import { inject } from '@angular/core';
@@ -23,24 +26,32 @@ import dayjs from 'dayjs';
   selector: 'mm-root',
   template: `
     <tui-root *ngIf="minutes$ | async as minutes; else getStarted">
-      <main>
+      <main *ngIf="app$ | async as app">
         <header>
           <h2>
             {{ minutes.title }} &bull;
             {{ dayjs(minutes.date).format('MMMM D, YYYY') }}
           </h2>
-          <pre>{{ (app$ | async).pathToMinutes }}</pre>
+          <pre>{{ app.pathToMinutes }}</pre>
         </header>
 
         <mm-wavesurfer
+          #wavesurfer
           [audioFile]="minutes.audio.url"
           [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }"
           class="wavesurfer">
           <mm-wavesurfer-timeline></mm-wavesurfer-timeline>
+          <mm-wavesurfer-regions>
+            <mm-wavesurfer-region
+              *ngIf="currentTx"
+              [params]="{ start: currentTx.start, end: currentTx.end }" />
+          </mm-wavesurfer-regions>
         </mm-wavesurfer>
 
         <nav class="tabs">
-          <tui-tabs [(activeItemIndex)]="tabIndex">
+          <tui-tabs
+            [activeItemIndex]="app.tabIndex"
+            (activeItemIndexChange)="onSwitchTab($event)">
             <button tuiTab>Meeting Details</button>
             <button tuiTab>Transcription</button>
             <button tuiTab>Summary</button>
@@ -48,16 +59,16 @@ import dayjs from 'dayjs';
         </nav>
 
         <mm-metadata
-          [ngClass]="{ data: true, hidden: tabIndex !== 0 }"
+          [ngClass]="{ data: true, hidden: app.tabIndex !== 0 }"
           [minutes]="minutes" />
 
         <mm-transcription
-          (selected)="txIndex = $event"
-          [ngClass]="{ data: true, hidden: tabIndex !== 1 }"
+          (selected)="onSelected($event)"
+          [ngClass]="{ data: true, hidden: app.tabIndex !== 1 }"
           [transcription]="transcription$ | async" />
 
         <mm-summary
-          [ngClass]="{ data: true, hidden: tabIndex !== 2 }"
+          [ngClass]="{ data: true, hidden: app.tabIndex !== 2 }"
           [summary]="summary$ | async" />
 
         <footer class="footer">
@@ -97,10 +108,11 @@ export class RootPage {
     (AgendaItem | Transcription)[]
   >;
 
+  @ViewChild(WaveSurferComponent) wavesurfer;
+
+  currentTx: Transcription = null;
   dayjs = dayjs;
   status: StatusStateModel;
-  tabIndex = 0;
-  txIndex = 0;
 
   #store = inject(Store);
 
@@ -113,6 +125,20 @@ export class RootPage {
 
   newMinutes(): void {
     this.#store.dispatch(new NewMinutes());
+  }
+
+  onSelected(tx: Transcription): void {
+    this.currentTx = null;
+    setTimeout(() => {
+      // 🔥 is this a hack? there's no repaint method in WaveSurfer,
+      //    so this causes the region to be redrawn
+      this.currentTx = tx.start != null && tx.end != null ? tx : null;
+      if (tx.start) this.wavesurfer.wavesurfer.setTime(tx.start);
+    });
+  }
+
+  onSwitchTab(tabIndex: number): void {
+    this.#store.dispatch(new SwitchTab(tabIndex));
   }
 
   openMinutes(): void {

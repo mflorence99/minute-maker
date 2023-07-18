@@ -243,6 +243,7 @@ export const SummarySchema = z.object({
 });
 
 export const TranscriptionSchema = z.object({
+  end: z.number().optional(),
   id: z.number(),
   speaker: z.string(),
   speech: z.string(),

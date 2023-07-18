@@ -86,30 +86,33 @@ export async function cancelOperation(
 // //////////////////////////////////////////////////////////////////////////
 
 function makeTranscription(request, response): Transcription[] {
+  let end = 0;
   let speaker = null;
   let start = 0;
   const speech: string[] = [];
-
   // 👇 we need only look at the last result
   //    https://cloud.google.com/speech-to-text/docs/multiple-voices
   const infos =
     response.results[response.results.length - 1].alternatives[0].words;
-  // 👇 add a terminal object
+  // 👇 add a terminal object so we don't have to worry about the last info
   infos.push({});
+  // 👇 now coalesce all the words by speaker
   return infos.reduce((transcription, info) => {
     const nextSpeaker = `Speaker ${info.speakerTag}`;
     if (nextSpeaker !== speaker) {
       if (speaker)
         transcription.push({
-          speaker: speaker,
+          end,
+          speaker,
           speech: speech.join(' '),
-          start: start
+          start
         });
       speaker = nextSpeaker;
       start = Number(info.startTime?.seconds ?? 0);
       speech.length = 0;
     }
     speech.push(info.word);
+    end = Number(info.endTime?.seconds ?? 0);
     return transcription;
   }, []);
 }

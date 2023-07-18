@@ -91,6 +91,11 @@ export class RephraseTranscription {
   constructor(public rephraseStrategy: RephraseStrategy, public ix: number) {}
 }
 
+export class SwitchTab {
+  static readonly type = '[App] SwitchTab';
+  constructor(public tabIndex: number) {}
+}
+
 export class TranscribeMinutes {
   static readonly type = '[App] TranscribeMinutes';
   constructor() {}
@@ -98,6 +103,7 @@ export class TranscribeMinutes {
 
 export type AppStateModel = {
   pathToMinutes: string;
+  tabIndex: number;
   transcriptionName: string;
 };
 
@@ -119,6 +125,7 @@ export class AppState implements NgxsOnInit {
   static defaultApp(): AppStateModel {
     return {
       pathToMinutes: null,
+      tabIndex: 0,
       transcriptionName: null
     };
   }
@@ -285,15 +292,17 @@ export class AppState implements NgxsOnInit {
     { saveAs }: SaveMinutes
   ): Promise<void> {
     const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
-    let path = getState().pathToMinutes;
-    if (saveAs || !path) {
-      path = await this.#fs.saveFileAs(JSON.stringify(minutes, null, 2), {
-        defaultPath: getState().pathToMinutes,
-        filters: [{ extensions: ['json'], name: 'Minutes' }],
-        title: 'Save Minutes'
-      });
-      if (path) setState(patch({ pathToMinutes: path }));
-    } else await this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
+    if (minutes) {
+      let path = getState().pathToMinutes;
+      if (saveAs || !path) {
+        path = await this.#fs.saveFileAs(JSON.stringify(minutes, null, 2), {
+          defaultPath: getState().pathToMinutes,
+          filters: [{ extensions: ['json'], name: 'Minutes' }],
+          title: 'Save Minutes'
+        });
+        if (path) setState(patch({ pathToMinutes: path }));
+      } else await this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
+    }
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -361,6 +370,17 @@ export class AppState implements NgxsOnInit {
     } finally {
       this.#store.dispatch(new ClearStatus());
     }
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 SwitchTab
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Action(SwitchTab) switchTab(
+    { setState }: StateContext<AppStateModel>,
+    { tabIndex }: SwitchTab
+  ): void {
+    setState(patch({ tabIndex }));
   }
 
   // //////////////////////////////////////////////////////////////////////////

@@ -23,7 +23,7 @@ import { inject } from '@angular/core';
       <tbody>
         <tr
           *ngFor="let tx of transcription; let ix = index; trackBy: trackByTx"
-          (click)="selected.emit((txIndex = ix))">
+          (click)="onSelected(tx, ix)">
           <td>
             <tui-svg
               [ngClass]="{ current: ix === txIndex }"
@@ -100,7 +100,7 @@ import { inject } from '@angular/core';
   `
 })
 export class TranscriptionComponent {
-  @Output() selected = new EventEmitter<number>();
+  @Output() selected = new EventEmitter<Transcription>();
 
   @Select(StatusState) status$: Observable<StatusStateModel>;
 
@@ -109,6 +109,11 @@ export class TranscriptionComponent {
   txIndex = 0;
 
   #minutesState = inject(MinutesState);
+
+  onSelected(tx: AgendaItem | Transcription, ix: number): void {
+    this.txIndex = ix;
+    if (tx.type === 'TX') this.selected.emit(tx);
+  }
 
   trackByTx(ix, tx: AgendaItem | Transcription): number {
     return tx.id;

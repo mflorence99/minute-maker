@@ -220,21 +220,23 @@ export class MinutesState implements NgxsOnInit {
   ): void {
     // 👇 capture the new speech
     const state = getState();
-    const speech1 = this.#pluckTranscription(state, ix).speech;
-    const speech2 = this.#pluckTranscription(state, ix + 1).speech;
-    const speech = `${speech1} ${speech2}`;
+    const tx1 = this.#pluckTranscription(state, ix);
+    const tx2 = this.#pluckTranscription(state, ix + 1);
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#store.dispatch(
         new StackUndoable([
-          new SplitTranscription(ix, speech1.length, true),
+          new SplitTranscription(ix, tx1.speech.length, true),
           new JoinTranscriptions(ix, true)
         ])
       );
     // 👇 now do the action
     setState(
       patch({
-        transcription: updateItem(ix, patch({ speech }))
+        transcription: updateItem(
+          ix,
+          patch({ end: tx2.end, speech: `${tx1.speech} ${tx2.speech}` })
+        )
       })
     );
     setState(patch({ transcription: removeItem(ix + 1) }));
@@ -315,12 +317,18 @@ export class MinutesState implements NgxsOnInit {
           new SplitTranscription(ix, pos, true)
         ])
       );
+    // 👇 approximate the new end/start times from words per second
+    const speech = original.speech.trim();
+    const speech1 = speech.substring(0, pos).trim();
+    const speech2 = speech.substring(pos).trim();
+    const wps = (original.end - original.start) / speech.split(/\s+/).length;
+    const splitTime = speech1.split(/\s+/).length * wps;
     // 👇 now do the action
     setState(
       patch({
         transcription: updateItem(
           ix,
-          patch({ speech: original.speech.substring(0, pos).trim() })
+          patch({ end: splitTime, speech: speech1 })
         )
       })
     );
@@ -330,9 +338,11 @@ export class MinutesState implements NgxsOnInit {
         nextTranscriptionID,
         transcription: insertItem(
           {
-            speaker: '',
-            speech: original.speech.substring(pos).trim(),
+            end: original.end,
             id: nextTranscriptionID,
+            speaker: '',
+            speech: speech2,
+            start: splitTime,
             type: 'TX'
           },
           ix + 1

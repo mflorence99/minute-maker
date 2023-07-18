@@ -243,11 +243,11 @@ export const SummarySchema = z.object({
 });
 
 export const TranscriptionSchema = z.object({
-  end: z.number().optional(),
+  end: z.number(),
   id: z.number(),
   speaker: z.string(),
   speech: z.string(),
-  start: z.number().optional(),
+  start: z.number(),
   type: z.literal('TX')
 });
 

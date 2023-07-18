@@ -132,8 +132,8 @@ export class RootPage {
     setTimeout(() => {
       // 🔥 is this a hack? there's no repaint method in WaveSurfer,
       //    so this causes the region to be redrawn
-      this.currentTx = tx.start != null && tx.end != null ? tx : null;
-      if (tx.start) this.wavesurfer.wavesurfer.setTime(tx.start);
+      this.currentTx = tx;
+      this.wavesurfer.wavesurfer.setTime(tx.start);
     });
   }
 

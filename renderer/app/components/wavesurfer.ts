@@ -2,12 +2,15 @@ import { AfterViewInit } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ClearStatus } from '#mm/state/status';
 import { Component } from '@angular/core';
+import { ComponentState } from '#mm/state/component';
+import { ComponentStateModel } from '#mm/state/component';
 import { ContentChildren } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { Input } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Output } from '@angular/core';
 import { QueryList } from '@angular/core';
+import { SetComponentState } from '#mm/state/component';
 import { SetStatus } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { ViewChild } from '@angular/core';
@@ -28,7 +31,11 @@ import WaveSurfer from 'wavesurfer.js';
     <figure>
       <div #wave></div>
       <ng-content />
-      <audio #media controls></audio>
+      <audio
+        #media
+        (ratechange)="onAudioChange()"
+        (volumechange)="onAudioChange()"
+        controls></audio>
     </figure>
   `,
   styles: [
@@ -77,11 +84,17 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   /* eslint-enable @typescript-eslint/member-ordering */
 
+  state: ComponentStateModel;
   wavesurfer: WaveSurfer;
 
   #audioFile: string;
   #options: Partial<WaveSurferOptions> = {};
   #store = inject(Store);
+
+  constructor() {
+    // 👇 initialize the component state
+    this.state = this.#store.selectSnapshot(ComponentState);
+  }
 
   @Input() get audioFile(): string {
     return this.#audioFile;
@@ -131,6 +144,19 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     this.wavesurfer.destroy();
   }
 
+  onAudioChange(): void {
+    const audio = this.media.nativeElement;
+    this.#store.dispatch(
+      new SetComponentState({
+        audio: {
+          muted: audio.muted,
+          rate: audio.playbackRate,
+          volume: audio.volume
+        }
+      })
+    );
+  }
+
   #loadAudioFile(): void {
     this.#store.dispatch(
       new SetStatus({
@@ -139,9 +165,15 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
       })
     );
     try {
-      this.wavesurfer.once('ready', () =>
-        this.#store.dispatch(new ClearStatus())
-      );
+      this.wavesurfer.once('ready', () => {
+        // 👇 set the media state
+        //     NOTE: can't set the playback rate until audio is loaded!
+        const audio = this.media.nativeElement;
+        audio.muted = this.state.audio.muted;
+        audio.playbackRate = this.state.audio.rate;
+        audio.volume = this.state.audio.volume;
+        this.#store.dispatch(new ClearStatus());
+      });
       this.wavesurfer.load(this.#audioFile);
     } catch (error) {
       this.#store.dispatch(new SetStatus({ error }));

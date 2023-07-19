@@ -2,6 +2,8 @@ import { AgendaItem } from '#mm/common';
 import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
 import { Component } from '@angular/core';
+import { ComponentState } from '#mm/state/component';
+import { ComponentStateModel } from '#mm/state/component';
 import { Constants } from '#mm/common';
 import { DestroyRef } from '@angular/core';
 import { MinutesState } from '#mm/state/minutes';
@@ -10,12 +12,12 @@ import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
 import { OpenMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
+import { SetComponentState } from '#mm/state/component';
 import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 import { Summary } from '#mm/common';
-import { SwitchTab } from '#mm/state/app';
 import { Transcription } from '#mm/common';
 import { ViewChild } from '@angular/core';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
@@ -64,7 +66,7 @@ import dayjs from 'dayjs';
         <nav class="tabs">
           <tui-tabs
             (activeItemIndexChange)="onSwitchTab($event)"
-            [activeItemIndex]="app.tabIndex">
+            [activeItemIndex]="state.tabIndex">
             <button tuiTab>Meeting Details</button>
             <button tuiTab>Transcription</button>
             <button tuiTab>Summary</button>
@@ -72,17 +74,17 @@ import dayjs from 'dayjs';
         </nav>
 
         <mm-metadata
-          [ngClass]="{ data: true, hidden: app.tabIndex !== 0 }"
+          [ngClass]="{ data: true, hidden: state.tabIndex !== 0 }"
           [minutes]="minutes" />
 
         <mm-transcription
           (selected)="onSelected($event)"
           [currentTx]="currentTx"
-          [ngClass]="{ data: true, hidden: app.tabIndex !== 1 }"
+          [ngClass]="{ data: true, hidden: state.tabIndex !== 1 }"
           [transcription]="transcription$ | async" />
 
         <mm-summary
-          [ngClass]="{ data: true, hidden: app.tabIndex !== 2 }"
+          [ngClass]="{ data: true, hidden: state.tabIndex !== 2 }"
           [summary]="summary$ | async" />
 
         <footer class="footer">
@@ -126,6 +128,7 @@ export class RootPage {
 
   currentTx: Transcription = null;
   dayjs = dayjs;
+  state: ComponentStateModel;
   status: StatusStateModel;
 
   #destroyRef = inject(DestroyRef);
@@ -133,6 +136,8 @@ export class RootPage {
   #timeupdate$ = new Subject<number>();
 
   constructor() {
+    // 👇 initialize the component state
+    this.state = this.#store.selectSnapshot(ComponentState);
     // 👇 induce a delay to prevent Angular change detection errors
     this.status$.pipe(delay(0)).subscribe((status) => {
       this.status = status;
@@ -165,7 +170,7 @@ export class RootPage {
   }
 
   onSwitchTab(tabIndex: number): void {
-    this.#store.dispatch(new SwitchTab(tabIndex));
+    this.#store.dispatch(new SetComponentState({ tabIndex }));
   }
 
   onTimeUpdate(ts: number): void {

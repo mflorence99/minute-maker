@@ -121,7 +121,12 @@ export class TranscriptionComponent {
     this.#currentTx = currentTx;
     if (currentTx) {
       const row = this.#window.document.querySelector(`#TX${currentTx.id}`);
-      if (row) row.scrollIntoView({ behavior: 'smooth' });
+      if (row)
+        row.scrollIntoView({
+          behavior: 'smooth',
+          block: 'end',
+          inline: 'nearest'
+        });
     }
   }
 

@@ -5,6 +5,7 @@ import { Channels } from '#mm/common';
 import { Clear as ClearUndoStacks } from '#mm/state/undo';
 import { ClearMinutes } from '#mm/state/minutes';
 import { ClearStatus } from '#mm/state/status';
+import { ComponentState } from '#mm/state/component';
 import { ConfigState } from '#mm/state/config';
 import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
@@ -19,6 +20,7 @@ import { MinutesStateModel } from '#mm/state/minutes';
 import { NgxsOnInit } from '@ngxs/store';
 import { OpenAIService } from '#mm/services/openai';
 import { RephraseStrategy } from '#mm/common';
+import { SetComponentState } from '#mm/state/component';
 import { SetMinutes } from '#mm/state/minutes';
 import { SetStatus } from '#mm/state/status';
 import { State } from '@ngxs/store';
@@ -91,11 +93,6 @@ export class RephraseTranscription {
   constructor(public rephraseStrategy: RephraseStrategy, public ix: number) {}
 }
 
-export class SwitchTab {
-  static readonly type = '[App] SwitchTab';
-  constructor(public tabIndex: number) {}
-}
-
 export class TranscribeMinutes {
   static readonly type = '[App] TranscribeMinutes';
   constructor() {}
@@ -103,13 +100,13 @@ export class TranscribeMinutes {
 
 export type AppStateModel = {
   pathToMinutes: string;
-  tabIndex: number;
-  transcriptionName: string;
 };
 
 @State<AppStateModel>({
   name: 'app',
-  defaults: AppState.defaultApp()
+  defaults: {
+    pathToMinutes: null
+  }
 })
 @Injectable()
 export class AppState implements NgxsOnInit {
@@ -122,22 +119,13 @@ export class AppState implements NgxsOnInit {
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
 
-  static defaultApp(): AppStateModel {
-    return {
-      pathToMinutes: null,
-      tabIndex: 0,
-      transcriptionName: null
-    };
-  }
-
   // //////////////////////////////////////////////////////////////////////////
   // 🟩 CancelTranscription
   // //////////////////////////////////////////////////////////////////////////
 
-  @Action(CancelTranscription) async cancelTranscription({
-    getState
-  }: StateContext<AppStateModel>): Promise<void> {
-    const transcriptionName = getState().transcriptionName;
+  @Action(CancelTranscription) async cancelTranscription(): Promise<void> {
+    const transcriptionName =
+      this.#store.selectSnapshot(ComponentState).transcriptionName;
     if (transcriptionName) {
       await this.#transcriber.cancelTranscription({ name: transcriptionName });
       this.#store.dispatch(new ClearStatus());
@@ -149,7 +137,7 @@ export class AppState implements NgxsOnInit {
   // //////////////////////////////////////////////////////////////////////////
 
   @Action(ClearApp) clearApp({ setState }: StateContext<AppStateModel>): void {
-    setState(AppState.defaultApp());
+    setState({ pathToMinutes: null });
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -373,23 +361,10 @@ export class AppState implements NgxsOnInit {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟩 SwitchTab
-  // //////////////////////////////////////////////////////////////////////////
-
-  @Action(SwitchTab) switchTab(
-    { setState }: StateContext<AppStateModel>,
-    { tabIndex }: SwitchTab
-  ): void {
-    setState(patch({ tabIndex }));
-  }
-
-  // //////////////////////////////////////////////////////////////////////////
   // 🟩 TranscribeMinutes (via Google speech-to-text)
   // //////////////////////////////////////////////////////////////////////////
 
-  @Action(TranscribeMinutes) async transcribeMinutes({
-    setState
-  }: StateContext<AppStateModel>): Promise<void> {
+  @Action(TranscribeMinutes) async transcribeMinutes(): Promise<void> {
     const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
     // 👇 warn about overwrite
     if (minutes.transcription) {
@@ -418,12 +393,12 @@ export class AppState implements NgxsOnInit {
       .transcribe(request)
       .pipe(
         tap((tx) => {
-          setState(patch({ transcriptionName: tx.name }));
-          this.#store.dispatch(
+          this.#store.dispatch([
+            new SetComponentState({ transcriptionName: tx.name }),
             new SetStatus({
               status: `Transcribing minutes: ${tx.progressPercent}% complete`
             })
-          );
+          ]);
         }),
         filter((tx) => tx.progressPercent === 100),
         catchError((error) => {
@@ -439,14 +414,14 @@ export class AppState implements NgxsOnInit {
             t.id = ++nextTranscriptionID;
             t.type = 'TX';
           });
-          this.#store.dispatch(
+          this.#store.dispatch([
+            new SetComponentState({ transcriptionName: null }),
             new SetMinutes({
               nextTranscriptionID,
               transcription: tx.transcription
             })
-          );
+          ]);
           // 👇 finally
-          setState(patch({ transcriptionName: null }));
           this.#store.dispatch(new ClearStatus());
         }
       });

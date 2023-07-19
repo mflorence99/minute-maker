@@ -5,6 +5,7 @@ import { AutosizeModule } from 'ngx-autosize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { ComponentState } from '#mm/state/component';
 import { ConfigState } from '#mm/state/config';
 import { DateTimeTransformer } from '#mm/services/datetime-transformer';
 import { DragDroppableDirective } from '#mm/directives/drag-droppable';
@@ -82,13 +83,20 @@ const PAGES = [RootPage];
 
 const STATES = [
   AppState,
+  ComponentState,
   ConfigState,
   MinutesState,
   RecentsState,
   StatusState,
   UndoState
 ];
-const STATES_SAVED = [AppState, ConfigState, RecentsState, UndoState];
+const STATES_SAVED = [
+  AppState,
+  ComponentState,
+  ConfigState,
+  RecentsState,
+  UndoState
+];
 
 @NgModule({
   bootstrap: [RootPage],

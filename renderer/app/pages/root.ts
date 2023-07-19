@@ -30,6 +30,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { throttleTime } from 'rxjs';
 
 import dayjs from 'dayjs';
+import deepCopy from 'deep-copy';
 
 @Component({
   selector: 'mm-root',
@@ -66,7 +67,7 @@ import dayjs from 'dayjs';
         <nav class="tabs">
           <tui-tabs
             (activeItemIndexChange)="onSwitchTab($event)"
-            [activeItemIndex]="state.tabIndex">
+            [(activeItemIndex)]="state.tabIndex">
             <button tuiTab>Meeting Details</button>
             <button tuiTab>Transcription</button>
             <button tuiTab>Summary</button>
@@ -137,7 +138,7 @@ export class RootPage {
 
   constructor() {
     // 👇 initialize the component state
-    this.state = this.#store.selectSnapshot(ComponentState);
+    this.state = deepCopy(this.#store.selectSnapshot(ComponentState));
     // 👇 induce a delay to prevent Angular change detection errors
     this.status$.pipe(delay(0)).subscribe((status) => {
       this.status = status;
@@ -170,6 +171,7 @@ export class RootPage {
   }
 
   onSwitchTab(tabIndex: number): void {
+    // this.state.tabIndex = tabIndex;
     this.#store.dispatch(new SetComponentState({ tabIndex }));
   }
 

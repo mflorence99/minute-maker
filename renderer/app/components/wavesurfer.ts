@@ -22,6 +22,7 @@ import { WaveSurferPluginComponent } from '#mm/components/wavesurfer-plugin';
 import { inject } from '@angular/core';
 import { kebabasize } from '#mm/utils';
 
+import deepCopy from 'deep-copy';
 import WaveSurfer from 'wavesurfer.js';
 
 @Component({
@@ -35,6 +36,9 @@ import WaveSurfer from 'wavesurfer.js';
         #media
         (ratechange)="onAudioChange()"
         (volumechange)="onAudioChange()"
+        [muted]="state.audio.muted"
+        [playbackRate]="state.audio.playbackRate"
+        [volume]="state.audio.volume"
         controls></audio>
     </figure>
   `,
@@ -93,7 +97,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   constructor() {
     // 👇 initialize the component state
-    this.state = this.#store.selectSnapshot(ComponentState);
+    this.state = deepCopy(this.#store.selectSnapshot(ComponentState));
   }
 
   @Input() get audioFile(): string {
@@ -146,15 +150,12 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   onAudioChange(): void {
     const audio = this.media.nativeElement;
-    this.#store.dispatch(
-      new SetComponentState({
-        audio: {
-          muted: audio.muted,
-          rate: audio.playbackRate,
-          volume: audio.volume
-        }
-      })
-    );
+    this.state.audio = {
+      muted: audio.muted,
+      playbackRate: audio.playbackRate,
+      volume: audio.volume
+    };
+    this.#store.dispatch(new SetComponentState({ audio: this.state.audio }));
   }
 
   #loadAudioFile(): void {
@@ -167,11 +168,9 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     try {
       this.wavesurfer.once('ready', () => {
         // 👇 set the media state
-        //     NOTE: can't set the playback rate until audio is loaded!
+        //    NOTE: can't set the playback rate until audio is loaded!
         const audio = this.media.nativeElement;
-        audio.muted = this.state.audio.muted;
-        audio.playbackRate = this.state.audio.rate;
-        audio.volume = this.state.audio.volume;
+        audio.playbackRate = this.state.audio.playbackRate;
         this.#store.dispatch(new ClearStatus());
       });
       this.wavesurfer.load(this.#audioFile);

@@ -13,7 +13,7 @@ export class SetComponentState {
 export type ComponentStateModel = {
   audio: {
     muted: boolean;
-    rate: number;
+    playbackRate: number;
     volume: number;
   };
   tabIndex: number;
@@ -25,7 +25,7 @@ export type ComponentStateModel = {
   defaults: {
     audio: {
       muted: false,
-      rate: 1,
+      playbackRate: 1,
       volume: 1
     },
     tabIndex: 0,

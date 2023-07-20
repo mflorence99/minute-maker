@@ -93,8 +93,8 @@ export class RephraseTranscription {
   constructor(public rephraseStrategy: RephraseStrategy, public ix: number) {}
 }
 
-export class TranscribeMinutes {
-  static readonly type = '[App] TranscribeMinutes';
+export class TranscribeAudio {
+  static readonly type = '[App] TranscribeAudio';
   constructor() {}
 }
 
@@ -303,7 +303,7 @@ export class AppState implements NgxsOnInit {
   ): Promise<void> {
     const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
     const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
-    if (minutes.summary) {
+    if (minutes.summary.length > 0) {
       // 👇 warn about overwrite
       const button = await this.#dialog.showMessageBox({
         buttons: ['Proceed', 'Cancel'],
@@ -361,13 +361,13 @@ export class AppState implements NgxsOnInit {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟩 TranscribeMinutes (via Google speech-to-text)
+  // 🟩 TranscribeAudio (via Google speech-to-text)
   // //////////////////////////////////////////////////////////////////////////
 
-  @Action(TranscribeMinutes) async transcribeMinutes(): Promise<void> {
+  @Action(TranscribeAudio) async transcribeAudio(): Promise<void> {
     const minutes = this.#store.selectSnapshot<MinutesStateModel>(MinutesState);
     // 👇 warn about overwrite
-    if (minutes.transcription) {
+    if (minutes.transcription.length > 0) {
       const button = await this.#dialog.showMessageBox({
         buttons: ['Proceed', 'Cancel'],
         message:
@@ -384,7 +384,7 @@ export class AppState implements NgxsOnInit {
     } as TranscriberRequest;
     this.#store.dispatch(
       new SetStatus({
-        status: 'Transcribing minutes',
+        status: 'Transcribing audio',
         working: 'transcription'
       })
     );
@@ -396,7 +396,7 @@ export class AppState implements NgxsOnInit {
           this.#store.dispatch([
             new SetComponentState({ transcriptionName: tx.name }),
             new SetStatus({
-              status: `Transcribing minutes: ${tx.progressPercent}% complete`
+              status: `Transcribing audio: ${tx.progressPercent}% complete`
             })
           ]);
         }),

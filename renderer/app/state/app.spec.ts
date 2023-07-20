@@ -16,7 +16,7 @@ import { SetMinutes } from '#mm/state/minutes';
 import { Store } from '@ngxs/store';
 import { SummarizeMinutes } from '#mm/state/app';
 import { TestBed } from '@angular/core/testing';
-import { TranscribeMinutes } from '#mm/state/app';
+import { TranscribeAudio } from '#mm/state/app';
 import { TranscriberService } from '#mm/services/transcriber';
 import { UploaderService } from '#mm/services/uploader';
 
@@ -167,9 +167,9 @@ describe('AppState', () => {
     });
   });
 
-  it('responds to TranscribeMinutes', () => {
+  it('responds to TranscribeAudio', () => {
     store.dispatch(new SetMinutes(minutes as any));
-    store.dispatch(new TranscribeMinutes()).subscribe((done) => {
+    store.dispatch(new TranscribeAudio()).subscribe((done) => {
       expect(mockTranscriber.transcribe).toHaveBeenCalledWith();
       done();
     });

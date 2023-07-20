@@ -253,7 +253,7 @@ export const TranscriptionSchema = z.object({
 });
 
 export const MinutesSchema = z.object({
-  absent: z.string().array().optional(),
+  absent: z.string().array(),
   audio: z.object({
     encoding: z.string(),
     gcsuri: z.string().url(),
@@ -261,18 +261,17 @@ export const MinutesSchema = z.object({
     url: z.string().url()
   }),
   date: z.coerce.date(),
-  nextTranscriptionID: z.number().optional(),
-  numSpeakers: z.number().optional(),
-  present: z.string().array().optional(),
-  subject: z.string().optional(),
-  subtitle: z.string().optional(),
-  summary: SummarySchema.array().optional(),
+  nextTranscriptionID: z.number(),
+  numSpeakers: z.number(),
+  present: z.string().array(),
+  subject: z.string(),
+  subtitle: z.string(),
+  summary: SummarySchema.array(),
   title: z.string(),
   transcription: z
     .discriminatedUnion('type', [AgendaItemSchema, TranscriptionSchema])
-    .array()
-    .optional(),
-  visitors: z.string().array().optional()
+    .array(),
+  visitors: z.string().array()
 });
 
 export type AgendaItem = z.infer<typeof AgendaItemSchema>;

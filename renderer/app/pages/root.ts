@@ -100,15 +100,19 @@ import deepCopy from 'deep-copy';
     <ng-template #getStarted>
       <tui-block-status>
         <img tuiSlot="top" src="./assets/meeting.png" />
+
         <h4>To get started ...</h4>
+
         <p>
-          You can perform these actions at anytime from the
+          These actions can be performed at anytime from the
           <b>File</b>
           menu.
         </p>
+
         <button (click)="newMinutes()" appearance="primary" size="m" tuiButton>
           New Minutes from MP3 Audio
         </button>
+
         <button (click)="openMinutes()" appearance="accent" size="m" tuiButton>
           Open Minutes JSON File
         </button>

@@ -1,10 +1,10 @@
+import { BufferedDispatcherService } from '#mm/services/buffered-dispatcher';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
-import { MinutesState } from '#mm/state/minutes';
 import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
@@ -62,35 +62,14 @@ import { inject } from '@angular/core';
         </label>
       </ng-container>
     </form>
-  `,
-  styles: [
-    `
-      form {
-        background-color: var(--tui-info-bg);
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-
-        .row {
-          display: flex;
-          flex-direction: row;
-          gap: 1rem;
-
-          * > {
-            flex-grow: 1;
-          }
-        }
-      }
-    `
-  ]
+  `
 })
 export class MetadataComponent implements OnChanges, OnInit {
   @Input({ required: true }) minutes: Minutes;
 
   metadata: FormGroup;
 
-  #minutesState = inject(MinutesState);
+  #bufferedDispatcher = inject(BufferedDispatcherService);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (Object.values(changes).some((change) => !change.firstChange)) {
@@ -128,7 +107,7 @@ export class MetadataComponent implements OnChanges, OnInit {
     });
     // 👇 watch for changes and update accordingly
     this.metadata.valueChanges.subscribe((details) =>
-      this.#minutesState.updateBuffer$.next(new UpdateDetails(details))
+      this.#bufferedDispatcher.dispatch(new UpdateDetails(details))
     );
   }
 }

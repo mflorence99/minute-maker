@@ -55,6 +55,7 @@ const summaryStrategy: SummaryStrategy = 'paragraphs';
 
 export const Constants = {
   backoffOptions,
+  bufferedDispatchDebounceTime: 1000,
   corsOptions,
   maxRecentPaths: 32,
   maxUndoStackDepth: 7,
@@ -68,8 +69,7 @@ export const Constants = {
     'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
   summaryStrategy,
   timeupdateThrottleInterval: 10000,
-  transcriptionPollInterval: 10000,
-  updateBufferDebounceTime: 1000
+  transcriptionPollInterval: 10000
 };
 
 // //////////////////////////////////////////////////////////////////////////

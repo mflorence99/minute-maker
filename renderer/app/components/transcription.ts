@@ -1,9 +1,9 @@
 import { AgendaItem } from '#mm/common';
+import { BufferedDispatcherService } from '#mm/services/buffered-dispatcher';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
-import { MinutesState } from '#mm/state/minutes';
 import { Observable } from 'rxjs';
 import { Output } from '@angular/core';
 import { Select } from '@ngxs/store';
@@ -22,95 +22,97 @@ import { inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-transcription',
   template: `
-    <ng-container *ngIf="status$ | async as status">
-      <tui-loader [showLoader]="status.working === 'transcription'">
-        <table *ngIf="transcription.length > 0; else noTranscription">
-          <tbody>
-            <tr
-              *ngFor="
-                let tx of transcription;
-                let ix = index;
-                trackBy: trackByTx
-              "
-              (click)="onSelected(tx)"
-              [id]="'TX' + tx.id">
-              <ng-container *ngIf="tx.type === 'AG'">
-                <td></td>
-                <td colspan="2" width="100%">
-                  <textarea
-                    #agendaItemTitle
-                    (input)="
-                      updateAgendaItem({ title: agendaItemTitle.value }, ix)
-                    "
-                    [mmRemovable]="ix"
-                    [value]="tx.title"
-                    autocomplete="off"
-                    autocorrect="on"
-                    class="heading"
-                    rows="1"
-                    spellcheck="true"
-                    style="width: calc(100% - 1rem)"
-                    wrap="off"></textarea>
-                </td>
-              </ng-container>
-
-              <ng-container *ngIf="tx.type === 'TX'">
-                <td>
-                  <tui-svg
-                    [ngClass]="{ current: tx.id === currentTx?.id }"
-                    class="marker"
-                    src="tuiIconArrowRightLarge" />
-                </td>
-
-                <td>
-                  <input
-                    #transcriptionSpeaker
-                    (input)="
-                      updateTranscription(
-                        { speaker: transcriptionSpeaker.value },
-                        ix
-                      )
-                    "
-                    [value]="tx.speaker"
-                    style="font-weight: bold; width: 7rem" />
-                </td>
-
-                <td width="100%">
-                  <tui-loader
-                    [showLoader]="
-                      status.working === 'rephrase' && status.ix === ix
-                    ">
+    <ng-container *ngIf="transcription.length > 0; else noTranscription">
+      <ng-container *ngIf="status$ | async as status">
+        <tui-loader [showLoader]="status.working === 'transcription'">
+          <table>
+            <tbody>
+              <tr
+                *ngFor="
+                  let tx of transcription;
+                  let ix = index;
+                  trackBy: trackByTx
+                "
+                (click)="onSelected(tx)"
+                [id]="'TX' + tx.id">
+                <ng-container *ngIf="tx.type === 'AG'">
+                  <td></td>
+                  <td colspan="2" width="100%">
                     <textarea
-                      #transcriptionSpeech
+                      #agendaItemTitle
+                      (input)="
+                        updateAgendaItem({ title: agendaItemTitle.value }, ix)
+                      "
+                      [mmRemovable]="ix"
+                      [value]="tx.title"
+                      autocomplete="off"
+                      autocorrect="on"
+                      class="heading"
+                      rows="1"
+                      spellcheck="true"
+                      style="width: calc(100% - 1rem)"
+                      wrap="off"></textarea>
+                  </td>
+                </ng-container>
+
+                <ng-container *ngIf="tx.type === 'TX'">
+                  <td>
+                    <tui-svg
+                      [ngClass]="{ current: tx.id === currentTx?.id }"
+                      class="marker"
+                      src="tuiIconArrowRightLarge" />
+                  </td>
+
+                  <td>
+                    <input
+                      #transcriptionSpeaker
                       (input)="
                         updateTranscription(
-                          { speech: transcriptionSpeech.value },
+                          { speaker: transcriptionSpeaker.value },
                           ix
                         )
                       "
-                      [class.disabled]="
+                      [value]="tx.speaker"
+                      style="font-weight: bold; width: 7rem" />
+                  </td>
+
+                  <td width="100%">
+                    <tui-loader
+                      [showLoader]="
                         status.working === 'rephrase' && status.ix === ix
-                      "
-                      [mmInsertable]="ix"
-                      [mmJoinable]="
-                        transcription[ix + 1]?.type === 'TX' ? ix : null
-                      "
-                      [mmRephraseable]="ix"
-                      [mmSplittable]="ix"
-                      [value]="tx.speech"
-                      autocomplete="off"
-                      autocorrect="on"
-                      autosize
-                      spellcheck="true"
-                      style="width: calc(100% - 1rem)"
-                      wrap="soft"></textarea>
-                  </tui-loader>
-                </td>
-              </ng-container>
-            </tr>
-          </tbody>
-        </table>
-      </tui-loader>
+                      ">
+                      <textarea
+                        #transcriptionSpeech
+                        (input)="
+                          updateTranscription(
+                            { speech: transcriptionSpeech.value },
+                            ix
+                          )
+                        "
+                        [class.disabled]="
+                          status.working === 'rephrase' && status.ix === ix
+                        "
+                        [mmInsertable]="ix"
+                        [mmJoinable]="
+                          transcription[ix + 1]?.type === 'TX' ? ix : null
+                        "
+                        [mmRephraseable]="ix"
+                        [mmSplittable]="ix"
+                        [value]="tx.speech"
+                        autocomplete="off"
+                        autocorrect="on"
+                        autosize
+                        spellcheck="true"
+                        style="width: calc(100% - 1rem)"
+                        wrap="soft"></textarea>
+                    </tui-loader>
+                  </td>
+                </ng-container>
+              </tr>
+            </tbody>
+          </table>
+        </tui-loader>
+      </ng-container>
     </ng-container>
 
     <ng-template #noTranscription>
@@ -151,8 +153,8 @@ export class TranscriptionComponent {
 
   @Input({ required: true }) transcription: (AgendaItem | Transcription)[];
 
+  #bufferedDispatcher = inject(BufferedDispatcherService);
   #currentTx: Transcription;
-  #minutesState = inject(MinutesState);
   #store = inject(Store);
   #window = inject(WINDOW);
 
@@ -187,11 +189,11 @@ export class TranscriptionComponent {
 
   updateAgendaItem(update: any, ix: number): void {
     const action = new UpdateAgendaItem(update, ix);
-    this.#minutesState.updateBuffer$.next(action);
+    this.#bufferedDispatcher.dispatch(action);
   }
 
   updateTranscription(update: any, ix: number): void {
     const action = new UpdateTranscription(update, ix);
-    this.#minutesState.updateBuffer$.next(action);
+    this.#bufferedDispatcher.dispatch(action);
   }
 }

@@ -4,6 +4,8 @@ import { AppStateModel } from '#mm/state/app';
 import { Component } from '@angular/core';
 import { ComponentState } from '#mm/state/component';
 import { ComponentStateModel } from '#mm/state/component';
+import { ConfigState } from '#mm/state/config';
+import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
 import { DestroyRef } from '@angular/core';
 import { MinutesState } from '#mm/state/minutes';
@@ -71,6 +73,11 @@ import deepCopy from 'deep-copy';
             <button tuiTab>Meeting Details</button>
             <button tuiTab>Transcription</button>
             <button tuiTab>Summary</button>
+            <div style="flex-grow: 2"></div>
+            <button tuiTab>
+              <tui-svg src="tuiIconSettings"></tui-svg>
+              Settings
+            </button>
           </tui-tabs>
         </nav>
 
@@ -87,6 +94,10 @@ import deepCopy from 'deep-copy';
         <mm-summary
           [ngClass]="{ data: true, hidden: state.tabIndex !== 2 }"
           [summary]="summary$ | async" />
+
+        <mm-config
+          [ngClass]="{ data: true, hidden: state.tabIndex !== 3 }"
+          [config]="config$ | async" />
 
         <footer class="footer">
           <ng-container *ngIf="status$ | async as status">
@@ -122,6 +133,7 @@ import deepCopy from 'deep-copy';
 })
 export class RootPage {
   @Select(AppState) app$: Observable<AppStateModel>;
+  @Select(ConfigState) config$: Observable<ConfigStateModel>;
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
   @Select(StatusState) status$: Observable<StatusStateModel>;
   @Select(MinutesState.summary) summary$: Observable<Summary[]>;

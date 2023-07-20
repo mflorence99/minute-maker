@@ -1,30 +1,21 @@
 import { Action } from '@ngxs/store';
 import { AgendaItem } from '#mm/common';
-import { Constants } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
-import { NgxsOnInit } from '@ngxs/store';
 import { Selector } from '@ngxs/store';
 import { Stack as StackUndoable } from '#mm/state/undo';
 import { State } from '@ngxs/store';
 import { StateContext } from '@ngxs/store';
 import { Store } from '@ngxs/store';
-import { Subject } from 'rxjs';
 import { Summary } from '#mm/common';
 import { Transcription } from '#mm/common';
 import { UndoableAction } from '#mm/state/undo';
 
-import { debounce } from 'rxjs';
 import { inject } from '@angular/core';
 import { insertItem } from '@ngxs/store/operators';
-import { map } from 'rxjs';
-import { objectsHaveSameKeys } from '#mm/utils';
 import { patch } from '@ngxs/store/operators';
 import { removeItem } from '@ngxs/store/operators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { timer } from 'rxjs';
 import { updateItem } from '@ngxs/store/operators';
-import { withPreviousItem } from '#mm/utils';
 
 import deepCopy from 'deep-copy';
 import deepEqual from 'deep-equal';
@@ -136,11 +127,7 @@ export type MinutesStateModel = Minutes;
   defaults: null
 })
 @Injectable()
-export class MinutesState implements NgxsOnInit {
-  updateBuffer$ = new Subject<
-    UpdateAgendaItem | UpdateDetails | UpdateSummary | UpdateTranscription
-  >();
-
+export class MinutesState {
   #store = inject(Store);
 
   // //////////////////////////////////////////////////////////////////////////
@@ -466,28 +453,6 @@ export class MinutesState implements NgxsOnInit {
       );
     // 👇 now do the action
     setState(patch({ transcription: updateItem(ix, patch(transcription)) }));
-  }
-
-  // //////////////////////////////////////////////////////////////////////////
-  // 🟫 Initialization
-  // //////////////////////////////////////////////////////////////////////////
-
-  ngxsOnInit(): void {
-    // 👇 all this to make sure that when we switch rows, we don't debounce
-    this.updateBuffer$
-      .pipe(
-        takeUntilDestroyed(),
-        withPreviousItem<UpdateAgendaItem | UpdateTranscription>(),
-        debounce(({ previous, current }) =>
-          !previous ||
-          previous.ix !== current.ix ||
-          !objectsHaveSameKeys(previous, current)
-            ? timer(0)
-            : timer(Constants.updateBufferDebounceTime)
-        ),
-        map(({ current }) => current)
-      )
-      .subscribe((action) => this.#store.dispatch(action));
   }
 
   // //////////////////////////////////////////////////////////////////////////

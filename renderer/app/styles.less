@@ -22,6 +22,24 @@
   background-color: var(--tui-base-05);
 }
 
+form {
+  background-color: var(--tui-info-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    * > {
+      flex-grow: 1;
+    }
+  }
+}
+
 header {
   padding-top: 0.5rem;
   text-align: center;
@@ -30,6 +48,10 @@ header {
   > * {
     margin: 0;
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
 }
 
 input {
@@ -137,10 +159,6 @@ textarea {
 }
 
 tui-root {
-  height: 100%;
-}
-
-tui-scrollbar {
   height: 100%;
 }
 

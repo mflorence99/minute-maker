@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { ComponentState } from '#mm/state/component';
+import { ConfigComponent } from '#mm/components/config';
 import { ConfigState } from '#mm/state/config';
 import { DateTimeTransformer } from '#mm/services/datetime-transformer';
 import { DragDroppableDirective } from '#mm/directives/drag-droppable';
@@ -49,6 +50,7 @@ import { TuiLoaderModule } from '@taiga-ui/core';
 import { TuiRootModule } from '@taiga-ui/core';
 import { TuiSvgModule } from '@taiga-ui/core';
 import { TuiTabsModule } from '@taiga-ui/kit';
+import { TuiTextAreaModule } from '@taiga-ui/kit';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { UndoState } from '#mm/state/undo';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
@@ -61,6 +63,7 @@ import { tuiInputNumberOptionsProvider } from '@taiga-ui/kit';
 import isDev from '#mm/is-dev';
 
 const COMPONENTS = [
+  ConfigComponent,
   MetadataComponent,
   SummaryComponent,
   TranscriptionComponent,
@@ -132,6 +135,7 @@ const STATES_SAVED = [
     TuiRootModule,
     TuiSvgModule,
     TuiTabsModule,
+    TuiTextAreaModule,
     TuiTextfieldControllerModule
   ],
 

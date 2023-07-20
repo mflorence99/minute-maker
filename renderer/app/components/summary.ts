@@ -1,8 +1,8 @@
+import { BufferedDispatcherService } from '#mm/services/buffered-dispatcher';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
-import { MinutesState } from '#mm/state/minutes';
 import { Observable } from 'rxjs';
 import { Output } from '@angular/core';
 import { Select } from '@ngxs/store';
@@ -20,40 +20,42 @@ import { inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-summary',
   template: `
-    <ng-container *ngIf="status$ | async as status">
-      <tui-loader [showLoader]="status.working === 'summary'">
-        <table *ngIf="summary.length > 0; else noSummary">
-          <tbody>
-            <tr
-              *ngFor="let summ of summary; let ix = index; trackBy: trackByIx"
-              (click)="selected.emit((summIndex = ix))">
-              <td>
-                <tui-svg
-                  [ngClass]="{ current: ix === summIndex }"
-                  class="marker"
-                  src="tuiIconArrowRightLarge" />
-              </td>
+    <ng-container *ngIf="summary.length > 0; else noSummary">
+      <ng-container *ngIf="status$ | async as status">
+        <tui-loader [showLoader]="status.working === 'summary'">
+          <table>
+            <tbody>
+              <tr
+                *ngFor="let summ of summary; let ix = index; trackBy: trackByIx"
+                (click)="selected.emit((summIndex = ix))">
+                <td>
+                  <tui-svg
+                    [ngClass]="{ current: ix === summIndex }"
+                    class="marker"
+                    src="tuiIconArrowRightLarge" />
+                </td>
 
-              <td width="100%">
-                <div *ngIf="summ.section" class="heading">
-                  {{ summ.section }}
-                </div>
+                <td width="100%">
+                  <div *ngIf="summ.section" class="heading">
+                    {{ summ.section }}
+                  </div>
 
-                <textarea
-                  #summText
-                  (input)="updateSummary({ summary: summText.value }, ix)"
-                  [value]="summ.summary"
-                  autocomplete="off"
-                  autocorrect="on"
-                  autosize
-                  spellcheck="true"
-                  style="width: calc(100% - 1rem)"
-                  wrap="soft"></textarea>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </tui-loader>
+                  <textarea
+                    #summText
+                    (input)="updateSummary({ summary: summText.value }, ix)"
+                    [value]="summ.summary"
+                    autocomplete="off"
+                    autocorrect="on"
+                    autosize
+                    spellcheck="true"
+                    style="width: calc(100% - 1rem)"
+                    wrap="soft"></textarea>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </tui-loader>
+      </ng-container>
     </ng-container>
 
     <ng-template #noSummary>
@@ -102,7 +104,7 @@ export class SummaryComponent {
 
   summIndex = 0;
 
-  #minutesState = inject(MinutesState);
+  #bufferedDispatcher = inject(BufferedDispatcherService);
   #store = inject(Store);
 
   summarizeMinutes(summaryStrategy: SummaryStrategy): void {
@@ -116,6 +118,6 @@ export class SummaryComponent {
 
   updateSummary(update: any, ix: number): void {
     const action = new UpdateSummary(update, ix);
-    this.#minutesState.updateBuffer$.next(action);
+    this.#bufferedDispatcher.dispatch(action);
   }
 }

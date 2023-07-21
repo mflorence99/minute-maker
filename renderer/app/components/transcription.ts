@@ -2,6 +2,7 @@ import { AgendaItem } from '#mm/common';
 import { BufferedDispatcherService } from '#mm/services/buffered-dispatcher';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
+import { ControllerService } from '#mm/services/controller';
 import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -9,8 +10,6 @@ import { Output } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
-import { Store } from '@ngxs/store';
-import { TranscribeAudio } from '#mm/state/app';
 import { Transcription } from '#mm/common';
 import { UpdateAgendaItem } from '#mm/state/minutes';
 import { UpdateTranscription } from '#mm/state/minutes';
@@ -147,8 +146,8 @@ export class TranscriptionComponent {
   @Input({ required: true }) transcription: (AgendaItem | Transcription)[];
 
   #bufferedDispatcher = inject(BufferedDispatcherService);
+  #controller = inject(ControllerService);
   #currentTx: Transcription;
-  #store = inject(Store);
   #window = inject(WINDOW);
 
   @Input() get currentTx(): Transcription {
@@ -177,7 +176,7 @@ export class TranscriptionComponent {
   }
 
   transcribeAudio(): void {
-    this.#store.dispatch(new TranscribeAudio());
+    this.#controller.transcribeAudio();
   }
 
   updateAgendaItem(update: any, ix: number): void {

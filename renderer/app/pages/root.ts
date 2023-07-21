@@ -7,13 +7,12 @@ import { ComponentStateModel } from '#mm/state/component';
 import { ConfigState } from '#mm/state/config';
 import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
+import { ControllerService } from '#mm/services/controller';
 import { DestroyRef } from '@angular/core';
 import { HostListener } from '@angular/core';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
-import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
-import { OpenMinutes } from '#mm/state/app';
 import { Redo } from '#mm/state/undo';
 import { Select } from '@ngxs/store';
 import { SetComponentState } from '#mm/state/component';
@@ -151,6 +150,7 @@ export class RootPage {
   state: ComponentStateModel;
   status: StatusStateModel;
 
+  #controller = inject(ControllerService);
   #destroyRef = inject(DestroyRef);
   #store = inject(Store);
   #timeupdate$ = new Subject<number>();
@@ -196,7 +196,7 @@ export class RootPage {
   }
 
   newMinutes(): void {
-    this.#store.dispatch(new NewMinutes());
+    this.#controller.newMinutes();
   }
 
   onSelected(tx: Transcription): void {
@@ -214,6 +214,6 @@ export class RootPage {
   }
 
   openMinutes(): void {
-    this.#store.dispatch(new OpenMinutes());
+    this.#controller.openMinutes();
   }
 }

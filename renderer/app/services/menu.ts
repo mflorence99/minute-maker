@@ -1,6 +1,5 @@
 import { Channels } from '#mm/common';
-import { CloseMinutes } from '#mm/state/app';
-import { ExportMinutes } from '#mm/state/app';
+import { ControllerService } from '#mm/services/controller';
 import { Injectable } from '@angular/core';
 import { InsertableDirective } from '#mm/directives/insertable';
 import { InsertAgendaItem } from '#mm/state/minutes';
@@ -9,17 +8,13 @@ import { JoinTranscriptions } from '#mm/state/minutes';
 import { MenuID } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
-import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
-import { OpenMinutes } from '#mm/state/app';
 import { RecentsState } from '#mm/state/recents';
 import { RecentsStateModel } from '#mm/state/recents';
 import { Redo } from '#mm/state/undo';
 import { RemovableDirective } from '#mm/directives/removable';
 import { RemoveAgendaItem } from '#mm/state/minutes';
 import { RephraseableDirective } from '#mm/directives/rephraseable';
-import { RephraseTranscription } from '#mm/state/app';
-import { SaveMinutes } from '#mm/state/app';
 import { Select } from '@ngxs/store';
 import { SplittableDirective } from '#mm/directives/splittable';
 import { SplitTranscription } from '#mm/state/minutes';
@@ -27,8 +22,6 @@ import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { SubmenuItem } from '#mm/common';
-import { SummarizeMinutes } from '#mm/state/app';
-import { TranscribeAudio } from '#mm/state/app';
 import { Undo } from '#mm/state/undo';
 import { UndoState } from '#mm/state/undo';
 import { UndoStateModel } from '#mm/state/undo';
@@ -49,6 +42,7 @@ export class MenuService {
   @Select(StatusState) status$: Observable<StatusStateModel>;
   @Select(UndoState) undo$: Observable<UndoStateModel>;
 
+  #controller = inject(ControllerService);
   #store = inject(Store);
   #window = inject(WINDOW);
 
@@ -67,10 +61,10 @@ export class MenuService {
       (event, id: MenuID, data: string, x: number, y: number) => {
         switch (id) {
           case MenuID.close:
-            this.#store.dispatch(new CloseMinutes());
+            this.#controller.closeMinutes();
             break;
           case MenuID.export:
-            this.#store.dispatch(new ExportMinutes());
+            this.#controller.exportMinutes();
             break;
           case MenuID.insert:
             {
@@ -88,16 +82,16 @@ export class MenuService {
             }
             break;
           case MenuID.new:
-            this.#store.dispatch(new NewMinutes());
+            this.#controller.newMinutes();
             break;
           case MenuID.open:
-            this.#store.dispatch(new OpenMinutes());
+            this.#controller.openMinutes();
             break;
           case MenuID.redo:
             this.#store.dispatch(new Redo());
             break;
           case MenuID.recents:
-            this.#store.dispatch(new OpenMinutes(data));
+            this.#controller.openMinutes(data);
             break;
           case MenuID.remove:
             {
@@ -111,7 +105,7 @@ export class MenuService {
                 this.#elementFromPoint(x, y)
               );
               if (!isNaN(ix))
-                this.#store.dispatch(new RephraseTranscription('accuracy', ix));
+                this.#controller.rephraseTranscription('accuracy', ix);
             }
             break;
           case MenuID.rephraseBrevity:
@@ -120,14 +114,14 @@ export class MenuService {
                 this.#elementFromPoint(x, y)
               );
               if (!isNaN(ix))
-                this.#store.dispatch(new RephraseTranscription('brevity', ix));
+                this.#controller.rephraseTranscription('brevity', ix);
             }
             break;
           case MenuID.save:
-            this.#store.dispatch(new SaveMinutes());
+            this.#controller.saveMinutes();
             break;
           case MenuID.saveAs:
-            this.#store.dispatch(new SaveMinutes(true));
+            this.#controller.saveMinutes(true);
             break;
           case MenuID.split:
             {
@@ -140,13 +134,13 @@ export class MenuService {
             }
             break;
           case MenuID.summarizeBullets:
-            this.#store.dispatch(new SummarizeMinutes('bullets'));
+            this.#controller.summarizeMinutes('bullets');
             break;
           case MenuID.summarizeParagraphs:
-            this.#store.dispatch(new SummarizeMinutes('paragraphs'));
+            this.#controller.summarizeMinutes('paragraphs');
             break;
           case MenuID.transcribe:
-            this.#store.dispatch(new TranscribeAudio());
+            this.#controller.transcribeAudio();
             break;
           case MenuID.undo:
             this.#store.dispatch(new Undo());

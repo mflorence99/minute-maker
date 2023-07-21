@@ -1,6 +1,7 @@
 import { BufferedDispatcherService } from '#mm/services/buffered-dispatcher';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
+import { ControllerService } from '#mm/services/controller';
 import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -8,8 +9,6 @@ import { Output } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
-import { Store } from '@ngxs/store';
-import { SummarizeMinutes } from '#mm/state/app';
 import { Summary } from '#mm/common';
 import { SummaryStrategy } from '#mm/common';
 import { UpdateSummary } from '#mm/state/minutes';
@@ -99,10 +98,10 @@ export class SummaryComponent {
   summIndex = 0;
 
   #bufferedDispatcher = inject(BufferedDispatcherService);
-  #store = inject(Store);
+  #controller = inject(ControllerService);
 
   summarizeMinutes(summaryStrategy: SummaryStrategy): void {
-    this.#store.dispatch(new SummarizeMinutes(summaryStrategy));
+    this.#controller.summarizeMinutes(summaryStrategy);
   }
 
   // 🔥 can't insert/remove summaries

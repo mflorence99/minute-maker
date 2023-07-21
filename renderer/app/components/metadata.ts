@@ -40,7 +40,11 @@ import { inject } from '@angular/core';
           <input tuiTextfield />
         </tui-input-date-time>
 
-        <tui-input-number formControlName="numSpeakers" [min]="1">
+        <tui-input-number
+          [style.text-align]="'right'"
+          formControlName="numSpeakers"
+          [max]="7"
+          [min]="1">
           Number of Speakers
         </tui-input-number>
       </article>

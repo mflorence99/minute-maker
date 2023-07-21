@@ -118,6 +118,7 @@
     "prettier-plugin-css-order": "^1",
     "prettier-plugin-package": "^1",
     "rxjs": "^7",
+    "scroll-into-view-if-needed": "^3.0.10",
     "stylelint": "^15",
     "stylelint-config-standard": "^34",
     "stylelint-order": "^6",

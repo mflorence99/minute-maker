@@ -37,6 +37,7 @@ import { TUI_DATE_FORMAT } from '@taiga-ui/cdk';
 import { TUI_DATE_SEPARATOR } from '@taiga-ui/cdk';
 import { TUI_DATE_TIME_VALUE_TRANSFORMER } from '@taiga-ui/kit';
 import { TUI_FIRST_DAY_OF_WEEK } from '@taiga-ui/core';
+import { TuiBadgeModule } from '@taiga-ui/kit';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import { TuiButtonModule } from '@taiga-ui/core';
 import { TuiDayOfWeek } from '@taiga-ui/cdk';
@@ -123,6 +124,7 @@ const STATES_SAVED = [
     }),
     NgxsLoggerPluginModule.forRoot({ collapsed: false }),
     ReactiveFormsModule,
+    TuiBadgeModule,
     TuiBlockStatusModule,
     TuiButtonModule,
     TuiHintModule,

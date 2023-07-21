@@ -41,7 +41,7 @@ export async function longRunningRecognize(
       enableSpeakerDiarization: true,
       encoding: request.audio?.encoding ?? 'MP3',
       languageCode: 'en-US',
-      model: 'phone_call',
+      model: 'latest_long',
       sampleRateHertz: request.audio?.sampleRateHertz ?? 16000
     }
   });
@@ -87,6 +87,7 @@ export async function cancelOperation(
 
 function makeTranscription(request, response): Transcription[] {
   let end = 0;
+  let numWords = 0;
   let speaker = null;
   let start = 0;
   const speech: string[] = [];
@@ -99,7 +100,8 @@ function makeTranscription(request, response): Transcription[] {
   // 👇 now coalesce all the words by speaker
   return infos.reduce((transcription, info) => {
     const nextSpeaker = `Speaker ${info.speakerTag}`;
-    if (nextSpeaker !== speaker) {
+    // 👇 emit speech on change of speaker or if speech exceeds maxima
+    if (nextSpeaker !== speaker || numWords >= Constants.maxSpeechWords) {
       if (speaker)
         transcription.push({
           end,
@@ -107,10 +109,13 @@ function makeTranscription(request, response): Transcription[] {
           speech: speech.join(' '),
           start
         });
+      numWords = 0;
       speaker = nextSpeaker;
       start = Number(info.startTime?.seconds ?? 0);
       speech.length = 0;
     }
+    // 👇 deal with the current word
+    numWords += 1;
     speech.push(info.word);
     end = Number(info.endTime?.seconds ?? 0);
     return transcription;

@@ -1,6 +1,7 @@
 import { AgendaItem } from '#mm/common';
 import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
+import { Clear as ClearUndoStacks } from '#mm/state/undo';
 import { Component } from '@angular/core';
 import { ComponentState } from '#mm/state/component';
 import { ComponentStateModel } from '#mm/state/component';
@@ -73,7 +74,14 @@ import deepCopy from 'deep-copy';
             (activeItemIndexChange)="onSwitchTab($event)"
             [(activeItemIndex)]="state.tabIndex">
             <button tuiTab>Meeting Details</button>
-            <button tuiTab>Transcription</button>
+            <button tuiTab>
+              Transcription
+              <tui-badge
+                class="tui-space_bottom-2"
+                size="xs"
+                status="primary"
+                [value]="minutes.numSpeakers"></tui-badge>
+            </button>
             <button tuiTab>Summary</button>
             <div style="flex-grow: 2"></div>
             <button tuiTab>
@@ -205,8 +213,10 @@ export class RootPage {
   }
 
   onSwitchTab(tabIndex: number): void {
-    // this.state.tabIndex = tabIndex;
-    this.#store.dispatch(new SetComponentState({ tabIndex }));
+    this.#store.dispatch([
+      new ClearUndoStacks(), // 👈 don't undo what isn't showing
+      new SetComponentState({ tabIndex })
+    ]);
   }
 
   onTimeUpdate(ts: number): void {

@@ -17,6 +17,8 @@ import { WINDOW } from '@ng-web-apis/common';
 
 import { inject } from '@angular/core';
 
+import scrollIntoView from 'scroll-into-view-if-needed';
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-transcription',
@@ -159,10 +161,11 @@ export class TranscriptionComponent {
     if (currentTx) {
       const row = this.#window.document.querySelector(`#TX${currentTx.id}`);
       if (row)
-        row.scrollIntoView({
+        scrollIntoView(row, {
           behavior: 'smooth',
           block: 'end',
-          inline: 'nearest'
+          inline: 'nearest',
+          scrollMode: 'if-needed'
         });
     }
   }

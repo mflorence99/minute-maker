@@ -58,6 +58,7 @@ export const Constants = {
   bufferedDispatchDebounceTime: 1000,
   corsOptions,
   maxRecentPaths: 32,
+  maxSpeechWords: 250,
   maxUndoStackDepth: 7,
   openaiDefaults: {
     temperature: 0.5,

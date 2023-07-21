@@ -27,14 +27,8 @@ import { inject } from '@angular/core';
             <tbody>
               <tr
                 *ngFor="let summ of summary; let ix = index; trackBy: trackByIx"
-                (click)="selected.emit((summIndex = ix))">
-                <td>
-                  <tui-svg
-                    [ngClass]="{ current: ix === summIndex }"
-                    class="marker"
-                    src="tuiIconArrowRightLarge" />
-                </td>
-
+                (click)="selected.emit((summIndex = ix))"
+                [ngClass]="{ selected: ix === summIndex }">
                 <td width="100%">
                   <div *ngIf="summ.section" class="heading">
                     {{ summ.section }}

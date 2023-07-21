@@ -34,9 +34,9 @@ import { inject } from '@angular/core';
                   trackBy: trackByTx
                 "
                 (click)="onSelected(tx)"
+                [ngClass]="{ selected: tx.id === currentTx?.id }"
                 [id]="'TX' + tx.id">
                 <ng-container *ngIf="tx.type === 'AG'">
-                  <td></td>
                   <td colspan="2" width="100%">
                     <textarea
                       #agendaItemTitle
@@ -56,13 +56,6 @@ import { inject } from '@angular/core';
                 </ng-container>
 
                 <ng-container *ngIf="tx.type === 'TX'">
-                  <td>
-                    <tui-svg
-                      [ngClass]="{ current: tx.id === currentTx?.id }"
-                      class="marker"
-                      src="tuiIconArrowRightLarge" />
-                  </td>
-
                   <td>
                     <input
                       #transcriptionSpeaker

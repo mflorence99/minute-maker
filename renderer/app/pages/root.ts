@@ -38,13 +38,13 @@ import deepCopy from 'deep-copy';
   selector: 'mm-root',
   template: `
     <tui-root *ngIf="minutes$ | async as minutes; else getStarted">
-      <main *ngIf="app$ | async as app">
-        <header>
+      <main>
+        <header class="header">
           <h2>
             {{ minutes.title }} &bull;
             {{ dayjs(minutes.date).format('MMMM D, YYYY') }}
           </h2>
-          <pre>{{ app.pathToMinutes }}</pre>
+          <pre>{{ (app$ | async).pathToMinutes }}</pre>
         </header>
 
         <mm-wavesurfer

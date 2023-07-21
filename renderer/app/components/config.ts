@@ -15,27 +15,28 @@ import { inject } from '@angular/core';
   selector: 'mm-config',
   template: `
     <form [formGroup]="configForm">
-      <ng-container formGroupName="rephraseStrategyPrompts">
-        <h3>Transcription Rephrase Strategy</h3>
-        <label tuiLabel="For accuracy">
+      <tui-input formControlName="bucketName">
+        Audio File Bucket Name
+        <input tuiTextfield />
+      </tui-input>
+
+      <article class="row" formGroupName="rephraseStrategyPrompts">
+        <label tuiLabel="Transcription rephrase strategy for accuracy">
           <tui-text-area formControlName="accuracy" [expandable]="true" />
         </label>
-        <label tuiLabel="For brevity">
+        <label tuiLabel="... for brevity">
           <tui-text-area formControlName="brevity" [expandable]="true" />
         </label>
-      </ng-container>
+      </article>
 
-      <br />
-
-      <ng-container formGroupName="summaryStrategyPrompts">
-        <h3>Transcription Summary Strategy</h3>
-        <label tuiLabel="As bullet points">
+      <article class="row" formGroupName="summaryStrategyPrompts">
+        <label tuiLabel="Transcription summary strategy as bullet points">
           <tui-text-area formControlName="bullets" [expandable]="true" />
         </label>
-        <label tuiLabel="Into paragraphs">
+        <label tuiLabel="... into paragraphs">
           <tui-text-area formControlName="paragraphs" [expandable]="true" />
         </label>
-      </ng-container>
+      </article>
     </form>
   `
 })
@@ -49,6 +50,7 @@ export class ConfigComponent implements OnInit {
   ngOnInit(): void {
     // 👇 create the form
     this.configForm = new FormGroup({
+      bucketName: new FormControl(this.config.bucketName),
       rephraseStrategyPrompts: new FormGroup({
         accuracy: new FormControl(this.config.rephraseStrategyPrompts.accuracy),
         brevity: new FormControl(this.config.rephraseStrategyPrompts.brevity)

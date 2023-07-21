@@ -3,18 +3,31 @@ import { Injectable } from '@angular/core';
 import { NgxsOnInit } from '@ngxs/store';
 import { RephraseStrategy } from '#mm/common';
 import { Selector } from '@ngxs/store';
+import { Stack as StackUndoable } from '#mm/state/undo';
 import { State } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { SummaryStrategy } from '#mm/common';
+import { UndoableAction } from '#mm/state/undo';
 import { UploaderService } from '#mm/services/uploader';
 
 import { inject } from '@angular/core';
 import { patch } from '@ngxs/store/operators';
+import { pluckOriginalFromChanges } from '#mm/utils';
 import { switchMap } from 'rxjs';
+
+import deepCopy from 'deep-copy';
+import deepEqual from 'deep-equal';
 
 export class SetConfig {
   static readonly type = '[Config] SetConfig';
   constructor(public config: Partial<ConfigStateModel>) {}
+}
+
+export class UpdateChanges extends UndoableAction {
+  static readonly type = '[Config] UpdateChanges';
+  constructor(public details: Partial<ConfigStateModel>, undoing = false) {
+    super(undoing);
+  }
 }
 
 type RephraseStrategyPrompts = Record<RephraseStrategy, string>;
@@ -62,6 +75,36 @@ export class ConfigState implements NgxsOnInit {
   // 👇 NOTE: utility action, as not all have to be set at once
   @Action(SetConfig) setConfig({ setState }, { config }: SetConfig): void {
     setState(patch(config));
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 UpdateChanges
+  //    the big difference between this and SetConfig is that it is undoable
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Action(UpdateChanges) updateChanges(
+    { getState, setState },
+    { details, undoing }: UpdateChanges
+  ): void {
+    // 👇 capture the original
+    const state = deepCopy(getState());
+    const changes = deepCopy(details);
+    const original: Partial<ConfigStateModel> = {
+      ...pluckOriginalFromChanges(state, changes)
+    };
+    // 👇 only if there's a delta
+    if (!deepEqual(original, changes)) {
+      // 👇 put the inverse action onto the undo stack
+      if (!undoing)
+        this.#store.dispatch(
+          new StackUndoable([
+            new UpdateChanges(original, true),
+            new UpdateChanges(changes, true)
+          ])
+        );
+      // 👇 now do the action
+      setState(patch(changes));
+    }
   }
 
   // //////////////////////////////////////////////////////////////////////////

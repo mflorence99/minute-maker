@@ -5,8 +5,10 @@ import { ConfigStateModel } from '#mm/state/config';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Input } from '@angular/core';
+import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { SetConfig } from '#mm/state/config';
+import { SimpleChanges } from '@angular/core';
+import { UpdateChanges } from '#mm/state/config';
 
 import { inject } from '@angular/core';
 
@@ -40,12 +42,18 @@ import { inject } from '@angular/core';
     </form>
   `
 })
-export class ConfigComponent implements OnInit {
+export class ConfigComponent implements OnChanges, OnInit {
   @Input({ required: true }) config: ConfigStateModel;
 
   configForm: FormGroup;
 
   #bufferedDispatcher = inject(BufferedDispatcherService);
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (Object.values(changes).some((change) => !change.firstChange)) {
+      this.configForm.setValue({ ...this.config }, { emitEvent: false });
+    }
+  }
 
   ngOnInit(): void {
     // 👇 create the form
@@ -64,7 +72,7 @@ export class ConfigComponent implements OnInit {
     });
     // 👇 watch for changes and update accordingly
     this.configForm.valueChanges.subscribe((changes) =>
-      this.#bufferedDispatcher.dispatch(new SetConfig(changes))
+      this.#bufferedDispatcher.dispatch(new UpdateChanges(changes))
     );
   }
 }

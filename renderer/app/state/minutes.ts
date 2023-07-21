@@ -14,6 +14,7 @@ import { UndoableAction } from '#mm/state/undo';
 import { inject } from '@angular/core';
 import { insertItem } from '@ngxs/store/operators';
 import { patch } from '@ngxs/store/operators';
+import { pluckOriginalFromChanges } from '#mm/utils';
 import { removeItem } from '@ngxs/store/operators';
 import { updateItem } from '@ngxs/store/operators';
 
@@ -91,8 +92,8 @@ export class UpdateAgendaItem extends UndoableAction {
   }
 }
 
-export class UpdateDetails extends UndoableAction {
-  static readonly type = '[Minutes] UpdateDetails';
+export class UpdateChanges extends UndoableAction {
+  static readonly type = '[Minutes] UpdateChanges';
   constructor(public details: Partial<Minutes>, undoing = false) {
     super(undoing);
   }
@@ -380,19 +381,19 @@ export class MinutesState {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟩 UpdateDetails
+  // 🟩 UpdateChanges
   //    the big difference between this and SetMinutes is that it is undoable
   // //////////////////////////////////////////////////////////////////////////
 
-  @Action(UpdateDetails) updateDetails(
+  @Action(UpdateChanges) updateChanges(
     { getState, setState },
-    { details, undoing }: UpdateDetails
+    { details, undoing }: UpdateChanges
   ): void {
     // 👇 capture the original
     const state = deepCopy(getState());
     const changes = deepCopy(details);
     const original: Partial<Minutes> = {
-      ...this.#pluckOriginalFromChanges(state, changes)
+      ...pluckOriginalFromChanges(state, changes)
     };
     // 👇 only if there's a delta
     if (!deepEqual(original, changes)) {
@@ -400,8 +401,8 @@ export class MinutesState {
       if (!undoing)
         this.#store.dispatch(
           new StackUndoable([
-            new UpdateDetails(original, true),
-            new UpdateDetails(changes, true)
+            new UpdateChanges(original, true),
+            new UpdateChanges(changes, true)
           ])
         );
       // 👇 now do the action
@@ -463,19 +464,6 @@ export class MinutesState {
     if (state.transcription[ix].type === 'AG')
       return state.transcription[ix] as any as AgendaItem;
     else throw new Error(`Operation not supported for item #${ix}`);
-  }
-
-  #pluckOriginalFromChanges(
-    state: MinutesStateModel,
-    changes: Partial<Minutes>
-  ): Partial<Minutes> {
-    // 👇 pluck only the original of the changed details
-    const original = Object.keys(changes).reduce((plucked, key) => {
-      if (!deepEqual(changes[key], state[key])) plucked[key] = state[key];
-      else delete changes[key];
-      return plucked;
-    }, {});
-    return original;
   }
 
   #pluckTranscription(state: MinutesStateModel, ix: number): Transcription {

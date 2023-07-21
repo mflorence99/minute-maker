@@ -7,6 +7,8 @@ import { pairwise } from 'rxjs';
 import { pipe } from 'rxjs';
 import { startWith } from 'rxjs';
 
+import deepEqual from 'deep-equal';
+
 // //////////////////////////////////////////////////////////////////////////
 // 🟦 WatchableEventEmitter
 // //////////////////////////////////////////////////////////////////////////
@@ -54,6 +56,20 @@ export function objectsHaveSameKeys(...objects): boolean {
   );
   const union = new Set(allKeys);
   return objects.every((object) => union.size === Object.keys(object).length);
+}
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟦 pluckOriginalFromChanges
+// //////////////////////////////////////////////////////////////////////////
+
+export function pluckOriginalFromChanges(state: any, changes: any): any {
+  // 👇 pluck only the original of the changed details
+  const original = Object.keys(changes).reduce((plucked, key) => {
+    if (!deepEqual(changes[key], state[key])) plucked[key] = state[key];
+    else delete changes[key];
+    return plucked;
+  }, {});
+  return original;
 }
 
 // //////////////////////////////////////////////////////////////////////////

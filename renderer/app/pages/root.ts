@@ -8,11 +8,13 @@ import { ConfigState } from '#mm/state/config';
 import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
 import { DestroyRef } from '@angular/core';
+import { HostListener } from '@angular/core';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
 import { NewMinutes } from '#mm/state/app';
 import { Observable } from 'rxjs';
 import { OpenMinutes } from '#mm/state/app';
+import { Redo } from '#mm/state/undo';
 import { Select } from '@ngxs/store';
 import { SetComponentState } from '#mm/state/component';
 import { StatusState } from '#mm/state/status';
@@ -21,6 +23,7 @@ import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 import { Summary } from '#mm/common';
 import { Transcription } from '#mm/common';
+import { Undo } from '#mm/state/undo';
 import { ViewChild } from '@angular/core';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 
@@ -175,6 +178,21 @@ export class RootPage {
       .subscribe((tx: Transcription) => {
         this.currentTx = tx;
       });
+  }
+
+  // 👇 Chrome has default udo/redo handlers for inputs and textareas
+  //    we must use our own unfo stack instead
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyPress(event: KeyboardEvent): void {
+    if ((event.ctrlKey || event.metaKey) && event.code === 'KeyZ') {
+      this.#store.dispatch(new Undo());
+      event.preventDefault();
+    }
+    if ((event.ctrlKey || event.metaKey) && event.code === 'KeyY') {
+      this.#store.dispatch(new Redo());
+      event.preventDefault();
+    }
   }
 
   newMinutes(): void {

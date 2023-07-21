@@ -8,7 +8,7 @@ import { Minutes } from '#mm/common';
 import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
-import { UpdateDetails } from '#mm/state/minutes';
+import { UpdateChanges } from '#mm/state/minutes';
 import { Validators } from '@angular/forms';
 
 import { emptyMinutes } from '#mm/common';
@@ -107,7 +107,7 @@ export class MetadataComponent implements OnChanges, OnInit {
     });
     // 👇 watch for changes and update accordingly
     this.metadata.valueChanges.subscribe((details) =>
-      this.#bufferedDispatcher.dispatch(new UpdateDetails(details))
+      this.#bufferedDispatcher.dispatch(new UpdateChanges(details))
     );
   }
 }

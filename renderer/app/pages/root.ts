@@ -83,6 +83,7 @@ import deepCopy from 'deep-copy';
                 [value]="minutes.numSpeakers"></tui-badge>
             </button>
             <button tuiTab>Summary</button>
+            <button tuiTab>Preview</button>
             <div style="flex-grow: 2"></div>
             <button tuiTab>
               <tui-svg src="tuiIconSettings"></tui-svg>
@@ -105,8 +106,12 @@ import deepCopy from 'deep-copy';
           [ngClass]="{ data: true, hidden: state.tabIndex !== 2 }"
           [summary]="summary$ | async" />
 
-        <mm-config
+        <mm-preview
           [ngClass]="{ data: true, hidden: state.tabIndex !== 3 }"
+          [minutes]="minutes" />
+
+        <mm-config
+          [ngClass]="{ data: true, hidden: state.tabIndex !== 4 }"
           [config]="config$ | async" />
 
         <footer class="footer">

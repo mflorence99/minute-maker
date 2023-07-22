@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MarkdownService } from 'ngx-markdown';
-import { MinutesState } from '#mm/state/minutes';
+import { Minutes } from '#mm/common';
 import { SetStatus } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 
@@ -15,19 +15,12 @@ export class ExporterService {
   #markdown = inject(MarkdownService);
   #store = inject(Store);
 
-  export(): void {
+  export(minutes: Minutes, zoom = 1): void {
     try {
-      // 👇 grab the latest minutes
-      const minutes = this.#store.selectSnapshot(MinutesState);
       // 👇 prepare the export from the minutes and the template
-      const env = nunjucks.configure('./assets', { autoescape: false });
-      const result = env.render('template.njk', {
-        dayjs,
-        fromMarkdown: this.#markdown.parse.bind(this.#markdown),
-        minutes
-      });
+      const rendering = this.render(minutes, zoom);
       // 👇 export the resulting HTML
-      const blob = new Blob([result], {
+      const blob = new Blob([rendering], {
         type: 'text/plain;charset=utf-8'
       });
       saveAs(
@@ -37,5 +30,17 @@ export class ExporterService {
     } catch (error) {
       this.#store.dispatch(new SetStatus({ error }));
     }
+  }
+
+  render(minutes: Minutes, zoom = 1): string {
+    // 👇 prepare the export from the minutes and the template
+    const env = nunjucks.configure('./assets', { autoescape: false });
+    const rendering = env.render('template.njk', {
+      dayjs,
+      fromMarkdown: this.#markdown.parse.bind(this.#markdown),
+      minutes,
+      zoom
+    });
+    return rendering;
   }
 }

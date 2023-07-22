@@ -29,6 +29,17 @@ form {
   gap: 1rem;
   padding: 1rem;
 
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hint {
+    color: var(--tui-primary);
+    font-size: smaller;
+    padding: 0.2rem 0 0 1rem;
+  }
+
   .row {
     align-items: flex-start;
     display: flex;
@@ -44,6 +55,11 @@ form {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
+}
+
+iframe {
+  height: 95%;
+  width: 100%;
 }
 
 input {

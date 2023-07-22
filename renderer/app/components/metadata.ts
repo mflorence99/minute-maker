@@ -40,31 +40,42 @@ import { inject } from '@angular/core';
           <input tuiTextfield />
         </tui-input-date-time>
 
-        <tui-input-number
-          [style.text-align]="'right'"
-          formControlName="numSpeakers"
-          [max]="7"
-          [min]="1">
-          Number of Speakers
-        </tui-input-number>
+        <article class="column">
+          <tui-input-slider formControlName="numSpeakers" [max]="7" [min]="1">
+            Number of Speakers
+          </tui-input-slider>
+          <span class="hint">
+            Necessary for speaker diarization during transcription
+          </span>
+        </article>
       </article>
 
-      <ng-container
-        *ngFor="
-          let inputTag of [
-            ['Members Present', 'present'],
-            ['Members Absent', 'absent'],
-            ['Visitors', 'visitors']
-          ]
-        ">
-        <label [tuiLabel]="inputTag[0]">
+      <label tuiLabel="Members Present">
+        <tui-input-tag
+          mmDragDroppable
+          formControlName="present"
+          [tuiTextfieldLabelOutside]="true"></tui-input-tag>
+      </label>
+
+      <label tuiLabel="Members Absent">
+        <tui-input-tag
+          mmDragDroppable
+          formControlName="absent"
+          [tuiTextfieldLabelOutside]="true"></tui-input-tag>
+      </label>
+
+      <label tuiLabel="Visitors">
+        <article class="column">
           <tui-input-tag
             mmDragDroppable
-            [formControlName]="inputTag[1]"
-            [tuiHintContent]="'Separate name, title etc with a dash'"
+            formControlName="visitors"
             [tuiTextfieldLabelOutside]="true"></tui-input-tag>
-        </label>
-      </ng-container>
+          <span class="hint">
+            Separate names from titles etc with a dash and hit ENTER after each
+            one
+          </span>
+        </article>
+      </label>
     </form>
   `
 })

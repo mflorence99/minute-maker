@@ -22,6 +22,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { PreviewComponent } from '#mm/components/preview';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecentsState } from '#mm/state/recents';
 import { RemovableDirective } from '#mm/directives/removable';
@@ -45,6 +46,7 @@ import { TuiHintModule } from '@taiga-ui/core';
 import { TuiInputDateTimeModule } from '@taiga-ui/kit';
 import { TuiInputModule } from '@taiga-ui/kit';
 import { TuiInputNumberModule } from '@taiga-ui/kit';
+import { TuiInputSliderModule } from '@taiga-ui/kit';
 import { TuiInputTagModule } from '@taiga-ui/kit';
 import { TuiLabelModule } from '@taiga-ui/core';
 import { TuiLoaderModule } from '@taiga-ui/core';
@@ -59,13 +61,12 @@ import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
 import { WaveSurferRegionsComponent } from '#mm/components/wavesurfer-regions';
 import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline';
 
-import { tuiInputNumberOptionsProvider } from '@taiga-ui/kit';
-
 import isDev from '#mm/is-dev';
 
 const COMPONENTS = [
   ConfigComponent,
   MetadataComponent,
+  PreviewComponent,
   SummaryComponent,
   TranscriptionComponent,
   WaveSurferComponent,
@@ -131,6 +132,7 @@ const STATES_SAVED = [
     TuiInputDateTimeModule,
     TuiInputModule,
     TuiInputNumberModule,
+    TuiInputSliderModule,
     TuiInputTagModule,
     TuiLabelModule,
     TuiLoaderModule,
@@ -153,10 +155,6 @@ const STATES_SAVED = [
       provide: STORAGE_ENGINE,
       useClass: StorageEngine
     },
-    tuiInputNumberOptionsProvider({
-      decimal: 'never',
-      step: 1
-    }),
     { provide: TUI_DATE_FORMAT, useValue: 'MDY' },
     { provide: TUI_DATE_SEPARATOR, useValue: '/' },
     {

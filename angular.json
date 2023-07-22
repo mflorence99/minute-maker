@@ -55,7 +55,7 @@
               }
             ],
             "index": "renderer/index.html",
-            "inlineStyleLanguage": "less",
+            "inlineStyleLanguage": "scss",
             "main": "renderer/app/main.ts",
             "outputPath": "dist/renderer",
             "polyfills": ["zone.js"],
@@ -68,7 +68,7 @@
               "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
               "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
               "node_modules/@taiga-ui/styles/taiga-ui-global.less",
-              "renderer/app/styles.less"
+              "renderer/app/styles.scss"
             ],
             "tsConfig": "renderer/tsconfig.app.json"
           }

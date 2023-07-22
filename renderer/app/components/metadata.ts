@@ -19,10 +19,12 @@ import { inject } from '@angular/core';
   selector: 'mm-metadata',
   template: `
     <form [formGroup]="metadata">
-      <tui-input formControlName="title">
-        Title
-        <input tuiTextfield />
-      </tui-input>
+      <label tuiLabel="Description">
+        <tui-input formControlName="title">
+          Title
+          <input tuiTextfield />
+        </tui-input>
+      </label>
 
       <tui-input formControlName="subtitle">
         Subtitle

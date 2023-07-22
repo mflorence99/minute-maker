@@ -50,6 +50,7 @@ import { TuiInputSliderModule } from '@taiga-ui/kit';
 import { TuiInputTagModule } from '@taiga-ui/kit';
 import { TuiLabelModule } from '@taiga-ui/core';
 import { TuiLoaderModule } from '@taiga-ui/core';
+import { TuiProgressModule } from '@taiga-ui/kit';
 import { TuiRootModule } from '@taiga-ui/core';
 import { TuiSvgModule } from '@taiga-ui/core';
 import { TuiTabsModule } from '@taiga-ui/kit';
@@ -136,6 +137,7 @@ const STATES_SAVED = [
     TuiInputTagModule,
     TuiLabelModule,
     TuiLoaderModule,
+    TuiProgressModule,
     TuiRootModule,
     TuiSvgModule,
     TuiTabsModule,

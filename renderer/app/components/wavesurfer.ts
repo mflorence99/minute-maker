@@ -127,7 +127,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
       media: this.media.nativeElement,
       plugins: this.plugins$.map((plugin: WaveSurferPlugin) => plugin.create()),
       progressColor: '#c0c0c0',
-      waveColor: '#ff7043', // 👈 --tui-accent
+      waveColor: '#880e4f', // 👈 --tui-accent
       ...this.options
     });
     // 👇 load the audio file

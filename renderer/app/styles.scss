@@ -22,6 +22,16 @@
   background-color: var(--tui-base-05);
 }
 
+:root {
+  --tui-primary: #004d40;
+  --tui-primary-hover: #004d40c0;
+  --tui-primary-active: #004d40;
+
+  --tui-accent: #880e4f;
+  --tui-accent-hover: #880e4fc0;
+  --tui-accent-active: #880e4f;
+}
+
 form {
   background-color: var(--tui-neutral-bg);
   display: flex;
@@ -29,13 +39,17 @@ form {
   gap: 1rem;
   padding: 1rem;
 
+  [tuiLabel] {
+    color: var(--tui-primary);
+  }
+
   .column {
     display: flex;
     flex-direction: column;
   }
 
   .hint {
-    color: var(--tui-primary);
+    color: var(--tui-text-02);
     font-size: smaller;
     padding: 0.2rem 0 0 1rem;
   }
@@ -46,14 +60,19 @@ form {
     flex-direction: row;
     gap: 1rem;
 
-    * > {
-      // 👇 https://css-tricks.com/equal-columns-with-flexbox-its-more-complicated-than-you-might-think/
+    // 👇 https://css-tricks.com/equal-columns-with-flexbox-its-more-complicated-than-you-might-think/
+    > * {
       flex: 1;
     }
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
 }
 
@@ -96,20 +115,11 @@ main {
   .footer {
     bottom: 0;
     display: block;
-    height: 3rem;
+    height: 2.5rem;
     position: absolute;
     width: 100%;
 
-    label {
-      position: absolute;
-      text-align: center;
-      top: 0.5rem;
-      width: 100%;
-    }
-
-    progress {
-      height: 2.5rem;
-      position: absolute;
+    .progress {
       width: 100%;
     }
   }
@@ -160,7 +170,7 @@ table {
   tr {
     vertical-align: top;
 
-    &.selected{
+    &.selected {
       background-color: var(--tui-neutral-bg);
     }
 
@@ -187,6 +197,6 @@ tui-root {
 }
 
 // 🔥 ugly hack!!
-tui-text-area tui-scrollbar{
+tui-text-area tui-scrollbar {
   border-top: 0 !important;
 }

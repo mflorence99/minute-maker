@@ -2,8 +2,8 @@
   "extends": "stylelint-config-standard",
   "overrides": [
     {
-      "files": ["**/*.less"],
-      "customSyntax": "postcss-less"
+      "files": ["**/*.scss"],
+      "customSyntax": "postcss-scss"
     },
     {
       "files": ["**/*.ts"],

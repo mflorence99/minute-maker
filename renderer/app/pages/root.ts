@@ -73,7 +73,7 @@ import deepCopy from 'deep-copy';
           <tui-tabs
             (activeItemIndexChange)="onSwitchTab($event)"
             [(activeItemIndex)]="state.tabIndex">
-            <button tuiTab>Meeting Details</button>
+            <button tuiTab>Details</button>
             <button tuiTab>
               Transcription
               <tui-badge
@@ -116,8 +116,10 @@ import deepCopy from 'deep-copy';
 
         <footer class="footer">
           <ng-container *ngIf="status$ | async as status">
-            <progress *ngIf="!!status.working"></progress>
-            <label>{{ status.status }}</label>
+            <label *ngIf="!!status.working" class="progress" tuiProgressLabel>
+              {{ status.status }}
+              <progress tuiProgressBar [max]="100"></progress>
+            </label>
           </ng-container>
         </footer>
       </main>

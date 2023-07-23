@@ -18,6 +18,10 @@ export class OpenAIService {
     return ipc.invoke(Channels.openaiCompletion, request);
   }
 
+  credentials(credentials: string): Promise<any> {
+    return ipc.invoke(Channels.openaiCredentials, credentials);
+  }
+
   listModels(): Promise<string[]> {
     return ipc.invoke(Channels.openaiListModels);
   }

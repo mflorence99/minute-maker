@@ -10,6 +10,37 @@ import { v1p1beta1 } from '@google-cloud/speech';
 
 import jsome from 'jsome';
 
+let credentials;
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟩 Channels.transcriberCancel --> cancelOperation)
+// //////////////////////////////////////////////////////////////////////////
+
+ipcMain.handle(Channels.transcriberCancel, cancelOperation);
+
+// 👇 exported for tests
+export async function cancelOperation(
+  event,
+  request: TranscriberCancel
+): Promise<void> {
+  const client = new v1p1beta1.SpeechClient();
+  try {
+    jsome([`👉 ${Channels.transcriberCancel}`, request]);
+    await client.cancelOperation(request as any);
+  } catch (error) {
+    console.log(`🔥 ${error.message}`);
+  }
+}
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟩 Channels.transcriberCredentials
+// //////////////////////////////////////////////////////////////////////////
+
+ipcMain.handle(
+  Channels.transcriberCredentials,
+  (creds) => (credentials = creds)
+);
+
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 Channels.transcriberRequest --> longRunningRecognize
 // //////////////////////////////////////////////////////////////////////////
@@ -59,26 +90,6 @@ export async function longRunningRecognize(
     progressPercent: 100,
     transcription: makeTranscription(request, response)
   });
-}
-
-// //////////////////////////////////////////////////////////////////////////
-// 🟩 Channels.transcriberCancel --> cancelOperation)
-// //////////////////////////////////////////////////////////////////////////
-
-ipcMain.handle(Channels.transcriberCancel, cancelOperation);
-
-// 👇 exported for tests
-export async function cancelOperation(
-  event,
-  request: TranscriberCancel
-): Promise<void> {
-  const client = new v1p1beta1.SpeechClient();
-  try {
-    jsome([`👉 ${Channels.transcriberCancel}`, request]);
-    await client.cancelOperation(request as any);
-  } catch (error) {
-    console.log(`🔥 ${error.message}`);
-  }
 }
 
 // //////////////////////////////////////////////////////////////////////////

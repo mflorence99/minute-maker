@@ -16,6 +16,10 @@ export class TranscriberService {
     return ipc.invoke(Channels.transcriberCancel, request);
   }
 
+  credentials(credentials: string): Promise<void> {
+    return ipc.invoke(Channels.transcriberCredentials, credentials);
+  }
+
   transcribe(request: TranscriberRequest): Observable<TranscriberResponse> {
     return new Observable((observer) => {
       // 👇 listen for transcriber responses

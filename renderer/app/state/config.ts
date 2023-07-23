@@ -1,15 +1,21 @@
 import { Action } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { NgxsOnInit } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { OpenAIService } from '#mm/services/openai';
 import { RephraseStrategy } from '#mm/common';
+import { Select } from '@ngxs/store';
 import { Selector } from '@ngxs/store';
 import { Stack as StackUndoable } from '#mm/state/undo';
 import { State } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { SummaryStrategy } from '#mm/common';
+import { TranscriberService } from '#mm/services/transcriber';
 import { UndoableAction } from '#mm/state/undo';
 import { UploaderService } from '#mm/services/uploader';
 
+import { combineLatest } from 'rxjs';
+import { filter } from 'rxjs';
 import { inject } from '@angular/core';
 import { patch } from '@ngxs/store/operators';
 import { pluckOriginalFromChanges } from '#mm/utils';
@@ -35,6 +41,8 @@ type SummaryStrategyPrompts = Record<SummaryStrategy, string>;
 
 export type ConfigStateModel = {
   bucketName: string;
+  googleCredentials: string;
+  openaiCredentials: string;
   rephraseStrategyPrompts: RephraseStrategyPrompts;
   summaryStrategyPrompts: SummaryStrategyPrompts;
 };
@@ -43,6 +51,8 @@ export type ConfigStateModel = {
   name: 'config',
   defaults: {
     bucketName: 'washington-app-319514.appspot.com', // 🔥 convenient for now
+    googleCredentials: null, // 👈 of course!
+    openaiCredentials: null, // 👈 of course!
     rephraseStrategyPrompts: {
       accuracy:
         'Rephrase my statement in the first person, using grammatical English and paragraphs',
@@ -57,7 +67,14 @@ export type ConfigStateModel = {
 })
 @Injectable()
 export class ConfigState implements NgxsOnInit {
+  @Select(ConfigState.bucketName) bucketName$: Observable<string>;
+  @Select(ConfigState.googleCredentials)
+  googleCredentials$: Observable<string>;
+  @Select(ConfigState.openaiCredentials) openaiCredentials$: Observable<string>;
+
+  #openai = inject(OpenAIService);
   #store = inject(Store);
+  #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
 
   // //////////////////////////////////////////////////////////////////////////
@@ -66,6 +83,22 @@ export class ConfigState implements NgxsOnInit {
 
   @Selector() static bucketName(config: ConfigStateModel): string {
     return config.bucketName;
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟪 @Select(ConfigState.googleCredentials) googleCredentials$
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Selector() static googleCredentials(config: ConfigStateModel): string {
+    return config.googleCredentials;
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟪 @Select(ConfigState.openaiCredentials) openaiCredentials$
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Selector() static openaiCredentials(config: ConfigStateModel): string {
+    return config.openaiCredentials;
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -109,13 +142,33 @@ export class ConfigState implements NgxsOnInit {
 
   // //////////////////////////////////////////////////////////////////////////
   // 🟫 Initialization
+  // 🙈 https://stackoverflow.com/questions/43881504/how-to-await-inside-rxjs-subscribe-method
   // //////////////////////////////////////////////////////////////////////////
 
   ngxsOnInit(): void {
-    const bucketName$ = this.#store.select(ConfigState.bucketName);
-    // 🙈 https://stackoverflow.com/questions/43881504/how-to-await-inside-rxjs-subscribe-method
-    bucketName$
-      .pipe(switchMap((bucketName) => this.#uploader.enableCORS(bucketName)))
+    // 👇 changes in Google credentials
+    combineLatest({
+      googleCredentials: this.googleCredentials$,
+      bucketName: this.bucketName$
+    })
+      .pipe(
+        filter(({ googleCredentials }) => !!googleCredentials),
+        switchMap(({ googleCredentials, bucketName }) =>
+          this.#uploader
+            .credentials(googleCredentials)
+            .then(() => this.#uploader.enableCORS(bucketName))
+            .then(() => this.#transcriber.credentials(googleCredentials))
+        )
+      )
+      .subscribe();
+    // 👇 changes in OpenAI credentials
+    this.openaiCredentials$
+      .pipe(
+        filter((openaiCredentials) => !!openaiCredentials),
+        switchMap((openaiCredentials) =>
+          this.#openai.credentials(openaiCredentials)
+        )
+      )
       .subscribe();
   }
 }

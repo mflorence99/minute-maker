@@ -136,12 +136,15 @@ export enum Channels {
 
   openaiChatCompletion = 'openai/chat-completion',
   openaiCompletion = 'openai/completion',
+  openaiCredentials = 'openai/credentials',
   openaiListModels = 'openai/list-models',
 
   transcriberCancel = 'google-speech/transcriber/cancel',
+  transcriberCredentials = 'google-speech/transcriber/credentials',
   transcriberRequest = 'google-speech/transcriber/request',
   transcriberResponse = 'google-speech/transcriber/response',
 
+  uploaderCredentials = 'google-speech/uploader/credentials',
   uploaderEnableCORS = 'google-storage/uploader/enableCORS',
   uploaderRequest = 'google-storage/uploader/request'
 }

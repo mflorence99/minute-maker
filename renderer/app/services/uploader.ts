@@ -10,6 +10,10 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 export class UploaderService {
   //
 
+  credentials(credentials: string): Promise<any> {
+    return ipc.invoke(Channels.uploaderCredentials, credentials);
+  }
+
   enableCORS(bucketName: string): Promise<void> {
     return ipc.invoke(Channels.uploaderEnableCORS, bucketName);
   }

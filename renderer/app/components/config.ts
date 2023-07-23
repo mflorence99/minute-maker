@@ -50,9 +50,8 @@ export class ConfigComponent implements OnChanges, OnInit {
   #bufferedDispatcher = inject(BufferedDispatcherService);
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (Object.values(changes).some((change) => !change.firstChange)) {
+    if (Object.values(changes).some((change) => !change.firstChange))
       this.configForm.setValue({ ...this.config }, { emitEvent: false });
-    }
   }
 
   ngOnInit(): void {

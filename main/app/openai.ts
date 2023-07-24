@@ -30,7 +30,7 @@ export async function chatCompletion(
   // 👇 create the OpenAI client
   const openai = new OpenAIApi(
     new Configuration({
-      apiKey: process.env['OPEN_AI_KEY']
+      apiKey: theCredentials
     })
   );
   // 👇 these are the request defaults
@@ -82,7 +82,7 @@ export async function completion(
   // 👇 create the OpenAI client
   const openai = new OpenAIApi(
     new Configuration({
-      apiKey: process.env['OPEN_AI_KEY']
+      apiKey: theCredentials
     })
   );
   // 👇 these are the request defaults
@@ -139,7 +139,7 @@ export async function listModels(): Promise<string[]> {
   // 👇 create the OpenAI client
   const openai = new OpenAIApi(
     new Configuration({
-      apiKey: process.env['OPEN_AI_KEY']
+      apiKey: theCredentials
     })
   );
   // 👇 ready to call OpenAI

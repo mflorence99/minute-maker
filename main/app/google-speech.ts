@@ -4,13 +4,15 @@ import { TranscriberCancel } from './common';
 import { TranscriberRequest } from './common';
 import { Transcription } from './common';
 
+import { CredentialBody } from 'google-auth-library';
+
 import { ipcMain } from 'electron';
 import { readFileSync } from 'fs';
 import { v1p1beta1 } from '@google-cloud/speech';
 
 import jsome from 'jsome';
 
-let theCredentials: string;
+let theCredentials: CredentialBody;
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 Channels.transcriberCancel --> cancelOperation)
@@ -22,7 +24,7 @@ export async function cancelOperation(
   event,
   request: TranscriberCancel
 ): Promise<void> {
-  const client = new v1p1beta1.SpeechClient();
+  const client = new v1p1beta1.SpeechClient({ credentials: theCredentials });
   try {
     jsome([`👉 ${Channels.transcriberCancel}`, request]);
     await client.cancelOperation(request as any);
@@ -38,8 +40,8 @@ export async function cancelOperation(
 ipcMain.handle(Channels.transcriberCredentials, credentials);
 
 export function credentials(event, creds: string): void {
-  theCredentials = creds;
-  jsome(`👉 ${Channels.transcriberCredentials} ${theCredentials}`);
+  jsome(`👉 ${Channels.transcriberCredentials} ${creds}`);
+  theCredentials = JSON.parse(creds.trim());
 }
 
 // //////////////////////////////////////////////////////////////////////////
@@ -52,7 +54,7 @@ export async function longRunningRecognize(
   event,
   request: TranscriberRequest
 ): Promise<void> {
-  const client = new v1p1beta1.SpeechClient();
+  const client = new v1p1beta1.SpeechClient({ credentials: theCredentials });
   jsome([`👉 ${Channels.transcriberRequest}`, request]);
 
   // 👇 call Google to begin transcription

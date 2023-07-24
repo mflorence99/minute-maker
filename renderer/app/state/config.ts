@@ -152,7 +152,10 @@ export class ConfigState implements NgxsOnInit {
       bucketName: this.bucketName$
     })
       .pipe(
-        filter(({ googleCredentials }) => !!googleCredentials),
+        filter(
+          ({ googleCredentials, bucketName }) =>
+            !!googleCredentials && !!bucketName
+        ),
         switchMap(({ googleCredentials, bucketName }) =>
           this.#uploader
             .credentials(googleCredentials)

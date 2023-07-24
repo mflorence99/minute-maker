@@ -10,7 +10,7 @@ import { v1p1beta1 } from '@google-cloud/speech';
 
 import jsome from 'jsome';
 
-let credentials;
+let theCredentials: string;
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 Channels.transcriberCancel --> cancelOperation)
@@ -18,7 +18,6 @@ let credentials;
 
 ipcMain.handle(Channels.transcriberCancel, cancelOperation);
 
-// 👇 exported for tests
 export async function cancelOperation(
   event,
   request: TranscriberCancel
@@ -36,10 +35,12 @@ export async function cancelOperation(
 // 🟩 Channels.transcriberCredentials
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.handle(
-  Channels.transcriberCredentials,
-  (creds) => (credentials = creds)
-);
+ipcMain.handle(Channels.transcriberCredentials, credentials);
+
+export function credentials(event, creds: string): void {
+  theCredentials = creds;
+  jsome(`👉 ${Channels.transcriberCredentials} ${theCredentials}`);
+}
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 Channels.transcriberRequest --> longRunningRecognize
@@ -47,7 +48,6 @@ ipcMain.handle(
 
 ipcMain.handle(Channels.transcriberRequest, longRunningRecognize);
 
-// 👇 exported for tests
 export async function longRunningRecognize(
   event,
   request: TranscriberRequest

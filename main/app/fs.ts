@@ -20,7 +20,6 @@ import jsome from 'jsome';
 
 ipcMain.handle(Channels.fsChooseFile, chooseFile);
 
-// 👇 exported for tests
 export function chooseFile(event, options: OpenDialogOptions): string {
   cleanOptions(options);
   const paths = dialog.showOpenDialogSync(globalThis.theWindow, {
@@ -36,7 +35,6 @@ export function chooseFile(event, options: OpenDialogOptions): string {
 
 ipcMain.handle(Channels.fsLoadFile, loadFile);
 
-// 👇 exported for tests
 export function loadFile(event, path: string): string {
   const data = readFileSync(path, { encoding: 'utf8' });
   jsome(`👈 readFileSync ${path} --> ${trunc(data)}`);
@@ -49,7 +47,6 @@ export function loadFile(event, path: string): string {
 
 ipcMain.handle(Channels.fsOpenFile, openFile);
 
-// 👇 exported for tests
 export function openFile(event, options: OpenDialogOptions): OpenFileResponse {
   cleanOptions(options);
   const path = chooseFile(event, options);
@@ -62,7 +59,6 @@ export function openFile(event, options: OpenDialogOptions): OpenFileResponse {
 
 ipcMain.handle(Channels.fsSaveFile, saveFile);
 
-// 👇 exported for tests
 export function saveFile(event, path: string, data: string): void {
   jsome(`👈 writeFileSync ${path} <-- ${trunc(data)}`);
   return writeFileSync(path, data, { encoding: 'utf8' });
@@ -74,7 +70,6 @@ export function saveFile(event, path: string, data: string): void {
 
 ipcMain.handle(Channels.fsSaveFileAs, saveFileAs);
 
-// 👇 exported for tests
 export function saveFileAs(
   event,
   data: string,

@@ -10,7 +10,6 @@ import { ipcMain } from 'electron';
 
 ipcMain.handle(Channels.dialogShowErrorBox, showErrorBox);
 
-// 👇 exported for tests
 export function showErrorBox(event, title: string, content: string): void {
   dialog.showErrorBox(title, content);
 }
@@ -21,7 +20,6 @@ export function showErrorBox(event, title: string, content: string): void {
 
 ipcMain.handle(Channels.dialogShowMessageBox, showMessageBox);
 
-// 👇 exported for tests
 export function showMessageBox(event, options: MessageBoxOptions): number {
   return dialog.showMessageBoxSync(globalThis.theWindow, options);
 }

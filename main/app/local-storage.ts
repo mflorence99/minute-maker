@@ -15,7 +15,6 @@ export const store = new Store({
 
 ipcMain.handle(Channels.localStorageClear, localStorageClear);
 
-// 👇 exported for tests
 export function localStorageClear(): void {
   store.clear();
 }
@@ -26,7 +25,6 @@ export function localStorageClear(): void {
 
 ipcMain.handle(Channels.localStorageGetItem, localStorageGetItem);
 
-// 👇 exported for tests
 export function localStorageGetItem(event, key: string): any {
   return store.get(key);
 }
@@ -37,7 +35,6 @@ export function localStorageGetItem(event, key: string): any {
 
 ipcMain.handle(Channels.localStorageRemoveItem, localStorageRemoveItem);
 
-// 👇 exported for tests
 export function localStorageRemoveItem(event, key: string): void {
   store.delete(key);
 }
@@ -48,7 +45,6 @@ export function localStorageRemoveItem(event, key: string): void {
 
 ipcMain.handle(Channels.localStorageSetItem, localStorageSetItem);
 
-// 👇 exported for tests
 export function localStorageSetItem(event, key: string, value: any): void {
   store.set(key, value);
 }
@@ -59,7 +55,6 @@ export function localStorageSetItem(event, key: string, value: any): void {
 
 ipcMain.handle(Channels.localStorageStore, localStorageStore);
 
-// 👇 exported for tests
 export function localStorageStore(_event): Record<string, any> {
   return store.store;
 }

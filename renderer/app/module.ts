@@ -42,6 +42,8 @@ import { TuiBadgeModule } from '@taiga-ui/kit';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import { TuiButtonModule } from '@taiga-ui/core';
 import { TuiDayOfWeek } from '@taiga-ui/cdk';
+import { TuiErrorModule } from '@taiga-ui/core';
+import { TuiFieldErrorPipeModule } from '@taiga-ui/kit';
 import { TuiHintModule } from '@taiga-ui/core';
 import { TuiInputDateTimeModule } from '@taiga-ui/kit';
 import { TuiInputModule } from '@taiga-ui/kit';
@@ -129,6 +131,8 @@ const STATES_SAVED = [
     TuiBadgeModule,
     TuiBlockStatusModule,
     TuiButtonModule,
+    TuiErrorModule,
+    TuiFieldErrorPipeModule,
     TuiHintModule,
     TuiInputDateTimeModule,
     TuiInputModule,

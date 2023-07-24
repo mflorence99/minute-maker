@@ -9,13 +9,18 @@ import { ipcMain } from 'electron';
 
 import jsome from 'jsome';
 
-let credentials;
+let theCredentials: string;
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 Channels.uploaderCredentials
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.handle(Channels.uploaderCredentials, (creds) => (credentials = creds));
+ipcMain.handle(Channels.uploaderCredentials, credentials);
+
+export function credentials(event, creds: string): void {
+  theCredentials = creds;
+  jsome(`👉 ${Channels.uploaderCredentials} ${theCredentials}`);
+}
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 Channels.uploaderRequest --> upload
@@ -23,7 +28,6 @@ ipcMain.handle(Channels.uploaderCredentials, (creds) => (credentials = creds));
 
 ipcMain.handle(Channels.uploaderRequest, upload);
 
-// 👇 exported for tests
 export async function upload(
   event,
   request: UploaderRequest
@@ -48,7 +52,6 @@ export async function upload(
 
 ipcMain.handle(Channels.uploaderEnableCORS, enableCORS);
 
-// 👇 exported for tests
 export async function enableCORS(event, bucketName: string): Promise<any> {
   const storage = new Storage();
   jsome([`👉 ${Channels.uploaderEnableCORS}`, bucketName]);

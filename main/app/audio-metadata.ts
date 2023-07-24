@@ -11,7 +11,6 @@ import { parseFile } from 'music-metadata';
 
 ipcMain.handle(Channels.metadataParseFile, metadataParseFile);
 
-// 👇 exported for tests
 export async function metadataParseFile(
   event,
   fileName: string

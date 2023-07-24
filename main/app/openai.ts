@@ -14,7 +14,7 @@ import { ipcMain } from 'electron';
 
 import jsome from 'jsome';
 
-let credentials;
+let theCredentials: string;
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 Channels.openaiChatCompletion --> chatCompletion
@@ -22,7 +22,6 @@ let credentials;
 
 ipcMain.handle(Channels.openaiChatCompletion, chatCompletion);
 
-// 👇 exported for tests
 export async function chatCompletion(
   event,
   _request: OpenAIRequest
@@ -75,7 +74,6 @@ export async function chatCompletion(
 
 ipcMain.handle(Channels.openaiCompletion, completion);
 
-// 👇 exported for tests
 export async function completion(
   event,
   request: OpenAIRequest
@@ -124,7 +122,12 @@ export async function completion(
 // 🟩 Channels.openaiCredentials
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.handle(Channels.openaiCredentials, (creds) => (credentials = creds));
+ipcMain.handle(Channels.openaiCredentials, credentials);
+
+export function credentials(event, creds: string): void {
+  theCredentials = creds;
+  jsome(`👉 ${Channels.openaiCredentials} ${theCredentials}`);
+}
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 Channels.openaiListModels --> listModels
@@ -132,7 +135,6 @@ ipcMain.handle(Channels.openaiCredentials, (creds) => (credentials = creds));
 
 ipcMain.handle(Channels.openaiListModels, listModels);
 
-// 👇 exported for tests
 export async function listModels(): Promise<string[]> {
   // 👇 create the OpenAI client
   const openai = new OpenAIApi(

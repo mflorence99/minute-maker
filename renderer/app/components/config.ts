@@ -20,18 +20,23 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
   template: `
     <form [formGroup]="configForm">
       <label tuiLabel="Credentials">
-        <tui-text-area
-          formControlName="googleCredentials"
-          spellcheck="false"
-          style="font-family: monospace; font-size: 12px; line-height: 1.25">
-          Google Application JSON
-        </tui-text-area>
-        <tui-error
-          formControlName="googleCredentials"
-          [error]="[] | tuiFieldError | async"></tui-error>
+        <article class="column">
+          <tui-text-area
+            formControlName="googleCredentials"
+            spellcheck="false"
+            style="font-family: monospace; font-size: 12px; line-height: 1.25">
+            Google Application JSON
+          </tui-text-area>
+          <tui-error
+            formControlName="googleCredentials"
+            [error]="[] | tuiFieldError | async"></tui-error>
+          <span class="hint">
+            Paste the contents of the GCloud credentials JSON file
+          </span>
+        </article>
       </label>
 
-      <label tuiLabel="">
+      <article>
         <tui-input formControlName="openaiCredentials" spellcheck="false">
           Open AI Key
           <input style="font-family: monospace; font-size: 12px" tuiTextfield />
@@ -39,7 +44,7 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
         <tui-error
           formControlName="openaiCredentials"
           [error]="[] | tuiFieldError | async"></tui-error>
-      </label>
+      </article>
 
       <tui-input formControlName="bucketName">
         Audio File Bucket Name
@@ -86,7 +91,10 @@ export class ConfigComponent implements OnChanges, OnInit {
     };
     // 👇 create the form
     this.configForm = new FormGroup({
-      bucketName: new FormControl(this.config.bucketName),
+      bucketName: new FormControl(this.config.bucketName, [
+        Validators.required,
+        credentialsValidator
+      ]),
       googleCredentials: new FormControl(this.config.googleCredentials, [
         Validators.required,
         credentialsValidator

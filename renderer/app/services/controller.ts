@@ -63,7 +63,8 @@ export class ControllerService {
     // 👇 load the last-used minutes, if any
     const app = this.#store.selectSnapshot(AppState);
     const path = app.pathToMinutes;
-    if (path) this.#loadMinutes(path);
+    if (path) this.#loadMinutes(path).then(() => this.#ready());
+    else this.#ready();
     // 👇 save the minutes before quitting
     ipc.on(Channels.appBeforeQuit, async () => {
       const minutes = this.#store.selectSnapshot(MinutesState);
@@ -412,5 +413,10 @@ export class ControllerService {
     if (state.transcription[ix].type === 'TX')
       return state.transcription[ix] as any as Transcription;
     else throw new Error(`Operation not supported for item #${ix}`);
+  }
+
+  #ready(): void {
+    const root = document.querySelector('mm-root');
+    root.classList.add('ready');
   }
 }

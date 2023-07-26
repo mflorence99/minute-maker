@@ -1,21 +1,47 @@
+.startup-body {
+  margin: 0;
+}
+
+.startup-caption,
+.startup-logo,
+.startup-wiggle {
+  margin-bottom: 2rem;
+}
+
+.startup-caption {
+  font-size: 2rem;
+}
+
 .startup-loading {
   align-items: center;
+  background-color: white;
   display: flex;
   flex-direction: column;
+  font-family: sans-serif;
   height: 100%;
   justify-content: center;
-  left: 0;
   opacity: 1;
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: 1;
+}
+
+.startup-logo {
+  height: 9rem;
+  width: 9rem;
 }
 
 .startup-wiggle {
-  animation: startup-wiggle 0.5s linear infinite;
+  animation: startup-wiggler 0.5s linear infinite;
 }
 
-@keyframes startup-wiggle {
+mm-root.ready + .startup-loading {
+  opacity: 0;
+  z-index: -1;
+}
+
+@keyframes startup-wiggler {
   10%,
   30%,
   50%,

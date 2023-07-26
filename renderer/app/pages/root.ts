@@ -73,8 +73,8 @@ import deepCopy from 'deep-copy';
           <tui-tabs
             (activeItemIndexChange)="onSwitchTab($event)"
             [(activeItemIndex)]="state.tabIndex">
-            <button tuiTab>Details</button>
-            <button tuiTab>
+            <button [disabled]="!configured" tuiTab>Details</button>
+            <button [disabled]="!configured" tuiTab>
               Transcription
               <tui-badge
                 class="tui-space_bottom-2"
@@ -82,8 +82,8 @@ import deepCopy from 'deep-copy';
                 status="primary"
                 [value]="minutes.numSpeakers"></tui-badge>
             </button>
-            <button tuiTab>Summary</button>
-            <button tuiTab>Preview</button>
+            <button [disabled]="!configured" tuiTab>Summary</button>
+            <button [disabled]="!configured" tuiTab>Preview</button>
             <div style="flex-grow: 2"></div>
             <button tuiTab>
               <tui-svg src="tuiIconSettings"></tui-svg>
@@ -93,25 +93,40 @@ import deepCopy from 'deep-copy';
         </nav>
 
         <mm-metadata
-          [ngClass]="{ data: true, hidden: state.tabIndex !== 0 }"
+          [ngClass]="{
+            data: true,
+            showing: configured && state.tabIndex === 0
+          }"
           [minutes]="minutes" />
 
         <mm-transcription
           (selected)="onSelected($event)"
           [currentTx]="currentTx"
-          [ngClass]="{ data: true, hidden: state.tabIndex !== 1 }"
+          [ngClass]="{
+            data: true,
+            showing: configured && state.tabIndex === 1
+          }"
           [transcription]="transcription$ | async" />
 
         <mm-summary
-          [ngClass]="{ data: true, hidden: state.tabIndex !== 2 }"
+          [ngClass]="{
+            data: true,
+            showing: configured && state.tabIndex === 2
+          }"
           [summary]="summary$ | async" />
 
         <mm-preview
-          [ngClass]="{ data: true, hidden: state.tabIndex !== 3 }"
+          [ngClass]="{
+            data: true,
+            showing: configured && state.tabIndex === 3
+          }"
           [minutes]="minutes" />
 
         <mm-config
-          [ngClass]="{ data: true, hidden: state.tabIndex !== 4 }"
+          [ngClass]="{
+            data: true,
+            showing: !configured || state.tabIndex === 4
+          }"
           [config]="config$ | async" />
 
         <footer class="footer">
@@ -151,6 +166,7 @@ import deepCopy from 'deep-copy';
 export class RootPage {
   @Select(AppState) app$: Observable<AppStateModel>;
   @Select(ConfigState) config$: Observable<ConfigStateModel>;
+  @Select(ConfigState.configured) configured$: Observable<boolean>;
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
   @Select(StatusState) status$: Observable<StatusStateModel>;
   @Select(MinutesState.summary) summary$: Observable<Summary[]>;
@@ -160,6 +176,7 @@ export class RootPage {
 
   @ViewChild(WaveSurferComponent) wavesurfer;
 
+  configured: boolean;
   currentTx: Transcription = null;
   dayjs = dayjs;
   state: ComponentStateModel;
@@ -173,10 +190,18 @@ export class RootPage {
   constructor() {
     // 👇 initialize the component state
     this.state = deepCopy(this.#store.selectSnapshot(ComponentState));
+    // 👇 mke sure we are sufficiently configured
+    this.configured$
+      .pipe(takeUntilDestroyed(this.#destroyRef), delay(0))
+      .subscribe((configured) => {
+        this.configured = configured;
+      });
     // 👇 induce a delay to prevent Angular change detection errors
-    this.status$.pipe(delay(0)).subscribe((status) => {
-      this.status = status;
-    });
+    this.status$
+      .pipe(takeUntilDestroyed(this.#destroyRef), delay(0))
+      .subscribe((status) => {
+        this.status = status;
+      });
     // 👇 update the current tx as the waveform plays
     this.#timeupdate$
       .pipe(
@@ -196,7 +221,7 @@ export class RootPage {
   }
 
   // 👇 Chrome has default udo/redo handlers for inputs and textareas
-  //    we must use our own unfo stack instead
+  //    we must use our own undo stack instead
 
   @HostListener('window:keydown', ['$event'])
   onKeyPress(event: KeyboardEvent): void {

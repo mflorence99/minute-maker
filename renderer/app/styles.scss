@@ -95,17 +95,17 @@ main {
   .data {
     display: block;
     height: calc(100% - 25rem);
-    opacity: 1;
+    opacity: 0;
     overflow: auto;
     position: absolute;
     top: 22rem;
     transition: opacity 0.25s linear;
     width: 100%;
-    z-index: 1;
+    z-index: -1;
 
-    &.hidden {
-      opacity: 0;
-      z-index: -1;
+    &.showing {
+      opacity: 1;
+      z-index: 1;
     }
   }
 

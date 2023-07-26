@@ -50,7 +50,7 @@ export type ConfigStateModel = {
 @State<ConfigStateModel>({
   name: 'config',
   defaults: {
-    bucketName: 'washington-app-319514.appspot.com', // 🔥 convenient for now
+    bucketName: null, // 👈 of course!
     googleCredentials: null, // 👈 of course!
     openaiCredentials: null, // 👈 of course!
     rephraseStrategyPrompts: {
@@ -83,6 +83,19 @@ export class ConfigState implements NgxsOnInit {
 
   @Selector() static bucketName(config: ConfigStateModel): string {
     return config.bucketName;
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟪 @Select(ConfigState.configured) configured$
+  //    when the Config settings are sufficient for the app to be used
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Selector() static configured(config: ConfigStateModel): boolean {
+    return (
+      !!config.bucketName &&
+      !!config.googleCredentials &&
+      !!config.openaiCredentials
+    );
   }
 
   // //////////////////////////////////////////////////////////////////////////

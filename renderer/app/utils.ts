@@ -85,8 +85,8 @@ export function withPreviousItem<T>(): OperatorFunction<
     startWith(undefined),
     pairwise(),
     map(([previous, current]) => ({
-      previous,
-      current
+      current,
+      previous
     }))
   );
 }

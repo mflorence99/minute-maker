@@ -92,6 +92,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                         "
                         [mmRephraseable]="ix"
                         [mmSplittable]="ix"
+                        [useImportant]="true"
                         [value]="tx.speech"
                         autocomplete="off"
                         autocorrect="on"

@@ -36,6 +36,7 @@ import { inject } from '@angular/core';
                   <textarea
                     #summText
                     (input)="updateSummary({ summary: summText.value }, ix)"
+                    [useImportant]="true"
                     [value]="summ.summary"
                     autocomplete="off"
                     autocorrect="on"

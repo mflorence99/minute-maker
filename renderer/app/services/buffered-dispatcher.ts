@@ -21,8 +21,8 @@ export class BufferedDispatcherService {
       .pipe(
         takeUntilDestroyed(),
         withPreviousItem(),
-        debounce(({ previous, current }) =>
-          !previous || !objectsHaveSameKeys(previous, current)
+        debounce(({ current, previous }) =>
+          this.#differentActions(current, previous)
             ? timer(0)
             : timer(Constants.bufferedDispatchDebounceTime)
         ),
@@ -33,5 +33,13 @@ export class BufferedDispatcherService {
 
   dispatch(action: any): void {
     this.#buffer$.next(action);
+  }
+
+  #differentActions(current, previous): boolean {
+    return (
+      current.__proto__.constructor.type !==
+        previous?.__proto__.constructor.type ||
+      !objectsHaveSameKeys(current, previous ?? {})
+    );
   }
 }

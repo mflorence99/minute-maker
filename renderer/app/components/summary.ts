@@ -4,10 +4,7 @@ import { Component } from '@angular/core';
 import { ControllerService } from '#mm/services/controller';
 import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Output } from '@angular/core';
-import { Select } from '@ngxs/store';
-import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Summary } from '#mm/common';
 import { SummaryStrategy } from '#mm/common';
@@ -19,41 +16,35 @@ import { inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-summary',
   template: `
-    <ng-container *ngIf="summary.length > 0; else noSummary">
-      <ng-container *ngIf="status$ | async as status">
-        <tui-loader [showLoader]="status.working === 'summary'">
-          <table>
-            <tbody>
-              <tr
-                *ngFor="let summ of summary; let ix = index; trackBy: trackByIx"
-                (click)="selected.emit((summIndex = ix))"
-                [ngClass]="{ selected: ix === summIndex }">
-                <td width="100%">
-                  <div *ngIf="summ.section" class="heading">
-                    {{ summ.section }}
-                  </div>
+    <table *ngIf="summary.length > 0; else noSummary">
+      <tbody>
+        <tr
+          *ngFor="let summ of summary; let ix = index; trackBy: trackByIx"
+          (click)="selected.emit((summIndex = ix))"
+          [ngClass]="{ selected: ix === summIndex }">
+          <td width="100%">
+            <div *ngIf="summ.section" class="heading">
+              {{ summ.section }}
+            </div>
 
-                  <textarea
-                    #summText
-                    (input)="updateSummary({ summary: summText.value }, ix)"
-                    [useImportant]="true"
-                    [value]="summ.summary"
-                    autocomplete="off"
-                    autocorrect="on"
-                    autosize
-                    spellcheck="true"
-                    style="width: calc(100% - 1rem)"
-                    wrap="soft"></textarea>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </tui-loader>
-      </ng-container>
-    </ng-container>
+            <textarea
+              #summText
+              (input)="updateSummary({ summary: summText.value }, ix)"
+              [useImportant]="true"
+              [value]="summ.summary"
+              autocomplete="off"
+              autocorrect="on"
+              autosize
+              spellcheck="true"
+              style="width: calc(100% - 1rem)"
+              wrap="soft"></textarea>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
     <ng-template #noSummary>
-      <tui-block-status *ngIf="status$ | async as status">
+      <tui-block-status>
         <img tuiSlot="top" src="./assets/meeting.png" />
 
         <h4>
@@ -92,8 +83,7 @@ import { inject } from '@angular/core';
 export class SummaryComponent {
   @Output() selected = new EventEmitter<number>();
 
-  @Select(StatusState) status$: Observable<StatusStateModel>;
-
+  @Input({ required: true }) status: StatusStateModel;
   @Input({ required: true }) summary: Summary[];
 
   summIndex = 0;

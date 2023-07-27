@@ -62,20 +62,27 @@ export async function longRunningRecognize(
     audio: {
       // 👇 content only works for "short" files, otherwise
       //    must use data in GCS bucket
-      content: request.audio?.fileName
+      content: request.audio.fileName
         ? readFileSync(request.audio.fileName).toString('base64')
         : null,
-      uri: request.audio?.gcsuri
+      uri: request.audio.gcsuri
     },
     config: {
+      adaptation: {
+        phraseSets: [
+          {
+            phrases: request.phrases.map((phrase) => ({ value: phrase }))
+          }
+        ]
+      },
       enableAutomaticPunctuation: true,
       enableWordTimeOffsets: true,
-      diarizationSpeakerCount: request.numSpeakers || 1,
+      diarizationSpeakerCount: request.numSpeakers,
       enableSpeakerDiarization: true,
-      encoding: request.audio?.encoding ?? 'MP3',
+      encoding: request.audio.encoding,
       languageCode: 'en-US',
       model: 'latest_long',
-      sampleRateHertz: request.audio?.sampleRateHertz ?? 16000
+      sampleRateHertz: request.audio.sampleRateHertz
     }
   });
 

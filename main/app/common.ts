@@ -213,6 +213,7 @@ export type TranscriberRequest = {
     sampleRateHertz: number;
   };
   numSpeakers: number;
+  phrases: string[];
 };
 
 export type TranscriberResponse = {

@@ -93,20 +93,20 @@ main {
   width: 40rem;
 
   .data {
-    display: block;
+    display: none;
     height: calc(100% - 25rem);
-    opacity: 0;
     overflow: auto;
     position: absolute;
     top: 22rem;
-    transition: opacity 0.25s linear;
     width: 100%;
-    z-index: -1;
+  }
 
-    &.showing {
-      opacity: 1;
-      z-index: 1;
-    }
+  .data.showing {
+    display: block;
+  }
+
+  tui-loader.data.showing {
+    display: flex;
   }
 
   .footer {

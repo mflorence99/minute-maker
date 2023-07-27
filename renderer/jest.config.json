@@ -19,9 +19,9 @@
     "^#mm/services/(.*)$": "<rootDir>/app/services/$1",
     "^#mm/state/(.*)$": "<rootDir>/app/state/$1",
     "^#mm/utils$": "<rootDir>/app/utils.ts",
-    "^wavesurfer\\.js$": "<rootDir>/../node_modules/wavesurfer.js/dist/wavesurfer.min.cjs",
-    "^wavesurfer\\.js/dist/plugins/regions$": "<rootDir>/../node_modules/wavesurfer.js/dist/plugins/regions.min.cjs",
-    "^wavesurfer\\.js/dist/plugins/timeline$": "<rootDir>/../node_modules/wavesurfer.js/dist/plugins/timeline.min.cjs"
+    "^wavesurfer\\.js$": "<rootDir>/../node_modules/wavesurfer.js/dist/wavesurfer.cjs",
+    "^wavesurfer\\.js/dist/plugins/regions$": "<rootDir>/../node_modules/wavesurfer.js/dist/plugins/regions.cjs",
+    "^wavesurfer\\.js/dist/plugins/timeline$": "<rootDir>/../node_modules/wavesurfer.js/dist/plugins/timeline.cjs"
   },
   "preset": "jest-preset-angular",
   "roots": ["<rootDir>/"],

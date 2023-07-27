@@ -268,8 +268,8 @@ export class ControllerService {
       const button = await this.#dialog.showMessageBox({
         buttons: ['Proceed', 'Cancel'],
         message:
-          'This action will overwrite the existing summary and cannot be undone.',
-        title: 'Are you sure you wish to proceed?',
+          'This action will overwrite the existing summary and cannot be undone. Are you sure you wish to proceed?',
+        title: 'Minute Maker',
         type: 'question'
       });
       if (button === 1) return;
@@ -331,8 +331,8 @@ export class ControllerService {
       const button = await this.#dialog.showMessageBox({
         buttons: ['Proceed', 'Cancel'],
         message:
-          'This action will overwrite the existing transcription and cannot be undone.',
-        title: 'Are you sure you wish to proceed?',
+          'This action will overwrite the existing transcription and cannot be undone. Are you sure you wish to proceed?',
+        title: 'Minute Maker',
         type: 'question'
       });
       if (button === 1) return;
@@ -340,7 +340,15 @@ export class ControllerService {
     // 👇 construct request
     const request = {
       audio: { ...minutes.audio },
-      numSpeakers: minutes.numSpeakers
+      numSpeakers: minutes.numSpeakers,
+      phrases: [
+        minutes.subject,
+        minutes.subtitle,
+        minutes.title,
+        ...minutes.absent,
+        ...minutes.present,
+        ...minutes.visitors
+      ]
     } as TranscriberRequest;
     this.#store.dispatch(
       new SetStatus({

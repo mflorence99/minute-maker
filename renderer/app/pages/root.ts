@@ -99,21 +99,27 @@ import deepCopy from 'deep-copy';
           }"
           [minutes]="minutes" />
 
-        <mm-transcription
-          (selected)="onSelected($event)"
-          [currentTx]="currentTx"
+        <tui-loader
           [ngClass]="{
             data: true,
             showing: configured && state.tabIndex === 1
           }"
-          [transcription]="transcription$ | async" />
+          [showLoader]="status.working === 'transcription'">
+          <mm-transcription
+            (selected)="onSelected($event)"
+            [currentTx]="currentTx"
+            [status]="status"
+            [transcription]="transcription$ | async" />
+        </tui-loader>
 
-        <mm-summary
+        <tui-loader
           [ngClass]="{
             data: true,
             showing: configured && state.tabIndex === 2
           }"
-          [summary]="summary$ | async" />
+          [showLoader]="status.working === 'summary'">
+          <mm-summary [status]="status" [summary]="summary$ | async" />
+        </tui-loader>
 
         <mm-preview
           [ngClass]="{
@@ -130,12 +136,10 @@ import deepCopy from 'deep-copy';
           [config]="config$ | async" />
 
         <footer class="footer">
-          <ng-container *ngIf="status$ | async as status">
-            <label *ngIf="!!status.working" class="progress" tuiProgressLabel>
-              {{ status.status }}
-              <progress tuiProgressBar [max]="100"></progress>
-            </label>
-          </ng-container>
+          <label *ngIf="!!status.working" class="progress" tuiProgressLabel>
+            {{ status.status }}
+            <progress tuiProgressBar [max]="100"></progress>
+          </label>
         </footer>
       </main>
     </tui-root>
@@ -180,7 +184,7 @@ export class RootPage {
   currentTx: Transcription = null;
   dayjs = dayjs;
   state: ComponentStateModel;
-  status: StatusStateModel;
+  status: StatusStateModel = StatusState.defaultStatus();
 
   #controller = inject(ControllerService);
   #destroyRef = inject(DestroyRef);
@@ -190,7 +194,7 @@ export class RootPage {
   constructor() {
     // 👇 initialize the component state
     this.state = deepCopy(this.#store.selectSnapshot(ComponentState));
-    // 👇 mke sure we are sufficiently configured
+    // 👇 make sure we are sufficiently configured
     this.configured$
       .pipe(takeUntilDestroyed(this.#destroyRef), delay(0))
       .subscribe((configured) => {

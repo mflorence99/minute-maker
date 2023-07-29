@@ -19,6 +19,7 @@ export class SetStatus {
 }
 
 export type StatusStateModel = {
+  canceler: Function;
   error: Partial<Error>;
   ix: number;
   status: string;
@@ -35,6 +36,7 @@ export class StatusState {
 
   static defaultStatus(): StatusStateModel {
     return {
+      canceler: null,
       error: null,
       ix: null,
       status: null,

@@ -45,7 +45,7 @@
     "jsome": "^2",
     "music-metadata": "^7",
     "openai": "^3",
-    "sharp": "^0.32.2",
+    "sharp": "^0.32.4",
     "zod": "^3"
   },
   "devDependencies": {
@@ -90,7 +90,7 @@
     "electron": "^25",
     "electron-installer-debian": "^3",
     "electron-packager": "^17",
-    "eslint": "^8",
+    "eslint": "^8.46",
     "eslint-config-mflorence99": "^1",
     "eslint-config-prettier": "^8",
     "eslint-plugin-import": "^2",
@@ -114,8 +114,8 @@
     "postcss": "^8",
     "postcss-angular": "^1",
     "postcss-scss": "^4",
-    "prettier": "2.8.8",
-    "prettier-plugin-css-order": "^1",
+    "prettier": "^3",
+    "prettier-plugin-css-order": "^2",
     "prettier-plugin-package": "^1",
     "rxjs": "^7",
     "scroll-into-view-if-needed": "^3.0.10",
@@ -127,7 +127,7 @@
     "typeface-roboto": "^1",
     "typescript": "^5",
     "uuid": "^9",
-    "wavesurfer.js": "^7",
+    "wavesurfer.js": "^7.1",
     "zone.js": "~0.13.1"
   }
 }

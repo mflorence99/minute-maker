@@ -10,6 +10,7 @@ import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
 import { ControllerService } from '#mm/services/controller';
 import { DestroyRef } from '@angular/core';
+import { DialogService } from '#mm/services/dialog';
 import { HostListener } from '@angular/core';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
@@ -84,7 +85,7 @@ import deepCopy from 'deep-copy';
             </button>
             <button [disabled]="!configured" tuiTab>Summary</button>
             <button [disabled]="!configured" tuiTab>Preview</button>
-            <div style="flex-grow: 2"></div>
+            <div style="flex: 2"></div>
             <button tuiTab>
               <tui-svg src="tuiIconSettings"></tui-svg>
               Settings
@@ -135,11 +136,21 @@ import deepCopy from 'deep-copy';
           }"
           [config]="config$ | async" />
 
-        <footer class="footer">
-          <label *ngIf="!!status.working" class="progress" tuiProgressLabel>
+        <footer *ngIf="!status.working" class="footer">
+          <label class="progress" tuiProgressLabel>
             {{ status.status }}
             <progress tuiProgressBar [max]="100"></progress>
           </label>
+          <button
+            *ngIf="!status.canceler"
+            (click)="onCancelAction()"
+            appearance="mono"
+            class="canceler"
+            size="xs"
+            icon="tuiIconClose"
+            tuiButton>
+            Cancel
+          </button>
         </footer>
       </main>
     </tui-root>
@@ -188,6 +199,7 @@ export class RootPage {
 
   #controller = inject(ControllerService);
   #destroyRef = inject(DestroyRef);
+  #dialog = inject(DialogService);
   #store = inject(Store);
   #timeupdate$ = new Subject<number>();
 
@@ -224,7 +236,7 @@ export class RootPage {
       });
   }
 
-  // 👇 Chrome has default udo/redo handlers for inputs and textareas
+  // 👇 Chrome has default undo/redo handlers for inputs and textareas
   //    we must use our own undo stack instead
 
   @HostListener('window:keydown', ['$event'])
@@ -241,6 +253,19 @@ export class RootPage {
 
   newMinutes(): void {
     this.#controller.newMinutes();
+  }
+
+  onCancelAction(): void {
+    this.#dialog
+      .showMessageBox({
+        buttons: ['Proceed', 'Cancel'],
+        message: `This action will cancel the ${this.status.working} currently running in the background. Are you sure you wish to proceed?`,
+        title: 'Minute Maker',
+        type: 'question'
+      })
+      .then((button) => {
+        if (button === 0) this.status.canceler();
+      });
   }
 
   onSelected(tx: Transcription): void {

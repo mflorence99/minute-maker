@@ -110,14 +110,18 @@ main {
   }
 
   .footer {
+    align-items: center;
     bottom: 0;
-    display: block;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
     height: 2.5rem;
+    justify-content: space-between;
     position: absolute;
     width: 100%;
 
     .progress {
-      width: 100%;
+      flex: 2;
     }
   }
 

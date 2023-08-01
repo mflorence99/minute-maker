@@ -10,7 +10,6 @@ import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
 import { ControllerService } from '#mm/services/controller';
 import { DestroyRef } from '@angular/core';
-import { DialogService } from '#mm/services/dialog';
 import { HostListener } from '@angular/core';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
@@ -65,7 +64,7 @@ import deepCopy from 'deep-copy';
               [params]="{
                 end: currentTx.end,
                 id: 'singleton',
-                start: currentTx.start,
+                start: currentTx.start
               }" />
           </mm-wavesurfer-regions>
         </mm-wavesurfer>
@@ -105,7 +104,7 @@ import deepCopy from 'deep-copy';
             data: true,
             showing: configured && state.tabIndex === 1
           }"
-          [showLoader]="status.working === 'transcription'">
+          [showLoader]="status.working?.on === 'transcription'">
           <mm-transcription
             (selected)="onSelected($event)"
             [currentTx]="currentTx"
@@ -118,7 +117,7 @@ import deepCopy from 'deep-copy';
             data: true,
             showing: configured && state.tabIndex === 2
           }"
-          [showLoader]="status.working === 'summary'">
+          [showLoader]="status.working?.on === 'summary'">
           <mm-summary [status]="status" [summary]="summary$ | async" />
         </tui-loader>
 
@@ -142,7 +141,7 @@ import deepCopy from 'deep-copy';
             <progress tuiProgressBar [max]="100"></progress>
           </label>
           <button
-            *ngIf="!status.canceler"
+            *ngIf="!status.working?.canceledBy"
             (click)="onCancelAction()"
             appearance="mono"
             class="canceler"
@@ -199,41 +198,16 @@ export class RootPage {
 
   #controller = inject(ControllerService);
   #destroyRef = inject(DestroyRef);
-  #dialog = inject(DialogService);
   #store = inject(Store);
   #timeupdate$ = new Subject<number>();
 
   constructor() {
     // 👇 initialize the component state
     this.state = deepCopy(this.#store.selectSnapshot(ComponentState));
-    // 👇 make sure we are sufficiently configured
-    this.configured$
-      .pipe(takeUntilDestroyed(this.#destroyRef), delay(0))
-      .subscribe((configured) => {
-        this.configured = configured;
-      });
-    // 👇 induce a delay to prevent Angular change detection errors
-    this.status$
-      .pipe(takeUntilDestroyed(this.#destroyRef), delay(0))
-      .subscribe((status) => {
-        this.status = status;
-      });
-    // 👇 update the current tx as the waveform plays
-    this.#timeupdate$
-      .pipe(
-        takeUntilDestroyed(this.#destroyRef),
-        throttleTime(Constants.timeupdateThrottleInterval),
-        map((ts: number) => {
-          const txs = this.#store.selectSnapshot(MinutesState.transcription);
-          return txs.find(
-            (tx) => tx.type === 'TX' && ts >= tx.start && ts < tx.end
-          );
-        }),
-        distinctUntilChanged()
-      )
-      .subscribe((tx: Transcription) => {
-        this.currentTx = tx;
-      });
+    // 👇 monitor state changes
+    this.#monitorConfigState();
+    this.#monitorStatus();
+    this.#monitorWaveSurfer();
   }
 
   // 👇 Chrome has default undo/redo handlers for inputs and textareas
@@ -256,16 +230,7 @@ export class RootPage {
   }
 
   onCancelAction(): void {
-    this.#dialog
-      .showMessageBox({
-        buttons: ['Proceed', 'Cancel'],
-        message: `This action will cancel the ${this.status.working} currently running in the background. Are you sure you wish to proceed?`,
-        title: 'Minute Maker',
-        type: 'question'
-      })
-      .then((button) => {
-        if (button === 0) this.status.canceler();
-      });
+    this.#controller.cancelWorking(this.status.working);
   }
 
   onSelected(tx: Transcription): void {
@@ -286,5 +251,42 @@ export class RootPage {
 
   openMinutes(): void {
     this.#controller.openMinutes();
+  }
+
+  #monitorConfigState(): void {
+    // 👇 make sure we are sufficiently configured
+    this.configured$
+      .pipe(takeUntilDestroyed(this.#destroyRef), delay(0))
+      .subscribe((configured) => {
+        this.configured = configured;
+      });
+  }
+
+  #monitorStatus(): void {
+    // 👇 induce a delay to prevent Angular change detection errors
+    this.status$
+      .pipe(takeUntilDestroyed(this.#destroyRef), delay(0))
+      .subscribe((status) => {
+        this.status = status;
+      });
+  }
+
+  #monitorWaveSurfer(): void {
+    // 👇 update the current tx as the waveform plays
+    this.#timeupdate$
+      .pipe(
+        takeUntilDestroyed(this.#destroyRef),
+        throttleTime(Constants.timeupdateThrottleInterval),
+        map((ts: number) => {
+          const txs = this.#store.selectSnapshot(MinutesState.transcription);
+          return txs.find(
+            (tx) => tx.type === 'TX' && ts >= tx.start && ts < tx.end
+          );
+        }),
+        distinctUntilChanged()
+      )
+      .subscribe((tx: Transcription) => {
+        this.currentTx = tx;
+      });
   }
 }

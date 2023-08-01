@@ -19,12 +19,18 @@ export class SetStatus {
 }
 
 export type StatusStateModel = {
-  canceler: Function;
   error: Partial<Error>;
   ix: number;
   status: string;
-  working: 'audio' | 'rephrase' | 'summary' | 'transcription' | 'upload';
+  working: Working;
 };
+
+export class Working {
+  constructor(
+    public on: 'audio' | 'rephrase' | 'summary' | 'transcription' | 'upload',
+    public canceledBy: Function = null
+  ) {}
+}
 
 @State<StatusStateModel>({
   name: 'status',
@@ -36,7 +42,6 @@ export class StatusState {
 
   static defaultStatus(): StatusStateModel {
     return {
-      canceler: null,
       error: null,
       ix: null,
       status: null,

@@ -235,8 +235,9 @@ export class MenuService {
   #monitorStatusState(): void {
     this.status$.subscribe((status) => {
       ipc.send(Channels.menuEnable, {
-        [MenuID.rephraseAccuracy]: status.working !== 'rephrase',
-        [MenuID.rephraseBrevity]: status.working !== 'rephrase'
+        [MenuID.rephraseAccuracy]: status.working?.on !== 'rephrase',
+        [MenuID.rephraseBrevity]: status.working?.on !== 'rephrase',
+        [MenuID.transcribe]: status.working?.on !== 'transcription'
       });
     });
   }

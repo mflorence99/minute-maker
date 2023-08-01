@@ -18,6 +18,7 @@ import { WatchableEventEmitter } from '#mm/utils';
 import { WaveSurferOptions } from 'wavesurfer.js';
 import { WaveSurferPlugin } from '#mm/components/wavesurfer-plugin';
 import { WaveSurferPluginComponent } from '#mm/components/wavesurfer-plugin';
+import { Working } from '#mm/state/status';
 
 import { inject } from '@angular/core';
 import { kebabasize } from '#mm/utils';
@@ -162,7 +163,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     this.#store.dispatch(
       new SetStatus({
         status: 'Loading audio into player',
-        working: 'audio'
+        working: new Working('audio')
       })
     );
     try {

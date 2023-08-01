@@ -30,6 +30,7 @@ import { TranscriberService } from '#mm/services/transcriber';
 import { Transcription } from '#mm/common';
 import { UpdateTranscription } from '#mm/state/minutes';
 import { UploaderService } from '#mm/services/uploader';
+import { Working } from '#mm/state/status';
 
 import { catchError } from 'rxjs';
 import { debounceTime } from 'rxjs';
@@ -65,32 +66,9 @@ export class ControllerService {
     const path = app.pathToMinutes;
     if (path) this.#loadMinutes(path).then(() => this.#ready());
     else this.#ready();
-    // 👇 save the minutes before quitting
-    ipc.on(Channels.appBeforeQuit, async () => {
-      const minutes = this.#store.selectSnapshot(MinutesState);
-      const app = this.#store.selectSnapshot(AppState);
-      if (app.pathToMinutes)
-        await this.#fs.saveFile(
-          app.pathToMinutes,
-          JSON.stringify(minutes, null, 2)
-        );
-      ipc.send(Channels.appQuit);
-    });
-    // 👇 save the minutes periodically
-    const minutes$ = this.#store.select(MinutesState);
-    minutes$
-      .pipe(
-        map((minutes) => {
-          // 👇 we'll use the snapshot b/c who knows where we are now
-          const app = this.#store.selectSnapshot(AppState);
-          return [minutes, app.pathToMinutes];
-        }),
-        filter(([minutes, path]) => !!(minutes && path)),
-        debounceTime(Constants.saveFileInterval)
-      )
-      .subscribe(([minutes, path]) => {
-        this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
-      });
+    // 👇 monitor state changes
+    this.#monitorAppQuit();
+    this.#saveMinutesPeriodically();
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -102,6 +80,27 @@ export class ControllerService {
       this.#store.selectSnapshot(ComponentState).transcriptionName;
     if (transcriptionName) {
       await this.#transcriber.cancelTranscription({ name: transcriptionName });
+      this.#store.dispatch(new ClearStatus());
+    }
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 CancelWorking
+  // //////////////////////////////////////////////////////////////////////////
+
+  async cancelWorking(working: Working): Promise<void> {
+    const button = await this.#dialog.showMessageBox({
+      buttons: ['Proceed', 'Cancel'],
+      message: `This action will cancel the ${working.on} currently running in the background. Are you sure you wish to proceed?`,
+      title: 'Minute Maker',
+      type: 'question'
+    });
+    if (button === 1) return;
+    try {
+      await working.canceledBy();
+    } catch (error) {
+      this.#store.dispatch(new SetStatus({ error }));
+    } finally {
       this.#store.dispatch(new ClearStatus());
     }
   }
@@ -144,7 +143,7 @@ export class ControllerService {
       this.#store.dispatch(
         new SetStatus({
           status: 'Uploading audio recording',
-          working: 'upload'
+          working: new Working('upload')
         })
       );
       try {
@@ -216,7 +215,7 @@ export class ControllerService {
       new SetStatus({
         ix,
         status: 'Rephrasing transcription',
-        working: 'rephrase'
+        working: new Working('rephrase')
       })
     );
     try {
@@ -278,7 +277,7 @@ export class ControllerService {
     this.#store.dispatch(
       new SetStatus({
         status: 'Summarizing minutes',
-        working: 'summary'
+        working: new Working('summary')
       })
     );
     // 👇 first, just attach a section to each transcription where the
@@ -353,7 +352,7 @@ export class ControllerService {
     this.#store.dispatch(
       new SetStatus({
         status: 'Transcribing audio',
-        working: 'transcription'
+        working: new Working('transcription')
       })
     );
     // 👇 initiate transcription
@@ -417,6 +416,20 @@ export class ControllerService {
     }
   }
 
+  #monitorAppQuit(): void {
+    // 👇 save the minutes before quitting
+    ipc.on(Channels.appBeforeQuit, async () => {
+      const minutes = this.#store.selectSnapshot(MinutesState);
+      const app = this.#store.selectSnapshot(AppState);
+      if (app.pathToMinutes)
+        await this.#fs.saveFile(
+          app.pathToMinutes,
+          JSON.stringify(minutes, null, 2)
+        );
+      ipc.send(Channels.appQuit);
+    });
+  }
+
   #pluckTranscription(state: MinutesStateModel, ix: number): Transcription {
     if (state.transcription[ix].type === 'TX')
       return state.transcription[ix] as any as Transcription;
@@ -426,5 +439,22 @@ export class ControllerService {
   #ready(): void {
     const root = document.querySelector('mm-root');
     root.classList.add('ready');
+  }
+
+  #saveMinutesPeriodically(): void {
+    const minutes$ = this.#store.select(MinutesState);
+    minutes$
+      .pipe(
+        map((minutes) => {
+          // 👇 we'll use the snapshot b/c who knows where we are now
+          const app = this.#store.selectSnapshot(AppState);
+          return [minutes, app.pathToMinutes];
+        }),
+        filter(([minutes, path]) => !!(minutes && path)),
+        debounceTime(Constants.saveFileInterval)
+      )
+      .subscribe(([minutes, path]) => {
+        this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
+      });
   }
 }

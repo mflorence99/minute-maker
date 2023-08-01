@@ -61,7 +61,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
             <td width="100%">
               <tui-loader
                 [showLoader]="
-                  status.working === 'rephrase' && status.ix === ix
+                  status.working?.on === 'rephrase' && status.ix === ix
                 ">
                 <textarea
                   #transcriptionSpeech
@@ -72,7 +72,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                     )
                   "
                   [class.disabled]="
-                    status.working === 'rephrase' && status.ix === ix
+                    status.working?.on === 'rephrase' && status.ix === ix
                   "
                   [mmInsertable]="ix"
                   [mmJoinable]="
@@ -111,11 +111,11 @@ import scrollIntoView from 'scroll-into-view-if-needed';
           menu.
         </p>
 
-        <tui-loader [showLoader]="status.working === 'transcription'">
+        <tui-loader [showLoader]="status.working?.on === 'transcription'">
           <button
             (click)="transcribeAudio()"
             [appearance]="
-              status.working === 'transcription' ? 'mono' : 'primary'
+              status.working?.on === 'transcription' ? 'mono' : 'primary'
             "
             size="m"
             tuiButton>

@@ -59,10 +59,10 @@ import { inject } from '@angular/core';
           menu.
         </p>
 
-        <tui-loader [showLoader]="status.working === 'summary'">
+        <tui-loader [showLoader]="status.working?.on === 'summary'">
           <button
             (click)="summarizeMinutes('bullets')"
-            [appearance]="status.working === 'summary' ? 'mono' : 'primary'"
+            [appearance]="status.working?.on === 'summary' ? 'mono' : 'primary'"
             size="m"
             tuiButton>
             Summarize Transcription into Bullet Points
@@ -70,7 +70,7 @@ import { inject } from '@angular/core';
 
           <button
             (click)="summarizeMinutes('paragraphs')"
-            [appearance]="status.working === 'summary' ? 'mono' : 'accent'"
+            [appearance]="status.working?.on === 'summary' ? 'mono' : 'accent'"
             size="m"
             tuiButton>
             Summarize Transcription into Paragraphs

@@ -17,18 +17,7 @@ export class BufferedDispatcherService {
   #store = inject(Store);
 
   constructor() {
-    this.#buffer$
-      .pipe(
-        takeUntilDestroyed(),
-        withPreviousItem(),
-        debounce(({ current, previous }) =>
-          this.#differentActions(current, previous)
-            ? timer(0)
-            : timer(Constants.bufferedDispatchDebounceTime)
-        ),
-        map(({ current }) => current)
-      )
-      .subscribe((action) => this.#store.dispatch(action));
+    this.#monitorBuffer();
   }
 
   dispatch(action: any): void {
@@ -41,5 +30,20 @@ export class BufferedDispatcherService {
         previous?.__proto__.constructor.type ||
       !objectsHaveSameKeys(current, previous ?? {})
     );
+  }
+
+  #monitorBuffer(): void {
+    this.#buffer$
+      .pipe(
+        takeUntilDestroyed(),
+        withPreviousItem(),
+        debounce(({ current, previous }) =>
+          this.#differentActions(current, previous)
+            ? timer(0)
+            : timer(Constants.bufferedDispatchDebounceTime)
+        ),
+        map(({ current }) => current)
+      )
+      .subscribe((action) => this.#store.dispatch(action));
   }
 }

@@ -1,8 +1,9 @@
 import { Channels } from './common';
 import { Constants } from './common';
-import { TranscriberCancel } from './common';
 import { TranscriberRequest } from './common';
 import { Transcription } from './common';
+
+import { sleep } from './utils';
 
 import { CredentialBody } from 'google-auth-library';
 
@@ -22,12 +23,13 @@ ipcMain.handle(Channels.transcriberCancel, cancelOperation);
 
 export async function cancelOperation(
   event,
-  request: TranscriberCancel
+  transcriptionName: string
 ): Promise<void> {
   const client = new v1p1beta1.SpeechClient({ credentials: theCredentials });
   try {
-    jsome([`👉 ${Channels.transcriberCancel}`, request]);
-    await client.cancelOperation(request as any);
+    jsome([`👉 ${Channels.transcriberCancel}`, transcriptionName]);
+    // @ts-ignore 🔥 can't explain why this doesn't match required type
+    await client.cancelOperation({ name: transcriptionName });
   } catch (error) {
     console.log(`🔥 ${error.message}`);
   }
@@ -45,6 +47,51 @@ export function credentials(event, creds: string): void {
 }
 
 // //////////////////////////////////////////////////////////////////////////
+// 🟩 Channels.transcriberPoll --> longRunningRecognize
+// //////////////////////////////////////////////////////////////////////////
+
+ipcMain.handle(Channels.transcriberPoll, checkLongRunningRecognizeProgress);
+
+export async function checkLongRunningRecognizeProgress(
+  event,
+  transcriptionName: string
+): Promise<void> {
+  const client = new v1p1beta1.SpeechClient({ credentials: theCredentials });
+  jsome([`👉 ${Channels.transcriberPoll}`, transcriptionName]);
+
+  do {
+    try {
+      // 👇 how far along are we?
+      const response = await client.checkLongRunningRecognizeProgress(
+        transcriptionName
+      );
+
+      // 👇 1. metadata doesn't seem to be typed properly
+      //    2. seems to be 0% all the way to the end, when it jumps to 100%
+      const progressPercent = response.done
+        ? 100
+        : // @ts-ignore 🔥 metadata doesn't have progressPercent?
+          response.metadata.progressPercent ?? 0;
+      console.log(`👈 ${Channels.transcriberPoll} ${progressPercent}%`);
+      globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
+        name: transcriptionName,
+        progressPercent,
+        transcription: response.done ? makeTranscription(response.result) : null
+      });
+
+      // 👇 it's all over
+      if (response.done) break;
+
+      // 👇 wait before polling again
+      await sleep(Constants.transcriberPollInterval);
+    } catch (error) {
+      jsome(`🔥 ${error.message}`);
+      throw error;
+    }
+  } while (true);
+}
+
+// //////////////////////////////////////////////////////////////////////////
 // 🟩 Channels.transcriberRequest --> longRunningRecognize
 // //////////////////////////////////////////////////////////////////////////
 
@@ -53,11 +100,12 @@ ipcMain.handle(Channels.transcriberRequest, longRunningRecognize);
 export async function longRunningRecognize(
   event,
   request: TranscriberRequest
-): Promise<void> {
+): Promise<string> {
   const client = new v1p1beta1.SpeechClient({ credentials: theCredentials });
   jsome([`👉 ${Channels.transcriberRequest}`, request]);
 
   // 👇 call Google to begin transcription
+  // @ts-ignore 🔥 no idea why this stopped compiling
   const [operation] = await client.longRunningRecognize({
     audio: {
       // 👇 content only works for "short" files, otherwise
@@ -79,6 +127,7 @@ export async function longRunningRecognize(
       enableWordTimeOffsets: true,
       diarizationSpeakerCount: request.numSpeakers,
       enableSpeakerDiarization: true,
+      // @ts-ignore 🔥 no access ro Google's encoding
       encoding: request.audio.encoding,
       languageCode: 'en-US',
       model: 'latest_long',
@@ -86,26 +135,15 @@ export async function longRunningRecognize(
     }
   });
 
-  // 👇 call Google to begin transcription
-  const transcriber = operation.promise();
-  const poller = pollOperationProgress(client, operation);
-  const [[response]] = await Promise.all([transcriber, poller]);
-
-  jsome(`👈 ${Channels.transcriberResponse} 100%`);
-
-  // 👇 return the transcription to the caller
-  globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
-    name: operation.name,
-    progressPercent: 100,
-    transcription: makeTranscription(request, response)
-  });
+  // 👇 with the name, clients can now poll for comopletion
+  return operation.name;
 }
 
 // //////////////////////////////////////////////////////////////////////////
 // 🟦 helper functions
 // //////////////////////////////////////////////////////////////////////////
 
-function makeTranscription(request, response): Transcription[] {
+function makeTranscription(result): Transcription[] {
   let end = 0;
   let numWords = 0;
   let speaker = null;
@@ -113,8 +151,7 @@ function makeTranscription(request, response): Transcription[] {
   const speech: string[] = [];
   // 👇 we need only look at the last result
   //    https://cloud.google.com/speech-to-text/docs/multiple-voices
-  const infos =
-    response.results[response.results.length - 1].alternatives[0].words;
+  const infos = result.results[result.results.length - 1].alternatives[0].words;
   // 👇 add a terminal object so we don't have to worry about the last info
   infos.push({});
   // 👇 now coalesce all the words by speaker
@@ -140,38 +177,4 @@ function makeTranscription(request, response): Transcription[] {
     end = Number(info.endTime?.seconds ?? 0);
     return transcription;
   }, []);
-}
-
-async function pollOperationProgress(
-  client: v1p1beta1.SpeechClient,
-  operation
-): Promise<void> {
-  do {
-    try {
-      // 👇 how far along are we?
-      const response = await client.checkLongRunningRecognizeProgress(
-        operation.name
-      );
-      const { latestResponse, metadata } = response;
-      if (latestResponse.done) break;
-      // 👇 1. metadata doesn't seem to be typed properly
-      //    2. seems to be 0% all the way to the end, when it jumps to 100%
-      const progressPercent = (<any>metadata).progressPercent ?? 0;
-      console.log(`👈 ${Channels.transcriberResponse} ${progressPercent}%`);
-      globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
-        name: operation.name,
-        progressPercent,
-        speech: null
-      });
-      // 👇 wait before polling again
-      await sleep(Constants.transcriptionPollInterval);
-    } catch (error) {
-      jsome(`🔥 ${error.message}`);
-      break;
-    }
-  } while (true);
-}
-
-function sleep(ms): Promise<any> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }

@@ -1,7 +1,6 @@
 import { Channels } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TranscriberCancel } from '#mm/common';
 import { TranscriberRequest } from '#mm/common';
 import { TranscriberResponse } from '#mm/common';
 
@@ -12,35 +11,40 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 export class TranscriberService {
   //
 
-  cancelTranscription(request: TranscriberCancel): Promise<void> {
-    return ipc.invoke(Channels.transcriberCancel, request);
+  cancelTranscription(transcriptionName: string): Promise<void> {
+    return ipc.invoke(Channels.transcriberCancel, transcriptionName);
   }
 
   credentials(credentials: string): Promise<void> {
     return ipc.invoke(Channels.transcriberCredentials, credentials);
   }
 
-  transcribe(request: TranscriberRequest): Observable<TranscriberResponse> {
+  async transcribe(
+    request: TranscriberRequest
+  ): Promise<Observable<TranscriberResponse>> {
+    // 👇 kick off the transcription
+    const transcriptionName = await ipc.invoke(
+      Channels.transcriberRequest,
+      request
+    );
+
+    // 👇 create a stream that polls for completion
     return new Observable((observer) => {
       // 👇 listen for transcriber responses
-      let name;
       function listener(event, response): void {
-        name = response.name;
         observer.next(response);
         if (response.progressPercent === 100) observer.complete();
       }
       ipc.on(Channels.transcriberResponse, listener);
 
-      // 👇 start transcription
-      try {
-        ipc.invoke(Channels.transcriberRequest, request);
-      } catch (error) {
-        observer.error(error);
-      }
+      // 👇 poll for transcription complete
+      ipc
+        .invoke(Channels.transcriberPoll, transcriptionName)
+        .catch((error) => observer.error(error));
 
       // 👇 teardown logic
       return () => {
-        ipc.invoke(Channels.transcriberCancel, { name });
+        ipc.invoke(Channels.transcriberCancel, transcriptionName);
         ipc.removeListener(Channels.transcriberResponse, listener);
       };
     });

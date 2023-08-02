@@ -135,13 +135,13 @@ import deepCopy from 'deep-copy';
           }"
           [config]="config$ | async" />
 
-        <footer *ngIf="!status.working" class="footer">
+        <footer *ngIf="!!status.working" class="footer">
           <label class="progress" tuiProgressLabel>
             {{ status.status }}
             <progress tuiProgressBar [max]="100"></progress>
           </label>
           <button
-            *ngIf="!status.working?.canceledBy"
+            *ngIf="status.working.canceledBy"
             (click)="onCancelAction()"
             appearance="mono"
             class="canceler"

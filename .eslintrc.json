@@ -23,6 +23,7 @@
   ],
   "root": true,
   "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/naming-convention": [
       "error",
       {

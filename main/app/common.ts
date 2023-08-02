@@ -70,7 +70,7 @@ export const Constants = {
     'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
   summaryStrategy,
   timeupdateThrottleInterval: 10000,
-  transcriptionPollInterval: 10000
+  transcriberPollInterval: 10000
 };
 
 // //////////////////////////////////////////////////////////////////////////
@@ -141,6 +141,7 @@ export enum Channels {
 
   transcriberCancel = 'google-speech/transcriber/cancel',
   transcriberCredentials = 'google-speech/transcriber/credentials',
+  transcriberPoll = 'google-speech/transcriber/poll',
   transcriberRequest = 'google-speech/transcriber/request',
   transcriberResponse = 'google-speech/transcriber/response',
 
@@ -201,13 +202,9 @@ export type OpenFileResponse = {
 
 export type SaveDialogOptions = OpenDialogOptions;
 
-export type TranscriberCancel = {
-  name: string;
-};
-
 export type TranscriberRequest = {
   audio: {
-    encoding: any; // 👈 yes really -- no access to Google's encoding
+    encoding: string;
     fileName?: string;
     gcsuri?: string;
     sampleRateHertz: number;

@@ -79,7 +79,7 @@ export class ControllerService {
     const transcriptionName =
       this.#store.selectSnapshot(ComponentState).transcriptionName;
     if (transcriptionName) {
-      await this.#transcriber.cancelTranscription({ name: transcriptionName });
+      await this.#transcriber.cancelTranscription(transcriptionName);
       this.#store.dispatch(new ClearStatus());
     }
   }
@@ -356,22 +356,23 @@ export class ControllerService {
       })
     );
     // 👇 initiate transcription
-    this.#transcriber
-      .transcribe(request)
+    const transcriber$ = await this.#transcriber.transcribe(request);
+    transcriber$
       .pipe(
-        tap((tx) => {
-          this.#store.dispatch([
-            new SetComponentState({ transcriptionName: tx.name }),
-            new SetStatus({
-              status: `Transcribing audio: ${tx.progressPercent}% complete`
-            })
-          ]);
-        }),
-        filter((tx) => tx.progressPercent === 100),
         catchError((error) => {
           this.#store.dispatch(new SetStatus({ error }));
           return of(null);
-        })
+        }),
+        tap((tx) => {
+          if (tx)
+            this.#store.dispatch([
+              new SetComponentState({ transcriptionName: tx.name }),
+              new SetStatus({
+                status: `Transcribing audio: ${tx.progressPercent}% complete`
+              })
+            ]);
+        }),
+        filter((tx) => tx.progressPercent === 100)
       )
       .subscribe((tx) => {
         if (tx) {
@@ -432,7 +433,7 @@ export class ControllerService {
 
   #pluckTranscription(state: MinutesStateModel, ix: number): Transcription {
     if (state.transcription[ix].type === 'TX')
-      return state.transcription[ix] as any as Transcription;
+      return state.transcription[ix] as Transcription;
     else throw new Error(`Operation not supported for item #${ix}`);
   }
 

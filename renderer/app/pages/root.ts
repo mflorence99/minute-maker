@@ -100,13 +100,16 @@ import deepCopy from 'deep-copy';
           [minutes]="minutes" />
 
         <tui-loader
+          [hydratorMargin]="'100px'"
+          [hydratorTrace]="true"
           [ngClass]="{
             data: true,
             showing: configured && state.tabIndex === 1
           }"
-          [showLoader]="status.working?.on === 'transcription'">
+          [showLoader]="status.working?.on === 'transcription'"
+          mmHydrator>
           <mm-transcription
-            (selected)="onSelected($event)"
+            (selected)="onTranscription($event)"
             [currentTx]="currentTx"
             [status]="status"
             [transcription]="transcription$ | async" />
@@ -233,11 +236,6 @@ export class RootPage {
     this.#controller.cancelWorking(this.status.working);
   }
 
-  onSelected(tx: Transcription): void {
-    this.currentTx = tx;
-    this.wavesurfer.wavesurfer.setTime(tx.start);
-  }
-
   onSwitchTab(tabIndex: number): void {
     this.#store.dispatch([
       new ClearUndoStacks(), // 👈 don't undo what isn't showing
@@ -247,6 +245,11 @@ export class RootPage {
 
   onTimeUpdate(ts: number): void {
     this.#timeupdate$.next(ts);
+  }
+
+  onTranscription(tx: Transcription): void {
+    this.currentTx = tx;
+    this.wavesurfer.wavesurfer.setTime(tx.start);
   }
 
   openMinutes(): void {

@@ -11,6 +11,8 @@ import { ConfigState } from '#mm/state/config';
 import { DateTimeTransformer } from '#mm/services/datetime-transformer';
 import { DragDroppableDirective } from '#mm/directives/drag-droppable';
 import { ErrorHandler } from '@angular/core';
+import { HydratedDirective } from '#mm/directives/hydrated';
+import { HydratorDirective } from '#mm/directives/hydrator';
 import { InsertableDirective } from '#mm/directives/insertable';
 import { JoinableDirective } from '#mm/directives/joinable';
 import { MarkdownModule } from 'ngx-markdown';
@@ -82,6 +84,8 @@ const COMPONENTS = [
 
 const DIRECTIVES = [
   DragDroppableDirective,
+  HydratedDirective,
+  HydratorDirective,
   InsertableDirective,
   JoinableDirective,
   RemovableDirective,

@@ -22,76 +22,80 @@ import scrollIntoView from 'scroll-into-view-if-needed';
   template: `
     <table *ngIf="transcription.length > 0; else noTranscription">
       <tbody>
-        <tr
-          *ngFor="let tx of transcription; let ix = index; trackBy: trackByTx"
-          (click)="onSelected(tx)"
-          [ngClass]="{ selected: tx.id === currentTx?.id }"
-          [id]="'TX' + tx.id">
-          <ng-container *ngIf="tx.type === 'AG'">
-            <td colspan="2" width="100%">
-              <textarea
-                #agendaItemTitle
-                (input)="updateAgendaItem({ title: agendaItemTitle.value }, ix)"
-                [mmRemovable]="ix"
-                [value]="tx.title"
-                autocomplete="off"
-                autocorrect="on"
-                class="heading"
-                rows="1"
-                spellcheck="true"
-                style="width: calc(100% - 1rem)"
-                wrap="off"></textarea>
-            </td>
-          </ng-container>
-
-          <ng-container *ngIf="tx.type === 'TX'">
-            <td>
-              <input
-                #transcriptionSpeaker
-                (input)="
-                  updateTranscription(
-                    { speaker: transcriptionSpeaker.value },
-                    ix
-                  )
-                "
-                [value]="tx.speaker"
-                style="font-weight: bold; width: 7rem" />
-            </td>
-
-            <td width="100%">
-              <tui-loader
-                [showLoader]="
-                  status.working?.on === 'rephrase' && status.ix === ix
-                ">
+        <ng-container
+          *ngFor="let tx of transcription; let ix = index; trackBy: trackByTx">
+          <tr
+            (click)="onSelected(tx)"
+            [ngClass]="{ selected: tx.id === currentTx?.id }"
+            [id]="'TX' + tx.id">
+            <ng-container *ngIf="tx.type === 'AG'">
+              <td colspan="2" width="100%">
                 <textarea
-                  #transcriptionSpeech
+                  #agendaItemTitle
                   (input)="
-                    updateTranscription(
-                      { speech: transcriptionSpeech.value },
-                      ix
-                    )
+                    updateAgendaItem({ title: agendaItemTitle.value }, ix)
                   "
-                  [class.disabled]="
-                    status.working?.on === 'rephrase' && status.ix === ix
-                  "
-                  [mmInsertable]="ix"
-                  [mmJoinable]="
-                    transcription[ix + 1]?.type === 'TX' ? ix : null
-                  "
-                  [mmRephraseable]="ix"
-                  [mmSplittable]="ix"
-                  [useImportant]="true"
-                  [value]="tx.speech"
+                  [mmRemovable]="ix"
+                  [value]="tx.title"
                   autocomplete="off"
                   autocorrect="on"
                   autosize
+                  class="heading"
                   spellcheck="true"
                   style="width: calc(100% - 1rem)"
-                  wrap="soft"></textarea>
-              </tui-loader>
-            </td>
-          </ng-container>
-        </tr>
+                  wrap="off"></textarea>
+              </td>
+            </ng-container>
+
+            <ng-container *ngIf="tx.type === 'TX'">
+              <td>
+                <input
+                  #transcriptionSpeaker
+                  (input)="
+                    updateTranscription(
+                      { speaker: transcriptionSpeaker.value },
+                      ix
+                    )
+                  "
+                  [value]="tx.speaker"
+                  style="font-weight: bold; width: 7rem" />
+              </td>
+
+              <td width="100%">
+                <tui-loader
+                  [showLoader]="
+                    status.working?.on === 'rephrase' && status.ix === ix
+                  ">
+                  <textarea
+                    #transcriptionSpeech
+                    (input)="
+                      updateTranscription(
+                        { speech: transcriptionSpeech.value },
+                        ix
+                      )
+                    "
+                    [class.disabled]="
+                      status.working?.on === 'rephrase' && status.ix === ix
+                    "
+                    [mmInsertable]="ix"
+                    [mmJoinable]="
+                      transcription[ix + 1]?.type === 'TX' ? ix : null
+                    "
+                    [mmRephraseable]="ix"
+                    [mmSplittable]="ix"
+                    [useImportant]="true"
+                    [value]="tx.speech"
+                    autocomplete="off"
+                    autocorrect="on"
+                    autosize
+                    spellcheck="true"
+                    style="width: calc(100% - 1rem)"
+                    wrap="soft"></textarea>
+                </tui-loader>
+              </td>
+            </ng-container>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
 

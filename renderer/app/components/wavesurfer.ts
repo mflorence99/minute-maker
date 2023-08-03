@@ -127,6 +127,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
       container: this.wave.nativeElement,
       media: this.media.nativeElement,
       plugins: this.plugins$.map((plugin: WaveSurferPlugin) => plugin.create()),
+      peaks: [[0]],
       progressColor: '#c0c0c0',
       waveColor: '#880e4f', // 👈 --tui-accent
       ...this.options

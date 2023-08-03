@@ -50,21 +50,30 @@ export class InsertTranscription extends UndoableAction {
 
 export class JoinTranscriptions extends UndoableAction {
   static readonly type = '[Minutes] JoinTranscriptions';
-  constructor(public ix: number, undoing = false) {
+  constructor(
+    public ix: number,
+    undoing = false
+  ) {
     super(undoing);
   }
 }
 
 export class RemoveAgendaItem extends UndoableAction {
   static readonly type = '[Minutes] RemoveAgendaItem';
-  constructor(public ix: number, undoing = false) {
+  constructor(
+    public ix: number,
+    undoing = false
+  ) {
     super(undoing);
   }
 }
 
 export class RemoveTranscription extends UndoableAction {
   static readonly type = '[Minutes] RemoveTranscription';
-  constructor(public ix: number, undoing = false) {
+  constructor(
+    public ix: number,
+    undoing = false
+  ) {
     super(undoing);
   }
 }
@@ -76,7 +85,11 @@ export class SetMinutes {
 
 export class SplitTranscription extends UndoableAction {
   static readonly type = '[Minutes] SplitTranscription';
-  constructor(public ix: number, public pos: number, undoing = false) {
+  constructor(
+    public ix: number,
+    public pos: number,
+    undoing = false
+  ) {
     super(undoing);
   }
 }
@@ -94,7 +107,10 @@ export class UpdateAgendaItem extends UndoableAction {
 
 export class UpdateChanges extends UndoableAction {
   static readonly type = '[Minutes] UpdateChanges';
-  constructor(public details: Partial<Minutes>, undoing = false) {
+  constructor(
+    public details: Partial<Minutes>,
+    undoing = false
+  ) {
     super(undoing);
   }
 }
@@ -310,7 +326,11 @@ export class MinutesState {
     const speech1 = speech.substring(0, pos).trim();
     const speech2 = speech.substring(pos).trim();
     const wps = (original.end - original.start) / speech.split(/\s+/).length;
-    const splitTime = speech1.split(/\s+/).length * wps;
+    // 🔥 can't go backwards
+    const splitTime = Math.max(
+      original.start,
+      speech1.split(/\s+/).length * wps
+    );
     // 👇 now do the action
     setState(
       patch({

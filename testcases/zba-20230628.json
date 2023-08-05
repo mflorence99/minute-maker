@@ -1,0 +1,173 @@
+{
+  "audio": {
+    "encoding": "MP3",
+    "gcsuri": "gs://washington-app-319514.appspot.com/edaa567a-71de-4020-b61b-bee31e344645.mp3",
+    "sampleRateHertz": 22050,
+    "url": "https://storage.googleapis.com/washington-app-319514.appspot.com/edaa567a-71de-4020-b61b-bee31e344645.mp3"
+  },
+  "absent": [
+    "bob citizen"
+  ],
+  "date": "2023-07-22T23:00:00.000Z",
+  "nextTranscriptionID": 89,
+  "numSpeakers": 5,
+  "present": [
+    "Joe Tapp - Board Member",
+    "Gary Carney - Board Member",
+    "Linda Marshall - Board Member"
+  ],
+  "subject": "Public Hearing",
+  "subtitle": "Meeting Minutes",
+  "summary": [
+    {
+      "section": "Approval of Minutes",
+      "summary": "- Florence calls the June meeting of the Zoning Board of Adjustment to order.\n- Present are new Board member Joe Tapp, members Linda Marshall and Gary Carney, and Florence as Board chair.\n- Executive Administrative Deb DeFosse and member Andrew Hatch are not present.\n- The first order of business is to approve the minutes from the last meeting on May 31st.\n- Florence moves to approve the minutes and all members say \"Aye.\"\n- The motion passes unanimously and the minutes are approved.\n- Carney expresses enjoyment in reading the minutes, stating it feels like experiencing the events firsthand and is a perfect experience."
+    },
+    {
+      "section": "New Agenda Item",
+      "summary": "- Florence proposes to read and vote on the amended Rules of Procedure, which will take immediate effect if approved.\n- The changes to the Rules of Procedure include updating them to align with current practice and law.\n- The appeal window for filing an Appeal from an Administrative Decision has been changed from 21 to 30 days.\n- The word \"chairman\" has been replaced with \"chair\" for modernization purposes.\n- The requirement for three readings before voting on and implementing changes to the Rules of Procedure has been eliminated.\n- The motion to approve the amended Rules of Procedure is unanimously passed, and they are now in effect."
+    },
+    {
+      "section": "New Business",
+      "summary": "- Joe does not have any questions at the moment and has learned a lot from previous meetings\n- The next meeting is scheduled for July 26th, but only if there is a case to hear\n- The meeting is adjourned unanimously at 7:10 pm"
+    }
+  ],
+  "title": "Zoning Board of Adjustment",
+  "transcription": [
+    {
+      "id": 79,
+      "title": "Approval of Minutes",
+      "type": "AG"
+    },
+    {
+      "end": 54,
+      "id": 2,
+      "speaker": "Florence",
+      "speech": "Good evening, everybody. The June meeting of the Zoning Board of Adjustment is called to order. Present are: new Board member Joe Tapp, members Linda Marshall and Gary Carney, and me, Board chair, Mark Florence. Executive Administrative Deb DeFosse and member Andrew Hatch are not present this evening. \n\nOur first order of business is to approve the minutes from the last meeting on May 31st. I move that we approve those minutes. All those in favor?",
+      "start": 1,
+      "type": "TX"
+    },
+    {
+      "end": 66,
+      "id": 10,
+      "speaker": "All",
+      "speech": "Aye",
+      "start": 54,
+      "type": "TX"
+    },
+    {
+      "end": 50,
+      "id": 72,
+      "speaker": "Florence",
+      "speech": "The motion passes unanimously and the minutes are approved.",
+      "start": 0,
+      "type": "TX"
+    },
+    {
+      "end": 84,
+      "id": 14,
+      "speaker": "Carney",
+      "speech": "I would like to mention that reading those minutes is truly enjoyable, as it feels as though I am experiencing the events firsthand. It's like being right there in the moment. Honestly, I can't even remember what I had for breakfast, but the experience of reading these minutes is absolutely perfect.",
+      "start": 66,
+      "type": "TX"
+    },
+    {
+      "id": 80,
+      "title": "Scott Nazarian/Carlson & Bowen – TM 14-138 and 14-124, proposed annexation or lot line adjustment",
+      "type": "AG"
+    },
+    {
+      "title": "New Agenda Item",
+      "id": 89,
+      "type": "AG"
+    },
+    {
+      "end": 111,
+      "id": 15,
+      "speaker": "Florence",
+      "speech": "Next up is unfinished business. We have to read the amended Rules of Procedure into the record, then vote on them and if we vote to approve them, they take immediate effect. Should we recap what those changes were?",
+      "start": 84,
+      "type": "TX"
+    },
+    {
+      "end": 112,
+      "id": 16,
+      "speaker": "Carney",
+      "speech": "Let's do that.",
+      "start": 111,
+      "type": "TX"
+    },
+    {
+      "end": 194,
+      "id": 17,
+      "speaker": "Florence",
+      "speech": "Basically, we proposed updating the Rules of Procedure to align with current practice and current law. We changed the window in which to file an Appeal from an Administrative Decision from 21 to 30 days to make the appeal windows uniform. \n\nWe replaced the word \"chairman\" with \"chair\" to get us into the 21st century. \n\nThe big change was to eliminate the requirement that any change of the Rules of Procedure required three readings before it could be voted on and take effect. If you recall, there was  a time when we only had four Board members and we needed to rule in a timely manner what the effect of a 2-2 tie would be.\n\nI move that the amended Rules of Procedure be read as written, and that we approve them. All those in favor?",
+      "start": 112,
+      "type": "TX"
+    },
+    {
+      "end": 203,
+      "id": 25,
+      "speaker": "All",
+      "speech": "Aye",
+      "start": 194,
+      "type": "TX"
+    },
+    {
+      "end": 222,
+      "id": 26,
+      "speaker": "Florence",
+      "speech": "The motion passes unanimously and the amended Rules of Procedure are now in effect.",
+      "start": 203,
+      "type": "TX"
+    },
+    {
+      "id": 83,
+      "title": "New Business",
+      "type": "AG"
+    },
+    {
+      "end": 50,
+      "id": 77,
+      "speaker": "Florence",
+      "speech": "Joe, are there any questions that you might have for us?",
+      "start": 0,
+      "type": "TX"
+    },
+    {
+      "end": 360,
+      "id": 28,
+      "speaker": "Tapp",
+      "speech": "No, not at this time. You answered many questions when we spoke last, and although I was sorry to miss the last meeting, I learned a lot from the one before that, the Mensh hearing.",
+      "start": 222,
+      "type": "TX"
+    },
+    {
+      "end": 591,
+      "id": 44,
+      "speaker": "Florence",
+      "speech": "Does anyone else have any business to discuss? If not, it only remains to schedule our next meeting, which will be on July 26th, but only if we have a case to hear.\n\nI move to adjourn the meeting. All those in favor?",
+      "start": 360,
+      "type": "TX"
+    },
+    {
+      "end": 50,
+      "id": 65,
+      "speaker": "All",
+      "speech": "Aye",
+      "start": 0,
+      "type": "TX"
+    },
+    {
+      "end": 600,
+      "id": 64,
+      "speaker": "Florence",
+      "speech": "The motion passes unanimously and the meeting is adjourned at 7:10 pm.",
+      "start": 591,
+      "type": "TX"
+    }
+  ],
+  "visitors": [
+    "Linda Marshall - Board Member"
+  ]
+}

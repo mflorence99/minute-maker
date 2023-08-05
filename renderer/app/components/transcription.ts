@@ -43,7 +43,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                   class="heading"
                   spellcheck="true"
                   style="width: calc(100% - 1rem)"
-                  wrap="off"></textarea>
+                  wrap="soft"></textarea>
               </td>
             </ng-container>
 

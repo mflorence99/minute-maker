@@ -262,6 +262,8 @@ export class RootPage {
       .pipe(takeUntilDestroyed(this.#destroyRef), delay(0))
       .subscribe((configured) => {
         this.configured = configured;
+        // 👇 force "settings" tab if not configured
+        if (!configured) this.state.tabIndex = 4;
       });
   }
 

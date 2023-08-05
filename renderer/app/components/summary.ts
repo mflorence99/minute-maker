@@ -23,9 +23,9 @@ import { inject } from '@angular/core';
           (click)="selected.emit((summIndex = ix))"
           [ngClass]="{ selected: ix === summIndex }">
           <td width="100%">
-            <div *ngIf="summ.section" class="heading">
+            <article *ngIf="summ.section" class="heading">
               {{ summ.section }}
-            </div>
+            </article>
 
             <textarea
               #summText

@@ -31,16 +31,44 @@ import WaveSurfer from 'wavesurfer.js';
   selector: 'mm-wavesurfer',
   template: `
     <figure>
-      <div #wave></div>
+      <article #wave></article>
+
       <ng-content />
-      <audio
-        #media
-        (ratechange)="onAudioChange()"
-        (volumechange)="onAudioChange()"
-        [muted]="state.audio.muted"
-        [playbackRate]="state.audio.playbackRate"
-        [volume]="state.audio.volume"
-        controls></audio>
+
+      <nav>
+        <audio
+          #media
+          (ratechange)="onAudioChange()"
+          (volumechange)="onAudioChange()"
+          [muted]="state.audio.muted"
+          [playbackRate]="state.audio.playbackRate"
+          [volume]="state.audio.volume"
+          controls></audio>
+
+        <button
+          (click)="onSkip(-10)"
+          appearance="mono"
+          icon="tuiIconCornerUpLeft"
+          size="xs"
+          tuiIconButton
+          type="button"></button>
+
+        <input
+          #zoomer
+          (input)="onZoom()"
+          [value]="state.wavesurfer.minPxPerSec"
+          max="100"
+          min="1"
+          type="range" />
+
+        <button
+          (click)="onSkip(+10)"
+          appearance="mono"
+          icon="tuiIconCornerUpRight"
+          size="xs"
+          tuiIconButton
+          type="button"></button>
+      </nav>
     </figure>
   `,
   styles: [
@@ -55,7 +83,15 @@ import WaveSurfer from 'wavesurfer.js';
         }
 
         audio {
+          flex: 2;
           height: 2rem;
+        }
+
+        nav {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          gap: 0.25rem;
         }
       }
     `
@@ -83,6 +119,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   @ViewChild('media') media: ElementRef<HTMLMediaElement>;
   @ViewChild('wave') wave: ElementRef<HTMLElement>;
+  @ViewChild('zoomer') zoomer: ElementRef<HTMLInputElement>;
 
   @ContentChildren(WaveSurferPluginComponent)
   plugins$: QueryList<WaveSurferPluginComponent>;
@@ -126,8 +163,8 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     this.wavesurfer = WaveSurfer.create({
       container: this.wave.nativeElement,
       media: this.media.nativeElement,
+      minPxPerSec: this.state.wavesurfer.minPxPerSec,
       plugins: this.plugins$.map((plugin: WaveSurferPlugin) => plugin.create()),
-      peaks: [[0]],
       progressColor: '#c0c0c0',
       waveColor: '#880e4f', // 👈 --tui-accent
       ...this.options
@@ -158,6 +195,21 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
       volume: audio.volume
     };
     this.#store.dispatch(new SetComponentState({ audio: this.state.audio }));
+  }
+
+  onSkip(secsToSkip: number): void {
+    this.wavesurfer.setTime(this.wavesurfer.getCurrentTime() + secsToSkip);
+  }
+
+  onZoom(): void {
+    const zoomer = this.zoomer.nativeElement;
+    this.wavesurfer.zoom(zoomer.valueAsNumber);
+    this.state.wavesurfer = {
+      minPxPerSec: zoomer.valueAsNumber
+    };
+    this.#store.dispatch(
+      new SetComponentState({ wavesurfer: this.state.wavesurfer })
+    );
   }
 
   #loadAudioFile(): void {

@@ -1,0 +1,1615 @@
+{
+  "audio": {
+    "encoding": "MP3",
+    "gcsuri": "gs://washington-app-319514.appspot.com/0d81f474-68c2-4b22-9750-920f99d3d1dc.mp3",
+    "sampleRateHertz": 22050,
+    "url": "https://storage.googleapis.com/washington-app-319514.appspot.com/0d81f474-68c2-4b22-9750-920f99d3d1dc.mp3"
+  },
+  "absent": [],
+  "date": "2023-08-02T22:30:00.000Z",
+  "nextTranscriptionID": 959,
+  "numSpeakers": 4,
+  "present": [
+    "Jim Crandall - Board Chair",
+    "Don Revane - Ex-officio Member",
+    "Fred Douglass - Member",
+    "Peter Martin - Member",
+    "Nan Schwartz - Member & Secretary",
+    "Mark Florence - Alternate",
+    "Jean Kluk - Alternate"
+  ],
+  "subject": "Public Hearing",
+  "subtitle": "Meeting Minutes",
+  "summary": [
+    {
+      "section": "1.0 Minutes: July 11th meeting and public hearing",
+      "summary": "- Meeting begins with a quorum present\n- First item on the agenda is to review the minutes from previous meetings\n- Martin has a question about an unfamiliar name in the minutes\n- Schwartz clarifies the name as Daniel Tompkins, who spoke about the \"Mars\" project\n- Revane jokes about Jim's phone being on silent\n- Revane moves to approve the minutes, Crandall seconds, and all approve\n- Martin asks for more information about Daniel Tompkins"
+    },
+    {
+      "section": "2.1 Scott Nazarian/Carlson & Bowen – TM 14-138 and 14-124, proposed annexation or lot line adjustment",
+      "summary": "- Scott Nazarian and his neighbors are interested in either doing an annexation or a lot line adjustment in LAE.\n- Both parties need sign off from their mortgage companies before proceeding.\n- There is a potential issue with a driveway on one of the lots, which may be resolved through a land trade.\n- Enforcing the mortgage problem and obtaining approval is important to avoid foreclosure issues.\n- Douglas shares a personal experience with a similar situation and the need to fix a deed issue.\n- The discussion focuses on the potential non-conformity of the lots and the impact of making them smaller.\n- The issue of non-conformity in LAE is raised and discussed.\n- The conversation moves on to the next topic."
+    },
+    {
+      "section": "3.1 Driveway regulations",
+      "summary": "- Florence sent out two draft documents for LUO 307 and the Driveway Permit Application and is seeking feedback\n- Schwartz suggests identifying whether the driveway is temporary or permanent on the form\n- Kluk suggests adding \"check all that apply\" instead of \"check the appropriate box\" on the form\n- Discussion about ownership and responsibility within the right of way\n- Suggestions to clarify terminology and improve the form\n- Martin suggests using arrows to clarify the extent of the right of way\n- Discussion about the terms \"driveway access\" and \"curb cut\"\n- Suggestions to improve the form, including adding applicant's address and phone number\n- Discussion about the distinction between roadway and right of way\n- Suggestions to improve the form, including clarifying when Part I and Part II are needed and adding a $30 filing fee\n- Discussion about the definition of driveway access and curb cut\n- Suggestions to improve the form, including clarifying regulations for private roads\n- Revane provides information on road maintenance responsibilities for private roads\n- Discussion about making changes to the proposed LUO 307.2\n- Martin suggests adding \"if applicable\" to clarify when Part II approval is needed\n- Kluk suggests adding \"or alteration\" to clarify when approval is needed for driveway construction"
+    },
+    {
+      "section": "3.1 Town Center Vision project, parking and access for town buildings, planning for Library adjacent property",
+      "summary": "- Crandall has been meeting with the Select Board to discuss the access and parking for Town Hall, in addition to the library and community garden projects.\n- The long stairway leading up from the lower parking for Town Hall has been dropped due to controversy.\n- The library shed is in poor condition and will be rebuilt at a smaller size on the existing concrete pad.\n- Estimates for the shed will be provided by Mike Carter and Reese Ferry.\n- The shed will have a combination padlock for security.\n- DPW will turn the soil in the garden area this fall for planting next spring.\n- The approximate cost for the shed is between $15,000 and $20,000.\n- The plan for Town Hall parking and access does not worsen the current egress situation and creating a new egress road is not feasible due to state regulations.\n- Henniker Septic will assess the load bearing capabilities of the leach field behind Town Hall to potentially expand the rear parking.\n- The grassy area in front of Town Hall will be expanded, but parking will be prohibited.\n- The possibility of expanding the lot behind Town Hall is being explored, but plans were not available at the meeting.\n- Tighter parking spaces and smaller, curved cement blocks are being considered to allow for more vehicles to fit in the space."
+    },
+    {
+      "section": "3.3 Master Plan",
+      "summary": "- Crandall believes that the Master Plan is still a placeholder.\n- Douglas agrees with Crandall's statement."
+    },
+    {
+      "section": "3.4 ZBA Report",
+      "summary": "- Crandall asks about any updates from the ZBA.\n- Florence responds that there were no ZBA hearings in July.\n- No property owner requested a variance during that time."
+    },
+    {
+      "section": "3.x King St Property (not on agenda)",
+      "summary": "- Kluk is interested in updates on the NASA proposal and the timeline for next steps.\n- Revane discusses the recent determination of the location for the access road and trail, as well as the involvement of environmental experts and neighboring landowners.\n- Crandall asks about public input in the process, and Revane assures that it will be incorporated.\n- Schwartz asks about wetlands crossings and forestry plans, and Revane provides information on the changes in the landscape and the involvement of a forester.\n- Crandall asks about funding, and Revane explains that there is currently no funding as there are no immediate plans.\n- Kluk suggests involving NH NEMBA for constructing trails, and Revane discusses the restrictions and options for activities on the property.\n- Crandall mentions that ATVs cannot be kept off the property, and Revane acknowledges this.\n- Schwartz asks about the connection to Wild Acre, and Revane explains the trail system and the idea of providing designated areas for ATVs to minimize their roaming."
+    },
+    {
+      "section": "6.0 Mergers",
+      "summary": "- There is a merger on the agenda for Fluery, but paperwork is not available for discussion\n- Paperwork is available for a merger between Kelly and Matthew Lannon to merge lots 14-76 and 14-75 on Stowell Road\n- The new lot size will be 2.65 acres\n- Kelly and Matthew Lannon have provided the necessary fee and deeds\n- Douglas asks if a surveyor is needed, but it is confirmed that they do not need one\n- Douglas makes a motion to accept the merger as presented, which is seconded by Schwartz\n- All members in attendance vote in favor\n- The group proceeds to sign and date the paperwork"
+    }
+  ],
+  "title": "Planning Board",
+  "transcription": [
+    {
+      "id": 1,
+      "title": "1.0 Minutes: July 11th meeting and public hearing",
+      "type": "AG"
+    },
+    {
+      "end": 28,
+      "id": 2,
+      "speaker": "Crandall",
+      "speech": "Alright, it's 6:30 now. I believe we have enough people present for a quorum. We are ready to begin. The first item on the agenda is to review the minutes from both the meeting and the public hearing that took place last month. Everyone should have received a copy of the minutes. Does anyone have any corrections, additions, deletions, or changes they would like to make?",
+      "start": 0,
+      "type": "TX"
+    },
+    {
+      "end": 42,
+      "id": 3,
+      "speaker": "Martin",
+      "speech": "I had a question. I saw somebody's name in the minutes and didn't recognize it.",
+      "start": 31,
+      "type": "TX"
+    },
+    {
+      "end": 44,
+      "id": 4,
+      "speaker": "Schwartz",
+      "speech": "Daniel Tompkins?",
+      "start": 42,
+      "type": "TX"
+    },
+    {
+      "end": 50,
+      "id": 5,
+      "speaker": "Martin",
+      "speech": "No, I remember him. It was in the middle of the text. It's not important if I find it I'll escalate.",
+      "start": 44,
+      "type": "TX"
+    },
+    {
+      "end": 54,
+      "id": 6,
+      "speaker": "Schwartz",
+      "speech": " Kendrick?",
+      "start": 50,
+      "type": "TX"
+    },
+    {
+      "end": 57,
+      "id": 7,
+      "speaker": "Revane",
+      "speech": "Jim did you put your phone on silent? _(laughter)_ I move to approve the minutes.",
+      "start": 55,
+      "type": "TX"
+    },
+    {
+      "end": 73,
+      "id": 8,
+      "speaker": "Crandall",
+      "speech": " I'll second that. All those in favor?",
+      "start": 60,
+      "type": "TX"
+    },
+    {
+      "end": 74,
+      "id": 9,
+      "speaker": "All",
+      "speech": "Aye",
+      "start": 73,
+      "type": "TX"
+    },
+    {
+      "end": 77,
+      "id": 10,
+      "speaker": "Martin",
+      "speech": "Who's Daniel Tompkins?",
+      "start": 74,
+      "type": "TX"
+    },
+    {
+      "end": 84,
+      "id": 11,
+      "speaker": "Schwartz",
+      "speech": "He was the man that that spoke with the selectmen about the \"Mars\" project.",
+      "start": 78,
+      "type": "TX"
+    },
+    {
+      "end": 87,
+      "id": 12,
+      "speaker": "Revane",
+      "speech": "He was the one we met Saturday out on King Street.",
+      "start": 84,
+      "type": "TX"
+    },
+    {
+      "end": 91,
+      "id": 13,
+      "speaker": "Martin",
+      "speech": "He's the person to deal with.",
+      "start": 87,
+      "type": "TX"
+    },
+    {
+      "id": 14,
+      "title": "2.0 New Business",
+      "type": "AG"
+    },
+    {
+      "id": 15,
+      "title": "2.1 Scott Nazarian/Carlson & Bowen – TM 14-138 and 14-124, proposed annexation or lot line adjustment",
+      "type": "AG"
+    },
+    {
+      "end": 111,
+      "id": 16,
+      "speaker": "Crandall",
+      "speech": "The new business is a proposed annexation.",
+      "start": 93,
+      "type": "TX"
+    },
+    {
+      "end": 201,
+      "id": 17,
+      "speaker": "Schwartz",
+      "speech": "Scott Nazarian and his neighbor Carlson and Bowen are interested in either doing an annexation or a lot line adjustment in LAE. Unfortunately, they are unable to attend tonight. I spoke to Peter Mellon, who was contacted by Scott about the plan that was done for Carlson and Bowen over a year ago. The issue we are facing is that both of us need sign off from our mortgage companies before proceeding, as we both have mortgages and will be trading land. \n\nIn Hillsboro, he told me that there has been a problem before, so he simply informed me about it. He mentioned that they might choose to follow through with it after resolving the issue, or they might attempt to do it beforehand. However, it is important to note that obtaining sign off is necessary.",
+      "start": 111,
+      "type": "TX"
+    },
+    {
+      "end": 208,
+      "id": 18,
+      "speaker": "Revane",
+      "speech": "You're going to make the lots smaller?",
+      "start": 205,
+      "type": "TX"
+    },
+    {
+      "end": 229,
+      "id": 19,
+      "speaker": "Schwartz",
+      "speech": "I believe that the lots are of a good size, but there might be a problem with a driveway on one of them. They are considering trading land so that the issue can be resolved, and it seems like Scott was planning to give them a portion of that land.",
+      "start": 208,
+      "type": "TX"
+    },
+    {
+      "end": 240,
+      "id": 20,
+      "speaker": "Crandall",
+      "speech": "Why are we being asked to enforce the mortgage problem and verify if it has been approved? Why would we need to ask them to do so?",
+      "start": 230,
+      "type": "TX"
+    },
+    {
+      "end": 251,
+      "id": 21,
+      "speaker": "Schwartz",
+      "speech": "If I approve something and someone ends up getting foreclosed on, it becomes a major issue with the mortgage companies.",
+      "start": 241,
+      "type": "TX"
+    },
+    {
+      "end": 288,
+      "id": 22,
+      "speaker": "Douglas",
+      "speech": "In 1975, I experienced a situation where my driveway or house was not on my property, which caused a problem with the bank. Despite it being there for 40 years, they were unhappy about it. The deed was messed up, but I had to fix it on my own. And I did manage to straighten it out.",
+      "start": 251,
+      "type": "TX"
+    },
+    {
+      "end": 289,
+      "id": 23,
+      "speaker": "Martin",
+      "speech": "Adverse possession?",
+      "start": 288,
+      "type": "TX"
+    },
+    {
+      "end": 313,
+      "id": 24,
+      "speaker": "Douglas",
+      "speech": "No, they wouldn't allow me to do that. However, I had to go through the planning board in order to proceed. I viewed it as a friendly endeavor, as I took a quarter acre lot and transformed it into a third of an acre. This was done because everyone believed their lot line was located here, when in fact it was there. Consequently, I acquired the additional land for a mere dollar, all in a spirit of friendliness.",
+      "start": 289,
+      "type": "TX"
+    },
+    {
+      "end": 318,
+      "id": 25,
+      "speaker": "Revane",
+      "speech": "In the case before us now, is a non-conforming lot going to be made more or less conforming?",
+      "start": 313,
+      "type": "TX"
+    },
+    {
+      "end": 320,
+      "id": 26,
+      "speaker": "Kluk",
+      "speech": "I was just going to ask the same question.",
+      "start": 318,
+      "type": "TX"
+    },
+    {
+      "end": 359,
+      "id": 27,
+      "speaker": "Ravane",
+      "speech": "Nazarian owns 14-138, which was made into a weird shape when we merged a 0.16 acre lot to make a 2.16 acre lot a while back. Carlson and Bowen own 14-124, also 2.16 acres. I think Nazarian is trying to give them those 0.16 acres, cutting the property line straight. So that's going to make the Nazarian lot smaller and less conforming. It's gonna take a 2.16 acre lot and drop it to one point something. So how do you make a lot smaller?",
+      "start": 320,
+      "type": "TX"
+    },
+    {
+      "end": 365,
+      "id": 28,
+      "speaker": "Douglas",
+      "speech": "But weren't all those lots approved previously as half-acre lots?",
+      "start": 359,
+      "type": "TX"
+    },
+    {
+      "end": -76.85333333333334,
+      "id": 29,
+      "speaker": "Revane",
+      "speech": "Once they were deeded, they were deeded. They're all different sizes.",
+      "start": 366,
+      "type": "TX"
+    },
+    {
+      "end": 226.26666666666665,
+      "id": 30,
+      "speaker": "Douglas",
+      "speech": "I thought they got 400 lots out of that.",
+      "start": -76.85333333333334,
+      "type": "TX"
+    },
+    {
+      "end": 394,
+      "id": 31,
+      "speaker": "Revane",
+      "speech": "Well, there are all different lot sizes. You can't make a lot smaller.",
+      "start": 226.26666666666665,
+      "type": "TX"
+    },
+    {
+      "end": 405,
+      "id": 32,
+      "speaker": "Schwartz",
+      "speech": "It looks like they both have double lots. We'll have to see what he presents to us.",
+      "start": 394,
+      "type": "TX"
+    },
+    {
+      "end": 407,
+      "id": 33,
+      "speaker": "Kluk",
+      "speech": "None of them are conforming at 4 acres.",
+      "start": 405,
+      "type": "TX"
+    },
+    {
+      "end": 424,
+      "id": 34,
+      "speaker": "Revane",
+      "speech": "I don't know how to address the issue of non-conformity in LAE. Personally, I have experience with this matter on Valley Road. In our community, we didn't allow someone to freely move between two places because it seemed to promote more non-conforming behavior.",
+      "start": 407,
+      "type": "TX"
+    },
+    {
+      "end": 430,
+      "id": 35,
+      "speaker": "Crandall",
+      "speech": "Moving on ...",
+      "start": 424,
+      "type": "TX"
+    },
+    {
+      "id": 36,
+      "title": "3.0 Old Business",
+      "type": "AG"
+    },
+    {
+      "id": 37,
+      "title": "3.1 Driveway regulations",
+      "type": "AG"
+    },
+    {
+      "end": 430,
+      "id": 38,
+      "speaker": "Crandall",
+      "speech": "Moving on to driveway regulations. I thought we had a very good working session.",
+      "start": 430,
+      "type": "TX"
+    },
+    {
+      "end": 430,
+      "id": 39,
+      "speaker": "Florence",
+      "speech": "Yesterday evening, I sent out two draft documents via email. One was for LUO 307 and the other was for the Driveway Permit Application. I'm seeking suggestions from anyone regarding any errors, omissions, or any other feedback on these drafts.",
+      "start": 430,
+      "type": "TX"
+    },
+    {
+      "end": 479,
+      "id": 40,
+      "speaker": "Schwartz",
+      "speech": "We need to identify whether the driveway is temporary or permanent, either on the diagram or elsewhere.",
+      "start": 430,
+      "type": "TX"
+    },
+    {
+      "end": 487,
+      "id": 41,
+      "speaker": "Florence",
+      "speech": "I added the \"temporary\" checkbox we spoke of. Was that not enough, do you think?",
+      "start": 479,
+      "type": "TX"
+    },
+    {
+      "end": 494,
+      "id": 42,
+      "speaker": "Kluk",
+      "speech": "It's at the bottom of the blue section. There's a checkbox that says \"temporary driveway\".",
+      "start": 487,
+      "type": "TX"
+    },
+    {
+      "end": 511,
+      "id": 43,
+      "speaker": "Schwartz",
+      "speech": "I think the form should ask first: is the driveway temporary or permanent? Then, the applicant can check the other boxes as appropriate.",
+      "start": 495,
+      "type": "TX"
+    },
+    {
+      "end": 503,
+      "id": 44,
+      "speaker": "Kluk",
+      "speech": "So two major categories: temporary and permanent?",
+      "start": 503,
+      "type": "TX"
+    },
+    {
+      "end": 511,
+      "id": 932,
+      "speaker": "Schwartz",
+      "speech": "Agreed. Then the applicant can check off the other categories: new construction, alteration and so on.",
+      "start": 503,
+      "type": "TX"
+    },
+    {
+      "end": 514,
+      "id": 46,
+      "speaker": "Florence",
+      "speech": "Isn't logging by definition temporary?",
+      "start": 511,
+      "type": "TX"
+    },
+    {
+      "end": 525,
+      "id": 47,
+      "speaker": "Schwartz",
+      "speech": "No. Logging can be permanent too.",
+      "start": 514,
+      "type": "TX"
+    },
+    {
+      "end": 534,
+      "id": 49,
+      "speaker": "Douglas",
+      "speech": "I performed some logging work, and during that time, Ed contacted me to discuss whether I preferred a permanent or temporary arrangement. I expressed my preference for it to be made permanent, as I intend to return to construct a driveway in the future.",
+      "start": 526,
+      "type": "TX"
+    },
+    {
+      "end": 546,
+      "id": 52,
+      "speaker": "Crandall",
+      "speech": "The same circumstances applied to me.",
+      "start": 536,
+      "type": "TX"
+    },
+    {
+      "end": 561,
+      "id": 53,
+      "speaker": "Douglas",
+      "speech": "I really don't want to be the one who has to put the stonewall back. If it's only meant to be temporary, then it's your responsibility to restore the wall. Honestly, I can't even lift those heavy rocks, so it's impossible for me to do it.",
+      "start": 546,
+      "type": "TX"
+    },
+    {
+      "end": 561,
+      "id": 60,
+      "speaker": "Kluk",
+      "speech": "As I was going through it, I found myself questioning whether we really need to say \"check the appropriate box.\"",
+      "start": 561,
+      "type": "TX"
+    },
+    {
+      "end": 561,
+      "id": 936,
+      "speaker": "All",
+      "speech": "Yes, we do.",
+      "start": 561,
+      "type": "TX"
+    },
+    {
+      "end": 602,
+      "id": 935,
+      "speaker": "Kluk",
+      "speech": "I believe that if we need those words, then it should be stated as \"check all that apply.\"",
+      "start": 561,
+      "type": "TX"
+    },
+    {
+      "end": 603,
+      "id": 61,
+      "speaker": "Florence",
+      "speech": "Agreed, I will make that change.",
+      "start": 602,
+      "type": "TX"
+    },
+    {
+      "end": 608,
+      "id": 62,
+      "speaker": "Schwartz",
+      "speech": "Do we need the checkbox \"landscape within the right of way\"?",
+      "start": 603,
+      "type": "TX"
+    },
+    {
+      "end": 613,
+      "id": 63,
+      "speaker": "Florence",
+      "speech": "I copied that from the Atkinson application form. I didn't make it up.",
+      "start": 610,
+      "type": "TX"
+    },
+    {
+      "end": 613,
+      "id": 66,
+      "speaker": "Kluk",
+      "speech": "Okay, yes. I believe that it all comes down to whether I am going to have an impact by doing landscaping in the right way. Will my actions as a landscaper make a difference?",
+      "start": 613,
+      "type": "TX"
+    },
+    {
+      "end": 625,
+      "id": 937,
+      "speaker": "Revane",
+      "speech": "I know where this has happened.",
+      "start": 613,
+      "type": "TX"
+    },
+    {
+      "end": 628,
+      "id": 70,
+      "speaker": "Schwartz",
+      "speech": "Yes, on Jean Kluk's road.",
+      "start": 626,
+      "type": "TX"
+    },
+    {
+      "end": 630,
+      "id": 71,
+      "speaker": "Kluk",
+      "speech": "Indeed, right next to me.",
+      "start": 628,
+      "type": "TX"
+    },
+    {
+      "end": 651,
+      "id": 73,
+      "speaker": "Revane",
+      "speech": "No, I'm referring to a  person who wanted to place a series of large rocks on a corner of Valley Road to enhance the area. Surprisingly, DPW agreed to it, saying it was okay to do so. This meant that he could also landscape within the right of way, including the fence and everything else.",
+      "start": 630,
+      "type": "TX"
+    },
+    {
+      "end": 657,
+      "id": 76,
+      "speaker": "Schwartz",
+      "speech": "Agreed. There have been other cases where a homeowner has erected a fence in the right-of-way.",
+      "start": 651,
+      "type": "TX"
+    },
+    {
+      "end": 657,
+      "id": 77,
+      "speaker": "Florence",
+      "speech": "I noticed that there are additional checkboxes on the first page. I wondered if I should add \"check all the options that apply\" in that section. At first glance, it appeared clear to me what needed to be done.",
+      "start": 657,
+      "type": "TX"
+    },
+    {
+      "end": 681,
+      "id": 938,
+      "speaker": "Martin",
+      "speech": "Why don't we change the bullets the boxes?",
+      "start": 657,
+      "type": "TX"
+    },
+    {
+      "end": 709,
+      "id": 80,
+      "speaker": "Kluk",
+      "speech": "I believe that's a problem with Word, or whatever software we have on our computers.",
+      "start": 682,
+      "type": "TX"
+    },
+    {
+      "end": 720,
+      "id": 88,
+      "speaker": "Florence",
+      "speech": "The two documents, the LUO 307 draft and the Driveway Permit Application form are both Google Documents. You should see checkboxes when you view them.",
+      "start": 709,
+      "type": "TX"
+    },
+    {
+      "end": 724,
+      "id": 93,
+      "speaker": "Schwartz",
+      "speech": "I approved of the instructions you added above the driveway diagram.",
+      "start": 720,
+      "type": "TX"
+    },
+    {
+      "end": 726,
+      "id": 94,
+      "speaker": "Florence",
+      "speech": "Good. I thought those were the words we agreed upon.",
+      "start": 724,
+      "type": "TX"
+    },
+    {
+      "end": 733,
+      "id": 95,
+      "speaker": "Martin",
+      "speech": "There should be some words that say \"check all that apply\".",
+      "start": 726,
+      "type": "TX"
+    },
+    {
+      "end": 738,
+      "id": 98,
+      "speaker": "Florence",
+      "speech": "Agreed. I will add that underneath the diagram.",
+      "start": 733,
+      "type": "TX"
+    },
+    {
+      "end": 738,
+      "id": 100,
+      "speaker": "Kluk",
+      "speech": "I am currently working on a schematic for a roadway and lot boundary. I must admit, I am not very experienced with roads, so I am trying my best to figure it out. I have been looking at the subdivision regulations, specifically the schematics provided, but I couldn't find any information regarding the lot boundary. The schematics only show the roadway and the dotted line representing the right of way.",
+      "start": 738,
+      "type": "TX"
+    },
+    {
+      "end": 781,
+      "id": 939,
+      "speaker": "Schwartz",
+      "speech": " I thought that the right way line is the lot boundary? ",
+      "start": 738,
+      "type": "TX"
+    },
+    {
+      "end": 782,
+      "id": 101,
+      "speaker": "Kluk",
+      "speech": "No.",
+      "start": 782,
+      "type": "TX"
+    },
+    {
+      "end": 783,
+      "id": 102,
+      "speaker": "Martin",
+      "speech": "It had better be.",
+      "start": 782,
+      "type": "TX"
+    },
+    {
+      "end": 788,
+      "id": 103,
+      "speaker": "Florence",
+      "speech": "The right of way is an area, not a line. That's what I intended to represent in the diagram.",
+      "start": 783,
+      "type": "TX"
+    },
+    {
+      "end": 794,
+      "id": 105,
+      "speaker": "Douglas",
+      "speech": "You don't own beyond the right of way. You *cannot* own beyond the right of way.",
+      "start": 788,
+      "type": "TX"
+    },
+    {
+      "end": 801,
+      "id": 107,
+      "speaker": "Revane",
+      "speech": "The right of way is the area from the stonewall to the pavement. It is not part of the lot and not the property of the owner of the lot.",
+      "start": 794,
+      "type": "TX"
+    },
+    {
+      "end": 802,
+      "id": 108,
+      "speaker": "Florence",
+      "speech": "Agreed. That's why I drew it the way I did in the diagram.",
+      "start": 801,
+      "type": "TX"
+    },
+    {
+      "end": 924,
+      "id": 109,
+      "speaker": "Kluk",
+      "speech": "The problem I'm facing is that the right way does not necessarily take up the full width. It's like this for both corners of my lot that are near the road. However, what about a cross street? It's the same situation, as they are right by the roadway. I live in a newer subdivision, and the culvert that was put in is eight feet onto our property from the edge of the road. This is why I always thought it was approved, but it shouldn't have been. The driveway culvert was installed in 1991, which is now a concern for the town if it gets blocked. Although it is technically on my property based on where my property stakes are, the town has an easement or right of way. This means they can trim or cut down trees that are theoretically on my property but within the right of way. Utility companies have the same authority, and the town can even be held responsible for not maintaining or removing dead trees in that right of way.",
+      "start": 802,
+      "type": "TX"
+    },
+    {
+      "end": 933,
+      "id": 139,
+      "speaker": "Florence",
+      "speech": "I fail to understand how one can claim ownership over something in the right of way. The concept of owning anything within the right of way seems perplexing to me, as it is the town, state, or private development that holds ownership over it.",
+      "start": 924,
+      "type": "TX"
+    },
+    {
+      "end": 938,
+      "id": 140,
+      "speaker": "Douglas",
+      "speech": "I'd be interested in seeing the Kluk property plan",
+      "start": 933,
+      "type": "TX"
+    },
+    {
+      "end": 959,
+      "id": 142,
+      "speaker": "Kluk",
+      "speech": "You have the legal option to use that piece of property even though you don't own it.",
+      "start": 938,
+      "type": "TX"
+    },
+    {
+      "end": 1006,
+      "id": 144,
+      "speaker": "Florence",
+      "speech": " If the town or the state wanted to widen the road, they have the authority to extend it up to my property line. In other words, they could pave the road all the way up to the lot line that belongs to me.",
+      "start": 960,
+      "type": "TX"
+    },
+    {
+      "end": 1011,
+      "id": 155,
+      "speaker": "Douglas",
+      "speech": "If they wanted to go further than that, they could take part of the property by eminent domain, but that's a separate issue.",
+      "start": 1006,
+      "type": "TX"
+    },
+    {
+      "end": 1019,
+      "id": 156,
+      "speaker": "Speaker 1",
+      "speech": "On the diagram, I labeled that strip of land \"right of way\" because that's where the proposed LUO 307.1 governs.",
+      "start": 1011,
+      "type": "TX"
+    },
+    {
+      "end": 1021,
+      "id": 158,
+      "speaker": "Schwartz",
+      "speech": "I don't know if it needs to be as wide.",
+      "start": 1019,
+      "type": "TX"
+    },
+    {
+      "end": 1021,
+      "id": 159,
+      "speaker": "Florence",
+      "speech": "I drew it as wide as I did because I believed that the flare and the culvert would be the focal points of the interesting events. It is important to note that nothing can be drawn in the roadway itself.",
+      "start": 1021,
+      "type": "TX"
+    },
+    {
+      "end": 1061,
+      "id": 942,
+      "speaker": "Schwartz",
+      "speech": "I think the roadway should have a solid line at the edge, while the right-of-way should have a dotted line.",
+      "start": 1021,
+      "type": "TX"
+    },
+    {
+      "end": 1072,
+      "id": 167,
+      "speaker": "Florence",
+      "speech": "The right of way is not represented as a line on my diagram, but rather as a strip of land.",
+      "start": 1062,
+      "type": "TX"
+    },
+    {
+      "end": 1075,
+      "id": 168,
+      "speaker": "Revane",
+      "speech": "Why not change the wording to \"right of way *area*\" and \"roadway *surface*\". That would clarify matters.",
+      "start": 1072,
+      "type": "TX"
+    },
+    {
+      "end": 1079,
+      "id": 169,
+      "speaker": "Florence",
+      "speech": "Agreed, that makes a big difference.",
+      "start": 1075,
+      "type": "TX"
+    },
+    {
+      "end": 1109,
+      "id": 170,
+      "speaker": "Revane",
+      "speech": "I am trying to determine if the roadway is made of compacted gravel or not, specifically focusing on the area where your tires might go off into the ditch line. The concern is mainly related to water flow and runoff, particularly in the area before your property where the Department of Public Works is most concerned.",
+      "start": 1079,
+      "type": "TX"
+    },
+    {
+      "end": 1133,
+      "id": 176,
+      "speaker": "Florence",
+      "speech": "I believe that we reached a consensus on the fact that in about 90% of the cases, the diagram in the lot area will simply consist of a 50-foot straight line. This line would be 12 feet wide and extend directly to the house. Essentially, this arrangement would be applicable to almost all scenarios. Personally, I am quite fond of these new terms, and I will make the necessary adjustments accordingly.",
+      "start": 1109,
+      "type": "TX"
+    },
+    {
+      "end": 1139,
+      "id": 181,
+      "speaker": "Kluk",
+      "speech": "I think those terms are easy to get your head around. ",
+      "start": 1133,
+      "type": "TX"
+    },
+    {
+      "end": 1139,
+      "id": 182,
+      "speaker": "Martin",
+      "speech": "I must admit that I completely misread this. Initially, I mistakenly interpreted the solid line as indicating the boundary of a lot, while perceiving the dotted line as representing the right of way. Furthermore, I mistakenly believed that the bottom of the drawing denoted the location of the road.",
+      "start": 1139,
+      "type": "TX"
+    },
+    {
+      "end": 1167,
+      "id": 943,
+      "speaker": "Florence",
+      "speech": "I believe that annotating the area and surface helps clarify the distinction. A strip of land is indeed a strip of land, just like the roadway is also a strip of land. Therefore, we will change the label to \"roadway surface\".",
+      "start": 1139,
+      "type": "TX"
+    },
+    {
+      "end": 1206,
+      "id": 183,
+      "speaker": "Revane",
+      "speech": "If I want to put in a driveway, I would start by drawing a line from the edge of the roadway to my property. I measure the distance and it turns out to be 50 feet. I plan to have a 20-foot driveway. However, the Department of Public Works suggests installing a 12-inch culvert in this area.",
+      "start": 1167,
+      "type": "TX"
+    },
+    {
+      "end": 1215,
+      "id": 188,
+      "speaker": "Florence",
+      "speech": "I want to emphasize that the right of way is not a line, but instead an area, a strip of land.",
+      "start": 1206,
+      "type": "TX"
+    },
+    {
+      "end": 1215,
+      "id": 189,
+      "speaker": "Martin",
+      "speech": "I don't like this drawing at all. Instead, I think the roadway should be drawn with a cross hatch, or something like it.",
+      "start": 1215,
+      "type": "TX"
+    },
+    {
+      "end": 1238,
+      "id": 944,
+      "speaker": "Florence",
+      "speech": "I appreciate the fact that, according to its definition, the diagram does not include any markings on the roadway. It seems that one aspect that might be causing confusion is the typical depiction of a roadway with the right of way area and lots on both sides. However, it's important to note that such elements are not applicable in the context of a driveway diagram.",
+      "start": 1215,
+      "type": "TX"
+    },
+    {
+      "end": 1238,
+      "id": 195,
+      "speaker": "Martin",
+      "speech": "As a suggestion in order to clarify this point, why not draw up and down arrows, above and below the \"right of way\" label to emphasize its extent?",
+      "start": 1238,
+      "type": "TX"
+    },
+    {
+      "end": 1378,
+      "id": 945,
+      "speaker": "Florence",
+      "speech": "I agree with all those suggestions and I will make appropriate changes.",
+      "start": 1238,
+      "type": "TX"
+    },
+    {
+      "end": 1430,
+      "id": 221,
+      "speaker": "Kluk",
+      "speech": "I have some additional suggestions. First, the form just asks for \"address\" but I believe it should be explicit, and ask for \"applicant's address\". Second, the form should ask for the applicant's phone number.",
+      "start": 1378,
+      "type": "TX"
+    },
+    {
+      "end": 1453,
+      "id": 229,
+      "speaker": "Florence",
+      "speech": "I deliberately dropped the phone number because I felt that the existing form asked for excessive information. In my opinion, having a phone is not necessary for the task of building a driveway.",
+      "start": 1430,
+      "type": "TX"
+    },
+    {
+      "end": 1467,
+      "id": 232,
+      "speaker": "Kluk",
+      "speech": "I have a different opinion on this matter. In my view, it is highly beneficial for the applicant to be easily reachable, and this can prove to be quite challenging without a phone number.",
+      "start": 1453,
+      "type": "TX"
+    },
+    {
+      "end": 1498,
+      "id": 233,
+      "speaker": "Florence",
+      "speech": "Agreed. I will change the form to request \"applicant address\" and \"phone\".",
+      "start": 1467,
+      "type": "TX"
+    },
+    {
+      "end": 1529,
+      "id": 242,
+      "speaker": "Revane",
+      "speech": "When it comes to \"location,\" I believe that all I need is the street address of the property where the driveway is constructed, along with the tax map and lot numbers. Fortunately, these can be easily obtained by anyone through our online maps.",
+      "start": 1500,
+      "type": "TX"
+    },
+    {
+      "end": 1532,
+      "id": 250,
+      "speaker": "Florence",
+      "speech": "Agreed. I will make that change also.",
+      "start": 1531,
+      "type": "TX"
+    },
+    {
+      "end": 1704,
+      "id": 251,
+      "speaker": "Schwartz",
+      "speech": "Finally, I believe that it must be the *owner* not the *applicant* who signs the form. We've actually had a person who was leasing a property tried to get a driveway permit",
+      "start": 1532,
+      "type": "TX"
+    },
+    {
+      "end": 1753,
+      "id": 297,
+      "speaker": "Florence",
+      "speech": "Agreed. I will make that change also. \n\nI had an issue of my own when I drafted the form. Specifically, I intended to write \"driveway access _slash_ curb cut,\" which is what we ultimately ended up with. However, upon seeing it written down, it appeared to me as if we were unsure of what to actually call it. We combined these two terms with a slash in between. Now, I'm not suggesting that we decide on a specific name for it right now, as we have ample time to make adjustments. However, I want to clarify that I did not like how it looked once I put it on paper.",
+      "start": 1704,
+      "type": "TX"
+    },
+    {
+      "end": 1784,
+      "id": 304,
+      "speaker": "Schwartz",
+      "speech": "Well, it looks fine with a space between and the term is used many times between the two documents, the LUO 307 draft and the Driveway Permit Application.",
+      "start": 1754,
+      "type": "TX"
+    },
+    {
+      "end": 1789,
+      "id": 310,
+      "speaker": "Martin",
+      "speech": "Why is a $30 payment required?",
+      "start": 1784,
+      "type": "TX"
+    },
+    {
+      "end": 1793,
+      "id": 311,
+      "speaker": "Schwartz",
+      "speech": "For the Driveway Permit Application.",
+      "start": 1791,
+      "type": "TX"
+    },
+    {
+      "end": 1794,
+      "id": 312,
+      "speaker": "Martin",
+      "speech": "So I must enclose the $30 filing fee when I sign the form?",
+      "start": 1794,
+      "type": "TX"
+    },
+    {
+      "end": 1823,
+      "id": 946,
+      "speaker": "Florence",
+      "speech": "Yes, I admit that I simply copied it directly from what we currently do. I didn't come up with it myself, to be honest. I just replicated the wording we already have. I'm curious to know if you have any suggestions for improvement.",
+      "start": 1794,
+      "type": "TX"
+    },
+    {
+      "end": 1856,
+      "id": 313,
+      "speaker": "Kluk",
+      "speech": "Let's return to the subject of \"driveway access slash curb cut\".",
+      "start": 1826,
+      "type": "TX"
+    },
+    {
+      "end": 1905,
+      "id": 320,
+      "speaker": "Florence",
+      "speech": "To me, it seemed as if we were randomly combining two words or terms without a clear idea of what we wanted to name it.",
+      "start": 1856,
+      "type": "TX"
+    },
+    {
+      "end": 1945,
+      "id": 329,
+      "speaker": "Kluk",
+      "speech": "In the manual \"Knowing the Territory,\" it is stated that driveway entrances, exits, and other activities commonly referred to as curb cuts are mentioned. The manual puts the term \"curb cuts\" in quotation marks. Furthermore, they refer to the maintenance of private driveway connections as \"driveway connections.\" Interestingly, other sources have labeled them as \"driveway access.\"",
+      "start": 1909,
+      "type": "TX"
+    },
+    {
+      "end": 1953,
+      "id": 333,
+      "speaker": "Schwartz",
+      "speech": "I like the phrase \"driveway connection\".",
+      "start": 1951,
+      "type": "TX"
+    },
+    {
+      "end": 1959,
+      "id": 334,
+      "speaker": "Revane",
+      "speech": "Did you copy questions 1 through 5 on page 3 of the application from the existing form?",
+      "start": 1955,
+      "type": "TX"
+    },
+    {
+      "end": 1977,
+      "id": 335,
+      "speaker": "Florence",
+      "speech": "No. I added number 1 after our working session. That's the requirement to flag and stake the driveway location and extent for the purposes of site inspection.",
+      "start": 1959,
+      "type": "TX"
+    },
+    {
+      "end": 2007,
+      "id": 341,
+      "speaker": "Schwartz",
+      "speech": "Do you think we need to state somewhere that this is a two part application?",
+      "start": 1983,
+      "type": "TX"
+    },
+    {
+      "end": 2051,
+      "id": 345,
+      "speaker": "Kluk",
+      "speech": "Perhaps a subtitle under the main Driveway Permit Application title that reads \"Part I and Part II\" would work.",
+      "start": 2007,
+      "type": "TX"
+    },
+    {
+      "end": 2066,
+      "id": 348,
+      "speaker": "Florence",
+      "speech": "One issue is that Part I is not applicable if you're building a driveway on Route 31, for example,",
+      "start": 2051,
+      "type": "TX"
+    },
+    {
+      "end": 2101,
+      "id": 349,
+      "speaker": "Kluk",
+      "speech": "I think the subtitle as I described earlier will work. The LUO spells out when you need Part I and when you need Part II.",
+      "start": 2066,
+      "type": "TX"
+    },
+    {
+      "end": 2177,
+      "id": 355,
+      "speaker": "Florence",
+      "speech": "Also, there's an information box on top of page 3, that's Part I, that tells you when you need that page completed, and a similar information box on top of page 4 for Part II.",
+      "start": 2106,
+      "type": "TX"
+    },
+    {
+      "end": 2187,
+      "id": 371,
+      "speaker": "Martin",
+      "speech": "Regarding that information box on top of page 3, I don't see where it tells you that it is not needed if your driveway access is to a State-maintained highway.",
+      "start": 2177,
+      "type": "TX"
+    },
+    {
+      "end": 2217,
+      "id": 372,
+      "speaker": "Florence",
+      "speech": "I worry that the more words we use, even as good-faith explanations, the less people will read them.",
+      "start": 2189,
+      "type": "TX"
+    },
+    {
+      "end": 2226,
+      "id": 378,
+      "speaker": "Martin",
+      "speech": "How about instead just inserting the phrase \"instead of the Town permit\" when a State permit is required?",
+      "start": 2217,
+      "type": "TX"
+    },
+    {
+      "end": 2247,
+      "id": 379,
+      "speaker": "Florence",
+      "speech": "I like that idea very much.",
+      "start": 2229,
+      "type": "TX"
+    },
+    {
+      "end": 2253,
+      "id": 388,
+      "speaker": "Douglas",
+      "speech": "As this is a legal document, how about \"in _lieu_ of ...\"?",
+      "start": 2253,
+      "type": "TX"
+    },
+    {
+      "end": 2255,
+      "id": 389,
+      "speaker": "Florence",
+      "speech": "We speak American in Washington, Fred, not French! Although, if we were to be strictly legal, perhaps we should use Latin?",
+      "start": 2253,
+      "type": "TX"
+    },
+    {
+      "end": 2302,
+      "id": 390,
+      "speaker": "Kluk",
+      "speech": "When it comes to the issue of \"driveway access / curb cuts,\" I believe it would be beneficial to consider the approach outlined in the _Knowing the Territory_ manual. In this case, I suggest using the phrase \"driveway access 'curb cut'.\"",
+      "start": 2258,
+      "type": "TX"
+    },
+    {
+      "end": 2315,
+      "id": 399,
+      "speaker": "Florence",
+      "speech": "That might work once, maybe twice, but we need to use the phrase multiple times and I think that construction will start to look weird. ",
+      "start": 2302,
+      "type": "TX"
+    },
+    {
+      "end": 2323,
+      "id": 401,
+      "speaker": "Kluk",
+      "speech": "Use the \"definitions\" section of the LUO to make the statement just once.",
+      "start": 2315,
+      "type": "TX"
+    },
+    {
+      "end": 2349,
+      "id": 403,
+      "speaker": "Florence",
+      "speech": "I have been considering the idea of having two separate definitions for driveway access and curb cut. I believe that curb cut is often used interchangeably with driveway access. However, this approach raises the question of which terms to use for the remaining parts of the definition.\n\nOne issue is that we don't have any actual \"curbs\" in Washington, and \"curb cuts\" is a Big City term.",
+      "start": 2324,
+      "type": "TX"
+    },
+    {
+      "end": 2395,
+      "id": 404,
+      "speaker": "Martin",
+      "speech": "While we are talking about the definitions, why are Class IV roads not mentioned?",
+      "start": 2349,
+      "type": "TX"
+    },
+    {
+      "end": 2426,
+      "id": 419,
+      "speaker": "Florence",
+      "speech": "There are no Class IV roads in Washington. Only 20-30 towns have Class IV roads, and they're all enumerated in the relevant RSA. All Town roads are either Class V or Class VI.",
+      "start": 2395,
+      "type": "TX"
+    },
+    {
+      "end": 2431,
+      "id": 423,
+      "speaker": "Martin",
+      "speech": "I thought Class V was summer maintenance only?",
+      "start": 2426,
+      "type": "TX"
+    },
+    {
+      "end": 2431,
+      "id": 425,
+      "speaker": "Revane",
+      "speech": "That's not so. Some are, but that's not a characteristic of Class V.",
+      "start": 2431,
+      "type": "TX"
+    },
+    {
+      "end": 2480,
+      "id": 426,
+      "speaker": "Florence",
+      "speech": "It is interesting to note that part of East Washington Road is Class II, but it is not State-maintained. That's the part from the junction of Bradford Springs Road to the Hillsboro line. Similarly, Bradford Springs Road is also Class II. Also, the Pillsbury access road is Class III.",
+      "start": 2431,
+      "type": "TX"
+    },
+    {
+      "end": 2484,
+      "id": 438,
+      "speaker": "Martin",
+      "speech": "Why are we why are we regulating Private Road?",
+      "start": 2484,
+      "type": "TX"
+    },
+    {
+      "end": 2533,
+      "id": 948,
+      "speaker": "Florence",
+      "speech": "We want to regulate the driveway, specifically the portion that is on the owner's lot, regardless of whether it connects to a private road, town road, or a state-maintained highway. This regulation is necessary for the sake of health and safety, as well as for all the other reasons we regulate various aspects in the LUO.",
+      "start": 2484,
+      "type": "TX"
+    },
+    {
+      "end": 2546,
+      "id": 444,
+      "speaker": "Kluk",
+      "speech": "The only remaining question to my mind is whether we are going to propose LUO 307 such that it governs driveway access to private roads.",
+      "start": 2535,
+      "type": "TX"
+    },
+    {
+      "end": 2582,
+      "id": 446,
+      "speaker": "Florence",
+      "speech": "I find it possible that there may be controversy surrounding the piece we have chosen to include. However, I am uncertain about our decision. Did we actually decide to include it? I recall us leaving the working session with the understanding that we would continue, even though it was not cast in concrete. We believed we had the authority to regulate the curb cut on a private road.",
+      "start": 2546,
+      "type": "TX"
+    },
+    {
+      "end": 2589,
+      "id": 454,
+      "speaker": "Revane",
+      "speech": "During our working session, I researched NHMA online. The Town LUO governs the properties in private developments as they have all adopted our land use ordinance. That means that our proposed LUO 307.2 definitely governs their driveways, so it implies that LUO 307.1 governs their driveway access, or curb cuts, too.",
+      "start": 2583,
+      "type": "TX"
+    },
+    {
+      "end": 2733,
+      "id": 455,
+      "speaker": "Florence",
+      "speech": "I think it is beyond the ability of the seven of us present this evening to answer that question now. We should continue wit the assumption that LUO 307.1 will govern private roads until we get feedback from the public at the Public Hearing next February.",
+      "start": 2589,
+      "type": "TX"
+    },
+    {
+      "end": 2792,
+      "id": 486,
+      "speaker": "Revane",
+      "speech": "I have studied the relevant RSA concerning road maintenance. As of 2019 it falls 100% on the residents of the road.  \n\nThe RSA states: in the absence of an Express agreement or requirement governing maintenance of a private road when more than one residential owner enjoys a common benefit each residential owner shall contribute equitably to the reasonable cost of maintaining the road and shall have the right to bring a civil action to enforce the requirements of this paragraph.\n\nThat's the new state RSA that all the associations have a hard time with. Because they all want money from these private road maintenance, but they're commingling it with their other dues and they can't it's only can be used for road maintenance. ",
+      "start": 2733,
+      "type": "TX"
+    },
+    {
+      "end": 2792,
+      "id": 493,
+      "speaker": "Martin",
+      "speech": "Turning to the proposed LUO 307.2,  there's a statement that says prior to construction, Part II of the application must be approved. Should we say \"if applicable\"?",
+      "start": 2792,
+      "type": "TX"
+    },
+    {
+      "end": 3132,
+      "id": 950,
+      "speaker": "Florence",
+      "speech": "No everybody needs Part II approval. That's the point.",
+      "start": 2792,
+      "type": "TX"
+    },
+    {
+      "end": 3142,
+      "id": 551,
+      "speaker": "Kluk",
+      "speech": "Instead of merely saying \"driveway  construction\", we should say \"driveway construction _or alteration_\". Otherwise, the instructions read as if approval is only needed when a new driveway us built.",
+      "start": 3132,
+      "type": "TX"
+    },
+    {
+      "end": 3296,
+      "id": 552,
+      "speaker": "Florence",
+      "speech": "Agreed. I will  make all of these changes in in the next few days and then send revised drafts to the Board.",
+      "start": 3143,
+      "type": "TX"
+    },
+    {
+      "id": 947,
+      "title": "3.1 Town Center Vision project, parking and access for town buildings, planning for Library adjacent property",
+      "type": "AG"
+    },
+    {
+      "end": 3462,
+      "id": 583,
+      "speaker": "Crandall",
+      "speech": "Since our last meeting, I have met with the Select Board several times. Previously, the TCV has only considered the library and community garden projects, but we are now reviewing the history and potential direction of the access and parking for Town Hall. Previously, the long stairway leading up from the lower parking had been controversial, so for now we've decided to drop it.\n\nRegarding the library project, I believe everyone has seen the map. A big issue is the shed, which is in very poor condition. It is currently 26 x 24 feet but, as the Select Board pointed out, that is much larger than is required. So we are now recommending that we rebuild at 16 x 14 feet, on the existing 26 x 24 concrete pad, which is in good condition. We could extend the roof line at the side or back, over the large pad, for outside seating or storage.\n\nI will have estimates from Mike Carter and Reese Ferry in the next few days. We are planning on two windows and a 3 foot door at the front, and also two windows with a 4 foot door at the back.",
+      "start": 3296,
+      "type": "TX"
+    },
+    {
+      "end": 3595,
+      "id": 590,
+      "speaker": "Martin",
+      "speech": "Why a 4 foot door?",
+      "start": 3462,
+      "type": "TX"
+    },
+    {
+      "end": 3600,
+      "id": 601,
+      "speaker": "Schwartz",
+      "speech": "For wheelbarrows and so on. Also, the library has several large items they need to store in the shed seasonally.",
+      "start": 3595,
+      "type": "TX"
+    },
+    {
+      "end": 3684,
+      "id": 602,
+      "speaker": "Crandall",
+      "speech": "In answer to several questions, the shed will have a combination padlock to help prevent unauthorized entry. But I feel we are venturing into trivia now. We hope that DPW will be able to turn the soil in the garden area this fall, so planting can occur next Spring.",
+      "start": 3600,
+      "type": "TX"
+    },
+    {
+      "end": 3841,
+      "id": 624,
+      "speaker": "Douglas",
+      "speech": "What is the approximate cost for the proposed 216 x 14 foot shed?",
+      "start": 3684,
+      "type": "TX"
+    },
+    {
+      "end": 3843,
+      "id": 655,
+      "speaker": "Crandall",
+      "speech": "Between $15,000 and $20,000. The open question now is when and if to schedule a Public Hearing on our plans.",
+      "start": 3841,
+      "type": "TX"
+    },
+    {
+      "end": 3951,
+      "id": 656,
+      "speaker": "Florence",
+      "speech": "Back to the Town Hall parking and access, was a big objection to the earlier plan that there was no egress?",
+      "start": 3843,
+      "type": "TX"
+    },
+    {
+      "end": 3954,
+      "id": 676,
+      "speaker": "Revane",
+      "speech": "No, it was only the Fire Department that raised that objection. They don't have egress now, so the plan will not worsen that situation. In addition, creating the egress road to the North presents many problems, including the fact that it will create a 5-way intersection with Main St, which the State will not allow.",
+      "start": 3951,
+      "type": "TX"
+    },
+    {
+      "end": 4120,
+      "id": 677,
+      "speaker": "Crandall",
+      "speech": "Shortly, Henniker Septic will inspect the rear of Town Hall to assess the load bearing capabilities of the leach field. As the Select Board pointed out, if we can expand the rear parking by even 5 to 6 feet, our capacity close to Town Hall will be greaty increased.",
+      "start": 3954,
+      "type": "TX"
+    },
+    {
+      "end": 4168,
+      "id": 703,
+      "speaker": "Florence",
+      "speech": "I think a good aspect of your plan is that the grassy area in from on Town Hall will be expanded.",
+      "start": 4120,
+      "type": "TX"
+    },
+    {
+      "end": 4276,
+      "id": 709,
+      "speaker": "Revane",
+      "speech": "We prohibit parking now in front if Town Hall, but this will make it impossible. In prior years, we have coned off the front roadway with good results. ",
+      "start": 4168,
+      "type": "TX"
+    },
+    {
+      "end": 4344,
+      "id": 734,
+      "speaker": "Kluk",
+      "speech": "I apologize for dwelling on this matter, but I am curious if any of the plans involve expanding the lot behind here, particularly once the Community Gardens are established. It seems like it would be beneficial to make it larger back there, especially on busy Sunday mornings. The issue lies in the way people park, as it is not efficiently sized to accommodate a road down the middle or any other alternative. However, I would like to explore the possibility of redesigning it to see if it would be possible to create a pocket in the middle. ",
+      "start": 4281,
+      "type": "TX"
+    },
+    {
+      "end": 4401,
+      "id": 743,
+      "speaker": "Crandall",
+      "speech": "That's part of a plan which unfortunately I did not bring copies of this evening. \n\nWe have also looked at tighter parking spaces.  On this side of the parking lot, there are cement blocks, but they are smaller and curved, not the large Jersey barriers. These blocks give the impression that it is a suitable place to park. When cars are parked close together, it allows for more vehicles to fit in the space. On the other hand, if cars are parked with a significant gap between them, around four and a half to five feet, it becomes difficult to navigate.",
+      "start": 4344,
+      "type": "TX"
+    },
+    {
+      "id": 951,
+      "title": "3.3 Master Plan",
+      "type": "AG"
+    },
+    {
+      "end": 4411,
+      "id": 755,
+      "speaker": "Crandall",
+      "speech": "I believe the Master Plan is still a placeholder?",
+      "start": 4404,
+      "type": "TX"
+    },
+    {
+      "end": 4416,
+      "id": 756,
+      "speaker": "Douglas",
+      "speech": "That is correct.",
+      "start": 4411,
+      "type": "TX"
+    },
+    {
+      "id": 952,
+      "title": "3.4 ZBA Report",
+      "type": "AG"
+    },
+    {
+      "end": 4432,
+      "id": 757,
+      "speaker": "Crandall",
+      "speech": "Is there anything to report from the ZBA?",
+      "start": 4416,
+      "type": "TX"
+    },
+    {
+      "end": 4437,
+      "id": 764,
+      "speaker": "Florence",
+      "speech": "No, we did not hold any ZBA hearings in July, as no property owner requested a variance.",
+      "start": 4432,
+      "type": "TX"
+    },
+    {
+      "id": 953,
+      "title": "3.x King St Property (not on agenda)",
+      "type": "AG"
+    },
+    {
+      "end": 4437,
+      "id": 765,
+      "speaker": "Kluk",
+      "speech": "I saw the building permits and it piqued my curiosity. We don't have the NASA proposal listed under old business. I'm interested to know if there have been any updates on that matter. Additionally, I'm curious about the timing of the next steps mentioned in the proposal. Have there been any updates provided to the Select Board regarding the timeline for those next steps?",
+      "start": 4437,
+      "type": "TX"
+    },
+    {
+      "end": 4576,
+      "id": 956,
+      "speaker": "Revane",
+      "speech": "It is very likely that it will take around 5 years. We recently determined the location for the first access road and trail and also decided to reclaim some existing logging road. This was done on Saturday. So, we are discussing King Street and how we are moving forward. However, none of these things are in place yet. Daniel Tompkins, the environmental expert, joined us on Saturday to explore the properties. Tim Kendrick, the neighboring landowner, was also present. Matt took them to all the corners of the property to highlight the wetlands areas, wildlife areas, and the terrain for access. They had only been on the property during winter, so this was a new experience for them. We showed them the existing snowmobile trail on the property and also the new one, as there are multiple trails. They were excited and asked what needed to be done to open up the trail for access to the property. After that, they will start evaluating its popularity. Currently, it is just for recreational use.",
+      "start": 4437,
+      "type": "TX"
+    },
+    {
+      "end": 4580,
+      "id": 776,
+      "speaker": "Crandall",
+      "speech": "At some point, will there be public input on this?",
+      "start": 4576,
+      "type": "TX"
+    },
+    {
+      "end": 4637,
+      "id": 777,
+      "speaker": "Revane",
+      "speech": "Yes, absolutely. I will be incorporating public input into the process. I have included Arin Mills from the Conservation Commission in the discussions because I believe it is important to involve them. I sent her the information directly and explained that this Saturday was not the best time to discuss it as they are not yet at that stage. However, I assured them that I will connect as many people as possible through the SAU because this project involves educating high school students, which is one of their main concerns. I have provided them with a direct link to get in touch. I mentioned that we primarily want to address planting issues and other business-related matters, but there will also be multiple questions on other topics. Currently, it seems that their focus is on maintenance of access points and how to clear the road crossings.",
+      "start": 4581,
+      "type": "TX"
+    },
+    {
+      "end": 4647,
+      "id": 778,
+      "speaker": "Schwartz",
+      "speech": "Is there anyone who knows if there are wetlands crossings for us to be concerned about? I ask because I have noticed that there is actually a logging road that extends almost two miles into that property.",
+      "start": 4639,
+      "type": "TX"
+    },
+    {
+      "end": 4647,
+      "id": 780,
+      "speaker": "Revane",
+      "speech": "Yeah, I have seen it firsthand. It's evident on the GPS and maps. The area has transformed significantly. It is no longer a clear-cut or even recognizable. Recently, we rode ATVs there and the landscape has completely changed. The vegetation has grown immensely, reaching heights of 20 to 30 feet. It's astonishing to witness how rapidly it has occurred. The main concern now is how to restore the old-growth forest. They are contemplating long-term plans, spanning a hundred or even five hundred years, to achieve this goal.",
+      "start": 4647,
+      "type": "TX"
+    },
+    {
+      "end": 4691,
+      "id": 957,
+      "speaker": "Schwartz",
+      "speech": "Do they have a forester working with them?",
+      "start": 4647,
+      "type": "TX"
+    },
+    {
+      "end": 4744,
+      "id": 783,
+      "speaker": "Revane",
+      "speech": "I know that they have a Forester, but I also know that Larry Gaskell was on the call, and he has experience in forestry. During our conversation, we discussed Larry Gaskell and the fact that Anita works for the town. It became clear that we also have a Forester on our team. Therefore, when the time comes for collaboration, it would be beneficial to include it in the forest management plan. Currently, he is focusing on a forest management plan, while they are primarily concerned with conservation. They are prioritizing these aspects before discussing any potential structures. In fact, even if structures were to be considered, they would be minimal and primarily used for storage or other small purposes.",
+      "start": 4691,
+      "type": "TX"
+    },
+    {
+      "end": 4748,
+      "id": 787,
+      "speaker": "Crandall",
+      "speech": "Is there any funding?",
+      "start": 4744,
+      "type": "TX"
+    },
+    {
+      "end": 4809,
+      "id": 788,
+      "speaker": "Revane",
+      "speech": "There's no funding now, as there are no immediate plans that require it. \n\nDavid Chevraunt will be back in October or November, and that's when he will come meet with me. He is currently in Houston, but once he returns, we can discuss what's going on. At the moment, he is simply a guy who has purchased a piece of land and is considering opening up Trails. There's no commercial aspect to it at all and therefore little need for the Planning Board to be involved.",
+      "start": 4748,
+      "type": "TX"
+    },
+    {
+      "end": 4907,
+      "id": 804,
+      "speaker": "Kluk",
+      "speech": "Have you had a conversation with him about getting NH NEMBA involved? NH NEMBA is the New Hampshire chapter of the New England Mountain Bike Association. It would be great if they could construct some single track trails in that area. I genuinely believe that this would attract more people to our town.",
+      "start": 4809,
+      "type": "TX"
+    },
+    {
+      "end": 4953,
+      "id": 811,
+      "speaker": "Revane",
+      "speech": "The question I had was regarding the restrictions that can be imposed. If he decide to open up the trail system, there may be certain activities that he doesn't want to allow, such as ATVs. He has the ability to restrict that. However, if he wants to benefit from the current use tax break, he has to allow certain activities. For instance, he could consider allowing only snowmobiles, which provides a 2 million dollar liability policy. These are the options we have in front of us, and by agreeing to some of these conditions from the beginning, we can make progress and gain access to the property. This will encourage people to engage in recreational activities in different ways and support the idea he is trying to promote. I believe this is where he is trying to make progress and gain support.",
+      "start": 4907,
+      "type": "TX"
+    },
+    {
+      "end": 4953,
+      "id": 814,
+      "speaker": "Crandall",
+      "speech": "He won't be able to keep ATVs off the property. ",
+      "start": 4953,
+      "type": "TX"
+    },
+    {
+      "end": 4992,
+      "id": 959,
+      "speaker": "Revane",
+      "speech": "Yes, I am aware of that. As I was exploring the property, I noticed that signs were posted every 50 feet indicating private ownership. However, to my surprise, just 200 yards into the property, I came across well-established ATV trails. It was quite astonishing to witness.",
+      "start": 4953,
+      "type": "TX"
+    },
+    {
+      "end": 4995,
+      "id": 818,
+      "speaker": "Schwartz",
+      "speech": "Does the property connect to Wild Acre?",
+      "start": 4992,
+      "type": "TX"
+    },
+    {
+      "end": 5087,
+      "id": 819,
+      "speaker": "Revane",
+      "speech": "It connects to Barden Pond Road. I followed a part of one trail down and then right through, across the brook, and right up onto the end of that acreage. We discussed the idea that if we build a designated place for them to go, they will stay on the trail about 90% of the time. Instead of allowing them access to all 300 acres to roam wherever they please, it would be better to provide them with a main corridor to reach King Street, along with a connecting trail system. This way, we can at least maintain and monitor their movements. Otherwise, they will continue to go wherever they want, just like they have been doing.",
+      "start": 4995,
+      "type": "TX"
+    },
+    {
+      "id": 954,
+      "title": "6.0 Mergers",
+      "type": "AG"
+    },
+    {
+      "end": 5099,
+      "id": 830,
+      "speaker": "Schwartz",
+      "speech": "There is a merger on the agenda for Fluery, but we don't have the paperwork, so we can't discuss it this evening. We did get paperwork for another merger, for Kelly and Matthew Lannon, wishing to merge lots 14-76 and 14-75 on Stowell Road. Lot 14-76 has a house, 14-75 is undeveloped. The new lot size will be 2.65 acres. They have sent us a check for the fee and a copy of the deeds, so everything is in order. Would someone like to make a motion to accept?",
+      "start": 5087,
+      "type": "TX"
+    },
+    {
+      "end": 5254,
+      "id": 831,
+      "speaker": "Douglas",
+      "speech": " Is it complete? Do they need a surveyor?",
+      "start": 5099,
+      "type": "TX"
+    },
+    {
+      "end": 5264,
+      "id": 860,
+      "speaker": "Schwartz",
+      "speech": "They don't need a surveyor as they own both lots.",
+      "start": 5261,
+      "type": "TX"
+    },
+    {
+      "end": 5269,
+      "id": 861,
+      "speaker": "Douglas",
+      "speech": "Then I move to accept the merger as presented.",
+      "start": 5264,
+      "type": "TX"
+    },
+    {
+      "end": 5270,
+      "id": 862,
+      "speaker": "Schwartz",
+      "speech": "I second that.",
+      "start": 5269,
+      "type": "TX"
+    },
+    {
+      "end": 5284,
+      "id": 863,
+      "speaker": "Crandall",
+      "speech": "All those in favor?",
+      "start": 5273,
+      "type": "TX"
+    },
+    {
+      "end": 5297,
+      "id": 864,
+      "speaker": "All",
+      "speech": "Aye.",
+      "start": 5284,
+      "type": "TX"
+    },
+    {
+      "end": 5362,
+      "id": 865,
+      "speaker": "Schwartz",
+      "speech": "Let's sign and date the paperwork now.",
+      "start": 5297,
+      "type": "TX"
+    }
+  ],
+  "visitors": []
+}

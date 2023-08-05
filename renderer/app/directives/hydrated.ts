@@ -16,11 +16,12 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class HydratedDirective implements Hydrateable, OnDestroy, OnInit {
   @Output() hydrated = new EventEmitter<boolean>();
+
   @Input() mmHydrated = uuidv4();
 
   element = inject(ElementRef);
 
-  #hydrated = true;
+  #hydrated = false;
   #hydrator = inject(HydratorDirective);
 
   @Input()
@@ -32,8 +33,6 @@ export class HydratedDirective implements Hydrateable, OnDestroy, OnInit {
     this.hydrated.emit(hydrated);
     this.#hydrated = hydrated;
   }
-
-  // lifecycle methods
 
   ngOnDestroy(): void {
     this.#hydrator.unregisterHydrateable(this);

@@ -18,6 +18,9 @@ export type ComponentStateModel = {
   };
   tabIndex: number;
   transcriptionName: string;
+  wavesurfer: {
+    minPxPerSec: number;
+  };
 };
 
 @State<ComponentStateModel>({
@@ -29,7 +32,10 @@ export type ComponentStateModel = {
       volume: 1
     },
     tabIndex: 0,
-    transcriptionName: null
+    transcriptionName: null,
+    wavesurfer: {
+      minPxPerSec: 1
+    }
   }
 })
 @Injectable()

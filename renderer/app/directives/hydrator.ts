@@ -13,29 +13,23 @@ export class HydratorDirective implements OnInit {
   @Input() hydratorMargin = '0px';
   @Input() hydratorTrace = false;
 
-  #element = inject(ElementRef);
-  #hydrateables: { [uuid: string]: Hydrateable } = {};
+  #host = inject(ElementRef);
   #observer: IntersectionObserver;
 
   ngOnInit(): void {
     this.#observer = new IntersectionObserver(this.#callback.bind(this), {
-      root: this.#element.nativeElement,
+      root: this.#host.nativeElement,
       rootMargin: this.hydratorMargin,
       threshold: [0]
     });
   }
 
-  registerHydrateable(hydrateable: Hydrateable): void {
-    this.#hydrateables[hydrateable.mmHydrated] = hydrateable;
-    this.#observer.observe(hydrateable.element.nativeElement);
+  registerHydrateable(element: HTMLElement): void {
+    this.#observer.observe(element);
   }
 
-  unregisterHydrateable(hydrateable: Hydrateable): void {
-    // NOTE: this can fail depending on the order in which things are destroyed
-    try {
-      this.#observer.unobserve(hydrateable.element.nativeElement);
-      delete this.#hydrateables[hydrateable.mmHydrated];
-    } catch (ignored) {}
+  unregisterHydrateable(element: HTMLElement): void {
+    this.#observer.unobserve(element);
   }
 
   #callback(
@@ -43,13 +37,14 @@ export class HydratorDirective implements OnInit {
     _observer: IntersectionObserver
   ): void {
     entries.forEach((entry) => {
-      const hydrateable =
-        this.#hydrateables[entry.target.getAttribute('mmHydrated')];
+      const hydrateable: Hydrateable = entry.target['mmHydrated'];
       if (hydrateable) {
         const isNow = entry.isIntersecting;
         const was = hydrateable.isHydrated;
         if (was !== isNow) {
           if (this.hydratorTrace) {
+            hydrateable.isHydrated = isNow;
+            // 👇 trace hydration
             const uuid = hydrateable.mmHydrated;
             if (isNow)
               console.log(
@@ -64,7 +59,6 @@ export class HydratorDirective implements OnInit {
                 'color: grey'
               );
           }
-          hydrateable.isHydrated = isNow;
         }
       }
     });

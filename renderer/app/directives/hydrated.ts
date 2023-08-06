@@ -1,57 +1,53 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { Directive } from '@angular/core';
 import { ElementRef } from '@angular/core';
-import { EventEmitter } from '@angular/core';
 import { HydratorDirective } from '#mm/directives//hydrator';
 import { Input } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { Output } from '@angular/core';
 
 import { inject } from '@angular/core';
-import { v4 as uuidv4 } from 'uuid';
 
 @Directive({
   exportAs: 'hydrated',
   selector: '[mmHydrated]'
 })
 export class HydratedDirective implements Hydrateable, OnDestroy, OnInit {
-  /* eslint-disable @typescript-eslint/member-ordering */
+  @Input({ required: true }) mmHydrated: string;
 
-  @Input() mmHydrated = uuidv4();
-
-  @Output() hydrated = new EventEmitter<boolean>();
-
-  /* eslint-enable @typescript-eslint/member-ordering */
-
-  element = inject(ElementRef);
-
-  #hydrated = false;
+  #cdf = inject(ChangeDetectorRef);
+  #host = inject(ElementRef);
   #hydrator = inject(HydratorDirective);
+  #isHydrated = false;
 
-  @Input()
   get isHydrated(): boolean {
-    return this.#hydrated;
+    return this.#isHydrated;
   }
 
-  set isHydrated(hydrated: boolean) {
-    this.hydrated.emit(hydrated);
-    this.#hydrated = hydrated;
+  set isHydrated(isHydrated: boolean) {
+    this.#isHydrated = isHydrated;
+    const element = this.#host.nativeElement;
+    if (this.isHydrated) element.style = '';
+    else element.style = 'height: 200px';
+    this.#cdf.markForCheck();
   }
 
   ngOnDestroy(): void {
-    this.#hydrator.unregisterHydrateable(this);
+    const element = this.#host.nativeElement;
+    this.#hydrator.unregisterHydrateable(element);
   }
 
   ngOnInit(): void {
-    this.element.nativeElement.setAttribute('mmHydrated', this.mmHydrated);
-    this.#hydrator.registerHydrateable(this);
+    const element = this.#host.nativeElement;
+    if (!this.isHydrated) element.style = 'height: 200px';
+    element['mmHydrated'] = this;
+    this.#hydrator.registerHydrateable(element);
   }
 }
 
 // 👇 avoid circular dependency in HydratorDirective
 
 export interface Hydrateable {
-  element: ElementRef;
   isHydrated: boolean;
   mmHydrated: string;
 }

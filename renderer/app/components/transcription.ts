@@ -26,7 +26,9 @@ import scrollIntoView from 'scroll-into-view-if-needed';
         <ng-container
           *ngFor="let tx of transcription; let ix = index; trackBy: trackByTx">
           <tr
+            #row="hydrated"
             (click)="onSelected(tx)"
+            [mmHydrated]="'TX' + tx.id"
             [ngClass]="{ selected: tx.id === currentTx?.id }"
             [id]="'TX' + tx.id">
             <ng-container *ngIf="tx.type === 'AG'">
@@ -48,7 +50,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
               </td>
             </ng-container>
 
-            <ng-container *ngIf="tx.type === 'TX'">
+            <ng-container *ngIf="tx.type === 'TX' && row.isHydrated">
               <td
                 style="font-family: monospace; font-size: smaller; padding-top: 0.15rem">
                 {{

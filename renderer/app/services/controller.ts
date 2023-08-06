@@ -195,8 +195,8 @@ export class ControllerService {
       });
     }
     if (path) {
-      this.#store.dispatch(new SetPathToMinutes(path));
-      this.#loadMinutes(path);
+      const minutes = await this.#loadMinutes(path);
+      if (minutes) this.#store.dispatch(new SetPathToMinutes(path));
       // 👇 clear the undo stacks as this is new data
       this.#store.dispatch(new ClearUndoStacks());
     }
@@ -400,10 +400,11 @@ export class ControllerService {
   // 🟦 helper methods
   // //////////////////////////////////////////////////////////////////////////
 
-  async #loadMinutes(path: string): Promise<void> {
+  async #loadMinutes(path: string): Promise<Minutes> {
+    let minutes: Minutes;
     try {
       const raw = await this.#fs.loadFile(path);
-      const minutes: Minutes = MinutesSchema.parse(JSON.parse(raw));
+      minutes = MinutesSchema.parse(JSON.parse(raw));
       if (minutes)
         this.#store.dispatch([new SetMinutes(minutes), new AddRecent(path)]);
     } catch (error) {
@@ -417,6 +418,7 @@ export class ControllerService {
         })
       );
     }
+    return minutes;
   }
 
   #monitorAppQuit(): void {

@@ -38,6 +38,7 @@
         "ignore": "custom-elements"
       }
     ],
+    "shorthand-property-no-redundant-values": null,
     "unit-allowed-list": [
       ["deg", "fr", "s", "rem", "%"],
       {

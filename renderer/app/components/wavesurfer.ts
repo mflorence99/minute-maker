@@ -77,6 +77,7 @@ import WaveSurfer from 'wavesurfer.js';
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        margin: 0.5rem 0 0 0;
 
         > * {
           width: 100%;

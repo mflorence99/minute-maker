@@ -8,9 +8,15 @@ import { StorageEngine } from '#mm/state/storage-engine';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
+import dayjs from 'dayjs';
 import isDev from '#mm/is-dev';
+import objectSupport from 'dayjs/plugin/objectSupport';
 
 if (!isDev) enableProdMode();
+
+// 👇 add in DayJS plugins
+
+dayjs.extend(objectSupport);
 
 // 👇 log the environment
 

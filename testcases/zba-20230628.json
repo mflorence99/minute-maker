@@ -3,7 +3,8 @@
     "encoding": "MP3",
     "gcsuri": "gs://washington-app-319514.appspot.com/edaa567a-71de-4020-b61b-bee31e344645.mp3",
     "sampleRateHertz": 22050,
-    "url": "https://storage.googleapis.com/washington-app-319514.appspot.com/edaa567a-71de-4020-b61b-bee31e344645.mp3"
+    "url": "https://storage.googleapis.com/washington-app-319514.appspot.com/edaa567a-71de-4020-b61b-bee31e344645.mp3",
+    "duration": 596.5322448979592
   },
   "absent": [
     "bob citizen"

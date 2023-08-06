@@ -81,10 +81,14 @@ import { inject } from '@angular/core';
   `
 })
 export class SummaryComponent {
-  @Output() selected = new EventEmitter<number>();
+  /* eslint-disable @typescript-eslint/member-ordering */
 
   @Input({ required: true }) status: StatusStateModel;
   @Input({ required: true }) summary: Summary[];
+
+  @Output() selected = new EventEmitter<number>();
+
+  /* eslint-enable @typescript-eslint/member-ordering */
 
   summIndex = 0;
 

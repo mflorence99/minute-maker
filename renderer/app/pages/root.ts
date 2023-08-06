@@ -56,7 +56,6 @@ import deepCopy from 'deep-copy';
           [audioFile]="minutes.audio.url"
           [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }"
           class="wavesurfer">
-          <mm-wavesurfer-timeline></mm-wavesurfer-timeline>
           <mm-wavesurfer-regions>
             <!-- 👇 only one region that we update -->
             <mm-wavesurfer-region
@@ -276,8 +275,8 @@ export class RootPage {
       });
   }
 
+  // 👇 update the current tx as the waveform plays
   #monitorWaveSurfer(): void {
-    // 👇 update the current tx as the waveform plays
     this.#timeupdate$
       .pipe(
         takeUntilDestroyed(this.#destroyRef),

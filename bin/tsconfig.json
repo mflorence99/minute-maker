@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "target": "esnext"
   }
 }

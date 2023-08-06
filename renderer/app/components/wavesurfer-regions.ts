@@ -68,27 +68,8 @@ export class WaveSurferRegionsComponent
     return this.plugin;
   }
 
-  // 👇 respond to region changes -- BUT wait until WaveSurfer is ready
   ngAfterContentInit(): void {
-    combineLatest([
-      this.regions$.changes.pipe(startWith(this.regions$)),
-      this.wavesurfer.ready
-    ])
-      .pipe(
-        takeUntilDestroyed(this.#destroyRef),
-        filter(([_, ready]) => ready),
-        map(([regions]) => regions)
-      )
-      .subscribe((regions) => {
-        // 👇 easiest to wipe the old regions ...
-        this.plugin.clearRegions();
-        this.regionByID = {};
-        // 👇 ... and create the new ones afresh
-        regions.forEach((region) => {
-          const obj = this.plugin.addRegion(region.params);
-          if (region.params.id) this.regionByID[region.params.id] = obj;
-        });
-      });
+    this.#monitorRegions();
   }
 
   ngOnDestroy(): void {
@@ -128,5 +109,28 @@ export class WaveSurferRegionsComponent
         .subscribe((region) => this.regionEntered.emit(region));
       return false;
     } else return true;
+  }
+
+  // 👇 respond to region changes -- BUT wait until WaveSurfer is ready
+  #monitorRegions(): void {
+    combineLatest([
+      this.regions$.changes.pipe(startWith(this.regions$)),
+      this.wavesurfer.ready
+    ])
+      .pipe(
+        takeUntilDestroyed(this.#destroyRef),
+        filter(([_, ready]) => ready),
+        map(([regions]) => regions)
+      )
+      .subscribe((regions) => {
+        // 👇 easiest to wipe the old regions ...
+        this.plugin.clearRegions();
+        this.regionByID = {};
+        // 👇 ... and create the new ones afresh
+        regions.forEach((region) => {
+          const obj = this.plugin.addRegion(region.params);
+          if (region.params.id) this.regionByID[region.params.id] = obj;
+        });
+      });
   }
 }

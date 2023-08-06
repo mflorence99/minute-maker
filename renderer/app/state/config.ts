@@ -31,7 +31,10 @@ export class SetConfig {
 
 export class UpdateChanges extends UndoableAction {
   static readonly type = '[Config] UpdateChanges';
-  constructor(public details: Partial<ConfigStateModel>, undoing = false) {
+  constructor(
+    public details: Partial<ConfigStateModel>,
+    undoing = false
+  ) {
     super(undoing);
   }
 }
@@ -159,7 +162,15 @@ export class ConfigState implements NgxsOnInit {
   // //////////////////////////////////////////////////////////////////////////
 
   ngxsOnInit(): void {
-    // 👇 changes in Google credentials
+    this.#monitorGoogleCredentials();
+    this.#monitorOpenAICredentials();
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟦 Helper methods
+  // //////////////////////////////////////////////////////////////////////////
+
+  #monitorGoogleCredentials(): void {
     combineLatest({
       googleCredentials: this.googleCredentials$,
       bucketName: this.bucketName$
@@ -177,7 +188,9 @@ export class ConfigState implements NgxsOnInit {
         )
       )
       .subscribe();
-    // 👇 changes in OpenAI credentials
+  }
+
+  #monitorOpenAICredentials(): void {
     this.openaiCredentials$
       .pipe(
         filter((openaiCredentials) => !!openaiCredentials),

@@ -14,6 +14,7 @@ import { WINDOW } from '@ng-web-apis/common';
 
 import { inject } from '@angular/core';
 
+import dayjs from 'dayjs';
 import scrollIntoView from 'scroll-into-view-if-needed';
 
 @Component({
@@ -29,7 +30,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
             [ngClass]="{ selected: tx.id === currentTx?.id }"
             [id]="'TX' + tx.id">
             <ng-container *ngIf="tx.type === 'AG'">
-              <td colspan="2" width="100%">
+              <td colspan="3" width="100%">
                 <textarea
                   #agendaItemTitle
                   (input)="
@@ -48,6 +49,9 @@ import scrollIntoView from 'scroll-into-view-if-needed';
             </ng-container>
 
             <ng-container *ngIf="tx.type === 'TX'">
+              <td style="font-family: monospace; font-size: smaller">
+                {{ dayjs({ second: tx.start }).format('HH:mm:ss') }}
+              </td>
               <td>
                 <input
                   #transcriptionSpeaker
@@ -131,10 +135,16 @@ import scrollIntoView from 'scroll-into-view-if-needed';
   `
 })
 export class TranscriptionComponent {
-  @Output() selected = new EventEmitter<Transcription>();
+  /* eslint-disable @typescript-eslint/member-ordering */
 
   @Input({ required: true }) status: StatusStateModel;
   @Input({ required: true }) transcription: (AgendaItem | Transcription)[];
+
+  @Output() selected = new EventEmitter<Transcription>();
+
+  /* eslint-enable @typescript-eslint/member-ordering */
+
+  dayjs = dayjs;
 
   #bufferedDispatcher = inject(BufferedDispatcherService);
   #controller = inject(ControllerService);

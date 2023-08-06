@@ -15,9 +15,13 @@ import { v4 as uuidv4 } from 'uuid';
   selector: '[mmHydrated]'
 })
 export class HydratedDirective implements Hydrateable, OnDestroy, OnInit {
-  @Output() hydrated = new EventEmitter<boolean>();
+  /* eslint-disable @typescript-eslint/member-ordering */
 
   @Input() mmHydrated = uuidv4();
+
+  @Output() hydrated = new EventEmitter<boolean>();
+
+  /* eslint-enable @typescript-eslint/member-ordering */
 
   element = inject(ElementRef);
 

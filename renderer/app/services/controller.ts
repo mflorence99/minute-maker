@@ -160,6 +160,7 @@ export class ControllerService {
         const minutes: Minutes = {
           ...emptyMinutes(),
           audio: {
+            duration: metadata.duration,
             encoding: metadata.encoding,
             gcsuri: upload.gcsuri,
             sampleRateHertz: metadata.sampleRate,

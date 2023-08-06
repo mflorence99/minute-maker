@@ -69,7 +69,7 @@ export const Constants = {
   sentryDSN:
     'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
   summaryStrategy,
-  timeupdateThrottleInterval: 10000,
+  timeupdateThrottleInterval: 250,
   transcriberPollInterval: 10000
 };
 
@@ -257,6 +257,7 @@ export const TranscriptionSchema = z.object({
 export const MinutesSchema = z.object({
   absent: z.string().array(),
   audio: z.object({
+    duration: z.number(),
     encoding: z.string(),
     gcsuri: z.string().url(),
     sampleRateHertz: z.number(),

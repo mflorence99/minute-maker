@@ -1,0 +1,39 @@
+{
+  "audio": {
+    "encoding": "MP3",
+    "gcsuri": "gs://washington-app-319514.appspot.com/3f0763d8-4702-45fd-92b2-e1d910201510.mp3",
+    "sampleRateHertz": 22050,
+    "url": "https://storage.googleapis.com/washington-app-319514.appspot.com/3f0763d8-4702-45fd-92b2-e1d910201510.mp3",
+    "duration": 10.083265306122449
+  },
+  "absent": [],
+  "date": "2023-07-18T11:06:27.370Z",
+  "nextTranscriptionID": 26,
+  "numSpeakers": 1,
+  "present": [
+    "Mark Florence - Board Chair",
+    "Wilma Flintstone - Board Member"
+  ],
+  "subject": "Working Session",
+  "subtitle": "Driveway Permits",
+  "summary": [
+    {
+      "section": "",
+      "summary": "- Speaker 1 expresses their belief that they are alone in their appreciation of beauty and willpower.\n- Mr. Rochester is mentioned, suggesting he may play a significant role in the discussion.\n- The speaker implies that they find simplicity and devotion important, but it is unclear what they are referring to.\n- There is a sense of uncertainty about what might happen or be discussed."
+    }
+  ],
+  "title": "Planning Board",
+  "transcription": [
+    {
+      "end": 9,
+      "id": 26,
+      "speaker": "Speaker 1",
+      "speech": "My thought I have nobody by a beauty and will as you poured. Mr. Rochester's serve and that so don't find simplest and devoted about to what might",
+      "start": 0,
+      "type": "TX"
+    }
+  ],
+  "visitors": [
+    "Fred Flintstone - Concerned Citizen"
+  ]
+}

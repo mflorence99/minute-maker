@@ -404,7 +404,8 @@ export class ControllerService {
     try {
       const raw = await this.#fs.loadFile(path);
       const minutes: Minutes = MinutesSchema.parse(JSON.parse(raw));
-      this.#store.dispatch([new SetMinutes(minutes), new AddRecent(path)]);
+      if (minutes)
+        this.#store.dispatch([new SetMinutes(minutes), new AddRecent(path)]);
     } catch (error) {
       console.error(error);
       this.#store.dispatch(

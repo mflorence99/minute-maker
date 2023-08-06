@@ -110,6 +110,7 @@ import deepCopy from 'deep-copy';
           <mm-transcription
             (selected)="onTranscription($event)"
             [currentTx]="currentTx"
+            [duration]="minutes.audio.duration"
             [status]="status"
             [transcription]="transcription$ | async" />
         </tui-loader>

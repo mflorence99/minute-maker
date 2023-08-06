@@ -49,8 +49,13 @@ import scrollIntoView from 'scroll-into-view-if-needed';
             </ng-container>
 
             <ng-container *ngIf="tx.type === 'TX'">
-              <td style="font-family: monospace; font-size: smaller">
-                {{ dayjs({ second: tx.start }).format('HH:mm:ss') }}
+              <td
+                style="font-family: monospace; font-size: smaller; padding-top: 0.15rem">
+                {{
+                  dayjs({ second: tx.start }).format(
+                    duration > 60 * 60 ? 'HH:mm:ss' : 'mm:ss'
+                  )
+                }}
               </td>
               <td>
                 <input
@@ -137,6 +142,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
 export class TranscriptionComponent {
   /* eslint-disable @typescript-eslint/member-ordering */
 
+  @Input({ required: true }) duration: number;
   @Input({ required: true }) status: StatusStateModel;
   @Input({ required: true }) transcription: (AgendaItem | Transcription)[];
 

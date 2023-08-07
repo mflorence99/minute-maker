@@ -83,6 +83,17 @@ import deepCopy from 'deep-copy';
                   status="primary"
                   [value]="minutes.numSpeakers"></tui-badge>
               </button>
+
+              <article
+                *ngIf="state.tabIndex === 1"
+                style="align-items: center; display: flex; margin-left: 1rem">
+                <tui-svg src="tuiIconFilter"></tui-svg>
+                <input
+                  [value]="state.txFilter"
+                  placeholder="Filter"
+                  style="width: 5rem" />
+              </article>
+
               <button [disabled]="!configured" tuiTab>Summary</button>
               <button [disabled]="!configured" tuiTab>Preview</button>
               <div style="flex: 2"></div>

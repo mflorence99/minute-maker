@@ -6,12 +6,14 @@ import { OnInit } from '@angular/core';
 
 import { inject } from '@angular/core';
 
+import isDev from '#mm/is-dev';
+
 @Directive({
   selector: '[mmHydrator]'
 })
 export class HydratorDirective implements OnInit {
-  @Input() hydratorMargin = '0px';
-  @Input() hydratorTrace = false;
+  @Input() hydratorMargin = 100;
+  @Input() hydratorTrace = isDev;
 
   #host = inject(ElementRef);
   #observer: IntersectionObserver;
@@ -19,7 +21,7 @@ export class HydratorDirective implements OnInit {
   ngOnInit(): void {
     this.#observer = new IntersectionObserver(this.#callback.bind(this), {
       root: this.#host.nativeElement,
-      rootMargin: this.hydratorMargin,
+      rootMargin: `${this.hydratorMargin}px`,
       threshold: [0]
     });
   }

@@ -99,8 +99,6 @@ import deepCopy from 'deep-copy';
           [minutes]="minutes" />
 
         <tui-loader
-          [hydratorMargin]="'100px'"
-          [hydratorTrace]="true"
           [ngClass]="{
             data: true,
             showing: configured && state.tabIndex === 1

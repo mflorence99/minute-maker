@@ -113,16 +113,15 @@ export class WaveSurferRegionsComponent
 
   // 👇 respond to region changes -- BUT wait until WaveSurfer is ready
   #monitorRegions(): void {
-    combineLatest([
-      this.regions$.changes.pipe(startWith(this.regions$)),
-      this.wavesurfer.ready
-    ])
+    combineLatest({
+      regions: this.regions$.changes.pipe(startWith(this.regions$)),
+      ready: this.wavesurfer.ready
+    })
       .pipe(
         takeUntilDestroyed(this.#destroyRef),
-        filter(([_, ready]) => ready),
-        map(([regions]) => regions)
+        filter(({ ready }) => ready)
       )
-      .subscribe((regions) => {
+      .subscribe(({ regions }) => {
         // 👇 easiest to wipe the old regions ...
         this.plugin.clearRegions();
         this.regionByID = {};

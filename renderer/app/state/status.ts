@@ -10,7 +10,7 @@ import { patch } from '@ngxs/store/operators';
 
 export class ClearStatus {
   static readonly type = '[Status] ClearStatus';
-  constructor() {}
+  constructor(public working?: Working) {}
 }
 
 export class SetStatus {
@@ -53,8 +53,14 @@ export class StatusState {
   // 🟩 ClearStatus
   // //////////////////////////////////////////////////////////////////////////
 
-  @Action(ClearStatus) clearStatus({ setState }): void {
-    setState(StatusState.defaultStatus());
+  @Action(ClearStatus) clearStatus(
+    { getState, setState },
+    { working }: ClearStatus
+  ): void {
+    const status = getState();
+    // 👇 only clear the status if it still "belongs" to me
+    if (!working || !status.working || working.on === status.working.on)
+      setState(StatusState.defaultStatus());
   }
 
   // //////////////////////////////////////////////////////////////////////////

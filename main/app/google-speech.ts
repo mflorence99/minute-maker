@@ -65,14 +65,17 @@ export async function checkLongRunningRecognizeProgress(
       const response = await client.checkLongRunningRecognizeProgress(
         transcriptionName
       );
-
       // 👇 1. metadata doesn't seem to be typed properly
       //    2. seems to be 0% all the way to the end, when it jumps to 100%
       const progressPercent = response.done
         ? 100
         : // @ts-ignore 🔥 metadata doesn't have progressPercent?
           response.metadata.progressPercent ?? 0;
-      console.log(`👈 ${Channels.transcriberPoll} ${progressPercent}%`);
+      console.log(
+        `👈 ${Channels.transcriberPoll} ${progressPercent}% ${
+          response.done ? 'DONE' : ''
+        }`
+      );
       globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
         name: transcriptionName,
         progressPercent,
@@ -127,7 +130,7 @@ export async function longRunningRecognize(
       enableWordTimeOffsets: true,
       diarizationSpeakerCount: request.numSpeakers,
       enableSpeakerDiarization: true,
-      // @ts-ignore 🔥 no access ro Google's encoding
+      // @ts-ignore 🔥 no access to Google's encoding
       encoding: request.audio.encoding,
       languageCode: 'en-US',
       model: 'latest_long',

@@ -19,15 +19,9 @@ export class TranscriberService {
     return ipc.invoke(Channels.transcriberCredentials, credentials);
   }
 
-  async transcribe(
-    request: TranscriberRequest
-  ): Promise<Observable<TranscriberResponse>> {
-    // 👇 kick off the transcription
-    const transcriptionName = await ipc.invoke(
-      Channels.transcriberRequest,
-      request
-    );
-
+  pollTranscription(
+    transcriptionName: string
+  ): Observable<TranscriberResponse> {
     // 👇 create a stream that polls for completion
     return new Observable((observer) => {
       // 👇 listen for transcriber responses
@@ -43,10 +37,11 @@ export class TranscriberService {
         .catch((error) => observer.error(error));
 
       // 👇 teardown logic
-      return () => {
-        ipc.invoke(Channels.transcriberCancel, transcriptionName);
-        ipc.removeListener(Channels.transcriberResponse, listener);
-      };
+      return () => ipc.removeListener(Channels.transcriberResponse, listener);
     });
+  }
+
+  async startTranscription(request: TranscriberRequest): Promise<string> {
+    return await ipc.invoke(Channels.transcriberRequest, request);
   }
 }

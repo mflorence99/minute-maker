@@ -118,7 +118,7 @@ export class UndoState {
   // //////////////////////////////////////////////////////////////////////////
 
   cando(): Candoable {
-    const state = this.#store.selectSnapshot(UndoState);
+    const state = this.#store.selectSnapshot<UndoStateModel>(UndoState);
     return [state.undoStack.length > 0, state.redoStack.length > 0];
   }
 

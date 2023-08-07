@@ -11,12 +11,14 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import dayjs from 'dayjs';
 import isDev from '#mm/is-dev';
 import objectSupport from 'dayjs/plugin/objectSupport';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 if (!isDev) enableProdMode();
 
 // 👇 add in DayJS plugins
 
 dayjs.extend(objectSupport);
+dayjs.extend(relativeTime);
 
 // 👇 log the environment
 

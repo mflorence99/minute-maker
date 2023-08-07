@@ -170,11 +170,11 @@ table {
     vertical-align: top;
 
     &.selected {
-      background-color: var(--tui-neutral-bg);
+      background-color: var(--tui-neutral-bg-hover);
     }
 
     &:hover {
-      background-color: var(--tui-neutral-bg-hover);
+      background-color: var(--tui-neutral-bg);
     }
   }
 }

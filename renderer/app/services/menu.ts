@@ -184,17 +184,17 @@ export class MenuService {
   #monitorElementState(): void {
     this.#window.addEventListener('pointerdown', (event: MouseEvent) => {
       const element = event.target as HTMLElement;
-      const status = this.#store.selectSnapshot(StatusState);
+      const status = this.#store.selectSnapshot<StatusStateModel>(StatusState);
       ipc.send(Channels.menuEnable, {
         [MenuID.insert]: !isNaN(this.#getInsertableIndex(element)),
         [MenuID.join]: !isNaN(this.#getJoinableIndex(element)),
         [MenuID.remove]: !isNaN(this.#getRemovableIndex(element)),
         [MenuID.rephraseAccuracy]:
           !isNaN(this.#getRephraseableIndex(element)) &&
-          status.working !== 'rephrase',
+          status.working?.on !== 'rephrase',
         [MenuID.rephraseBrevity]:
           !isNaN(this.#getRephraseableIndex(element)) &&
-          status.working !== 'rephrase',
+          status.working?.on !== 'rephrase',
         [MenuID.split]: !isNaN(this.#getSplittableIndex(element))
       });
     });

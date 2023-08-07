@@ -1,12 +1,13 @@
 import { AddRecent } from '#mm/state/recents';
 import { AppState } from '#mm/state/app';
+import { AppStateModel } from '#mm/state/app';
 import { AudioMetadataService } from '#mm/services/audio-metadata';
 import { Channels } from '#mm/common';
 import { Clear as ClearUndoStacks } from '#mm/state/undo';
 import { ClearMinutes } from '#mm/state/minutes';
 import { ClearStatus } from '#mm/state/status';
-import { ComponentState } from '#mm/state/component';
 import { ConfigState } from '#mm/state/config';
+import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
 import { DialogService } from '#mm/services/dialog';
 import { ExporterService } from '#mm/services/exporter';
@@ -18,7 +19,6 @@ import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
 import { OpenAIService } from '#mm/services/openai';
 import { RephraseStrategy } from '#mm/common';
-import { SetComponentState } from '#mm/state/component';
 import { SetMinutes } from '#mm/state/minutes';
 import { SetPathToMinutes } from '#mm/state/app';
 import { SetStatus } from '#mm/state/status';
@@ -33,12 +33,14 @@ import { UploaderService } from '#mm/services/uploader';
 import { Working } from '#mm/state/status';
 
 import { catchError } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { debounceTime } from 'rxjs';
 import { emptyMinutes } from '#mm/common';
 import { filter } from 'rxjs';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
 import { of } from 'rxjs';
+import { takeWhile } from 'rxjs';
 import { tap } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -62,7 +64,7 @@ export class ControllerService {
 
   constructor() {
     // 👇 load the last-used minutes, if any
-    const app = this.#store.selectSnapshot(AppState);
+    const app = this.#store.selectSnapshot<AppStateModel>(AppState);
     const path = app.pathToMinutes;
     if (path) this.#loadMinutes(path).then(() => this.#ready());
     else this.#ready();
@@ -76,11 +78,15 @@ export class ControllerService {
   // //////////////////////////////////////////////////////////////////////////
 
   async cancelTranscription(): Promise<void> {
-    const transcriptionName =
-      this.#store.selectSnapshot(ComponentState).transcriptionName;
-    if (transcriptionName) {
-      await this.#transcriber.cancelTranscription(transcriptionName);
-      this.#store.dispatch(new ClearStatus());
+    const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
+    if (minutes.transcriptionName) {
+      await this.#transcriber.cancelTranscription(minutes.transcriptionName);
+      this.#store.dispatch([
+        new SetMinutes({
+          transcriptionName: null
+        }),
+        new ClearStatus(new Working('transcription'))
+      ]);
     }
   }
 
@@ -101,7 +107,8 @@ export class ControllerService {
     } catch (error) {
       this.#store.dispatch(new SetStatus({ error }));
     } finally {
-      this.#store.dispatch(new ClearStatus());
+      // 🔥 maybe rely on canceledBy implementation to clear status?
+      // this.#store.dispatch(new ClearStatus());
     }
   }
 
@@ -124,7 +131,7 @@ export class ControllerService {
   // //////////////////////////////////////////////////////////////////////////
 
   exportMinutes(): void {
-    this.#exporter.export(this.#store.selectSnapshot(MinutesState));
+    this.#exporter.export(this.#store.selectSnapshot<Minutes>(MinutesState));
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -132,7 +139,8 @@ export class ControllerService {
   // //////////////////////////////////////////////////////////////////////////
 
   async newMinutes(): Promise<void> {
-    const app = this.#store.selectSnapshot(AppState);
+    const working = new Working('upload');
+    const app = this.#store.selectSnapshot<AppStateModel>(AppState);
     // 🔥 locked into MP3 only for now
     const path = await this.#fs.chooseFile({
       defaultPath: app.pathToMinutes,
@@ -143,11 +151,12 @@ export class ControllerService {
       this.#store.dispatch(
         new SetStatus({
           status: 'Uploading audio recording',
-          working: new Working('upload')
+          working
         })
       );
       try {
-        const config = this.#store.selectSnapshot(ConfigState);
+        const config =
+          this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
         // 👇 extract the audio metadata
         const metadata = await this.#metadata.parseFile(path);
         // 👇 upload the audio to GCS
@@ -176,7 +185,7 @@ export class ControllerService {
       } catch (error) {
         this.#store.dispatch(new SetStatus({ error }));
       } finally {
-        this.#store.dispatch(new ClearStatus());
+        this.#store.dispatch(new ClearStatus(working));
       }
     }
   }
@@ -186,7 +195,7 @@ export class ControllerService {
   // //////////////////////////////////////////////////////////////////////////
 
   async openMinutes(path = null): Promise<void> {
-    const app = this.#store.selectSnapshot(AppState);
+    const app = this.#store.selectSnapshot<AppStateModel>(AppState);
     if (!path) {
       path = await this.#fs.chooseFile({
         defaultPath: app.pathToMinutes,
@@ -195,6 +204,8 @@ export class ControllerService {
       });
     }
     if (path) {
+      // 👇 make sure we can't save while the minutes are loading
+      this.#store.dispatch(new SetPathToMinutes(null));
       const minutes = await this.#loadMinutes(path);
       if (minutes) this.#store.dispatch(new SetPathToMinutes(path));
       // 👇 clear the undo stacks as this is new data
@@ -210,13 +221,14 @@ export class ControllerService {
     rephraseStrategy: RephraseStrategy,
     ix: number
   ): Promise<void> {
-    const config = this.#store.selectSnapshot(ConfigState);
-    const minutes = this.#store.selectSnapshot(MinutesState);
+    const working = new Working('rephrase');
+    const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
+    const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
     this.#store.dispatch(
       new SetStatus({
         ix,
         status: 'Rephrasing transcription',
-        working: new Working('rephrase')
+        working
       })
     );
     try {
@@ -232,7 +244,7 @@ export class ControllerService {
     } catch (error) {
       this.#store.dispatch(new SetStatus({ error }));
     } finally {
-      this.#store.dispatch(new ClearStatus());
+      this.#store.dispatch(new ClearStatus(working));
     }
   }
 
@@ -241,8 +253,8 @@ export class ControllerService {
   // //////////////////////////////////////////////////////////////////////////
 
   async saveMinutes(saveAs = false): Promise<void> {
-    const app = this.#store.selectSnapshot(AppState);
-    const minutes = this.#store.selectSnapshot(MinutesState);
+    const app = this.#store.selectSnapshot<AppStateModel>(AppState);
+    const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
     if (minutes) {
       let path = app.pathToMinutes;
       if (saveAs || !path) {
@@ -261,8 +273,9 @@ export class ControllerService {
   // //////////////////////////////////////////////////////////////////////////
 
   async summarizeMinutes(summaryStrategy: SummaryStrategy): Promise<void> {
-    const config = this.#store.selectSnapshot(ConfigState);
-    const minutes = this.#store.selectSnapshot(MinutesState);
+    const working = new Working('summary');
+    const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
+    const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
     if (minutes.summary.length > 0) {
       // 👇 warn about overwrite
       const button = await this.#dialog.showMessageBox({
@@ -278,7 +291,7 @@ export class ControllerService {
     this.#store.dispatch(
       new SetStatus({
         status: 'Summarizing minutes',
-        working: new Working('summary')
+        working
       })
     );
     // 👇 first, just attach a section to each transcription where the
@@ -316,7 +329,7 @@ export class ControllerService {
     } catch (error) {
       this.#store.dispatch(new SetStatus({ error }));
     } finally {
-      this.#store.dispatch(new ClearStatus());
+      this.#store.dispatch(new ClearStatus(working));
     }
   }
 
@@ -325,7 +338,7 @@ export class ControllerService {
   // //////////////////////////////////////////////////////////////////////////
 
   async transcribeAudio(): Promise<void> {
-    const minutes = this.#store.selectSnapshot(MinutesState);
+    const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
     // 👇 warn about overwrite
     if (minutes.transcription.length > 0) {
       const button = await this.#dialog.showMessageBox({
@@ -350,32 +363,65 @@ export class ControllerService {
         ...minutes.visitors
       ]
     } as TranscriberRequest;
-    this.#store.dispatch(
+    // 👇 immediately show start of transcription
+    this.#store.dispatch([
+      new SetMinutes({ transcriptionStart: new Date() }),
       new SetStatus({
         status: 'Transcribing audio',
         working: new Working('transcription')
       })
-    );
+    ]);
     // 👇 initiate transcription
-    const transcriber$ = await this.#transcriber.transcribe(request);
-    transcriber$
+    const transcriptionName = await this.#transcriber.startTranscription(
+      request
+    );
+    // 👇 transcription isn't cancelable until we know the transcription name
+    this.#store.dispatch(new SetMinutes({ transcriptionName }));
+    // 👇 now start polling for completion
+    this.transcribeAudioPoll();
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 TranscribeAudioPoll (via Google speech-to-text)
+  //    NOTE: we can enter here from #loadMinutes
+  // //////////////////////////////////////////////////////////////////////////
+
+  transcribeAudioPoll(): void {
+    const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
+    // 👇 quick exit if nothing to do
+    if (!minutes.transcriptionName) return;
+    // 👇 transcription isn't cancelable until we know the transcription name
+    this.#store.dispatch(
+      new SetStatus({
+        status: 'Transcribing audio',
+        working: new Working('transcription', () => this.cancelTranscription())
+      })
+    );
+    // 👇 poll transcription and note progress as status
+    combineLatest({
+      tx: this.#transcriber.pollTranscription(minutes.transcriptionName),
+      name: this.#store.select(MinutesState.transcriptionName)
+    })
       .pipe(
+        takeWhile(({ name }) => name === minutes.transcriptionName),
         catchError((error) => {
           this.#store.dispatch(new SetStatus({ error }));
-          return of(null);
+          return of({ tx: null });
         }),
-        tap((tx) => {
+        tap(({ tx }) => {
           if (tx)
             this.#store.dispatch([
-              new SetComponentState({ transcriptionName: tx.name }),
               new SetStatus({
-                status: `Transcribing audio: ${tx.progressPercent}% complete`
+                status: `Transcribing audio: ${tx.progressPercent}% complete`,
+                working: new Working('transcription', () =>
+                  this.cancelTranscription()
+                )
               })
             ]);
         }),
-        filter((tx) => tx.progressPercent === 100)
+        filter(({ tx }) => tx.progressPercent === 100)
       )
-      .subscribe((tx) => {
+      .subscribe(({ tx }) => {
         if (tx) {
           let nextTranscriptionID = minutes.nextTranscriptionID ?? 0;
           // 👇 make sure they're typed right and propery ID'd
@@ -383,15 +429,15 @@ export class ControllerService {
             t.id = ++nextTranscriptionID;
             t.type = 'TX';
           });
+          // 👇 finally
           this.#store.dispatch([
-            new SetComponentState({ transcriptionName: null }),
             new SetMinutes({
               nextTranscriptionID,
-              transcription: tx.transcription
-            })
+              transcription: tx.transcription,
+              transcriptionName: null
+            }),
+            new ClearStatus(new Working('transcription'))
           ]);
-          // 👇 finally
-          this.#store.dispatch(new ClearStatus());
         }
       });
   }
@@ -405,8 +451,11 @@ export class ControllerService {
     try {
       const raw = await this.#fs.loadFile(path);
       minutes = MinutesSchema.parse(JSON.parse(raw));
-      if (minutes)
+      if (minutes) {
         this.#store.dispatch([new SetMinutes(minutes), new AddRecent(path)]);
+        // 👇 in case transcription was in progress, poll for its completion
+        this.transcribeAudioPoll();
+      }
     } catch (error) {
       console.error(error);
       this.#store.dispatch(
@@ -424,8 +473,8 @@ export class ControllerService {
   #monitorAppQuit(): void {
     // 👇 save the minutes before quitting
     ipc.on(Channels.appBeforeQuit, async () => {
-      const minutes = this.#store.selectSnapshot(MinutesState);
-      const app = this.#store.selectSnapshot(AppState);
+      const app = this.#store.selectSnapshot<AppStateModel>(AppState);
+      const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
       if (app.pathToMinutes)
         await this.#fs.saveFile(
           app.pathToMinutes,
@@ -452,7 +501,7 @@ export class ControllerService {
       .pipe(
         map((minutes) => {
           // 👇 we'll use the snapshot b/c who knows where we are now
-          const app = this.#store.selectSnapshot(AppState);
+          const app = this.#store.selectSnapshot<AppStateModel>(AppState);
           return [minutes, app.pathToMinutes];
         }),
         filter(([minutes, path]) => !!(minutes && path)),

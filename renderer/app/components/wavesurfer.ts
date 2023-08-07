@@ -136,7 +136,9 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   constructor() {
     // 👇 initialize the component state
-    this.state = deepCopy(this.#store.selectSnapshot(ComponentState));
+    this.state = deepCopy(
+      this.#store.selectSnapshot<ComponentStateModel>(ComponentState)
+    );
   }
 
   @Input() get audioFile(): string {
@@ -214,10 +216,11 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
   }
 
   #loadAudioFile(): void {
+    const working = new Working('audio');
     this.#store.dispatch(
       new SetStatus({
         status: 'Loading audio into player',
-        working: new Working('audio')
+        working
       })
     );
     try {
@@ -226,7 +229,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
         //    NOTE: can't set the playback rate until audio is loaded!
         const audio = this.media.nativeElement;
         audio.playbackRate = this.state.audio.playbackRate;
-        this.#store.dispatch(new ClearStatus());
+        this.#store.dispatch(new ClearStatus(working));
       });
       this.wavesurfer.load(this.#audioFile);
     } catch (error) {

@@ -65,7 +65,7 @@ export const Constants = {
     top_p: 1
   },
   rephraseStrategy,
-  saveFileInterval: 10000,
+  saveFileInterval: 1000,
   sentryDSN:
     'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
   summaryStrategy,
@@ -214,7 +214,6 @@ export type TranscriberRequest = {
 };
 
 export type TranscriberResponse = {
-  name: string;
   progressPercent: number;
   transcription: Transcription[];
 };
@@ -274,6 +273,8 @@ export const MinutesSchema = z.object({
   transcription: z
     .discriminatedUnion('type', [AgendaItemSchema, TranscriptionSchema])
     .array(),
+  transcriptionName: z.string().nullable().optional(),
+  transcriptionStart: z.coerce.date().nullable().optional(),
   visitors: z.string().array()
 });
 

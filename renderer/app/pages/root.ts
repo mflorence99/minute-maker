@@ -68,73 +68,73 @@ import deepCopy from 'deep-copy';
           </mm-wavesurfer-regions>
         </mm-wavesurfer>
 
-        <nav class="tabs">
-          <tui-tabs
-            (activeItemIndexChange)="onSwitchTab($event)"
-            [(activeItemIndex)]="state.tabIndex">
-            <button [disabled]="!configured" tuiTab>Details</button>
-            <button [disabled]="!configured" tuiTab>
-              Transcription
-              <tui-badge
-                class="tui-space_bottom-2"
-                size="xs"
-                status="primary"
-                [value]="minutes.numSpeakers"></tui-badge>
-            </button>
-            <button [disabled]="!configured" tuiTab>Summary</button>
-            <button [disabled]="!configured" tuiTab>Preview</button>
-            <div style="flex: 2"></div>
-            <button tuiTab>
-              <tui-svg src="tuiIconSettings"></tui-svg>
-              Settings
-            </button>
-          </tui-tabs>
-        </nav>
+        <ng-container
+          *ngIf="status.working?.on !== 'transcription'; else transcribing">
+          <nav class="tabs">
+            <tui-tabs
+              (activeItemIndexChange)="onSwitchTab($event)"
+              [(activeItemIndex)]="state.tabIndex">
+              <button [disabled]="!configured" tuiTab>Details</button>
+              <button [disabled]="!configured" tuiTab>
+                Transcription
+                <tui-badge
+                  class="tui-space_bottom-2"
+                  size="xs"
+                  status="primary"
+                  [value]="minutes.numSpeakers"></tui-badge>
+              </button>
+              <button [disabled]="!configured" tuiTab>Summary</button>
+              <button [disabled]="!configured" tuiTab>Preview</button>
+              <div style="flex: 2"></div>
+              <button tuiTab>
+                <tui-svg src="tuiIconSettings"></tui-svg>
+                Settings
+              </button>
+            </tui-tabs>
+          </nav>
 
-        <mm-metadata
-          [ngClass]="{
-            data: true,
-            showing: configured && state.tabIndex === 0
-          }"
-          [minutes]="minutes" />
+          <mm-metadata
+            [ngClass]="{
+              data: true,
+              showing: configured && state.tabIndex === 0
+            }"
+            [minutes]="minutes" />
 
-        <tui-loader
-          [ngClass]="{
-            data: true,
-            showing: configured && state.tabIndex === 1
-          }"
-          [showLoader]="status.working?.on === 'transcription'"
-          mmHydrator>
           <mm-transcription
             (selected)="onTranscription($event)"
             [currentTx]="currentTx"
             [duration]="minutes.audio.duration"
+            [ngClass]="{
+              data: true,
+              showing: configured && state.tabIndex === 1
+            }"
             [status]="status"
-            [transcription]="transcription$ | async" />
-        </tui-loader>
+            [transcription]="transcription$ | async"
+            mmHydrator />
 
-        <tui-loader
-          [ngClass]="{
-            data: true,
-            showing: configured && state.tabIndex === 2
-          }"
-          [showLoader]="status.working?.on === 'summary'">
-          <mm-summary [status]="status" [summary]="summary$ | async" />
-        </tui-loader>
+          <tui-loader
+            [ngClass]="{
+              data: true,
+              showing: configured && state.tabIndex === 2
+            }"
+            [showLoader]="status.working?.on === 'summary'">
+            <mm-summary [status]="status" [summary]="summary$ | async" />
+          </tui-loader>
 
-        <mm-preview
-          [ngClass]="{
-            data: true,
-            showing: configured && state.tabIndex === 3
-          }"
-          [minutes]="minutes" />
+          <mm-preview
+            [ngClass]="{
+              data: true,
+              showing: configured && state.tabIndex === 3
+            }"
+            [minutes]="minutes" />
 
-        <mm-config
-          [ngClass]="{
-            data: true,
-            showing: !configured || state.tabIndex === 4
-          }"
-          [config]="config$ | async" />
+          <mm-config
+            [ngClass]="{
+              data: true,
+              showing: !configured || state.tabIndex === 4
+            }"
+            [config]="config$ | async" />
+        </ng-container>
 
         <footer *ngIf="!!status.working" class="footer">
           <label class="progress" tuiProgressLabel>
@@ -153,6 +153,51 @@ import deepCopy from 'deep-copy';
           </button>
         </footer>
       </main>
+
+      <ng-template #transcribing>
+        <tui-block-status>
+          <img tuiSlot="top" src="./assets/meeting.png" />
+
+          <h4>Transcription in progress ...</h4>
+
+          <p>
+            Speech-to-text transcription typically processes audio at 2x
+            realtime, although performance is not linear for very short or very
+            long recordings.
+          </p>
+
+          <p>
+            This transcription should take about
+            <b>
+              {{
+                dayjs()
+                  .add(minutes.audio.duration / 2, 'second')
+                  .fromNow(true)
+              }}
+            </b>
+            and complete at approximately
+            <b>
+              {{
+                dayjs(minutes.transcriptionStart)
+                  .add(minutes.audio.duration / 2, 'second')
+                  .format('hh:mm a')
+              }}
+            </b>
+            .
+          </p>
+
+          <p>
+            While it is running, the app can be closed or work can be performed
+            on another set of minutes. When these minutes are opened again, the
+            current progress will be shown.
+          </p>
+
+          <p>
+            The transcription can be canceled at anytime from the status bar
+            below.
+          </p>
+        </tui-block-status>
+      </ng-template>
     </tui-root>
 
     <ng-template #getStarted>
@@ -204,7 +249,9 @@ export class RootPage {
 
   constructor() {
     // 👇 initialize the component state
-    this.state = deepCopy(this.#store.selectSnapshot(ComponentState));
+    this.state = deepCopy(
+      this.#store.selectSnapshot<ComponentStateModel>(ComponentState)
+    );
     // 👇 monitor state changes
     this.#monitorConfigState();
     this.#monitorStatus();
@@ -281,7 +328,9 @@ export class RootPage {
         takeUntilDestroyed(this.#destroyRef),
         throttleTime(Constants.timeupdateThrottleInterval),
         map((ts: number) => {
-          const txs = this.#store.selectSnapshot(MinutesState.transcription);
+          const txs = this.#store.selectSnapshot<
+            (AgendaItem | Transcription)[]
+          >(MinutesState.transcription);
           return txs.find(
             (tx) => tx.type === 'TX' && ts >= tx.start && ts < tx.end
           );

@@ -57,7 +57,6 @@ export const Constants = {
   backoffOptions,
   bufferedDispatchDebounceTime: 1000,
   corsOptions,
-  filterThrottleInterval: 1000,
   maxRecentPaths: 32,
   maxSpeechWords: 250,
   maxUndoStackDepth: 7,

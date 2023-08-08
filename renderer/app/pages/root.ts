@@ -10,7 +10,9 @@ import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
 import { ControllerService } from '#mm/services/controller';
 import { DestroyRef } from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { HostListener } from '@angular/core';
+import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
 import { Observable } from 'rxjs';
@@ -27,10 +29,12 @@ import { Undo } from '#mm/state/undo';
 import { ViewChild } from '@angular/core';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 
+import { combineLatest } from 'rxjs';
 import { delay } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
+import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { throttleTime } from 'rxjs';
 
@@ -89,7 +93,8 @@ import deepCopy from 'deep-copy';
                 style="align-items: center; display: flex; margin-left: 1rem">
                 <tui-svg src="tuiIconFilter"></tui-svg>
                 <input
-                  [value]="state.txFilter"
+                  #txFilter
+                  (input)="onTxFilter()"
                   placeholder="Filter"
                   style="width: 5rem" />
               </article>
@@ -241,10 +246,8 @@ export class RootPage {
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
   @Select(StatusState) status$: Observable<StatusStateModel>;
   @Select(MinutesState.summary) summary$: Observable<Summary[]>;
-  @Select(MinutesState.transcription) transcription$: Observable<
-    (AgendaItem | Transcription)[]
-  >;
 
+  @ViewChild('txFilter') txFilter: ElementRef<HTMLInputElement>;
   @ViewChild(WaveSurferComponent) wavesurfer;
 
   configured: boolean;
@@ -252,17 +255,21 @@ export class RootPage {
   dayjs = dayjs;
   state: ComponentStateModel;
   status: StatusStateModel = StatusState.defaultStatus();
+  transcription$: Observable<(AgendaItem | Transcription)[]>;
 
   #controller = inject(ControllerService);
   #destroyRef = inject(DestroyRef);
   #store = inject(Store);
   #timeupdate$ = new Subject<number>();
+  #txFilter$ = new Subject<string>();
 
   constructor() {
     // 👇 initialize the component state
     this.state = deepCopy(
       this.#store.selectSnapshot<ComponentStateModel>(ComponentState)
     );
+    // 👇 the transcription state is lazy, depending on filter
+    this.transcription$ = this.#makeTranscription$();
     // 👇 monitor state changes
     this.#monitorConfigState();
     this.#monitorStatus();
@@ -308,8 +315,49 @@ export class RootPage {
     this.wavesurfer.wavesurfer.setTime(tx.start);
   }
 
+  onTxFilter(): void {
+    const txFilter = this.txFilter.nativeElement;
+    this.#txFilter$.next(txFilter.value);
+  }
+
   openMinutes(): void {
     this.#controller.openMinutes();
+  }
+
+  #makeTranscription$(): Observable<(AgendaItem | Transcription)[]> {
+    return combineLatest({
+      txs: this.#store.select(MinutesState.transcription),
+      // 👇 I don't think BehaviorSubject is a very good name!
+      filter: this.#txFilter$.pipe(startWith(''))
+    }).pipe(
+      // 🙈 https://stackoverflow.com/questions/55130781/debouncetime-only-after-first-value
+      throttleTime(Constants.filterThrottleInterval, undefined, {
+        leading: true,
+        trailing: true
+      }),
+      map(({ txs, filter }) => {
+        if (filter) {
+          filter = filter.toLowerCase();
+          const filtered = txs.filter(
+            (tx) =>
+              tx.type === 'AG' ||
+              (tx.type === 'TX' &&
+                (tx.speaker.toLowerCase().includes(filter) ||
+                  tx.speech.toLowerCase().includes(filter)))
+          );
+          // 👇 return a bogus AgendaItem if nothing matches
+          return filtered.length > 0
+            ? filtered
+            : [
+                {
+                  id: -1,
+                  title: `No transcriptions match the filter '${filter}'`,
+                  type: 'AG'
+                }
+              ];
+        } else return txs;
+      })
+    );
   }
 
   #monitorConfigState(): void {
@@ -339,10 +387,8 @@ export class RootPage {
         takeUntilDestroyed(this.#destroyRef),
         throttleTime(Constants.timeupdateThrottleInterval),
         map((ts: number) => {
-          const txs = this.#store.selectSnapshot<
-            (AgendaItem | Transcription)[]
-          >(MinutesState.transcription);
-          return txs.find(
+          const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
+          return minutes.transcription.find(
             (tx) => tx.type === 'TX' && ts >= tx.start && ts < tx.end
           );
         }),

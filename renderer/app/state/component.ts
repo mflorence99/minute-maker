@@ -17,7 +17,6 @@ export type ComponentStateModel = {
     volume: number;
   };
   tabIndex: number;
-  txFilter: string;
   wavesurfer: {
     minPxPerSec: number;
   };
@@ -32,7 +31,6 @@ export type ComponentStateModel = {
       volume: 1
     },
     tabIndex: 0,
-    txFilter: '',
     wavesurfer: {
       minPxPerSec: 1
     }

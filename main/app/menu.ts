@@ -144,14 +144,15 @@ export const menuTemplate = [
         enabled: false,
         id: MenuID.find,
         label: 'Find'
-      },
-      {
-        accelerator: 'CmdOrCtrl+H',
-        click: menuSelected,
-        enabled: false,
-        id: MenuID.replace,
-        label: 'Replace'
       }
+      // 🔥 replace not yet supported!
+      // {
+      //   accelerator: 'CmdOrCtrl+H',
+      //   click: menuSelected,
+      //   enabled: false,
+      //   id: MenuID.replace,
+      //   label: 'Replace'
+      // }
     ]
   },
   {

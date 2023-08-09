@@ -128,9 +128,7 @@ export class MenuService {
             break;
           case MenuID.replace:
             this.#store.dispatch(
-              new UpdateFindReplace({
-                doFind: false /* 🔥 doFind: true, withReplace: true */
-              })
+              new UpdateFindReplace({ doFind: true, withReplace: true })
             );
             break;
           case MenuID.save:

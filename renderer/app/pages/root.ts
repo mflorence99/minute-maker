@@ -9,11 +9,13 @@ import { ConfigStateModel } from '#mm/state/config';
 import { Constants } from '#mm/common';
 import { ControllerService } from '#mm/services/controller';
 import { DestroyRef } from '@angular/core';
+import { FindReplaceComponent } from '#mm/components/find-replace';
 import { HostListener } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
 import { Observable } from 'rxjs';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { Redo } from '#mm/state/undo';
 import { Select } from '@ngxs/store';
 import { SetComponentState } from '#mm/state/component';
@@ -21,9 +23,12 @@ import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { TabIndex } from '#mm/state/component';
 import { Transcription } from '#mm/common';
+import { TuiAlertService } from '@taiga-ui/core';
 import { Undo } from '#mm/state/undo';
+import { UpdateFindReplace } from '#mm/state/minutes';
 import { ViewChild } from '@angular/core';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 
@@ -251,8 +256,10 @@ export class RootPage {
   // eslint-disable-next-line @typescript-eslint/member-ordering
   TabIndex: typeof TabIndex = TabIndex;
 
+  #alerts = inject(TuiAlertService);
   #controller = inject(ControllerService);
   #destroyRef = inject(DestroyRef);
+  #findReplace$: Subscription;
   #store = inject(Store);
   #timeupdate$ = new Subject<number>();
 
@@ -342,9 +349,7 @@ export class RootPage {
         ),
         distinctUntilChanged()
       )
-      .subscribe((doFind) => {
-        console.log({ doFind });
-      });
+      .subscribe((show) => this.#showHideReplace(show));
   }
 
   #monitorStatus(): void {
@@ -376,5 +381,26 @@ export class RootPage {
       .subscribe((tx: Transcription) => {
         this.currentTx = tx;
       });
+  }
+
+  #showHideReplace(show: boolean): void {
+    // 👇 never more than one showing -- none at all if hiding!
+    if (this.#findReplace$) this.#findReplace$.unsubscribe();
+    if (show) {
+      this.#findReplace$ = this.#alerts
+        .open(new PolymorpheusComponent(FindReplaceComponent), {
+          label: 'Find and Replace',
+          status: 'info',
+          autoClose: false
+        })
+        .subscribe({
+          // 👇 this is the one way the doFind flag is reset:
+          //    when the find-replace panel is closed
+          complete: () =>
+            this.#store.dispatch(new UpdateFindReplace({ doFind: false }))
+        });
+    }
+    // 👇 cleanup subscription
+    else this.#findReplace$ = null;
   }
 }

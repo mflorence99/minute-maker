@@ -40,9 +40,9 @@ import WaveSurfer from 'wavesurfer.js';
           #media
           (ratechange)="onAudioChange()"
           (volumechange)="onAudioChange()"
-          [muted]="state.audio.muted"
-          [playbackRate]="state.audio.playbackRate"
-          [volume]="state.audio.volume"
+          [muted]="componentState.audio.muted"
+          [playbackRate]="componentState.audio.playbackRate"
+          [volume]="componentState.audio.volume"
           controls></audio>
 
         <button
@@ -56,7 +56,7 @@ import WaveSurfer from 'wavesurfer.js';
         <input
           #zoomer
           (input)="onZoom()"
-          [value]="state.wavesurfer.minPxPerSec"
+          [value]="componentState.wavesurfer.minPxPerSec"
           max="100"
           min="1"
           type="range" />
@@ -127,7 +127,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   /* eslint-enable @typescript-eslint/member-ordering */
 
-  state: ComponentStateModel;
+  componentState: ComponentStateModel;
   wavesurfer: WaveSurfer;
 
   #audioFile: string;
@@ -136,7 +136,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   constructor() {
     // 👇 initialize the component state
-    this.state = deepCopy(
+    this.componentState = deepCopy(
       this.#store.selectSnapshot<ComponentStateModel>(ComponentState)
     );
   }
@@ -166,7 +166,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     this.wavesurfer = WaveSurfer.create({
       container: this.wave.nativeElement,
       media: this.media.nativeElement,
-      minPxPerSec: this.state.wavesurfer.minPxPerSec,
+      minPxPerSec: this.componentState.wavesurfer.minPxPerSec,
       plugins: this.plugins$.map((plugin: WaveSurferPlugin) => plugin.create()),
       progressColor: '#c0c0c0',
       waveColor: '#880e4f', // 👈 --tui-accent
@@ -192,12 +192,12 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   onAudioChange(): void {
     const audio = this.media.nativeElement;
-    this.state.audio = {
+    this.componentState.audio = {
       muted: audio.muted,
       playbackRate: audio.playbackRate,
       volume: audio.volume
     };
-    this.#store.dispatch(new SetComponentState({ audio: this.state.audio }));
+    this.#store.dispatch(new SetComponentState({ audio: this.componentState.audio }));
   }
 
   onSkip(secsToSkip: number): void {
@@ -207,11 +207,11 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
   onZoom(): void {
     const zoomer = this.zoomer.nativeElement;
     this.wavesurfer.zoom(zoomer.valueAsNumber);
-    this.state.wavesurfer = {
+    this.componentState.wavesurfer = {
       minPxPerSec: zoomer.valueAsNumber
     };
     this.#store.dispatch(
-      new SetComponentState({ wavesurfer: this.state.wavesurfer })
+      new SetComponentState({ wavesurfer: this.componentState.wavesurfer })
     );
   }
 
@@ -228,7 +228,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
         // 👇 set the media state
         //    NOTE: can't set the playback rate until audio is loaded!
         const audio = this.media.nativeElement;
-        audio.playbackRate = this.state.audio.playbackRate;
+        audio.playbackRate = this.componentState.audio.playbackRate;
         this.#store.dispatch(new ClearStatus(working));
       });
       this.wavesurfer.load(this.#audioFile);

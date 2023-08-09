@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { ControllerService } from '#mm/services/controller';
 import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
+import { Minutes } from '#mm/common';
 import { Output } from '@angular/core';
 import { StatusStateModel } from '#mm/state/status';
 import { Transcription } from '#mm/common';
@@ -21,10 +22,14 @@ import scrollIntoView from 'scroll-into-view-if-needed';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-transcription',
   template: `
-    <table *ngIf="transcription.length > 0; else noTranscription">
+    <table *ngIf="minutes.transcription.length > 0; else noTranscription">
       <tbody>
         <ng-container
-          *ngFor="let tx of transcription; let ix = index; trackBy: trackByTx">
+          *ngFor="
+            let tx of minutes.transcription;
+            let ix = index;
+            trackBy: trackByTx
+          ">
           <tr
             #row="hydrated"
             (click)="onSelected(tx)"
@@ -90,7 +95,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                     "
                     [mmInsertable]="ix"
                     [mmJoinable]="
-                      transcription[ix + 1]?.type === 'TX' ? ix : null
+                      minutes.transcription[ix + 1]?.type === 'TX' ? ix : null
                     "
                     [mmRephraseable]="ix"
                     [mmSplittable]="ix"
@@ -145,8 +150,8 @@ export class TranscriptionComponent {
   /* eslint-disable @typescript-eslint/member-ordering */
 
   @Input({ required: true }) duration: number;
+  @Input({ required: true }) minutes: Minutes;
   @Input({ required: true }) status: StatusStateModel;
-  @Input({ required: true }) transcription: (AgendaItem | Transcription)[];
 
   @Output() selected = new EventEmitter<Transcription>();
 

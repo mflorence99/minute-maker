@@ -80,6 +80,7 @@ export const Constants = {
 export enum MenuID {
   close = 'menu/close',
   export = 'menu/export',
+  find = 'menu/find',
   insert = 'menu/insert',
   join = 'menu/join',
   new = 'menu/new',
@@ -89,6 +90,7 @@ export enum MenuID {
   remove = 'menu/remove',
   rephraseAccuracy = 'menu/rephrase/accuracy',
   rephraseBrevity = 'menu/rephrase/brevity',
+  replace = 'menu/replace',
   save = 'menu/save',
   saveAs = 'menu/saveAs',
   split = 'menu/split',
@@ -239,6 +241,11 @@ export const AgendaItemSchema = z.object({
   type: z.literal('AG')
 });
 
+export const FindReplaceSchema = z.object({
+  doFind: z.boolean().optional(),
+  withReplace: z.boolean().optional()
+});
+
 export const SummarySchema = z.object({
   section: z.string(),
   summary: z.string()
@@ -266,6 +273,7 @@ export const MinutesSchema = z.object({
   nextTranscriptionID: z.number(),
   numSpeakers: z.number(),
   present: z.string().array(),
+  findReplace: FindReplaceSchema.optional(),
   subject: z.string(),
   subtitle: z.string(),
   summary: SummarySchema.array(),
@@ -279,6 +287,8 @@ export const MinutesSchema = z.object({
 });
 
 export type AgendaItem = z.infer<typeof AgendaItemSchema>;
+
+export type FindReplace = z.infer<typeof FindReplaceSchema>;
 
 export type Minutes = z.infer<typeof MinutesSchema>;
 

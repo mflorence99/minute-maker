@@ -1,4 +1,3 @@
-import { AgendaItem } from '#mm/common';
 import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
 import { Clear as ClearUndoStacks } from '#mm/state/undo';
@@ -22,7 +21,6 @@ import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
-import { Summary } from '#mm/common';
 import { Transcription } from '#mm/common';
 import { Undo } from '#mm/state/undo';
 import { ViewChild } from '@angular/core';
@@ -74,7 +72,7 @@ import deepCopy from 'deep-copy';
           <nav class="tabs">
             <tui-tabs
               (activeItemIndexChange)="onSwitchTab($event)"
-              [(activeItemIndex)]="state.tabIndex">
+              [(activeItemIndex)]="componentState.tabIndex">
               <button [disabled]="!configured" tuiTab>Details</button>
               <button [disabled]="!configured" tuiTab>
                 Transcription
@@ -97,7 +95,7 @@ import deepCopy from 'deep-copy';
           <mm-metadata
             [ngClass]="{
               data: true,
-              showing: configured && state.tabIndex === 0
+              showing: configured && componentState.tabIndex === 0
             }"
             [minutes]="minutes" />
 
@@ -105,34 +103,34 @@ import deepCopy from 'deep-copy';
             (selected)="onTranscription($event)"
             [currentTx]="currentTx"
             [duration]="minutes.audio.duration"
+            [minutes]="minutes$ | async"
             [ngClass]="{
               data: true,
-              showing: configured && state.tabIndex === 1
+              showing: configured && componentState.tabIndex === 1
             }"
             [status]="status"
-            [transcription]="transcription$ | async"
             mmHydrator />
 
           <tui-loader
             [ngClass]="{
               data: true,
-              showing: configured && state.tabIndex === 2
+              showing: configured && componentState.tabIndex === 2
             }"
             [showLoader]="status.working?.on === 'summary'">
-            <mm-summary [status]="status" [summary]="summary$ | async" />
+            <mm-summary [minutes]="minutes$ | async" [status]="status" />
           </tui-loader>
 
           <mm-preview
             [ngClass]="{
               data: true,
-              showing: configured && state.tabIndex === 3
+              showing: configured && componentState.tabIndex === 3
             }"
             [minutes]="minutes" />
 
           <mm-config
             [ngClass]="{
               data: true,
-              showing: !configured || state.tabIndex === 4
+              showing: !configured || componentState.tabIndex === 4
             }"
             [config]="config$ | async" />
         </ng-container>
@@ -230,17 +228,13 @@ export class RootPage {
   @Select(ConfigState.configured) configured$: Observable<boolean>;
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
   @Select(StatusState) status$: Observable<StatusStateModel>;
-  @Select(MinutesState.summary) summary$: Observable<Summary[]>;
-  @Select(MinutesState.transcription) transcription$: Observable<
-    (AgendaItem | Transcription)[]
-  >;
 
   @ViewChild(WaveSurferComponent) wavesurfer;
 
+  componentState: ComponentStateModel;
   configured: boolean;
   currentTx: Transcription = null;
   dayjs = dayjs;
-  state: ComponentStateModel;
   status: StatusStateModel = StatusState.defaultStatus();
 
   #controller = inject(ControllerService);
@@ -250,7 +244,7 @@ export class RootPage {
 
   constructor() {
     // 👇 initialize the component state
-    this.state = deepCopy(
+    this.componentState = deepCopy(
       this.#store.selectSnapshot<ComponentStateModel>(ComponentState)
     );
     // 👇 monitor state changes
@@ -309,7 +303,7 @@ export class RootPage {
       .subscribe((configured) => {
         this.configured = configured;
         // 👇 force "settings" tab if not configured
-        if (!configured) this.state.tabIndex = 4;
+        if (!configured) this.componentState.tabIndex = 4;
       });
   }
 

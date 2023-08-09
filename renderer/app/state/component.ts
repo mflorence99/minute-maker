@@ -7,7 +7,7 @@ import { patch } from '@ngxs/store/operators';
 
 export class SetComponentState {
   static readonly type = '[Component] SetComponentState';
-  constructor(public state: Partial<ComponentStateModel>) {}
+  constructor(public componentState: Partial<ComponentStateModel>) {}
 }
 
 export type ComponentStateModel = {
@@ -46,8 +46,8 @@ export class ComponentState {
 
   @Action(SetComponentState) setComponentState(
     { setState }: StateContext<ComponentStateModel>,
-    { state }: SetComponentState
+    { componentState }: SetComponentState
   ): void {
-    setState(patch(state));
+    setState(patch(componentState));
   }
 }

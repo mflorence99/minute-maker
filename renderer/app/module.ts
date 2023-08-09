@@ -11,6 +11,7 @@ import { ConfigState } from '#mm/state/config';
 import { DateTimeTransformer } from '#mm/services/datetime-transformer';
 import { DragDroppableDirective } from '#mm/directives/drag-droppable';
 import { ErrorHandler } from '@angular/core';
+import { FindReplaceComponent } from '#mm/components/find-replace';
 import { HydratedDirective } from '#mm/directives/hydrated';
 import { HydratorDirective } from '#mm/directives/hydrator';
 import { InsertableDirective } from '#mm/directives/insertable';
@@ -41,6 +42,7 @@ import { TUI_DATE_FORMAT } from '@taiga-ui/cdk';
 import { TUI_DATE_SEPARATOR } from '@taiga-ui/cdk';
 import { TUI_DATE_TIME_VALUE_TRANSFORMER } from '@taiga-ui/kit';
 import { TUI_FIRST_DAY_OF_WEEK } from '@taiga-ui/core';
+import { TuiAlertModule } from '@taiga-ui/core';
 import { TuiBadgeModule } from '@taiga-ui/kit';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import { TuiButtonModule } from '@taiga-ui/core';
@@ -72,6 +74,7 @@ import isDev from '#mm/is-dev';
 
 const COMPONENTS = [
   ConfigComponent,
+  FindReplaceComponent,
   MetadataComponent,
   PreviewComponent,
   SummaryComponent,
@@ -136,6 +139,7 @@ const STATES_SAVED = [
     }),
     NgxsLoggerPluginModule.forRoot({ collapsed: false }),
     ReactiveFormsModule,
+    TuiAlertModule,
     TuiBadgeModule,
     TuiBlockStatusModule,
     TuiButtonModule,

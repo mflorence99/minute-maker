@@ -1,4 +1,6 @@
 import { Channels } from '#mm/common';
+import { ComponentState } from '#mm/state/component';
+import { ComponentStateModel } from '#mm/state/component';
 import { ControllerService } from '#mm/services/controller';
 import { Injectable } from '@angular/core';
 import { InsertableDirective } from '#mm/directives/insertable';
@@ -25,6 +27,7 @@ import { SubmenuItem } from '#mm/common';
 import { Undo } from '#mm/state/undo';
 import { UndoState } from '#mm/state/undo';
 import { UndoStateModel } from '#mm/state/undo';
+import { UpdateFindReplace } from '#mm/state/minutes';
 import { WINDOW } from '@ng-web-apis/common';
 
 import { inject } from '@angular/core';
@@ -37,6 +40,7 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
+  @Select(ComponentState) component$: Observable<ComponentStateModel>;
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
   @Select(RecentsState) recents$: Observable<RecentsStateModel>;
   @Select(StatusState) status$: Observable<StatusStateModel>;
@@ -48,6 +52,7 @@ export class MenuService {
 
   constructor() {
     this.#dispatch();
+    this.#monitorComponentState();
     this.#monitorElementState();
     this.#monitorMinutesState();
     this.#monitorRecentsState();
@@ -65,6 +70,9 @@ export class MenuService {
             break;
           case MenuID.export:
             this.#controller.exportMinutes();
+            break;
+          case MenuID.find:
+            this.#store.dispatch(new UpdateFindReplace({ doFind: true }));
             break;
           case MenuID.insert:
             {
@@ -116,6 +124,11 @@ export class MenuService {
               if (!isNaN(ix))
                 this.#controller.rephraseTranscription('brevity', ix);
             }
+            break;
+          case MenuID.replace:
+            this.#store.dispatch(
+              new UpdateFindReplace({ doFind: true, withReplace: true })
+            );
             break;
           case MenuID.save:
             this.#controller.saveMinutes();
@@ -181,6 +194,15 @@ export class MenuService {
     return Number(splittable?.mmSplittable ?? NaN);
   }
 
+  #monitorComponentState(): void {
+    this.component$.subscribe((componentState) => {
+      ipc.send(Channels.menuEnable, {
+        [MenuID.find]: componentState.tabIndex === 1,
+        [MenuID.replace]: componentState.tabIndex === 1
+      });
+    });
+  }
+
   #monitorElementState(): void {
     this.#window.addEventListener('pointerdown', (event: MouseEvent) => {
       const element = event.target as HTMLElement;
@@ -201,15 +223,15 @@ export class MenuService {
   }
 
   #monitorMinutesState(): void {
-    this.minutes$.subscribe((state) => {
+    this.minutes$.subscribe((minutes) => {
       ipc.send(Channels.menuEnable, {
-        [MenuID.close]: !!state,
-        [MenuID.export]: !!state?.transcription && !!state?.summary,
-        [MenuID.save]: !!state,
-        [MenuID.saveAs]: !!state,
-        [MenuID.summarizeBullets]: !!state,
-        [MenuID.summarizeParagraphs]: !!state,
-        [MenuID.transcribe]: !!state
+        [MenuID.close]: !!minutes,
+        [MenuID.export]: !!minutes?.transcription && !!minutes?.summary,
+        [MenuID.save]: !!minutes,
+        [MenuID.saveAs]: !!minutes,
+        [MenuID.summarizeBullets]: !!minutes,
+        [MenuID.summarizeParagraphs]: !!minutes,
+        [MenuID.transcribe]: !!minutes
       });
     });
   }

@@ -138,7 +138,20 @@ export const menuTemplate = [
       { role: 'copy' },
       { role: 'paste' },
       { type: 'separator' },
-      { role: 'selectAll' }
+      {
+        accelerator: 'CmdOrCtrl+F',
+        click: menuSelected,
+        enabled: false,
+        id: MenuID.find,
+        label: 'Find'
+      },
+      {
+        accelerator: 'CmdOrCtrl+H',
+        click: menuSelected,
+        enabled: false,
+        id: MenuID.replace,
+        label: 'Replace'
+      }
     ]
   },
   {

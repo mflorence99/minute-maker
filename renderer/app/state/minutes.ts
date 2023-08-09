@@ -1,5 +1,6 @@
 import { Action } from '@ngxs/store';
 import { AgendaItem } from '#mm/common';
+import { FindReplace } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Selector } from '@ngxs/store';
@@ -113,6 +114,11 @@ export class UpdateChanges extends UndoableAction {
   ) {
     super(undoing);
   }
+}
+
+export class UpdateFindReplace {
+  static readonly type = '[Minutes] UpdateFindReplace';
+  constructor(public findReplace: Partial<FindReplace>) {}
 }
 
 export class UpdateSummary extends UndoableAction {
@@ -297,8 +303,12 @@ export class MinutesState {
   // //////////////////////////////////////////////////////////////////////////
 
   // 👇 NOTE: utility action, as not all have to be set at once
-  @Action(SetMinutes) setMinutes({ setState }, { minutes }: SetMinutes): void {
-    if (minutes.audio) setState({ audio: patch(minutes.audio) });
+  @Action(SetMinutes) setMinutes(
+    { patchState, setState },
+    { minutes }: SetMinutes
+  ): void {
+    if (minutes.audio) patchState({ audio: patch(minutes.audio) });
+    if (minutes.findReplace) patchState({ findReplace: patch(minutes.audio) });
     setState(patch(minutes));
   }
 
@@ -360,24 +370,6 @@ export class MinutesState {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟪 @Select(MinutesState.summary) summary$
-  // //////////////////////////////////////////////////////////////////////////
-
-  @Selector() static summary(minutes: MinutesStateModel): Summary[] {
-    return minutes?.summary ?? [];
-  }
-
-  // //////////////////////////////////////////////////////////////////////////
-  // 🟪 @Select(MinutesState.transcription) transcription$
-  // //////////////////////////////////////////////////////////////////////////
-
-  @Selector() static transcription(
-    minutes: MinutesStateModel
-  ): (AgendaItem | Transcription)[] {
-    return minutes?.transcription ?? [];
-  }
-
-  // //////////////////////////////////////////////////////////////////////////
   // 🟪 @Select(MinutesState.transcriptionName) transcriptionName$
   // //////////////////////////////////////////////////////////////////////////
 
@@ -436,6 +428,20 @@ export class MinutesState {
       // 👇 now do the action
       setState(patch(changes));
     }
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 UpdateFindReplace
+  // //////////////////////////////////////////////////////////////////////////
+
+  // 👇 NOTE: utility action, as not all have to be set at once
+  @Action(UpdateFindReplace) updateFindReplace(
+    { getState, setState },
+    { findReplace }: UpdateFindReplace
+  ): void {
+    if (getState().findReplace)
+      setState(patch({ findReplace: patch(findReplace) }));
+    else setState(patch({ findReplace }));
   }
 
   // //////////////////////////////////////////////////////////////////////////

@@ -4,9 +4,9 @@ import { Component } from '@angular/core';
 import { ControllerService } from '#mm/services/controller';
 import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
+import { Minutes } from '#mm/common';
 import { Output } from '@angular/core';
 import { StatusStateModel } from '#mm/state/status';
-import { Summary } from '#mm/common';
 import { SummaryStrategy } from '#mm/common';
 import { UpdateSummary } from '#mm/state/minutes';
 
@@ -16,10 +16,14 @@ import { inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-summary',
   template: `
-    <table *ngIf="summary.length > 0; else noSummary">
+    <table *ngIf="minutes.summary.length > 0; else noSummary">
       <tbody>
         <tr
-          *ngFor="let summ of summary; let ix = index; trackBy: trackByIx"
+          *ngFor="
+            let summ of minutes.summary;
+            let ix = index;
+            trackBy: trackByIx
+          "
           (click)="selected.emit((summIndex = ix))"
           [ngClass]="{ selected: ix === summIndex }">
           <td width="100%">
@@ -83,8 +87,8 @@ import { inject } from '@angular/core';
 export class SummaryComponent {
   /* eslint-disable @typescript-eslint/member-ordering */
 
+  @Input({ required: true }) minutes: Minutes;
   @Input({ required: true }) status: StatusStateModel;
-  @Input({ required: true }) summary: Summary[];
 
   @Output() selected = new EventEmitter<number>();
 

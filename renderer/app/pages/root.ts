@@ -21,15 +21,18 @@ import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
+import { TabIndex } from '#mm/state/component';
 import { Transcription } from '#mm/common';
 import { Undo } from '#mm/state/undo';
 import { ViewChild } from '@angular/core';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 
+import { combineLatest } from 'rxjs';
 import { delay } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
+import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { throttleTime } from 'rxjs';
 
@@ -70,6 +73,7 @@ import deepCopy from 'deep-copy';
         <ng-container
           *ngIf="status.working?.on !== 'transcription'; else transcribing">
           <nav class="tabs">
+            <!-- 🔥 tabs can only be referenced by number, not name so be sure to change the TabIndex enum if you change the tab order -->
             <tui-tabs
               (activeItemIndexChange)="onSwitchTab($event)"
               [(activeItemIndex)]="componentState.tabIndex">
@@ -95,7 +99,8 @@ import deepCopy from 'deep-copy';
           <mm-metadata
             [ngClass]="{
               data: true,
-              showing: configured && componentState.tabIndex === 0
+              showing:
+                configured && componentState.tabIndex === TabIndex.details
             }"
             [minutes]="minutes" />
 
@@ -106,7 +111,8 @@ import deepCopy from 'deep-copy';
             [minutes]="minutes$ | async"
             [ngClass]="{
               data: true,
-              showing: configured && componentState.tabIndex === 1
+              showing:
+                configured && componentState.tabIndex === TabIndex.transcription
             }"
             [status]="status"
             mmHydrator />
@@ -114,7 +120,8 @@ import deepCopy from 'deep-copy';
           <tui-loader
             [ngClass]="{
               data: true,
-              showing: configured && componentState.tabIndex === 2
+              showing:
+                configured && componentState.tabIndex === TabIndex.summary
             }"
             [showLoader]="status.working?.on === 'summary'">
             <mm-summary [minutes]="minutes$ | async" [status]="status" />
@@ -123,14 +130,16 @@ import deepCopy from 'deep-copy';
           <mm-preview
             [ngClass]="{
               data: true,
-              showing: configured && componentState.tabIndex === 3
+              showing:
+                configured && componentState.tabIndex === TabIndex.preview
             }"
             [minutes]="minutes" />
 
           <mm-config
             [ngClass]="{
               data: true,
-              showing: !configured || componentState.tabIndex === 4
+              showing:
+                !configured || componentState.tabIndex === TabIndex.settings
             }"
             [config]="config$ | async" />
         </ng-container>
@@ -224,6 +233,7 @@ import deepCopy from 'deep-copy';
 })
 export class RootPage {
   @Select(AppState) app$: Observable<AppStateModel>;
+  @Select(ComponentState) component$: Observable<ComponentStateModel>;
   @Select(ConfigState) config$: Observable<ConfigStateModel>;
   @Select(ConfigState.configured) configured$: Observable<boolean>;
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
@@ -237,6 +247,10 @@ export class RootPage {
   dayjs = dayjs;
   status: StatusStateModel = StatusState.defaultStatus();
 
+  // 👇 just to reference the enum in the template
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  TabIndex: typeof TabIndex = TabIndex;
+
   #controller = inject(ControllerService);
   #destroyRef = inject(DestroyRef);
   #store = inject(Store);
@@ -249,6 +263,7 @@ export class RootPage {
     );
     // 👇 monitor state changes
     this.#monitorConfigState();
+    this.#monitorFindReplace();
     this.#monitorStatus();
     this.#monitorWaveSurfer();
   }
@@ -303,7 +318,32 @@ export class RootPage {
       .subscribe((configured) => {
         this.configured = configured;
         // 👇 force "settings" tab if not configured
-        if (!configured) this.componentState.tabIndex = 4;
+        if (!configured) this.componentState.tabIndex = TabIndex.settings;
+      });
+  }
+
+  #monitorFindReplace(): void {
+    combineLatest({
+      componentState: this.component$,
+      minutes: this.minutes$
+    })
+      .pipe(
+        takeUntilDestroyed(this.#destroyRef),
+        startWith({
+          componentState:
+            this.#store.selectSnapshot<ComponentStateModel>(ComponentState),
+          minutes: this.#store.selectSnapshot(MinutesState)
+        }),
+        map(
+          ({ componentState, minutes }) =>
+            // 🔥 find/replace only works for transcriptions
+            componentState.tabIndex === TabIndex.transcription &&
+            !!minutes?.findReplace?.doFind
+        ),
+        distinctUntilChanged()
+      )
+      .subscribe((doFind) => {
+        console.log({ doFind });
       });
   }
 
@@ -321,7 +361,10 @@ export class RootPage {
     this.#timeupdate$
       .pipe(
         takeUntilDestroyed(this.#destroyRef),
-        throttleTime(Constants.timeupdateThrottleInterval),
+        throttleTime(Constants.timeupdateThrottleInterval, undefined, {
+          leading: true,
+          trailing: true
+        }),
         map((ts: number) => {
           const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
           return minutes.transcription.find(

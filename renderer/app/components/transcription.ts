@@ -22,7 +22,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-transcription',
   template: `
-    <table *ngIf="minutes.transcription.length > 0; else noTranscription">
+    <table *ngIf="minutes.transcription?.length > 0; else noTranscription">
       <tbody>
         <ng-container
           *ngFor="

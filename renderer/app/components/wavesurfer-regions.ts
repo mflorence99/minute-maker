@@ -98,7 +98,10 @@ export class WaveSurferRegionsComponent
       this.wavesurfer.timeupdate
         .pipe(
           takeUntilDestroyed(this.#destroyRef),
-          throttleTime(Constants.timeupdateThrottleInterval),
+          throttleTime(Constants.timeupdateThrottleInterval, undefined, {
+            leading: true,
+            trailing: true
+          }),
           map((ts: number) =>
             this.plugin
               .getRegions()

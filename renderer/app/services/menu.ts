@@ -24,12 +24,14 @@ import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { SubmenuItem } from '#mm/common';
+import { TabIndex } from '#mm/state/component';
 import { Undo } from '#mm/state/undo';
 import { UndoState } from '#mm/state/undo';
 import { UndoStateModel } from '#mm/state/undo';
 import { UpdateFindReplace } from '#mm/state/minutes';
 import { WINDOW } from '@ng-web-apis/common';
 
+import { combineLatest } from 'rxjs';
 import { inject } from '@angular/core';
 
 // 🙈 preload.ts
@@ -52,7 +54,6 @@ export class MenuService {
 
   constructor() {
     this.#dispatch();
-    this.#monitorComponentState();
     this.#monitorElementState();
     this.#monitorMinutesState();
     this.#monitorRecentsState();
@@ -127,7 +128,9 @@ export class MenuService {
             break;
           case MenuID.replace:
             this.#store.dispatch(
-              new UpdateFindReplace({ doFind: true, withReplace: true })
+              new UpdateFindReplace({
+                doFind: false /* 🔥 doFind: true, withReplace: true */
+              })
             );
             break;
           case MenuID.save:
@@ -194,15 +197,6 @@ export class MenuService {
     return Number(splittable?.mmSplittable ?? NaN);
   }
 
-  #monitorComponentState(): void {
-    this.component$.subscribe((componentState) => {
-      ipc.send(Channels.menuEnable, {
-        [MenuID.find]: componentState.tabIndex === 1,
-        [MenuID.replace]: componentState.tabIndex === 1
-      });
-    });
-  }
-
   #monitorElementState(): void {
     this.#window.addEventListener('pointerdown', (event: MouseEvent) => {
       const element = event.target as HTMLElement;
@@ -223,10 +217,17 @@ export class MenuService {
   }
 
   #monitorMinutesState(): void {
-    this.minutes$.subscribe((minutes) => {
+    combineLatest({
+      componentState: this.component$,
+      minutes: this.minutes$
+    }).subscribe(({ componentState, minutes }) => {
       ipc.send(Channels.menuEnable, {
         [MenuID.close]: !!minutes,
         [MenuID.export]: !!minutes?.transcription && !!minutes?.summary,
+        [MenuID.find]:
+          componentState.tabIndex === TabIndex.transcription && !!minutes,
+        [MenuID.replace]:
+          componentState.tabIndex === TabIndex.transcription && !!minutes,
         [MenuID.save]: !!minutes,
         [MenuID.saveAs]: !!minutes,
         [MenuID.summarizeBullets]: !!minutes,

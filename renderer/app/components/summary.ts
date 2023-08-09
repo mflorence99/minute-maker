@@ -16,7 +16,7 @@ import { inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-summary',
   template: `
-    <table *ngIf="minutes.summary.length > 0; else noSummary">
+    <table *ngIf="minutes.summary?.length > 0; else noSummary">
       <tbody>
         <tr
           *ngFor="

@@ -36,13 +36,14 @@ import scrollIntoView from 'scroll-into-view-if-needed';
             [mmHydrated]="'TX' + tx.id"
             [ngClass]="{ selected: tx.id === currentTx?.id }"
             [id]="'TX' + tx.id">
-            <ng-container *ngIf="tx.type === 'AG'">
+            <ng-container *ngIf="tx.type === 'AG' && row.isHydrated">
               <td colspan="3" width="100%">
                 <textarea
                   #agendaItemTitle
                   (input)="
                     updateAgendaItem({ title: agendaItemTitle.value }, ix)
                   "
+                  [mmHighlight]="'or'"
                   [mmRemovable]="ix"
                   [value]="tx.title"
                   autocomplete="off"
@@ -73,6 +74,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                       ix
                     )
                   "
+                  [mmHighlight]="'Florence'"
                   [value]="tx.speaker"
                   style="font-weight: bold; width: 7rem" />
               </td>
@@ -104,6 +106,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                     autocomplete="off"
                     autocorrect="on"
                     autosize
+                    [mmHighlight]="'and'"
                     spellcheck="true"
                     style="width: calc(100% - 1rem)"
                     wrap="soft"></textarea>

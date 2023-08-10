@@ -13,6 +13,7 @@ import { DragDroppableDirective } from '#mm/directives/drag-droppable';
 import { ErrorHandler } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { FindReplaceComponent } from '#mm/components/find-replace';
+import { HighlightDirective } from '#mm/directives/highlight';
 import { HydratedDirective } from '#mm/directives/hydrated';
 import { HydratorDirective } from '#mm/directives/hydrator';
 import { InsertableDirective } from '#mm/directives/insertable';
@@ -89,6 +90,7 @@ const COMPONENTS = [
 
 const DIRECTIVES = [
   DragDroppableDirective,
+  HighlightDirective,
   HydratedDirective,
   HydratorDirective,
   InsertableDirective,

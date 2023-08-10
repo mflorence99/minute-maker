@@ -70,6 +70,7 @@
     "@angular/router": "^16",
     "@inquirer/prompts": "^3",
     "@ng-web-apis/common": "^3",
+    "@ng-web-apis/resize-observer": "^3",
     "@ngxs/devtools-plugin": "^3",
     "@ngxs/logger-plugin": "^3",
     "@ngxs/router-plugin": "^3",

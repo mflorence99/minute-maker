@@ -1,4 +1,5 @@
 import { AfterViewInit } from '@angular/core';
+import { AudioState } from '#mm/state/component';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ClearStatus } from '#mm/state/status';
 import { Component } from '@angular/core';
@@ -38,8 +39,13 @@ import WaveSurfer from 'wavesurfer.js';
       <nav>
         <audio
           #media
-          (ratechange)="onAudioChange()"
-          (volumechange)="onAudioChange()"
+          (ratechange)="
+            onAudioChange({
+              muted: media.muted,
+              playbackRate: media.playbackRate
+            })
+          "
+          (volumechange)="onAudioChange({ volume: media.volume })"
           [muted]="componentState.audio.muted"
           [playbackRate]="componentState.audio.playbackRate"
           [volume]="componentState.audio.volume"
@@ -55,7 +61,7 @@ import WaveSurfer from 'wavesurfer.js';
 
         <input
           #zoomer
-          (input)="onZoom()"
+          (input)="onZoom(zoomer.valueAsNumber)"
           [value]="componentState.wavesurfer.minPxPerSec"
           max="100"
           min="1"
@@ -190,29 +196,19 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     this.wavesurfer.destroy();
   }
 
-  onAudioChange(): void {
-    const audio = this.media.nativeElement;
-    this.componentState.audio = {
-      muted: audio.muted,
-      playbackRate: audio.playbackRate,
-      volume: audio.volume
-    };
-    this.#store.dispatch(new SetComponentState({ audio: this.componentState.audio }));
+  onAudioChange(changes: Partial<AudioState>): void {
+    const state = { ...this.componentState.audio, ...changes };
+    this.#store.dispatch(new SetComponentState({ audio: state }));
   }
 
   onSkip(secsToSkip: number): void {
     this.wavesurfer.setTime(this.wavesurfer.getCurrentTime() + secsToSkip);
   }
 
-  onZoom(): void {
-    const zoomer = this.zoomer.nativeElement;
-    this.wavesurfer.zoom(zoomer.valueAsNumber);
-    this.componentState.wavesurfer = {
-      minPxPerSec: zoomer.valueAsNumber
-    };
-    this.#store.dispatch(
-      new SetComponentState({ wavesurfer: this.componentState.wavesurfer })
-    );
+  onZoom(minPxPerSec: number): void {
+    this.wavesurfer.zoom(minPxPerSec);
+    const state = { ...this.componentState.wavesurfer, minPxPerSec };
+    this.#store.dispatch(new SetComponentState({ wavesurfer: state }));
   }
 
   #loadAudioFile(): void {

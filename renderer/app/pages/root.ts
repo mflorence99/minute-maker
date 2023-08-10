@@ -122,13 +122,16 @@ import deepCopy from 'deep-copy';
             [status]="status"
             mmHydrator />
 
+          <!-- 🔥 we don't strictly need to make the symmary hydrateable, but it makes autosize work on the textareas -->
+
           <tui-loader
             [ngClass]="{
               data: true,
               showing:
                 configured && componentState.tabIndex === TabIndex.summary
             }"
-            [showLoader]="status.working?.on === 'summary'">
+            [showLoader]="status.working?.on === 'summary'"
+            mmHydrator>
             <mm-summary [minutes]="minutes$ | async" [status]="status" />
           </tui-loader>
 
@@ -389,7 +392,7 @@ export class RootPage {
     if (show) {
       this.#findReplace$ = this.#alerts
         .open(new PolymorpheusComponent(FindReplaceComponent), {
-          label: 'Find and Replace',
+          label: 'Search Transcription',
           status: 'info',
           autoClose: false
         })

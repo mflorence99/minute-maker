@@ -10,6 +10,12 @@ export class SetComponentState {
   constructor(public componentState: Partial<ComponentStateModel>) {}
 }
 
+export type AudioState = {
+  muted: boolean;
+  playbackRate: number;
+  volume: number;
+};
+
 // 🔥 tabs can only be referenced by number, not name so be sure
 //    to change this enum if you change the tab order
 
@@ -21,16 +27,14 @@ export enum TabIndex {
   settings = 4
 }
 
+export type WavesurferState = {
+  minPxPerSec: number;
+};
+
 export type ComponentStateModel = {
-  audio: {
-    muted: boolean;
-    playbackRate: number;
-    volume: number;
-  };
+  audio: AudioState;
   tabIndex: TabIndex;
-  wavesurfer: {
-    minPxPerSec: number;
-  };
+  wavesurfer: WavesurferState;
 };
 
 @State<ComponentStateModel>({

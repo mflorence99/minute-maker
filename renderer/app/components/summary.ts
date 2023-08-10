@@ -19,14 +19,16 @@ import { inject } from '@angular/core';
     <table *ngIf="minutes.summary?.length > 0; else noSummary">
       <tbody>
         <tr
+          #row="hydrated"
           *ngFor="
             let summ of minutes.summary;
             let ix = index;
             trackBy: trackByIx
           "
           (click)="selected.emit((summIndex = ix))"
+          [mmHydrated]="'IX' + ix"
           [ngClass]="{ selected: ix === summIndex }">
-          <td width="100%">
+          <td *ngIf="row.isHydrated" width="100%">
             <article *ngIf="summ.section" class="heading">
               {{ summ.section }}
             </article>

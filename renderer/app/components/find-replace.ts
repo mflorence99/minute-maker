@@ -17,7 +17,7 @@ import { Select } from '@ngxs/store';
     <article *ngIf="minutes$ | async as minutes">
       <input
         #finder
-        (input)="onFind(finder.value, minutes)"
+        (input.throttled)="onFind(finder.value, minutes)"
         style="border: 1px solid gray"
         value="" />
       <div>{{ numMatches }} results</div>
@@ -31,6 +31,7 @@ export class FindReplaceComponent {
   numMatches = 0;
 
   onFind(value: string, minutes: Minutes): void {
+    console.log({ searchString: value });
     const regex = new RegExp(value, 'gi');
     this.numMatches = (minutes.transcription ?? []).reduce((acc, tx) => {
       if (tx.type === 'TX') {

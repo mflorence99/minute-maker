@@ -11,6 +11,7 @@ import { ConfigState } from '#mm/state/config';
 import { DateTimeTransformer } from '#mm/services/datetime-transformer';
 import { DragDroppableDirective } from '#mm/directives/drag-droppable';
 import { ErrorHandler } from '@angular/core';
+import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { FindReplaceComponent } from '#mm/components/find-replace';
 import { HydratedDirective } from '#mm/directives/hydrated';
 import { HydratorDirective } from '#mm/directives/hydrator';
@@ -37,6 +38,7 @@ import { StatusState } from '#mm/state/status';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
 import { StorageEngine } from '#mm/state/storage-engine';
 import { SummaryComponent } from '#mm/components/summary';
+import { ThrottledEventPlugin } from '#mm/services/throttled-event';
 import { TranscriptionComponent } from '#mm/components/transcription';
 import { TUI_DATE_FORMAT } from '@taiga-ui/cdk';
 import { TUI_DATE_SEPARATOR } from '@taiga-ui/cdk';
@@ -169,6 +171,11 @@ const STATES_SAVED = [
         logErrors: true,
         showDialog: false
       })
+    },
+    {
+      provide: EVENT_MANAGER_PLUGINS,
+      useClass: ThrottledEventPlugin,
+      multi: true
     },
     {
       provide: STORAGE_ENGINE,

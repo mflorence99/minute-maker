@@ -1,4 +1,3 @@
-import { BufferedDispatcherService } from '#mm/services/buffered-dispatcher';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ControllerService } from '#mm/services/controller';
@@ -7,6 +6,7 @@ import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Output } from '@angular/core';
 import { StatusStateModel } from '#mm/state/status';
+import { Store } from '@ngxs/store';
 import { SummaryStrategy } from '#mm/common';
 import { UpdateSummary } from '#mm/state/minutes';
 
@@ -35,7 +35,7 @@ import { inject } from '@angular/core';
 
             <textarea
               #summText
-              (input)="updateSummary({ summary: summText.value }, ix)"
+              (input.throttled)="updateSummary({ summary: summText.value }, ix)"
               [useImportant]="true"
               [value]="summ.summary"
               autocomplete="off"
@@ -98,8 +98,8 @@ export class SummaryComponent {
 
   summIndex = 0;
 
-  #bufferedDispatcher = inject(BufferedDispatcherService);
   #controller = inject(ControllerService);
+  #store = inject(Store);
 
   summarizeMinutes(summaryStrategy: SummaryStrategy): void {
     this.#controller.summarizeMinutes(summaryStrategy);
@@ -111,7 +111,6 @@ export class SummaryComponent {
   }
 
   updateSummary(update: any, ix: number): void {
-    const action = new UpdateSummary(update, ix);
-    this.#bufferedDispatcher.dispatch(action);
+    this.#store.dispatch(new UpdateSummary(update, ix));
   }
 }

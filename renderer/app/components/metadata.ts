@@ -1,4 +1,3 @@
-import { BufferedDispatcherService } from '#mm/services/buffered-dispatcher';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -8,6 +7,7 @@ import { Minutes } from '#mm/common';
 import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { UpdateChanges } from '#mm/state/minutes';
 import { Validators } from '@angular/forms';
 
@@ -86,7 +86,7 @@ export class MetadataComponent implements OnChanges, OnInit {
 
   metadata: FormGroup;
 
-  #bufferedDispatcher = inject(BufferedDispatcherService);
+  #store = inject(Store);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (Object.values(changes).some((change) => !change.firstChange)) {
@@ -124,7 +124,7 @@ export class MetadataComponent implements OnChanges, OnInit {
     });
     // 👇 watch for changes and update accordingly
     this.metadata.valueChanges.subscribe((details) =>
-      this.#bufferedDispatcher.dispatch(new UpdateChanges(details))
+      this.#store.dispatch(new UpdateChanges(details))
     );
   }
 }

@@ -244,6 +244,7 @@ export const AgendaItemSchema = z.object({
 
 export const FindReplaceSchema = z.object({
   doFind: z.boolean().optional(),
+  searchString: z.string().optional(),
   withReplace: z.boolean().optional()
 });
 

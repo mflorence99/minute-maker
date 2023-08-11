@@ -1,4 +1,3 @@
-import { BufferedDispatcherService } from '#mm/services/buffered-dispatcher';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ConfigStateModel } from '#mm/state/config';
@@ -8,6 +7,7 @@ import { Input } from '@angular/core';
 import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { SimpleChanges } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { UpdateChanges } from '#mm/state/config';
 import { Validators } from '@angular/forms';
 
@@ -76,7 +76,7 @@ export class ConfigComponent implements OnChanges, OnInit {
 
   configForm: FormGroup;
 
-  #bufferedDispatcher = inject(BufferedDispatcherService);
+  #store = inject(Store);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (Object.values(changes).some((change) => !change.firstChange))
@@ -118,7 +118,7 @@ export class ConfigComponent implements OnChanges, OnInit {
     tuiMarkControlAsTouchedAndValidate(this.configForm);
     // 👇 watch for changes and update accordingly
     this.configForm.valueChanges.subscribe((changes) =>
-      this.#bufferedDispatcher.dispatch(new UpdateChanges(changes))
+      this.#store.dispatch(new UpdateChanges(changes))
     );
   }
 }

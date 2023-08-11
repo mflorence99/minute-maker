@@ -2,8 +2,10 @@ import { Directive } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { HostListener } from '@angular/core';
 import { Input } from '@angular/core';
+import { OnChanges } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { SimpleChanges } from '@angular/core';
 import { WINDOW } from '@ng-web-apis/common';
 
 import { inject } from '@angular/core';
@@ -11,12 +13,11 @@ import { inject } from '@angular/core';
 @Directive({
   selector: 'input[mmHighlight], textarea[mmHighlight]'
 })
-export class HighlightDirective implements OnDestroy, OnInit {
-  @Input({ required: true }) mmHighlight: string;
+export class HighlightDirective implements OnChanges, OnDestroy, OnInit {
+  @Input() mmHighlight: string;
 
-  // 👇 not what we do in other directives, but this is all about DOM
-  #host = inject(ElementRef).nativeElement;
   #observer: ResizeObserver;
+  #textarea = inject(ElementRef).nativeElement; // 👈 textarea or input
   #underlay: HTMLDivElement;
   #window = inject(WINDOW);
 
@@ -25,24 +26,29 @@ export class HighlightDirective implements OnDestroy, OnInit {
   }
 
   @HostListener('input') onInput(): void {
-    this.#underlay.innerHTML = this.#toHTML(this.#host.value);
+    this.#underlay.innerHTML = this.#toHTML(this.#textarea.value);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (Object.values(changes).some((change) => !change.firstChange))
+      this.#underlay.innerHTML = this.#toHTML(this.#textarea.value);
   }
 
   ngOnDestroy(): void {
-    this.#observer.unobserve(this.#host);
+    this.#observer.unobserve(this.#textarea);
     this.#underlay.remove();
   }
 
   ngOnInit(): void {
     this.#underlay = this.#makeUnderlay();
-    this.#observer.observe(this.#host);
+    this.#observer.observe(this.#textarea);
   }
 
   #makeResizeObserver(): ResizeObserver {
     return new ResizeObserver((entries) => {
       entries
         // 👇 make sure there's only one, our host!
-        .filter((entry) => entry.target === this.#host)
+        .filter((entry) => entry.target === this.#textarea)
         .forEach((entry) => {
           this.#underlay.style.height = `${entry.contentBoxSize[0].blockSize}px`;
           this.#underlay.style.left = `${entry.contentRect.x}px`;
@@ -54,10 +60,11 @@ export class HighlightDirective implements OnDestroy, OnInit {
 
   #makeUnderlay(): HTMLDivElement {
     const div = this.#window.document.createElement('div');
-    this.#host.parentElement.style.position = 'relative';
-    this.#host.parentElement.appendChild(div);
-    div.innerHTML = this.#toHTML(this.#host.value);
-    const style = this.#window.getComputedStyle(this.#host);
+    this.#textarea.parentElement.style.position = 'relative';
+    this.#textarea.parentElement.appendChild(div);
+    div.innerHTML = this.#toHTML(this.#textarea.value);
+    // 👇 just the essentials for now
+    const style = this.#window.getComputedStyle(this.#textarea);
     div.style.color = style.backgroundColor;
     div.style.fontSize = style.fontSize;
     div.style.fontWeight = style.fontWeight;
@@ -71,11 +78,10 @@ export class HighlightDirective implements OnDestroy, OnInit {
 
   #toHTML(text: string): string {
     let html = text.replaceAll('\n', '<br />');
-    if (this.mmHighlight)
-      html = html.replaceAll(
-        this.mmHighlight,
-        `<mark>${this.mmHighlight}</mark>`
-      );
+    if (this.mmHighlight) {
+      const regex = new RegExp(this.mmHighlight, 'gi');
+      html = html.replaceAll(regex, `<mark>${this.mmHighlight}</mark>`);
+    }
     return html;
   }
 }

@@ -1,5 +1,4 @@
 import { AgendaItem } from '#mm/common';
-import { BufferedDispatcherService } from '#mm/services/buffered-dispatcher';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ControllerService } from '#mm/services/controller';
@@ -8,6 +7,7 @@ import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Output } from '@angular/core';
 import { StatusStateModel } from '#mm/state/status';
+import { Store } from '@ngxs/store';
 import { Transcription } from '#mm/common';
 import { UpdateAgendaItem } from '#mm/state/minutes';
 import { UpdateTranscription } from '#mm/state/minutes';
@@ -40,10 +40,10 @@ import scrollIntoView from 'scroll-into-view-if-needed';
               <td colspan="3" width="100%">
                 <textarea
                   #agendaItemTitle
-                  (input)="
+                  (input.throttled)="
                     updateAgendaItem({ title: agendaItemTitle.value }, ix)
                   "
-                  [mmHighlight]="'or'"
+                  [mmHighlight]="searchString()"
                   [mmRemovable]="ix"
                   [value]="tx.title"
                   autocomplete="off"
@@ -68,13 +68,13 @@ import scrollIntoView from 'scroll-into-view-if-needed';
               <td>
                 <input
                   #transcriptionSpeaker
-                  (input)="
+                  (input.throttled)="
                     updateTranscription(
                       { speaker: transcriptionSpeaker.value },
                       ix
                     )
                   "
-                  [mmHighlight]="'Florence'"
+                  [mmHighlight]="searchString()"
                   [value]="tx.speaker"
                   style="font-weight: bold; width: 7rem" />
               </td>
@@ -86,7 +86,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                   ">
                   <textarea
                     #transcriptionSpeech
-                    (input)="
+                    (input.throttled)="
                       updateTranscription(
                         { speech: transcriptionSpeech.value },
                         ix
@@ -95,6 +95,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                     [class.disabled]="
                       status.working?.on === 'rephrase' && status.ix === ix
                     "
+                    [mmHighlight]="searchString()"
                     [mmInsertable]="ix"
                     [mmJoinable]="
                       minutes.transcription[ix + 1]?.type === 'TX' ? ix : null
@@ -106,7 +107,6 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                     autocomplete="off"
                     autocorrect="on"
                     autosize
-                    [mmHighlight]="'and'"
                     spellcheck="true"
                     style="width: calc(100% - 1rem)"
                     wrap="soft"></textarea>
@@ -162,9 +162,9 @@ export class TranscriptionComponent {
 
   dayjs = dayjs;
 
-  #bufferedDispatcher = inject(BufferedDispatcherService);
   #controller = inject(ControllerService);
   #currentTx: Transcription;
+  #store = inject(Store);
   #window = inject(WINDOW);
 
   @Input() get currentTx(): Transcription {
@@ -189,6 +189,12 @@ export class TranscriptionComponent {
     if (tx.type === 'TX') this.selected.emit(tx);
   }
 
+  searchString(): string {
+    return this.minutes.findReplace?.doFind
+      ? this.minutes.findReplace?.searchString
+      : '';
+  }
+
   trackByTx(ix, tx: AgendaItem | Transcription): number {
     return tx.id;
   }
@@ -198,12 +204,10 @@ export class TranscriptionComponent {
   }
 
   updateAgendaItem(update: any, ix: number): void {
-    const action = new UpdateAgendaItem(update, ix);
-    this.#bufferedDispatcher.dispatch(action);
+    this.#store.dispatch(new UpdateAgendaItem(update, ix));
   }
 
   updateTranscription(update: any, ix: number): void {
-    const action = new UpdateTranscription(update, ix);
-    this.#bufferedDispatcher.dispatch(action);
+    this.#store.dispatch(new UpdateTranscription(update, ix));
   }
 }

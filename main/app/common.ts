@@ -55,7 +55,6 @@ const summaryStrategy: SummaryStrategy = 'paragraphs';
 
 export const Constants = {
   backoffOptions,
-  bufferedDispatchDebounceTime: 1000,
   corsOptions,
   maxRecentPaths: 32,
   maxSpeechWords: 250,

@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/angular-ivy';
 
 import { AppState } from '#mm/state/app';
+import { AutofocusDirective } from '#mm/directives/autofocus';
 import { AutosizeModule } from 'ngx-autosize';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -34,6 +35,7 @@ import { RemovableDirective } from '#mm/directives/removable';
 import { RephraseableDirective } from '#mm/directives/rephraseable';
 import { RootPage } from '#mm/pages/root';
 import { SecurityContext } from '@angular/core';
+import { SelectOnFocusDirective } from '#mm/directives/select-on-focus';
 import { SplittableDirective } from '#mm/directives/splittable';
 import { StatusState } from '#mm/state/status';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
@@ -89,6 +91,7 @@ const COMPONENTS = [
 ];
 
 const DIRECTIVES = [
+  AutofocusDirective,
   DragDroppableDirective,
   HighlightDirective,
   HydratedDirective,
@@ -97,6 +100,7 @@ const DIRECTIVES = [
   JoinableDirective,
   RemovableDirective,
   RephraseableDirective,
+  SelectOnFocusDirective,
   SplittableDirective
 ];
 

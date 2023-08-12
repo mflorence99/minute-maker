@@ -203,6 +203,12 @@ tui-alert {
   width: unset !important;
 }
 
+tui-notification {
+  background: #f0f0f0 !important;
+  border: 1px solid var(--tui-text-01) !important;
+  border-radius: 0 !important;
+}
+
 tui-root {
   height: 100%;
 }

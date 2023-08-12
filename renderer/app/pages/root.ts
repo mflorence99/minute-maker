@@ -10,6 +10,7 @@ import { Constants } from '#mm/common';
 import { ControllerService } from '#mm/services/controller';
 import { DestroyRef } from '@angular/core';
 import { FindReplaceComponent } from '#mm/components/find-replace';
+import { FindReplaceMatch } from '#mm/components/find-replace';
 import { HostListener } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
@@ -39,6 +40,7 @@ import { inject } from '@angular/core';
 import { map } from 'rxjs';
 import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 import { throttleTime } from 'rxjs';
 
 import dayjs from 'dayjs';
@@ -301,6 +303,10 @@ export class RootPage {
     this.#controller.cancelWorking(this.status.working);
   }
 
+  onFindReplaceMatch(matches: FindReplaceMatch[]): void {
+    console.log({ matches });
+  }
+
   onSwitchTab(tabIndex: number): void {
     this.#store.dispatch([
       new ClearUndoStacks(), // 👈 don't undo what isn't showing
@@ -350,7 +356,8 @@ export class RootPage {
             componentState.tabIndex === TabIndex.transcription &&
             !!minutes?.findReplace?.doFind
         ),
-        distinctUntilChanged()
+        distinctUntilChanged(),
+        tap((show) => console.log({ showHideFindReplace: show }))
       )
       .subscribe((show) => this.#showHideReplace(show));
   }
@@ -390,10 +397,10 @@ export class RootPage {
     // 👇 never more than one showing -- none at all if hiding!
     if (this.#findReplace$) this.#findReplace$.unsubscribe();
     if (show) {
+      const component = new PolymorpheusComponent(FindReplaceComponent);
       this.#findReplace$ = this.#alerts
-        .open(new PolymorpheusComponent(FindReplaceComponent), {
+        .open(component, {
           label: 'Search Transcription',
-          status: 'info',
           autoClose: false
         })
         .subscribe({

@@ -452,7 +452,10 @@ export class ControllerService {
       const raw = await this.#fs.loadFile(path);
       minutes = MinutesSchema.parse(JSON.parse(raw));
       if (minutes) {
-        this.#store.dispatch([new SetMinutes(minutes), new AddRecent(path)]);
+        this.#store.dispatch([
+          new SetMinutes({ ...emptyMinutes(), ...minutes }),
+          new AddRecent(path)
+        ]);
         // 👇 in case transcription was in progress, poll for its completion
         this.transcribeAudioPoll();
       }

@@ -178,7 +178,7 @@ export class MinutesState {
         ])
       );
     // 👇 now do the action
-    const nextTranscriptionID = Number(getState().nextTranscriptionID) + 1;
+    const nextTranscriptionID = getState().nextTranscriptionID + 1;
     setState(
       patch({
         nextTranscriptionID,
@@ -207,7 +207,7 @@ export class MinutesState {
         ])
       );
     // 👇 now do the action
-    const nextTranscriptionID = Number(getState().nextTranscriptionID) + 1;
+    const nextTranscriptionID = getState().nextTranscriptionID + 1;
     setState(
       patch({
         nextTranscriptionID,
@@ -350,7 +350,7 @@ export class MinutesState {
         )
       })
     );
-    const nextTranscriptionID = Number(getState().nextTranscriptionID) + 1;
+    const nextTranscriptionID = getState().nextTranscriptionID + 1;
     setState(
       patch({
         nextTranscriptionID,

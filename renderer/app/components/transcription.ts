@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ControllerService } from '#mm/services/controller';
 import { EventEmitter } from '@angular/core';
+import { FindReplaceMatch } from '#mm/components/find-replace';
 import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Output } from '@angular/core';
@@ -43,6 +44,9 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                   (input.throttled)="
                     updateAgendaItem({ title: agendaItemTitle.value }, ix)
                   "
+                  [mmFindReplaceMatchFld]="'title'"
+                  [mmFindReplaceMatchID]="tx.id"
+                  [mmFindReplaceMatch]="match"
                   [mmHighlight]="searchString()"
                   [mmRemovable]="ix"
                   [value]="tx.title"
@@ -74,6 +78,9 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                       ix
                     )
                   "
+                  [mmFindReplaceMatchFld]="'speaker'"
+                  [mmFindReplaceMatchID]="tx.id"
+                  [mmFindReplaceMatch]="match"
                   [mmHighlight]="searchString()"
                   [value]="tx.speaker"
                   style="font-weight: bold; width: 7rem" />
@@ -95,6 +102,9 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                     [class.disabled]="
                       status.working?.on === 'rephrase' && status.ix === ix
                     "
+                    [mmFindReplaceMatchFld]="'speech'"
+                    [mmFindReplaceMatchID]="tx.id"
+                    [mmFindReplaceMatch]="match"
                     [mmHighlight]="searchString()"
                     [mmInsertable]="ix"
                     [mmJoinable]="
@@ -153,6 +163,7 @@ export class TranscriptionComponent {
   /* eslint-disable @typescript-eslint/member-ordering */
 
   @Input({ required: true }) duration: number;
+  @Input({ required: true }) match: FindReplaceMatch;
   @Input({ required: true }) minutes: Minutes;
   @Input({ required: true }) status: StatusStateModel;
 
@@ -167,17 +178,19 @@ export class TranscriptionComponent {
   #store = inject(Store);
   #window = inject(WINDOW);
 
-  @Input() get currentTx(): Transcription {
+  @Input() get currentTx(): Partial<Transcription> {
     return this.#currentTx;
   }
 
-  set currentTx(currentTx: Transcription) {
+  set currentTx(currentTx: Partial<Transcription>) {
     this.#currentTx = currentTx;
     if (currentTx) {
       const row = this.#window.document.querySelector(`#TX${currentTx.id}`);
       if (row)
         scrollIntoView(row, {
-          behavior: 'smooth',
+          // 🔥 smooth won't work for us, as it is too cumbersome to wait
+          //    until the scroll -- and hydration -- is complete
+          // behavior: 'smooth',
           block: 'end',
           inline: 'nearest',
           scrollMode: 'if-needed'

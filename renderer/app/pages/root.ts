@@ -36,6 +36,7 @@ import { WaveSurferComponent } from '#mm/components/wavesurfer';
 import { combineLatest } from 'rxjs';
 import { delay } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs';
+import { filter } from 'rxjs';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
 import { startWith } from 'rxjs';
@@ -115,6 +116,7 @@ import deepCopy from 'deep-copy';
             (selected)="onTranscription($event)"
             [currentTx]="currentTx"
             [duration]="minutes.audio.duration"
+            [match]="match"
             [minutes]="minutes$ | async"
             [ngClass]="{
               data: true,
@@ -253,8 +255,9 @@ export class RootPage {
 
   componentState: ComponentStateModel;
   configured: boolean;
-  currentTx: Transcription = null;
+  currentTx: Partial<Transcription>;
   dayjs = dayjs;
+  match: FindReplaceMatch;
   status: StatusStateModel = StatusState.defaultStatus();
 
   // 👇 just to reference the enum in the template
@@ -304,7 +307,8 @@ export class RootPage {
   }
 
   onFindReplaceMatch(match: FindReplaceMatch): void {
-    console.log(match);
+    this.currentTx = { id: match.id };
+    this.match = match;
   }
 
   onSwitchTab(tabIndex: number): void {
@@ -380,6 +384,11 @@ export class RootPage {
           leading: true,
           trailing: true
         }),
+        // 👇 filter the very first time update, as we may be editing
+        //    the transcription while a long audio loads -- NOTE: this isn't
+        //    technically the "first" but it's very hard to select manually
+        //    and is guaranteed to be emitted as audo load completes
+        filter((ts: number) => !!ts),
         map((ts: number) => {
           const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
           return minutes.transcription.find(

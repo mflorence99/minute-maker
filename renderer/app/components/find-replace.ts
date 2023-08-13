@@ -1,6 +1,9 @@
 import { AgendaItem } from '#mm/common';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
+import { Directive } from '@angular/core';
+import { ElementRef } from '@angular/core';
+import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
@@ -13,9 +16,9 @@ import { UpdateFindReplace } from '#mm/state/minutes';
 
 import { inject } from '@angular/core';
 
-// 🔥 this ONLY works for transcriptions!
-
-// 🔥 and doesn't replace either!
+// 🔥 1. this ONLY works for transcriptions!
+//    2. replace is not yet implemented
+//    3. directive is bundled with component, as they are interdependent
 
 export type FindReplaceMatch = {
   end: number;
@@ -23,6 +26,10 @@ export type FindReplaceMatch = {
   id: number;
   start: number;
 };
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟩 Component (see directive below)
+// //////////////////////////////////////////////////////////////////////////
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,14 +87,18 @@ export class FindReplaceComponent {
     return this.#matches.length > 0;
   }
 
-  emitMatch(incr = 0): void {
+  emitMatch(incr: number): void {
     if (this.#matches.length > 0) {
       this.#matchIx += incr;
       if (this.#matchIx < 0) this.#matchIx = this.#matches.length - 1;
-      if (this.#matchIx > this.#matches.length - 1) this.#matchIx = 0;
+      else if (this.#matchIx > this.#matches.length - 1) this.#matchIx = 0;
       this.#root.onFindReplaceMatch(this.#matches[this.#matchIx]);
     } else this.#root.onFindReplaceMatch(null);
   }
+
+  // 👇 as a side-effect of calculating numMatches (needed for the template)
+  //    we also develop #matches as FindReplaceMatch[] (needed by the
+  //    TranscriptionComponent to select matching text)
 
   numMatches(minutes: Minutes): number {
     let numMatches = 0;
@@ -102,13 +113,11 @@ export class FindReplaceComponent {
         return acc;
       }, 0);
     }
-    this.emitMatch();
     return numMatches;
   }
 
   onFind(searchString: string): void {
     this.#matchIx = -1;
-    this.emitMatch(+1);
     this.#store.dispatch(new UpdateFindReplace({ searchString }));
   }
 
@@ -130,5 +139,39 @@ export class FindReplaceComponent {
       );
       return matches.length;
     } else return 0;
+  }
+}
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟦 Directive
+// //////////////////////////////////////////////////////////////////////////
+
+@Directive({
+  selector:
+    'mm-transcription input[mmFindReplaceMatch], mm-transcription textarea[mmFindReplaceMatch]'
+})
+export class FindReplaceMatchDirective {
+  @Input({ required: true }) mmFindReplaceMatchFld: string;
+  @Input({ required: true }) mmFindReplaceMatchID: number;
+
+  #mmFindReplaceMatch: FindReplaceMatch;
+  #textarea = inject(ElementRef).nativeElement; // 👈 textarea or input
+
+  @Input() get mmFindReplaceMatch(): FindReplaceMatch {
+    return this.#mmFindReplaceMatch;
+  }
+
+  set mmFindReplaceMatch(match: FindReplaceMatch) {
+    this.#mmFindReplaceMatch = match;
+    if (
+      match?.id === this.mmFindReplaceMatchID &&
+      match?.fld === this.mmFindReplaceMatchFld
+    ) {
+      // 👇 we need to let any scroll / hydrate take place first
+      setTimeout(() => {
+        this.#textarea.setSelectionRange(match.start, match.end);
+        this.#textarea.focus();
+      }, 0);
+    }
   }
 }

@@ -51,8 +51,10 @@ export class HighlightDirective implements OnChanges, OnDestroy, OnInit {
         .filter((entry) => entry.target === this.#textarea)
         .forEach((entry) => {
           this.#underlay.style.height = `${entry.contentBoxSize[0].blockSize}px`;
-          this.#underlay.style.left = `${entry.contentRect.x}px`;
-          this.#underlay.style.top = `${entry.contentRect.y}px`;
+          // 🔥 defo isn't contentRect.x/y but not sure why it is zero
+          //    maybe because we've accounted for margin/padding already?
+          this.#underlay.style.left = '0'; // `${entry.contentRect.x}px`;
+          this.#underlay.style.top = '0'; // `${entry.contentRect.y}px`;
           this.#underlay.style.width = `${entry.contentBoxSize[0].inlineSize}px`;
         });
     });

@@ -15,6 +15,7 @@ import { ErrorHandler } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { EventPluginsModule } from '@tinkoff/ng-event-plugins';
 import { FindReplaceComponent } from '#mm/components/find-replace';
+import { FindReplaceMatchDirective } from '#mm/components/find-replace';
 import { HighlightDirective } from '#mm/directives/highlight';
 import { HydratedDirective } from '#mm/directives/hydrated';
 import { HydratorDirective } from '#mm/directives/hydrator';
@@ -94,6 +95,7 @@ const COMPONENTS = [
 const DIRECTIVES = [
   AutofocusDirective,
   DragDroppableDirective,
+  FindReplaceMatchDirective,
   HighlightDirective,
   HydratedDirective,
   HydratorDirective,

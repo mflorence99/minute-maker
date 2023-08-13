@@ -13,6 +13,7 @@ import { DateTimeTransformer } from '#mm/services/datetime-transformer';
 import { DragDroppableDirective } from '#mm/directives/drag-droppable';
 import { ErrorHandler } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
+import { EventPluginsModule } from '@tinkoff/ng-event-plugins';
 import { FindReplaceComponent } from '#mm/components/find-replace';
 import { HighlightDirective } from '#mm/directives/highlight';
 import { HydratedDirective } from '#mm/directives/hydrated';
@@ -133,6 +134,7 @@ const STATES_SAVED = [
     BrowserAnimationsModule,
     BrowserModule,
     CommonModule,
+    EventPluginsModule,
     MarkdownModule.forRoot({
       sanitize: SecurityContext.NONE
     }),

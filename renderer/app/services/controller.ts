@@ -34,7 +34,6 @@ import { Working } from '#mm/state/status';
 
 import { catchError } from 'rxjs';
 import { combineLatest } from 'rxjs';
-import { debounceTime } from 'rxjs';
 import { emptyMinutes } from '#mm/common';
 import { filter } from 'rxjs';
 import { inject } from '@angular/core';
@@ -42,6 +41,7 @@ import { map } from 'rxjs';
 import { of } from 'rxjs';
 import { takeWhile } from 'rxjs';
 import { tap } from 'rxjs';
+import { throttleTime } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 
 // 🙈 preload.ts
@@ -508,7 +508,10 @@ export class ControllerService {
           return [minutes, app.pathToMinutes];
         }),
         filter(([minutes, path]) => !!(minutes && path)),
-        debounceTime(Constants.saveFileInterval)
+        throttleTime(Constants.saveFileThrottleInterval, undefined, {
+          leading: true,
+          trailing: true
+        })
       )
       .subscribe(([minutes, path]) => {
         this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));

@@ -303,8 +303,8 @@ export class RootPage {
     this.#controller.cancelWorking(this.status.working);
   }
 
-  onFindReplaceMatch(matches: FindReplaceMatch[]): void {
-    console.log({ matches });
+  onFindReplaceMatch(match: FindReplaceMatch): void {
+    console.log(match);
   }
 
   onSwitchTab(tabIndex: number): void {

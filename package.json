@@ -84,6 +84,7 @@
     "@taiga-ui/kit": "^3",
     "@taiga-ui/layout": "^3",
     "@taiga-ui/styles": "^3",
+    "@tinkoff/ng-event-plugins": "^3",
     "@types/jest": "^29",
     "@types/marked": "^5",
     "@types/nunjucks": "^3",

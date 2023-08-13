@@ -36,7 +36,20 @@ export type FindReplaceMatch = {
         [mmSelectOnFocus]="true"
         [value]="minutes.findReplace?.searchString ?? ''"
         style="border: 1px solid var(--tui-text-01)" />
+
+      <span style="display: inline-block; padding-left: 0.5rem; width: 5rem">
+        <ng-container
+          *ngIf="numMatches(minutes) as count; else noMatches"
+          [ngPlural]="count">
+          <ng-template ngPluralCase="=1">One match</ng-template>
+          <ng-template ngPluralCase="other">{{ count }} matches</ng-template>
+        </ng-container>
+        <ng-template #noMatches>No matches</ng-template>
+      </span>
+
       <button
+        (click.silent)="emitMatch(-1)"
+        [disabled]="!this.canEmitMatch()"
         appearance="mono"
         icon="tuiIconArrowUp"
         size="xs"
@@ -44,19 +57,13 @@ export type FindReplaceMatch = {
         type="button"></button>
 
       <button
+        (click.silent)="emitMatch(+1)"
+        [disabled]="!this.canEmitMatch()"
         appearance="mono"
         icon="tuiIconArrowDown"
         size="xs"
         tuiIconButton
         type="button"></button>
-
-      <ng-container
-        *ngIf="numMatches(minutes) as count; else noMatches"
-        [ngPlural]="count">
-        <ng-template ngPluralCase="=1">One match</ng-template>
-        <ng-template ngPluralCase="other">{{ count }} matches</ng-template>
-      </ng-container>
-      <ng-template #noMatches>No matches</ng-template>
     </article>
   `,
   styles: []
@@ -64,9 +71,23 @@ export type FindReplaceMatch = {
 export class FindReplaceComponent {
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
 
+  #matchIx = -1;
   #matches: FindReplaceMatch[] = [];
   #root = inject(RootPage);
   #store = inject(Store);
+
+  canEmitMatch(): boolean {
+    return this.#matches.length > 0;
+  }
+
+  emitMatch(incr = 0): void {
+    if (this.#matches.length > 0) {
+      this.#matchIx += incr;
+      if (this.#matchIx < 0) this.#matchIx = this.#matches.length - 1;
+      if (this.#matchIx > this.#matches.length - 1) this.#matchIx = 0;
+      this.#root.onFindReplaceMatch(this.#matches[this.#matchIx]);
+    } else this.#root.onFindReplaceMatch(null);
+  }
 
   numMatches(minutes: Minutes): number {
     let numMatches = 0;
@@ -81,11 +102,13 @@ export class FindReplaceComponent {
         return acc;
       }, 0);
     }
-    this.#root.onFindReplaceMatch(this.#matches);
+    this.emitMatch();
     return numMatches;
   }
 
   onFind(searchString: string): void {
+    this.#matchIx = -1;
+    this.emitMatch(+1);
     this.#store.dispatch(new UpdateFindReplace({ searchString }));
   }
 

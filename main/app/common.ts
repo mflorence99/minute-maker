@@ -64,11 +64,11 @@ export const Constants = {
     top_p: 1
   },
   rephraseStrategy,
-  saveFileInterval: 1000,
+  saveFileThrottleInterval: 1000,
   sentryDSN:
     'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
   summaryStrategy,
-  throttledEventInterval: 1000,
+  throttledEventInterval: 1500,
   timeupdateThrottleInterval: 250,
   transcriberPollInterval: 10000
 };

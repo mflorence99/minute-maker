@@ -188,8 +188,9 @@ export class TranscriptionComponent {
       const row = this.#window.document.querySelector(`#TX${currentTx.id}`);
       if (row)
         scrollIntoView(row, {
-          // 🔥 smooth won't work for us, as it is too cumbersome to wait
-          //    until the scroll -- and hydration -- is complete
+          // 👇 smooth won't work for us, as it is too cumbersome to wait
+          //    until the scroll -- and hydration -- is complete -- normal
+          //    looks better anyway
           // behavior: 'smooth',
           block: 'end',
           inline: 'nearest',

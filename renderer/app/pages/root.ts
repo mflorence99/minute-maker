@@ -41,7 +41,6 @@ import { inject } from '@angular/core';
 import { map } from 'rxjs';
 import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { tap } from 'rxjs';
 import { throttleTime } from 'rxjs';
 
 import dayjs from 'dayjs';
@@ -360,8 +359,7 @@ export class RootPage {
             componentState.tabIndex === TabIndex.transcription &&
             !!minutes?.findReplace?.doFind
         ),
-        distinctUntilChanged(),
-        tap((show) => console.log({ showHideFindReplace: show }))
+        distinctUntilChanged()
       )
       .subscribe((show) => this.#showHideReplace(show));
   }

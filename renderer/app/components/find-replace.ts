@@ -17,7 +17,7 @@ import { UpdateFindReplace } from '#mm/state/minutes';
 import { inject } from '@angular/core';
 
 // 🔥 1. this ONLY works for transcriptions!
-//    2. replace is not yet implemented
+//    2. replace is not yet implemented (and may never be)
 //    3. directive is bundled with component, as they are interdependent
 
 export type FindReplaceMatch = {
@@ -44,7 +44,7 @@ export type FindReplaceMatch = {
         [value]="minutes.findReplace?.searchString ?? ''"
         style="border: 1px solid var(--tui-text-01)" />
 
-      <span style="display: inline-block; padding-left: 0.5rem; width: 5rem">
+      <span style="display: inline-block; padding-left: 0.5rem; width: 6rem">
         <ng-container
           *ngIf="numMatches(minutes) as count; else noMatches"
           [ngPlural]="count">
@@ -72,8 +72,7 @@ export type FindReplaceMatch = {
         tuiIconButton
         type="button"></button>
     </article>
-  `,
-  styles: []
+  `
 })
 export class FindReplaceComponent {
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;

@@ -336,7 +336,7 @@ export class MinutesState {
     const speech1 = speech.substring(0, pos).trim();
     const speech2 = speech.substring(pos).trim();
     const wps = (original.end - original.start) / speech.split(/\s+/).length;
-    // 🔥 can't go backwards
+    // ❗ can't go backwards
     const splitTime = Math.max(
       original.start,
       speech1.split(/\s+/).length * wps

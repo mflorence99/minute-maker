@@ -105,7 +105,7 @@ export class SummaryComponent {
     this.#controller.summarizeMinutes(summaryStrategy);
   }
 
-  // 🔥 can't insert/remove summaries
+  // 👇 can't insert/remove summaries
   trackByIx(ix: number): number {
     return ix;
   }

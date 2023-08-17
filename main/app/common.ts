@@ -137,7 +137,6 @@ export enum Channels {
   metadataParseFile = 'audio-metadata/parseFile',
 
   openaiChatCompletion = 'openai/chat-completion',
-  openaiCompletion = 'openai/completion',
   openaiCredentials = 'openai/credentials',
   openaiListModels = 'openai/list-models',
 

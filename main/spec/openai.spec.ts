@@ -72,13 +72,4 @@ describe('openai', () => {
       }
     );
   });
-
-  it("calls OpenAI's createCompletion", () => {
-    return completion(null, { prompt: 'What is your name?' }).then(
-      (response) => {
-        expect(response.finish_reason).toBe('stop');
-        expect(response.text).toContain('My name is');
-      }
-    );
-  });
 });

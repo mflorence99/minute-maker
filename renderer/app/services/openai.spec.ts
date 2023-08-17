@@ -20,16 +20,9 @@ describe('OpenAIService', () => {
     );
   });
 
-  it('invokes the openaiCompletion channel', () => {
-    const openai = new OpenAIService();
-    const request = { prompt: 'goodbye!' };
-    openai.completion(request);
-    expect(ipc.invoke).toHaveBeenCalledWith(Channels.openaiCompletion, request);
-  });
-
   it('invokes the openaiListModels channel', () => {
     const openai = new OpenAIService();
-    openai.listModels();
+    openai.models.list();
     expect(ipc.invoke).toHaveBeenCalledWith(Channels.openaiListModels);
   });
 });

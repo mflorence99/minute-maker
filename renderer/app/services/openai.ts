@@ -14,10 +14,6 @@ export class OpenAIService {
     return ipc.invoke(Channels.openaiChatCompletion, request);
   }
 
-  completion(request: OpenAIRequest): Promise<OpenAIResponse> {
-    return ipc.invoke(Channels.openaiCompletion, request);
-  }
-
   credentials(credentials: string): Promise<any> {
     return ipc.invoke(Channels.openaiCredentials, credentials);
   }

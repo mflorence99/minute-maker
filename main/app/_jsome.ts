@@ -17,7 +17,7 @@ jsome.colors = {
   brack: 'yellow'
 };
 
-jsome.params.async = true;
+jsome.params.async = false;
 
 jsome.params.lintable = true;
 

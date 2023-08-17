@@ -62,9 +62,8 @@ export async function checkLongRunningRecognizeProgress(
   do {
     try {
       // 👇 how far along are we?
-      const response = await client.checkLongRunningRecognizeProgress(
-        transcriptionName
-      );
+      const response =
+        await client.checkLongRunningRecognizeProgress(transcriptionName);
       // 👇 1. metadata doesn't seem to be typed properly
       //    2. seems to be 0% all the way to the end, when it jumps to 100%
       const progressPercent = response.done

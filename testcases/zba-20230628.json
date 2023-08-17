@@ -6,9 +6,7 @@
     "url": "https://storage.googleapis.com/washington-app-319514.appspot.com/edaa567a-71de-4020-b61b-bee31e344645.mp3",
     "duration": 596.5322448979592
   },
-  "absent": [
-    "bob citizen"
-  ],
+  "absent": ["bob citizen"],
   "date": "2023-07-22T23:00:00.000Z",
   "nextTranscriptionID": 89,
   "numSpeakers": 5,
@@ -168,7 +166,5 @@
       "type": "TX"
     }
   ],
-  "visitors": [
-    "Linda Marshall - Board Member"
-  ]
+  "visitors": ["Linda Marshall - Board Member"]
 }

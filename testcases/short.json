@@ -10,10 +10,7 @@
   "date": "2023-07-18T11:06:27.370Z",
   "nextTranscriptionID": 26,
   "numSpeakers": 1,
-  "present": [
-    "Mark Florence - Board Chair",
-    "Wilma Flintstone - Board Member"
-  ],
+  "present": ["Mark Florence - Board Chair", "Wilma Flintstone - Board Member"],
   "subject": "Working Session",
   "subtitle": "Driveway Permits",
   "summary": [
@@ -33,7 +30,5 @@
       "type": "TX"
     }
   ],
-  "visitors": [
-    "Fred Flintstone - Concerned Citizen"
-  ]
+  "visitors": ["Fred Flintstone - Concerned Citizen"]
 }

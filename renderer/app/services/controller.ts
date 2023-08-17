@@ -372,9 +372,8 @@ export class ControllerService {
       })
     ]);
     // 👇 initiate transcription
-    const transcriptionName = await this.#transcriber.startTranscription(
-      request
-    );
+    const transcriptionName =
+      await this.#transcriber.startTranscription(request);
     // 👇 transcription isn't cancelable until we know the transcription name
     this.#store.dispatch(new SetMinutes({ transcriptionName }));
     // 👇 now start polling for completion

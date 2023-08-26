@@ -240,9 +240,10 @@ export class ControllerService {
         throw new Error('This speech is too long to rephrase');
       else if (response.finish_reason !== 'stop')
         throw new Error(response.finish_reason);
-      this.#store.dispatch(
-        new UpdateTranscription({ speech: response.text }, ix)
-      );
+      else
+        this.#store.dispatch(
+          new UpdateTranscription({ speech: response.text }, ix)
+        );
     } catch (error) {
       this.#store.dispatch(new SetStatus({ error }));
     } finally {
@@ -327,7 +328,7 @@ export class ControllerService {
           throw new Error('This section is too long to rephrase');
         else if (response.finish_reason !== 'stop')
           throw new Error(response.finish_reason);
-        summary.push({ section, summary: response.text });
+        else summary.push({ section, summary: response.text });
       }
       this.#store.dispatch(new SetMinutes({ summary }));
     } catch (error) {

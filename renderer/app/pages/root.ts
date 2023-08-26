@@ -386,7 +386,7 @@ export class RootPage {
         //    the transcription while a long audio loads -- NOTE: this isn't
         //    technically the "first" but it's very hard to select manually
         //    and is guaranteed to be emitted as audo load completes
-        filter((ts: number) => !!ts),
+        filter((ts: number) => ts !== 0),
         map((ts: number) => {
           const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
           return minutes.transcription.find(

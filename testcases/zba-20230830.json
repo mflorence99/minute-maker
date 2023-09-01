@@ -1,0 +1,5508 @@
+{
+  "audio": {
+    "duration": 7282.729795918367,
+    "encoding": "MP3",
+    "gcsuri": "gs://washington-app-319514.appspot.com/4ff27418-4ca8-476d-b183-faebd3cef3c5.mp3",
+    "sampleRateHertz": 22050,
+    "url": "https://storage.googleapis.com/washington-app-319514.appspot.com/4ff27418-4ca8-476d-b183-faebd3cef3c5.mp3"
+  },
+  "findReplace": {},
+  "absent": [],
+  "date": "2023-08-30T23:00:00.000Z",
+  "nextTranscriptionID": 709,
+  "numSpeakers": 4,
+  "present": [
+    "Mark Florence - Chair",
+    "Deb DeFosse - Executive Administrator",
+    "Gary Carney - Vice-Chair",
+    "Linda Marshall - Member",
+    "Andrew Hatch - Member",
+    "Joe Tapp - Member"
+  ],
+  "subject": "Public Hearing",
+  "subtitle": "Meeting Minutes",
+  "summary": [],
+  "title": "Zoning Board of Adjustment",
+  "transcription": [
+    {
+      "title": "Motion to allow abutters to join by phone",
+      "id": 703,
+      "type": "AG"
+    },
+    {
+      "end": 88,
+      "id": 1,
+      "speaker": "Florence",
+      "speech": "Good evening, everyone. It's 7:00pm and time to begin the August meeting of the ZBA. \n\nI'll do introductions in a second but there's something we have to get out of the way first and that's that we've been asked by Pat Fone and Shellie Bueno, who are abutters of Mr. Crouss, to be allowed to speak. They can't be here unfortunately and the only way to do that is to get them on the phone. \n\nHowever, the ZBA rules of procedure don't contemplate virtual meetings. So what we're going to do first, I'm going to make a motion. I'll make it right now that we approve phone participation by these two abutters in this meeting. Do I have a second ?",
+      "start": 1,
+      "type": "TX"
+    },
+    {
+      "end": 88,
+      "id": 5,
+      "speaker": "Carney",
+      "speech": "Seconded",
+      "start": 88,
+      "type": "TX"
+    },
+    {
+      "end": 88,
+      "id": 701,
+      "speaker": "Florence",
+      "speech": "All those in favor?",
+      "start": 88,
+      "type": "TX"
+    },
+    {
+      "end": 89,
+      "id": 702,
+      "speaker": "All",
+      "speech": "Aye",
+      "start": 88,
+      "type": "TX"
+    },
+    {
+      "end": 96,
+      "id": 6,
+      "speaker": "Florence",
+      "speech": "So that motion passes unanimously, My Carney, could you initiate the call?",
+      "start": 89,
+      "type": "TX"
+    },
+    {
+      "end": 121,
+      "id": 7,
+      "speaker": "Bueno",
+      "speech": " Hi, this is Shelley.",
+      "start": 96,
+      "type": "TX"
+    },
+    {
+      "end": 147,
+      "id": 8,
+      "speaker": "Carney",
+      "speech": "My name is Gary Carney, and I represent the ZBA. I am reaching out to you because you had expressed interest in listening to the meeting. I sincerely hope that you will be able to join. To ensure clear communication, I will have my phone plugged in and placed in front of me. My intention is for you to hear everything that is being discussed during the meeting. ",
+      "start": 122,
+      "type": "TX"
+    },
+    {
+      "end": 181,
+      "id": 9,
+      "speaker": "Florence",
+      "speech": "Okay, before we proceed, I would like to mention one thing, Shelly. The acoustics in this room are not good, so our conversation might not work as expected. Unfortunately, all we have is a cell phone to communicate with you. If, at any point, you find it difficult to hear or understand us, and if you are unable to express your points adequately, please know that you have the right to request a continuance. This would allow you to be physically present and present your case in person. I hope this explanation makes sense to you.",
+      "start": 147,
+      "type": "TX"
+    },
+    {
+      "end": 192,
+      "id": 10,
+      "speaker": "Bueno",
+      "speech": "Yes. If I can't get my point across, then I can ask you to consider a continuance.",
+      "start": 182,
+      "type": "TX"
+    },
+    {
+      "end": 212,
+      "id": 13,
+      "speaker": "Florence",
+      "speech": "Before we can address your case, there are a few matters of business that need attention. Rest assured, I will involve you when the appropriate moment arises.",
+      "start": 192,
+      "type": "TX"
+    },
+    {
+      "title": "Schedule next meeting",
+      "id": 704,
+      "type": "AG"
+    },
+    {
+      "end": 259,
+      "id": 14,
+      "speaker": "Carney",
+      "speech": "Before we continue, I would like to propose that we discuss the scheduled next meeting. We currently have some issues that may require a continuance, so it would be beneficial to address them now rather than waiting until everyone has left and confusion arises. If I may hear a second on this motion, we can proceed with the discussion (_motion made, seconded, all in favor_). \n\nNow, our next scheduled meeting is on September 27th, but unfortunately, Mr Florence will be unable to attend.",
+      "start": 212,
+      "type": "TX"
+    },
+    {
+      "end": 293,
+      "id": 15,
+      "speaker": "Florence",
+      "speech": "I'm sorry, but I won't be able to attend the meeting and neither will I be available the following Wednesday. It would be preferable for me to attend as Chair, but it's not necessary as we have a vice chair and we would still have enough members for a quorum if I'm absent. We have two options to consider: either we proceed with the original date and take whatever consequences may arise, or we vote for an alternative. I suggest two alternatives: either the Tuesday before or the Wednesday before the original date. So, one day or one week earlier.",
+      "start": 259,
+      "type": "TX"
+    },
+    {
+      "end": 338,
+      "id": 16,
+      "speaker": "Carney",
+      "speech": "Personally, I like the idea of doing that Tuesday before the 27th, that would be to 26th. I like that. I like that but I don't know how it fits other people's meetings and schedules and stuff. What do we think about that? I can do it. Okay, then I we should vote on this. Yes. I make a motion that we change the next scheduled meeting from September 27 to September 26. That would be the Tuesday .",
+      "start": 295,
+      "type": "TX"
+    },
+    {
+      "end": 339,
+      "id": 17,
+      "speaker": "Florence",
+      "speech": "Seconded. All those if favor?",
+      "start": 339,
+      "type": "TX"
+    },
+    {
+      "end": 339,
+      "id": 705,
+      "speaker": "All",
+      "speech": "Aye",
+      "start": 339,
+      "type": "TX"
+    },
+    {
+      "end": 345,
+      "id": 707,
+      "speaker": "Florence",
+      "speech": "Confirmed: Tuesday, September 26. If a continuance were to occur, that specific date would serve as the designated time for it. I want to clarify that I am not implying that we will definitely have a continuation, but if there were to be one, that is when it would take place.",
+      "start": 339,
+      "type": "TX"
+    },
+    {
+      "title": "Roll call and prefatory remarks",
+      "id": 706,
+      "type": "AG"
+    },
+    {
+      "end": 345,
+      "id": 18,
+      "speaker": "Speaker 2",
+      "speech": "If you have never attended any of these hearings before, I would like to explain how it works briefly. First, we have a public hearing. During the first half of the meeting, every applicant, abutter, and anyone with something to say is given the opportunity to speak for as long as they need. We will remain here until everyone has presented their case to us. We will ask you questions, and you can ask us questions as well. We will address one case at a time and continue the dialogue until we are finished.\n\nOnce the public hearing is concluded, we will move on to the deliberative session. This session is also open to the public, and you are not only welcome but encouraged to stay and listen. During this session, the board members will discuss the evidence and arguments presented to us. We will then vote to either grant or deny the application in front of us. While you are welcome to observe, please note that the only discussion allowed is between the board members. You can see and hear everything, but you cannot comment. Therefore, it is important to make sure you say everything you need to say during the public hearing before it is closed.",
+      "start": 345,
+      "type": "TX"
+    },
+    {
+      "end": 534,
+      "id": 708,
+      "speaker": "Florence",
+      "speech": "Present today are board members Joe Tapp, Andrew Hatch, and Linda Marshall. Additionally, we have our chair Mark Florence, vice chair Gary Carney, and executive administrator Deb DeFosse.",
+      "start": 345,
+      "type": "TX"
+    },
+    {
+      "title": "Tim Crouss hearing",
+      "id": 709,
+      "type": "AG"
+    },
+    {
+      "end": 646,
+      "id": 21,
+      "speaker": "Crouss",
+      "speech": "I am proposing to build a 12 x 24 foot shed in order to replace the old shed that currently occupies the property. The old shed is located pretty much on the property line, right on the corner. Additionally, there used to be a carport, but it was a temporary structure that couldn't withstand the heavy snowfall of 42 inches, so I had to take it down. Therefore, I believe it would be more practical to combine all these structures into one shed, preventing the presence of multiple dilapidated sheds and the carport. Moreover, this would also help in moving the shed away from the property line. However, the property's layout is somewhat limited due to a stonewall and steps leading down to the driveway.",
+      "start": 534,
+      "type": "TX"
+    },
+    {
+      "end": 697,
+      "id": 34,
+      "speaker": "Florence",
+      "speech": "I know, I do believe. We've all seen the property, right? We've always seen it yet. Yeah. so, the The one that collapsed. That's the one that was over the tractor. Yeah, okay. And you would demolish the other shed. Okay, okay, okay, definitely, you know, whenever whenever anybody sees five variants, they get a little bit along but I believe it's the case with you, right? You've made. We've made this observation and at least I visited your site and you have to that, you are more conforming. After you finish your project",
+      "start": 647,
+      "type": "TX"
+    },
+    {
+      "end": 698,
+      "id": 40,
+      "speaker": "Speaker 1",
+      "speech": "then",
+      "start": 697,
+      "type": "TX"
+    },
+    {
+      "end": 698,
+      "id": 41,
+      "speaker": "Speaker 3",
+      "speech": "you are now.",
+      "start": 698,
+      "type": "TX"
+    },
+    {
+      "end": 705,
+      "id": 42,
+      "speaker": "Speaker 1",
+      "speech": "Yeah the pervious square foot is actually less correct. Combining it to just one shed",
+      "start": 698,
+      "type": "TX"
+    },
+    {
+      "end": 734,
+      "id": 43,
+      "speaker": "Speaker 3",
+      "speech": "and your your setback variances. Setback distances are less. Once you have demolished the old and build the new, okay? Okay, maybe Shelly, you know, just I hope you heard all of that. Can you can you say anything that you want to say? No. Anyway, on the volume on that? No, this is maximum volume. Okay,",
+      "start": 705,
+      "type": "TX"
+    },
+    {
+      "end": 738,
+      "id": 44,
+      "speaker": "Speaker 1",
+      "speech": "hang on one second. Okay",
+      "start": 734,
+      "type": "TX"
+    },
+    {
+      "end": 744,
+      "id": 45,
+      "speaker": "Speaker 3",
+      "speech": "now, there we go. Oh, yes. We got a bit more volume, so Shelly. Can you say what you want to say about that?",
+      "start": 738,
+      "type": "TX"
+    },
+    {
+      "end": 841,
+      "id": 46,
+      "speaker": "Speaker 1",
+      "speech": "I think it's 75 and 76. Hemlock Circle, we're just concerned about this. We do not want it to be approved. As you mentioned, there's five variances which, which seems to sort of raise a flag. But not only that. It's the abutting of our property seems to be that it's already overstated to be on our property. Line is already not abiding by. The law of the land. And if they overstep and get closer, this will impact our ability to be a home, as we're now in a place to be able to do that. This will impact our privacy and our views from any further house. I was told that that we have to have a 30 feet and between buildings. Now, if they do not have to stay within their 30 feet from the property line, which I believe is what it is and they encouraged and get to 18 feet. Which right now seems like they're on the property line, which should be removed. Regardless of this is, if this is approved. Then we're gonna have to push our building when we move further back, which doesn't seem that we should have to sacrifice our ability to build a property home or lose any privacy. You know, it's not a necessary item. They want to add it seems that they could build a smaller shed within the guidelines. And move the shed somewhere else or not build a shit. Find another way to do this",
+      "start": 753,
+      "type": "TX"
+    },
+    {
+      "end": 886,
+      "id": 47,
+      "speaker": "Speaker 1",
+      "speech": "without a coaching on someone else's property. You know, we, we have had this land in our family for a long time. I know we're not always up there between covid and then mom's droplet last year. It's been tough to get up there and visit. I know she does at least once a year several times for this property that's been in our house for our house, just like 60 years. And we want to be able to do this and allow her to be able to get up there and do something while she's still here and we want to privacy and we want to be able to do it without having to Um, change our plans for someone else who is not following a guy lines. Because that's what I want to see. It seems it seems excessive to build a shed that large to have to encourage on somebody else's property.",
+      "start": 841,
+      "type": "TX"
+    },
+    {
+      "end": 892,
+      "id": 48,
+      "speaker": "Speaker 3",
+      "speech": "Okay. Okay, thank you for that. Do you have any, any statements Jim? You want to make",
+      "start": 887,
+      "type": "TX"
+    },
+    {
+      "end": 968,
+      "id": 49,
+      "speaker": "Speaker 1",
+      "speech": "well actually farther away with the bullshit that was there now. So I'm actually pushing it farther towards the house. So I'm actually giving getting more space from your Proposed structure then what's existing? so he's saying he's giving more structure, but He's already over. What he should be. Was that approved? Was that currently approved? So he is already on our property line, should he be on a profound? I mean that's another question but you're giving more property that you're not giving us space, that's the law. So you're not really giving us back anything. You're putting backwards should have been really. that's, That structure. She said was temporary. It wasn't supposed to stay there. And that's what my mother is writing here to me. She's with me now. Did you hear that? The what he said is up there was supposed to be temporary and the one he wants to build is permanent and either way, it's still over.",
+      "start": 892,
+      "type": "TX"
+    },
+    {
+      "end": 976,
+      "id": 50,
+      "speaker": "Speaker 3",
+      "speech": "What what record or anything to you have about its temporary nature?",
+      "start": 971,
+      "type": "TX"
+    },
+    {
+      "end": 1007,
+      "id": 51,
+      "speaker": "Speaker 1",
+      "speech": "And he records, but I can look that up and see if you have any records palm of temporary. Do you have anything? That was temporary documentation. She doesn't have any documentation right now that we can think of it's just an idea. Yep. So she got it was she muted as temporary, excuse me. As you know if it's just a separate tents covering a tractor, she's filming. That it's temporary. So that's why her thinking that it was temporary,",
+      "start": 981,
+      "type": "TX"
+    },
+    {
+      "end": 1012,
+      "id": 52,
+      "speaker": "Speaker 3",
+      "speech": "okay? Mr. President when did you buy the property?",
+      "start": 1007,
+      "type": "TX"
+    },
+    {
+      "end": 1058,
+      "id": 53,
+      "speaker": "Speaker 1",
+      "speech": "And one lot, and the other lot was owned by my aunt and uncle, my mom. Bought the property from both of them. So we had two lots and she I bought part of my mom so I could participate in building a family Retreat, home up there for our family that is currently growing. I have two children. I just had a grandbaby Friday. So it's been in our family for Because it's going to make me calculate my head but 60, some odd years. It'd be great to have received something going on there. You know up there",
+      "start": 1021,
+      "type": "TX"
+    },
+    {
+      "end": 1062,
+      "id": 54,
+      "speaker": "Speaker 3",
+      "speech": "both. Lots are currently vacant. Is that right with no structures on them?",
+      "start": 1058,
+      "type": "TX"
+    },
+    {
+      "end": 1090,
+      "id": 55,
+      "speaker": "Speaker 1",
+      "speech": "So there's no structures. There is a camper that we are working to remove on it. It's been a camper out there that she used to be able to use but is no longer usable every time. One should go up there, it'd be used but it's immovable one. So we are in the process of getting someone to take it out the property my son in law was been doing that he just had a baby on Friday so we're working out to get someone to call it. We tried someone to junkyard up there but they were not able to help us.",
+      "start": 1063,
+      "type": "TX"
+    },
+    {
+      "end": 1096,
+      "id": 56,
+      "speaker": "Speaker 3",
+      "speech": "Okay. Okay. Mr. Krausman did you buy your property 11 years ago?",
+      "start": 1090,
+      "type": "TX"
+    },
+    {
+      "end": 1116,
+      "id": 57,
+      "speaker": "Speaker 4",
+      "speech": "Were the was that? not the the covering where the tractor is but that other shed was that there, then shed was existing in You have no idea when that shed was put up, just that it was there before you bought the property.",
+      "start": 1099,
+      "type": "TX"
+    },
+    {
+      "end": 1116,
+      "id": 58,
+      "speaker": "Speaker 3",
+      "speech": "Yeah,",
+      "start": 1116,
+      "type": "TX"
+    },
+    {
+      "end": 1117,
+      "id": 59,
+      "speaker": "Speaker 4",
+      "speech": "okay,",
+      "start": 1116,
+      "type": "TX"
+    },
+    {
+      "end": 1123,
+      "id": 60,
+      "speaker": "Speaker 3",
+      "speech": "yeah, yeah. So, plus was very possible that you'll use his grandfather.",
+      "start": 1117,
+      "type": "TX"
+    },
+    {
+      "end": 1140,
+      "id": 61,
+      "speaker": "Speaker 1",
+      "speech": "Yeah, and that's one that's literally it's right on the Downs. On property line. That shed, that's existing. Yeah. Then I had a survey to 2022 which was reflects the shed and The carport that's there, not there now but it was there.",
+      "start": 1124,
+      "type": "TX"
+    },
+    {
+      "end": 1151,
+      "id": 62,
+      "speaker": "Speaker 3",
+      "speech": "Mm-hmm. I know I have some comments but only comments that I'd want to say to the deliberative session. I don't I don't have any more questions. Does anybody have any questions on the board? Have called",
+      "start": 1140,
+      "type": "TX"
+    },
+    {
+      "end": 1173,
+      "id": 63,
+      "speaker": "Speaker 4",
+      "speech": "I do If you're standing and you're going towards the other piece of property, how far back does your line go into the woods? I tried to look for a stake there. It's pretty much right where the edge of the right where the edge of it. There's like almost Stones pile up there in the woods.",
+      "start": 1151,
+      "type": "TX"
+    },
+    {
+      "end": 1174,
+      "id": 64,
+      "speaker": "Speaker 1",
+      "speech": "Yeah.",
+      "start": 1173,
+      "type": "TX"
+    },
+    {
+      "end": 1177,
+      "id": 65,
+      "speaker": "Speaker 4",
+      "speech": "Yeah it's so good. Oh there's a well there",
+      "start": 1174,
+      "type": "TX"
+    },
+    {
+      "end": 1179,
+      "id": 66,
+      "speaker": "Speaker 3",
+      "speech": "as you well on the property line.",
+      "start": 1177,
+      "type": "TX"
+    },
+    {
+      "end": 1180,
+      "id": 67,
+      "speaker": "Speaker 1",
+      "speech": "It's",
+      "start": 1180,
+      "type": "TX"
+    },
+    {
+      "end": 1181,
+      "id": 68,
+      "speaker": "Speaker 4",
+      "speech": "on the property",
+      "start": 1180,
+      "type": "TX"
+    },
+    {
+      "end": 1181,
+      "id": 69,
+      "speaker": "Speaker 2",
+      "speech": "line.",
+      "start": 1181,
+      "type": "TX"
+    },
+    {
+      "end": 1182,
+      "id": 70,
+      "speaker": "Speaker 4",
+      "speech": "Okay, that",
+      "start": 1181,
+      "type": "TX"
+    },
+    {
+      "end": 1198,
+      "id": 71,
+      "speaker": "Speaker 3",
+      "speech": "okay. And you didn't put that well. Now write that, well, existed pre-existed you. Okay? is there anybody else here to speak for the Could you come forward? So we can hear you. Thank you. Thank you, Shelly.",
+      "start": 1182,
+      "type": "TX"
+    },
+    {
+      "end": 1200,
+      "id": 72,
+      "speaker": "Speaker 1",
+      "speech": "Thank you.",
+      "start": 1200,
+      "type": "TX"
+    },
+    {
+      "end": 1207,
+      "id": 73,
+      "speaker": "Speaker 3",
+      "speech": "Yes, of course. Well well, the other Buddha is getting ready to approach. Please do.",
+      "start": 1200,
+      "type": "TX"
+    },
+    {
+      "end": 1215,
+      "id": 74,
+      "speaker": "Speaker 1",
+      "speech": "Okay, I didn't hear exactly what he said something about the property 11 years ago.",
+      "start": 1208,
+      "type": "TX"
+    },
+    {
+      "end": 1216,
+      "id": 75,
+      "speaker": "Speaker 3",
+      "speech": "Correct.",
+      "start": 1215,
+      "type": "TX"
+    },
+    {
+      "end": 1226,
+      "id": 76,
+      "speaker": "Speaker 1",
+      "speech": "he said one thing was on there but the shed may have been on there but the other Piece was not the temporary tent.",
+      "start": 1217,
+      "type": "TX"
+    },
+    {
+      "end": 1231,
+      "id": 77,
+      "speaker": "Speaker 4",
+      "speech": "I did not ask about the temporary tent. I just asked about this shit.",
+      "start": 1227,
+      "type": "TX"
+    },
+    {
+      "end": 1232,
+      "id": 78,
+      "speaker": "Speaker 1",
+      "speech": "Okay.",
+      "start": 1232,
+      "type": "TX"
+    },
+    {
+      "end": 1236,
+      "id": 79,
+      "speaker": "Speaker 3",
+      "speech": "But that's a question to us. What did you write the carport in the last 10 years?",
+      "start": 1232,
+      "type": "TX"
+    },
+    {
+      "end": 1240,
+      "id": 80,
+      "speaker": "Speaker 1",
+      "speech": "Yeah, pretty much. Year, after we were there.",
+      "start": 1236,
+      "type": "TX"
+    },
+    {
+      "end": 1240,
+      "id": 81,
+      "speaker": "Speaker 3",
+      "speech": "Okay,",
+      "start": 1240,
+      "type": "TX"
+    },
+    {
+      "end": 1252,
+      "id": 82,
+      "speaker": "Speaker 1",
+      "speech": "it's the house. The tractor. I have to, you know, I agree the road now it's Your your road and take care of itself.",
+      "start": 1240,
+      "type": "TX"
+    },
+    {
+      "end": 1255,
+      "id": 83,
+      "speaker": "Speaker 3",
+      "speech": "It's safe to say you did not get a variance right to erect that.",
+      "start": 1252,
+      "type": "TX"
+    },
+    {
+      "end": 1258,
+      "id": 84,
+      "speaker": "Speaker 1",
+      "speech": "No, I mean, that was that even a thing 10 years ago. Well,",
+      "start": 1255,
+      "type": "TX"
+    },
+    {
+      "end": 1268,
+      "id": 85,
+      "speaker": "Speaker 3",
+      "speech": "that's a good question. Andrew, you'll Knowledge from the planning board. When was the, the setback? The setback well limits enacted.",
+      "start": 1258,
+      "type": "TX"
+    },
+    {
+      "end": 1312,
+      "id": 86,
+      "speaker": "Speaker 2",
+      "speech": "Fairly structure. But, you know, there's a lot of people that put up, you know, carports for better description. Never pursued the the permitting which is technically only you know you've got to have it for six months of the year and then you have to take it down nobody ever does. So it's not really Applicable. Certainly, the sidelines setback. You know has been established from 2002.",
+      "start": 1274,
+      "type": "TX"
+    },
+    {
+      "end": 1328,
+      "id": 87,
+      "speaker": "Speaker 3",
+      "speech": "Okay. Okay. I've been so it may well have been non-conforming. It's not a business here right now because it's gone, right? So it is what it is. I mean it's just a fact it's just a fact on the table. That's right.",
+      "start": 1312,
+      "type": "TX"
+    },
+    {
+      "end": 1333,
+      "id": 88,
+      "speaker": "Speaker 1",
+      "speech": "Okay. So you're saying that the rules were established in 2002,",
+      "start": 1329,
+      "type": "TX"
+    },
+    {
+      "end": 1351,
+      "id": 89,
+      "speaker": "Speaker 3",
+      "speech": "the luos themselves were established in 2002. But oh, through various amendments over the years, new luos are come into play and we are just not sure as we stand as we sit here. Now, when the setback LOL came into play, we don't know.",
+      "start": 1333,
+      "type": "TX"
+    },
+    {
+      "end": 1354,
+      "id": 90,
+      "speaker": "Speaker 1",
+      "speech": "Okay. All right. Thank you.",
+      "start": 1352,
+      "type": "TX"
+    },
+    {
+      "end": 1357,
+      "id": 91,
+      "speaker": "Speaker 3",
+      "speech": "Okay, thanks Shelley. I'm sorry. Go ahead please.",
+      "start": 1354,
+      "type": "TX"
+    },
+    {
+      "end": 1391,
+      "id": 92,
+      "speaker": "Speaker 1",
+      "speech": "So I am removing the old shed and moving the other one, and building is knew he would be bringing his backyard setback in the sidekick that a little more in Conformity and it is today. And it would also vastly improve the character of the neighborhood. Because we wouldn't have a temporary shelter and an old rickety Shack. We would have one structure, that's the vast Improvement. So I just",
+      "start": 1357,
+      "type": "TX"
+    },
+    {
+      "end": 1392,
+      "id": 93,
+      "speaker": "Speaker 3",
+      "speech": "okay, so",
+      "start": 1391,
+      "type": "TX"
+    },
+    {
+      "end": 1397,
+      "id": 94,
+      "speaker": "Speaker 1",
+      "speech": "in favor of improving the property, Engineering parents.",
+      "start": 1392,
+      "type": "TX"
+    },
+    {
+      "end": 1400,
+      "id": 95,
+      "speaker": "Speaker 3",
+      "speech": "And where is your property? In relation to",
+      "start": 1397,
+      "type": "TX"
+    },
+    {
+      "end": 1405,
+      "id": 96,
+      "speaker": "Speaker 1",
+      "speech": "I'm 2154 Valley Road. So, his backline setback",
+      "start": 1400,
+      "type": "TX"
+    },
+    {
+      "end": 1406,
+      "id": 97,
+      "speaker": "Speaker 3",
+      "speech": "is",
+      "start": 1405,
+      "type": "TX"
+    },
+    {
+      "end": 1407,
+      "id": 98,
+      "speaker": "Speaker 1",
+      "speech": "my side. Yeah,",
+      "start": 1406,
+      "type": "TX"
+    },
+    {
+      "end": 1408,
+      "id": 99,
+      "speaker": "Speaker 2",
+      "speech": "got it.",
+      "start": 1407,
+      "type": "TX"
+    },
+    {
+      "end": 1410,
+      "id": 100,
+      "speaker": "Speaker 3",
+      "speech": "Okay. Okay, thank you very much for that.",
+      "start": 1408,
+      "type": "TX"
+    },
+    {
+      "end": 1411,
+      "id": 101,
+      "speaker": "Speaker 2",
+      "speech": "Thank you.",
+      "start": 1410,
+      "type": "TX"
+    },
+    {
+      "end": 1420,
+      "id": 102,
+      "speaker": "Speaker 3",
+      "speech": "Anybody else, any questions any comments? Anybody else want to speak, anybody?",
+      "start": 1412,
+      "type": "TX"
+    },
+    {
+      "end": 1423,
+      "id": 103,
+      "speaker": "Speaker 1",
+      "speech": "This is Shelly. I'd like to make another comment,",
+      "start": 1421,
+      "type": "TX"
+    },
+    {
+      "end": 1423,
+      "id": 104,
+      "speaker": "Speaker 3",
+      "speech": "please.",
+      "start": 1423,
+      "type": "TX"
+    },
+    {
+      "end": 1455,
+      "id": 105,
+      "speaker": "Speaker 1",
+      "speech": "I would just like to say, you know, I could appreciate people wanting to improve their yard and neighbors and I told you understand that, I just don't understand why that should come at the price of a neighboring, a letter. So you don't you you can improve your property, it doesn't mean that you need to have a variance to build it bigger and to someone else has to sacrifice their privacy and sacrifice, what they have bought, and worked and paid for.",
+      "start": 1425,
+      "type": "TX"
+    },
+    {
+      "end": 1465,
+      "id": 106,
+      "speaker": "Speaker 3",
+      "speech": "Fair enough. Thank you. Shelly. Before we move away from that. Do you feel that you've heard and understood everything? You need to hear?",
+      "start": 1456,
+      "type": "TX"
+    },
+    {
+      "end": 1488,
+      "id": 107,
+      "speaker": "Speaker 1",
+      "speech": "I think so, I I think I do, I'm concerned about that. Shared and whatnot is already very close and look into that later. But I do feel that you guys have been very clear and I appreciate that and appreciate everybody allowing me to speak. Like this is in the situation where in here,",
+      "start": 1468,
+      "type": "TX"
+    },
+    {
+      "end": 1505,
+      "id": 108,
+      "speaker": "Speaker 3",
+      "speech": "thank you. Okay, so we're going to move on from Mr. Krause's Case now but we have not yet closed the public hearing. So if you stay on the line which I encourage you to do so. And if you know before it ends, if you think of something else please please speak up.",
+      "start": 1488,
+      "type": "TX"
+    },
+    {
+      "end": 1507,
+      "id": 109,
+      "speaker": "Speaker 1",
+      "speech": "All right, thank you so much, I will.",
+      "start": 1505,
+      "type": "TX"
+    },
+    {
+      "end": 1510,
+      "id": 110,
+      "speaker": "Speaker 3",
+      "speech": "Okay, thank you. Thanks Shelly. Thank you, Mr. Krause.",
+      "start": 1507,
+      "type": "TX"
+    },
+    {
+      "end": 1511,
+      "id": 111,
+      "speaker": "Speaker 2",
+      "speech": "Okay,",
+      "start": 1510,
+      "type": "TX"
+    },
+    {
+      "end": 1514,
+      "id": 112,
+      "speaker": "Speaker 3",
+      "speech": "so Mr. Max I'm afraid you",
+      "start": 1511,
+      "type": "TX"
+    },
+    {
+      "end": 1531,
+      "id": 113,
+      "speaker": "Speaker 2",
+      "speech": "68 was a summer home, they retired up here in the early 90s converted into the full-time living. 561 Washington Drive here in town",
+      "start": 1517,
+      "type": "TX"
+    },
+    {
+      "end": 1532,
+      "id": 114,
+      "speaker": "Speaker 1",
+      "speech": "No question,",
+      "start": 1531,
+      "type": "TX"
+    },
+    {
+      "end": 1552,
+      "id": 115,
+      "speaker": "Speaker 3",
+      "speech": "thank you. I do I do actually, yeah. Please please feel free to sit down what I'd like to do. And we've done this before. What I'd like to do is that I've got something that I'd like you do address before before you get, you know, all the way down what you want to say. I'm sorry into my field before you get into your speaker. I want you to do, you spell. But I want to talk about this first,",
+      "start": 1532,
+      "type": "TX"
+    },
+    {
+      "end": 1553,
+      "id": 116,
+      "speaker": "Speaker 1",
+      "speech": "okay?",
+      "start": 1552,
+      "type": "TX"
+    },
+    {
+      "end": 1558,
+      "id": 117,
+      "speaker": "Speaker 3",
+      "speech": "Vice chair, Kearney and I visited your lot today",
+      "start": 1554,
+      "type": "TX"
+    },
+    {
+      "end": 1559,
+      "id": 118,
+      "speaker": "Speaker 1",
+      "speech": "and",
+      "start": 1558,
+      "type": "TX"
+    },
+    {
+      "end": 1565,
+      "id": 119,
+      "speaker": "Speaker 3",
+      "speech": "did some measurements, we all do measurements, we all do that before, and I've got some results here that I want you to talk about",
+      "start": 1559,
+      "type": "TX"
+    },
+    {
+      "end": 1565,
+      "id": 120,
+      "speaker": "Speaker 1",
+      "speech": "it again.",
+      "start": 1565,
+      "type": "TX"
+    },
+    {
+      "end": 1573,
+      "id": 121,
+      "speaker": "Speaker 3",
+      "speech": "I mean, if you pass those out, oh, thank you very much. Yeah, I've got one for each of us too.",
+      "start": 1565,
+      "type": "TX"
+    },
+    {
+      "end": 1574,
+      "id": 122,
+      "speaker": "Speaker 1",
+      "speech": "Yeah.",
+      "start": 1573,
+      "type": "TX"
+    },
+    {
+      "end": 1579,
+      "id": 123,
+      "speaker": "Speaker 3",
+      "speech": "Because nobody seen this before.",
+      "start": 1577,
+      "type": "TX"
+    },
+    {
+      "end": 1589,
+      "id": 124,
+      "speaker": "Speaker 1",
+      "speech": "Thank you.",
+      "start": 1589,
+      "type": "TX"
+    },
+    {
+      "end": 1604,
+      "id": 125,
+      "speaker": "Speaker 3",
+      "speech": "So what? What Vice chair, Connie. And I, when we came to do your measurements noticed, That on page 4 of the lucc permit application. There was no work.",
+      "start": 1589,
+      "type": "TX"
+    },
+    {
+      "end": 1605,
+      "id": 126,
+      "speaker": "Speaker 1",
+      "speech": "Sorry,",
+      "start": 1605,
+      "type": "TX"
+    },
+    {
+      "end": 1612,
+      "id": 127,
+      "speaker": "Speaker 3",
+      "speech": "there was no work. There was no, I mean you're supposed to show the sons. You know what is the? I didn't",
+      "start": 1605,
+      "type": "TX"
+    },
+    {
+      "end": 1612,
+      "id": 128,
+      "speaker": "Speaker 1",
+      "speech": "hear the first",
+      "start": 1612,
+      "type": "TX"
+    },
+    {
+      "end": 1616,
+      "id": 129,
+      "speaker": "Speaker 3",
+      "speech": "thing he said when you when Vice chairman and I visited you a lot.",
+      "start": 1612,
+      "type": "TX"
+    },
+    {
+      "end": 1616,
+      "id": 130,
+      "speaker": "Speaker 1",
+      "speech": "Yes.",
+      "start": 1616,
+      "type": "TX"
+    },
+    {
+      "end": 1667,
+      "id": 131,
+      "speaker": "Speaker 3",
+      "speech": "Okay as we were about to do the measurements, we noticed that on page 4 of your eldc permit application, there was no Workshop. So that's where you say that my building coverage. I think you said it was a point, I don't know 8.67%, right? And and my, and you're impervious coverage was 19.67%. And what you're supposed to show on that sheet is that oh, my gosh, is 50 feet by 30 feet high. So that's, you know, 1500 square feet. Plus, you know, my cupboard way is this, plus my house is this that adds up to that I divided by the square foot on the lot that becomes. My so there was no Workshop. So what we decided to do. Mr. Connie and I we do some measurements of our own and I went you went just been a few minutes. Looking at that because I was,",
+      "start": 1616,
+      "type": "TX"
+    },
+    {
+      "end": 1670,
+      "id": 132,
+      "speaker": "Speaker 2",
+      "speech": "Yeah.",
+      "start": 1667,
+      "type": "TX"
+    },
+    {
+      "end": 1670,
+      "id": 133,
+      "speaker": "Speaker 1",
+      "speech": "Okay.",
+      "start": 1670,
+      "type": "TX"
+    },
+    {
+      "end": 1675,
+      "id": 134,
+      "speaker": "Speaker 3",
+      "speech": "And I'd like the board to look at that because I thought the numbers were surprising.",
+      "start": 1670,
+      "type": "TX"
+    },
+    {
+      "end": 1678,
+      "id": 135,
+      "speaker": "Speaker 2",
+      "speech": "Okay,",
+      "start": 1677,
+      "type": "TX"
+    },
+    {
+      "end": 1684,
+      "id": 136,
+      "speaker": "Speaker 3",
+      "speech": "because we did our measurement. And the building coverage is 15%,",
+      "start": 1678,
+      "type": "TX"
+    },
+    {
+      "end": 1684,
+      "id": 137,
+      "speaker": "Speaker 2",
+      "speech": "okay,",
+      "start": 1684,
+      "type": "TX"
+    },
+    {
+      "end": 1723,
+      "id": 138,
+      "speaker": "Speaker 3",
+      "speech": "which is already 5% over, what it should be. We did not measure all of the impervious. It was too high. There were 20 separate measurements that we felt that we had to make because you've got a beautiful walkway. We didn't measure that, you've got all of those retaining Wars, you know, with the top on the they got a nice broad Granite top. We didn't measure that, what all we measured was the driveway, that's all we measured. And we came up with an impervious coverage, a 25.6% And then not the numbers. I'm sorry, they are not the numbers that are in the LC permit application.",
+      "start": 1684,
+      "type": "TX"
+    },
+    {
+      "end": 1743,
+      "id": 139,
+      "speaker": "Speaker 2",
+      "speech": "I don't think I Perhaps Illinois. I needed to do that worksheet. Did you? You're saying Building from it. Okay. Not in that, in this application for variants",
+      "start": 1724,
+      "type": "TX"
+    },
+    {
+      "end": 1743,
+      "id": 140,
+      "speaker": "Speaker 1",
+      "speech": "know",
+      "start": 1743,
+      "type": "TX"
+    },
+    {
+      "end": 1753,
+      "id": 141,
+      "speaker": "Speaker 3",
+      "speech": "it's on the original hell. You say, you're right? It's really good building permit, we call it, it's the it's known as the LC panel, the land use compliance,",
+      "start": 1743,
+      "type": "TX"
+    },
+    {
+      "end": 1753,
+      "id": 142,
+      "speaker": "Speaker 2",
+      "speech": "okay?",
+      "start": 1753,
+      "type": "TX"
+    },
+    {
+      "end": 1782,
+      "id": 143,
+      "speaker": "Speaker 3",
+      "speech": "and if you look, On page 4 of that. This. Okay. Yeah, you did. You parents said it. You did draw out all of those different things you did. So what what are the numbers that are on there? You're saying that your structure coverage is 8.12%. And your impervious surface coverage is 19.6%.",
+      "start": 1754,
+      "type": "TX"
+    },
+    {
+      "end": 1784,
+      "id": 144,
+      "speaker": "Speaker 1",
+      "speech": "I, when I",
+      "start": 1782,
+      "type": "TX"
+    },
+    {
+      "end": 1815,
+      "id": 145,
+      "speaker": "Speaker 2",
+      "speech": "generated these numbers, I use the permit. That was my father had an engineer job when he got his permit for the garage and it showed the walkways and children driveways and children covered. So I essentially just copy those off of his original garage plan when he built it back in. I think it was 2013, so I would just was going by what an engineer heads on. So if you're coming up with something different and I'm at a loss, Okay?",
+      "start": 1784,
+      "type": "TX"
+    },
+    {
+      "end": 1815,
+      "id": 146,
+      "speaker": "Speaker 1",
+      "speech": "So",
+      "start": 1815,
+      "type": "TX"
+    },
+    {
+      "end": 1820,
+      "id": 147,
+      "speaker": "Speaker 3",
+      "speech": "I mean do you count the covered walkways? For example,",
+      "start": 1817,
+      "type": "TX"
+    },
+    {
+      "end": 1829,
+      "id": 148,
+      "speaker": "Speaker 2",
+      "speech": "I know where that one, they did the included the cover bar. The covered walkways. Yes, I believe. So it was part of the building permit. Thought.",
+      "start": 1820,
+      "type": "TX"
+    },
+    {
+      "end": 1839,
+      "id": 149,
+      "speaker": "Speaker 3",
+      "speech": "Yeah. I You know, your back me up Gary. We are measured this very carefully and if anything if anything we were very generous,",
+      "start": 1829,
+      "type": "TX"
+    },
+    {
+      "end": 1861,
+      "id": 150,
+      "speaker": "Speaker 4",
+      "speech": "okay, it would be, it would be higher. we did we did the best we could but like I like Mark said, we We didn't cover the top of the walls and try to measure because it was on a curve and it would take we'd be there. Most of the day measure in those. Those",
+      "start": 1839,
+      "type": "TX"
+    },
+    {
+      "end": 1865,
+      "id": 151,
+      "speaker": "Speaker 3",
+      "speech": "top to get everything. We wouldn't do it accurately enough to make a case right area,",
+      "start": 1861,
+      "type": "TX"
+    },
+    {
+      "end": 1865,
+      "id": 152,
+      "speaker": "Speaker 1",
+      "speech": "right?",
+      "start": 1865,
+      "type": "TX"
+    },
+    {
+      "end": 1866,
+      "id": 153,
+      "speaker": "Speaker 2",
+      "speech": "Yeah.",
+      "start": 1865,
+      "type": "TX"
+    },
+    {
+      "end": 1867,
+      "id": 154,
+      "speaker": "Speaker 1",
+      "speech": "Okay, so",
+      "start": 1866,
+      "type": "TX"
+    },
+    {
+      "end": 1868,
+      "id": 155,
+      "speaker": "Speaker 2",
+      "speech": "Where do we?",
+      "start": 1868,
+      "type": "TX"
+    },
+    {
+      "end": 1896,
+      "id": 156,
+      "speaker": "Speaker 3",
+      "speech": "Well, the fact is, you know, we're sitting here not with the one variants that you were looking for. Which was the sidelines, the side. Setback variance. You've got. A building coverage variance that you need and you've got an impervious coverage variants that you need and also we measured the distance from the garage to the road and that's 45 feet whereas it has to be 50 feet. so you need a front sink back to",
+      "start": 1868,
+      "type": "TX"
+    },
+    {
+      "end": 1906,
+      "id": 157,
+      "speaker": "Speaker 2",
+      "speech": "so that was built in 2013 By An engineered drawing. That was by the town, I'm assuming I'm assuming you got a permit. Yeah.",
+      "start": 1899,
+      "type": "TX"
+    },
+    {
+      "end": 1932,
+      "id": 158,
+      "speaker": "Speaker 3",
+      "speech": "But the Celtic walkway is going to align with the garage, right? That's the drawing that you gave us. So, the covered walkway itself is going to need that that front setback. I mean, I'm looking at the diagram here, it's front is aligned with the front of the garage. So if that garage, is only 45 feet from the road, should be 50 and the front of the covered with only 45 feet 50. Okay, so you would need a very special",
+      "start": 1906,
+      "type": "TX"
+    },
+    {
+      "end": 1934,
+      "id": 159,
+      "speaker": "Speaker 4",
+      "speech": "so not for the garage",
+      "start": 1932,
+      "type": "TX"
+    },
+    {
+      "end": 1939,
+      "id": 160,
+      "speaker": "Speaker 2",
+      "speech": "was too late. Discomfort the covered walkway. That",
+      "start": 1934,
+      "type": "TX"
+    },
+    {
+      "end": 1941,
+      "id": 161,
+      "speaker": "Speaker 3",
+      "speech": "the covered walkway. Yeah, so",
+      "start": 1939,
+      "type": "TX"
+    },
+    {
+      "end": 1943,
+      "id": 162,
+      "speaker": "Speaker 2",
+      "speech": "it's not only sides, it's frontal",
+      "start": 1941,
+      "type": "TX"
+    },
+    {
+      "end": 1968,
+      "id": 163,
+      "speaker": "Speaker 3",
+      "speech": "side fun and right up down all the events. And and, you know, it puts you building. Well, you're building coverage. You're Building coverage probably was something like 13.7%, then we add this and it gets up to 15%. So you need a variance for that too. And the impervious is what it is but it's setting at 25.6% at least on that line.",
+      "start": 1943,
+      "type": "TX"
+    },
+    {
+      "end": 1975,
+      "id": 164,
+      "speaker": "Speaker 2",
+      "speech": "Okay. Covering Putting a cover over president of pervious doesn't change in pervious.",
+      "start": 1968,
+      "type": "TX"
+    },
+    {
+      "end": 1988,
+      "id": 165,
+      "speaker": "Speaker 3",
+      "speech": "Why doesn't change it? But but it is a fact that we're sitting here looking at that. You're impervious coverage is at least 25.6% you can make the case that it hasn't changed. But it is that okay?",
+      "start": 1975,
+      "type": "TX"
+    },
+    {
+      "end": 1994,
+      "id": 166,
+      "speaker": "Speaker 2",
+      "speech": "Yeah.",
+      "start": 1992,
+      "type": "TX"
+    },
+    {
+      "end": 2009,
+      "id": 167,
+      "speaker": "Speaker 1",
+      "speech": "Why are we talking about? Why is it at all initially?",
+      "start": 2005,
+      "type": "TX"
+    },
+    {
+      "end": 2012,
+      "id": 168,
+      "speaker": "Speaker 3",
+      "speech": "I think it's something that we",
+      "start": 2010,
+      "type": "TX"
+    },
+    {
+      "end": 2016,
+      "id": 169,
+      "speaker": "Speaker 1",
+      "speech": "Remains the Same. Whether the this is a proof or not.",
+      "start": 2012,
+      "type": "TX"
+    },
+    {
+      "end": 2077,
+      "id": 170,
+      "speaker": "Speaker 3",
+      "speech": "Okay, I'll tell you why we're talking about it. we received a letter from Mr. John Butcher. And I will read that out to you now. as soon as it pops up on my screen, this is from John Butcher. Will there be a? He means the zba. Will the boa, the board of adjustment. He means the zba when he says that the Zoning Board of adjustment will the zba be taking into account and impervious surface percent variance for this project. Multiple construction projects, including driveway expansion, covered walkways as well as retaining walls. Structures have been recently within one year built on this law So I read that out the beta and it's going to go right into the record. That's why we're talking about it because it's been raised by a nobody",
+      "start": 2016,
+      "type": "TX"
+    },
+    {
+      "end": 2080,
+      "id": 171,
+      "speaker": "Speaker 2",
+      "speech": "so,",
+      "start": 2080,
+      "type": "TX"
+    },
+    {
+      "end": 2087,
+      "id": 172,
+      "speaker": "Speaker 1",
+      "speech": "The things that have already been done. Have already altered the impervious service,",
+      "start": 2083,
+      "type": "TX"
+    },
+    {
+      "end": 2088,
+      "id": 173,
+      "speaker": "Speaker 3",
+      "speech": "that's what he's playing.",
+      "start": 2087,
+      "type": "TX"
+    },
+    {
+      "end": 2093,
+      "id": 174,
+      "speaker": "Speaker 1",
+      "speech": "So that's not directly related to this.",
+      "start": 2091,
+      "type": "TX"
+    },
+    {
+      "end": 2128,
+      "id": 175,
+      "speaker": "Speaker 3",
+      "speech": "It's not directly related to this, but it's before us right now and I definitely want to talk about us. Now to the extent that we can, yeah, that's right to the extent that we can. so, at the very minimum, instead of needing one side, setback variance, I believe that you need a building coverage variance to get you to 15%. You need a front? Yeah. Yeah. You know, and you need a front setback to get, you from 45 feet to 50 feet.",
+      "start": 2093,
+      "type": "TX"
+    },
+    {
+      "end": 2129,
+      "id": 176,
+      "speaker": "Speaker 2",
+      "speech": "So",
+      "start": 2128,
+      "type": "TX"
+    },
+    {
+      "end": 2140,
+      "id": 177,
+      "speaker": "Speaker 3",
+      "speech": "it's, it's on that worksheet that I gave you. It's all there on that worksheet. But which one? Yeah.",
+      "start": 2129,
+      "type": "TX"
+    },
+    {
+      "end": 2142,
+      "id": 178,
+      "speaker": "Speaker 1",
+      "speech": "So yeah. So",
+      "start": 2140,
+      "type": "TX"
+    },
+    {
+      "end": 2146,
+      "id": 179,
+      "speaker": "Speaker 3",
+      "speech": "I said she hung up.",
+      "start": 2144,
+      "type": "TX"
+    },
+    {
+      "end": 2147,
+      "id": 180,
+      "speaker": "Speaker 1",
+      "speech": "No icons.",
+      "start": 2146,
+      "type": "TX"
+    },
+    {
+      "end": 2148,
+      "id": 181,
+      "speaker": "Speaker 3",
+      "speech": "Okay good.",
+      "start": 2147,
+      "type": "TX"
+    },
+    {
+      "end": 2149,
+      "id": 182,
+      "speaker": "Speaker 1",
+      "speech": "Hello.",
+      "start": 2149,
+      "type": "TX"
+    },
+    {
+      "end": 2153,
+      "id": 183,
+      "speaker": "Speaker 4",
+      "speech": "Do we still have you online",
+      "start": 2152,
+      "type": "TX"
+    },
+    {
+      "end": 2154,
+      "id": 184,
+      "speaker": "Speaker 3",
+      "speech": "know this Peggy? Not sure.",
+      "start": 2153,
+      "type": "TX"
+    },
+    {
+      "end": 2157,
+      "id": 185,
+      "speaker": "Speaker 2",
+      "speech": "Side front.",
+      "start": 2155,
+      "type": "TX"
+    },
+    {
+      "end": 2185,
+      "id": 186,
+      "speaker": "Speaker 3",
+      "speech": "Sight. Setback. You need that variance and that's what whatever you claimed it is. Right? What did you what did you say that you? Yeah, right, yeah, yeah. You want 18 feet. Where 30 feet is required. On the front, you want 45 feet with 50 years required? On the building coverage. You want 15% where? 10% is all you have",
+      "start": 2157,
+      "type": "TX"
+    },
+    {
+      "end": 2186,
+      "id": 187,
+      "speaker": "Speaker 2",
+      "speech": "building coverage?",
+      "start": 2185,
+      "type": "TX"
+    },
+    {
+      "end": 2186,
+      "id": 188,
+      "speaker": "Speaker 3",
+      "speech": "Yeah.",
+      "start": 2186,
+      "type": "TX"
+    },
+    {
+      "end": 2193,
+      "id": 189,
+      "speaker": "Speaker 2",
+      "speech": "now, ask them you're saying, I'm asking for",
+      "start": 2189,
+      "type": "TX"
+    },
+    {
+      "end": 2198,
+      "id": 190,
+      "speaker": "Speaker 1",
+      "speech": "so, you",
+      "start": 2196,
+      "type": "TX"
+    },
+    {
+      "end": 2208,
+      "id": 191,
+      "speaker": "Speaker 3",
+      "speech": "Absolutely. And we're going to consider at least those three variants and not the one that we've been presented with.",
+      "start": 2201,
+      "type": "TX"
+    },
+    {
+      "end": 2210,
+      "id": 192,
+      "speaker": "Speaker 1",
+      "speech": "Oh,",
+      "start": 2209,
+      "type": "TX"
+    },
+    {
+      "end": 2213,
+      "id": 193,
+      "speaker": "Speaker 2",
+      "speech": "side front building coverage.",
+      "start": 2210,
+      "type": "TX"
+    },
+    {
+      "end": 2213,
+      "id": 194,
+      "speaker": "Speaker 3",
+      "speech": "Yeah,",
+      "start": 2213,
+      "type": "TX"
+    },
+    {
+      "end": 2216,
+      "id": 195,
+      "speaker": "Speaker 2",
+      "speech": "from 15. It's 10. Is 10. Is",
+      "start": 2213,
+      "type": "TX"
+    },
+    {
+      "end": 2220,
+      "id": 196,
+      "speaker": "Speaker 3",
+      "speech": "10? Is the maximum? Yes. And 20% is the maximum on the impervious.",
+      "start": 2216,
+      "type": "TX"
+    },
+    {
+      "end": 2224,
+      "id": 197,
+      "speaker": "Speaker 2",
+      "speech": "Building coverage is 10.",
+      "start": 2222,
+      "type": "TX"
+    },
+    {
+      "end": 2225,
+      "id": 198,
+      "speaker": "Speaker 3",
+      "speech": "Building is 10. Yeah.",
+      "start": 2224,
+      "type": "TX"
+    },
+    {
+      "end": 2236,
+      "id": 199,
+      "speaker": "Speaker 1",
+      "speech": "So when you say you're going to consider all three of those, does that mean that you could see He's only asking for one.",
+      "start": 2226,
+      "type": "TX"
+    },
+    {
+      "end": 2264,
+      "id": 200,
+      "speaker": "Speaker 3",
+      "speech": "We could. Oh yeah. Yeah, don't do. We've got to consider the variances that are needed. We don't just consider the variances of a requested. We have to consider the variance that we need it. It's quite common for applicants not to know what variances are needed. And now we can talk about it right now.",
+      "start": 2237,
+      "type": "TX"
+    },
+    {
+      "end": 2277,
+      "id": 201,
+      "speaker": "Speaker 1",
+      "speech": "Or does he have to put a new application in which case we're not really going to get in a",
+      "start": 2272,
+      "type": "TX"
+    },
+    {
+      "end": 2290,
+      "id": 202,
+      "speaker": "Speaker 3",
+      "speech": "complex? No, no reapplication is needed. We're here to discuss everything tonight. We're not, you know, we don't play Simon Says on this board or there's paperwork that we're here to talk it through, whatever needs to be talked through.",
+      "start": 2277,
+      "type": "TX"
+    },
+    {
+      "end": 2296,
+      "id": 203,
+      "speaker": "Speaker 2",
+      "speech": "So are you saying you would address all three of those at this meeting now or in the future?",
+      "start": 2291,
+      "type": "TX"
+    },
+    {
+      "end": 2297,
+      "id": 204,
+      "speaker": "Speaker 3",
+      "speech": "No, right now.",
+      "start": 2296,
+      "type": "TX"
+    },
+    {
+      "end": 2310,
+      "id": 205,
+      "speaker": "Speaker 2",
+      "speech": "Oh, okay. I guess it was prepared because it caught me off guard and I wasn't aware of. So I'm kind of had a losses to how to respond.",
+      "start": 2298,
+      "type": "TX"
+    },
+    {
+      "end": 2320,
+      "id": 206,
+      "speaker": "Speaker 3",
+      "speech": "But all of the reasons that you would have prepared to justify your project. No matter how many minutes is Anita still relevant as we sit here,",
+      "start": 2310,
+      "type": "TX"
+    },
+    {
+      "end": 2411,
+      "id": 207,
+      "speaker": "Speaker 2",
+      "speech": "I was under the impression I had a true partnership and I was going to get into the location of the garage was not parallel, or it was a skew with his presence inside line. So the front corner. The way I understood it was pinned by an engineer and I can't remember if it was Um, because the chase, he's still in my property down the street Peter bhelen. I don't know if he located it, but if you can see from the drawing the property, relationship to the distance of the The rear corner of the front corner of the Lakeside of the garage, is greater. So I was going to talk about The location of the property or the location of the garage because it's distance to septic system. It was located where it had to be because it was conforming at the time, I did not realize, it wasn't within the 50 Foot frontal, setback. That was swimming and engineer new, what he did. I'm assuming my father, got a permit to build a garage. So I just assuming that the location of that garage was where it was for the reason was Believe that when they built it and I just wanted to put a carport over it. I'm in the process of trying to sell my assets off in Connecticut and move up here to take care of my parents. It's it's You based your calculations on a permit that you stated was granted",
+      "start": 2320,
+      "type": "TX"
+    },
+    {
+      "end": 2500,
+      "id": 208,
+      "speaker": "Speaker 2",
+      "speech": "in 2013? Mr. Butcher State Building has been going on the last year. It doesn't sign as if a construction going on. But does he want to clean on? Yes, yes. So we went to the We got a building permit through the town to cover the walkways because what was happening, is my mom was she's wheelchair bound. My father was shoveling the sidewalk. And back when she was in a walker, she slipped the fellow. And I said sidewalk and she split her head open. We almost lost her. so, the fact that we took the garage, we got the building permits to connect the garage to the house, which would you Which you see is the covered walkway. So we got permits for that we applied for the state. It was a whole inverse thing that was improved. It was built. And now I'm looking at, okay? I have a parking area to the side of the garage, the left side that I'm going. In what I thought was for the variants, that was here for tonight, was to cover an existing impervious, so I can have an extra vehicle parked outside in and The Windsor, whether I'm trying to, like I said, I'm trying to move up here to take care of them. My house. Closes on Tuesday. I'm going from a 5000 square foot home on a leaking, Connecticut. To maybe six or five or six hundred above a garage kind of thing. So, and",
+      "start": 2411,
+      "type": "TX"
+    },
+    {
+      "end": 2523,
+      "id": 209,
+      "speaker": "Speaker 2",
+      "speech": "it's all For obvious reasons you see before you. So I guess I'm asking for variances on all of that. Again, I wasn't aware that. We weren't in compliance with coverage areas. for all setbacks and side setbacks, I'm just here asking them",
+      "start": 2500,
+      "type": "TX"
+    },
+    {
+      "end": 2525,
+      "id": 210,
+      "speaker": "Speaker 4",
+      "speech": "to question is",
+      "start": 2523,
+      "type": "TX"
+    },
+    {
+      "end": 2594,
+      "id": 211,
+      "speaker": "Speaker 2",
+      "speech": "Took. facts that you considered, professional calculation, in 2013, If no work had been done since then, I think we'd be having a different conversation than we are tonight. So, work has gone on before and you have not chosen to take that into a concerning consideration from what I'm hearing. So I took the 13 engineering and then I added the calculations for covered walkways. Oh, okay. I did the clarify, like I factor those in so I took 13. Maps that were submitted with the town permits and in factored in the calculations for the covered walkways. Okay, thank you. So I did And apparently I don't know who's math is off. These guys were just here today, I'm not refuting what they measured. I'm sure they know how to measure. I just took what I had for me and I took what I added and I just put it on that permit. So I thought it was in compliance all along and I'll find out. It's kind of catching me off guard, to be",
+      "start": 2526,
+      "type": "TX"
+    },
+    {
+      "end": 2594,
+      "id": 212,
+      "speaker": "Speaker 3",
+      "speech": "honest.",
+      "start": 2594,
+      "type": "TX"
+    },
+    {
+      "end": 2607,
+      "id": 213,
+      "speaker": "Speaker 2",
+      "speech": "So Um, I don't know how to resolve it. I'm just trying to do the right thing by my parents and ask him for some leniency, I guess. I don't.",
+      "start": 2594,
+      "type": "TX"
+    },
+    {
+      "end": 2615,
+      "id": 214,
+      "speaker": "Speaker 1",
+      "speech": "What",
+      "start": 2614,
+      "type": "TX"
+    },
+    {
+      "end": 2626,
+      "id": 215,
+      "speaker": "Speaker 3",
+      "speech": "do you want to say anything about? The hardship you said about that right? You view the hardship as the lay of the land of the property, right? The position of",
+      "start": 2615,
+      "type": "TX"
+    },
+    {
+      "end": 2652,
+      "id": 216,
+      "speaker": "Speaker 2",
+      "speech": "a septic system, the position of his wealth Um and then the Garage side, the side of the garage is not parallel with the property line. so I the way I was understanding it is, I would be able to get a building permit for, you know, if this was the garage And I was going to have. This lean to not the perspective.",
+      "start": 2626,
+      "type": "TX"
+    },
+    {
+      "end": 2654,
+      "id": 217,
+      "speaker": "Speaker 3",
+      "speech": "Yes, side. Yep.",
+      "start": 2652,
+      "type": "TX"
+    },
+    {
+      "end": 2666,
+      "id": 218,
+      "speaker": "Speaker 2",
+      "speech": "That I would able to be able to do that without a variance but it builds a car for a roof line like that. So that's why I was asking for this. This additional setback. Okay,",
+      "start": 2654,
+      "type": "TX"
+    },
+    {
+      "end": 2667,
+      "id": 219,
+      "speaker": "Speaker 3",
+      "speech": "okay.",
+      "start": 2666,
+      "type": "TX"
+    },
+    {
+      "end": 2690,
+      "id": 220,
+      "speaker": "Speaker 2",
+      "speech": "I have done significant amount of landscaping, I brought Turf, my father had been struggling with years because of the gravel and the hill to try to get any kind of grass to take. I saw that as being an issue, I bought two triangles at the topsoil spread. It I bought. I can't remember the square footage. Probably 1500 square feet of sod",
+      "start": 2668,
+      "type": "TX"
+    },
+    {
+      "end": 2691,
+      "id": 221,
+      "speaker": "Speaker 3",
+      "speech": "and",
+      "start": 2690,
+      "type": "TX"
+    },
+    {
+      "end": 2695,
+      "id": 222,
+      "speaker": "Speaker 2",
+      "speech": "rolled it all out, and it was a good. I got it down before we started getting our first Deluge.",
+      "start": 2691,
+      "type": "TX"
+    },
+    {
+      "end": 2696,
+      "id": 223,
+      "speaker": "Speaker 3",
+      "speech": "So",
+      "start": 2695,
+      "type": "TX"
+    },
+    {
+      "end": 2701,
+      "id": 224,
+      "speaker": "Speaker 2",
+      "speech": "that helped me. And now I kind of shot myself in the foot now, that was something. I got a mole all the time.",
+      "start": 2696,
+      "type": "TX"
+    },
+    {
+      "end": 2702,
+      "id": 225,
+      "speaker": "Speaker 1",
+      "speech": "So,",
+      "start": 2701,
+      "type": "TX"
+    },
+    {
+      "end": 2703,
+      "id": 226,
+      "speaker": "Speaker 3",
+      "speech": "yeah, looks beautiful",
+      "start": 2702,
+      "type": "TX"
+    },
+    {
+      "end": 2734,
+      "id": 227,
+      "speaker": "Speaker 2",
+      "speech": "kind of The best he could. At the time I had let me kind of take over here. looking at to the garage where I want to put the carport, there's a path down to the to the water that's gravel that can all go back to more topsoil and sod. So that would address any impervious areas. I would happily give that up. The only reason that he had that going down was to get down into his",
+      "start": 2703,
+      "type": "TX"
+    },
+    {
+      "end": 2736,
+      "id": 228,
+      "speaker": "Speaker 4",
+      "speech": "basement.",
+      "start": 2734,
+      "type": "TX"
+    },
+    {
+      "end": 2789,
+      "id": 229,
+      "speaker": "Speaker 2",
+      "speech": "He was burning wood. I got him off of firewood because it's just too much warm. He's yelling at me, I'm taking away his exercise, but I got them switched over and propane. It's a lot point and shoot Future's house, warm, so that gravel area down the side of the garage. You can all get converted back to Topsoil inside and grass seed. Eliminate that impervious area there. So I mean, that's got to be 25 by Mile Road and Coastal. We're talking about 18. So it's got to be 25 by at least 10. Another 250 square feet can go back to impervious. so I'm willing to make any concessions, we have to, you know, Do what I got to do to move in and take care of my parents. So, I'm open to suggestions, I'm not here to argue or dispute or refute or",
+      "start": 2736,
+      "type": "TX"
+    },
+    {
+      "end": 2805,
+      "id": 230,
+      "speaker": "Speaker 3",
+      "speech": "unfortunately the board can't make suggestions like that, okay? That the select board can you know, I mean when you can go back to the select board and they're very helpful and give you all kinds of advice. All the board can do is mediators",
+      "start": 2789,
+      "type": "TX"
+    },
+    {
+      "end": 2806,
+      "id": 231,
+      "speaker": "Speaker 1",
+      "speech": "or",
+      "start": 2805,
+      "type": "TX"
+    },
+    {
+      "end": 2810,
+      "id": 232,
+      "speaker": "Speaker 3",
+      "speech": "we can do is Judge on the variances that are in front of us. Yes. So what do",
+      "start": 2806,
+      "type": "TX"
+    },
+    {
+      "end": 2822,
+      "id": 233,
+      "speaker": "Speaker 2",
+      "speech": "you propose to keep this open till I do more research? Remember again you just said you can't advise so maybe just ask the redundant question. You've told me already told me the answer to",
+      "start": 2810,
+      "type": "TX"
+    },
+    {
+      "end": 2835,
+      "id": 234,
+      "speaker": "Speaker 3",
+      "speech": "well, we we can we can talk about that but I'd like to hear. I mean, obviously you keep talking as long as you want to talk, but you have Two people here, right about us. That I don't",
+      "start": 2823,
+      "type": "TX"
+    },
+    {
+      "end": 2836,
+      "id": 235,
+      "speaker": "Speaker 2",
+      "speech": "know.",
+      "start": 2835,
+      "type": "TX"
+    },
+    {
+      "end": 2845,
+      "id": 236,
+      "speaker": "Speaker 3",
+      "speech": "Is that right? That you're not. You're not here. I'm sorry. I'm sorry. I misunderstood I misunderstood. Okay, I got it. Thank you, I misunderstood. Yeah,",
+      "start": 2836,
+      "type": "TX"
+    },
+    {
+      "end": 2848,
+      "id": 237,
+      "speaker": "Speaker 2",
+      "speech": "is there I've got here?",
+      "start": 2845,
+      "type": "TX"
+    },
+    {
+      "end": 2856,
+      "id": 238,
+      "speaker": "Speaker 3",
+      "speech": "Yeah, I know, that's why I bring this because I know exactly.",
+      "start": 2848,
+      "type": "TX"
+    },
+    {
+      "end": 2868,
+      "id": 239,
+      "speaker": "Speaker 1",
+      "speech": "So if you consider it tonight and find the favor and it's okay if you find against it doesn't Prejudice is ability to come back with a modified application, does it?",
+      "start": 2857,
+      "type": "TX"
+    },
+    {
+      "end": 2882,
+      "id": 240,
+      "speaker": "Speaker 3",
+      "speech": "No, not at all. You can't take two bites of the same Apple. So it has to be a significantly different proposal or or if we don't grind it and Mr. Mech has the right to appeal.",
+      "start": 2868,
+      "type": "TX"
+    },
+    {
+      "end": 2899,
+      "id": 241,
+      "speaker": "Speaker 1",
+      "speech": "If you find a density now and this will Prejudice is ability to come back with a similar application.",
+      "start": 2892,
+      "type": "TX"
+    },
+    {
+      "end": 2914,
+      "id": 242,
+      "speaker": "Speaker 3",
+      "speech": "It has to be a different application. It has to be different significant. What does that mean? Well, we we have to judge that when we see it, there is no no real guidelines about that. It just can't be the same proposal.",
+      "start": 2899,
+      "type": "TX"
+    },
+    {
+      "end": 2931,
+      "id": 243,
+      "speaker": "Speaker 1",
+      "speech": "But I don't see what he wants to do. I mean, the only thing is that this suggested that if you go back to the select board and say, well I'm gonna take out this gravel walkway and add 250 feet of impervious. I mean",
+      "start": 2916,
+      "type": "TX"
+    },
+    {
+      "end": 2932,
+      "id": 244,
+      "speaker": "Speaker 2",
+      "speech": "the previous service",
+      "start": 2931,
+      "type": "TX"
+    },
+    {
+      "end": 2935,
+      "id": 245,
+      "speaker": "Speaker 1",
+      "speech": "surface rather than an inverted.",
+      "start": 2932,
+      "type": "TX"
+    },
+    {
+      "end": 2993,
+      "id": 246,
+      "speaker": "Speaker 3",
+      "speech": "I don't want to get ahead of ourselves and talk now about, you know, granting or denying in the abstract, if the zba denies a variance, any variants, the applicant has 30 days in which to file an appeal. And in other words, that is an Avenue to represent the exact same proposal, different arguments, may be to represent it to us. To for reconsideration. And if at the end of the day, the zba rejects that the applicant has the right to go to the housing appeals board to Supreme Court. There's all kinds of avenues of appeal above us. Look at up for you. John Butcher's email was dated 815.",
+      "start": 2935,
+      "type": "TX"
+    },
+    {
+      "end": 2995,
+      "id": 247,
+      "speaker": "Speaker 1",
+      "speech": "A couple of weeks ago,",
+      "start": 2994,
+      "type": "TX"
+    },
+    {
+      "end": 2996,
+      "id": 248,
+      "speaker": "Speaker 3",
+      "speech": "correct,",
+      "start": 2995,
+      "type": "TX"
+    },
+    {
+      "end": 3012,
+      "id": 249,
+      "speaker": "Speaker 1",
+      "speech": "right. I know it's unintentional. Not giving someone a heads up. That happened. And then having them come in here and have to defend something. But it heals and just as a as a resident of the town that doesn't have a good book, you know what I mean?",
+      "start": 2996,
+      "type": "TX"
+    },
+    {
+      "end": 3032,
+      "id": 250,
+      "speaker": "Speaker 3",
+      "speech": "No, I don't know what you mean because the board has no ability to discuss this case with anybody period outside of this area. So I don't know what you mean on that. We did no investigation. We've done no investigation. We do measuring. That's all we do measuring.",
+      "start": 3012,
+      "type": "TX"
+    },
+    {
+      "end": 3045,
+      "id": 251,
+      "speaker": "Speaker 1",
+      "speech": "I'm just saying from a as I look at this, right? So you can't interact with any of the people here prior to this meeting is about your value. You're not allowed to interact with them. Well",
+      "start": 3033,
+      "type": "TX"
+    },
+    {
+      "end": 3050,
+      "id": 252,
+      "speaker": "Speaker 4",
+      "speech": "we if we show up at somebody's property, we obviously introduce ourselves and",
+      "start": 3045,
+      "type": "TX"
+    },
+    {
+      "end": 3057,
+      "id": 253,
+      "speaker": "Speaker 3",
+      "speech": "do we have permission to come on a second Etc. Yeah. Correct. Absolutely correct. Yeah,",
+      "start": 3050,
+      "type": "TX"
+    },
+    {
+      "end": 3058,
+      "id": 254,
+      "speaker": "Speaker 1",
+      "speech": "yeah,",
+      "start": 3057,
+      "type": "TX"
+    },
+    {
+      "end": 3069,
+      "id": 255,
+      "speaker": "Speaker 3",
+      "speech": "none whatsoever. That's just the forum for making that letter. Know, is this meeting? That's why we're here tonight.",
+      "start": 3058,
+      "type": "TX"
+    },
+    {
+      "end": 3070,
+      "id": 256,
+      "speaker": "Speaker 1",
+      "speech": "Be able to.",
+      "start": 3069,
+      "type": "TX"
+    },
+    {
+      "end": 3080,
+      "id": 257,
+      "speaker": "Speaker 3",
+      "speech": "Anybody have any questions from this MX?",
+      "start": 3077,
+      "type": "TX"
+    },
+    {
+      "end": 3084,
+      "id": 258,
+      "speaker": "Speaker 2",
+      "speech": "No, it's not.",
+      "start": 3083,
+      "type": "TX"
+    },
+    {
+      "end": 3108,
+      "id": 259,
+      "speaker": "Speaker 3",
+      "speech": "The question. Mr. X put on the table is. What do we do next right to do? We give Mr. Next, do we continue this hearing to give him more time to do research. Or do we proceed with the hearing? Go into the deliberative session and follow on what we have heard.",
+      "start": 3085,
+      "type": "TX"
+    },
+    {
+      "end": 3122,
+      "id": 260,
+      "speaker": "Speaker 2",
+      "speech": "As we're in the. Middle of open public hearing. I'm not sure if we wait till we close the public hearing before we discuss potential of a continuance.",
+      "start": 3112,
+      "type": "TX"
+    },
+    {
+      "end": 3127,
+      "id": 261,
+      "speaker": "Speaker 3",
+      "speech": "We have to, if we close the public hearing, we can't continue it.",
+      "start": 3123,
+      "type": "TX"
+    },
+    {
+      "end": 3129,
+      "id": 262,
+      "speaker": "Speaker 2",
+      "speech": "Oh, you",
+      "start": 3128,
+      "type": "TX"
+    },
+    {
+      "end": 3141,
+      "id": 263,
+      "speaker": "Speaker 3",
+      "speech": "can't, we can reopen it but I'd say we want to reopen it. If we go into the deliberative session, we can continue to deliberate session. But again, that's without any participation.",
+      "start": 3129,
+      "type": "TX"
+    },
+    {
+      "end": 3160,
+      "id": 264,
+      "speaker": "Speaker 2",
+      "speech": "so, I guess I would say that To offer any kind of. Give back any impervious area that the board",
+      "start": 3144,
+      "type": "TX"
+    },
+    {
+      "end": 3179,
+      "id": 265,
+      "speaker": "Speaker 3",
+      "speech": "we come negotiate Wellness will become negotiate or we can do is accept or deny your variances. That's all we can do. And of course, if we deny just like I said, this right of appeal and so on, I just step back to where you were when the",
+      "start": 3160,
+      "type": "TX"
+    },
+    {
+      "end": 3236,
+      "id": 266,
+      "speaker": "Speaker 2",
+      "speech": "building permit. One of the better description application was denied. It was denied upon the basis of that, which you submitted your requirements for a variance for your sideline, The discus. We as the board had no knowledge of this application, it was referred to us because of that decision being unable to be taken by the sport because you didn't meet that part of the early world. I can't comment on whether or what other measurements or discussions went on with the board of election, but He respects it with that on the basis of what was presented. They rejected that application and that's why we're here tonight, correct? But excuse me, I was, I was told that in order was apply for the application here gonna be a natural science because you're asking right",
+      "start": 3179,
+      "type": "TX"
+    },
+    {
+      "end": 3238,
+      "id": 267,
+      "speaker": "Speaker 1",
+      "speech": "to build inside a set that. So",
+      "start": 3236,
+      "type": "TX"
+    },
+    {
+      "end": 3329,
+      "id": 268,
+      "speaker": "Speaker 2",
+      "speech": "it's going to be out of our hands. It's gonna end up in your lap and I discussed with the selecting, you know, what's your hardship? And the hardship was the photography, the property line was a parallel with the garage Fine. On one end of the other, it was Not altering impervious because there's already existing impervious. I'm willing to give back. Another, if I do my calculation, another 250. Square feet of impervious. We could convert that back to absorbing or pervious soil. I can I see that as a positive I guess, you know, part of the other reason, what I was thinking was to make this in carport is because of that wall, that wall was erectile, had I just love it. and like just a couple weeks ago, he backed into the garage. Yeah, I read the information back to Deb on that. So at that point, I was part of what I was thinking was with this one. This this variance, I was asking if the carport is there needs to be some sort of guard rail. So it doesn't mean I'm a safety hazard. So what would the garden will be? It would be an eight by eight of which was gonna be an eight by eight there. It's wide open to support a roof So I'll just kind of lended itself to here. I am in front of you guys.",
+      "start": 3238,
+      "type": "TX"
+    },
+    {
+      "end": 3333,
+      "id": 269,
+      "speaker": "Speaker 3",
+      "speech": "Let's talk about the de s permit. Gary, you want to?",
+      "start": 3329,
+      "type": "TX"
+    },
+    {
+      "end": 3350,
+      "id": 270,
+      "speaker": "Speaker 4",
+      "speech": "Oh yeah, then eventually you're going to have to go to the state and get a shoreline permit. Correct. But we didn't do that ahead of time because it's kind of an expensive thing to do. So at the end of this, if we granted",
+      "start": 3333,
+      "type": "TX"
+    },
+    {
+      "end": 3356,
+      "id": 271,
+      "speaker": "Speaker 3",
+      "speech": "the permit would, you always have to go to the state correct? And they could deny you, I'm",
+      "start": 3350,
+      "type": "TX"
+    },
+    {
+      "end": 3361,
+      "id": 272,
+      "speaker": "Speaker 2",
+      "speech": "fully aware of that. So before I went from the state, I had to see if what you guys.",
+      "start": 3356,
+      "type": "TX"
+    },
+    {
+      "end": 3362,
+      "id": 273,
+      "speaker": "Speaker 4",
+      "speech": "Well, that's what why going from",
+      "start": 3361,
+      "type": "TX"
+    },
+    {
+      "end": 3364,
+      "id": 274,
+      "speaker": "Speaker 2",
+      "speech": "the state and Discussion and",
+      "start": 3362,
+      "type": "TX"
+    },
+    {
+      "end": 3368,
+      "id": 275,
+      "speaker": "Speaker 4",
+      "speech": "their money is non-refundable, and it's a lot.",
+      "start": 3364,
+      "type": "TX"
+    },
+    {
+      "end": 3370,
+      "id": 276,
+      "speaker": "Speaker 2",
+      "speech": "So that was that was the pecking order.",
+      "start": 3369,
+      "type": "TX"
+    },
+    {
+      "end": 3371,
+      "id": 277,
+      "speaker": "Speaker 1",
+      "speech": "I was",
+      "start": 3370,
+      "type": "TX"
+    },
+    {
+      "end": 3374,
+      "id": 278,
+      "speaker": "Speaker 2",
+      "speech": "advised to start with you guys. See what you're going to say.",
+      "start": 3371,
+      "type": "TX"
+    },
+    {
+      "end": 3374,
+      "id": 279,
+      "speaker": "Speaker 1",
+      "speech": "We",
+      "start": 3374,
+      "type": "TX"
+    },
+    {
+      "end": 3385,
+      "id": 280,
+      "speaker": "Speaker 4",
+      "speech": "started data while ago to give people a chance to and make sense. So they wouldn't have to spend a ton of money with the state and then have to go through and do the rest.",
+      "start": 3374,
+      "type": "TX"
+    },
+    {
+      "end": 3392,
+      "id": 281,
+      "speaker": "Speaker 3",
+      "speech": "It looks like all the building materials are sitting there, right? Ready to go. You're pretty much. You're pretty sure.",
+      "start": 3387,
+      "type": "TX"
+    },
+    {
+      "end": 3416,
+      "id": 282,
+      "speaker": "Speaker 2",
+      "speech": "They came to look at the original permit. The covered walkway because I there was a sign off on that and they're like, what are you doing? I'm like, well, this is what I wanted to do when they're like, So yeah, those I've spent several thousand dollars on Lumber that's been on the tarps now that I think",
+      "start": 3392,
+      "type": "TX"
+    },
+    {
+      "end": 3419,
+      "id": 283,
+      "speaker": "Speaker 3",
+      "speech": "so you were so pretty sure that you were going to get the tea.",
+      "start": 3416,
+      "type": "TX"
+    },
+    {
+      "end": 3422,
+      "id": 284,
+      "speaker": "Speaker 2",
+      "speech": "It wasn't aware of any of this to be perfectly honest",
+      "start": 3419,
+      "type": "TX"
+    },
+    {
+      "end": 3422,
+      "id": 285,
+      "speaker": "Speaker 1",
+      "speech": "with",
+      "start": 3422,
+      "type": "TX"
+    },
+    {
+      "end": 3424,
+      "id": 286,
+      "speaker": "Speaker 2",
+      "speech": "you. So because all brought to my attention",
+      "start": 3422,
+      "type": "TX"
+    },
+    {
+      "end": 3424,
+      "id": 287,
+      "speaker": "Speaker 1",
+      "speech": "afterwards. I",
+      "start": 3424,
+      "type": "TX"
+    },
+    {
+      "end": 3431,
+      "id": 288,
+      "speaker": "Speaker 2",
+      "speech": "said, hey, what are you doing that? You. So that's how that all materialized,",
+      "start": 3424,
+      "type": "TX"
+    },
+    {
+      "end": 3432,
+      "id": 289,
+      "speaker": "Speaker 3",
+      "speech": "okay?",
+      "start": 3431,
+      "type": "TX"
+    },
+    {
+      "end": 3435,
+      "id": 290,
+      "speaker": "Speaker 2",
+      "speech": "So that's yes, that pile of longer. You see, there is",
+      "start": 3432,
+      "type": "TX"
+    },
+    {
+      "end": 3438,
+      "id": 291,
+      "speaker": "Speaker 3",
+      "speech": "the construction materials for the lean to.",
+      "start": 3435,
+      "type": "TX"
+    },
+    {
+      "end": 3497,
+      "id": 292,
+      "speaker": "Speaker 2",
+      "speech": "Yes, So it, you know, in hindsight, it's and I don't know. Again, you see, you can't advise. I was hoping to well, a part of part of what my issue becomes is. I'm trying to build And it went into the whole building permit process, putting a bedroom above the garage because Mom and Dad need their space. 52 year old guy needs his face. Sure, I'm trying to get to. Four ports of egress on that garage. Okay, there's a fire. Okay, so one of them is already the money dressed inside the garage. So the second one I'm trying to get is that this blocked by a fire which is in a garage, there's gas oil, lawn mowers. I would have a second chance to escape from a second floor, which would incorporate this this area that I'm trying to get a set of stairs down.",
+      "start": 3438,
+      "type": "TX"
+    },
+    {
+      "end": 3499,
+      "id": 293,
+      "speaker": "Speaker 1",
+      "speech": "Okay,",
+      "start": 3499,
+      "type": "TX"
+    },
+    {
+      "end": 3513,
+      "id": 294,
+      "speaker": "Speaker 2",
+      "speech": "where I'm asking for this variance. So it's it's all from a safety standpoint, some sort of retaining or a guard rail on top of the retaining wall that someone doesn't back off of and give myself an egress in case of fire.",
+      "start": 3499,
+      "type": "TX"
+    },
+    {
+      "end": 3526,
+      "id": 295,
+      "speaker": "Speaker 3",
+      "speech": "And then we get what you're saying, but I don't I'm in whatever new information you want to say, what you want you to say the kind of filled with covering the same ground. Yeah. Is there anything that",
+      "start": 3513,
+      "type": "TX"
+    },
+    {
+      "end": 3543,
+      "id": 296,
+      "speaker": "Speaker 1",
+      "speech": "Circle? And in which are those Ledges of what I'm wearing",
+      "start": 3526,
+      "type": "TX"
+    },
+    {
+      "end": 3547,
+      "id": 297,
+      "speaker": "Speaker 3",
+      "speech": "these terrorists or maybe? Yeah.",
+      "start": 3543,
+      "type": "TX"
+    },
+    {
+      "end": 3551,
+      "id": 298,
+      "speaker": "Speaker 1",
+      "speech": "But that's not before us tonight, right?",
+      "start": 3548,
+      "type": "TX"
+    },
+    {
+      "end": 3551,
+      "id": 299,
+      "speaker": "Speaker 4",
+      "speech": "No.",
+      "start": 3551,
+      "type": "TX"
+    },
+    {
+      "end": 3560,
+      "id": 300,
+      "speaker": "Speaker 1",
+      "speech": "So what is John's letter shares directly on the masses for request.",
+      "start": 3551,
+      "type": "TX"
+    },
+    {
+      "end": 3565,
+      "id": 301,
+      "speaker": "Speaker 3",
+      "speech": "I think that's for us to discuss and not delivered at session.",
+      "start": 3562,
+      "type": "TX"
+    },
+    {
+      "end": 3570,
+      "id": 302,
+      "speaker": "Speaker 4",
+      "speech": "Did you?",
+      "start": 3569,
+      "type": "TX"
+    },
+    {
+      "end": 3575,
+      "id": 303,
+      "speaker": "Speaker 3",
+      "speech": "Yeah, yeah, go. I don't have it up but if you have it up,",
+      "start": 3570,
+      "type": "TX"
+    },
+    {
+      "end": 3608,
+      "id": 304,
+      "speaker": "Speaker 2",
+      "speech": "multiple construction, project comma, including driveway expansion, comma covered wolf ways as well as retaining wolves structures. Have been recently within one year built on this lot. and then it states the building permit request. and, Subsequent voting for denial from the board of selecting.",
+      "start": 3575,
+      "type": "TX"
+    },
+    {
+      "end": 3623,
+      "id": 305,
+      "speaker": "Speaker 1",
+      "speech": "So I think what I'm hearing is that John Butcher says asserts that doing that terracing. Reduced the amount of impervious surface. And that should be taking into account.",
+      "start": 3608,
+      "type": "TX"
+    },
+    {
+      "end": 3624,
+      "id": 306,
+      "speaker": "Speaker 3",
+      "speech": "That's what he's saying.",
+      "start": 3623,
+      "type": "TX"
+    },
+    {
+      "end": 3626,
+      "id": 307,
+      "speaker": "Speaker 1",
+      "speech": "That correctly I",
+      "start": 3624,
+      "type": "TX"
+    },
+    {
+      "end": 3627,
+      "id": 308,
+      "speaker": "Speaker 3",
+      "speech": "believe that's what he's saying. Yeah,",
+      "start": 3626,
+      "type": "TX"
+    },
+    {
+      "end": 3627,
+      "id": 309,
+      "speaker": "Speaker 2",
+      "speech": "yeah.",
+      "start": 3627,
+      "type": "TX"
+    },
+    {
+      "end": 3631,
+      "id": 310,
+      "speaker": "Speaker 1",
+      "speech": "Okay. And and that bears on this because",
+      "start": 3628,
+      "type": "TX"
+    },
+    {
+      "end": 3640,
+      "id": 311,
+      "speaker": "Speaker 3",
+      "speech": "Peter I'm not going to let you back us into a corner about what we're going to discuss in the deliberative session. That's, that's our privilege. We're going to take the evidence and we're going to talk about it.",
+      "start": 3631,
+      "type": "TX"
+    },
+    {
+      "end": 3647,
+      "id": 312,
+      "speaker": "Speaker 1",
+      "speech": "Bears on this discussion,",
+      "start": 3641,
+      "type": "TX"
+    },
+    {
+      "end": 3678,
+      "id": 313,
+      "speaker": "Speaker 3",
+      "speech": "if you, if you prepare to sit into the deliberative session, you'll find out, you know, Anybody else want to talk? On this case. If not in the public, hearing is not closed. If there's anything that occurs to you before we do close it, please say it. Otherwise, I'd like to move on to Mrs. And talk about this case.",
+      "start": 3647,
+      "type": "TX"
+    },
+    {
+      "end": 3679,
+      "id": 314,
+      "speaker": "Speaker 2",
+      "speech": "Thank you.",
+      "start": 3678,
+      "type": "TX"
+    },
+    {
+      "end": 3721,
+      "id": 315,
+      "speaker": "Speaker 1",
+      "speech": "Okay. Leave my schedule, which is not in compliance. So, I'll just make sure you guys have been to my property. It's basically only place I can put it, where it's dry. That's what I'm looking for a smoker shorts. And it's not a nice or even though it's closer to the wrong kind of supposed to be I believe I have plenty of space.",
+      "start": 3686,
+      "type": "TX"
+    },
+    {
+      "end": 3779,
+      "id": 316,
+      "speaker": "Speaker 3",
+      "speech": "Did you did you consider ultimate locations alternate conforming locations for that shed? Okay, okay. if it had gone on the other side, Of your driveway. Away from the room opposite, the opposite position that it is now. Would it have been conforming? Do you think",
+      "start": 3727,
+      "type": "TX"
+    },
+    {
+      "end": 3783,
+      "id": 317,
+      "speaker": "Speaker 1",
+      "speech": "probably would be? But it would be underwater too many times.",
+      "start": 3779,
+      "type": "TX"
+    },
+    {
+      "end": 3814,
+      "id": 318,
+      "speaker": "Speaker 3",
+      "speech": "It is true, right? That I observe that because, you know, Vice chairman and Connie and I were there, we spoke to you that. You have elevated to shed even now in his current position, it's three or four inches above grade on raffle, whatever, you've done that, to get it above the great, it didn't appear that slope was that significant and does the water.",
+      "start": 3784,
+      "type": "TX"
+    },
+    {
+      "end": 3821,
+      "id": 319,
+      "speaker": "Speaker 1",
+      "speech": "Into the most, you know? Just just before my driveway. So it was up there.",
+      "start": 3815,
+      "type": "TX"
+    },
+    {
+      "end": 3828,
+      "id": 320,
+      "speaker": "Speaker 3",
+      "speech": "Could with sufficient on the other side of the, you know, alternate location.",
+      "start": 3822,
+      "type": "TX"
+    },
+    {
+      "end": 3853,
+      "id": 321,
+      "speaker": "Speaker 1",
+      "speech": "Doesn't happen all the time. Just Children,",
+      "start": 3831,
+      "type": "TX"
+    },
+    {
+      "end": 3936,
+      "id": 322,
+      "speaker": "Speaker 3",
+      "speech": "right? I'm just looking for something where you're talking. It's true that a significant portion of your property is wetland, is that right a significant portion and that, you have you over the years or whenever your house was built, you have filled some of that Wetland to keep the Wetland away. Okay, did you look for Whether you have the required 50 foot clearance from the Wetland. Okay. Okay. I know, I know we measured it and it was a belt 50 feet, right? It was about, but it was unclear where your fill of the Wetland actually encroached on what is officially the Wetland if that makes any sense. Well, the Wetland is I've got a map here of your property. You can see that. but, You're free to come up and take a yeah, please. If you please, please, take a look. that this Here is the extent of the Wetland as understood by dias. That comes it comes directly from their database,",
+      "start": 3853,
+      "type": "TX"
+    },
+    {
+      "end": 3937,
+      "id": 323,
+      "speaker": "Speaker 1",
+      "speech": "right?",
+      "start": 3936,
+      "type": "TX"
+    },
+    {
+      "end": 3951,
+      "id": 324,
+      "speaker": "Speaker 3",
+      "speech": "So and that's the GPS location of your shed right there. So it's clearly, you know, within 50 feet of that. Well though, you have pushed that Wetland back by Phil, that you have done a little bit. Yeah,",
+      "start": 3937,
+      "type": "TX"
+    },
+    {
+      "end": 3954,
+      "id": 325,
+      "speaker": "Speaker 1",
+      "speech": "okay, okay. I'm not gonna deny it there.",
+      "start": 3951,
+      "type": "TX"
+    },
+    {
+      "end": 3957,
+      "id": 326,
+      "speaker": "Speaker 3",
+      "speech": "Yeah, yeah, okay. Okay.",
+      "start": 3954,
+      "type": "TX"
+    },
+    {
+      "end": 3972,
+      "id": 327,
+      "speaker": "Speaker 4",
+      "speech": "When we have a high water does. That other structure, you have their the barn or whatever, does the Water Circle that thing.",
+      "start": 3960,
+      "type": "TX"
+    },
+    {
+      "end": 3977,
+      "id": 328,
+      "speaker": "Speaker 3",
+      "speech": "Okay. Let's check it.",
+      "start": 3972,
+      "type": "TX"
+    },
+    {
+      "end": 3984,
+      "id": 329,
+      "speaker": "Speaker 4",
+      "speech": "Now that that water that you do get, that's that's the Overflow from Millen Pond that goes through there.",
+      "start": 3977,
+      "type": "TX"
+    },
+    {
+      "end": 3995,
+      "id": 330,
+      "speaker": "Speaker 1",
+      "speech": "Somebody is the creeping back is. There's also covered that comes underneath the road. Opposite side. You can see that",
+      "start": 3986,
+      "type": "TX"
+    },
+    {
+      "end": 4002,
+      "id": 331,
+      "speaker": "Speaker 3",
+      "speech": "there's the Culvert right there and this is the stream coming down here. Alright to feed into the pond.",
+      "start": 3995,
+      "type": "TX"
+    },
+    {
+      "end": 4002,
+      "id": 332,
+      "speaker": "Speaker 1",
+      "speech": "Yeah.",
+      "start": 4002,
+      "type": "TX"
+    },
+    {
+      "end": 4013,
+      "id": 333,
+      "speaker": "Speaker 4",
+      "speech": "Good one. There it shows. The string comes right.",
+      "start": 4009,
+      "type": "TX"
+    },
+    {
+      "end": 4015,
+      "id": 334,
+      "speaker": "Speaker 3",
+      "speech": "It shows the stream. Don't in the floors.",
+      "start": 4013,
+      "type": "TX"
+    },
+    {
+      "end": 4016,
+      "id": 335,
+      "speaker": "Speaker 2",
+      "speech": "Yeah, that's right.",
+      "start": 4015,
+      "type": "TX"
+    },
+    {
+      "end": 4035,
+      "id": 336,
+      "speaker": "Speaker 1",
+      "speech": "Dude, I just don't let me stop. You have like the books strike. I just got rid of some snowmobiles that were underwater for a couple years ago. Okay.",
+      "start": 4018,
+      "type": "TX"
+    },
+    {
+      "end": 4040,
+      "id": 337,
+      "speaker": "Speaker 3",
+      "speech": "Yeah. You had a snowman be only if I remember park behind your boat house, right?",
+      "start": 4035,
+      "type": "TX"
+    },
+    {
+      "end": 4040,
+      "id": 338,
+      "speaker": "Speaker 1",
+      "speech": "Yeah.",
+      "start": 4040,
+      "type": "TX"
+    },
+    {
+      "end": 4069,
+      "id": 339,
+      "speaker": "Speaker 3",
+      "speech": "Okay. Okay. Okay. Now you have. I thought his hair ready to speak on your behalf. Is that right? Would you like to speak now? Okay. Are you speaking for or against or neither neither? Okay, thank you. Yeah and I'm sorry you just speaking for or against or just",
+      "start": 4041,
+      "type": "TX"
+    },
+    {
+      "end": 4087,
+      "id": 340,
+      "speaker": "Speaker 1",
+      "speech": "Expected that they should have told him either build an apartment, they wanted to",
+      "start": 4083,
+      "type": "TX"
+    },
+    {
+      "end": 4087,
+      "id": 341,
+      "speaker": "Speaker 3",
+      "speech": "hear.",
+      "start": 4087,
+      "type": "TX"
+    },
+    {
+      "end": 4094,
+      "id": 342,
+      "speaker": "Speaker 1",
+      "speech": "And that's the location that he wanted it because of the area of water. He couldn't put it anywhere else because",
+      "start": 4087,
+      "type": "TX"
+    },
+    {
+      "end": 4097,
+      "id": 343,
+      "speaker": "Speaker 2",
+      "speech": "up on the other side of his house up on the street level",
+      "start": 4094,
+      "type": "TX"
+    },
+    {
+      "end": 4100,
+      "id": 344,
+      "speaker": "Speaker 1",
+      "speech": "seven. So that no place up there.",
+      "start": 4097,
+      "type": "TX"
+    },
+    {
+      "end": 4109,
+      "id": 345,
+      "speaker": "Speaker 3",
+      "speech": "I see. Where is a septic? It was a sceptic is here. Oh, here.",
+      "start": 4100,
+      "type": "TX"
+    },
+    {
+      "end": 4113,
+      "id": 346,
+      "speaker": "Speaker 1",
+      "speech": "Other person property there.",
+      "start": 4112,
+      "type": "TX"
+    },
+    {
+      "end": 4115,
+      "id": 347,
+      "speaker": "Speaker 3",
+      "speech": "Okay, right. Right. Right. Right here. Yeah.",
+      "start": 4113,
+      "type": "TX"
+    },
+    {
+      "end": 4115,
+      "id": 348,
+      "speaker": "Speaker 1",
+      "speech": "Okay.",
+      "start": 4115,
+      "type": "TX"
+    },
+    {
+      "end": 4118,
+      "id": 349,
+      "speaker": "Speaker 3",
+      "speech": "He's right. The subject is there?",
+      "start": 4115,
+      "type": "TX"
+    },
+    {
+      "end": 4125,
+      "id": 350,
+      "speaker": "Speaker 2",
+      "speech": "Yeah. Okay.",
+      "start": 4118,
+      "type": "TX"
+    },
+    {
+      "end": 4149,
+      "id": 351,
+      "speaker": "Speaker 1",
+      "speech": "I guess that's it. Basically there's a lot of us. Yeah,",
+      "start": 4146,
+      "type": "TX"
+    },
+    {
+      "end": 4164,
+      "id": 352,
+      "speaker": "Speaker 3",
+      "speech": "we know sir. Yes, sir. My drawing here. Yeah. Anybody got any more questions? Mr. Samansky So remember me, Gary somebody else is Shelly on the line.",
+      "start": 4149,
+      "type": "TX"
+    },
+    {
+      "end": 4169,
+      "id": 353,
+      "speaker": "Speaker 4",
+      "speech": "Hello, Shelly.",
+      "start": 4168,
+      "type": "TX"
+    },
+    {
+      "end": 4171,
+      "id": 354,
+      "speaker": "Speaker 1",
+      "speech": "Know, she's gone,",
+      "start": 4170,
+      "type": "TX"
+    },
+    {
+      "end": 4174,
+      "id": 355,
+      "speaker": "Speaker 4",
+      "speech": "she's gone. What can I show it?",
+      "start": 4171,
+      "type": "TX"
+    },
+    {
+      "end": 4186,
+      "id": 356,
+      "speaker": "Speaker 3",
+      "speech": "What I what I was going to suggest not just so this up before we close the public hearing, If we could raise Shelly one more time to see whether she's got anything saying, oh, I want to make clear to Shelly.",
+      "start": 4174,
+      "type": "TX"
+    },
+    {
+      "end": 4187,
+      "id": 357,
+      "speaker": "Speaker 2",
+      "speech": "All right,",
+      "start": 4186,
+      "type": "TX"
+    },
+    {
+      "end": 4188,
+      "id": 358,
+      "speaker": "Speaker 4",
+      "speech": "let me see if I can get",
+      "start": 4187,
+      "type": "TX"
+    },
+    {
+      "end": 4206,
+      "id": 359,
+      "speaker": "Speaker 3",
+      "speech": "it. She's got that after the deliberative session. If he doesn't like what we decide, she has the right to appeal as an Applause as she has the right to be there. Thank you.",
+      "start": 4188,
+      "type": "TX"
+    },
+    {
+      "end": 4226,
+      "id": 360,
+      "speaker": "Speaker 4",
+      "speech": "Call failed. 978-394-2157. I'll try it again. Okay,",
+      "start": 4217,
+      "type": "TX"
+    },
+    {
+      "end": 4228,
+      "id": 361,
+      "speaker": "Speaker 3",
+      "speech": "let's try one more time.",
+      "start": 4226,
+      "type": "TX"
+    },
+    {
+      "end": 4254,
+      "id": 362,
+      "speaker": "Speaker 4",
+      "speech": "off to tell my wife, I actually We kind of lost you, but we had the chairman would like to say something.",
+      "start": 4236,
+      "type": "TX"
+    },
+    {
+      "end": 4265,
+      "id": 363,
+      "speaker": "Speaker 3",
+      "speech": "Hi Shelly. Hi Shelly. Sorry to disturb you again so late, but we're about to close the public hearing. I want to make sure that you haven't thought of anything else you want to say.",
+      "start": 4255,
+      "type": "TX"
+    },
+    {
+      "end": 4273,
+      "id": 364,
+      "speaker": "Speaker 1",
+      "speech": "I have an idea missed the last half hour. All the sudden we couldn't hear anything after 7:35.",
+      "start": 4268,
+      "type": "TX"
+    },
+    {
+      "end": 4286,
+      "id": 365,
+      "speaker": "Speaker 3",
+      "speech": "Okay. And that was a different",
+      "start": 4273,
+      "type": "TX"
+    },
+    {
+      "end": 4288,
+      "id": 366,
+      "speaker": "Speaker 4",
+      "speech": "cat. That was a different case than your",
+      "start": 4286,
+      "type": "TX"
+    },
+    {
+      "end": 4289,
+      "id": 367,
+      "speaker": "Speaker 1",
+      "speech": "he didn't miss",
+      "start": 4288,
+      "type": "TX"
+    },
+    {
+      "end": 4293,
+      "id": 368,
+      "speaker": "Speaker 4",
+      "speech": "it so you didn't miss anything that had anything to do with your case.",
+      "start": 4289,
+      "type": "TX"
+    },
+    {
+      "end": 4294,
+      "id": 369,
+      "speaker": "Speaker 3",
+      "speech": "Well,",
+      "start": 4293,
+      "type": "TX"
+    },
+    {
+      "end": 4318,
+      "id": 370,
+      "speaker": "Speaker 1",
+      "speech": "I just I don't have anything specific to say. Just I appreciate, you know, the ability to come and speak or speak through the phone but also just reiterate that, you know, if its variants goes through, it does impact, you know, our property, and our ability to do what we need, what we potentially want to do. So I really think that they have other choices to make,",
+      "start": 4295,
+      "type": "TX"
+    },
+    {
+      "end": 4319,
+      "id": 371,
+      "speaker": "Speaker 3",
+      "speech": "okay? Okay,",
+      "start": 4318,
+      "type": "TX"
+    },
+    {
+      "end": 4322,
+      "id": 372,
+      "speaker": "Speaker 1",
+      "speech": "that's all I need to say, I think",
+      "start": 4319,
+      "type": "TX"
+    },
+    {
+      "end": 4364,
+      "id": 373,
+      "speaker": "Speaker 3",
+      "speech": "thank you. Okay, we're about to go into the deliberative session and I want to make clear that you can listen to that. You're welcome to. If at the end of that, we reach a Judicial that you don't like As an abuser, you have the right to appeal that you have the right to come to us. And ask us to rehear the case. There's a strict 30-day limit. The clock starts ticking tomorrow on that or if we fail to post the minutes within five business days. Then the clock starts ticking when we posted the minutes, but you have the right to appeal, I want to make sure you understand that.",
+      "start": 4322,
+      "type": "TX"
+    },
+    {
+      "end": 4365,
+      "id": 374,
+      "speaker": "Speaker 1",
+      "speech": "Okay,",
+      "start": 4365,
+      "type": "TX"
+    },
+    {
+      "end": 4379,
+      "id": 375,
+      "speaker": "Speaker 3",
+      "speech": "all right. Thank you. Okay. Okay, we'll keep it going. Thanks Shelly. I moved that at 8:12.",
+      "start": 4365,
+      "type": "TX"
+    },
+    {
+      "end": 4381,
+      "id": 376,
+      "speaker": "Speaker 4",
+      "speech": "I have something to say",
+      "start": 4379,
+      "type": "TX"
+    },
+    {
+      "end": 4382,
+      "id": 377,
+      "speaker": "Speaker 3",
+      "speech": "Gary. Yeah.",
+      "start": 4381,
+      "type": "TX"
+    },
+    {
+      "end": 4389,
+      "id": 378,
+      "speaker": "Speaker 4",
+      "speech": "Before we we forgot to the approval of last month's me a minutes.",
+      "start": 4382,
+      "type": "TX"
+    },
+    {
+      "end": 4391,
+      "id": 379,
+      "speaker": "Speaker 3",
+      "speech": "Yeah, we got too excited about that, we",
+      "start": 4389,
+      "type": "TX"
+    },
+    {
+      "end": 4392,
+      "id": 380,
+      "speaker": "Speaker 4",
+      "speech": "did. So I",
+      "start": 4391,
+      "type": "TX"
+    },
+    {
+      "end": 4393,
+      "id": 381,
+      "speaker": "Speaker 1",
+      "speech": "yeah, I",
+      "start": 4392,
+      "type": "TX"
+    },
+    {
+      "end": 4407,
+      "id": 382,
+      "speaker": "Speaker 4",
+      "speech": "think it's very important that we do that. So I'll make a motion that we accept the minutes from last month's meeting. Or do I have a second?",
+      "start": 4393,
+      "type": "TX"
+    },
+    {
+      "end": 4408,
+      "id": 383,
+      "speaker": "Speaker 1",
+      "speech": "I second.",
+      "start": 4407,
+      "type": "TX"
+    },
+    {
+      "end": 4411,
+      "id": 384,
+      "speaker": "Speaker 3",
+      "speech": "All those in favor, all those in favor.",
+      "start": 4409,
+      "type": "TX"
+    },
+    {
+      "end": 4414,
+      "id": 385,
+      "speaker": "Speaker 2",
+      "speech": "Aye, I'm standing to the wooden present.",
+      "start": 4411,
+      "type": "TX"
+    },
+    {
+      "end": 4419,
+      "id": 386,
+      "speaker": "Speaker 3",
+      "speech": "Okay. So four eyes and one abstention from Andrew.",
+      "start": 4415,
+      "type": "TX"
+    },
+    {
+      "end": 4429,
+      "id": 387,
+      "speaker": "Speaker 4",
+      "speech": "Okay, so that that takes care of the approval of the minutes. So we're all set and you can close out the public, hearing I",
+      "start": 4420,
+      "type": "TX"
+    },
+    {
+      "end": 4436,
+      "id": 388,
+      "speaker": "Speaker 3",
+      "speech": "moved at 8:30, we closed the public hearing and then move into the delivery date to I have a second",
+      "start": 4429,
+      "type": "TX"
+    },
+    {
+      "end": 4440,
+      "id": 389,
+      "speaker": "Speaker 4",
+      "speech": "second, all those in favor. I so",
+      "start": 4436,
+      "type": "TX"
+    },
+    {
+      "end": 4451,
+      "id": 390,
+      "speaker": "Speaker 3",
+      "speech": "the public hearing is ended, everybody is, welcome to stay and listen and do whatever you want. The only thing you can't do is purchase something. Okay. All right. All righty.",
+      "start": 4440,
+      "type": "TX"
+    },
+    {
+      "end": 4454,
+      "id": 391,
+      "speaker": "Speaker 1",
+      "speech": "So,",
+      "start": 4454,
+      "type": "TX"
+    },
+    {
+      "end": 4457,
+      "id": 392,
+      "speaker": "Speaker 3",
+      "speech": "thank you. Good night.",
+      "start": 4454,
+      "type": "TX"
+    },
+    {
+      "end": 4462,
+      "id": 393,
+      "speaker": "Speaker 4",
+      "speech": "Have a good evening. Okay, what do we?",
+      "start": 4457,
+      "type": "TX"
+    },
+    {
+      "end": 4469,
+      "id": 394,
+      "speaker": "Speaker 3",
+      "speech": "Gonna we're gonna consider the Tim Krause. Proposal first.",
+      "start": 4463,
+      "type": "TX"
+    },
+    {
+      "end": 4477,
+      "id": 395,
+      "speaker": "Speaker 1",
+      "speech": "So,",
+      "start": 4475,
+      "type": "TX"
+    },
+    {
+      "end": 4501,
+      "id": 396,
+      "speaker": "Speaker 2",
+      "speech": "Just on the last couple of days, I didn't see any staking hours for the actual shed that I could sort of, understand with the topography where the intention was",
+      "start": 4488,
+      "type": "TX"
+    },
+    {
+      "end": 4513,
+      "id": 397,
+      "speaker": "Speaker 4",
+      "speech": "it within what I believe that I had the same comment but within a couple of feet there's only a certain place you can put it.",
+      "start": 4501,
+      "type": "TX"
+    },
+    {
+      "end": 4528,
+      "id": 398,
+      "speaker": "Speaker 2",
+      "speech": "I mean. We have issues in the past where things are clear and I'm not debating that it's not clear, but I suppose from the strictest points of view is not possible to measure something that's not state.",
+      "start": 4514,
+      "type": "TX"
+    },
+    {
+      "end": 4529,
+      "id": 399,
+      "speaker": "Speaker 4",
+      "speech": "Right,",
+      "start": 4529,
+      "type": "TX"
+    },
+    {
+      "end": 4530,
+      "id": 400,
+      "speaker": "Speaker 1",
+      "speech": "that should be.",
+      "start": 4529,
+      "type": "TX"
+    },
+    {
+      "end": 4532,
+      "id": 401,
+      "speaker": "Speaker 2",
+      "speech": "I wasn't sure if I",
+      "start": 4530,
+      "type": "TX"
+    },
+    {
+      "end": 4536,
+      "id": 402,
+      "speaker": "Speaker 1",
+      "speech": "was taking. They should have to.",
+      "start": 4532,
+      "type": "TX"
+    },
+    {
+      "end": 4558,
+      "id": 403,
+      "speaker": "Speaker 2",
+      "speech": "I think what we've got is some, you know, an aggregate here is, you know, if you, you know, if you take the width between the two side property lines and you take 24 from it, I don't know. I'm not disputing. The measurement and that's why I decided not to, you know, make a fuss about it",
+      "start": 4536,
+      "type": "TX"
+    },
+    {
+      "end": 4566,
+      "id": 404,
+      "speaker": "Speaker 3",
+      "speech": "was a good comment. We made the same observation and judgment. And so Joe, you've got something to say that Linda was trying to say something a second ago.",
+      "start": 4558,
+      "type": "TX"
+    },
+    {
+      "end": 4577,
+      "id": 405,
+      "speaker": "Speaker 1",
+      "speech": "I think everybody when they wanted to do something like this, needs to stake where they want it with. Stakes that are visible to anyone coming to look.",
+      "start": 4566,
+      "type": "TX"
+    },
+    {
+      "end": 4578,
+      "id": 406,
+      "speaker": "Speaker 3",
+      "speech": "Okay.",
+      "start": 4577,
+      "type": "TX"
+    },
+    {
+      "end": 4579,
+      "id": 407,
+      "speaker": "Speaker 1",
+      "speech": "How do we guess?",
+      "start": 4578,
+      "type": "TX"
+    },
+    {
+      "end": 4582,
+      "id": 408,
+      "speaker": "Speaker 3",
+      "speech": "Okay, okay.",
+      "start": 4581,
+      "type": "TX"
+    },
+    {
+      "end": 4588,
+      "id": 409,
+      "speaker": "Speaker 4",
+      "speech": "Yeah, because it is in the and the directions it does say",
+      "start": 4584,
+      "type": "TX"
+    },
+    {
+      "end": 4590,
+      "id": 410,
+      "speaker": "Speaker 1",
+      "speech": "tape measure, might be an inch off from yours, you know.",
+      "start": 4588,
+      "type": "TX"
+    },
+    {
+      "end": 4594,
+      "id": 411,
+      "speaker": "Speaker 3",
+      "speech": "Okay. Do you think that's disqualifying",
+      "start": 4590,
+      "type": "TX"
+    },
+    {
+      "end": 4615,
+      "id": 412,
+      "speaker": "Speaker 1",
+      "speech": "know because we haven't, we haven't made it. But I think in the Okay. I mean we've nobody's ever said oh it's not stake, I can't look at this but in the future they should",
+      "start": 4596,
+      "type": "TX"
+    },
+    {
+      "end": 4615,
+      "id": 413,
+      "speaker": "Speaker 3",
+      "speech": "okay and",
+      "start": 4615,
+      "type": "TX"
+    },
+    {
+      "end": 4616,
+      "id": 414,
+      "speaker": "Speaker 1",
+      "speech": "we should",
+      "start": 4615,
+      "type": "TX"
+    },
+    {
+      "end": 4617,
+      "id": 415,
+      "speaker": "Speaker 3",
+      "speech": "okay. Okay,",
+      "start": 4616,
+      "type": "TX"
+    },
+    {
+      "end": 4618,
+      "id": 416,
+      "speaker": "Speaker 1",
+      "speech": "so we know what we're talking about.",
+      "start": 4617,
+      "type": "TX"
+    },
+    {
+      "end": 4638,
+      "id": 417,
+      "speaker": "Speaker 3",
+      "speech": "I I mean I tend to agree in any other circumstance. I would have I would have insisted on Stakes but the space is so limited and the distances. So carefully measured that there's really only, you know, plus or minus a foot where would actually be? That was just my thing that's just my",
+      "start": 4618,
+      "type": "TX"
+    },
+    {
+      "end": 4639,
+      "id": 418,
+      "speaker": "Speaker 1",
+      "speech": "thing. Yeah,",
+      "start": 4638,
+      "type": "TX"
+    },
+    {
+      "end": 4641,
+      "id": 419,
+      "speaker": "Speaker 3",
+      "speech": "Joe,",
+      "start": 4641,
+      "type": "TX"
+    },
+    {
+      "end": 4649,
+      "id": 420,
+      "speaker": "Speaker 2",
+      "speech": "did you say don't really know? My right. So then those states where they should stay for when we come",
+      "start": 4641,
+      "type": "TX"
+    },
+    {
+      "end": 4649,
+      "id": 421,
+      "speaker": "Speaker 1",
+      "speech": "and look at.",
+      "start": 4649,
+      "type": "TX"
+    },
+    {
+      "end": 4676,
+      "id": 422,
+      "speaker": "Speaker 2",
+      "speech": "And that's the normal. I didn't, you know? I didn't want to make an overly big deal out of it in this case because I satisfied myself, the only one location, but this time in with the setbacks, And as it was applied to the application. So not but I",
+      "start": 4649,
+      "type": "TX"
+    },
+    {
+      "end": 4677,
+      "id": 423,
+      "speaker": "Speaker 3",
+      "speech": "think it's",
+      "start": 4676,
+      "type": "TX"
+    },
+    {
+      "end": 4690,
+      "id": 424,
+      "speaker": "Speaker 2",
+      "speech": "I think what Linda's saying, just for the record is, we should consider a place where that is stated. Perhaps even, I don't know if appropriate within the application for variance,",
+      "start": 4679,
+      "type": "TX"
+    },
+    {
+      "end": 4692,
+      "id": 425,
+      "speaker": "Speaker 3",
+      "speech": "certainly, our rules, who procedure could stay there.",
+      "start": 4690,
+      "type": "TX"
+    },
+    {
+      "end": 4693,
+      "id": 426,
+      "speaker": "Speaker 4",
+      "speech": "Yeah,",
+      "start": 4692,
+      "type": "TX"
+    },
+    {
+      "end": 4695,
+      "id": 427,
+      "speaker": "Speaker 2",
+      "speech": "I think we need to make a note.",
+      "start": 4693,
+      "type": "TX"
+    },
+    {
+      "end": 4706,
+      "id": 428,
+      "speaker": "Speaker 3",
+      "speech": "Okay. Before us now is I think only the issue, is it disqualifying or not. We can vote on that or we can just, you know, we just agree amongst us that it's not disqualifying and we'll move on.",
+      "start": 4695,
+      "type": "TX"
+    },
+    {
+      "end": 4720,
+      "id": 429,
+      "speaker": "Speaker 2",
+      "speech": "I think it's just a great move on, okay? The other thing to be, you know, clear is that this was represented as having an existing car War Obviously, it was fairly self-evident.",
+      "start": 4708,
+      "type": "TX"
+    },
+    {
+      "end": 4722,
+      "id": 430,
+      "speaker": "Speaker 3",
+      "speech": "That. Yeah.",
+      "start": 4722,
+      "type": "TX"
+    },
+    {
+      "end": 4747,
+      "id": 431,
+      "speaker": "Speaker 2",
+      "speech": "And It seemed rather odd that that was submitted in July but it was gross referenced. The fact that it's important not and in the March snowstorm March snow storm. So I don't understand why that didn't come up during the The process of. Considering. For construction. Anyway,",
+      "start": 4722,
+      "type": "TX"
+    },
+    {
+      "end": 4765,
+      "id": 432,
+      "speaker": "Speaker 4",
+      "speech": "I'd like to say that for the carport there. Granted the carports, not there, but the material under it is still non pervious. It would need to be made to be pervious with some grass planet, or something else. There.",
+      "start": 4747,
+      "type": "TX"
+    },
+    {
+      "end": 4770,
+      "id": 433,
+      "speaker": "Speaker 3",
+      "speech": "It would have to be. I agree. I agree. If you it's a crunch of. Yeah, I agree.",
+      "start": 4765,
+      "type": "TX"
+    },
+    {
+      "end": 4778,
+      "id": 434,
+      "speaker": "Speaker 2",
+      "speech": "But from a point of view of his Original application. He had made that included that in his calculations of",
+      "start": 4770,
+      "type": "TX"
+    },
+    {
+      "end": 4779,
+      "id": 435,
+      "speaker": "Speaker 4",
+      "speech": "correcting,",
+      "start": 4778,
+      "type": "TX"
+    },
+    {
+      "end": 4818,
+      "id": 436,
+      "speaker": "Speaker 2",
+      "speech": "it considered a destruction. But if it's not structured, then I guess it at my point, is it shifts from buildings to total? Impervious. It doesn't show up in building but it doesn't improve yourself the way presented, but okay, just just to try and get a Just to try and get ourselves on the same page before we start collaborating. But the application itself, In. Other times, you know,",
+      "start": 4779,
+      "type": "TX"
+    },
+    {
+      "end": 4873,
+      "id": 437,
+      "speaker": "Speaker 3",
+      "speech": "in some cases, you know, this notion of five variants, I know Shelly raise that point is just by itself a red flag, but I want to be clear that there is nothing in the criteria for granting or denying a variance about the number of them. We need to consider, we just need to consider the project. That could be 10 variants. Is, it could be one variance. We have to judge each on this merits That we can't. When I'm trying to say is that we can't Prejudice this application just because it has five variances needed. and and at the same time, I accept the claim that if this was granted, that property will be more conforming than it is now. and to my mind, that's a big plus And in the testimony can",
+      "start": 4818,
+      "type": "TX"
+    },
+    {
+      "end": 4902,
+      "id": 438,
+      "speaker": "Speaker 2",
+      "speech": "receive tonight. It was preempted by an email that I only received today, which was after I visited the prophecy. So other than being familiar with the back, you know, Woody's Lock and try to determine exactly where the property line was, I really wasn't paying any attention to the butter in back in, obviously, is a tool intensive purposes and underdeveloped a lot with what she's saying is some form of Darrell trailer on it",
+      "start": 4873,
+      "type": "TX"
+    },
+    {
+      "end": 4904,
+      "id": 439,
+      "speaker": "Speaker 3",
+      "speech": "but",
+      "start": 4902,
+      "type": "TX"
+    },
+    {
+      "end": 4947,
+      "id": 440,
+      "speaker": "Speaker 2",
+      "speech": "Anyway. it sounds to me as if the buses notice Triggered this response. What I was hearing from their contention. about this being adverse is a little hard to conceive and give them your argument that this is a net Improvement on setbacks, and The. You know, obviously. The setback that affects them. Is the back, the rear setback. That is.",
+      "start": 4905,
+      "type": "TX"
+    },
+    {
+      "end": 4973,
+      "id": 441,
+      "speaker": "Speaker 4",
+      "speech": "You know, I was thinking as I was I was taking a morning walk and I was thinking about this, let's just say the gentleman didn't build the new building by law. He could take those two the carport. And the other building, he could take it down to the foundation and build a two-story",
+      "start": 4948,
+      "type": "TX"
+    },
+    {
+      "end": 4979,
+      "id": 442,
+      "speaker": "Speaker 3",
+      "speech": "Barn. on both those spots and not have to talk to him, not even have to",
+      "start": 4973,
+      "type": "TX"
+    },
+    {
+      "end": 4979,
+      "id": 443,
+      "speaker": "Speaker 1",
+      "speech": "cut",
+      "start": 4979,
+      "type": "TX"
+    },
+    {
+      "end": 4989,
+      "id": 444,
+      "speaker": "Speaker 4",
+      "speech": "the variance for the Shed. Yeah, but since it's already there, The only thing he'd have to do is get a building permit and they couldn't deny it because it would be on the same thing.",
+      "start": 4979,
+      "type": "TX"
+    },
+    {
+      "end": 4991,
+      "id": 445,
+      "speaker": "Speaker 3",
+      "speech": "Yeah,",
+      "start": 4989,
+      "type": "TX"
+    },
+    {
+      "end": 5016,
+      "id": 446,
+      "speaker": "Speaker 4",
+      "speech": "whereas what when, when this is being done, you're getting rid of those two other things which are right on the line. Granted not by much. But it's they're still getting rid of them and you're taking your total impervious and you're cutting it down. I didn't figure out the percentage but you're making it less.",
+      "start": 4991,
+      "type": "TX"
+    },
+    {
+      "end": 5018,
+      "id": 447,
+      "speaker": "Speaker 3",
+      "speech": "Yeah. Actually this,",
+      "start": 5017,
+      "type": "TX"
+    },
+    {
+      "end": 5024,
+      "id": 448,
+      "speaker": "Speaker 4",
+      "speech": "I just wanted to make sure that this was stated. The previous coverage is less. The building",
+      "start": 5018,
+      "type": "TX"
+    },
+    {
+      "end": 5028,
+      "id": 449,
+      "speaker": "Speaker 3",
+      "speech": "coverage is less than the setbacks or less. Correct. All of those are true.",
+      "start": 5024,
+      "type": "TX"
+    },
+    {
+      "end": 5031,
+      "id": 450,
+      "speaker": "Speaker 4",
+      "speech": "And in the distance from the road is less",
+      "start": 5028,
+      "type": "TX"
+    },
+    {
+      "end": 5032,
+      "id": 451,
+      "speaker": "Speaker 3",
+      "speech": "exactly",
+      "start": 5031,
+      "type": "TX"
+    },
+    {
+      "end": 5034,
+      "id": 452,
+      "speaker": "Speaker 4",
+      "speech": "because it's less than the carport.",
+      "start": 5032,
+      "type": "TX"
+    },
+    {
+      "end": 5036,
+      "id": 453,
+      "speaker": "Speaker 1",
+      "speech": "Now, via butter.",
+      "start": 5035,
+      "type": "TX"
+    },
+    {
+      "end": 5044,
+      "id": 454,
+      "speaker": "Speaker 2",
+      "speech": "In the back side. he stated that she wanted to put a house possibly in the future, but wouldn't",
+      "start": 5038,
+      "type": "TX"
+    },
+    {
+      "end": 5044,
+      "id": 455,
+      "speaker": "Speaker 1",
+      "speech": "that",
+      "start": 5044,
+      "type": "TX"
+    },
+    {
+      "end": 5050,
+      "id": 456,
+      "speaker": "Speaker 2",
+      "speech": "You do have to be 30 feet structures away. I believe it's",
+      "start": 5047,
+      "type": "TX"
+    },
+    {
+      "end": 5051,
+      "id": 457,
+      "speaker": "Speaker 1",
+      "speech": "gonna",
+      "start": 5050,
+      "type": "TX"
+    },
+    {
+      "end": 5054,
+      "id": 458,
+      "speaker": "Speaker 3",
+      "speech": "decide the site. The site variance is 30",
+      "start": 5051,
+      "type": "TX"
+    },
+    {
+      "end": 5054,
+      "id": 459,
+      "speaker": "Speaker 2",
+      "speech": "feet. Yeah,",
+      "start": 5054,
+      "type": "TX"
+    },
+    {
+      "end": 5054,
+      "id": 460,
+      "speaker": "Speaker 3",
+      "speech": "yeah,",
+      "start": 5054,
+      "type": "TX"
+    },
+    {
+      "end": 5055,
+      "id": 461,
+      "speaker": "Speaker 1",
+      "speech": "so",
+      "start": 5054,
+      "type": "TX"
+    },
+    {
+      "end": 5064,
+      "id": 462,
+      "speaker": "Speaker 2",
+      "speech": "if she wanted to be Two chair, if you want to be. In 30 feet. That's 18 feet. She would have to be 12 feet off the property line.",
+      "start": 5055,
+      "type": "TX"
+    },
+    {
+      "end": 5065,
+      "id": 463,
+      "speaker": "Speaker 3",
+      "speech": "Yeah,",
+      "start": 5064,
+      "type": "TX"
+    },
+    {
+      "end": 5073,
+      "id": 464,
+      "speaker": "Speaker 2",
+      "speech": "so Oh, you're talking about in our role of the distance between the buildings. 35.",
+      "start": 5065,
+      "type": "TX"
+    },
+    {
+      "end": 5074,
+      "id": 465,
+      "speaker": "Speaker 3",
+      "speech": "Yeah.",
+      "start": 5073,
+      "type": "TX"
+    },
+    {
+      "end": 5130,
+      "id": 466,
+      "speaker": "Speaker 2",
+      "speech": "35% back from property line. Not requiring. A variance this person to But what you're talking about is distance between two buildings which may be on and Jason's properties, can't get close to that. But I mean, again, this applicant's well again we have to talk about a car for that doesn't exist that we've been told does this conceptually that there is, it would be more problematic because they it's virtually on the property when they without getting variants were going to be 30 and it was close to 35 feet between structures, even if they were complying with the only world and her contention, is this sort of puts unfair pressure on them, but I don't think it applies because it's, Eight is movement, is the carports, not there. And the proposal is to even if it was there,",
+      "start": 5074,
+      "type": "TX"
+    },
+    {
+      "end": 5131,
+      "id": 467,
+      "speaker": "Speaker 3",
+      "speech": "it's going to be removed.",
+      "start": 5130,
+      "type": "TX"
+    },
+    {
+      "end": 5137,
+      "id": 468,
+      "speaker": "Speaker 2",
+      "speech": "So again. I don't see that as a relevant. I enjoy,",
+      "start": 5131,
+      "type": "TX"
+    },
+    {
+      "end": 5227,
+      "id": 469,
+      "speaker": "Speaker 3",
+      "speech": "I'd like to stipulate on somehow agree between us that the fact that the carport disappeared in a snowstorm in March, is I believe not relevant. Because it's well within the period that it could be grandfather didn't rebuild. So I think we have to assume okay. Just as a matter of accident it isn't there right now because it fell down. But I think the fact that it is going to go away permanently and never rebuild you need to consider that that is fair to consider that. Okay, okay. The other thing, a Shelley made a lot of good points are very impassioned case a lot of sympathy for her case but the fact is Shelley's life, it's actually two lives. One is 0.17 and one is I don't know. It's it's a little bit bigger than that in some it's basically points 35. So if Shelly would have build She would need, I believe at least four variances to build our own house on that property and the Privacy issue again. She made it makes a very good point but privacy goes both ways, right? So yeah, yeah, there's a nice Hemlock a wall of Hemlock separates the two but if Shelley is upset by. Tim's building affecting her privacy when she builds her house. He worked both ways. Tim is going to be upset by the Privacy, you know, encroached on her building. So I mean she made a great case and I got a lot",
+      "start": 5137,
+      "type": "TX"
+    },
+    {
+      "end": 5231,
+      "id": 470,
+      "speaker": "Speaker 3",
+      "speech": "of sympathy for what she's saying. But to my mind those objections were neutralized.",
+      "start": 5227,
+      "type": "TX"
+    },
+    {
+      "end": 5259,
+      "id": 471,
+      "speaker": "Speaker 2",
+      "speech": "It would be. you as always, not getting ahead of myself, but Because we have a previous experience. Yep. This. 12 by 24 shed can't become 35 feet. High",
+      "start": 5232,
+      "type": "TX"
+    },
+    {
+      "end": 5282,
+      "id": 472,
+      "speaker": "Speaker 3",
+      "speech": "correct. It's got to be one story. Write one story. Oh, one story. Yeah. One story only. That would be a condition that I prepared to another condition. I'd be. I'd like to put on it if we grind it is the rehab. Where the core part, where the rehab to make it pervious where the carport was, and the demo of the shed, the old chair. Before the new one",
+      "start": 5259,
+      "type": "TX"
+    },
+    {
+      "end": 5286,
+      "id": 473,
+      "speaker": "Speaker 4",
+      "speech": "because that way, I know time. Do we increase",
+      "start": 5282,
+      "type": "TX"
+    },
+    {
+      "end": 5287,
+      "id": 474,
+      "speaker": "Speaker 3",
+      "speech": "the",
+      "start": 5286,
+      "type": "TX"
+    },
+    {
+      "end": 5293,
+      "id": 475,
+      "speaker": "Speaker 4",
+      "speech": "imperius? You know another words? We buy eliminating that before you do. The other one.",
+      "start": 5287,
+      "type": "TX"
+    },
+    {
+      "end": 5294,
+      "id": 476,
+      "speaker": "Speaker 2",
+      "speech": "At no",
+      "start": 5293,
+      "type": "TX"
+    },
+    {
+      "end": 5297,
+      "id": 477,
+      "speaker": "Speaker 4",
+      "speech": "time, do you have all three structures at the same time?",
+      "start": 5294,
+      "type": "TX"
+    },
+    {
+      "end": 5299,
+      "id": 478,
+      "speaker": "Speaker 3",
+      "speech": "Yep. Yep.",
+      "start": 5297,
+      "type": "TX"
+    },
+    {
+      "end": 5304,
+      "id": 479,
+      "speaker": "Speaker 4",
+      "speech": "Because we, we did run into that problem before.",
+      "start": 5302,
+      "type": "TX"
+    },
+    {
+      "end": 5318,
+      "id": 480,
+      "speaker": "Speaker 3",
+      "speech": "Yeah. I'll say, you know, when I don't know, I don't want to pre-empt a motion or anything like that, but I definitely want to put on the table that I'm inclined to Grant these variants.",
+      "start": 5304,
+      "type": "TX"
+    },
+    {
+      "end": 5325,
+      "id": 481,
+      "speaker": "Speaker 2",
+      "speech": "Well, if we don't, we don't have",
+      "start": 5323,
+      "type": "TX"
+    },
+    {
+      "end": 5329,
+      "id": 482,
+      "speaker": "Speaker 3",
+      "speech": "anything more to say with, with conditions. Subsequent. Yeah. That's right. Yeah,",
+      "start": 5325,
+      "type": "TX"
+    },
+    {
+      "end": 5354,
+      "id": 483,
+      "speaker": "Speaker 4",
+      "speech": "let's motion. Let's motion to vote, okay. I make a motion that we vote on this. To Grant. To Grant the shed. but with the removal of the impervious and the old shed, First.",
+      "start": 5329,
+      "type": "TX"
+    },
+    {
+      "end": 5361,
+      "id": 484,
+      "speaker": "Speaker 3",
+      "speech": "And Do I have a second? And also that the height of the building?",
+      "start": 5354,
+      "type": "TX"
+    },
+    {
+      "end": 5361,
+      "id": 485,
+      "speaker": "Speaker 2",
+      "speech": "Oh",
+      "start": 5361,
+      "type": "TX"
+    },
+    {
+      "end": 5363,
+      "id": 486,
+      "speaker": "Speaker 3",
+      "speech": "no. Yeah.",
+      "start": 5361,
+      "type": "TX"
+    },
+    {
+      "end": 5371,
+      "id": 487,
+      "speaker": "Speaker 4",
+      "speech": "I'll second that motion all in favor. Aye. Okay. So that's granted. Granted",
+      "start": 5365,
+      "type": "TX"
+    },
+    {
+      "end": 5388,
+      "id": 488,
+      "speaker": "Speaker 3",
+      "speech": "okay. Shelley. I, if you're on, hold the main, I hope you heard that. And again, remember that you have the right to appeal that decision. Okay. Let's consider.",
+      "start": 5371,
+      "type": "TX"
+    },
+    {
+      "end": 5396,
+      "id": 489,
+      "speaker": "Speaker 4",
+      "speech": "Doug Max Doug Max's case. Yeah, let's do that. oh,",
+      "start": 5391,
+      "type": "TX"
+    },
+    {
+      "end": 5401,
+      "id": 490,
+      "speaker": "Speaker 3",
+      "speech": "Please anybody anybody",
+      "start": 5397,
+      "type": "TX"
+    },
+    {
+      "end": 5403,
+      "id": 491,
+      "speaker": "Speaker 4",
+      "speech": "can move wherever they want",
+      "start": 5401,
+      "type": "TX"
+    },
+    {
+      "end": 5441,
+      "id": 492,
+      "speaker": "Speaker 3",
+      "speech": "yeah, or whatever. Whatever, you know anybody? I am not happy. I will want to put that, this is in two consecutive public hearings. we have had the problem of measurements that have just not the application out of the worst. Right? We don't have to know. I mean, it's all public record, but we don't have to gossip names here right now, but at our last public hearing, we were faced with exactly the same issue. And, and I'm not happy about.",
+      "start": 5403,
+      "type": "TX"
+    },
+    {
+      "end": 5449,
+      "id": 493,
+      "speaker": "Speaker 4",
+      "speech": "You do have a point there.",
+      "start": 5448,
+      "type": "TX"
+    },
+    {
+      "end": 5451,
+      "id": 494,
+      "speaker": "Speaker 2",
+      "speech": "but",
+      "start": 5451,
+      "type": "TX"
+    },
+    {
+      "end": 5451,
+      "id": 495,
+      "speaker": "Speaker 3",
+      "speech": "yeah,",
+      "start": 5451,
+      "type": "TX"
+    },
+    {
+      "end": 5452,
+      "id": 496,
+      "speaker": "Speaker 4",
+      "speech": "yeah, yeah,",
+      "start": 5451,
+      "type": "TX"
+    },
+    {
+      "end": 5454,
+      "id": 497,
+      "speaker": "Speaker 3",
+      "speech": "I'm not happy about",
+      "start": 5452,
+      "type": "TX"
+    },
+    {
+      "end": 5477,
+      "id": 498,
+      "speaker": "Speaker 2",
+      "speech": "when I look at it, it wasn't a lot of Crushed on. And when I pulled up the other day, and I did walk around the side, and Saw,",
+      "start": 5465,
+      "type": "TX"
+    },
+    {
+      "end": 5481,
+      "id": 499,
+      "speaker": "Speaker 3",
+      "speech": "you're talking about the retaining walls and so on. Yeah, okay,",
+      "start": 5477,
+      "type": "TX"
+    },
+    {
+      "end": 5482,
+      "id": 500,
+      "speaker": "Speaker 1",
+      "speech": "yeah,",
+      "start": 5481,
+      "type": "TX"
+    },
+    {
+      "end": 5492,
+      "id": 501,
+      "speaker": "Speaker 3",
+      "speech": "because they're very surface of those retaining Wars have to count towards the impervious, of course, right? Because they're quite wide. They're great, you know, granite slabs or whatever. So why",
+      "start": 5482,
+      "type": "TX"
+    },
+    {
+      "end": 5499,
+      "id": 502,
+      "speaker": "Speaker 1",
+      "speech": "Know.",
+      "start": 5498,
+      "type": "TX"
+    },
+    {
+      "end": 5505,
+      "id": 503,
+      "speaker": "Speaker 4",
+      "speech": "I can I can speak about because that's very nice.",
+      "start": 5500,
+      "type": "TX"
+    },
+    {
+      "end": 5514,
+      "id": 504,
+      "speaker": "Speaker 2",
+      "speech": "With it. The",
+      "start": 5506,
+      "type": "TX"
+    },
+    {
+      "end": 5514,
+      "id": 505,
+      "speaker": "Speaker 1",
+      "speech": "contention",
+      "start": 5514,
+      "type": "TX"
+    },
+    {
+      "end": 5517,
+      "id": 506,
+      "speaker": "Speaker 3",
+      "speech": "the public here. I'd like you to say. I",
+      "start": 5514,
+      "type": "TX"
+    },
+    {
+      "end": 5517,
+      "id": 507,
+      "speaker": "Speaker 4",
+      "speech": "like",
+      "start": 5517,
+      "type": "TX"
+    },
+    {
+      "end": 5524,
+      "id": 508,
+      "speaker": "Speaker 2",
+      "speech": "I like the idea. Of planting grass over a lot of that.",
+      "start": 5517,
+      "type": "TX"
+    },
+    {
+      "end": 5531,
+      "id": 509,
+      "speaker": "Speaker 4",
+      "speech": "Putting grass that's going to cut down Big Time. Percentage of",
+      "start": 5525,
+      "type": "TX"
+    },
+    {
+      "end": 5532,
+      "id": 510,
+      "speaker": "Speaker 2",
+      "speech": "impervious",
+      "start": 5531,
+      "type": "TX"
+    },
+    {
+      "end": 5555,
+      "id": 511,
+      "speaker": "Speaker 3",
+      "speech": "it is. But I think the point has been made and the point has been made that the impervious coverage is is at the end of the day, not before us. Now we can look at it and say that this is just looking at the impervious. It's wildly non-conforming. Okay, I don't think we can do anything about that.",
+      "start": 5532,
+      "type": "TX"
+    },
+    {
+      "end": 5556,
+      "id": 512,
+      "speaker": "Speaker 4",
+      "speech": "All right,",
+      "start": 5555,
+      "type": "TX"
+    },
+    {
+      "end": 5579,
+      "id": 513,
+      "speaker": "Speaker 3",
+      "speech": "I think I think all we could do we could say to the select board we could say, hey look this thing is wildly out of compliance. Would you want to do about it? So reducing the impervious at this stage at this. Here is not going to affect anything, you know? Yeah. Okay that's what I I don't know what anybody else.",
+      "start": 5556,
+      "type": "TX"
+    },
+    {
+      "end": 5612,
+      "id": 514,
+      "speaker": "Speaker 2",
+      "speech": "If he reduces the side where he goes down to where there's actually I saw a garage door on a massage down below of the yeah, yeah, that's a base metal. The garage if you reduces that, to just say grass and then, You really can't reduce the amount where he wants to have the carport because that's all filled in",
+      "start": 5579,
+      "type": "TX"
+    },
+    {
+      "end": 5619,
+      "id": 515,
+      "speaker": "Speaker 3",
+      "speech": "that that lean to either exists or it doesn't right. And I certainly before us it either exists or it doesn't",
+      "start": 5612,
+      "type": "TX"
+    },
+    {
+      "end": 5623,
+      "id": 516,
+      "speaker": "Speaker 4",
+      "speech": "and it doesn't affect the impervious whatsoever because it's already impervious",
+      "start": 5619,
+      "type": "TX"
+    },
+    {
+      "end": 5642,
+      "id": 517,
+      "speaker": "Speaker 3",
+      "speech": "and it does affect the building coverage because he's going to cover. What wasn't covered before. It will require a setback, a side setback and a front, setback variance to be billed. And the building coverage is again wildly. Out of wildly non-conforming.",
+      "start": 5623,
+      "type": "TX"
+    },
+    {
+      "end": 5655,
+      "id": 518,
+      "speaker": "Speaker 4",
+      "speech": "So, it's up to 15% now and is that 15% including the new carport",
+      "start": 5643,
+      "type": "TX"
+    },
+    {
+      "end": 5677,
+      "id": 519,
+      "speaker": "Speaker 3",
+      "speech": "Yeah, that I've noted that on the worksheet that I just distributed with everybody. It's it's it's what you and I measured. And then plus the 12 by 306, 432 square feet for the lean tooth and 4 by 832 square feet for the stairway.",
+      "start": 5657,
+      "type": "TX"
+    },
+    {
+      "end": 5692,
+      "id": 520,
+      "speaker": "Speaker 4",
+      "speech": "Okay. So what do you think the let's say, The percentages with out. In other words, what is it sitting right now? Today, I didn't, I didn't do that one.",
+      "start": 5677,
+      "type": "TX"
+    },
+    {
+      "end": 5694,
+      "id": 521,
+      "speaker": "Speaker 3",
+      "speech": "What is it sitting right now",
+      "start": 5692,
+      "type": "TX"
+    },
+    {
+      "end": 5695,
+      "id": 522,
+      "speaker": "Speaker 4",
+      "speech": "right now?",
+      "start": 5694,
+      "type": "TX"
+    },
+    {
+      "end": 5700,
+      "id": 523,
+      "speaker": "Speaker 3",
+      "speech": "Well, I, I could redo the calculations if you like, I think is 13.6.",
+      "start": 5695,
+      "type": "TX"
+    },
+    {
+      "end": 5706,
+      "id": 524,
+      "speaker": "Speaker 4",
+      "speech": "Okay, that that's close enough. So, okay 13.6 to 15. Okay.",
+      "start": 5700,
+      "type": "TX"
+    },
+    {
+      "end": 5708,
+      "id": 525,
+      "speaker": "Speaker 3",
+      "speech": "That's that's what I",
+      "start": 5706,
+      "type": "TX"
+    },
+    {
+      "end": 5708,
+      "id": 526,
+      "speaker": "Speaker 4",
+      "speech": "wanted to get",
+      "start": 5708,
+      "type": "TX"
+    },
+    {
+      "end": 5711,
+      "id": 527,
+      "speaker": "Speaker 3",
+      "speech": "something like that.",
+      "start": 5708,
+      "type": "TX"
+    },
+    {
+      "end": 5723,
+      "id": 528,
+      "speaker": "Speaker 4",
+      "speech": "So we're talking about, You know, not quite 2%. 1.5 1.4%, right?",
+      "start": 5711,
+      "type": "TX"
+    },
+    {
+      "end": 5724,
+      "id": 529,
+      "speaker": "Speaker 3",
+      "speech": "So",
+      "start": 5723,
+      "type": "TX"
+    },
+    {
+      "end": 5727,
+      "id": 530,
+      "speaker": "Speaker 1",
+      "speech": "basically, you're saying that on the application you put down,",
+      "start": 5725,
+      "type": "TX"
+    },
+    {
+      "end": 5738,
+      "id": 531,
+      "speaker": "Speaker 2",
+      "speech": "As 3,454. Square feet of the previous soil and they're saying that you found 7,661.",
+      "start": 5729,
+      "type": "TX"
+    },
+    {
+      "end": 5750,
+      "id": 532,
+      "speaker": "Speaker 3",
+      "speech": "Mm-hmm. Yeah, I'm saying. Yes, 7661 is what we found, Gary. And I found at least, but we didn't measure everything. He was too hard to measure.",
+      "start": 5738,
+      "type": "TX"
+    },
+    {
+      "end": 5759,
+      "id": 533,
+      "speaker": "Speaker 4",
+      "speech": "If we took the, we took the wheel. We didn't we didn't tape measure. We took the the wheel with the comes up with the numbers.",
+      "start": 5750,
+      "type": "TX"
+    },
+    {
+      "end": 5803,
+      "id": 534,
+      "speaker": "Speaker 3",
+      "speech": "Yeah, we didn't measure the the walkway. We didn't measure the surface of the of the terracing of the retaining walls. There was a lot of things we didn't measure. but, In the end. In the end, to we have to judge this on the five variants criteria. And if we're inclined to have a problem with it. I think we need to look at the fight variants criteria and see see where we stand on that because that's the that's the only basis. You know, we can't we can't say, whoa, you know, like it's it's it's it's you know, all that we got these surprise numbers. We're going to deny it. We can't do that. And you.",
+      "start": 5759,
+      "type": "TX"
+    },
+    {
+      "end": 5812,
+      "id": 535,
+      "speaker": "Speaker 4",
+      "speech": "My idea for asking the questions was just, so I have something kicking around in my head.",
+      "start": 5806,
+      "type": "TX"
+    },
+    {
+      "end": 5813,
+      "id": 536,
+      "speaker": "Speaker 3",
+      "speech": "Sure,",
+      "start": 5812,
+      "type": "TX"
+    },
+    {
+      "end": 5873,
+      "id": 537,
+      "speaker": "Speaker 4",
+      "speech": "as far as the variance, you know, coming from the street that five feet The garage is the garages already there. The Grudges 45 feet from the edge of the street. The hardship part. To me is the fact that the garage is already there. You know, you're not encroaching on the distance. Let's say you are putting something up and there was nothing to go by where you could say well cheaper you know I just move it back another five feet but but the garage is already there somewhere along the line, it was granted that the town fathers, some other board, whatever it is. Granted",
+      "start": 5816,
+      "type": "TX"
+    },
+    {
+      "end": 5874,
+      "id": 538,
+      "speaker": "Speaker 3",
+      "speech": "however, it happened",
+      "start": 5873,
+      "type": "TX"
+    },
+    {
+      "end": 5875,
+      "id": 539,
+      "speaker": "Speaker 2",
+      "speech": "just",
+      "start": 5874,
+      "type": "TX"
+    },
+    {
+      "end": 5876,
+      "id": 540,
+      "speaker": "Speaker 3",
+      "speech": "happened",
+      "start": 5875,
+      "type": "TX"
+    },
+    {
+      "end": 5891,
+      "id": 541,
+      "speaker": "Speaker 4",
+      "speech": "and I don't think we, we would be doing all that much damage by granting that five feet and it's just going to be even with the garage.",
+      "start": 5876,
+      "type": "TX"
+    },
+    {
+      "end": 5892,
+      "id": 542,
+      "speaker": "Speaker 3",
+      "speech": "Mm-hmm,",
+      "start": 5891,
+      "type": "TX"
+    },
+    {
+      "end": 5900,
+      "id": 543,
+      "speaker": "Speaker 4",
+      "speech": "that's already there. That's all I got to say about the, the five feet.",
+      "start": 5892,
+      "type": "TX"
+    },
+    {
+      "end": 6000,
+      "id": 544,
+      "speaker": "Speaker 3",
+      "speech": "Okay? For the front of the garage. Okay, I'm thinking about two of the five prongs following on from what you were saying, right? So, The substantial Justice. Of the three. and the part of number five, which says What does it say? What are we asking here? Would a literal enforcement fail to advance? The luos that Spirit of the OS and the fair and substantial way. So in other words, if we literally enforce, The luo on this. In other words, deny the variances. Is that, is that, is that fair on the applicant? You know, are we creating a hardship? Hardship is not the right word, but if are we Is that out of proportion? To the variances, not expressing myself very well, but looking at the other way, what would be the impact? If this lean to just was not built, we can't rectify anything else, we can't, we can't, you know, dig up. 5% of the light and make it pervious. We can't tear down 5% of the buildings to make it conforming. We can't do that, but if just, if this is never built, Just not built. What is the impact? Is that? Is that fair? On the applicant is that out of proportion?",
+      "start": 5900,
+      "type": "TX"
+    },
+    {
+      "end": 6009,
+      "id": 545,
+      "speaker": "Speaker 4",
+      "speech": "I think. I don't know. I'm tending. To think there is a",
+      "start": 6002,
+      "type": "TX"
+    },
+    {
+      "end": 6010,
+      "id": 546,
+      "speaker": "Speaker 2",
+      "speech": "hardship case here.",
+      "start": 6009,
+      "type": "TX"
+    },
+    {
+      "end": 6013,
+      "id": 547,
+      "speaker": "Speaker 4",
+      "speech": "I think that",
+      "start": 6012,
+      "type": "TX"
+    },
+    {
+      "end": 6016,
+      "id": 548,
+      "speaker": "Speaker 2",
+      "speech": "was a walkway as well.",
+      "start": 6013,
+      "type": "TX"
+    },
+    {
+      "end": 6018,
+      "id": 549,
+      "speaker": "Speaker 3",
+      "speech": "So you say again, Joe",
+      "start": 6017,
+      "type": "TX"
+    },
+    {
+      "end": 6025,
+      "id": 550,
+      "speaker": "Speaker 1",
+      "speech": "Seems to be.",
+      "start": 6025,
+      "type": "TX"
+    },
+    {
+      "end": 6029,
+      "id": 551,
+      "speaker": "Speaker 2",
+      "speech": "The don't have that.",
+      "start": 6028,
+      "type": "TX"
+    },
+    {
+      "end": 6049,
+      "id": 552,
+      "speaker": "Speaker 3",
+      "speech": "What. Okay, so what does happen if this isn't build? What is the in the substantial Justice? What do we reading here? Providing second egress, blah blah. I'll turn the location. Well,",
+      "start": 6032,
+      "type": "TX"
+    },
+    {
+      "end": 6052,
+      "id": 553,
+      "speaker": "Speaker 4",
+      "speech": "I think, I think a second egress from,",
+      "start": 6049,
+      "type": "TX"
+    },
+    {
+      "end": 6054,
+      "id": 554,
+      "speaker": "Speaker 3",
+      "speech": "that's the stairway, right?",
+      "start": 6052,
+      "type": "TX"
+    },
+    {
+      "end": 6056,
+      "id": 555,
+      "speaker": "Speaker 4",
+      "speech": "I think that's important.",
+      "start": 6055,
+      "type": "TX"
+    },
+    {
+      "end": 6060,
+      "id": 556,
+      "speaker": "Speaker 1",
+      "speech": "you know,",
+      "start": 6060,
+      "type": "TX"
+    },
+    {
+      "end": 6064,
+      "id": 557,
+      "speaker": "Speaker 4",
+      "speech": "I would hate to I would hate it.",
+      "start": 6060,
+      "type": "TX"
+    },
+    {
+      "end": 6072,
+      "id": 558,
+      "speaker": "Speaker 3",
+      "speech": "Okay, so the stairway, can we consider the stairway? Separate to the lean to",
+      "start": 6066,
+      "type": "TX"
+    },
+    {
+      "end": 6078,
+      "id": 559,
+      "speaker": "Speaker 4",
+      "speech": "I think it goes together.",
+      "start": 6077,
+      "type": "TX"
+    },
+    {
+      "end": 6087,
+      "id": 560,
+      "speaker": "Speaker 3",
+      "speech": "When they sent me. You know that? Is the justification the same for both?",
+      "start": 6080,
+      "type": "TX"
+    },
+    {
+      "end": 6107,
+      "id": 561,
+      "speaker": "Speaker 4",
+      "speech": "And I tend to agree with you. I think so myself. I'm thinking that way.",
+      "start": 6097,
+      "type": "TX"
+    },
+    {
+      "end": 6127,
+      "id": 562,
+      "speaker": "Speaker 3",
+      "speech": "Mm-hmm. Anybody. Andrew Linda.",
+      "start": 6120,
+      "type": "TX"
+    },
+    {
+      "end": 6127,
+      "id": 563,
+      "speaker": "Speaker 1",
+      "speech": "Yeah,",
+      "start": 6127,
+      "type": "TX"
+    },
+    {
+      "end": 6163,
+      "id": 564,
+      "speaker": "Speaker 2",
+      "speech": "I'm just trying to get my head around and go. you know, the I think what you're saying is very important. You know, we've discovered come up with some major discrepancies on the impervious coverage. proposing front of this is materially affecting that. In and of itself. because, It's not creating more than exists right now, it's not",
+      "start": 6127,
+      "type": "TX"
+    },
+    {
+      "end": 6166,
+      "id": 565,
+      "speaker": "Speaker 3",
+      "speech": "the impervious, not I agree. I",
+      "start": 6163,
+      "type": "TX"
+    },
+    {
+      "end": 6190,
+      "id": 566,
+      "speaker": "Speaker 2",
+      "speech": "mean, we've made I mean, I think we've made a fairly big thing denying is 14. Out. it's not to main specifically to the thing, we're trying to decide on which is the additional existence of the lead to and a couple more Questions standing.",
+      "start": 6166,
+      "type": "TX"
+    },
+    {
+      "end": 6206,
+      "id": 567,
+      "speaker": "Speaker 3",
+      "speech": "Well, the impervious is only one part of that. The building coverage is is, is is important. Because because the the this lean to and the stairway will bring the building coverage up to 15%. It will be 5% over",
+      "start": 6190,
+      "type": "TX"
+    },
+    {
+      "end": 6245,
+      "id": 568,
+      "speaker": "Speaker 2",
+      "speech": "but you just said before viewing the Stairwell and the resulting second egress. should not be considered separately to the LinkedIn and I'm struggling to I'm I'm thinking the opposite that, you know, there is a hardship conversation and you know, something that we need to consider is the the benefit of the stairwell with the important thing and it is a completely Standalone and separate issue to putting a lean to over an existing Focus.",
+      "start": 6206,
+      "type": "TX"
+    },
+    {
+      "end": 6246,
+      "id": 569,
+      "speaker": "Speaker 3",
+      "speech": "That's what I was saying.",
+      "start": 6245,
+      "type": "TX"
+    },
+    {
+      "end": 6246,
+      "id": 570,
+      "speaker": "Speaker 2",
+      "speech": "And",
+      "start": 6246,
+      "type": "TX"
+    },
+    {
+      "end": 6258,
+      "id": 571,
+      "speaker": "Speaker 3",
+      "speech": "misunderstood know, that's what I was saying. Yeah, I was like, I was actually asking the question. Okay. Can we consider them separately because I was starting to consider them separately in my mind, that that",
+      "start": 6246,
+      "type": "TX"
+    },
+    {
+      "end": 6262,
+      "id": 572,
+      "speaker": "Speaker 2",
+      "speech": "That's, that's where I'm at. I'm at,",
+      "start": 6260,
+      "type": "TX"
+    },
+    {
+      "end": 6276,
+      "id": 573,
+      "speaker": "Speaker 3",
+      "speech": "okay. I'm not sure. That we would have the power. To vote one up and one down. Because they began that's not what's before us? Yeah.",
+      "start": 6262,
+      "type": "TX"
+    },
+    {
+      "end": 6285,
+      "id": 574,
+      "speaker": "Speaker 4",
+      "speech": "I think the only thing that's before us is the the front setback on the side. Set back.",
+      "start": 6279,
+      "type": "TX"
+    },
+    {
+      "end": 6286,
+      "id": 575,
+      "speaker": "Speaker 3",
+      "speech": "No end of building coverage.",
+      "start": 6285,
+      "type": "TX"
+    },
+    {
+      "end": 6288,
+      "id": 576,
+      "speaker": "Speaker 2",
+      "speech": "I want the building and",
+      "start": 6286,
+      "type": "TX"
+    },
+    {
+      "end": 6291,
+      "id": 577,
+      "speaker": "Speaker 3",
+      "speech": "the building coverage is absolutely a forest. Yes, it absolutely is.",
+      "start": 6288,
+      "type": "TX"
+    },
+    {
+      "end": 6293,
+      "id": 578,
+      "speaker": "Speaker 4",
+      "speech": "Yeah, pardon me. I screwed up. Yeah.",
+      "start": 6291,
+      "type": "TX"
+    },
+    {
+      "end": 6308,
+      "id": 579,
+      "speaker": "Speaker 1",
+      "speech": "Okay. So",
+      "start": 6308,
+      "type": "TX"
+    },
+    {
+      "end": 6327,
+      "id": 580,
+      "speaker": "Speaker 3",
+      "speech": "do you know another question that we've asked ourselves to try and drill into this is Do. Let me see if I can remember how we asked. You do the variants is requested. Render. The project reasonable.",
+      "start": 6308,
+      "type": "TX"
+    },
+    {
+      "end": 6328,
+      "id": 581,
+      "speaker": "Speaker 1",
+      "speech": "So,",
+      "start": 6328,
+      "type": "TX"
+    },
+    {
+      "end": 6333,
+      "id": 582,
+      "speaker": "Speaker 3",
+      "speech": "do the variances requested render the project reasonable.",
+      "start": 6328,
+      "type": "TX"
+    },
+    {
+      "end": 6341,
+      "id": 583,
+      "speaker": "Speaker 4",
+      "speech": "I think it does. I'd have to say, yes.",
+      "start": 6337,
+      "type": "TX"
+    },
+    {
+      "end": 6359,
+      "id": 584,
+      "speaker": "Speaker 3",
+      "speech": "Is anybody ready to make a motion? Or we still mulling this over. I'm ready to go with them.",
+      "start": 6349,
+      "type": "TX"
+    },
+    {
+      "end": 6369,
+      "id": 585,
+      "speaker": "Speaker 4",
+      "speech": "How about you, Andrew?",
+      "start": 6368,
+      "type": "TX"
+    },
+    {
+      "end": 6381,
+      "id": 586,
+      "speaker": "Speaker 2",
+      "speech": "I wouldn't be quite ready to make a motion. I'm ready to consider them. Just to consider one as well.",
+      "start": 6372,
+      "type": "TX"
+    },
+    {
+      "end": 6387,
+      "id": 587,
+      "speaker": "Speaker 3",
+      "speech": "So I think what, what they're saying is, if you want to make a motion will vote on it,",
+      "start": 6383,
+      "type": "TX"
+    },
+    {
+      "end": 6399,
+      "id": 588,
+      "speaker": "Speaker 4",
+      "speech": "we'll see. Okay, I will make a motion that we vote on this. On these on this applicant. We",
+      "start": 6387,
+      "type": "TX"
+    },
+    {
+      "end": 6401,
+      "id": 589,
+      "speaker": "Speaker 3",
+      "speech": "vote to,",
+      "start": 6399,
+      "type": "TX"
+    },
+    {
+      "end": 6417,
+      "id": 590,
+      "speaker": "Speaker 4",
+      "speech": "I think we, I think I would like to vote to Grant it all three variants. All three variants is, I will talk about the front. The side. and the building percentage.",
+      "start": 6401,
+      "type": "TX"
+    },
+    {
+      "end": 6425,
+      "id": 591,
+      "speaker": "Speaker 2",
+      "speech": "In purpose.",
+      "start": 6425,
+      "type": "TX"
+    },
+    {
+      "end": 6426,
+      "id": 592,
+      "speaker": "Speaker 4",
+      "speech": "Yes.",
+      "start": 6425,
+      "type": "TX"
+    },
+    {
+      "end": 6438,
+      "id": 593,
+      "speaker": "Speaker 3",
+      "speech": "Well, the know we're not going to the impervious, I think I thought we had agreed between us that the impervious was off the table, where upset about the impervious,",
+      "start": 6428,
+      "type": "TX"
+    },
+    {
+      "end": 6439,
+      "id": 594,
+      "speaker": "Speaker 2",
+      "speech": "okay?",
+      "start": 6438,
+      "type": "TX"
+    },
+    {
+      "end": 6447,
+      "id": 595,
+      "speaker": "Speaker 3",
+      "speech": "We don't like it that we can talk to the select board and say, you know, we this is not a good thing, but we can't vote on that tonight.",
+      "start": 6439,
+      "type": "TX"
+    },
+    {
+      "end": 6457,
+      "id": 596,
+      "speaker": "Speaker 4",
+      "speech": "So you made your motion, I made my motion. We have a second Thank you.",
+      "start": 6449,
+      "type": "TX"
+    },
+    {
+      "end": 6466,
+      "id": 597,
+      "speaker": "Speaker 3",
+      "speech": "Fold those in favor. Say aye. Aye. Those not in favor. Say nay, I say nay.",
+      "start": 6458,
+      "type": "TX"
+    },
+    {
+      "end": 6468,
+      "id": 598,
+      "speaker": "Speaker 2",
+      "speech": "I don't believe that the",
+      "start": 6467,
+      "type": "TX"
+    },
+    {
+      "end": 6478,
+      "id": 599,
+      "speaker": "Speaker 3",
+      "speech": "I don't believe that the variances that were granting justify what's being done. So I'm going to vote.",
+      "start": 6471,
+      "type": "TX"
+    },
+    {
+      "end": 6478,
+      "id": 600,
+      "speaker": "Speaker 1",
+      "speech": "No.",
+      "start": 6478,
+      "type": "TX"
+    },
+    {
+      "end": 6480,
+      "id": 601,
+      "speaker": "Speaker 2",
+      "speech": "I was",
+      "start": 6479,
+      "type": "TX"
+    },
+    {
+      "end": 6485,
+      "id": 602,
+      "speaker": "Speaker 3",
+      "speech": "okay. So, the motion passes through to 32 passed.",
+      "start": 6480,
+      "type": "TX"
+    },
+    {
+      "end": 6499,
+      "id": 603,
+      "speaker": "Speaker 2",
+      "speech": "Thank you. Thank you same, just very interesting process. First time I've ever done anything like this. Okay, so thank you",
+      "start": 6490,
+      "type": "TX"
+    },
+    {
+      "end": 6506,
+      "id": 604,
+      "speaker": "Speaker 4",
+      "speech": "again. So you don't forget. Your next step is, you got to go to the Shoreline permit.",
+      "start": 6499,
+      "type": "TX"
+    },
+    {
+      "end": 6510,
+      "id": 605,
+      "speaker": "Speaker 3",
+      "speech": "Because yes, it's all contingent on you getting that that",
+      "start": 6508,
+      "type": "TX"
+    },
+    {
+      "end": 6511,
+      "id": 606,
+      "speaker": "Speaker 1",
+      "speech": "comes to me.",
+      "start": 6510,
+      "type": "TX"
+    },
+    {
+      "end": 6515,
+      "id": 607,
+      "speaker": "Speaker 2",
+      "speech": "Thank you.",
+      "start": 6513,
+      "type": "TX"
+    },
+    {
+      "end": 6517,
+      "id": 608,
+      "speaker": "Speaker 3",
+      "speech": "Okay, thank you.",
+      "start": 6515,
+      "type": "TX"
+    },
+    {
+      "end": 6527,
+      "id": 609,
+      "speaker": "Speaker 1",
+      "speech": "that's, Right. She doesn't say much.",
+      "start": 6521,
+      "type": "TX"
+    },
+    {
+      "end": 6533,
+      "id": 610,
+      "speaker": "Speaker 4",
+      "speech": "All right. So we did all three of these. Correct?",
+      "start": 6531,
+      "type": "TX"
+    },
+    {
+      "end": 6536,
+      "id": 611,
+      "speaker": "Speaker 3",
+      "speech": "Know we got to talk about Mr. Ziminski.",
+      "start": 6533,
+      "type": "TX"
+    },
+    {
+      "end": 6536,
+      "id": 612,
+      "speaker": "Speaker 1",
+      "speech": "Yes.",
+      "start": 6536,
+      "type": "TX"
+    },
+    {
+      "end": 6536,
+      "id": 613,
+      "speaker": "Speaker 4",
+      "speech": "Oh",
+      "start": 6536,
+      "type": "TX"
+    },
+    {
+      "end": 6538,
+      "id": 614,
+      "speaker": "Speaker 3",
+      "speech": "yeah. I'm a fight.",
+      "start": 6536,
+      "type": "TX"
+    },
+    {
+      "end": 6539,
+      "id": 615,
+      "speaker": "Speaker 4",
+      "speech": "Sorry about that.",
+      "start": 6538,
+      "type": "TX"
+    },
+    {
+      "end": 6540,
+      "id": 616,
+      "speaker": "Speaker 3",
+      "speech": "I know, I know.",
+      "start": 6539,
+      "type": "TX"
+    },
+    {
+      "end": 6541,
+      "id": 617,
+      "speaker": "Speaker 1",
+      "speech": "I'm sorry.",
+      "start": 6540,
+      "type": "TX"
+    },
+    {
+      "end": 6560,
+      "id": 618,
+      "speaker": "Speaker 3",
+      "speech": "Okay. All right. So I let's keep going. And this anybody has any run out completely around it gaps, right?",
+      "start": 6546,
+      "type": "TX"
+    },
+    {
+      "end": 6562,
+      "id": 619,
+      "speaker": "Speaker 4",
+      "speech": "No, I think I think we can do that.",
+      "start": 6560,
+      "type": "TX"
+    },
+    {
+      "end": 6564,
+      "id": 620,
+      "speaker": "Speaker 3",
+      "speech": "I think we need to decide Mrs. Samonsky.",
+      "start": 6562,
+      "type": "TX"
+    },
+    {
+      "end": 6564,
+      "id": 621,
+      "speaker": "Speaker 2",
+      "speech": "Yeah,",
+      "start": 6564,
+      "type": "TX"
+    },
+    {
+      "end": 6565,
+      "id": 622,
+      "speaker": "Speaker 1",
+      "speech": "I",
+      "start": 6564,
+      "type": "TX"
+    },
+    {
+      "end": 6566,
+      "id": 623,
+      "speaker": "Speaker 4",
+      "speech": "think we can do that.",
+      "start": 6565,
+      "type": "TX"
+    },
+    {
+      "end": 6566,
+      "id": 624,
+      "speaker": "Speaker 3",
+      "speech": "Yeah.",
+      "start": 6566,
+      "type": "TX"
+    },
+    {
+      "end": 6567,
+      "id": 625,
+      "speaker": "Speaker 1",
+      "speech": "Okay.",
+      "start": 6566,
+      "type": "TX"
+    },
+    {
+      "end": 6618,
+      "id": 626,
+      "speaker": "Speaker 4",
+      "speech": "I I'll start off by saying that. I was. You know at first when I went there I saw a two-point something acre piece of property and I said holy God. That's yeah, no problem with this. You know but then when I when we put the overlay on top of the property, it it goes from 2.0 2.1 or 2.2 whatever it is. It's time really makes a difference. And I do believe that. As a matter of fact, not only when I was there, I could hear the stream running",
+      "start": 6568,
+      "type": "TX"
+    },
+    {
+      "end": 6619,
+      "id": 627,
+      "speaker": "Speaker 3",
+      "speech": "right, you",
+      "start": 6618,
+      "type": "TX"
+    },
+    {
+      "end": 6619,
+      "id": 628,
+      "speaker": "Speaker 4",
+      "speech": "know,",
+      "start": 6619,
+      "type": "TX"
+    },
+    {
+      "end": 6619,
+      "id": 629,
+      "speaker": "Speaker 3",
+      "speech": "right?",
+      "start": 6619,
+      "type": "TX"
+    },
+    {
+      "end": 6633,
+      "id": 630,
+      "speaker": "Speaker 4",
+      "speech": "And if I could hear it in my hearing, really stinks, according to my wife, hahaha selectively know. You know, if I could hear it was closed.",
+      "start": 6619,
+      "type": "TX"
+    },
+    {
+      "end": 6634,
+      "id": 631,
+      "speaker": "Speaker 3",
+      "speech": "Sure.",
+      "start": 6633,
+      "type": "TX"
+    },
+    {
+      "end": 6635,
+      "id": 632,
+      "speaker": "Speaker 4",
+      "speech": "You know, and I",
+      "start": 6634,
+      "type": "TX"
+    },
+    {
+      "end": 6638,
+      "id": 633,
+      "speaker": "Speaker 3",
+      "speech": "and that was my mark before the rains",
+      "start": 6635,
+      "type": "TX"
+    },
+    {
+      "end": 6721,
+      "id": 634,
+      "speaker": "Speaker 4",
+      "speech": "and that was before the race spell there for for a little bit. So I can just imagine what it was like back in July, when we had what 17 inches of rain, 18 inches of rain, whatever it was there, it must, you know, back when back when the lake almost overflowed, you know. I imagine that was that was a pretty good anyways. and I still again my time for thinking is when I take the dog for a walk in the morning and so anyways as I was thinking about that, I said to myself, you know, It there's probably no other place really that he could have put that death shed building or whatever you want to call it. If we brought it across the center part, the parking area, or whatever you want to call that, and put it there. Now, we're putting it. Even lower. Plus, we're encroaching on the, on the wetlands. Are putting it over next to the other Barn. I'll call that. That's, that's That doesn't that doesn't seem to be a good plan because again the highest spot is where he did put it. And",
+      "start": 6638,
+      "type": "TX"
+    },
+    {
+      "end": 6723,
+      "id": 635,
+      "speaker": "Speaker 3",
+      "speech": "they had to be made a little bit higher",
+      "start": 6721,
+      "type": "TX"
+    },
+    {
+      "end": 6752,
+      "id": 636,
+      "speaker": "Speaker 4",
+      "speech": "and they even made it a little higher. They, they brought in the Riff Raff or whatever you want to call it, put it on block, did whatever they did, raise it up in the air a little bit, and let me tell you, if the water did get into it now, he'd have more than just a couple of inches. I think in the in the cellar, he'd have way over a foot to of water. So anyways, that's all I got that. That's my thoughts on it, okay.",
+      "start": 6723,
+      "type": "TX"
+    },
+    {
+      "end": 6775,
+      "id": 637,
+      "speaker": "Speaker 3",
+      "speech": "but one way, open looking at this, is that Is to look at it as if it was, you know, de Nova, right as if it wasn't built. And this is a mansion came in front of us with just a sketch. So I want to put a shed here. Would we have granted it? Because I don't think we can let we can't be swayed by the fact that it's already there.",
+      "start": 6754,
+      "type": "TX"
+    },
+    {
+      "end": 6825,
+      "id": 638,
+      "speaker": "Speaker 4",
+      "speech": "All right, to answer that question. Very simply he would have, he would have come to, he would have go to the get a building permit. They would have rejected it. We would have went there and instead of seeing the shed, we would have seen four four markers in the ground. I think we would have came to the same conclusion. We would have walked around still, we would have to take some measurements. We would have determined yet 25 feet from the road. I really don't think You know, the the fact that the shed is there, it made it. I thought it made it nice because I got to see the shed but other than that I don't think it wouldn't have made any difference to me. I think my thinking on it would have been exactly the same.",
+      "start": 6776,
+      "type": "TX"
+    },
+    {
+      "end": 6836,
+      "id": 639,
+      "speaker": "Speaker 3",
+      "speech": "With an alternative of occurred to us. Okay. Make the boat house a bit bigger. Make that boat house, could be taken down. It could be, it could be",
+      "start": 6826,
+      "type": "TX"
+    },
+    {
+      "end": 6871,
+      "id": 640,
+      "speaker": "Speaker 4",
+      "speech": "enlarged by the time by the time you took the boat house down and a large litter or something. I'm just going, I'm just going to guess probably wrong, but I'll just say x amount of money. He paid a cost to build that little shed. It would definitely if you took it down and built it, bigger that boat house or whatever it is. You would probably be two or three times. The price of that Boathouse to do something like that,",
+      "start": 6836,
+      "type": "TX"
+    },
+    {
+      "end": 6902,
+      "id": 641,
+      "speaker": "Speaker 2",
+      "speech": "you touching on substantially. You know. Is that? Where is the? Where is that in the five? That, you know, because obviously we know the hardship conversation isn't personal financial hardship, but It is the argument that the alternative there would be. To burdensome for the African.",
+      "start": 6871,
+      "type": "TX"
+    },
+    {
+      "end": 6914,
+      "id": 642,
+      "speaker": "Speaker 3",
+      "speech": "Yeah. If we literally enforce the lure and say it should not be there. Are we advancing the function, the purpose of the LOL in a fair and substantial way?",
+      "start": 6902,
+      "type": "TX"
+    },
+    {
+      "end": 6927,
+      "id": 643,
+      "speaker": "Speaker 2",
+      "speech": "and I, I think Gary and I agree with Gary, I think it would be a bad idea would Have been not advancing the early world.",
+      "start": 6915,
+      "type": "TX"
+    },
+    {
+      "end": 6930,
+      "id": 644,
+      "speaker": "Speaker 3",
+      "speech": "because if",
+      "start": 6929,
+      "type": "TX"
+    },
+    {
+      "end": 6938,
+      "id": 645,
+      "speaker": "Speaker 2",
+      "speech": "it wouldn't be fair on the you know, see that as an important,",
+      "start": 6930,
+      "type": "TX"
+    },
+    {
+      "end": 6954,
+      "id": 646,
+      "speaker": "Speaker 3",
+      "speech": "I'm a bit buzzed that you know the Wetland which is you know the Wetland. Used to be bigger than what it is now. and, I don't know. I mean, I, I don't",
+      "start": 6941,
+      "type": "TX"
+    },
+    {
+      "end": 6959,
+      "id": 647,
+      "speaker": "Speaker 2",
+      "speech": "really allow that. Is that something we should even",
+      "start": 6954,
+      "type": "TX"
+    },
+    {
+      "end": 6964,
+      "id": 648,
+      "speaker": "Speaker 3",
+      "speech": "know that? I don't think so? I don't think so. I'm just saying in the past allow",
+      "start": 6959,
+      "type": "TX"
+    },
+    {
+      "end": 6965,
+      "id": 649,
+      "speaker": "Speaker 4",
+      "speech": "you know,",
+      "start": 6964,
+      "type": "TX"
+    },
+    {
+      "end": 6965,
+      "id": 650,
+      "speaker": "Speaker 3",
+      "speech": "I",
+      "start": 6965,
+      "type": "TX"
+    },
+    {
+      "end": 6973,
+      "id": 651,
+      "speaker": "Speaker 4",
+      "speech": "never the house was built how many years ago, 20 years ago, 30 years ago, whatever it's not. That's, that's when all I got done.",
+      "start": 6965,
+      "type": "TX"
+    },
+    {
+      "end": 6978,
+      "id": 652,
+      "speaker": "Speaker 3",
+      "speech": "It's not not our job is not in our power to, you know, saying this thing about",
+      "start": 6973,
+      "type": "TX"
+    },
+    {
+      "end": 6978,
+      "id": 653,
+      "speaker": "Speaker 2",
+      "speech": "what",
+      "start": 6978,
+      "type": "TX"
+    },
+    {
+      "end": 6992,
+      "id": 654,
+      "speaker": "Speaker 3",
+      "speech": "and, and to be fed when we know we when Gary and I measured we just say, okay, how far is it? Exactly",
+      "start": 6978,
+      "type": "TX"
+    },
+    {
+      "end": 6993,
+      "id": 655,
+      "speaker": "Speaker 2",
+      "speech": "right.",
+      "start": 6992,
+      "type": "TX"
+    },
+    {
+      "end": 6998,
+      "id": 656,
+      "speaker": "Speaker 3",
+      "speech": "And and it it's 50 feet and a little bit but it's definitely 50 feet.",
+      "start": 6993,
+      "type": "TX"
+    },
+    {
+      "end": 6999,
+      "id": 657,
+      "speaker": "Speaker 2",
+      "speech": "Again, I think that",
+      "start": 6998,
+      "type": "TX"
+    },
+    {
+      "end": 7007,
+      "id": 658,
+      "speaker": "Speaker 3",
+      "speech": "And anybody want to make a motion.",
+      "start": 7005,
+      "type": "TX"
+    },
+    {
+      "end": 7022,
+      "id": 659,
+      "speaker": "Speaker 2",
+      "speech": "To. to Grant the variance of a Is it a five foot 25 foot? Very,",
+      "start": 7008,
+      "type": "TX"
+    },
+    {
+      "end": 7025,
+      "id": 660,
+      "speaker": "Speaker 3",
+      "speech": "it's just in 25 foot, worth 50 feet is required.",
+      "start": 7022,
+      "type": "TX"
+    },
+    {
+      "end": 7027,
+      "id": 661,
+      "speaker": "Speaker 2",
+      "speech": "Yeah, very",
+      "start": 7025,
+      "type": "TX"
+    },
+    {
+      "end": 7036,
+      "id": 662,
+      "speaker": "Speaker 4",
+      "speech": "I'll second that. All those in favor. Say, aye,",
+      "start": 7032,
+      "type": "TX"
+    },
+    {
+      "end": 7041,
+      "id": 663,
+      "speaker": "Speaker 3",
+      "speech": "aye. The motion passes by zero,",
+      "start": 7036,
+      "type": "TX"
+    },
+    {
+      "end": 7042,
+      "id": 664,
+      "speaker": "Speaker 1",
+      "speech": "thank you.",
+      "start": 7041,
+      "type": "TX"
+    },
+    {
+      "end": 7052,
+      "id": 665,
+      "speaker": "Speaker 3",
+      "speech": "All right, all right, thank you, everybody, I think. We Sorry, Andrew was going to say something.",
+      "start": 7042,
+      "type": "TX"
+    },
+    {
+      "end": 7052,
+      "id": 666,
+      "speaker": "Speaker 1",
+      "speech": "No.",
+      "start": 7052,
+      "type": "TX"
+    },
+    {
+      "end": 7076,
+      "id": 667,
+      "speaker": "Speaker 2",
+      "speech": "When I used to come to CPA meetings and also be on the planning board. I used to both to both boards support back on anything",
+      "start": 7065,
+      "type": "TX"
+    },
+    {
+      "end": 7078,
+      "id": 668,
+      "speaker": "Speaker 3",
+      "speech": "interesting. Mm-hmm,",
+      "start": 7076,
+      "type": "TX"
+    },
+    {
+      "end": 7083,
+      "id": 669,
+      "speaker": "Speaker 2",
+      "speech": "pertinent in both ways and I'm wondering if there's any human I should be updated.",
+      "start": 7078,
+      "type": "TX"
+    },
+    {
+      "end": 7099,
+      "id": 670,
+      "speaker": "Speaker 3",
+      "speech": "well, I'm on the planning board as you know, and on this board and I had planned to raise the Egregious, what I think is the egregious overage on the max properly. I definitely was going to raise that.",
+      "start": 7085,
+      "type": "TX"
+    },
+    {
+      "end": 7100,
+      "id": 671,
+      "speaker": "Speaker 1",
+      "speech": "Okay? Yeah.",
+      "start": 7099,
+      "type": "TX"
+    },
+    {
+      "end": 7127,
+      "id": 672,
+      "speaker": "Speaker 3",
+      "speech": "I'm going to make a I'm sorry. Andrew and what? I cut you off, but is getting late. Yeah. Okay, what are you gonna do about it? I'm just gonna raise it, as I think you should be. I think you should have been caught. I think it should have been caught. I think we need to do a better job. No, I think there's a lot of construction that is way newer than 20 years. It's just like the the bean property, right? I think that should have been core.",
+      "start": 7103,
+      "type": "TX"
+    },
+    {
+      "end": 7140,
+      "id": 673,
+      "speaker": "Speaker 4",
+      "speech": "you know, so if you remember anything like that, you know, build anything, Who's stopping you from putting anything down on your yard? You know, that if",
+      "start": 7128,
+      "type": "TX"
+    },
+    {
+      "end": 7146,
+      "id": 674,
+      "speaker": "Speaker 2",
+      "speech": "it's crushed on or whatever, who's stopping because you're not going for a building permit or variants or anything like",
+      "start": 7140,
+      "type": "TX"
+    },
+    {
+      "end": 7147,
+      "id": 675,
+      "speaker": "Speaker 3",
+      "speech": "that? Well,",
+      "start": 7146,
+      "type": "TX"
+    },
+    {
+      "end": 7154,
+      "id": 676,
+      "speaker": "Speaker 4",
+      "speech": "that's what that's one of the problems we need. A, what is it called? The guy that goes around and checks",
+      "start": 7147,
+      "type": "TX"
+    },
+    {
+      "end": 7160,
+      "id": 677,
+      "speaker": "Speaker 3",
+      "speech": "Bill inspect right. The select board. They went there and they only measured to cite",
+      "start": 7154,
+      "type": "TX"
+    },
+    {
+      "end": 7161,
+      "id": 678,
+      "speaker": "Speaker 1",
+      "speech": "setting.",
+      "start": 7160,
+      "type": "TX"
+    },
+    {
+      "end": 7162,
+      "id": 679,
+      "speaker": "Speaker 4",
+      "speech": "Correct.",
+      "start": 7161,
+      "type": "TX"
+    },
+    {
+      "end": 7167,
+      "id": 680,
+      "speaker": "Speaker 3",
+      "speech": "I don't know why they didn't measure the building coverage and the and the front setback as well, you know,",
+      "start": 7162,
+      "type": "TX"
+    },
+    {
+      "end": 7169,
+      "id": 681,
+      "speaker": "Speaker 1",
+      "speech": "because it's already there.",
+      "start": 7167,
+      "type": "TX"
+    },
+    {
+      "end": 7199,
+      "id": 682,
+      "speaker": "Speaker 3",
+      "speech": "Know, the the that lean to added to the building coverage, it added to it, it needed to be measured that that, that that is going to be the lean-to is that is going to be built. Adds to the building, We'll add it also because it's in line with the garage needs that front. Setback. It wasn't measured. Anyway, I move. I'm sorry, I don't mean to cut anybody else, but I move that we close the delivery to session and we close this. This hearing,",
+      "start": 7169,
+      "type": "TX"
+    },
+    {
+      "end": 7208,
+      "id": 683,
+      "speaker": "Speaker 4",
+      "speech": "we can close the deliberative secession but I have a question for the administrative person. Okay,",
+      "start": 7199,
+      "type": "TX"
+    },
+    {
+      "end": 7218,
+      "id": 684,
+      "speaker": "Speaker 3",
+      "speech": "so any second on closing, the deliveries session. I'll second all those in favor. I Gary. There's question, you want to be recorded as part of the minute?",
+      "start": 7208,
+      "type": "TX"
+    },
+    {
+      "end": 7218,
+      "id": 685,
+      "speaker": "Speaker 2",
+      "speech": "Sure.",
+      "start": 7218,
+      "type": "TX"
+    },
+    {
+      "end": 7223,
+      "id": 686,
+      "speaker": "Speaker 3",
+      "speech": "Okay. So I gotta keep the recording going. Have a nice evening, good evening.",
+      "start": 7218,
+      "type": "TX"
+    },
+    {
+      "end": 7232,
+      "id": 687,
+      "speaker": "Speaker 4",
+      "speech": "Guess you were. On the next meeting on that Tuesday. Do we have cases?",
+      "start": 7224,
+      "type": "TX"
+    },
+    {
+      "end": 7233,
+      "id": 688,
+      "speaker": "Speaker 1",
+      "speech": "At this point.",
+      "start": 7233,
+      "type": "TX"
+    },
+    {
+      "end": 7240,
+      "id": 689,
+      "speaker": "Speaker 4",
+      "speech": "At this point, no, only if Shelly for I don't think Shelley's going to appeal, but if she does that,",
+      "start": 7233,
+      "type": "TX"
+    },
+    {
+      "end": 7241,
+      "id": 690,
+      "speaker": "Speaker 3",
+      "speech": "that could",
+      "start": 7240,
+      "type": "TX"
+    },
+    {
+      "end": 7244,
+      "id": 691,
+      "speaker": "Speaker 1",
+      "speech": "happen. Could be a potential one, but the people work has not",
+      "start": 7241,
+      "type": "TX"
+    },
+    {
+      "end": 7265,
+      "id": 692,
+      "speaker": "Speaker 4",
+      "speech": "Okay, so we'll be advised if it anyways. If we don't have If we don't have a case coming up on the next session do we still want to meet or not? Do we have any thing that we have to do? No. No for anything?",
+      "start": 7247,
+      "type": "TX"
+    },
+    {
+      "end": 7266,
+      "id": 693,
+      "speaker": "Speaker 3",
+      "speech": "No.",
+      "start": 7265,
+      "type": "TX"
+    },
+    {
+      "end": 7269,
+      "id": 694,
+      "speaker": "Speaker 4",
+      "speech": "So it'll all depend on whether or not we have",
+      "start": 7266,
+      "type": "TX"
+    },
+    {
+      "end": 7270,
+      "id": 695,
+      "speaker": "Speaker 1",
+      "speech": "something okay",
+      "start": 7269,
+      "type": "TX"
+    },
+    {
+      "end": 7271,
+      "id": 696,
+      "speaker": "Speaker 3",
+      "speech": "all right,",
+      "start": 7270,
+      "type": "TX"
+    },
+    {
+      "end": 7273,
+      "id": 697,
+      "speaker": "Speaker 2",
+      "speech": "thank you",
+      "start": 7271,
+      "type": "TX"
+    },
+    {
+      "end": 7277,
+      "id": 698,
+      "speaker": "Speaker 3",
+      "speech": "John at 9. What is it? It's not.",
+      "start": 7273,
+      "type": "TX"
+    },
+    {
+      "end": 7279,
+      "id": 699,
+      "speaker": "Speaker 1",
+      "speech": "All right",
+      "start": 7277,
+      "type": "TX"
+    },
+    {
+      "end": 7281,
+      "id": 700,
+      "speaker": "Speaker 3",
+      "speech": "I'll second that motion all those in favor say hi.",
+      "start": 7279,
+      "type": "TX"
+    }
+  ],
+  "visitors": [
+    "Peter Martin - Abutter",
+    "Cheryl Damato - Abutter",
+    "Rosemarie Downey - Abutter",
+    "Daniel Lavoie - Abutter",
+    "Pat Fone - Abutter (by phone)",
+    "Shellie Bueno - Abutter (by phone)",
+    "Tom Burt",
+    "Nick Cashorali"
+  ],
+  "transcriptionName": null,
+  "transcriptionStart": "2023-08-31T08:40:10.974Z"
+}

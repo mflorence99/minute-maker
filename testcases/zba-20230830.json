@@ -6,18 +6,21 @@
     "sampleRateHertz": 22050,
     "url": "https://storage.googleapis.com/washington-app-319514.appspot.com/4ff27418-4ca8-476d-b183-faebd3cef3c5.mp3"
   },
-  "findReplace": {},
+  "findReplace": {
+    "doFind": false,
+    "searchString": "look"
+  },
   "absent": [],
   "date": "2023-08-30T23:00:00.000Z",
-  "nextTranscriptionID": 709,
+  "nextTranscriptionID": 715,
   "numSpeakers": 4,
   "present": [
-    "Mark Florence - Chair",
+    "Andrew Hatch - Member",
     "Deb DeFosse - Executive Administrator",
     "Gary Carney - Vice-Chair",
+    "Joe Tapp - Member",
     "Linda Marshall - Member",
-    "Andrew Hatch - Member",
-    "Joe Tapp - Member"
+    "Mark Florence - Chair"
   ],
   "subject": "Public Hearing",
   "subtitle": "Meeting Minutes",
@@ -25,8 +28,8 @@
   "title": "Zoning Board of Adjustment",
   "transcription": [
     {
-      "title": "Motion to allow abutters to join by phone",
       "id": 703,
+      "title": "Motion to allow abutters to join by phone",
       "type": "AG"
     },
     {
@@ -110,8 +113,8 @@
       "type": "TX"
     },
     {
-      "title": "Schedule next meeting",
       "id": 704,
+      "title": "Schedule next meeting",
       "type": "AG"
     },
     {
@@ -163,8 +166,8 @@
       "type": "TX"
     },
     {
-      "title": "Roll call and prefatory remarks",
       "id": 706,
+      "title": "Roll call and prefatory remarks",
       "type": "AG"
     },
     {
@@ -184,8 +187,8 @@
       "type": "TX"
     },
     {
-      "title": "Tim Crouss hearing",
       "id": 709,
+      "title": "Tim Crouss hearing",
       "type": "AG"
     },
     {
@@ -197,947 +200,360 @@
       "type": "TX"
     },
     {
-      "end": 697,
+      "end": 698,
       "id": 34,
       "speaker": "Florence",
-      "speech": "I know, I do believe. We've all seen the property, right? We've always seen it yet. Yeah. so, the The one that collapsed. That's the one that was over the tractor. Yeah, okay. And you would demolish the other shed. Okay, okay, okay, definitely, you know, whenever whenever anybody sees five variants, they get a little bit along but I believe it's the case with you, right? You've made. We've made this observation and at least I visited your site and you have to that, you are more conforming. After you finish your project",
+      "speech": "Your proposal appears to make your lot more conforming after you finish your project than it is now.",
       "start": 647,
-      "type": "TX"
-    },
-    {
-      "end": 698,
-      "id": 40,
-      "speaker": "Speaker 1",
-      "speech": "then",
-      "start": 697,
-      "type": "TX"
-    },
-    {
-      "end": 698,
-      "id": 41,
-      "speaker": "Speaker 3",
-      "speech": "you are now.",
-      "start": 698,
       "type": "TX"
     },
     {
       "end": 705,
       "id": 42,
-      "speaker": "Speaker 1",
-      "speech": "Yeah the pervious square foot is actually less correct. Combining it to just one shed",
+      "speaker": "Crouss",
+      "speech": "Yes, the building and impervious coverage will be less than it is now, as well as all the setback distances.",
       "start": 698,
       "type": "TX"
     },
     {
       "end": 734,
       "id": 43,
-      "speaker": "Speaker 3",
-      "speech": "and your your setback variances. Setback distances are less. Once you have demolished the old and build the new, okay? Okay, maybe Shelly, you know, just I hope you heard all of that. Can you can you say anything that you want to say? No. Anyway, on the volume on that? No, this is maximum volume. Okay,",
+      "speaker": "Florence",
+      "speech": "Ms Bueno _(on phone)_ do you have any comments you'd like to make?",
       "start": 705,
       "type": "TX"
     },
     {
-      "end": 738,
-      "id": 44,
-      "speaker": "Speaker 1",
-      "speech": "hang on one second. Okay",
-      "start": 734,
-      "type": "TX"
-    },
-    {
-      "end": 744,
-      "id": 45,
-      "speaker": "Speaker 3",
-      "speech": "now, there we go. Oh, yes. We got a bit more volume, so Shelly. Can you say what you want to say about that?",
-      "start": 738,
-      "type": "TX"
-    },
-    {
-      "end": 841,
-      "id": 46,
-      "speaker": "Speaker 1",
-      "speech": "I think it's 75 and 76. Hemlock Circle, we're just concerned about this. We do not want it to be approved. As you mentioned, there's five variances which, which seems to sort of raise a flag. But not only that. It's the abutting of our property seems to be that it's already overstated to be on our property. Line is already not abiding by. The law of the land. And if they overstep and get closer, this will impact our ability to be a home, as we're now in a place to be able to do that. This will impact our privacy and our views from any further house. I was told that that we have to have a 30 feet and between buildings. Now, if they do not have to stay within their 30 feet from the property line, which I believe is what it is and they encouraged and get to 18 feet. Which right now seems like they're on the property line, which should be removed. Regardless of this is, if this is approved. Then we're gonna have to push our building when we move further back, which doesn't seem that we should have to sacrifice our ability to build a property home or lose any privacy. You know, it's not a necessary item. They want to add it seems that they could build a smaller shed within the guidelines. And move the shed somewhere else or not build a shit. Find another way to do this",
-      "start": 753,
-      "type": "TX"
-    },
-    {
       "end": 886,
-      "id": 47,
-      "speaker": "Speaker 1",
-      "speech": "without a coaching on someone else's property. You know, we, we have had this land in our family for a long time. I know we're not always up there between covid and then mom's droplet last year. It's been tough to get up there and visit. I know she does at least once a year several times for this property that's been in our house for our house, just like 60 years. And we want to be able to do this and allow her to be able to get up there and do something while she's still here and we want to privacy and we want to be able to do it without having to Um, change our plans for someone else who is not following a guy lines. Because that's what I want to see. It seems it seems excessive to build a shed that large to have to encourage on somebody else's property.",
-      "start": 841,
+      "id": 44,
+      "speaker": "Bueno",
+      "speech": "As the owner and abutter of 75 and 76 Hemlock Circle, my mother, Pat Fone, and I have concerns regarding the approval of the proposed project. The existence of five variances raises a red flag. Moreover, the fact that the project encroaches on our property line, which is already not in compliance with the law, is troubling. If they continue to encroach and get closer, it will negatively impact our ability to have a home, which is something we have been working towards. This encroachment will also compromise our privacy and obstruct our views from any future house.\n\nI was informed that there should be a 30-foot distance between buildings. However, if they are not required to stay within this limit and are allowed to be 18 feet away from the property line, which currently seems to be the case, it should be rectified. Regardless of whether this project is approved or not, we will have to adjust our building plans and move further back, which is unfair as it jeopardizes our ability to construct our dream home and maintain our privacy. The addition they propose does not seem necessary, and it appears they could build a smaller shed within the guidelines or find an alternative location or solution that does not encroach on someone else's property.\n\nThis land has been in our family for a long time, and although we have not been able to visit frequently due to COVID and my mother's illness last year, it holds sentimental value to us. We want to make use of the property and allow my mother to enjoy it while she is still with us. Our priority is to maintain our privacy and proceed with our plans without having to make changes due to someone else's failure to adhere to guidelines. This excessive construction of a large shed encroaching on someone else's property seems unnecessary and unfair.",
+      "start": 734,
       "type": "TX"
     },
     {
       "end": 892,
       "id": 48,
-      "speaker": "Speaker 3",
-      "speech": "Okay. Okay, thank you for that. Do you have any, any statements Jim? You want to make",
+      "speaker": "Florence",
+      "speech": "Mr Crouss, would you like to respond?",
       "start": 887,
       "type": "TX"
     },
     {
-      "end": 968,
+      "end": 892,
       "id": 49,
-      "speaker": "Speaker 1",
-      "speech": "well actually farther away with the bullshit that was there now. So I'm actually pushing it farther towards the house. So I'm actually giving getting more space from your Proposed structure then what's existing? so he's saying he's giving more structure, but He's already over. What he should be. Was that approved? Was that currently approved? So he is already on our property line, should he be on a profound? I mean that's another question but you're giving more property that you're not giving us space, that's the law. So you're not really giving us back anything. You're putting backwards should have been really. that's, That structure. She said was temporary. It wasn't supposed to stay there. And that's what my mother is writing here to me. She's with me now. Did you hear that? The what he said is up there was supposed to be temporary and the one he wants to build is permanent and either way, it's still over.",
+      "speaker": "Crouss",
+      "speech": "The new shed will actually be closer to my house and further away from the property line than the old structures.",
+      "start": 892,
+      "type": "TX"
+    },
+    {
+      "end": 968,
+      "id": 711,
+      "speaker": "Bueno",
+      "speech": "So, I understand that he claims to be providing more space, but he has already exceeded what he should have. I wonder if that was officially approved. Is it currently approved? As it stands, he has already encroached upon our property boundary. Shouldn't he be more considerate? This raises another question - you are offering more property, but not actually granting us additional space, which goes against the law. In reality, you are not giving us anything back; instead, you are essentially reversing what should have been done. That's the structure of it. According to what she said, it was meant to be temporary, not meant to remain there. My mother is here with me and she is expressing the same sentiment in this message. Did you hear that? He mentioned that what was up there was supposed to be temporary, and now he wants to construct something permanent, which still exceeds the boundaries.",
       "start": 892,
       "type": "TX"
     },
     {
       "end": 976,
       "id": 50,
-      "speaker": "Speaker 3",
-      "speech": "What what record or anything to you have about its temporary nature?",
+      "speaker": "Florence",
+      "speech": "Do you have any record to show that the existing structures were supposed to be temporary?",
       "start": 971,
       "type": "TX"
     },
     {
       "end": 1007,
       "id": 51,
-      "speaker": "Speaker 1",
-      "speech": "And he records, but I can look that up and see if you have any records palm of temporary. Do you have anything? That was temporary documentation. She doesn't have any documentation right now that we can think of it's just an idea. Yep. So she got it was she muted as temporary, excuse me. As you know if it's just a separate tents covering a tractor, she's filming. That it's temporary. So that's why her thinking that it was temporary,",
+      "speaker": "Bueno",
+      "speech": "No, but it has always been our understanding that the shed was temporary.",
       "start": 981,
       "type": "TX"
     },
     {
       "end": 1012,
       "id": 52,
-      "speaker": "Speaker 3",
-      "speech": "okay? Mr. President when did you buy the property?",
+      "speaker": "Florence",
+      "speech": "Mr Crouss, when did you buy your property?",
       "start": 1007,
       "type": "TX"
     },
     {
-      "end": 1058,
+      "end": 1021,
       "id": 53,
-      "speaker": "Speaker 1",
-      "speech": "And one lot, and the other lot was owned by my aunt and uncle, my mom. Bought the property from both of them. So we had two lots and she I bought part of my mom so I could participate in building a family Retreat, home up there for our family that is currently growing. I have two children. I just had a grandbaby Friday. So it's been in our family for Because it's going to make me calculate my head but 60, some odd years. It'd be great to have received something going on there. You know up there",
+      "speaker": "Bueno",
+      "speech": "_via phone, misunderstands and believes question was directed at her_",
+      "start": 1021,
+      "type": "TX"
+    },
+    {
+      "end": 1058,
+      "id": 712,
+      "speaker": "Bueno",
+      "speech": "I own one lot, while my aunt and uncle owned the other lot. Then my mom purchased the property from both of them, so now we have two lots. I decided to buy a portion of my mom's lot so that I could contribute to the construction of a family retreat up there. It will serve as a home for our growing family, as I now have two children and just welcomed a grandbaby last Friday. This property has been in our family for over 60 years, and it would be wonderful to see something happening there. I'm really looking forward to spending time up there.",
       "start": 1021,
       "type": "TX"
     },
     {
       "end": 1062,
       "id": 54,
-      "speaker": "Speaker 3",
-      "speech": "both. Lots are currently vacant. Is that right with no structures on them?",
+      "speaker": "Florence",
+      "speech": "Both lots are currently vacant, is that right, with no structures on them?",
       "start": 1058,
       "type": "TX"
     },
     {
       "end": 1090,
       "id": 55,
-      "speaker": "Speaker 1",
-      "speech": "So there's no structures. There is a camper that we are working to remove on it. It's been a camper out there that she used to be able to use but is no longer usable every time. One should go up there, it'd be used but it's immovable one. So we are in the process of getting someone to take it out the property my son in law was been doing that he just had a baby on Friday so we're working out to get someone to call it. We tried someone to junkyard up there but they were not able to help us.",
+      "speaker": "Bueno",
+      "speech": "Currently, there are no structures on the property. However, there is a camper that we are actively trying to remove from it. This camper used to be functional and usable, but unfortunately, it has become unusable over time. Although there is a camper available for use, it is immovable. Therefore, we are currently in the process of finding someone who can assist us in removing it from the property. My son-in-law has been working on this task, but he recently had a baby on Friday, so we are exploring other options to get it taken care of. Initially, we attempted to contact a local junkyard for assistance, but they were unable to provide the help we needed.",
       "start": 1063,
       "type": "TX"
     },
     {
-      "end": 1096,
+      "end": 1090,
       "id": 56,
-      "speaker": "Speaker 3",
-      "speech": "Okay. Okay. Mr. Krausman did you buy your property 11 years ago?",
+      "speaker": "Florence",
+      "speech": "Mt Crouss, when did you buy your property?",
       "start": 1090,
       "type": "TX"
     },
     {
-      "end": 1116,
-      "id": 57,
-      "speaker": "Speaker 4",
-      "speech": "Were the was that? not the the covering where the tractor is but that other shed was that there, then shed was existing in You have no idea when that shed was put up, just that it was there before you bought the property.",
-      "start": 1099,
-      "type": "TX"
-    },
-    {
-      "end": 1116,
-      "id": 58,
-      "speaker": "Speaker 3",
-      "speech": "Yeah,",
-      "start": 1116,
-      "type": "TX"
-    },
-    {
-      "end": 1117,
-      "id": 59,
-      "speaker": "Speaker 4",
-      "speech": "okay,",
-      "start": 1116,
-      "type": "TX"
-    },
-    {
-      "end": 1123,
-      "id": 60,
-      "speaker": "Speaker 3",
-      "speech": "yeah, yeah. So, plus was very possible that you'll use his grandfather.",
-      "start": 1117,
-      "type": "TX"
-    },
-    {
       "end": 1140,
-      "id": 61,
-      "speaker": "Speaker 1",
-      "speech": "Yeah, and that's one that's literally it's right on the Downs. On property line. That shed, that's existing. Yeah. Then I had a survey to 2022 which was reflects the shed and The carport that's there, not there now but it was there.",
-      "start": 1124,
+      "id": 713,
+      "speaker": "Crouss",
+      "speech": "11 years ago. The shed was in place at that time. In 2022, I had the lot surveyed. This survey accurately depicted the shed and the carport that used to be present on the property. However, it is important to note that the carport is no longer there currently.",
+      "start": 1090,
       "type": "TX"
     },
     {
       "end": 1151,
       "id": 62,
-      "speaker": "Speaker 3",
-      "speech": "Mm-hmm. I know I have some comments but only comments that I'd want to say to the deliberative session. I don't I don't have any more questions. Does anybody have any questions on the board? Have called",
+      "speaker": "Florence",
+      "speech": " I have some comments but only comments that I'd want to make in the deliberative session. I don't I don't have any more questions. Does anybody have any questions on the board?",
       "start": 1140,
       "type": "TX"
     },
     {
-      "end": 1173,
+      "end": 1151,
       "id": 63,
-      "speaker": "Speaker 4",
-      "speech": "I do If you're standing and you're going towards the other piece of property, how far back does your line go into the woods? I tried to look for a stake there. It's pretty much right where the edge of the right where the edge of it. There's like almost Stones pile up there in the woods.",
+      "speaker": "Carney",
+      "speech": "I do If you're standing and you're going towards the other piece of property, how far back does your line go into the woods? I tried to look for a stake there.",
       "start": 1151,
       "type": "TX"
     },
     {
-      "end": 1174,
-      "id": 64,
-      "speaker": "Speaker 1",
-      "speech": "Yeah.",
-      "start": 1173,
-      "type": "TX"
-    },
-    {
-      "end": 1177,
-      "id": 65,
-      "speaker": "Speaker 4",
-      "speech": "Yeah it's so good. Oh there's a well there",
-      "start": 1174,
-      "type": "TX"
-    },
-    {
-      "end": 1179,
-      "id": 66,
-      "speaker": "Speaker 3",
-      "speech": "as you well on the property line.",
-      "start": 1177,
-      "type": "TX"
-    },
-    {
-      "end": 1180,
-      "id": 67,
-      "speaker": "Speaker 1",
-      "speech": "It's",
-      "start": 1180,
-      "type": "TX"
-    },
-    {
-      "end": 1181,
-      "id": 68,
-      "speaker": "Speaker 4",
-      "speech": "on the property",
-      "start": 1180,
-      "type": "TX"
-    },
-    {
-      "end": 1181,
-      "id": 69,
-      "speaker": "Speaker 2",
-      "speech": "line.",
-      "start": 1181,
-      "type": "TX"
-    },
-    {
-      "end": 1182,
-      "id": 70,
-      "speaker": "Speaker 4",
-      "speech": "Okay, that",
-      "start": 1181,
-      "type": "TX"
-    },
-    {
-      "end": 1198,
-      "id": 71,
-      "speaker": "Speaker 3",
-      "speech": "okay. And you didn't put that well. Now write that, well, existed pre-existed you. Okay? is there anybody else here to speak for the Could you come forward? So we can hear you. Thank you. Thank you, Shelly.",
-      "start": 1182,
-      "type": "TX"
-    },
-    {
-      "end": 1200,
-      "id": 72,
-      "speaker": "Speaker 1",
-      "speech": "Thank you.",
-      "start": 1200,
-      "type": "TX"
-    },
-    {
-      "end": 1207,
-      "id": 73,
-      "speaker": "Speaker 3",
-      "speech": "Yes, of course. Well well, the other Buddha is getting ready to approach. Please do.",
-      "start": 1200,
+      "end": 1173,
+      "id": 714,
+      "speaker": "Crouss",
+      "speech": "It's right where the rocks pile up at the edge of the trees. There's a well right on the property line that predates my ownership.",
+      "start": 1151,
       "type": "TX"
     },
     {
       "end": 1215,
-      "id": 74,
-      "speaker": "Speaker 1",
-      "speech": "Okay, I didn't hear exactly what he said something about the property 11 years ago.",
-      "start": 1208,
-      "type": "TX"
-    },
-    {
-      "end": 1216,
-      "id": 75,
-      "speaker": "Speaker 3",
-      "speech": "Correct.",
-      "start": 1215,
-      "type": "TX"
-    },
-    {
-      "end": 1226,
-      "id": 76,
-      "speaker": "Speaker 1",
-      "speech": "he said one thing was on there but the shed may have been on there but the other Piece was not the temporary tent.",
-      "start": 1217,
-      "type": "TX"
-    },
-    {
-      "end": 1231,
-      "id": 77,
-      "speaker": "Speaker 4",
-      "speech": "I did not ask about the temporary tent. I just asked about this shit.",
-      "start": 1227,
-      "type": "TX"
-    },
-    {
-      "end": 1232,
-      "id": 78,
-      "speaker": "Speaker 1",
-      "speech": "Okay.",
-      "start": 1232,
+      "id": 64,
+      "speaker": "Bueno",
+      "speech": "I could not hear perfectly, but did Mr Crouss say he bought the property 11 years ago and the shed was already there, but not the carport?",
+      "start": 1173,
       "type": "TX"
     },
     {
       "end": 1236,
-      "id": 79,
-      "speaker": "Speaker 3",
-      "speech": "But that's a question to us. What did you write the carport in the last 10 years?",
-      "start": 1232,
+      "id": 75,
+      "speaker": "Florence",
+      "speech": "Correct. Mr Crouss, did you erect the carport in the last 10 years?",
+      "start": 1215,
       "type": "TX"
     },
     {
       "end": 1240,
       "id": 80,
-      "speaker": "Speaker 1",
-      "speech": "Yeah, pretty much. Year, after we were there.",
+      "speaker": "Crouss",
+      "speech": "I agree with that. It was a year after we had been there.",
       "start": 1236,
       "type": "TX"
     },
     {
-      "end": 1240,
-      "id": 81,
-      "speaker": "Speaker 3",
-      "speech": "Okay,",
-      "start": 1240,
-      "type": "TX"
-    },
-    {
-      "end": 1252,
-      "id": 82,
-      "speaker": "Speaker 1",
-      "speech": "it's the house. The tractor. I have to, you know, I agree the road now it's Your your road and take care of itself.",
-      "start": 1240,
-      "type": "TX"
-    },
-    {
       "end": 1255,
-      "id": 83,
-      "speaker": "Speaker 3",
-      "speech": "It's safe to say you did not get a variance right to erect that.",
-      "start": 1252,
+      "id": 81,
+      "speaker": "Florence",
+      "speech": "Is it safe to say you did not get a variance at that time?",
+      "start": 1240,
       "type": "TX"
     },
     {
       "end": 1258,
       "id": 84,
-      "speaker": "Speaker 1",
-      "speech": "No, I mean, that was that even a thing 10 years ago. Well,",
+      "speaker": "Crouss",
+      "speech": "No, was that even a thing 10 years ago?",
       "start": 1255,
       "type": "TX"
     },
     {
       "end": 1268,
       "id": 85,
-      "speaker": "Speaker 3",
-      "speech": "that's a good question. Andrew, you'll Knowledge from the planning board. When was the, the setback? The setback well limits enacted.",
+      "speaker": "Florence",
+      "speech": "That's a good question. Mr Hatch, from your experience as chair of the Planning Board, do you know when the setback limits enacted?",
       "start": 1258,
       "type": "TX"
     },
     {
       "end": 1312,
       "id": 86,
-      "speaker": "Speaker 2",
-      "speech": "Fairly structure. But, you know, there's a lot of people that put up, you know, carports for better description. Never pursued the the permitting which is technically only you know you've got to have it for six months of the year and then you have to take it down nobody ever does. So it's not really Applicable. Certainly, the sidelines setback. You know has been established from 2002.",
+      "speaker": "Hatch",
+      "speech": "I have noticed that many individuals install carports, if you will, for a more accurate description. Surprisingly, they never bother obtaining the necessary permits, which are technically required for six months of the year. After that period, they are supposed to take it down, but nobody ever does. Therefore, the requirement is not really applicable. Additionally, the sidelines setback has been established since 2002.",
       "start": 1274,
       "type": "TX"
     },
     {
       "end": 1328,
       "id": 87,
-      "speaker": "Speaker 3",
-      "speech": "Okay. Okay. I've been so it may well have been non-conforming. It's not a business here right now because it's gone, right? So it is what it is. I mean it's just a fact it's just a fact on the table. That's right.",
+      "speaker": "Florence",
+      "speech": "I believe the carport might have been non-conforming, but that is not our concern at the moment since it no longer exists. Therefore, it is what it is. I mean, it is simply a fact that we have to accept.",
       "start": 1312,
       "type": "TX"
     },
     {
       "end": 1333,
       "id": 88,
-      "speaker": "Speaker 1",
-      "speech": "Okay. So you're saying that the rules were established in 2002,",
+      "speaker": "Bueno",
+      "speech": "Okay. So you're saying that the LUOs were established in 2002?",
       "start": 1329,
       "type": "TX"
     },
     {
       "end": 1351,
       "id": 89,
-      "speaker": "Speaker 3",
-      "speech": "the luos themselves were established in 2002. But oh, through various amendments over the years, new luos are come into play and we are just not sure as we stand as we sit here. Now, when the setback LOL came into play, we don't know.",
+      "speaker": "Florence",
+      "speech": "Yes. However over the years new LUOs have been introduced through several amendments. I am uncertain about the exact timing of when the setback LUO was implemented.",
       "start": 1333,
       "type": "TX"
     },
     {
       "end": 1354,
       "id": 90,
-      "speaker": "Speaker 1",
-      "speech": "Okay. All right. Thank you.",
+      "speaker": "Bueno",
+      "speech": "I appreciate your response and thank you for your input.",
       "start": 1352,
       "type": "TX"
     },
     {
-      "end": 1357,
+      "end": 1411,
       "id": 91,
-      "speaker": "Speaker 3",
-      "speech": "Okay, thanks Shelley. I'm sorry. Go ahead please.",
+      "speaker": "Lavoie",
+      "speech": "I am an abutter at 2154 Valley Road. I believe that by removing the old shed and carport and replacing them with a new shed, Mr Crouss will make his lot more conforming than it is today. Additionally, this change would greatly enhance the character of the neighborhood. Instead of having a temporary shelter and an old rickety shack, we would have one structure, which would be a vast improvement. Therefore, I am fully in favor of Mr Crouss's project.",
       "start": 1354,
       "type": "TX"
     },
     {
-      "end": 1391,
-      "id": 92,
-      "speaker": "Speaker 1",
-      "speech": "So I am removing the old shed and moving the other one, and building is knew he would be bringing his backyard setback in the sidekick that a little more in Conformity and it is today. And it would also vastly improve the character of the neighborhood. Because we wouldn't have a temporary shelter and an old rickety Shack. We would have one structure, that's the vast Improvement. So I just",
-      "start": 1357,
-      "type": "TX"
-    },
-    {
-      "end": 1392,
-      "id": 93,
-      "speaker": "Speaker 3",
-      "speech": "okay, so",
-      "start": 1391,
-      "type": "TX"
-    },
-    {
-      "end": 1397,
-      "id": 94,
-      "speaker": "Speaker 1",
-      "speech": "in favor of improving the property, Engineering parents.",
-      "start": 1392,
-      "type": "TX"
-    },
-    {
-      "end": 1400,
-      "id": 95,
-      "speaker": "Speaker 3",
-      "speech": "And where is your property? In relation to",
-      "start": 1397,
-      "type": "TX"
-    },
-    {
-      "end": 1405,
-      "id": 96,
-      "speaker": "Speaker 1",
-      "speech": "I'm 2154 Valley Road. So, his backline setback",
-      "start": 1400,
-      "type": "TX"
-    },
-    {
-      "end": 1406,
-      "id": 97,
-      "speaker": "Speaker 3",
-      "speech": "is",
-      "start": 1405,
-      "type": "TX"
-    },
-    {
-      "end": 1407,
-      "id": 98,
-      "speaker": "Speaker 1",
-      "speech": "my side. Yeah,",
-      "start": 1406,
-      "type": "TX"
-    },
-    {
-      "end": 1408,
-      "id": 99,
-      "speaker": "Speaker 2",
-      "speech": "got it.",
-      "start": 1407,
-      "type": "TX"
-    },
-    {
-      "end": 1410,
-      "id": 100,
-      "speaker": "Speaker 3",
-      "speech": "Okay. Okay, thank you very much for that.",
-      "start": 1408,
-      "type": "TX"
-    },
-    {
-      "end": 1411,
-      "id": 101,
-      "speaker": "Speaker 2",
-      "speech": "Thank you.",
-      "start": 1410,
-      "type": "TX"
-    },
-    {
-      "end": 1420,
-      "id": 102,
-      "speaker": "Speaker 3",
-      "speech": "Anybody else, any questions any comments? Anybody else want to speak, anybody?",
-      "start": 1412,
-      "type": "TX"
-    },
-    {
-      "end": 1423,
-      "id": 103,
-      "speaker": "Speaker 1",
-      "speech": "This is Shelly. I'd like to make another comment,",
-      "start": 1421,
-      "type": "TX"
-    },
-    {
-      "end": 1423,
-      "id": 104,
-      "speaker": "Speaker 3",
-      "speech": "please.",
-      "start": 1423,
-      "type": "TX"
-    },
-    {
       "end": 1455,
-      "id": 105,
-      "speaker": "Speaker 1",
-      "speech": "I would just like to say, you know, I could appreciate people wanting to improve their yard and neighbors and I told you understand that, I just don't understand why that should come at the price of a neighboring, a letter. So you don't you you can improve your property, it doesn't mean that you need to have a variance to build it bigger and to someone else has to sacrifice their privacy and sacrifice, what they have bought, and worked and paid for.",
-      "start": 1425,
+      "id": 102,
+      "speaker": "Bueno",
+      "speech": "I'd like to make another comment. I just want to express my thoughts on this matter. I can understand and appreciate people's desire to enhance their yard and be considerate neighbors. However, I fail to comprehend why this should come at the expense of someone living nearby. Just because you can improve your own property, it doesn't necessarily mean that you should obtain a variance to make it bigger, causing someone else to compromise their privacy and relinquish what they have rightfully obtained through hard work and payment.",
+      "start": 1412,
       "type": "TX"
     },
     {
       "end": 1465,
       "id": 106,
-      "speaker": "Speaker 3",
-      "speech": "Fair enough. Thank you. Shelly. Before we move away from that. Do you feel that you've heard and understood everything? You need to hear?",
+      "speaker": "Florence",
+      "speech": "Before we move on, do you feel that you've heard and understood everything you needed to?",
       "start": 1456,
       "type": "TX"
     },
     {
       "end": 1488,
       "id": 107,
-      "speaker": "Speaker 1",
-      "speech": "I think so, I I think I do, I'm concerned about that. Shared and whatnot is already very close and look into that later. But I do feel that you guys have been very clear and I appreciate that and appreciate everybody allowing me to speak. Like this is in the situation where in here,",
+      "speaker": "Bueno",
+      "speech": "I believe so. I have concerns about the shed being already very close. However, I want to acknowledge that you all have been very clear, and I genuinely appreciate that. Moreover, I am grateful to everyone for giving me the opportunity to speak.",
       "start": 1468,
       "type": "TX"
     },
     {
       "end": 1505,
       "id": 108,
-      "speaker": "Speaker 3",
-      "speech": "thank you. Okay, so we're going to move on from Mr. Krause's Case now but we have not yet closed the public hearing. So if you stay on the line which I encourage you to do so. And if you know before it ends, if you think of something else please please speak up.",
+      "speaker": "Florence",
+      "speech": "Thank you. We're going to move on from Mr. Crouss's Case now but we have not yet closed the Public Hearing. I encourage you to stay on the line. Please speak up if anything further occurs to you.",
       "start": 1488,
       "type": "TX"
     },
     {
+      "id": 715,
+      "title": "Doug Max hearing",
+      "type": "AG"
+    },
+    {
       "end": 1507,
       "id": 109,
-      "speaker": "Speaker 1",
-      "speech": "All right, thank you so much, I will.",
+      "speaker": "Florence",
+      "speech": "Mr Max, before we proceed, vice-chair Carney and I visited your lot today and measured the setback distances, and the building and impervious coverage. We were concerned that no work was shown on page 4 of your buiiding permit application. I will now hand out a document that shows the measurements we found and I'd like to hear your comments.",
       "start": 1505,
       "type": "TX"
     },
     {
       "end": 1510,
       "id": 110,
-      "speaker": "Speaker 3",
-      "speech": "Okay, thank you. Thanks Shelly. Thank you, Mr. Krause.",
+      "speaker": "Document",
+      "speech": "Front setback from garage to road: 45’ where 50’ required.\n\nTotal lot: 29900\n\nGarage and surrounding covered walkways: 38.6 x 41.7 = 1610\nConnector covered walkway, garage to house: 10 x 13.5 = 135\nHouse (including deck): (47.2 x 57.4) - (18 x 23.5) = 2286\n\nNew lean-to: 12 x 36 = 432\nNew stairway: 4 x 8 = 32\n\nTotal building coverage: 4495 = 15%\n\nDriveway: (28.2 x 80) + (20 x 45.5) = 3166 (impervious at LEAST this amount) \n\nTotal impervious coverage: 7661 = 25.6% AT LEAST",
       "start": 1507,
       "type": "TX"
     },
     {
-      "end": 1511,
+      "end": 1782,
       "id": 111,
-      "speaker": "Speaker 2",
-      "speech": "Okay,",
+      "speaker": "Florence",
+      "speech": " And I'd like the board to look at that because I thought the numbers were surprising.  On the building permit application, you're saying that your structure coverage is 8.12% and your impervious surface coverage is 19.6%, whereas both are actually significantly higher.",
       "start": 1510,
       "type": "TX"
     },
     {
-      "end": 1514,
-      "id": 112,
-      "speaker": "Speaker 3",
-      "speech": "so Mr. Max I'm afraid you",
-      "start": 1511,
-      "type": "TX"
-    },
-    {
-      "end": 1531,
-      "id": 113,
-      "speaker": "Speaker 2",
-      "speech": "68 was a summer home, they retired up here in the early 90s converted into the full-time living. 561 Washington Drive here in town",
-      "start": 1517,
-      "type": "TX"
-    },
-    {
-      "end": 1532,
-      "id": 114,
-      "speaker": "Speaker 1",
-      "speech": "No question,",
-      "start": 1531,
-      "type": "TX"
-    },
-    {
-      "end": 1552,
-      "id": 115,
-      "speaker": "Speaker 3",
-      "speech": "thank you. I do I do actually, yeah. Please please feel free to sit down what I'd like to do. And we've done this before. What I'd like to do is that I've got something that I'd like you do address before before you get, you know, all the way down what you want to say. I'm sorry into my field before you get into your speaker. I want you to do, you spell. But I want to talk about this first,",
-      "start": 1532,
-      "type": "TX"
-    },
-    {
-      "end": 1553,
-      "id": 116,
-      "speaker": "Speaker 1",
-      "speech": "okay?",
-      "start": 1552,
-      "type": "TX"
-    },
-    {
-      "end": 1558,
-      "id": 117,
-      "speaker": "Speaker 3",
-      "speech": "Vice chair, Kearney and I visited your lot today",
-      "start": 1554,
-      "type": "TX"
-    },
-    {
-      "end": 1559,
-      "id": 118,
-      "speaker": "Speaker 1",
-      "speech": "and",
-      "start": 1558,
-      "type": "TX"
-    },
-    {
-      "end": 1565,
-      "id": 119,
-      "speaker": "Speaker 3",
-      "speech": "did some measurements, we all do measurements, we all do that before, and I've got some results here that I want you to talk about",
-      "start": 1559,
-      "type": "TX"
-    },
-    {
-      "end": 1565,
-      "id": 120,
-      "speaker": "Speaker 1",
-      "speech": "it again.",
-      "start": 1565,
-      "type": "TX"
-    },
-    {
-      "end": 1573,
-      "id": 121,
-      "speaker": "Speaker 3",
-      "speech": "I mean, if you pass those out, oh, thank you very much. Yeah, I've got one for each of us too.",
-      "start": 1565,
-      "type": "TX"
-    },
-    {
-      "end": 1574,
-      "id": 122,
-      "speaker": "Speaker 1",
-      "speech": "Yeah.",
-      "start": 1573,
-      "type": "TX"
-    },
-    {
-      "end": 1579,
-      "id": 123,
-      "speaker": "Speaker 3",
-      "speech": "Because nobody seen this before.",
-      "start": 1577,
-      "type": "TX"
-    },
-    {
-      "end": 1589,
-      "id": 124,
-      "speaker": "Speaker 1",
-      "speech": "Thank you.",
-      "start": 1589,
-      "type": "TX"
-    },
-    {
-      "end": 1604,
-      "id": 125,
-      "speaker": "Speaker 3",
-      "speech": "So what? What Vice chair, Connie. And I, when we came to do your measurements noticed, That on page 4 of the lucc permit application. There was no work.",
-      "start": 1589,
-      "type": "TX"
-    },
-    {
-      "end": 1605,
-      "id": 126,
-      "speaker": "Speaker 1",
-      "speech": "Sorry,",
-      "start": 1605,
-      "type": "TX"
-    },
-    {
-      "end": 1612,
-      "id": 127,
-      "speaker": "Speaker 3",
-      "speech": "there was no work. There was no, I mean you're supposed to show the sons. You know what is the? I didn't",
-      "start": 1605,
-      "type": "TX"
-    },
-    {
-      "end": 1612,
-      "id": 128,
-      "speaker": "Speaker 1",
-      "speech": "hear the first",
-      "start": 1612,
-      "type": "TX"
-    },
-    {
-      "end": 1616,
-      "id": 129,
-      "speaker": "Speaker 3",
-      "speech": "thing he said when you when Vice chairman and I visited you a lot.",
-      "start": 1612,
-      "type": "TX"
-    },
-    {
-      "end": 1616,
-      "id": 130,
-      "speaker": "Speaker 1",
-      "speech": "Yes.",
-      "start": 1616,
-      "type": "TX"
-    },
-    {
-      "end": 1667,
-      "id": 131,
-      "speaker": "Speaker 3",
-      "speech": "Okay as we were about to do the measurements, we noticed that on page 4 of your eldc permit application, there was no Workshop. So that's where you say that my building coverage. I think you said it was a point, I don't know 8.67%, right? And and my, and you're impervious coverage was 19.67%. And what you're supposed to show on that sheet is that oh, my gosh, is 50 feet by 30 feet high. So that's, you know, 1500 square feet. Plus, you know, my cupboard way is this, plus my house is this that adds up to that I divided by the square foot on the lot that becomes. My so there was no Workshop. So what we decided to do. Mr. Connie and I we do some measurements of our own and I went you went just been a few minutes. Looking at that because I was,",
-      "start": 1616,
-      "type": "TX"
-    },
-    {
-      "end": 1670,
-      "id": 132,
-      "speaker": "Speaker 2",
-      "speech": "Yeah.",
-      "start": 1667,
-      "type": "TX"
-    },
-    {
-      "end": 1670,
-      "id": 133,
-      "speaker": "Speaker 1",
-      "speech": "Okay.",
-      "start": 1670,
-      "type": "TX"
-    },
-    {
-      "end": 1675,
-      "id": 134,
-      "speaker": "Speaker 3",
-      "speech": "And I'd like the board to look at that because I thought the numbers were surprising.",
-      "start": 1670,
-      "type": "TX"
-    },
-    {
-      "end": 1678,
-      "id": 135,
-      "speaker": "Speaker 2",
-      "speech": "Okay,",
-      "start": 1677,
-      "type": "TX"
-    },
-    {
-      "end": 1684,
-      "id": 136,
-      "speaker": "Speaker 3",
-      "speech": "because we did our measurement. And the building coverage is 15%,",
-      "start": 1678,
-      "type": "TX"
-    },
-    {
-      "end": 1684,
-      "id": 137,
-      "speaker": "Speaker 2",
-      "speech": "okay,",
-      "start": 1684,
-      "type": "TX"
-    },
-    {
-      "end": 1723,
-      "id": 138,
-      "speaker": "Speaker 3",
-      "speech": "which is already 5% over, what it should be. We did not measure all of the impervious. It was too high. There were 20 separate measurements that we felt that we had to make because you've got a beautiful walkway. We didn't measure that, you've got all of those retaining Wars, you know, with the top on the they got a nice broad Granite top. We didn't measure that, what all we measured was the driveway, that's all we measured. And we came up with an impervious coverage, a 25.6% And then not the numbers. I'm sorry, they are not the numbers that are in the LC permit application.",
-      "start": 1684,
-      "type": "TX"
-    },
-    {
-      "end": 1743,
-      "id": 139,
-      "speaker": "Speaker 2",
-      "speech": "I don't think I Perhaps Illinois. I needed to do that worksheet. Did you? You're saying Building from it. Okay. Not in that, in this application for variants",
-      "start": 1724,
-      "type": "TX"
-    },
-    {
-      "end": 1743,
-      "id": 140,
-      "speaker": "Speaker 1",
-      "speech": "know",
-      "start": 1743,
-      "type": "TX"
-    },
-    {
-      "end": 1753,
-      "id": 141,
-      "speaker": "Speaker 3",
-      "speech": "it's on the original hell. You say, you're right? It's really good building permit, we call it, it's the it's known as the LC panel, the land use compliance,",
-      "start": 1743,
-      "type": "TX"
-    },
-    {
-      "end": 1753,
-      "id": 142,
-      "speaker": "Speaker 2",
-      "speech": "okay?",
-      "start": 1753,
-      "type": "TX"
-    },
-    {
-      "end": 1782,
-      "id": 143,
-      "speaker": "Speaker 3",
-      "speech": "and if you look, On page 4 of that. This. Okay. Yeah, you did. You parents said it. You did draw out all of those different things you did. So what what are the numbers that are on there? You're saying that your structure coverage is 8.12%. And your impervious surface coverage is 19.6%.",
-      "start": 1754,
-      "type": "TX"
-    },
-    {
-      "end": 1784,
+      "end": 1815,
       "id": 144,
-      "speaker": "Speaker 1",
-      "speech": "I, when I",
+      "speaker": "Max",
+      "speech": "I'm at a loss at how you came to those numbers as, when I filled out the building permit application, I simply copied from a survey we had done in 2013.",
       "start": 1782,
       "type": "TX"
     },
     {
-      "end": 1815,
-      "id": 145,
-      "speaker": "Speaker 2",
-      "speech": "generated these numbers, I use the permit. That was my father had an engineer job when he got his permit for the garage and it showed the walkways and children driveways and children covered. So I essentially just copy those off of his original garage plan when he built it back in. I think it was 2013, so I would just was going by what an engineer heads on. So if you're coming up with something different and I'm at a loss, Okay?",
-      "start": 1784,
-      "type": "TX"
-    },
-    {
-      "end": 1815,
-      "id": 146,
-      "speaker": "Speaker 1",
-      "speech": "So",
-      "start": 1815,
-      "type": "TX"
-    },
-    {
       "end": 1820,
-      "id": 147,
-      "speaker": "Speaker 3",
-      "speech": "I mean do you count the covered walkways? For example,",
-      "start": 1817,
+      "id": 146,
+      "speaker": "Florence",
+      "speech": "Did that survey include the covered walkways, for example?",
+      "start": 1815,
       "type": "TX"
     },
     {
       "end": 1829,
       "id": 148,
-      "speaker": "Speaker 2",
-      "speech": "I know where that one, they did the included the cover bar. The covered walkways. Yes, I believe. So it was part of the building permit. Thought.",
+      "speaker": "Max",
+      "speech": "Yes, I believe so.",
       "start": 1820,
       "type": "TX"
     },
     {
       "end": 1839,
       "id": 149,
-      "speaker": "Speaker 3",
-      "speech": "Yeah. I You know, your back me up Gary. We are measured this very carefully and if anything if anything we were very generous,",
+      "speaker": "Florence",
+      "speech": "I believe Mr. Carney can support my statement that we have thoroughly analyzed this situation and, if anything, we have been quite generous in our approach.",
       "start": 1829,
       "type": "TX"
     },
     {
-      "end": 1861,
+      "end": 1865,
       "id": 150,
-      "speaker": "Speaker 4",
-      "speech": "okay, it would be, it would be higher. we did we did the best we could but like I like Mark said, we We didn't cover the top of the walls and try to measure because it was on a curve and it would take we'd be there. Most of the day measure in those. Those",
+      "speaker": "Carney",
+      "speech": "I think the actual coverage would be higher. We tried our best, but as, Mr Florence mentioned, we didn't measure the top of the walls because they were curved and it would have taken too long. So, we wouldn't have been able to accurately determine the right area.",
       "start": 1839,
       "type": "TX"
     },
     {
-      "end": 1865,
-      "id": 151,
-      "speaker": "Speaker 3",
-      "speech": "top to get everything. We wouldn't do it accurately enough to make a case right area,",
-      "start": 1861,
-      "type": "TX"
-    },
-    {
-      "end": 1865,
-      "id": 152,
-      "speaker": "Speaker 1",
-      "speech": "right?",
-      "start": 1865,
-      "type": "TX"
-    },
-    {
-      "end": 1866,
-      "id": 153,
-      "speaker": "Speaker 2",
-      "speech": "Yeah.",
-      "start": 1865,
-      "type": "TX"
-    },
-    {
-      "end": 1867,
-      "id": 154,
-      "speaker": "Speaker 1",
-      "speech": "Okay, so",
-      "start": 1866,
-      "type": "TX"
-    },
-    {
-      "end": 1868,
-      "id": 155,
-      "speaker": "Speaker 2",
-      "speech": "Where do we?",
-      "start": 1868,
-      "type": "TX"
-    },
-    {
       "end": 1896,
-      "id": 156,
-      "speaker": "Speaker 3",
-      "speech": "Well, the fact is, you know, we're sitting here not with the one variants that you were looking for. Which was the sidelines, the side. Setback variance. You've got. A building coverage variance that you need and you've got an impervious coverage variants that you need and also we measured the distance from the garage to the road and that's 45 feet whereas it has to be 50 feet. so you need a front sink back to",
-      "start": 1868,
+      "id": 153,
+      "speaker": "Florence",
+      "speech": "Well, the fact is, we're confronted not with the one variance that you were looking for, which was the side setback variance. You've got a building coverage variance that you need and you've got an impervious coverage variance that you need. We measured the distance from the garage to the road and that's 45 feet whereas it has to be 50 feet. so you need a front setback variance too.",
+      "start": 1865,
       "type": "TX"
     },
     {
@@ -5494,14 +4910,19 @@
     }
   ],
   "visitors": [
-    "Peter Martin - Abutter",
     "Cheryl Damato - Abutter",
-    "Rosemarie Downey - Abutter",
     "Daniel Lavoie - Abutter",
+    "Doug Max - Applicant",
+    "Joan Max - Applicant",
+    "Joseph Szymanski - Applicant",
+    "Nick Cashorali",
     "Pat Fone - Abutter (by phone)",
+    "Peter Martin - Abutter",
+    "Ronald Max - Applicant",
+    "Rosemarie Downey - Abutter",
     "Shellie Bueno - Abutter (by phone)",
-    "Tom Burt",
-    "Nick Cashorali"
+    "Tim Crouss - Applicant",
+    "Tom Burt"
   ],
   "transcriptionName": null,
   "transcriptionStart": "2023-08-31T08:40:10.974Z"

@@ -39,13 +39,10 @@ import WaveSurfer from 'wavesurfer.js';
       <nav>
         <audio
           #media
-          (ratechange)="
-            onAudioChange({
-              muted: media.muted,
-              playbackRate: media.playbackRate
-            })
+          (ratechange)="onAudioChange({ playbackRate: media.playbackRate })"
+          (volumechange)="
+            onAudioChange({ muted: media.muted, volume: media.volume })
           "
-          (volumechange)="onAudioChange({ volume: media.volume })"
           [muted]="componentState.audio.muted"
           [playbackRate]="componentState.audio.playbackRate"
           [volume]="componentState.audio.volume"

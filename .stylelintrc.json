@@ -6,7 +6,7 @@
       "customSyntax": "postcss-scss"
     },
     {
-      "files": ["**/*.ts"],
+      "files": ["**/*.mts", "**/*.ts"],
       "customSyntax": "postcss-angular"
     }
   ],

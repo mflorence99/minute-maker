@@ -21,6 +21,7 @@
     "edit:config": "nano ~/.config/minute-maker/config.dev.json",
     "eslint": "eslint --ext ts --fix ./main ./renderer",
     "fix-duration": "ts-node --esm ./bin/fix-duration.mts",
+    "fix-speaker": "ts-node --esm ./bin/fix-speaker.mts",
     "fix-timestamps": "ts-node --esm ./bin/fix-timestamps.mts",
     "fix-txid": "ts-node --esm ./bin/fix-txid.mts",
     "postinstall": "rm -rf node_modules/@types/rimraf node_modules/@types/cacheable-request",

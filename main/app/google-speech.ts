@@ -158,7 +158,7 @@ function makeTranscription(result): Transcription[] {
   infos.push({});
   // 👇 now coalesce all the words by speaker
   return infos.reduce((transcription, info) => {
-    const nextSpeaker = `Speaker ${info.speakerTag}`;
+    const nextSpeaker = `Speaker_${info.speakerTag}`;
     // 👇 emit speech on change of speaker or if speech exceeds maxima
     if (nextSpeaker !== speaker || numWords >= Constants.maxSpeechWords) {
       if (speaker)

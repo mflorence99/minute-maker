@@ -302,7 +302,7 @@ export class ControllerService {
     let section = '';
     const withSections = minutes.transcription.reduce((acc, tx) => {
       if (tx.type === 'AG') section = tx.title;
-      else if (tx.type === 'TX') acc.push({ section, tx });
+      else if (tx.type === 'TX' && tx.speaker) acc.push({ section, tx });
       return acc;
     }, []);
     // 👇 create raw summaries of minutes by section

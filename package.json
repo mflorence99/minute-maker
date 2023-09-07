@@ -115,7 +115,7 @@
     "jest-extended": "^4",
     "jest-junit": "^16",
     "jest-preset-angular": "^13",
-    "marked": "^7",
+    "marked": "^8",
     "material-design-icons": "^3",
     "ng-mocks": "^14",
     "ngx-autosize": "^2",

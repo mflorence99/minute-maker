@@ -109,6 +109,35 @@ const DIRECTIVES = [
 
 const PAGES = [RootPage];
 
+const PROVIDERS = [
+  {
+    provide: ErrorHandler,
+    useValue: Sentry.createErrorHandler({
+      logErrors: true,
+      showDialog: false
+    })
+  },
+  {
+    provide: EVENT_MANAGER_PLUGINS,
+    useClass: ThrottledEventPlugin,
+    multi: true
+  },
+  {
+    provide: STORAGE_ENGINE,
+    useClass: StorageEngine
+  },
+  { provide: TUI_DATE_FORMAT, useValue: 'MDY' },
+  { provide: TUI_DATE_SEPARATOR, useValue: '/' },
+  {
+    provide: TUI_DATE_TIME_VALUE_TRANSFORMER,
+    useClass: DateTimeTransformer
+  },
+  {
+    provide: TUI_FIRST_DAY_OF_WEEK,
+    useValue: TuiDayOfWeek.Sunday
+  }
+];
+
 const STATES = [
   AppState,
   ComponentState,
@@ -118,6 +147,7 @@ const STATES = [
   StatusState,
   UndoState
 ];
+
 const STATES_SAVED = [
   AppState,
   ComponentState,
@@ -126,82 +156,54 @@ const STATES_SAVED = [
   UndoState
 ];
 
+const MODULES = [
+  AutosizeModule,
+  BrowserAnimationsModule,
+  BrowserModule,
+  CommonModule,
+  EventPluginsModule,
+  MarkdownModule.forRoot({
+    sanitize: SecurityContext.NONE
+  }),
+  NgxsModule.forRoot(STATES, {
+    developmentMode: isDev
+  }),
+  NgxsReduxDevtoolsPluginModule.forRoot({
+    disabled: !isDev
+  }),
+  NgxsStoragePluginModule.forRoot({
+    key: STATES_SAVED
+  }),
+  NgxsLoggerPluginModule.forRoot({ collapsed: false }),
+  ReactiveFormsModule,
+  TuiAlertModule,
+  TuiBadgeModule,
+  TuiBlockStatusModule,
+  TuiButtonModule,
+  TuiErrorModule,
+  TuiFieldErrorPipeModule,
+  TuiHintModule,
+  TuiInputDateTimeModule,
+  TuiInputModule,
+  TuiInputNumberModule,
+  TuiInputSliderModule,
+  TuiInputTagModule,
+  TuiLabelModule,
+  TuiLoaderModule,
+  TuiNotificationModule,
+  TuiProgressModule,
+  TuiRootModule,
+  TuiSvgModule,
+  TuiTabsModule,
+  TuiTextAreaModule,
+  TuiTextfieldControllerModule
+];
+
 @NgModule({
   bootstrap: [RootPage],
-
   declarations: [...COMPONENTS, ...DIRECTIVES, ...PAGES],
-
-  imports: [
-    AutosizeModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    CommonModule,
-    EventPluginsModule,
-    MarkdownModule.forRoot({
-      sanitize: SecurityContext.NONE
-    }),
-    NgxsModule.forRoot(STATES, {
-      developmentMode: isDev
-    }),
-    NgxsReduxDevtoolsPluginModule.forRoot({
-      disabled: !isDev
-    }),
-    NgxsStoragePluginModule.forRoot({
-      key: STATES_SAVED
-    }),
-    NgxsLoggerPluginModule.forRoot({ collapsed: false }),
-    ReactiveFormsModule,
-    TuiAlertModule,
-    TuiBadgeModule,
-    TuiBlockStatusModule,
-    TuiButtonModule,
-    TuiErrorModule,
-    TuiFieldErrorPipeModule,
-    TuiHintModule,
-    TuiInputDateTimeModule,
-    TuiInputModule,
-    TuiInputNumberModule,
-    TuiInputSliderModule,
-    TuiInputTagModule,
-    TuiLabelModule,
-    TuiLoaderModule,
-    TuiNotificationModule,
-    TuiProgressModule,
-    TuiRootModule,
-    TuiSvgModule,
-    TuiTabsModule,
-    TuiTextAreaModule,
-    TuiTextfieldControllerModule
-  ],
-
-  providers: [
-    {
-      provide: ErrorHandler,
-      useValue: Sentry.createErrorHandler({
-        logErrors: true,
-        showDialog: false
-      })
-    },
-    {
-      provide: EVENT_MANAGER_PLUGINS,
-      useClass: ThrottledEventPlugin,
-      multi: true
-    },
-    {
-      provide: STORAGE_ENGINE,
-      useClass: StorageEngine
-    },
-    { provide: TUI_DATE_FORMAT, useValue: 'MDY' },
-    { provide: TUI_DATE_SEPARATOR, useValue: '/' },
-    {
-      provide: TUI_DATE_TIME_VALUE_TRANSFORMER,
-      useClass: DateTimeTransformer
-    },
-    {
-      provide: TUI_FIRST_DAY_OF_WEEK,
-      useValue: TuiDayOfWeek.Sunday
-    }
-  ]
+  imports: [...MODULES],
+  providers: [...PROVIDERS]
 })
 export class RootModule {
   constructor(private menu: MenuService) {}

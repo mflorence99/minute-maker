@@ -13,14 +13,14 @@ import { inject } from '@angular/core';
   styles: ['host { display: none; }']
 })
 export class WaveSurferRegionComponent {
-  #params: Partial<RegionParams> = {};
+  #params: RegionParams;
   #regions = inject(WaveSurferRegionsComponent);
 
-  @Input() get params(): Partial<RegionParams> {
+  @Input() get params(): RegionParams {
     return this.#params;
   }
 
-  set params(params: Partial<RegionParams>) {
+  set params(params: RegionParams) {
     this.#params = params;
     const region = this.#regions.regionByID[params.id];
     if (region) region.setOptions(params);

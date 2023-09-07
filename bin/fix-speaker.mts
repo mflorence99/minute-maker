@@ -13,9 +13,9 @@ const minutes = JSON.parse(readFileSync(path).toString());
 
 // 👇 reset the default speaker
 minutes.transcription
-  .filter((tx) => tx.speaker.startsWith('Speaker '))
+  .filter((tx) => tx.speaker?.startsWith('Speaker '))
   .forEach((tx) => {
-    tx.sspeaker = '';
+    tx.speaker = '';
   });
 
 // 👇 and we're done!

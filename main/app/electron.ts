@@ -3,10 +3,12 @@ import './audio-metadata';
 import './context-menu';
 import './dialog';
 import './fs';
-import './google-speech';
-import './google-storage';
 import './menu';
 import './openai';
+import './transcriber';
+import './transcriber-google';
+import './uploader';
+import './uploader-google';
 
 import { Channels } from './common';
 import { Constants } from './common';

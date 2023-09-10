@@ -6,8 +6,6 @@ import { UploaderResponse } from './common';
 import { CredentialBody } from 'google-auth-library';
 import { Storage } from '@google-cloud/storage';
 
-import { ipcMain } from 'electron';
-
 import jsome from 'jsome';
 
 let theCredentials: CredentialBody;
@@ -16,20 +14,16 @@ let theCredentials: CredentialBody;
 // 🟩 Channels.uploaderCredentials
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.handle(Channels.uploaderCredentials, credentials);
-
-export function credentials(event, creds: string): void {
-  jsome(`👉 ${Channels.uploaderCredentials} ${creds}`);
-  theCredentials = JSON.parse(creds.trim());
+export function credentials(event, credentials: string): void {
+  jsome(`👉 ${Channels.uploaderCredentials} ${credentials}`);
+  theCredentials = JSON.parse(credentials.trim());
 }
 
 // //////////////////////////////////////////////////////////////////////////
-// 🟩 Channels.uploaderRequest --> upload
+// 🟩 Channels.uploaderRequest --> uploaderRequest
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.handle(Channels.uploaderRequest, upload);
-
-export async function upload(
+export async function uploaderRequest(
   event,
   request: UploaderRequest
 ): Promise<UploaderResponse> {
@@ -48,12 +42,13 @@ export async function upload(
 }
 
 // //////////////////////////////////////////////////////////////////////////
-// 🟩 Channels.uploaderEnableCORS --> enableCORS
+// 🟩 Channels.uploaderEnableCORS --> uploaderEnableCORS
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.handle(Channels.uploaderEnableCORS, enableCORS);
-
-export async function enableCORS(event, bucketName: string): Promise<any> {
+export async function uploaderEnableCORS(
+  event,
+  bucketName: string
+): Promise<any> {
   const storage = new Storage({ credentials: theCredentials });
   jsome([`👉 ${Channels.uploaderEnableCORS}`, bucketName]);
   await storage.bucket(bucketName).setCorsConfiguration(Constants.corsOptions);

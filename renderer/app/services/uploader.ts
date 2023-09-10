@@ -1,5 +1,6 @@
 import { Channels } from '#mm/common';
 import { Injectable } from '@angular/core';
+import { TranscriptionImpl } from '#mm/common';
 import { UploaderRequest } from '#mm/common';
 import { UploaderResponse } from '#mm/common';
 
@@ -10,8 +11,15 @@ declare const ipc /* 👈 typeof ipcRenderer */;
 export class UploaderService {
   //
 
-  credentials(credentials: string): Promise<any> {
-    return ipc.invoke(Channels.uploaderCredentials, credentials);
+  credentials(
+    credentials: string,
+    implementation: TranscriptionImpl
+  ): Promise<any> {
+    return ipc.invoke(
+      Channels.uploaderCredentials,
+      credentials,
+      implementation
+    );
   }
 
   enableCORS(bucketName: string): Promise<void> {

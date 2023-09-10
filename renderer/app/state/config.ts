@@ -11,6 +11,7 @@ import { State } from '@ngxs/store';
 import { Store } from '@ngxs/store';
 import { SummaryStrategy } from '#mm/common';
 import { TranscriberService } from '#mm/services/transcriber';
+import { TranscriptionImpl } from '#mm/common';
 import { UndoableAction } from '#mm/state/undo';
 import { UploaderService } from '#mm/services/uploader';
 
@@ -43,29 +44,35 @@ type RephraseStrategyPrompts = Record<RephraseStrategy, string>;
 type SummaryStrategyPrompts = Record<SummaryStrategy, string>;
 
 export type ConfigStateModel = {
+  assemblyaiCredentials: string;
   bucketName: string;
   googleCredentials: string;
   openaiCredentials: string;
   rephraseStrategyPrompts: RephraseStrategyPrompts;
   summaryStrategyPrompts: SummaryStrategyPrompts;
+  transcriptionImpl: TranscriptionImpl;
 };
 
 @State<ConfigStateModel>({
   name: 'config',
   defaults: {
+    assemblyaiCredentials: null, // 👈 of course!
     bucketName: null, // 👈 of course!
     googleCredentials: null, // 👈 of course!
     openaiCredentials: null, // 👈 of course!
     rephraseStrategyPrompts: {
       accuracy:
-        'Rephrase my statement in the first person, using grammatical English and paragraphs',
-      brevity: 'Summarize my statement in the first person'
+        'Rephrase my statement as part of a conversation, using grammatical English and paragraphs, and in a natural conversational style',
+      brevity:
+        'Summarize and simplify my statement in a natural style as part of a conversation'
     },
     summaryStrategyPrompts: {
-      bullets: 'Summarize this discussion into a few bullet points',
+      bullets:
+        'Summarize this discussion into bullet points as if the events discussed happened in the past',
       paragraphs:
-        'Using the past tense, summarize this discussion into short paragraphs for a professional reader'
-    }
+        'Summarize this discussion into short paragraphs for a professional reader as if the events discussed happened in the past'
+    },
+    transcriptionImpl: 'google'
   }
 })
 @Injectable()
@@ -74,6 +81,8 @@ export class ConfigState implements NgxsOnInit {
   @Select(ConfigState.googleCredentials)
   googleCredentials$: Observable<string>;
   @Select(ConfigState.openaiCredentials) openaiCredentials$: Observable<string>;
+  @Select(ConfigState.transcriptionImpl)
+  transcriptionImpl$: Observable<TranscriptionImpl>;
 
   #openai = inject(OpenAIService);
   #store = inject(Store);
@@ -127,6 +136,16 @@ export class ConfigState implements NgxsOnInit {
   }
 
   // //////////////////////////////////////////////////////////////////////////
+  // 🟪 @Select(ConfigState.transcriptionImpl) transcriptionImpl$
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Selector() static transcriptionImpl(
+    config: ConfigStateModel
+  ): TranscriptionImpl {
+    return config.transcriptionImpl;
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
   // 🟩 UpdateChanges
   //    the big difference between this and SetConfig is that it is undoable
   // //////////////////////////////////////////////////////////////////////////
@@ -172,19 +191,24 @@ export class ConfigState implements NgxsOnInit {
 
   #monitorGoogleCredentials(): void {
     combineLatest({
+      bucketName: this.bucketName$,
       googleCredentials: this.googleCredentials$,
-      bucketName: this.bucketName$
+      transcriptionImpl: this.transcriptionImpl$
     })
       .pipe(
         filter(
-          ({ googleCredentials, bucketName }) =>
-            !!googleCredentials && !!bucketName
+          ({ bucketName, googleCredentials, transcriptionImpl }) =>
+            !!bucketName &&
+            !!googleCredentials &&
+            transcriptionImpl === 'google'
         ),
-        switchMap(({ googleCredentials, bucketName }) =>
+        switchMap(({ bucketName, googleCredentials }) =>
           this.#uploader
-            .credentials(googleCredentials)
+            .credentials(googleCredentials, 'google')
             .then(() => this.#uploader.enableCORS(bucketName))
-            .then(() => this.#transcriber.credentials(googleCredentials))
+            .then(() =>
+              this.#transcriber.credentials(googleCredentials, 'google')
+            )
         )
       )
       .subscribe();

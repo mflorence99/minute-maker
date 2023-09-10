@@ -7,7 +7,6 @@ import { sleep } from './utils';
 
 import { CredentialBody } from 'google-auth-library';
 
-import { ipcMain } from 'electron';
 import { readFileSync } from 'fs';
 import { v1p1beta1 } from '@google-cloud/speech';
 
@@ -16,12 +15,10 @@ import jsome from 'jsome';
 let theCredentials: CredentialBody;
 
 // //////////////////////////////////////////////////////////////////////////
-// 🟩 Channels.transcriberCancel --> cancelOperation)
+// 🟩 Channels.transcriberCancel --> transcriberCancel)
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.handle(Channels.transcriberCancel, cancelOperation);
-
-export async function cancelOperation(
+export async function transcriberCancel(
   event,
   transcriptionName: string
 ): Promise<void> {
@@ -39,20 +36,16 @@ export async function cancelOperation(
 // 🟩 Channels.transcriberCredentials
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.handle(Channels.transcriberCredentials, credentials);
-
-export function credentials(event, creds: string): void {
-  jsome(`👉 ${Channels.transcriberCredentials} ${creds}`);
-  theCredentials = JSON.parse(creds.trim());
+export function credentials(event, credentials: string): void {
+  jsome(`👉 ${Channels.transcriberCredentials} ${credentials}`);
+  theCredentials = JSON.parse(credentials.trim());
 }
 
 // //////////////////////////////////////////////////////////////////////////
-// 🟩 Channels.transcriberPoll --> longRunningRecognize
+// 🟩 Channels.transcriberPoll --> transcriberPoll
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.handle(Channels.transcriberPoll, checkLongRunningRecognizeProgress);
-
-export async function checkLongRunningRecognizeProgress(
+export async function transcriberPoll(
   event,
   transcriptionName: string
 ): Promise<void> {
@@ -94,12 +87,10 @@ export async function checkLongRunningRecognizeProgress(
 }
 
 // //////////////////////////////////////////////////////////////////////////
-// 🟩 Channels.transcriberRequest --> longRunningRecognize
+// 🟩 Channels.transcriberRequest --> transcriberRequest
 // //////////////////////////////////////////////////////////////////////////
 
-ipcMain.handle(Channels.transcriberRequest, longRunningRecognize);
-
-export async function longRunningRecognize(
+export async function transcriberRequest(
   event,
   request: TranscriberRequest
 ): Promise<string> {

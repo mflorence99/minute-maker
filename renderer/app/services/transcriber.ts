@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TranscriberRequest } from '#mm/common';
 import { TranscriberResponse } from '#mm/common';
+import { TranscriptionImpl } from '#mm/common';
 
 // 🙈 preload.ts
 declare const ipc /* 👈 typeof ipcRenderer */;
@@ -15,8 +16,15 @@ export class TranscriberService {
     return ipc.invoke(Channels.transcriberCancel, transcriptionName);
   }
 
-  credentials(credentials: string): Promise<void> {
-    return ipc.invoke(Channels.transcriberCredentials, credentials);
+  credentials(
+    credentials: string,
+    implementation: TranscriptionImpl
+  ): Promise<void> {
+    return ipc.invoke(
+      Channels.transcriberCredentials,
+      credentials,
+      implementation
+    );
   }
 
   pollTranscription(

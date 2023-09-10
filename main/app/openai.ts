@@ -71,8 +71,8 @@ export async function chatCompletion(
 
 ipcMain.handle(Channels.openaiCredentials, credentials);
 
-export function credentials(event, creds: string): void {
-  theCredentials = creds;
+export function credentials(event, credentials: string): void {
+  theCredentials = credentials;
   jsome(`👉 ${Channels.openaiCredentials} ${theCredentials}`);
 }
 

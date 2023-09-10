@@ -53,6 +53,8 @@ export const summaryStrategies = ['bullets', 'paragraphs'] as const;
 export type SummaryStrategy = (typeof summaryStrategies)[number];
 const summaryStrategy: SummaryStrategy = 'paragraphs';
 
+export type TranscriptionImpl = 'assemblyai' | 'google';
+
 export const Constants = {
   backoffOptions,
   corsOptions,

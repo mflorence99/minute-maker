@@ -66,6 +66,7 @@ import { TuiLabelModule } from '@taiga-ui/core';
 import { TuiLoaderModule } from '@taiga-ui/core';
 import { TuiNotificationModule } from '@taiga-ui/core';
 import { TuiProgressModule } from '@taiga-ui/kit';
+import { TuiRadioBlockModule } from '@taiga-ui/kit';
 import { TuiRootModule } from '@taiga-ui/core';
 import { TuiSvgModule } from '@taiga-ui/core';
 import { TuiTabsModule } from '@taiga-ui/kit';
@@ -192,6 +193,7 @@ const MODULES = [
   TuiLoaderModule,
   TuiNotificationModule,
   TuiProgressModule,
+  TuiRadioBlockModule,
   TuiRootModule,
   TuiSvgModule,
   TuiTabsModule,

@@ -19,6 +19,19 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
   selector: 'mm-config',
   template: `
     <form [formGroup]="configForm">
+      <label tuiLabel="Transcription implementation">
+        <article>
+          <tui-radio-block formControlName="transcriptionImpl" item="google">
+            Google Speech-to-Text
+          </tui-radio-block>
+          <tui-radio-block
+            formControlName="transcriptionImpl"
+            item="assemblyai">
+            AssemblyAI Transcript
+          </tui-radio-block>
+        </article>
+      </label>
+
       <label tuiLabel="Credentials">
         <article class="column">
           <tui-text-area
@@ -37,19 +50,31 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
       </label>
 
       <article>
+        <tui-input formControlName="bucketName">
+          Google Audio File Bucket Name
+          <input style="font-family: monospace; font-size: 12px" tuiTextfield />
+        </tui-input>
+      </article>
+
+      <article>
+        <tui-input formControlName="assemblyaiCredentials" spellcheck="false">
+          AssemblyAI API Token
+          <input style="font-family: monospace; font-size: 12px" tuiTextfield />
+        </tui-input>
+        <tui-error
+          formControlName="assemblyaiCredentials"
+          [error]="[] | tuiFieldError | async"></tui-error>
+      </article>
+
+      <article>
         <tui-input formControlName="openaiCredentials" spellcheck="false">
-          Open AI Key
+          OpenAI Key
           <input style="font-family: monospace; font-size: 12px" tuiTextfield />
         </tui-input>
         <tui-error
           formControlName="openaiCredentials"
           [error]="[] | tuiFieldError | async"></tui-error>
       </article>
-
-      <tui-input formControlName="bucketName">
-        Audio File Bucket Name
-        <input tuiTextfield />
-      </tui-input>
 
       <article class="row" formGroupName="rephraseStrategyPrompts">
         <label tuiLabel="Transcription rephrase strategy for accuracy">
@@ -91,6 +116,10 @@ export class ConfigComponent implements OnChanges, OnInit {
     };
     // 👇 create the form
     this.configForm = new FormGroup({
+      assemblyaiCredentials: new FormControl(
+        this.config.assemblyaiCredentials,
+        [Validators.required, credentialsValidator]
+      ),
       bucketName: new FormControl(this.config.bucketName, [
         Validators.required,
         credentialsValidator
@@ -112,7 +141,8 @@ export class ConfigComponent implements OnChanges, OnInit {
         paragraphs: new FormControl(
           this.config.summaryStrategyPrompts.paragraphs
         )
-      })
+      }),
+      transcriptionImpl: new FormControl(this.config.transcriptionImpl)
     });
     // 👇 mark the critical required fields invalid right away
     tuiMarkControlAsTouchedAndValidate(this.configForm);

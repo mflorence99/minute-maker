@@ -37,7 +37,7 @@ ipcMain.handle(Channels.fsLoadFile, loadFile);
 
 export function loadFile(event, path: string): string {
   const data = readFileSync(path, { encoding: 'utf8' });
-  jsome(`👈 readFileSync ${path} --> ${trunc(data)}`);
+  jsome(`👈  readFileSync ${path} --> ${trunc(data)}`);
   return data;
 }
 
@@ -60,7 +60,7 @@ export function openFile(event, options: OpenDialogOptions): OpenFileResponse {
 ipcMain.handle(Channels.fsSaveFile, saveFile);
 
 export function saveFile(event, path: string, data: string): void {
-  jsome(`👈 writeFileSync ${path} <-- ${trunc(data)}`);
+  jsome(`👈  writeFileSync ${path} <-- ${trunc(data)}`);
   return writeFileSync(path, data, { encoding: 'utf8' });
 }
 

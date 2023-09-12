@@ -159,7 +159,8 @@ export class ControllerService {
           this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
         // 👇 extract the audio metadata
         const metadata = await this.#metadata.parseFile(path);
-        // 👇 upload the audio to GCS
+        // 👇 upload the audio
+        //    NOTE: not all settings required by all implementations
         const upload = await this.#uploader.upload({
           bucketName: config.bucketName,
           destFileName: `${uuidv4()}.mp3`,
@@ -377,12 +378,16 @@ export class ControllerService {
       })
     ]);
     // 👇 initiate transcription
-    const transcriptionName =
-      await this.#transcriber.startTranscription(request);
-    // 👇 transcription isn't cancelable until we know the transcription name
-    this.#store.dispatch(new SetMinutes({ transcriptionName }));
-    // 👇 now start polling for completion
-    this.transcribeAudioPoll();
+    try {
+      const transcriptionName =
+        await this.#transcriber.startTranscription(request);
+      // 👇 transcription isn't cancelable until we know the transcription name
+      this.#store.dispatch(new SetMinutes({ transcriptionName }));
+      // 👇 now start polling for completion
+      this.transcribeAudioPoll();
+    } catch (error) {
+      this.#store.dispatch(new SetStatus({ error }));
+    }
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -403,46 +408,46 @@ export class ControllerService {
     );
     // 👇 poll transcription and note progress as status
     combineLatest({
-      tx: this.#transcriber.pollTranscription(minutes.transcriptionName),
-      name: this.#store.select(MinutesState.transcriptionName)
+      name: this.#store.select(MinutesState.transcriptionName),
+      tx: this.#transcriber.pollTranscription(minutes.transcriptionName)
     })
       .pipe(
-        takeWhile(({ name }) => name === minutes.transcriptionName),
         catchError((error) => {
-          this.#store.dispatch(new SetStatus({ error }));
-          return of({ tx: null });
+          this.#store.dispatch([
+            new SetMinutes({ transcriptionName: null }),
+            new SetStatus({ error })
+          ]);
+          return of({ name: null, tx: null });
         }),
+        takeWhile(({ name, tx }) => name === minutes.transcriptionName && !!tx),
         tap(({ tx }) => {
-          if (tx)
-            this.#store.dispatch([
-              new SetStatus({
-                status: `Transcribing audio: ${tx.progressPercent}% complete`,
-                working: new Working('transcription', () =>
-                  this.cancelTranscription()
-                )
-              })
-            ]);
+          this.#store.dispatch([
+            new SetStatus({
+              status: `Transcribing audio: ${tx.progressPercent}% complete`,
+              working: new Working('transcription', () =>
+                this.cancelTranscription()
+              )
+            })
+          ]);
         }),
         filter(({ tx }) => tx.progressPercent === 100)
       )
       .subscribe(({ tx }) => {
-        if (tx) {
-          let nextTranscriptionID = minutes.nextTranscriptionID ?? 0;
-          // 👇 make sure they're typed right and propery ID'd
-          tx.transcription.forEach((t) => {
-            t.id = ++nextTranscriptionID;
-            t.type = 'TX';
-          });
-          // 👇 finally
-          this.#store.dispatch([
-            new SetMinutes({
-              nextTranscriptionID,
-              transcription: tx.transcription,
-              transcriptionName: null
-            }),
-            new ClearStatus(new Working('transcription'))
-          ]);
-        }
+        let nextTranscriptionID = minutes.nextTranscriptionID ?? 0;
+        // 👇 make sure they're typed right and propery ID'd
+        tx.transcription.forEach((t) => {
+          t.id = ++nextTranscriptionID;
+          t.type = 'TX';
+        });
+        // 👇 finally
+        this.#store.dispatch([
+          new SetMinutes({
+            nextTranscriptionID,
+            transcription: tx.transcription,
+            transcriptionName: null
+          }),
+          new ClearStatus(new Working('transcription'))
+        ]);
       });
   }
 

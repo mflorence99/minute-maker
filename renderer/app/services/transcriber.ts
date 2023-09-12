@@ -38,12 +38,10 @@ export class TranscriberService {
         if (response.progressPercent === 100) observer.complete();
       }
       ipc.on(Channels.transcriberResponse, listener);
-
       // 👇 poll for transcription complete
       ipc
         .invoke(Channels.transcriberPoll, transcriptionName)
         .catch((error) => observer.error(error));
-
       // 👇 teardown logic
       return () => ipc.removeListener(Channels.transcriberResponse, listener);
     });

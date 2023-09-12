@@ -15,7 +15,7 @@ let theCredentials: CredentialBody;
 // //////////////////////////////////////////////////////////////////////////
 
 export function credentials(event, credentials: string): void {
-  jsome(`👉 ${Channels.uploaderCredentials} ${credentials}`);
+  jsome(`👉  GOOGLE ${Channels.uploaderCredentials} ${credentials}`);
   theCredentials = JSON.parse(credentials.trim());
 }
 
@@ -31,13 +31,13 @@ export async function uploaderRequest(
   const options = {
     destination: request.destFileName
   };
-  jsome([`👉 ${Channels.uploaderRequest}`, request]);
+  jsome([`👉  GOOGLE ${Channels.uploaderRequest}`, request]);
   await storage.bucket(request.bucketName).upload(request.filePath, options);
   const response = {
     gcsuri: `gs://${request.bucketName}/${request.destFileName}`,
     url: `https://storage.googleapis.com/${request.bucketName}/${request.destFileName}`
   };
-  jsome([`👈 ${Channels.uploaderRequest}`, response]);
+  jsome([`👈  GOOGLE ${Channels.uploaderRequest}`, response]);
   return response;
 }
 
@@ -50,9 +50,9 @@ export async function uploaderEnableCORS(
   bucketName: string
 ): Promise<any> {
   const storage = new Storage({ credentials: theCredentials });
-  jsome([`👉 ${Channels.uploaderEnableCORS}`, bucketName]);
+  jsome([`👉  GOOGLE ${Channels.uploaderEnableCORS}`, bucketName]);
   await storage.bucket(bucketName).setCorsConfiguration(Constants.corsOptions);
   const [metadata] = await storage.bucket(bucketName).getMetadata();
-  jsome([`👈 ${Channels.uploaderEnableCORS}`, metadata.cors]);
+  jsome([`👈  GOOGLE ${Channels.uploaderEnableCORS}`, metadata.cors]);
   return metadata;
 }

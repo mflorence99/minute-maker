@@ -56,6 +56,7 @@ const summaryStrategy: SummaryStrategy = 'paragraphs';
 export type TranscriptionImpl = 'assemblyai' | 'google';
 
 export const Constants = {
+  assemblyai: { endpoint: 'https://api.assemblyai.com/v2' },
   backoffOptions,
   corsOptions,
   maxRecentPaths: 32,
@@ -142,15 +143,15 @@ export enum Channels {
   openaiCredentials = 'openai/credentials',
   openaiListModels = 'openai/list-models',
 
-  transcriberCancel = 'google-speech/transcriber/cancel',
-  transcriberCredentials = 'google-speech/transcriber/credentials',
-  transcriberPoll = 'google-speech/transcriber/poll',
-  transcriberRequest = 'google-speech/transcriber/request',
-  transcriberResponse = 'google-speech/transcriber/response',
+  transcriberCancel = 'transcriber/cancel',
+  transcriberCredentials = 'transcriber/credentials',
+  transcriberPoll = 'transcriber/poll',
+  transcriberRequest = 'transcriber/request',
+  transcriberResponse = 'transcriber/response',
 
-  uploaderCredentials = 'google-speech/uploader/credentials',
-  uploaderEnableCORS = 'google-storage/uploader/enableCORS',
-  uploaderRequest = 'google-storage/uploader/request'
+  uploaderCredentials = 'uploader/credentials',
+  uploaderEnableCORS = 'uploader/enableCORS',
+  uploaderRequest = 'uploader/request'
 }
 
 // //////////////////////////////////////////////////////////////////////////
@@ -208,15 +209,16 @@ export type SaveDialogOptions = OpenDialogOptions;
 export type TranscriberRequest = {
   audio: {
     encoding: string;
-    fileName?: string;
-    gcsuri?: string;
+    gcsuri: string;
     sampleRateHertz: number;
+    url: string;
   };
   numSpeakers: number;
   phrases: string[];
 };
 
 export type TranscriberResponse = {
+  name: string;
   progressPercent: number;
   transcription: Transcription[];
 };

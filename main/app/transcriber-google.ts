@@ -1,35 +1,40 @@
 import { Channels } from './common';
 import { Constants } from './common';
 import { TranscriberRequest } from './common';
+import { TranscriberResponse } from './common';
 import { Transcription } from './common';
 
 import { sleep } from './utils';
 
 import { CredentialBody } from 'google-auth-library';
 
-import { readFileSync } from 'fs';
 import { v1p1beta1 } from '@google-cloud/speech';
 
 import jsome from 'jsome';
 
 let theCredentials: CredentialBody;
 
+const cancellations = new Set<string>();
+
 // //////////////////////////////////////////////////////////////////////////
 // 🟩 Channels.transcriberCancel --> transcriberCancel)
 // //////////////////////////////////////////////////////////////////////////
 
-export async function transcriberCancel(
+export function transcriberCancel(event, transcriptionName: string): void {
+  jsome([`👉  GOOGLE ${Channels.transcriberCancel}`, transcriptionName]);
+  cancellations.add(transcriptionName);
+}
+
+// 🔥 this doesn't work at all -- no way to cancel in API?
+
+export async function transcriberCancelXXX(
   event,
   transcriptionName: string
 ): Promise<void> {
+  jsome([`👉  GOOGLE ${Channels.transcriberCancel}`, transcriptionName]);
   const client = new v1p1beta1.SpeechClient({ credentials: theCredentials });
-  try {
-    jsome([`👉 ${Channels.transcriberCancel}`, transcriptionName]);
-    // @ts-ignore 🔥 can't explain why this doesn't match required type
-    await client.cancelOperation({ name: transcriptionName });
-  } catch (error) {
-    console.log(`🔥 ${error.message}`);
-  }
+  // @ts-ignore 🔥 can't explain why this doesn't match required type
+  await client.cancelOperation({ name: transcriptionName });
 }
 
 // //////////////////////////////////////////////////////////////////////////
@@ -37,7 +42,7 @@ export async function transcriberCancel(
 // //////////////////////////////////////////////////////////////////////////
 
 export function credentials(event, credentials: string): void {
-  jsome(`👉 ${Channels.transcriberCredentials} ${credentials}`);
+  jsome(`👉  GOOGLE ${Channels.transcriberCredentials} ${credentials}`);
   theCredentials = JSON.parse(credentials.trim());
 }
 
@@ -49,41 +54,36 @@ export async function transcriberPoll(
   event,
   transcriptionName: string
 ): Promise<void> {
+  jsome([`👉  GOOGLE ${Channels.transcriberPoll}`, transcriptionName]);
   const client = new v1p1beta1.SpeechClient({ credentials: theCredentials });
-  jsome([`👉 ${Channels.transcriberPoll}`, transcriptionName]);
-
-  do {
-    try {
-      // 👇 how far along are we?
-      const response =
-        await client.checkLongRunningRecognizeProgress(transcriptionName);
-      // 👇 1. metadata doesn't seem to be typed properly
-      //    2. seems to be 0% all the way to the end, when it jumps to 100%
-      const progressPercent = response.done
-        ? 100
-        : // @ts-ignore 🔥 metadata doesn't have progressPercent?
-          response.metadata.progressPercent ?? 0;
-      console.log(
-        `👈 ${Channels.transcriberPoll} ${progressPercent}% ${
-          response.done ? 'DONE' : ''
-        }`
-      );
-      globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
-        name: transcriptionName,
-        progressPercent,
-        transcription: response.done ? makeTranscription(response.result) : null
-      });
-
-      // 👇 it's all over
-      if (response.done) break;
-
-      // 👇 wait before polling again
-      await sleep(Constants.transcriberPollInterval);
-    } catch (error) {
-      jsome(`🔥 ${error.message}`);
-      throw error;
-    }
-  } while (true);
+  while (true) {
+    // 👇 have we been cancelled?
+    if (cancellations.has(transcriptionName))
+      throw new Error('Transcription cancelled');
+    // 👇 how far along are we?
+    const response =
+      await client.checkLongRunningRecognizeProgress(transcriptionName);
+    // 👇 1. metadata doesn't seem to be typed properly
+    //    2. seems to be 0% all the way to the end, when it jumps to 100%
+    const progressPercent = response.done
+      ? 100
+      : // @ts-ignore 🔥 metadata doesn't have progressPercent?
+        response.metadata.progressPercent ?? 0;
+    jsome(
+      `👈 GOOGLE ${Channels.transcriberPoll} ${progressPercent}% ${
+        response.done ? 'DONE' : ''
+      }`
+    );
+    globalThis.theWindow.webContents.send(Channels.transcriberResponse, {
+      name: transcriptionName,
+      progressPercent,
+      transcription: response.done ? makeTranscription(response.result) : null
+    } satisfies TranscriberResponse);
+    // 👇 it's all over
+    if (response.done) break;
+    // 👇 wait before polling again
+    await sleep(Constants.transcriberPollInterval);
+  }
 }
 
 // //////////////////////////////////////////////////////////////////////////
@@ -94,18 +94,12 @@ export async function transcriberRequest(
   event,
   request: TranscriberRequest
 ): Promise<string> {
+  jsome([`👉  GOOGLE ${Channels.transcriberRequest}`, request]);
   const client = new v1p1beta1.SpeechClient({ credentials: theCredentials });
-  jsome([`👉 ${Channels.transcriberRequest}`, request]);
-
   // 👇 call Google to begin transcription
   // @ts-ignore 🔥 no idea why this stopped compiling
   const [operation] = await client.longRunningRecognize({
     audio: {
-      // 👇 content only works for "short" files, otherwise
-      //    must use data in GCS bucket
-      content: request.audio.fileName
-        ? readFileSync(request.audio.fileName).toString('base64')
-        : null,
       uri: request.audio.gcsuri
     },
     config: {
@@ -127,8 +121,7 @@ export async function transcriberRequest(
       sampleRateHertz: request.audio.sampleRateHertz
     }
   });
-
-  // 👇 with the name, clients can now poll for comopletion
+  // 👇 with the name, clients can now poll for completion
   return operation.name;
 }
 

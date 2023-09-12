@@ -12,6 +12,7 @@ import { ConfigState } from '#mm/state/config';
 import { DateTimeTransformer } from '#mm/services/datetime-transformer';
 import { DragDroppableDirective } from '#mm/directives/drag-droppable';
 import { ErrorHandler } from '@angular/core';
+import { ErrorHandler as CustomErrorHandler } from '#mm/services/error-handler';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { EventPluginsModule } from '@tinkoff/ng-event-plugins';
 import { FindReplaceComponent } from '#mm/components/find-replace';
@@ -111,13 +112,18 @@ const DIRECTIVES = [
 const PAGES = [RootPage];
 
 const PROVIDERS = [
-  {
-    provide: ErrorHandler,
-    useValue: Sentry.createErrorHandler({
-      logErrors: true,
-      showDialog: false
-    })
-  },
+  isDev
+    ? {
+        provide: ErrorHandler,
+        useClass: CustomErrorHandler
+      }
+    : {
+        provide: ErrorHandler,
+        useValue: Sentry.createErrorHandler({
+          logErrors: true,
+          showDialog: true
+        })
+      },
   {
     provide: EVENT_MANAGER_PLUGINS,
     useClass: ThrottledEventPlugin,

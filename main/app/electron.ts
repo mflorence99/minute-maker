@@ -6,9 +6,7 @@ import './fs';
 import './menu';
 import './openai';
 import './transcriber';
-import './transcriber-google';
 import './uploader';
-import './uploader-google';
 
 import { Channels } from './common';
 import { Constants } from './common';
@@ -118,12 +116,12 @@ app.on('ready', async () => {
 
   // 👇 perform quit actions
   ipcMain.on(Channels.appQuit, () => {
-    jsome('🔥 ... exit');
+    jsome('🔥  ... exit');
     app.exit();
   });
 
   globalThis.theWindow.on('close', (event) => {
-    jsome('🔥 Exiting ...');
+    jsome('🔥  Exiting ...');
     event.preventDefault();
     globalThis.theWindow.webContents.send(Channels.appBeforeQuit);
   });

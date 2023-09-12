@@ -25,7 +25,7 @@ export async function chatCompletion(
   event,
   _request: OpenAIRequest
 ): Promise<OpenAIResponse> {
-  jsome([`👉 ${Channels.openaiChatCompletion}`, `${trunc(_request.prompt)}`]);
+  jsome([`👉  ${Channels.openaiChatCompletion}`, `${trunc(_request.prompt)}`]);
   // 👇 create the OpenAI client
   const openai = new OpenAI({
     apiKey: theCredentials
@@ -72,8 +72,8 @@ export async function chatCompletion(
 ipcMain.handle(Channels.openaiCredentials, credentials);
 
 export function credentials(event, credentials: string): void {
-  theCredentials = credentials;
-  jsome(`👉 ${Channels.openaiCredentials} ${theCredentials}`);
+  jsome(`👉  ${Channels.openaiCredentials} ${credentials}`);
+  theCredentials = credentials.trim();
 }
 
 // //////////////////////////////////////////////////////////////////////////
@@ -88,10 +88,10 @@ export async function listModels(): Promise<string[]> {
     apiKey: theCredentials
   });
   // 👇 ready to call OpenAI
-  jsome(`👉 ${Channels.openaiListModels}`);
+  jsome(`👉  ${Channels.openaiListModels}`);
   const response = await openai.models.list();
   const models = response.data.map((data) => data.id).sort();
-  jsome([`👈 ${Channels.openaiListModels}`, models]);
+  jsome([`👈  ${Channels.openaiListModels}`, models]);
   return models;
 }
 
@@ -103,7 +103,7 @@ function backoffOptions(): BackoffOptions {
   return {
     ...Constants.backoffOptions,
     retry: (error): boolean => {
-      jsome(`🔥 ${error.message}`, error);
+      jsome(`🔥  ${error.message}`, error);
       // 🙈 https://help.openai.com/en/articles/5955604-how-can-i-solve-429-too-many-requests-errors
       return /(rate limit)|(too many)/i.test(error.message);
     }

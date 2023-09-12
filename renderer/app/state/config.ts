@@ -77,6 +77,8 @@ export type ConfigStateModel = {
 })
 @Injectable()
 export class ConfigState implements NgxsOnInit {
+  @Select(ConfigState.assemblyaiCredentials)
+  assemblyaiCredentials$: Observable<string>;
   @Select(ConfigState.bucketName) bucketName$: Observable<string>;
   @Select(ConfigState.googleCredentials)
   googleCredentials$: Observable<string>;
@@ -88,6 +90,14 @@ export class ConfigState implements NgxsOnInit {
   #store = inject(Store);
   #transcriber = inject(TranscriberService);
   #uploader = inject(UploaderService);
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟪 @Select(ConfigState.assemblyaiCredentials) assemblyaiCredentials$
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Selector() static assemblyaiCredentials(config: ConfigStateModel): string {
+    return config.assemblyaiCredentials;
+  }
 
   // //////////////////////////////////////////////////////////////////////////
   // 🟪 @Select(ConfigState.bucketName) bucketName$
@@ -104,6 +114,7 @@ export class ConfigState implements NgxsOnInit {
 
   @Selector() static configured(config: ConfigStateModel): boolean {
     return (
+      !!config.assemblyaiCredentials &&
       !!config.bucketName &&
       !!config.googleCredentials &&
       !!config.openaiCredentials
@@ -180,6 +191,7 @@ export class ConfigState implements NgxsOnInit {
   // //////////////////////////////////////////////////////////////////////////
 
   ngxsOnInit(): void {
+    this.#monitorAssemblyAICredentials();
     this.#monitorGoogleCredentials();
     this.#monitorOpenAICredentials();
   }
@@ -188,6 +200,41 @@ export class ConfigState implements NgxsOnInit {
   // 🟦 Helper methods
   // 🙈 https://stackoverflow.com/questions/43881504/how-to-await-inside-rxjs-subscribe-method
   // //////////////////////////////////////////////////////////////////////////
+
+  // 🔥 we can't currently use this uploader as the AssemblyAI CDN only
+  //    works within AssemblyAI code -- so we are using Google's instead
+
+  #monitorAssemblyAICredentials(): void {
+    combineLatest({
+      assemblyaiCredentials: this.assemblyaiCredentials$,
+      bucketName: this.bucketName$,
+      googleCredentials: this.googleCredentials$,
+      transcriptionImpl: this.transcriptionImpl$
+    })
+      .pipe(
+        filter(
+          ({
+            assemblyaiCredentials,
+            bucketName,
+            googleCredentials,
+            transcriptionImpl
+          }) =>
+            !!assemblyaiCredentials &&
+            !!bucketName &&
+            !!googleCredentials &&
+            transcriptionImpl === 'assemblyai'
+        ),
+        switchMap(({ assemblyaiCredentials, bucketName, googleCredentials }) =>
+          this.#uploader
+            .credentials(googleCredentials, 'google')
+            .then(() => this.#uploader.enableCORS(bucketName))
+            .then(() =>
+              this.#transcriber.credentials(assemblyaiCredentials, 'assemblyai')
+            )
+        )
+      )
+      .subscribe();
+  }
 
   #monitorGoogleCredentials(): void {
     combineLatest({

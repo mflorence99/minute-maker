@@ -216,17 +216,13 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
         working
       })
     );
-    try {
-      this.wavesurfer.once('ready', () => {
-        // 👇 set the media state
-        //    NOTE: can't set the playback rate until audio is loaded!
-        const audio = this.media.nativeElement;
-        audio.playbackRate = this.componentState.audio.playbackRate;
-        this.#store.dispatch(new ClearStatus(working));
-      });
-      this.wavesurfer.load(this.#audioFile);
-    } catch (error) {
-      this.#store.dispatch(new SetStatus({ error }));
-    }
+    this.wavesurfer.once('ready', () => {
+      // 👇 set the media state
+      //    NOTE: can't set the playback rate until audio is loaded!
+      const audio = this.media.nativeElement;
+      audio.playbackRate = this.componentState.audio.playbackRate;
+      this.#store.dispatch(new ClearStatus(working));
+    });
+    this.wavesurfer.load(this.#audioFile);
   }
 }

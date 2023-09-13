@@ -20,6 +20,9 @@ const cancellations = new Set<string>();
 // 🟩 Channels.transcriberCancel --> transcriberCancel)
 // //////////////////////////////////////////////////////////////////////////
 
+// 🔥 this doesn't actually cancel a transcription, it just stops the poll
+//    for completion to make it appear to be canceled
+
 export function transcriberCancel(event, transcriptionName: string): void {
   jsome([`👉  GOOGLE ${Channels.transcriberCancel}`, transcriptionName]);
   cancellations.add(transcriptionName);

@@ -16,7 +16,6 @@ import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { MinutesSchema } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
-import { MinutesStateModel } from '#mm/state/minutes';
 import { OpenAIService } from '#mm/services/openai';
 import { RephraseStrategy } from '#mm/common';
 import { SetMinutes } from '#mm/state/minutes';
@@ -340,7 +339,7 @@ export class ControllerService {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟩 TranscribeAudio (via Google speech-to-text)
+  // 🟩 TranscribeAudio
   // //////////////////////////////////////////////////////////////////////////
 
   async transcribeAudio(): Promise<void> {
@@ -391,7 +390,7 @@ export class ControllerService {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟩 TranscribeAudioPoll (via Google speech-to-text)
+  // 🟩 TranscribeAudioPoll
   //    NOTE: we can enter here from #loadMinutes
   // //////////////////////////////////////////////////////////////////////////
 
@@ -496,9 +495,9 @@ export class ControllerService {
     });
   }
 
-  #pluckTranscription(state: MinutesStateModel, ix: number): Transcription {
-    if (state.transcription[ix].type === 'TX')
-      return state.transcription[ix] as Transcription;
+  #pluckTranscription(minutes: Minutes, ix: number): Transcription {
+    if (minutes.transcription[ix].type === 'TX')
+      return minutes.transcription[ix] as Transcription;
     else throw new Error(`Operation not supported for item #${ix}`);
   }
 

@@ -56,10 +56,9 @@ export async function tuiSVGtoPNG(
 ): Promise<NativeImage> {
   // 👇 use cached image if any
   const key = `${nm}-${w}-${h}-${color}`;
-  const img = tuiSVGtoPNGfromCache(nm, w, h, color);
-  if (img) return img;
-  // 👇 otherwise try to convert SVG to PNG
-  try {
+  let img = tuiSVGtoPNGfromCache(nm, w, h, color);
+  if (!img) {
+    // 👇 otherwise convert SVG to PNG
     const path = join(
       __dirname, // 🔥 this is suspect in production
       '..',
@@ -77,13 +76,10 @@ export async function tuiSVGtoPNG(
       .png()
       .resize(w, h)
       .toBuffer();
-    const img = nativeImage.createFromBuffer(png);
+    img = nativeImage.createFromBuffer(png);
     tuiSVGtoPNGCache.set(key, img);
-    return img;
-  } catch (error) {
-    console.error(`🔥 ${error.message}`);
-    return null;
   }
+  return img;
 }
 
 export function tuiSVGtoPNGfromCache(

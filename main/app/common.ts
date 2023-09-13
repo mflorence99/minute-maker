@@ -56,9 +56,15 @@ const summaryStrategy: SummaryStrategy = 'paragraphs';
 export type TranscriptionImpl = 'assemblyai' | 'google';
 
 export const Constants = {
-  assemblyai: { endpoint: 'https://api.assemblyai.com/v2' },
+  assemblyai: {
+    endpoint: 'https://api.assemblyai.com/v2',
+    transcriptionRate: 5 // 👈 x real time
+  },
   backoffOptions,
   corsOptions,
+  google: {
+    transcriptionRate: 2 // 👈 x real time
+  },
   maxRecentPaths: 32,
   maxSpeechWords: 250,
   maxUndoStackDepth: 7,

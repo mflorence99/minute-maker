@@ -2,6 +2,7 @@ import { AgendaItem } from '#mm/common';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ControllerService } from '#mm/services/controller';
+import { DialogService } from '#mm/services/dialog';
 import { EventEmitter } from '@angular/core';
 import { FindReplaceMatch } from '#mm/components/find-replace';
 import { Input } from '@angular/core';
@@ -42,7 +43,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                 <textarea
                   #agendaItemTitle
                   (input.throttled)="
-                    updateAgendaItem({ title: agendaItemTitle.value }, ix)
+                    updateAgendaItem(agendaItemTitle.value, ix)
                   "
                   [mmFindReplaceMatchFld]="'title'"
                   [mmFindReplaceMatchID]="tx.id"
@@ -72,12 +73,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
               <td>
                 <input
                   #transcriptionSpeaker
-                  (input.throttled)="
-                    updateTranscription(
-                      { speaker: transcriptionSpeaker.value },
-                      ix
-                    )
-                  "
+                  (change)="updateSpeaker(transcriptionSpeaker.value, ix)"
                   [mmFindReplaceMatchFld]="'speaker'"
                   [mmFindReplaceMatchID]="tx.id"
                   [mmFindReplaceMatch]="match"
@@ -94,10 +90,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                   <textarea
                     #transcriptionSpeech
                     (input.throttled)="
-                      updateTranscription(
-                        { speech: transcriptionSpeech.value },
-                        ix
-                      )
+                      updateSpeech(transcriptionSpeech.value, ix)
                     "
                     [class.disabled]="
                       status.working?.on === 'rephrase' && status.ix === ix
@@ -175,6 +168,7 @@ export class TranscriptionComponent {
 
   #controller = inject(ControllerService);
   #currentTx: Transcription;
+  #dialog = inject(DialogService);
   #store = inject(Store);
   #window = inject(WINDOW);
 
@@ -217,11 +211,41 @@ export class TranscriptionComponent {
     this.#controller.transcribeAudio();
   }
 
-  updateAgendaItem(update: any, ix: number): void {
-    this.#store.dispatch(new UpdateAgendaItem(update, ix));
+  updateAgendaItem(title: string, ix: number): void {
+    this.#store.dispatch(new UpdateAgendaItem({ title }, ix));
   }
 
-  updateTranscription(update: any, ix: number): void {
-    this.#store.dispatch(new UpdateTranscription(update, ix));
+  async updateSpeaker(speaker: string, ix: number): Promise<void> {
+    const original = this.#pluckTranscription(this.minutes, ix).speaker;
+    // 🔥 need "don't" ask me again
+    const button = await this.#dialog.showMessageBox({
+      buttons: ['Yes, change all', 'No, just this'],
+      message: `Do you want to change all occurences of "${original}" to "${speaker}"?`,
+      title: 'Minute Maker',
+      type: 'question'
+    });
+    // 👇 yes, change all
+    if (button === 0) {
+      const actions = [];
+      for (let iy = 0; iy < this.minutes.transcription.length - 1; iy++) {
+        const tx = this.minutes.transcription[iy];
+        if (tx.type === 'TX' && tx.speaker === original)
+          actions.push(new UpdateTranscription({ speaker }, iy));
+      }
+      this.#store.dispatch(actions);
+    }
+    // 👇 no, just this one
+    else if (button === 1)
+      this.#store.dispatch(new UpdateTranscription({ speaker }, ix));
+  }
+
+  updateSpeech(speech: string, ix: number): void {
+    this.#store.dispatch(new UpdateTranscription({ speech }, ix));
+  }
+
+  #pluckTranscription(minutes: Minutes, ix: number): Transcription {
+    if (minutes.transcription[ix].type === 'TX')
+      return minutes.transcription[ix] as any as Transcription;
+    else throw new Error(`Operation not supported for item #${ix}`);
   }
 }

@@ -1,4 +1,5 @@
 import { Action } from '@ngxs/store';
+import { Constants } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { NgxsOnInit } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -62,15 +63,15 @@ export type ConfigStateModel = {
     openaiCredentials: null, // 👈 of course!
     rephraseStrategyPrompts: {
       accuracy:
-        'Rephrase my statement as part of a conversation, using grammatical English and paragraphs, and in a natural conversational style',
+        'Rephrase the following statement, using the first person and grammatical English and paragraphs',
       brevity:
-        'Summarize and simplify my statement in a natural style as part of a conversation'
+        'Summarize and simplify the following statement using the first person'
     },
     summaryStrategyPrompts: {
       bullets:
-        'Summarize this discussion into bullet points as if the events discussed happened in the past',
+        'Summarize the following discussion into bullet points using the past tense',
       paragraphs:
-        'Summarize this discussion into short paragraphs for a professional reader as if the events discussed happened in the past'
+        'Summarize the following discussion for a professional reader into short paragraphs  using the past tense'
     },
     transcriptionImpl: 'google'
   }
@@ -154,6 +155,14 @@ export class ConfigState implements NgxsOnInit {
     config: ConfigStateModel
   ): TranscriptionImpl {
     return config.transcriptionImpl;
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟪 @Select(ConfigState.transcriptionRate) transcriptionRate$
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Selector() static transcriptionRate(config: ConfigStateModel): number {
+    return Constants[config.transcriptionImpl].transcriptionRate;
   }
 
   // //////////////////////////////////////////////////////////////////////////

@@ -174,15 +174,16 @@ import deepCopy from 'deep-copy';
       </main>
 
       <ng-template #transcribing>
-        <tui-block-status>
+        <tui-block-status
+          *ngIf="transcriptionRate$ | async as transcriptionRate">
           <img tuiSlot="top" src="./assets/meeting.png" />
 
           <h4>Transcription in progress ...</h4>
 
           <p>
-            Speech-to-text transcription typically processes audio at 2x
-            realtime, although performance is not linear for very short or very
-            long recordings.
+            Speech-to-text transcription typically processes audio at
+            {{ transcriptionRate }}x realtime, although performance is not
+            linear for very short or very long recordings.
           </p>
 
           <p>
@@ -190,7 +191,7 @@ import deepCopy from 'deep-copy';
             <b>
               {{
                 dayjs()
-                  .add(minutes.audio.duration / 2, 'second')
+                  .add(minutes.audio.duration / transcriptionRate, 'second')
                   .fromNow(true)
               }}
             </b>
@@ -198,7 +199,7 @@ import deepCopy from 'deep-copy';
             <b>
               {{
                 dayjs(minutes.transcriptionStart)
-                  .add(minutes.audio.duration / 2, 'second')
+                  .add(minutes.audio.duration / transcriptionRate, 'second')
                   .format('hh:mm a')
               }}
             </b>
@@ -249,6 +250,8 @@ export class RootPage {
   @Select(ConfigState.configured) configured$: Observable<boolean>;
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
   @Select(StatusState) status$: Observable<StatusStateModel>;
+  @Select(ConfigState.transcriptionRate)
+  transcriptionRate$: Observable<number>;
 
   @ViewChild(WaveSurferComponent) wavesurfer;
 

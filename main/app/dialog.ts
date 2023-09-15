@@ -1,5 +1,6 @@
 import { Channels } from './common';
 import { MessageBoxOptions } from './common';
+import { MessageBoxReply } from './common';
 
 import { dialog } from 'electron';
 import { ipcMain } from 'electron';
@@ -20,6 +21,9 @@ export function showErrorBox(event, title: string, content: string): void {
 
 ipcMain.handle(Channels.dialogShowMessageBox, showMessageBox);
 
-export function showMessageBox(event, options: MessageBoxOptions): number {
-  return dialog.showMessageBoxSync(globalThis.theWindow, options);
+export async function showMessageBox(
+  event,
+  options: MessageBoxOptions
+): Promise<MessageBoxReply> {
+  return await dialog.showMessageBox(globalThis.theWindow, options);
 }

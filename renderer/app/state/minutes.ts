@@ -121,6 +121,18 @@ export class UpdateFindReplace {
   constructor(public findReplace: Partial<FindReplace>) {}
 }
 
+export class UpdateSpeakers extends UndoableAction {
+  static readonly type = '[Minutes] UpdateSpeaker';
+  constructor(
+    public original: string,
+    public speaker: string,
+    public ix: number,
+    undoing = false
+  ) {
+    super(undoing);
+  }
+}
+
 export class UpdateSummary extends UndoableAction {
   static readonly type = '[Minutes] UpdateSummary';
   constructor(
@@ -442,6 +454,30 @@ export class MinutesState {
     if (getState().findReplace)
       setState(patch({ findReplace: patch(findReplace) }));
     else setState(patch({ findReplace }));
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
+  // 🟩 UpdateSpeakers
+  // //////////////////////////////////////////////////////////////////////////
+
+  @Action(UpdateSpeakers) updateSpeakers(
+    { getState, setState }: StateContext<MinutesStateModel>,
+    { original, speaker, ix, undoing }: UpdateSpeakers
+  ): void {
+    // 👇 put the inverse action onto the undo stack
+    if (!undoing)
+      this.#store.dispatch(
+        new StackUndoable([
+          new UpdateSpeakers(speaker, original, ix, true),
+          new UpdateSpeakers(original, speaker, ix, true)
+        ])
+      );
+    // 👇 now do the action
+    for (let iy = ix; iy < getState().transcription.length - 1; iy++) {
+      const tx = getState().transcription[iy];
+      if (tx.type === 'TX' && tx.speaker === original)
+        setState(patch({ transcription: updateItem(iy, patch({ speaker })) }));
+    }
   }
 
   // //////////////////////////////////////////////////////////////////////////

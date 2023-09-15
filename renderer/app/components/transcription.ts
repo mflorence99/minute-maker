@@ -8,10 +8,12 @@ import { FindReplaceMatch } from '#mm/components/find-replace';
 import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Output } from '@angular/core';
+import { SetMinutes } from '#mm/state/minutes';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { Transcription } from '#mm/common';
 import { UpdateAgendaItem } from '#mm/state/minutes';
+import { UpdateSpeakers } from '#mm/state/minutes';
 import { UpdateTranscription } from '#mm/state/minutes';
 import { WINDOW } from '@ng-web-apis/common';
 
@@ -217,26 +219,34 @@ export class TranscriptionComponent {
 
   async updateSpeaker(speaker: string, ix: number): Promise<void> {
     const original = this.#pluckTranscription(this.minutes, ix).speaker;
-    // 🔥 need "don't" ask me again
-    const button = await this.#dialog.showMessageBox({
-      buttons: ['Yes, change all', 'No, just this'],
-      message: `Do you want to change all occurences of "${original}" to "${speaker}"?`,
-      title: 'Minute Maker',
-      type: 'question'
-    });
-    // 👇 yes, change all
-    if (button === 0) {
-      const actions = [];
-      for (let iy = 0; iy < this.minutes.transcription.length - 1; iy++) {
-        const tx = this.minutes.transcription[iy];
-        if (tx.type === 'TX' && tx.speaker === original)
-          actions.push(new UpdateTranscription({ speaker }, iy));
+    // 👇 need to show change dialog?
+    //    if original is blank, don't show the dialog because
+    //    we will ALWAYS only change this occurrence
+    let button = 1; // 👈 safety valve if button doesn't get set
+    if (original && !this.minutes.hideSpeakerUpdateDialog) {
+      const { checkboxChecked, response } = await this.#dialog.showMessageBox({
+        buttons: ['Yes, change all', 'No, just this one'],
+        checkboxLabel: `Don't show this message again for these minutes`,
+        detail: `If "don't show this message again" is checked, the action will be honored for all future changes to these minutes. This can be reversed from the details tab.`,
+        message: `Change all occurences of "${original}" to "${speaker}" from here onwards?`,
+        title: 'Minute Maker',
+        type: 'question'
+      });
+      button = response;
+      if (checkboxChecked) {
+        this.#store.dispatch(
+          new SetMinutes({
+            hideSpeakerUpdateDialog: true,
+            speakerUpdateButton: button
+          })
+        );
       }
-      this.#store.dispatch(actions);
-    }
+    } else button = this.minutes.speakerUpdateButton;
+    // 👇 yes, change all -- but only if the original wasn't blank
+    if (original && button === 0)
+      this.#store.dispatch(new UpdateSpeakers(original, speaker, ix));
     // 👇 no, just this one
-    else if (button === 1)
-      this.#store.dispatch(new UpdateTranscription({ speaker }, ix));
+    else this.#store.dispatch(new UpdateTranscription({ speaker }, ix));
   }
 
   updateSpeech(speech: string, ix: number): void {

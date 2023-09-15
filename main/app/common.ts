@@ -181,9 +181,16 @@ export type FileFilter = {
 
 export type MessageBoxOptions = {
   buttons: string[];
+  checkboxLabel?: string;
+  detail?: string;
   message: string;
   title?: string;
   type?: 'none' | 'info' | 'error' | 'question' | 'warning';
+};
+
+export type MessageBoxReply = {
+  checkboxChecked: boolean;
+  response: number;
 };
 
 export type OpenAIRequest = {
@@ -280,10 +287,12 @@ export const MinutesSchema = z.object({
     url: z.string().url()
   }),
   date: z.coerce.date(),
+  findReplace: FindReplaceSchema.optional(),
+  hideSpeakerUpdateDialog: z.boolean().optional(),
   nextTranscriptionID: z.number(),
   numSpeakers: z.number(),
   present: z.string().array(),
-  findReplace: FindReplaceSchema.optional(),
+  speakerUpdateButton: z.number().optional(),
   subject: z.string(),
   subtitle: z.string(),
   summary: SummarySchema.array(),

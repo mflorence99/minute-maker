@@ -94,7 +94,7 @@ export class ControllerService {
   // //////////////////////////////////////////////////////////////////////////
 
   async cancelWorking(working: Working): Promise<void> {
-    const button = await this.#dialog.showMessageBox({
+    const { response: button } = await this.#dialog.showMessageBox({
       buttons: ['Proceed', 'Cancel'],
       message: `This action will cancel the ${working.on} currently running in the background. Are you sure you wish to proceed?`,
       title: 'Minute Maker',
@@ -281,7 +281,7 @@ export class ControllerService {
     const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
     if (minutes.summary.length > 0) {
       // 👇 warn about overwrite
-      const button = await this.#dialog.showMessageBox({
+      const { response: button } = await this.#dialog.showMessageBox({
         buttons: ['Proceed', 'Cancel'],
         message:
           'This action will overwrite the existing summary and cannot be undone. Are you sure you wish to proceed?',
@@ -346,7 +346,7 @@ export class ControllerService {
     const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
     // 👇 warn about overwrite
     if (minutes.transcription.length > 0) {
-      const button = await this.#dialog.showMessageBox({
+      const { response: button } = await this.#dialog.showMessageBox({
         buttons: ['Proceed', 'Cancel'],
         message:
           'This action will overwrite the existing transcription and cannot be undone. Are you sure you wish to proceed?',

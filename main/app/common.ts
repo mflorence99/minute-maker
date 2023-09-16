@@ -57,12 +57,16 @@ export type TranscriptionImpl = 'assemblyai' | 'google';
 
 export const Constants = {
   assemblyai: {
+    description: `AssemblyAI's Transcript`,
     endpoint: 'https://api.assemblyai.com/v2',
+    link: 'https://www.assemblyai.com/docs/',
     transcriptionRate: 5 // 👈 x real time
   },
   backoffOptions,
   corsOptions,
   google: {
+    description: `Google's Speech-to-text`,
+    link: 'https://cloud.google.com/speech-to-text/docs/how-to',
     transcriptionRate: 2 // 👈 x real time
   },
   maxRecentPaths: 32,

@@ -54,6 +54,9 @@ import { TuiAlertModule } from '@taiga-ui/core';
 import { TuiBadgeModule } from '@taiga-ui/kit';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import { TuiButtonModule } from '@taiga-ui/core';
+import { TuiCheckboxBlockModule } from '@taiga-ui/kit';
+import { TuiDataListModule } from '@taiga-ui/core';
+import { TuiDataListWrapperModule } from '@taiga-ui/kit';
 import { TuiDayOfWeek } from '@taiga-ui/cdk';
 import { TuiErrorModule } from '@taiga-ui/core';
 import { TuiFieldErrorPipeModule } from '@taiga-ui/kit';
@@ -69,6 +72,7 @@ import { TuiNotificationModule } from '@taiga-ui/core';
 import { TuiProgressModule } from '@taiga-ui/kit';
 import { TuiRadioBlockModule } from '@taiga-ui/kit';
 import { TuiRootModule } from '@taiga-ui/core';
+import { TuiSelectModule } from '@taiga-ui/kit';
 import { TuiSvgModule } from '@taiga-ui/core';
 import { TuiTabsModule } from '@taiga-ui/kit';
 import { TuiTextAreaModule } from '@taiga-ui/kit';
@@ -187,6 +191,9 @@ const MODULES = [
   TuiBadgeModule,
   TuiBlockStatusModule,
   TuiButtonModule,
+  TuiCheckboxBlockModule,
+  TuiDataListModule,
+  TuiDataListWrapperModule,
   TuiErrorModule,
   TuiFieldErrorPipeModule,
   TuiHintModule,
@@ -201,6 +208,7 @@ const MODULES = [
   TuiProgressModule,
   TuiRadioBlockModule,
   TuiRootModule,
+  TuiSelectModule,
   TuiSvgModule,
   TuiTabsModule,
   TuiTextAreaModule,

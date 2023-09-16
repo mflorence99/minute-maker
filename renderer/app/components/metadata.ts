@@ -52,6 +52,22 @@ import { inject } from '@angular/core';
         </article>
       </article>
 
+      <label tuiLabel="Settings">
+        <article class="row">
+          <tui-checkbox-block formControlName="hideSpeakerUpdateDialog">
+            Hide speaker update dialog
+          </tui-checkbox-block>
+
+          <tui-select formControlName="speakerUpdateButton">
+            Speaker Update Action
+            <input placeholder="Select update action" tuiTextfield />
+            <tui-data-list-wrapper
+              *tuiDataList
+              [items]="speakerUpdateActions"></tui-data-list-wrapper>
+          </tui-select>
+        </article>
+      </label>
+
       <label tuiLabel="Members Present">
         <tui-input-tag
           mmDragDroppable
@@ -86,6 +102,8 @@ export class MetadataComponent implements OnChanges, OnInit {
 
   metadata: FormGroup;
 
+  speakerUpdateActions = ['Change all speakers', 'Change only one'];
+
   #store = inject(Store);
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -95,8 +113,13 @@ export class MetadataComponent implements OnChanges, OnInit {
         {
           absent: this.minutes.absent ?? dflt.absent,
           date: this.minutes.date ?? dflt.date,
+          hideSpeakerUpdateDialog:
+            this.minutes.hideSpeakerUpdateDialog ??
+            dflt.hideSpeakerUpdateDialog,
           numSpeakers: this.minutes.numSpeakers || dflt.numSpeakers,
           present: this.minutes.present ?? dflt.present,
+          speakerUpdateButton:
+            this.speakerUpdateActions[this.minutes.speakerUpdateButton],
           subject: this.minutes.subject ?? dflt.subject,
           subtitle: this.minutes.subtitle ?? dflt.subtitle,
           title: this.minutes.title ?? dflt.title,
@@ -112,11 +135,17 @@ export class MetadataComponent implements OnChanges, OnInit {
     this.metadata = new FormGroup({
       absent: new FormControl(this.minutes.absent),
       date: new FormControl(this.minutes.date, Validators.required),
+      hideSpeakerUpdateDialog: new FormControl(
+        this.minutes.hideSpeakerUpdateDialog
+      ),
       numSpeakers: new FormControl(
         this.minutes.numSpeakers || this.minutes.present?.length || 1,
         Validators.required
       ),
       present: new FormControl(this.minutes.present),
+      speakerUpdateButton: new FormControl(
+        this.speakerUpdateActions[this.minutes.speakerUpdateButton]
+      ),
       subject: new FormControl(this.minutes.subject),
       subtitle: new FormControl(this.minutes.subtitle),
       title: new FormControl(this.minutes.title, Validators.required),
@@ -124,7 +153,14 @@ export class MetadataComponent implements OnChanges, OnInit {
     });
     // 👇 watch for changes and update accordingly
     this.metadata.valueChanges.subscribe((details) =>
-      this.#store.dispatch(new UpdateChanges(details))
+      this.#store.dispatch(
+        new UpdateChanges({
+          ...details,
+          speakerUpdateButton: this.speakerUpdateActions.indexOf(
+            details.speakerUpdateButton
+          )
+        })
+      )
     );
   }
 }

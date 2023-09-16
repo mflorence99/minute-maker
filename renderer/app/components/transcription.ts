@@ -233,14 +233,12 @@ export class TranscriptionComponent {
         type: 'question'
       });
       button = response;
-      if (checkboxChecked) {
-        this.#store.dispatch(
-          new SetMinutes({
-            hideSpeakerUpdateDialog: true,
-            speakerUpdateButton: button
-          })
-        );
-      }
+      this.#store.dispatch(
+        new SetMinutes({
+          hideSpeakerUpdateDialog: checkboxChecked,
+          speakerUpdateButton: button
+        })
+      );
     } else button = this.minutes.speakerUpdateButton;
     // 👇 yes, change all -- but only if the original wasn't blank
     if (original && button === 0)

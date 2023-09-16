@@ -328,6 +328,7 @@ export const emptyMinutes = (): Minutes => ({
   audio: {},
   date: new Date(),
   findReplace: {},
+  hideSpeakerUpdateDialog: false,
   nextTranscriptionID: 0,
   numSpeakers: 1,
   present: [],

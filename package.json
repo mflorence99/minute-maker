@@ -116,7 +116,7 @@
     "jest-extended": "^4",
     "jest-junit": "^16",
     "jest-preset-angular": "^13",
-    "marked": "^8",
+    "marked": "^9",
     "material-design-icons": "^3",
     "ng-mocks": "^14",
     "ngx-autosize": "^2",
@@ -140,6 +140,6 @@
     "typescript": "^5",
     "uuid": "^9",
     "wavesurfer.js": "^7",
-    "zone.js": "~0.13.1"
+    "zone.js": "~0.13.3"
   }
 }

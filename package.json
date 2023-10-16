@@ -51,7 +51,7 @@
     "jsome": "^2",
     "music-metadata": "^7",
     "openai": "^4",
-    "sharp": "^0.32.4",
+    "sharp": "^0.32.6",
     "zod": "^3"
   },
   "devDependencies": {
@@ -89,7 +89,7 @@
     "@taiga-ui/styles": "^3",
     "@tinkoff/ng-event-plugins": "^3",
     "@types/jest": "^29",
-    "@types/marked": "^5",
+    "@types/marked": "^6",
     "@types/nunjucks": "^3",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
@@ -97,7 +97,7 @@
     "dayjs": "^1",
     "deep-copy": "^1",
     "deep-equal": "^2",
-    "electron": "^26",
+    "electron": "^27",
     "electron-installer-debian": "^3",
     "electron-packager": "^17",
     "eslint": "^8",
@@ -140,6 +140,6 @@
     "typescript": "^5",
     "uuid": "^9",
     "wavesurfer.js": "^7",
-    "zone.js": "~0.13.3"
+    "zone.js": "~0.14.0"
   }
 }

@@ -43,6 +43,11 @@ const corsOptions: Cors[] = [
   }
 ];
 
+const openaiModels: Record<OpenAIModel, string> = {
+  'gpt-3.5-turbo-16k': 'GPT 3.5',
+  'gpt-4': 'GPT 4'
+};
+
 // 👇 all this so we can access the strategy at runtime eg: in UI
 export const rephraseStrategies = ['brevity', 'accuracy'] as const;
 export type RephraseStrategy = (typeof rephraseStrategies)[number];
@@ -55,20 +60,23 @@ const summaryStrategy: SummaryStrategy = 'paragraphs';
 
 export type TranscriptionImpl = 'assemblyai' | 'google';
 
-export const Constants = {
+const transcriptionImpls: Record<TranscriptionImpl, any> = {
   assemblyai: {
     description: `AssemblyAI's Transcript`,
     endpoint: 'https://api.assemblyai.com/v2',
     link: 'https://www.assemblyai.com/docs/',
     transcriptionRate: 5 // 👈 x real time
   },
-  backoffOptions,
-  corsOptions,
   google: {
     description: `Google's Speech-to-text`,
     link: 'https://cloud.google.com/speech-to-text/docs/how-to',
     transcriptionRate: 2 // 👈 x real time
-  },
+  }
+};
+
+export const Constants = {
+  backoffOptions,
+  corsOptions,
   maxRecentPaths: 32,
   maxSpeechWords: 250,
   maxUndoStackDepth: 7,
@@ -76,6 +84,7 @@ export const Constants = {
     temperature: 0.5,
     top_p: 1
   },
+  openaiModels,
   rephraseStrategy,
   saveFileThrottleInterval: 1000,
   sentryDSN:
@@ -83,7 +92,8 @@ export const Constants = {
   summaryStrategy,
   throttledEventInterval: 1500,
   timeupdateThrottleInterval: 250,
-  transcriberPollInterval: 10000
+  transcriberPollInterval: 10000,
+  transcriptionImpls
 };
 
 // //////////////////////////////////////////////////////////////////////////
@@ -197,9 +207,10 @@ export type MessageBoxReply = {
   response: number;
 };
 
+export type OpenAIModel = 'gpt-3.5-turbo-16k' | 'gpt-4';
+
 export type OpenAIRequest = {
-  max_tokens?: number;
-  model?: string;
+  model: OpenAIModel;
   prompt: string;
   temperature?: number;
   top_p?: number;

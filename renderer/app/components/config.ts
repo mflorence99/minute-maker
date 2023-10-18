@@ -19,18 +19,29 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
   selector: 'mm-config',
   template: `
     <form [formGroup]="configForm">
-      <label tuiLabel="Transcription implementation">
-        <article>
+      <article class="row">
+        <label tuiLabel="Transcription implementation">
           <tui-radio-block formControlName="transcriptionImpl" item="google">
-            Google Speech-to-Text
+            Google
           </tui-radio-block>
           <tui-radio-block
             formControlName="transcriptionImpl"
             item="assemblyai">
-            AssemblyAI Transcript
+            AssemblyAI
           </tui-radio-block>
-        </article>
-      </label>
+        </label>
+
+        <label tuiLabel="OpenAI model">
+          <tui-radio-block
+            formControlName="openaiModel"
+            item="gpt-3.5-turbo-16k">
+            GPT 3.5
+          </tui-radio-block>
+          <tui-radio-block formControlName="openaiModel" item="gpt-4">
+            GPT 4
+          </tui-radio-block>
+        </label>
+      </article>
 
       <label tuiLabel="Credentials">
         <article class="column">
@@ -132,6 +143,7 @@ export class ConfigComponent implements OnChanges, OnInit {
         Validators.required,
         credentialsValidator
       ]),
+      openaiModel: new FormControl(this.config.openaiModel),
       rephraseStrategyPrompts: new FormGroup({
         accuracy: new FormControl(this.config.rephraseStrategyPrompts.accuracy),
         brevity: new FormControl(this.config.rephraseStrategyPrompts.brevity)

@@ -3,6 +3,7 @@ import { Constants } from '#mm/common';
 import { Injectable } from '@angular/core';
 import { NgxsOnInit } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { OpenAIModel } from '#mm/common';
 import { OpenAIService } from '#mm/services/openai';
 import { RephraseStrategy } from '#mm/common';
 import { Select } from '@ngxs/store';
@@ -49,6 +50,7 @@ export type ConfigStateModel = {
   bucketName: string;
   googleCredentials: string;
   openaiCredentials: string;
+  openaiModel: OpenAIModel;
   rephraseStrategyPrompts: RephraseStrategyPrompts;
   summaryStrategyPrompts: SummaryStrategyPrompts;
   transcriptionImpl: TranscriptionImpl;
@@ -61,6 +63,7 @@ export type ConfigStateModel = {
     bucketName: null, // 👈 of course!
     googleCredentials: null, // 👈 of course!
     openaiCredentials: null, // 👈 of course!
+    openaiModel: 'gpt-4',
     rephraseStrategyPrompts: {
       accuracy:
         'Rephrase the following statement, using the first person and grammatical English and paragraphs',
@@ -69,9 +72,9 @@ export type ConfigStateModel = {
     },
     summaryStrategyPrompts: {
       bullets:
-        'Summarize the following discussion into bullet points using the past tense',
+        'The intended audience is a professional reader. Summarize the following discussion into bullet points by using the past tense',
       paragraphs:
-        'Summarize the following discussion for a professional reader into short paragraphs  using the past tense'
+        'The intended audience is a professional reader. Summarize the following discussion into short paragraphs by using the past tense'
     },
     transcriptionImpl: 'google'
   }
@@ -162,7 +165,8 @@ export class ConfigState implements NgxsOnInit {
   // //////////////////////////////////////////////////////////////////////////
 
   @Selector() static transcriptionRate(config: ConfigStateModel): number {
-    return Constants[config.transcriptionImpl].transcriptionRate;
+    return Constants.transcriptionImpls[config.transcriptionImpl]
+      .transcriptionRate;
   }
 
   // //////////////////////////////////////////////////////////////////////////

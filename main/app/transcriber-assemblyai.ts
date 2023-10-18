@@ -33,7 +33,7 @@ export async function transcriberCancelXXX(
 ): Promise<void> {
   jsome([`👉  ASSEMBLYAI ${Channels.transcriberCancel}`, transcriptionName]);
   const response = await axios.delete(
-    `${Constants.assemblyai.endpoint}/transcript/${transcriptionName}`,
+    `${Constants.transcriptionImpls.assemblyai.endpoint}/transcript/${transcriptionName}`,
     {
       headers: {
         Authorization: theCredentials
@@ -68,7 +68,7 @@ export async function transcriberPoll(
       throw new Error('Transcription cancelled');
     // 👇 how far along are we?
     const response = await axios.get(
-      `${Constants.assemblyai.endpoint}/transcript/${transcriptionName}`,
+      `${Constants.transcriptionImpls.assemblyai.endpoint}/transcript/${transcriptionName}`,
       {
         headers: {
           Authorization: theCredentials
@@ -113,7 +113,7 @@ export async function transcriberRequest(
   jsome([`👉  ASSEMBLYAI ${Channels.transcriberRequest}`, request]);
   // 👇 call AssemblyAI to begin transcription
   const response = await axios.post(
-    `${Constants.assemblyai.endpoint}/transcript`,
+    `${Constants.transcriptionImpls.assemblyai.endpoint}/transcript`,
     {
       audio_url: request.audio.url,
       disfluencies: false,

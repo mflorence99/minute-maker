@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
+import { ConfigStateModel } from '#mm/state/config';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ExporterService } from '#mm/services/exporter';
 import { Input } from '@angular/core';
@@ -42,6 +43,7 @@ import { inject } from '@angular/core';
   ]
 })
 export class PreviewComponent implements OnChanges {
+  @Input({ required: true }) config: ConfigStateModel;
   @Input({ required: true }) minutes: Minutes;
 
   rendering: SafeHtml;
@@ -50,11 +52,11 @@ export class PreviewComponent implements OnChanges {
   #sanitizer = inject(DomSanitizer);
 
   export(): void {
-    this.#exporter.export(this.minutes);
+    this.#exporter.export(this.config, this.minutes);
   }
 
   ngOnChanges(): void {
-    const raw = this.#exporter.render(this.minutes, 0.8);
+    const raw = this.#exporter.render(this.config, this.minutes, 0.8);
     this.rendering = this.#sanitizer.bypassSecurityTrustHtml(raw);
   }
 }

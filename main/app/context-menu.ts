@@ -106,7 +106,7 @@ ContextMenu({
         click: clicker,
         enabled: itemsEnabled[MenuID.join],
         id: MenuID.join,
-        label: 'Join to next Transcription'
+        label: 'Join to Next Transcription'
       }
     ];
   },

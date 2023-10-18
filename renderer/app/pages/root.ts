@@ -144,6 +144,7 @@ import deepCopy from 'deep-copy';
               showing:
                 configured && componentState.tabIndex === TabIndex.preview
             }"
+            [config]="config$ | async"
             [minutes]="minutes" />
 
           <mm-config

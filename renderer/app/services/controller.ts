@@ -130,7 +130,10 @@ export class ControllerService {
   // //////////////////////////////////////////////////////////////////////////
 
   exportMinutes(): void {
-    this.#exporter.export(this.#store.selectSnapshot<Minutes>(MinutesState));
+    this.#exporter.export(
+      this.#store.selectSnapshot<ConfigStateModel>(ConfigState),
+      this.#store.selectSnapshot<Minutes>(MinutesState)
+    );
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -234,6 +237,7 @@ export class ControllerService {
     try {
       const speech = this.#pluckTranscription(minutes, ix).speech;
       const response = await this.#openai.chatCompletion({
+        model: config.openaiModel,
         prompt: `${config.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`
       });
       if (response.finish_reason === 'length')
@@ -320,6 +324,7 @@ export class ControllerService {
       const summary: Summary[] = [];
       for (const [section, texts] of Object.entries(bySection)) {
         const response = await this.#openai.chatCompletion({
+          model: config.openaiModel,
           prompt: `${
             config.summaryStrategyPrompts[summaryStrategy]
           }:\n\n${texts.join('\n')}`

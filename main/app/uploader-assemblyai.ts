@@ -34,7 +34,7 @@ export async function uploaderRequest(
   // 👁️ https://www.assemblyai.com/docs/Guides/transcribing_an_audio_file
   const data = await readFile(request.filePath);
   const _response = await axios.post(
-    `${Constants.assemblyai.endpoint}/upload`,
+    `${Constants.transcriptionImpls.assemblyai.endpoint}/upload`,
     data,
     {
       headers: {

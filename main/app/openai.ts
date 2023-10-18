@@ -30,22 +30,16 @@ export async function chatCompletion(
   const openai = new OpenAI({
     apiKey: theCredentials
   });
-  // 👇 these are the request defaults
-  const dflt = {
-    ...Constants.openaiDefaults,
-    model: 'gpt-3.5-turbo-16k'
-  };
-  // 👇 simplify the API to look the same as "completion"
-  const { prompt, ...request } = _request;
   // 👇 ready to call OpenAI
+  const { prompt, ...request } = _request;
   let response;
   try {
     const _response = await backOff(
       () =>
         openai.chat.completions.create({
           messages: [{ content: prompt, role: 'user' }],
-          ...request,
-          ...dflt
+          ...Constants.openaiDefaults,
+          ...request
         }),
       backoffOptions()
     );

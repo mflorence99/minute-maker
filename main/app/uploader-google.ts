@@ -27,11 +27,11 @@ export async function uploaderRequest(
   event,
   request: UploaderRequest
 ): Promise<UploaderResponse> {
+  jsome([`👉  GOOGLE ${Channels.uploaderRequest}`, request]);
   const storage = new Storage({ credentials: theCredentials });
   const options = {
     destination: request.destFileName
   };
-  jsome([`👉  GOOGLE ${Channels.uploaderRequest}`, request]);
   await storage.bucket(request.bucketName).upload(request.filePath, options);
   const response = {
     gcsuri: `gs://${request.bucketName}/${request.destFileName}`,

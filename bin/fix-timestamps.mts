@@ -11,13 +11,15 @@ const path = await input({ message: 'Enter path to minutes JSON' });
 console.log(chalk.yellow(`👈 reading ${path}`));
 const minutes = JSON.parse(readFileSync(path).toString());
 
-// 👇 what chunk of time is missing?
-const duration = minutes.audio.duration;
-const missing = duration - minutes.transcription.at(-1).start;
+// 👇 correct for the wrong offset
+const offset = 9 * 60;
 
 // 👇 reset the timestamp of each Transcription
 minutes.transcription.forEach((tx) => {
-  tx.start += missing * (tx.start / duration);
+  if (tx.type === 'TX' && tx.id >= 230) {
+    tx.start += offset;
+    tx.end += offset;
+  }
 });
 
 // 👇 and we're done!

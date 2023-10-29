@@ -33,7 +33,7 @@
 
       body {
         font-family: sans-serif;
-        font-size: 16px;
+        font-size: 14px;
         margin: 2rem;
         zoom: {{ zoom }};
       }
@@ -57,12 +57,24 @@
         padding: 0.5rem;
       }
 
+      table {
+        font-size: 14px;
+      }
+
       table.attendees td:not(:first-child) {
         padding-left: 2rem;
       }
 
+      table.attendees td .attendee::before {
+        content: '\2022  ';
+      }
+
+      table.attendees td .attendee {
+        margin-left: 1rem;
+        text-indent: -1rem;
+      }
+
       table.attendees td.title {
-        font-size: larger;
         font-weight: bold;
       }
 
@@ -77,7 +89,6 @@
       }
 
       table.disclaimer td {
-        font-size: smaller;
         line-height: 1.25;
         padding: 4px;
       }
@@ -153,15 +164,34 @@
 
       <tr>
         <td class="title">Present</td>
-        <td class="title">Absent</td>
         <td class="title">Visitors</td>
       <tr>
 
         <tr>
-          {% for attendees in [minutes.present, minutes.absent, minutes.visitors] %}
+          {% for attendees in [minutes.present, minutes.visitors] %}
             <td>
               {% for attendee in attendees %}
-                <div>{{ attendee }}</div>
+                <div class="attendee">{{ attendee }}</div>
+              {% else %}
+                None
+              {% endfor %}
+            </td>
+          {% endfor %}
+        </tr>
+
+      <tr>
+        <td class="title">&nbsp;</td>
+      <tr>
+
+      <tr>
+        <td class="title">Absent</td>
+      <tr>
+
+        <tr>
+          {% for attendees in [minutes.absent] %}
+            <td>
+              {% for attendee in attendees %}
+                <div class="attendee">{{ attendee }}</div>
               {% else %}
                 None
               {% endfor %}

@@ -1,7 +1,7 @@
 import PACKAGE from '../../package.json';
 
 import { BackoffOptions } from 'exponential-backoff';
-import { Cors } from '@google-cloud/storage/build/src/storage';
+import { Cors } from '@google-cloud/storage/build/cjs/src/storage';
 
 import { z } from 'zod';
 

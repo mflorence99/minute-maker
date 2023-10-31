@@ -60,10 +60,15 @@ const summaryStrategy: SummaryStrategy = 'paragraphs';
 
 export type TranscriptionImpl = 'assemblyai' | 'google';
 
-const transcriptionImpls: Record<TranscriptionImpl, any> = {
+export type TranscriptionTech = {
+  description: string;
+  link: string;
+  transcriptionRate: number;
+};
+
+const transcriptionImpls: Record<TranscriptionImpl, TranscriptionTech> = {
   assemblyai: {
     description: `AssemblyAI's Transcript`,
-    endpoint: 'https://api.assemblyai.com/v2',
     link: 'https://www.assemblyai.com/docs/',
     transcriptionRate: 5 // 👈 x real time
   },

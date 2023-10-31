@@ -1,11 +1,9 @@
 import { Channels } from './common';
-import { Constants } from './common';
 import { UploaderRequest } from './common';
 import { UploaderResponse } from './common';
 
-import { readFile } from 'fs/promises';
+import { AssemblyAI } from 'assemblyai';
 
-import axios from 'axios';
 import jsome from 'jsome';
 
 let theCredentials: string;
@@ -31,29 +29,13 @@ export async function uploaderRequest(
   request: UploaderRequest
 ): Promise<UploaderResponse> {
   jsome([`👉  ASSEMBLYAI ${Channels.uploaderRequest}`, request]);
-  // 👁️ https://www.assemblyai.com/docs/Guides/transcribing_an_audio_file
-  const data = await readFile(request.filePath);
-  const _response = await axios.post(
-    `${Constants.transcriptionImpls.assemblyai.endpoint}/upload`,
-    data,
-    {
-      headers: {
-        'Authorization': theCredentials,
-        'Content-Type': 'application/octet-stream'
-      }
-    }
-  );
-  if (_response.status === 200) {
-    const response = {
-      gcsuri: '', // 👈 not used
-      url: _response.data.upload_url
-    };
-    jsome([`👈  ASSEMBLY ${Channels.uploaderRequest}`, response]);
-    return response;
-  } else {
-    jsome(`🔥  ${_response.statusText}`);
-    throw new Error(_response.statusText);
-  }
+  const client = new AssemblyAI({ apiKey: theCredentials });
+  const response = await client.files.upload(request.filePath);
+  jsome([`👈  ASSEMBLY ${Channels.uploaderRequest}`, response]);
+  return {
+    gcsuri: '', // 👈 not used
+    url: response
+  };
 }
 
 // //////////////////////////////////////////////////////////////////////////

@@ -43,7 +43,6 @@
     "@sentry/node": "^7",
     "@taiga-ui/icons": "^3",
     "assemblyai": "^3",
-    "axios": "^1",
     "electron-context-menu": "^3",
     "electron-is-dev": "^2",
     "electron-squirrel-startup": "^1",

@@ -27,7 +27,13 @@ export type StatusStateModel = {
 
 export class Working {
   constructor(
-    public on: 'audio' | 'rephrase' | 'summary' | 'transcription' | 'upload',
+    public on:
+      | 'audio'
+      | 'badge'
+      | 'rephrase'
+      | 'summary'
+      | 'transcription'
+      | 'upload',
     public canceledBy: Function = null
   ) {}
 }

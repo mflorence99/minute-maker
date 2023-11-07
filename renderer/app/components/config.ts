@@ -37,7 +37,9 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
             item="gpt-3.5-turbo-16k">
             GPT 3.5
           </tui-radio-block>
-          <tui-radio-block formControlName="openaiModel" item="gpt-4">
+          <tui-radio-block
+            formControlName="openaiModel"
+            item="gpt-4-1106-preview">
             GPT 4
           </tui-radio-block>
         </label>
@@ -87,6 +89,15 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
           [error]="[] | tuiFieldError | async"></tui-error>
       </article>
 
+      <article>
+        <label tuiLabel="Badge generation prompt">
+          <tui-text-area
+            [expandable]="true"
+            formControlName="badgeGenerationPrompt"
+            size="m" />
+        </label>
+      </article>
+
       <article class="row" formGroupName="rephraseStrategyPrompts">
         <label tuiLabel="Transcription rephrase strategy for accuracy">
           <tui-text-area [expandable]="true" formControlName="accuracy" />
@@ -131,6 +142,7 @@ export class ConfigComponent implements OnChanges, OnInit {
         this.config.assemblyaiCredentials,
         [Validators.required, credentialsValidator]
       ),
+      badgeGenerationPrompt: new FormControl(this.config.badgeGenerationPrompt),
       bucketName: new FormControl(this.config.bucketName, [
         Validators.required,
         credentialsValidator

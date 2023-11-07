@@ -1,7 +1,9 @@
 import { Channels } from './common';
 import { Constants } from './common';
-import { OpenAIRequest } from './common';
-import { OpenAIResponse } from './common';
+import { OpenAIChatCompletionRequest } from './common';
+import { OpenAIChatCompletionResponse } from './common';
+import { OpenAIImageGenerationRequest } from './common';
+import { OpenAIImageGenerationResponse } from './common';
 
 import { trunc } from './utils';
 
@@ -23,16 +25,20 @@ ipcMain.handle(Channels.openaiChatCompletion, chatCompletion);
 
 export async function chatCompletion(
   event,
-  _request: OpenAIRequest
-): Promise<OpenAIResponse> {
-  jsome([`👉  ${Channels.openaiChatCompletion}`, `${trunc(_request.prompt)}`]);
+  _request: OpenAIChatCompletionRequest
+): Promise<OpenAIChatCompletionResponse> {
+  jsome([
+    `👉  ${Channels.openaiChatCompletion}`,
+    _request.model,
+    trunc(_request.prompt)
+  ]);
   // 👇 create the OpenAI client
   const openai = new OpenAI({
     apiKey: theCredentials
   });
   // 👇 ready to call OpenAI
   const { prompt, ...request } = _request;
-  let response;
+  let response: OpenAIChatCompletionResponse;
   try {
     const _response = await backOff(
       () =>
@@ -53,8 +59,8 @@ export async function chatCompletion(
   // 👇 return synthesized response
   jsome([
     `👈 ${Channels.openaiChatCompletion}`,
-    `${response.finish_reason}`,
-    `${trunc(response.text)}`
+    response.finish_reason,
+    trunc(response.text)
   ]);
   return response;
 }
@@ -66,8 +72,56 @@ export async function chatCompletion(
 ipcMain.handle(Channels.openaiCredentials, credentials);
 
 export function credentials(event, credentials: string): void {
-  jsome(`👉  ${Channels.openaiCredentials} ${credentials}`);
+  jsome([`👉  ${Channels.openaiCredentials}`, credentials]);
   theCredentials = credentials.trim();
+}
+
+// //////////////////////////////////////////////////////////////////////////
+// 🟩 Channels.openaiImageGeneration
+// //////////////////////////////////////////////////////////////////////////
+
+ipcMain.handle(Channels.openaiImageGeneration, imageGeneration);
+
+export async function imageGeneration(
+  event,
+  request: OpenAIImageGenerationRequest
+): Promise<OpenAIImageGenerationResponse> {
+  jsome([
+    `👉  ${Channels.openaiImageGeneration}`,
+    request.model,
+    trunc(request.prompt)
+  ]);
+  // 👇 create the OpenAI client
+  const openai = new OpenAI({
+    apiKey: theCredentials
+  });
+  // 👇 ready to call OpenAI
+  let response: OpenAIImageGenerationResponse;
+  try {
+    const _response = await backOff(
+      () =>
+        openai.images.generate({
+          model: request.model,
+          n: 1,
+          prompt: request.prompt,
+          quality: 'hd',
+          response_format: 'b64_json',
+          size: request.size,
+          style: 'vivid'
+        } as any),
+      backoffOptions()
+    );
+    response = { b64_json: _response.data[0].b64_json, error: '' };
+  } catch (error) {
+    response = { b64_json: '', error: error.message };
+  }
+  // 👇 return synthesized response
+  jsome([
+    `👈 ${Channels.openaiImageGeneration}`,
+    response.error,
+    trunc(response.b64_json)
+  ]);
+  return response;
 }
 
 // //////////////////////////////////////////////////////////////////////////

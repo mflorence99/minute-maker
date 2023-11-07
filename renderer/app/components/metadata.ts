@@ -20,16 +20,11 @@ import { inject } from '@angular/core';
   template: `
     <form [formGroup]="metadata">
       <label tuiLabel="Description">
-        <tui-input formControlName="title">
-          Title
+        <tui-input formControlName="organization">
+          Organization
           <input tuiTextfield />
         </tui-input>
       </label>
-
-      <tui-input formControlName="subtitle">
-        Subtitle
-        <input tuiTextfield />
-      </tui-input>
 
       <tui-input formControlName="subject">
         Subject
@@ -117,12 +112,11 @@ export class MetadataComponent implements OnChanges, OnInit {
             this.minutes.hideSpeakerUpdateDialog ??
             dflt.hideSpeakerUpdateDialog,
           numSpeakers: this.minutes.numSpeakers || dflt.numSpeakers,
+          organization: this.minutes.organization ?? dflt.subject,
           present: this.minutes.present ?? dflt.present,
           speakerUpdateButton:
             this.speakerUpdateActions[this.minutes.speakerUpdateButton],
           subject: this.minutes.subject ?? dflt.subject,
-          subtitle: this.minutes.subtitle ?? dflt.subtitle,
-          title: this.minutes.title ?? dflt.title,
           visitors: this.minutes.visitors ?? dflt.visitors
         },
         { emitEvent: false }
@@ -142,13 +136,15 @@ export class MetadataComponent implements OnChanges, OnInit {
         this.minutes.numSpeakers || this.minutes.present?.length || 1,
         Validators.required
       ),
+      organization: new FormControl(
+        this.minutes.organization,
+        Validators.required
+      ),
       present: new FormControl(this.minutes.present),
       speakerUpdateButton: new FormControl(
         this.speakerUpdateActions[this.minutes.speakerUpdateButton]
       ),
       subject: new FormControl(this.minutes.subject),
-      subtitle: new FormControl(this.minutes.subtitle),
-      title: new FormControl(this.minutes.title, Validators.required),
       visitors: new FormControl(this.minutes.visitors)
     });
     // 👇 watch for changes and update accordingly

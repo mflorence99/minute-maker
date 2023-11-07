@@ -53,7 +53,7 @@ import deepCopy from 'deep-copy';
       <main>
         <header class="header">
           <h2>
-            {{ minutes.title }} &bull;
+            {{ minutes.subject }} &bull;
             {{ dayjs(minutes.date).format('MMMM D, YYYY') }}
           </h2>
           <pre>{{ (app$ | async).pathToMinutes }}</pre>

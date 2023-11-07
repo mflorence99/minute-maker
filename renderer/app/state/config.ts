@@ -47,6 +47,7 @@ type SummaryStrategyPrompts = Record<SummaryStrategy, string>;
 
 export type ConfigStateModel = {
   assemblyaiCredentials: string;
+  badgeGenerationPrompt;
   bucketName: string;
   googleCredentials: string;
   openaiCredentials: string;
@@ -60,10 +61,12 @@ export type ConfigStateModel = {
   name: 'config',
   defaults: {
     assemblyaiCredentials: null, // 👈 of course!
+    badgeGenerationPrompt:
+      'Show an adult member of the public petitioning the Town Councillors in the style of Norman Rockwell.',
     bucketName: null, // 👈 of course!
     googleCredentials: null, // 👈 of course!
     openaiCredentials: null, // 👈 of course!
-    openaiModel: 'gpt-4',
+    openaiModel: 'gpt-4-1106-preview',
     rephraseStrategyPrompts: {
       accuracy:
         'Rephrase the following statement, using the first person and grammatical English and paragraphs',

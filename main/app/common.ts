@@ -43,7 +43,7 @@ const corsOptions: Cors[] = [
   }
 ];
 
-const openaiModels: Record<OpenAIModel, string> = {
+const openaiModels: Partial<Record<OpenAIModel, string>> = {
   'gpt-3.5-turbo-16k': 'GPT 3.5',
   'gpt-4': 'GPT 4'
 };
@@ -68,12 +68,12 @@ export type TranscriptionTech = {
 
 const transcriptionImpls: Record<TranscriptionImpl, TranscriptionTech> = {
   assemblyai: {
-    description: `AssemblyAI's Transcript`,
+    description: `AssemblyAI Transcript`,
     link: 'https://www.assemblyai.com/docs/',
     transcriptionRate: 5 // 👈 x real time
   },
   google: {
-    description: `Google's Speech-to-text`,
+    description: `Google Speech-to-text`,
     link: 'https://cloud.google.com/speech-to-text/docs/how-to',
     transcriptionRate: 2 // 👈 x real time
   }
@@ -106,6 +106,7 @@ export const Constants = {
 // //////////////////////////////////////////////////////////////////////////
 
 export enum MenuID {
+  badge = 'menu/badge',
   close = 'menu/close',
   export = 'menu/export',
   find = 'menu/find',
@@ -166,6 +167,7 @@ export enum Channels {
 
   openaiChatCompletion = 'openai/chat-completion',
   openaiCredentials = 'openai/credentials',
+  openaiImageGeneration = 'openai/image-generation',
   openaiListModels = 'openai/list-models',
 
   transcriberCancel = 'transcriber/cancel',
@@ -212,18 +214,35 @@ export type MessageBoxReply = {
   response: number;
 };
 
-export type OpenAIModel = 'gpt-3.5-turbo-16k' | 'gpt-4';
+export type OpenAIModel =
+  | 'dall-e-2'
+  | 'dall-e-3'
+  | 'gpt-3.5-turbo-16k'
+  | 'gpt-4'
+  | 'gpt-4-turbo'
+  | 'gpt-4-1106-preview';
 
-export type OpenAIRequest = {
+export type OpenAIChatCompletionRequest = {
   model: OpenAIModel;
   prompt: string;
   temperature?: number;
   top_p?: number;
 };
 
-export type OpenAIResponse = {
-  finish_reason: 'length' | 'stop';
+export type OpenAIChatCompletionResponse = {
+  finish_reason: 'length' | 'stop'; // 👈 actual error if anything else
   text: string;
+};
+
+export type OpenAIImageGenerationRequest = {
+  model: OpenAIModel;
+  prompt: string;
+  size: '256x256' | '512x512' | '1024x1024' | '1792x1024' | '1024x1792';
+};
+
+export type OpenAIImageGenerationResponse = {
+  b64_json?: string;
+  error?: string;
 };
 
 export type OpenDialogOptions = {
@@ -306,17 +325,17 @@ export const MinutesSchema = z.object({
     sampleRateHertz: z.number(),
     url: z.string().url()
   }),
+  badge: z.string().optional(),
   date: z.coerce.date(),
   findReplace: FindReplaceSchema.optional(),
   hideSpeakerUpdateDialog: z.boolean().optional(),
   nextTranscriptionID: z.number(),
   numSpeakers: z.number(),
+  organization: z.string(),
   present: z.string().array(),
   speakerUpdateButton: z.number().optional(),
   subject: z.string(),
-  subtitle: z.string(),
   summary: SummarySchema.array(),
-  title: z.string(),
   transcription: z
     .discriminatedUnion('type', [AgendaItemSchema, TranscriptionSchema])
     .array(),
@@ -347,11 +366,10 @@ export const emptyMinutes = (): Minutes => ({
   hideSpeakerUpdateDialog: false,
   nextTranscriptionID: 0,
   numSpeakers: 1,
+  organization: '',
   present: [],
   subject: '',
-  subtitle: '',
   summary: [],
-  title: '',
   transcription: [],
   visitors: []
 });

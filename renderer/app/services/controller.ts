@@ -137,6 +137,36 @@ export class ControllerService {
   }
 
   // //////////////////////////////////////////////////////////////////////////
+  // 🟩 GenerateBadge (via OpenAI)
+  // //////////////////////////////////////////////////////////////////////////
+
+  async generateBadge(): Promise<void> {
+    const working = new Working('badge');
+    const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
+    // 👇 prepare to generate badge
+    this.#store.dispatch(
+      new SetStatus({
+        status: 'Generating badge',
+        working
+      })
+    );
+    // 👇 generate the badge
+    try {
+      const response = await this.#openai.imageGeneration({
+        model: 'dall-e-3',
+        prompt: config.badgeGenerationPrompt,
+        size: '1024x1024'
+      });
+      if (response.error) throw new Error(response.error);
+      this.#store.dispatch(new SetMinutes({ badge: response.b64_json }));
+    } catch (error) {
+      this.#store.dispatch(new SetStatus({ error }));
+    } finally {
+      this.#store.dispatch(new ClearStatus(working));
+    }
+  }
+
+  // //////////////////////////////////////////////////////////////////////////
   // 🟩 NewMinutes
   // //////////////////////////////////////////////////////////////////////////
 
@@ -365,9 +395,8 @@ export class ControllerService {
       audio: { ...minutes.audio },
       numSpeakers: minutes.numSpeakers,
       phrases: [
+        minutes.organization,
         minutes.subject,
-        minutes.subtitle,
-        minutes.title,
         ...minutes.absent,
         ...minutes.present,
         ...minutes.visitors

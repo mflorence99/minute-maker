@@ -1,8 +1,11 @@
 <html>
   <head>
     <title>
-      {{ minutes.title }} {{ dayjs(minutes.date).format('YYYY-MM-DD') }}
+      {{ minutes.subject }} {{ dayjs(minutes.date).format('YYYY-MM-DD') }}
     </title>
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab">
 
     <style>
 
@@ -23,6 +26,17 @@
         text-decoration: none;
       }
 
+      article.badge {  
+        box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.2);
+        display: inline-block;
+        padding: 1rem;
+      }
+
+      article.badge > img {
+        height: 512px;
+        width: 512px;
+      }
+
       blockquote {
         border-left: 0.5rem solid lightgray;
         font-family: monospace;
@@ -32,14 +46,19 @@
       }
 
       body {
-        font-family: sans-serif;
+        font-family: "Roboto";
         font-size: 14px;
         margin: 2rem;
         zoom: {{ zoom }};
       }
 
-      h3 {
-        margin-block-end: 0;
+      h1, h2, h3, h4, h5, h6 {
+        font-family: "Roboto Slab";
+      }
+
+      h4, h5, h6 {
+        margin-block-start: 0; 
+        margin-block-end: 0; 
       }
 
       p { 
@@ -61,21 +80,16 @@
         font-size: 14px;
       }
 
+      table.attendees {
+        margin-top: 1rem;
+      }
+
       table.attendees td:not(:first-child) {
         padding-left: 2rem;
       }
 
-      table.attendees td .attendee::before {
-        content: '\2022  ';
-      }
-
       table.attendees td .attendee {
-        margin-left: 1rem;
-        text-indent: -1rem;
-      }
-
-      table.attendees td.title {
-        font-weight: bold;
+        white-space: nowrap;
       }
 
       table.attendees tr {
@@ -85,6 +99,7 @@
       table.disclaimer {
         border-collapse: separate;
         border-spacing: 1px;
+        page-break-before: always;
         width: 100%;
       }
 
@@ -94,7 +109,7 @@
       }
 
       table.disclaimer tr {
-        background-color: #e0e0e0;
+        background-color: #f0f0f0;
         vertical-align: center;
       }
 
@@ -127,11 +142,56 @@
   </head>
 
   <body>
-    <center><h1>{{ minutes.title }}</h1></center>
+    <center>
 
-    <center><h2>{{ minutes.subtitle }}</h2></center>
+      <article class="badge">
+        <img src="data:image/png;base64,{{ minutes.badge }}">
+        <h1>{{ minutes.organization }}</h1>
+        <h2>{{ minutes.subject }}</h2>
+        <h3>{{ dayjs(minutes.date).format('MMMM D, YYYY') }}</h3>
+      </article>
 
-    <center><h2>{{ dayjs(minutes.date).format('MMMM D, YYYY') }}</h2></center>
+      <table class="attendees">
+
+        <tr>
+          <td><h4>Members Present</h4></td>
+          <td><h4>Members Absent</h4></td>
+        <tr>
+
+          <tr>
+            {% for attendees in [minutes.present, minutes.absent] %}
+              <td>
+                {% for attendee in attendees %}
+                  <div class="attendee">{{ attendee }}</div>
+                {% else %}
+                  None
+                {% endfor %}
+              </td>
+            {% endfor %}
+          </tr>
+
+        </table>
+
+      <table class="attendees">
+
+        <tr>
+          <td><h4>Visitors</h4></td>
+        <tr>
+
+          <tr>
+            {% for attendees in [minutes.visitors] %}
+              <td>
+                {% for attendee in attendees %}
+                  <div class="attendee">{{ attendee }}</div>
+                {% else %}
+                  None
+                {% endfor %}
+              </td>
+            {% endfor %}
+          </tr>
+
+      </table>
+    </center>
 
     <table class="disclaimer">
       <tr>
@@ -147,65 +207,22 @@
           <a href="{{ transcriber.link }}">
             {{ transcriber.description }}
           </a>
-          to perform the transcription, and
+          to perform the transcription, and the
           <a href="https://platform.openai.com/docs/models">
-            Open AI’s {{ openaiModel }}
+            Open AI {{ openaiModel }} and DALL-E-3
           </a>
-          model to convert the transcription into grammatical sentences and
-          paragraphs, and to automatically generate a summary from
+          models to convert the transcription into grammatical sentences and
+          paragraphs, and to automatically generate a summary and illustration from
           the transcript.
         </td>
       </tr>
-    </table>
-
-    <h1>{{ minutes.subject }}</h1>
-
-    <table class="attendees">
-
-      <tr>
-        <td class="title">Present</td>
-        <td class="title">Visitors</td>
-      <tr>
-
-        <tr>
-          {% for attendees in [minutes.present, minutes.visitors] %}
-            <td>
-              {% for attendee in attendees %}
-                <div class="attendee">{{ attendee }}</div>
-              {% else %}
-                None
-              {% endfor %}
-            </td>
-          {% endfor %}
-        </tr>
-
-      <tr>
-        <td class="title">&nbsp;</td>
-      <tr>
-
-      <tr>
-        <td class="title">Absent</td>
-      <tr>
-
-        <tr>
-          {% for attendees in [minutes.absent] %}
-            <td>
-              {% for attendee in attendees %}
-                <div class="attendee">{{ attendee }}</div>
-              {% else %}
-                None
-              {% endfor %}
-            </td>
-          {% endfor %}
-        </tr>
-
     </table>
 
     <h2>Summary</h2>
 
     {% for summ in minutes.summary %} 
       {% if summ.section %}
-        <h3>{{ summ.section }}</h3>
+        <h4>{{ summ.section }}</h4>
       {% endif %} 
       {{ fromMarkdown(summ.summary) }} 
     {% endfor %}
@@ -229,7 +246,7 @@
               {% if loop.first %}
                 <h2>Transcript</h2>
               {% endif %}
-              <h3>{{ tx.title }}</h3>
+              <h4>{{ tx.title }}</h4>
             </td>
 
           {% elif tx.type == 'TX'  %}

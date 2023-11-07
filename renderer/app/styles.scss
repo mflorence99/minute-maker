@@ -217,3 +217,15 @@ tui-root {
 tui-text-area tui-scrollbar {
   border-top: 0 !important;
 }
+
+tui-text-area[size='s'] {
+  min-height: 3rem;
+}
+
+tui-text-area[size='m'] {
+  min-height: 4rem;
+}
+
+tui-text-area[size='l'] {
+  min-height: 7rem;
+}

@@ -170,6 +170,12 @@ export const menuTemplate = [
     submenu: [
       {
         click: menuSelected,
+        enabled: true,
+        id: MenuID.badge,
+        label: 'Generate Badge'
+      },
+      {
+        click: menuSelected,
         enabled: false,
         id: MenuID.transcribe,
         label: 'Transcribe Audio'

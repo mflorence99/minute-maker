@@ -155,7 +155,9 @@ export class ControllerService {
       const response = await this.#openai.imageGeneration({
         model: 'dall-e-3',
         prompt: config.badgeGenerationPrompt,
-        size: '1024x1024'
+        quality: 'hd',
+        size: '1024x1024',
+        style: 'vivid'
       });
       if (response.error) throw new Error(response.error);
       this.#store.dispatch(new SetMinutes({ badge: response.b64_json }));

@@ -156,22 +156,7 @@ import deepCopy from 'deep-copy';
             [config]="config$ | async" />
         </ng-container>
 
-        <footer *ngIf="!!status.working" class="footer">
-          <label class="progress" tuiProgressLabel>
-            {{ status.status }}
-            <progress tuiProgressBar [max]="100"></progress>
-          </label>
-          <button
-            *ngIf="status.working.canceledBy"
-            (click)="onCancelAction()"
-            appearance="mono"
-            class="canceler"
-            size="xs"
-            icon="tuiIconClose"
-            tuiButton>
-            Cancel
-          </button>
-        </footer>
+        <ng-container *ngTemplateOutlet="progress"></ng-container>
       </main>
 
       <ng-template #transcribing>
@@ -222,25 +207,56 @@ import deepCopy from 'deep-copy';
     </tui-root>
 
     <ng-template #getStarted>
-      <tui-block-status>
-        <img tuiSlot="top" src="./assets/meeting.png" />
+      <main>
+        <tui-block-status>
+          <img tuiSlot="top" src="./assets/meeting.png" />
 
-        <h4>To get started ...</h4>
+          <h4>To get started ...</h4>
 
-        <p>
-          These actions can be performed at anytime from the
-          <b>File</b>
-          menu.
-        </p>
+          <p>
+            These actions can be performed at anytime from the
+            <b>File</b>
+            menu.
+          </p>
 
-        <button (click)="newMinutes()" appearance="primary" size="m" tuiButton>
-          New Minutes from MP3 Audio
+          <button
+            (click)="newMinutes()"
+            appearance="primary"
+            size="m"
+            tuiButton>
+            New Minutes from MP3 Audio
+          </button>
+
+          <button
+            (click)="openMinutes()"
+            appearance="accent"
+            size="m"
+            tuiButton>
+            Open Minutes JSON File
+          </button>
+        </tui-block-status>
+
+        <ng-container *ngTemplateOutlet="progress"></ng-container>
+      </main>
+    </ng-template>
+
+    <ng-template #progress>
+      <footer *ngIf="!!status.working" class="footer">
+        <label class="progress" tuiProgressLabel>
+          {{ status.status }}
+          <progress tuiProgressBar [max]="100"></progress>
+        </label>
+        <button
+          *ngIf="status.working.canceledBy"
+          (click)="onCancelAction()"
+          appearance="mono"
+          class="canceler"
+          size="xs"
+          icon="tuiIconClose"
+          tuiButton>
+          Cancel
         </button>
-
-        <button (click)="openMinutes()" appearance="accent" size="m" tuiButton>
-          Open Minutes JSON File
-        </button>
-      </tui-block-status>
+      </footer>
     </ng-template>
   `
 })

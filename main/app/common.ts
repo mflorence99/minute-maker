@@ -85,9 +85,13 @@ export const Constants = {
   maxRecentPaths: 32,
   maxSpeechWords: 250,
   maxUndoStackDepth: 7,
-  openaiDefaults: {
+  openaiChatCompletionDefaults: {
     temperature: 0.5,
     top_p: 1
+  },
+  openaiImageGenerationDefaults: {
+    n: 1,
+    response_format: 'b64_json'
   },
   openaiModels,
   rephraseStrategy,
@@ -237,7 +241,9 @@ export type OpenAIChatCompletionResponse = {
 export type OpenAIImageGenerationRequest = {
   model: OpenAIModel;
   prompt: string;
+  quality?: 'hd';
   size: '256x256' | '512x512' | '1024x1024' | '1792x1024' | '1024x1792';
+  style?: 'natural' | 'vivid';
 };
 
 export type OpenAIImageGenerationResponse = {
@@ -328,12 +334,12 @@ export const MinutesSchema = z.object({
   badge: z.string().optional(),
   date: z.coerce.date(),
   findReplace: FindReplaceSchema.optional(),
-  hideSpeakerUpdateDialog: z.boolean().optional(),
+  hideSpeakerUpdateDialog: z.boolean(),
   nextTranscriptionID: z.number(),
   numSpeakers: z.number(),
   organization: z.string(),
   present: z.string().array(),
-  speakerUpdateButton: z.number().optional(),
+  speakerUpdateButton: z.number(),
   subject: z.string(),
   summary: SummarySchema.array(),
   transcription: z
@@ -368,6 +374,7 @@ export const emptyMinutes = (): Minutes => ({
   numSpeakers: 1,
   organization: '',
   present: [],
+  speakerUpdateButton: 1,
   subject: '',
   summary: [],
   transcription: [],

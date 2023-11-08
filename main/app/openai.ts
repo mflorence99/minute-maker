@@ -44,7 +44,7 @@ export async function chatCompletion(
       () =>
         openai.chat.completions.create({
           messages: [{ content: prompt, role: 'user' }],
-          ...Constants.openaiDefaults,
+          ...Constants.openaiChatCompletionDefaults,
           ...request
         }),
       backoffOptions()
@@ -100,15 +100,11 @@ export async function imageGeneration(
   try {
     const _response = await backOff(
       () =>
+        // @ts-ignore 🔥 type not properly defined for dall-e-3
         openai.images.generate({
-          model: request.model,
-          n: 1,
-          prompt: request.prompt,
-          quality: 'hd',
-          response_format: 'b64_json',
-          size: request.size,
-          style: 'vivid'
-        } as any),
+          ...Constants.openaiImageGenerationDefaults,
+          ...request
+        }),
       backoffOptions()
     );
     response = { b64_json: _response.data[0].b64_json, error: '' };

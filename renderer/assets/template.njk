@@ -26,15 +26,19 @@
         text-decoration: none;
       }
 
-      article.badge {  
-        box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.2);
-        display: inline-block;
-        padding: 1rem;
-      }
-
-      article.badge > img {
+      article.artwork {
         height: 512px;
         width: 512px;
+      }
+
+      article.artwork .credit {
+        font-size: smaller;
+        text-align: right;
+      }
+
+      article.artwork img {
+        height: 100%;
+        width: 100%;
       }
 
       blockquote {
@@ -74,6 +78,12 @@
         font-size: smaller;
         margin: 0;
         padding: 0.5rem;
+      }
+
+      section.badge {  
+        box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.2);
+        display: inline-block;
+        padding: 1rem;
       }
 
       table {
@@ -144,12 +154,22 @@
   <body>
     <center>
 
-      <article class="badge">
-        <img src="data:image/png;base64,{{ minutes.badge }}">
+      <section class="badge">
+
+        {% if minutes.badge %}
+          <article class="artwork">
+            <img src="data:image/png;base64,{{ minutes.badge }}">
+            <div class="credit">Artwork credit: DALL-E</div>
+          </article>
+          <br>
+        {% endif %} 
+        
         <h1>{{ minutes.organization }}</h1>
         <h2>{{ minutes.subject }}</h2>
         <h3>{{ dayjs(minutes.date).format('MMMM D, YYYY') }}</h3>
-      </article>
+      </section>
+
+      <br>
 
       <table class="attendees">
 

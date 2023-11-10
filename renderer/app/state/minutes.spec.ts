@@ -1,12 +1,12 @@
 import 'jest-extended';
 
 import { Constants } from '#mm/common';
-import { InsertAgendaItem } from '#mm/state/minutes';
+import { InsertTranscriptionItem } from '#mm/state/minutes';
 import { InsertTranscription } from '#mm/state/minutes';
 import { JoinTranscriptions } from '#mm/state/minutes';
 import { MinutesState } from '#mm/state/minutes';
 import { NgxsModule } from '@ngxs/store';
-import { RemoveAgendaItem } from '#mm/state/minutes';
+import { RemoveTranscriptionItem } from '#mm/state/minutes';
 import { RemoveTranscription } from '#mm/state/minutes';
 import { SetMinutes } from '#mm/state/minutes';
 import { SplitTranscription } from '#mm/state/minutes';
@@ -67,14 +67,14 @@ describe('MinutesState', () => {
     expect(tx).toStrictEqual([transcription]);
   });
 
-  it('responds to Insert/RemoveAgendaItem', () => {
-    store.dispatch(new InsertAgendaItem(agendaItem as any, 0));
+  it('responds to Insert/RemoveTranscriptionItem', () => {
+    store.dispatch(new InsertTranscriptionItem(agendaItem as any, 0));
     let tx = store.selectSnapshot(MinutesState.transcription);
     expect(tx).toStrictEqual([
       expect.objectContaining(agendaItem),
       transcription
     ]);
-    store.dispatch(new RemoveAgendaItem(0));
+    store.dispatch(new RemoveTranscriptionItem(0));
     tx = store.selectSnapshot(MinutesState.transcription);
     expect(tx).toStrictEqual([transcription]);
   });
@@ -104,7 +104,7 @@ describe('MinutesState', () => {
   });
 
   it('responds to UpdateAgendaItem', () => {
-    store.dispatch(new InsertAgendaItem(agendaItem as any, 0));
+    store.dispatch(new InsertTranscriptionItem(agendaItem as any, 0));
     store.dispatch(new UpdateAgendaItem({ title: 'zzz' }, 0));
     const tx = store.selectSnapshot(MinutesState.transcription);
     expect(tx).toStrictEqual([

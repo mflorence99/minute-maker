@@ -27,7 +27,7 @@ export function menuEnable(
       if (Array.isArray(submenu) && menuItem.submenu) {
         // 🔥 clear doesn't work for some reason, so we only append
         //    SubmenuItems not already present
-        // menuItem.submenu.clear();
+        //    menuItem.submenu.clear();
         const present = new Set(
           menuItem.submenu.items.map((item) => item.label)
         );

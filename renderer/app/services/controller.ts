@@ -544,8 +544,9 @@ export class ControllerService {
 
   #resolveSpeaker(minutes: Minutes, speaker: string): string {
     const members = [
-      ...minutes.absent,
+      // 🔥 this order is important!!
       ...minutes.present,
+      ...minutes.absent,
       ...minutes.visitors
     ];
     const resolved = members.find((member) =>

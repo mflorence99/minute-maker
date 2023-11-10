@@ -106,6 +106,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                       minutes.transcription[ix + 1]?.type === 'TX' ? ix : null
                     "
                     [mmRephraseable]="ix"
+                    [mmRemovable]="ix"
                     [mmSplittable]="ix"
                     [useImportant]="true"
                     [value]="tx.speech"

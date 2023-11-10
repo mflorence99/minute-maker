@@ -4,7 +4,7 @@ import { ComponentStateModel } from '#mm/state/component';
 import { ControllerService } from '#mm/services/controller';
 import { Injectable } from '@angular/core';
 import { InsertableDirective } from '#mm/directives/insertable';
-import { InsertAgendaItem } from '#mm/state/minutes';
+import { InsertTranscriptionItem } from '#mm/state/minutes';
 import { JoinableDirective } from '#mm/directives/joinable';
 import { JoinTranscriptions } from '#mm/state/minutes';
 import { MenuID } from '#mm/common';
@@ -15,7 +15,7 @@ import { RecentsState } from '#mm/state/recents';
 import { RecentsStateModel } from '#mm/state/recents';
 import { Redo } from '#mm/state/undo';
 import { RemovableDirective } from '#mm/directives/removable';
-import { RemoveAgendaItem } from '#mm/state/minutes';
+import { RemoveTranscriptionItem } from '#mm/state/minutes';
 import { RephraseableDirective } from '#mm/directives/rephraseable';
 import { Select } from '@ngxs/store';
 import { SplittableDirective } from '#mm/directives/splittable';
@@ -83,7 +83,10 @@ export class MenuService {
               const ix = this.#getInsertableIndex(this.#elementFromPoint(x, y));
               if (!isNaN(ix))
                 this.#store.dispatch(
-                  new InsertAgendaItem({ title: 'New Agenda Item' }, ix)
+                  new InsertTranscriptionItem(
+                    { title: 'New Agenda Item', type: 'AG' },
+                    ix
+                  )
                 );
             }
             break;
@@ -108,7 +111,8 @@ export class MenuService {
           case MenuID.remove:
             {
               const ix = this.#getRemovableIndex(this.#elementFromPoint(x, y));
-              if (!isNaN(ix)) this.#store.dispatch(new RemoveAgendaItem(ix));
+              if (!isNaN(ix))
+                this.#store.dispatch(new RemoveTranscriptionItem(ix));
             }
             break;
           case MenuID.rephraseAccuracy:

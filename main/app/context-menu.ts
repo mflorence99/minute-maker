@@ -94,7 +94,7 @@ ContextMenu({
         click: clicker,
         enabled: itemsEnabled[MenuID.remove],
         id: MenuID.remove,
-        label: 'Remove Agenda Item'
+        label: 'Remove Item from Transcript'
       },
       {
         click: clicker,

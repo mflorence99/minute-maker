@@ -27,10 +27,10 @@ export class ClearMinutes {
   constructor() {}
 }
 
-export class InsertAgendaItem extends UndoableAction {
-  static readonly type = '[Minutes] InsertAgendaItem';
+export class InsertTranscriptionItem extends UndoableAction {
+  static readonly type = '[Minutes] InsertTranscriptionItem';
   constructor(
-    public agendaItem: Partial<AgendaItem>,
+    public item: Partial<AgendaItem | Transcription>,
     public ix: number,
     undoing = false
   ) {
@@ -59,8 +59,8 @@ export class JoinTranscriptions extends UndoableAction {
   }
 }
 
-export class RemoveAgendaItem extends UndoableAction {
-  static readonly type = '[Minutes] RemoveAgendaItem';
+export class RemoveTranscriptionItem extends UndoableAction {
+  static readonly type = '[Minutes] RemoveTranscriptionItem';
   constructor(
     public ix: number,
     undoing = false
@@ -174,19 +174,19 @@ export class MinutesState {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟩 InsertAgendaItem
+  // 🟩 InsertTranscriptionItem
   // //////////////////////////////////////////////////////////////////////////
 
-  @Action(InsertAgendaItem) insertAgendaItem(
+  @Action(InsertTranscriptionItem) insertAgendaItem(
     { getState, setState }: StateContext<MinutesStateModel>,
-    { agendaItem, ix, undoing }: InsertAgendaItem
+    { item, ix, undoing }: InsertTranscriptionItem
   ): void {
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#store.dispatch(
         new StackUndoable([
-          new RemoveAgendaItem(ix, true),
-          new InsertAgendaItem(agendaItem, ix, true)
+          new RemoveTranscriptionItem(ix, true),
+          new InsertTranscriptionItem(item, ix, true)
         ])
       );
     // 👇 now do the action
@@ -194,39 +194,7 @@ export class MinutesState {
     setState(
       patch({
         nextTranscriptionID,
-        transcription: insertItem(
-          { ...agendaItem, id: nextTranscriptionID, type: 'AG' },
-          ix
-        )
-      })
-    );
-  }
-
-  // //////////////////////////////////////////////////////////////////////////
-  // 🟩 InsertTranscription
-  // //////////////////////////////////////////////////////////////////////////
-
-  @Action(InsertTranscription) insertTranscription(
-    { getState, setState }: StateContext<MinutesStateModel>,
-    { transcription, ix, undoing }: InsertTranscription
-  ): void {
-    // 👇 put the inverse action onto the undo stack
-    if (!undoing)
-      this.#store.dispatch(
-        new StackUndoable([
-          new RemoveTranscription(ix, true),
-          new InsertTranscription(transcription, ix, true)
-        ])
-      );
-    // 👇 now do the action
-    const nextTranscriptionID = getState().nextTranscriptionID + 1;
-    setState(
-      patch({
-        nextTranscriptionID,
-        transcription: insertItem(
-          { ...transcription, id: nextTranscriptionID, type: 'TX' },
-          ix
-        )
+        transcription: insertItem({ ...item, id: nextTranscriptionID }, ix)
       })
     );
   }
@@ -265,45 +233,22 @@ export class MinutesState {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟩 RemoveAgendaItem
+  // 🟩 RemoveTranscriptionItem
   // //////////////////////////////////////////////////////////////////////////
 
-  @Action(RemoveAgendaItem) removeAgendaItem(
+  @Action(RemoveTranscriptionItem) removeTranscriptionItem(
     { getState, setState }: StateContext<MinutesStateModel>,
-    { ix, undoing }: RemoveAgendaItem
+    { ix, undoing }: RemoveTranscriptionItem
   ): void {
     // 👇 capture the original
     const state = getState();
-    const original: AgendaItem = { ...this.#pluckAgendaItem(state, ix) };
+    const original: AgendaItem | Transcription = { ...state.transcription[ix] };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#store.dispatch(
         new StackUndoable([
-          new InsertAgendaItem(original, ix, true),
-          new RemoveAgendaItem(ix, true)
-        ])
-      );
-    // 👇 now do the action
-    setState(patch({ transcription: removeItem(ix) }));
-  }
-
-  // //////////////////////////////////////////////////////////////////////////
-  // 🟩 RemoveTranscription
-  // //////////////////////////////////////////////////////////////////////////
-
-  @Action(RemoveTranscription) removeTranscription(
-    { getState, setState }: StateContext<MinutesStateModel>,
-    { ix, undoing }: RemoveTranscription
-  ): void {
-    // 👇 capture the original
-    const state = getState();
-    const original: Transcription = { ...this.#pluckTranscription(state, ix) };
-    // 👇 put the inverse action onto the undo stack
-    if (!undoing)
-      this.#store.dispatch(
-        new StackUndoable([
-          new InsertTranscription(original, ix, true),
-          new RemoveTranscription(ix, true)
+          new InsertTranscriptionItem(original, ix, true),
+          new RemoveTranscriptionItem(ix, true)
         ])
       );
     // 👇 now do the action

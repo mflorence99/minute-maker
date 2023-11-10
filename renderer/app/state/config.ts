@@ -69,15 +69,14 @@ export type ConfigStateModel = {
     openaiModel: 'gpt-4-1106-preview',
     rephraseStrategyPrompts: {
       accuracy:
-        'Rephrase the following statement, using the first person and grammatical English and paragraphs',
-      brevity:
-        'Summarize and simplify the following statement using the first person'
+        'I made the following statement. Rephrase it using grammatical sentences and paragraphs',
+      brevity: 'I made the following statement. Simplify and summarize it'
     },
     summaryStrategyPrompts: {
       bullets:
-        'The intended audience is a professional reader. Summarize the following discussion into bullet points by using the past tense. Use the full name of each participant',
+        'The intended audience is a professional reader. Summarize the following discussion into bullet points by using the past tense',
       paragraphs:
-        'TThe intended audience is a professional reader. Summarize the following discussion into no more than three paragraphs  by using the past tense. Use the full name of each participant.'
+        'TThe intended audience is a professional reader. Summarize the following discussion into no more than three paragraphs by using the past tense'
     },
     transcriptionImpl: 'google'
   }

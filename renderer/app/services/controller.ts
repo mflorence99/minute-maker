@@ -294,7 +294,8 @@ export class ControllerService {
   async saveMinutes(saveAs = false): Promise<void> {
     const app = this.#store.selectSnapshot<AppStateModel>(AppState);
     const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
-    if (minutes) {
+    // 👇 only save valid minutes!
+    if (minutes && MinutesSchema.safeParse(minutes).success) {
       let path = app.pathToMinutes;
       if (saveAs || !path) {
         path = await this.#fs.saveFileAs(JSON.stringify(minutes, null, 2), {
@@ -345,8 +346,13 @@ export class ControllerService {
     const bySection: Record<string, Transcription[]> = withSections.reduce(
       (acc, withSection) => {
         const { section, tx } = withSection;
-        acc[section] = acc[section] ?? [];
-        acc[section].push(`${tx.speaker} says: ${tx.speech}`);
+        // 👇 elimiate annotations like (Crosstalk)
+        if (!(tx.speaker.startsWith('(') && tx.speaker.endsWith(')'))) {
+          acc[section] = acc[section] ?? [];
+          acc[section].push(
+            `${this.#resolveSpeaker(minutes, tx.speaker)} says: ${tx.speech}`
+          );
+        }
         return acc;
       },
       {}
@@ -520,13 +526,7 @@ export class ControllerService {
   #monitorAppQuit(): void {
     // 👇 save the minutes before quitting
     ipc.on(Channels.appBeforeQuit, async () => {
-      const app = this.#store.selectSnapshot<AppStateModel>(AppState);
-      const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
-      if (app.pathToMinutes)
-        await this.#fs.saveFile(
-          app.pathToMinutes,
-          JSON.stringify(minutes, null, 2)
-        );
+      await this.saveMinutes();
       ipc.send(Channels.appQuit);
     });
   }
@@ -542,6 +542,18 @@ export class ControllerService {
     root.classList.add('ready');
   }
 
+  #resolveSpeaker(minutes: Minutes, speaker: string): string {
+    const members = [
+      ...minutes.absent,
+      ...minutes.present,
+      ...minutes.visitors
+    ];
+    const resolved = members.find((member) =>
+      new RegExp(`\\b${speaker}\\b`).test(member)
+    );
+    return resolved ?? speaker;
+  }
+
   #saveMinutesPeriodically(): void {
     const minutes$ = this.#store.select(MinutesState);
     minutes$
@@ -551,7 +563,11 @@ export class ControllerService {
           const app = this.#store.selectSnapshot<AppStateModel>(AppState);
           return [minutes, app.pathToMinutes];
         }),
-        filter(([minutes, path]) => !!(minutes && path)),
+        filter(
+          // 👇 only save valid minutes!
+          ([minutes, path]) =>
+            !!(minutes && path) && MinutesSchema.safeParse(minutes).success
+        ),
         throttleTime(Constants.saveFileThrottleInterval, undefined, {
           leading: true,
           trailing: true

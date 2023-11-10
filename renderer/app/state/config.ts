@@ -62,7 +62,7 @@ export type ConfigStateModel = {
   defaults: {
     assemblyaiCredentials: null, // 👈 of course!
     badgeGenerationPrompt:
-      'Show an adult member of the public petitioning the Town Councillors in the style of Norman Rockwell.',
+      'Show an adult member of the public addressing at a meeting of a modern New England town Planning Board in the style of Norman Rockwell, but without words or lettering',
     bucketName: null, // 👈 of course!
     googleCredentials: null, // 👈 of course!
     openaiCredentials: null, // 👈 of course!
@@ -75,9 +75,9 @@ export type ConfigStateModel = {
     },
     summaryStrategyPrompts: {
       bullets:
-        'The intended audience is a professional reader. Summarize the following discussion into bullet points by using the past tense',
+        'The intended audience is a professional reader. Summarize the following discussion into bullet points by using the past tense. Use the full name of each participant',
       paragraphs:
-        'The intended audience is a professional reader. Summarize the following discussion into short paragraphs by using the past tense'
+        'TThe intended audience is a professional reader. Summarize the following discussion into no more than three paragraphs  by using the past tense. Use the full name of each participant.'
     },
     transcriptionImpl: 'google'
   }

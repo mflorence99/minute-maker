@@ -61,6 +61,9 @@ ipcMain.handle(Channels.fsSaveFile, saveFile);
 
 export function saveFile(event, path: string, data: string): void {
   jsome(`👈  writeFileSync ${path} <-- ${trunc(data)}`);
+  // 🔥 failsafe for bugs!!
+  if (!data || data === 'null' || data === '{}')
+    throw new Error('Writing empty data!!');
   return writeFileSync(path, data, { encoding: 'utf8' });
 }
 

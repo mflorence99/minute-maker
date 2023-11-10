@@ -104,7 +104,11 @@ export class FindReplaceComponent {
     this.#matches = [];
     const searchString = minutes.findReplace?.searchString;
     if (searchString) {
-      const regexp = new RegExp(searchString, 'gi');
+      const regexp = new RegExp(
+        // 🔥 really need to DRY this!
+        searchString.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&'),
+        'gi'
+      );
       numMatches = (minutes.transcription ?? []).reduce((acc, tx) => {
         acc += this.#matchAll(tx, 'title', regexp);
         acc += this.#matchAll(tx, 'speaker', regexp);

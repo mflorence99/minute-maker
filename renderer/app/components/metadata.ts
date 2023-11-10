@@ -38,7 +38,7 @@ import { inject } from '@angular/core';
         </tui-input-date-time>
 
         <article class="column">
-          <tui-input-slider formControlName="numSpeakers" [max]="7" [min]="1">
+          <tui-input-slider formControlName="numSpeakers" [max]="10" [min]="1">
             Number of Speakers
           </tui-input-slider>
           <span class="hint">

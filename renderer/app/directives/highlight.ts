@@ -81,7 +81,11 @@ export class HighlightDirective implements OnChanges, OnDestroy, OnInit {
   #toHTML(text: string): string {
     let html = text.replaceAll('\n', '<br />');
     if (this.mmHighlight) {
-      const regex = new RegExp(this.mmHighlight, 'gi');
+      const regex = new RegExp(
+        // 🔥 really need to DRY this!
+        this.mmHighlight.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&'),
+        'gi'
+      );
       html = html.replaceAll(regex, `<mark>${this.mmHighlight}</mark>`);
     }
     return html;

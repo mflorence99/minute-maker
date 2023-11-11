@@ -85,6 +85,7 @@ import deepCopy from 'deep-copy';
               (activeItemIndexChange)="onSwitchTab($event)"
               [(activeItemIndex)]="componentState.tabIndex">
               <button [disabled]="!configured" tuiTab>Details</button>
+              <button [disabled]="!configured" tuiTab>Badges</button>
               <button [disabled]="!configured" tuiTab>
                 Transcription
                 <tui-badge
@@ -110,6 +111,15 @@ import deepCopy from 'deep-copy';
                 configured && componentState.tabIndex === TabIndex.details
             }"
             [minutes]="minutes" />
+
+          <mm-badges
+            [ngClass]="{
+              data: true,
+              showing: configured && componentState.tabIndex === TabIndex.badges
+            }"
+            [config]="config$ | async"
+            [minutes]="minutes"
+            [status]="status" />
 
           <mm-transcription
             (selected)="onTranscription($event)"

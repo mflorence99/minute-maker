@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/angular-ivy';
 import { AppState } from '#mm/state/app';
 import { AutofocusDirective } from '#mm/directives/autofocus';
 import { AutosizeModule } from 'ngx-autosize';
+import { BadgesComponent } from '#mm/components/badges';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
@@ -71,6 +72,7 @@ import { TuiLoaderModule } from '@taiga-ui/core';
 import { TuiNotificationModule } from '@taiga-ui/core';
 import { TuiProgressModule } from '@taiga-ui/kit';
 import { TuiRadioBlockModule } from '@taiga-ui/kit';
+import { TuiRadioModule } from '@taiga-ui/kit';
 import { TuiRootModule } from '@taiga-ui/core';
 import { TuiSelectModule } from '@taiga-ui/kit';
 import { TuiSvgModule } from '@taiga-ui/core';
@@ -86,6 +88,7 @@ import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline'
 import isDev from '#mm/is-dev';
 
 const COMPONENTS = [
+  BadgesComponent,
   ConfigComponent,
   FindReplaceComponent,
   MetadataComponent,
@@ -207,6 +210,7 @@ const MODULES = [
   TuiNotificationModule,
   TuiProgressModule,
   TuiRadioBlockModule,
+  TuiRadioModule,
   TuiRootModule,
   TuiSelectModule,
   TuiSvgModule,

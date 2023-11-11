@@ -66,8 +66,8 @@ export class MenuService {
       Channels.menuSelected,
       (event, id: MenuID, data: string, x: number, y: number) => {
         switch (id) {
-          case MenuID.badge:
-            this.#controller.generateBadge();
+          case MenuID.badges:
+            this.#controller.generateBadges();
             break;
           case MenuID.close:
             this.#controller.closeMinutes();

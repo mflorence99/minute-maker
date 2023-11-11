@@ -171,8 +171,8 @@ export const menuTemplate = [
       {
         click: menuSelected,
         enabled: true,
-        id: MenuID.badge,
-        label: 'Generate Badge'
+        id: MenuID.badges,
+        label: 'Generate Badges'
       },
       {
         click: menuSelected,

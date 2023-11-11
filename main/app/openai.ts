@@ -97,25 +97,30 @@ export async function imageGeneration(
   });
   // 👇 ready to call OpenAI
   let response: OpenAIImageGenerationResponse;
+  const dflts = Constants.openaiImageGenerationDefaults;
   try {
     const _response = await backOff(
       () =>
         // @ts-ignore 🔥 type not properly defined for dall-e-3
         openai.images.generate({
-          ...Constants.openaiImageGenerationDefaults,
+          ...dflts,
+          ...{ n: request.model === 'dall-e-3' ? 1 : dflts.n },
           ...request
         }),
       backoffOptions()
     );
-    response = { b64_json: _response.data[0].b64_json, error: '' };
+    response = {
+      b64_json: _response.data.map((data) => data.b64_json),
+      error: ''
+    };
   } catch (error) {
-    response = { b64_json: '', error: error.message };
+    response = { b64_json: [], error: error.message };
   }
   // 👇 return synthesized response
   jsome([
     `👈 ${Channels.openaiImageGeneration}`,
     response.error,
-    trunc(response.b64_json)
+    `${response.b64_json.length} images`
   ]);
   return response;
 }

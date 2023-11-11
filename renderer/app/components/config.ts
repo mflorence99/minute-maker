@@ -31,16 +31,37 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
           </tui-radio-block>
         </label>
 
-        <label tuiLabel="OpenAI model">
+        <label tuiLabel="OpenAI text model">
           <tui-radio-block
-            formControlName="openaiModel"
-            item="gpt-3.5-turbo-16k">
+            formControlName="openaiChatCompletionModel"
+            item="gpt-3.5-turbo-16k"
+            style="width: 50%">
             GPT 3.5
           </tui-radio-block>
           <tui-radio-block
-            formControlName="openaiModel"
-            item="gpt-4-1106-preview">
+            formControlName="openaiChatCompletionModel"
+            item="gpt-4-1106-preview"
+            style="width: 50%">
             GPT 4
+          </tui-radio-block>
+        </label>
+      </article>
+
+      <article class="row">
+        <div></div>
+
+        <label tuiLabel="OpenAI image model">
+          <tui-radio-block
+            formControlName="openaiImageGenerationModel"
+            item="dall-e-2"
+            style="width: 50%">
+            DALL-E 2
+          </tui-radio-block>
+          <tui-radio-block
+            formControlName="openaiImageGenerationModel"
+            item="dall-e-3"
+            style="width: 50%">
+            DALL-E 3
           </tui-radio-block>
         </label>
       </article>
@@ -155,7 +176,12 @@ export class ConfigComponent implements OnChanges, OnInit {
         Validators.required,
         credentialsValidator
       ]),
-      openaiModel: new FormControl(this.config.openaiModel),
+      openaiChatCompletionModel: new FormControl(
+        this.config.openaiChatCompletionModel
+      ),
+      openaiImageGenerationModel: new FormControl(
+        this.config.openaiImageGenerationModel
+      ),
       rephraseStrategyPrompts: new FormGroup({
         accuracy: new FormControl(this.config.rephraseStrategyPrompts.accuracy),
         brevity: new FormControl(this.config.rephraseStrategyPrompts.brevity)

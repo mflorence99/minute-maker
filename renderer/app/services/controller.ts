@@ -140,27 +140,26 @@ export class ControllerService {
   // 🟩 GenerateBadge (via OpenAI)
   // //////////////////////////////////////////////////////////////////////////
 
-  async generateBadge(): Promise<void> {
+  async generateBadges(): Promise<void> {
     const working = new Working('badge');
     const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
     // 👇 prepare to generate badge
     this.#store.dispatch(
       new SetStatus({
-        status: 'Generating badge',
+        status: 'Generating badges',
         working
       })
     );
     // 👇 generate the badge
     try {
       const response = await this.#openai.imageGeneration({
-        model: 'dall-e-3',
-        prompt: config.badgeGenerationPrompt,
-        quality: 'hd',
-        size: '1024x1024',
-        style: 'vivid'
+        model: config.openaiImageGenerationModel,
+        prompt: config.badgeGenerationPrompt
       });
       if (response.error) throw new Error(response.error);
-      this.#store.dispatch(new SetMinutes({ badge: response.b64_json }));
+      this.#store.dispatch(
+        new SetMinutes({ badgeNum: 0, badges: response.b64_json })
+      );
     } catch (error) {
       this.#store.dispatch(new SetStatus({ error }));
     } finally {
@@ -269,7 +268,7 @@ export class ControllerService {
     try {
       const speech = this.#pluckTranscription(minutes, ix).speech;
       const response = await this.#openai.chatCompletion({
-        model: config.openaiModel,
+        model: config.openaiChatCompletionModel,
         prompt: `${config.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`
       });
       if (response.finish_reason === 'length')
@@ -362,7 +361,7 @@ export class ControllerService {
       const summary: Summary[] = [];
       for (const [section, texts] of Object.entries(bySection)) {
         const response = await this.#openai.chatCompletion({
-          model: config.openaiModel,
+          model: config.openaiChatCompletionModel,
           prompt: `${
             config.summaryStrategyPrompts[summaryStrategy]
           }:\n\n${texts.join('\n')}`
@@ -545,6 +544,8 @@ export class ControllerService {
   #resolveSpeaker(minutes: Minutes, speaker: string): string {
     const members = [
       // 🔥 this order is important!!
+      //    someone might be in more than one list, and this is the
+      //    order we want to pick them
       ...minutes.present,
       ...minutes.absent,
       ...minutes.visitors

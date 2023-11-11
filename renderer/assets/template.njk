@@ -160,9 +160,9 @@
 
       <section class="badge">
 
-        {% if minutes.badge %}
+        {% if minutes.badges[minutes.badgeNum] %}
           <article class="artwork">
-            <img src="data:image/png;base64,{{ minutes.badge }}">
+            <img src="data:image/png;base64,{{ minutes.badges[minutes.badgeNum] }}">
             <div class="credit">Artwork credit: DALL-E</div>
           </article>
           <br>
@@ -233,7 +233,7 @@
           </a>
           to perform the transcription, and the
           <a href="https://platform.openai.com/docs/models">
-            Open AI {{ openaiModel }} and DALL-E-3
+            Open AI {{ openaiChatCompletionModel }} and DALL-E-3
           </a>
           models to convert the transcription into grammatical sentences and
           paragraphs, and to automatically generate a summary and illustration from

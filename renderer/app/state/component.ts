@@ -21,10 +21,11 @@ export type AudioState = {
 
 export enum TabIndex {
   details = 0,
-  transcription = 1,
-  summary = 2,
-  preview = 3,
-  settings = 4
+  badges = 1,
+  transcription = 2,
+  summary = 3,
+  preview = 4,
+  settings = 5
 }
 
 export type WavesurferState = {

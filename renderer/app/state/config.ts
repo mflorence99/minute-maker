@@ -50,8 +50,9 @@ export type ConfigStateModel = {
   badgeGenerationPrompt;
   bucketName: string;
   googleCredentials: string;
+  openaiChatCompletionModel: OpenAIModel;
   openaiCredentials: string;
-  openaiModel: OpenAIModel;
+  openaiImageGenerationModel: OpenAIModel;
   rephraseStrategyPrompts: RephraseStrategyPrompts;
   summaryStrategyPrompts: SummaryStrategyPrompts;
   transcriptionImpl: TranscriptionImpl;
@@ -66,7 +67,8 @@ export type ConfigStateModel = {
     bucketName: null, // 👈 of course!
     googleCredentials: null, // 👈 of course!
     openaiCredentials: null, // 👈 of course!
-    openaiModel: 'gpt-4-1106-preview',
+    openaiChatCompletionModel: 'gpt-4-1106-preview',
+    openaiImageGenerationModel: 'dall-e-3',
     rephraseStrategyPrompts: {
       accuracy:
         'I made the following statement. Rephrase it using grammatical sentences and paragraphs',

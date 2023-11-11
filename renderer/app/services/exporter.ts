@@ -34,7 +34,8 @@ export class ExporterService {
       dayjs,
       fromMarkdown: this.#markdown.parse.bind(this.#markdown),
       minutes,
-      openaiModel: Constants.openaiModels[config.openaiModel],
+      openaiChatCompletionModel:
+        Constants.openaiModels[config.openaiChatCompletionModel],
       transcriber: {
         description:
           Constants.transcriptionImpls[config.transcriptionImpl].description,

@@ -43,9 +43,13 @@ const corsOptions: Cors[] = [
   }
 ];
 
-const openaiModels: Partial<Record<OpenAIModel, string>> = {
+const openaiModels: Record<OpenAIModel, string> = {
+  'dall-e-2': 'DALL-E 2',
+  'dall-e-3': 'DALL-E 3',
   'gpt-3.5-turbo-16k': 'GPT 3.5',
-  'gpt-4': 'GPT 4'
+  'gpt-4': 'GPT 4',
+  'gpt-4-turbo': 'GPT 4',
+  'gpt-4-1106-preview': 'GPT 4'
 };
 
 // 👇 all this so we can access the strategy at runtime eg: in UI
@@ -90,8 +94,11 @@ export const Constants = {
     top_p: 1
   },
   openaiImageGenerationDefaults: {
-    n: 1,
-    response_format: 'b64_json'
+    n: 4,
+    quality: 'hd',
+    response_format: 'b64_json',
+    size: '1024x1024',
+    style: 'vivid'
   },
   openaiModels,
   rephraseStrategy,
@@ -110,7 +117,7 @@ export const Constants = {
 // //////////////////////////////////////////////////////////////////////////
 
 export enum MenuID {
-  badge = 'menu/badge',
+  badges = 'menu/badges',
   close = 'menu/close',
   export = 'menu/export',
   find = 'menu/find',
@@ -239,16 +246,17 @@ export type OpenAIChatCompletionResponse = {
 };
 
 export type OpenAIImageGenerationRequest = {
-  model: OpenAIModel;
+  model?: OpenAIModel;
+  n?: number;
   prompt: string;
   quality?: 'hd';
-  size: '256x256' | '512x512' | '1024x1024' | '1792x1024' | '1024x1792';
+  size?: '256x256' | '512x512' | '1024x1024' | '1792x1024' | '1024x1792';
   style?: 'natural' | 'vivid';
 };
 
 export type OpenAIImageGenerationResponse = {
-  b64_json?: string;
-  error?: string;
+  b64_json: string[];
+  error: string;
 };
 
 export type OpenDialogOptions = {
@@ -331,7 +339,8 @@ export const MinutesSchema = z.object({
     sampleRateHertz: z.number(),
     url: z.string().url()
   }),
-  badge: z.string().optional(),
+  badgeNum: z.number(),
+  badges: z.string().array(),
   date: z.coerce.date(),
   findReplace: FindReplaceSchema.optional(),
   hideSpeakerUpdateDialog: z.boolean(),
@@ -367,6 +376,8 @@ export type Transcription = z.infer<typeof TranscriptionSchema>;
 export const emptyMinutes = (): Minutes => ({
   absent: [],
   audio: {},
+  badgeNum: 0,
+  badges: [],
   date: new Date(),
   findReplace: {},
   hideSpeakerUpdateDialog: false,

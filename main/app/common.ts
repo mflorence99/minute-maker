@@ -43,6 +43,28 @@ const corsOptions: Cors[] = [
   }
 ];
 
+const openaiChatCompletionDefaults: Partial<OpenAIChatCompletionRequest> = {
+  temperature: 0.5,
+  top_p: 1
+};
+
+const openaiImageGenerationDefaults: Partial<
+  Record<OpenAIModel, Partial<OpenAIImageGenerationRequest>>
+> = {
+  'dall-e-2': {
+    n: 4,
+    response_format: 'b64_json',
+    size: '512x512'
+  },
+  'dall-e-3': {
+    n: 1,
+    quality: 'hd',
+    response_format: 'b64_json',
+    size: '1024x1024',
+    style: 'vivid'
+  }
+};
+
 const openaiModels: Record<OpenAIModel, string> = {
   'dall-e-2': 'DALL-E 2',
   'dall-e-3': 'DALL-E 3',
@@ -89,24 +111,8 @@ export const Constants = {
   maxRecentPaths: 32,
   maxSpeechWords: 250,
   maxUndoStackDepth: 7,
-  openaiChatCompletionDefaults: {
-    temperature: 0.5,
-    top_p: 1
-  },
-  openaiImageGenerationDefaults: {
-    'dall-e-2': {
-      n: 4,
-      response_format: 'b64_json',
-      size: '512x512'
-    },
-    'dall-e-3': {
-      n: 1,
-      quality: 'hd',
-      response_format: 'b64_json',
-      size: '1024x1024',
-      style: 'vivid'
-    }
-  },
+  openaiChatCompletionDefaults,
+  openaiImageGenerationDefaults,
   openaiModels,
   rephraseStrategy,
   saveFileThrottleInterval: 1000,
@@ -257,6 +263,7 @@ export type OpenAIImageGenerationRequest = {
   n?: number;
   prompt: string;
   quality?: 'hd';
+  response_format?: 'b64_json' | 'url';
   size?: '256x256' | '512x512' | '1024x1024' | '1792x1024' | '1024x1792';
   style?: 'natural' | 'vivid';
 };

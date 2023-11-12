@@ -100,6 +100,7 @@ export async function imageGeneration(
   try {
     const _response = await backOff(
       () =>
+        // @ts-ignore 🔥 size not properly defined for dall-e-3
         openai.images.generate({
           ...Constants.openaiImageGenerationDefaults[request.model],
           ...request

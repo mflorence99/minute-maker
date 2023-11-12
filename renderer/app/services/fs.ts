@@ -23,11 +23,15 @@ export class FSService {
     return ipc.invoke(Channels.fsOpenFile, options);
   }
 
-  saveFile(path: string, data: string): Promise<void> {
-    return ipc.invoke(Channels.fsSaveFile, path, data);
+  saveFile(path: string, data: string, wait = false): Promise<void> {
+    return ipc.invoke(Channels.fsSaveFile, path, data, wait);
   }
 
-  saveFileAs(data: string, options: SaveDialogOptions): Promise<string> {
-    return ipc.invoke(Channels.fsSaveFileAs, data, options);
+  saveFileAs(
+    data: string,
+    options: SaveDialogOptions,
+    wait = false
+  ): Promise<string> {
+    return ipc.invoke(Channels.fsSaveFileAs, data, options, wait);
   }
 }

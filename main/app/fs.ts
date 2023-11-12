@@ -7,8 +7,8 @@ import { trunc } from './utils';
 
 import { dialog } from 'electron';
 import { ipcMain } from 'electron';
-import { readFileSync } from 'fs';
-import { writeFileSync } from 'fs';
+import { readFile } from 'fs/promises';
+import { writeFile } from 'fs/promises';
 
 import jsome from 'jsome';
 
@@ -35,9 +35,9 @@ export function chooseFile(event, options: OpenDialogOptions): string {
 
 ipcMain.handle(Channels.fsLoadFile, loadFile);
 
-export function loadFile(event, path: string): string {
-  const data = readFileSync(path, { encoding: 'utf8' });
-  jsome(`👈  readFileSync ${path} --> ${trunc(data)}`);
+export async function loadFile(event, path: string): Promise<string> {
+  const data = await readFile(path, { encoding: 'utf8' });
+  jsome(`👈  readFile ${path} --> ${trunc(data)}`);
   return data;
 }
 
@@ -47,10 +47,16 @@ export function loadFile(event, path: string): string {
 
 ipcMain.handle(Channels.fsOpenFile, openFile);
 
-export function openFile(event, options: OpenDialogOptions): OpenFileResponse {
+export async function openFile(
+  event,
+  options: OpenDialogOptions
+): Promise<OpenFileResponse> {
   cleanOptions(options);
   const path = chooseFile(event, options);
-  return path ? { data: loadFile(event, path), path } : null;
+  if (path) {
+    const data = await loadFile(event, path);
+    return { data, path };
+  } else return null;
 }
 
 // //////////////////////////////////////////////////////////////////////////
@@ -59,12 +65,22 @@ export function openFile(event, options: OpenDialogOptions): OpenFileResponse {
 
 ipcMain.handle(Channels.fsSaveFile, saveFile);
 
-export function saveFile(event, path: string, data: string): void {
-  jsome(`👈  writeFileSync ${path} <-- ${trunc(data)}`);
+let pendingWrite: Promise<void> = Promise.resolve();
+
+export async function saveFile(
+  event,
+  path: string,
+  data: string,
+  wait: boolean
+): Promise<void> {
+  jsome(`👈  writeFile ${path} wait:${wait} <-- ${trunc(data)}`);
   // 🔥 failsafe for bugs!!
   if (!data || data === 'null' || data === '{}')
     throw new Error('Writing empty data!!');
-  return writeFileSync(path, data, { encoding: 'utf8' });
+  // 👇 this allows us to write without waiting -- at least until
+  //    the next write request
+  await pendingWrite;
+  pendingWrite = writeFile(path, data, { encoding: 'utf8' });
 }
 
 // //////////////////////////////////////////////////////////////////////////
@@ -76,14 +92,15 @@ ipcMain.handle(Channels.fsSaveFileAs, saveFileAs);
 export function saveFileAs(
   event,
   data: string,
-  options: SaveDialogOptions
+  options: SaveDialogOptions,
+  wait: boolean
 ): string {
   cleanOptions(options);
   const path = dialog.showSaveDialogSync(globalThis.theWindow, {
     ...options,
     properties: ['showOverwriteConfirmation']
   });
-  if (path) saveFile(event, path, data);
+  if (path) saveFile(event, path, data, wait);
   return path;
 }
 

@@ -290,20 +290,25 @@ export class ControllerService {
   // 🟩 SaveMinutes
   // //////////////////////////////////////////////////////////////////////////
 
-  async saveMinutes(saveAs = false): Promise<void> {
+  async saveMinutes(saveAs = false, wait = false): Promise<void> {
     const app = this.#store.selectSnapshot<AppStateModel>(AppState);
     const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
     // 👇 only save valid minutes!
     if (minutes && MinutesSchema.safeParse(minutes).success) {
       let path = app.pathToMinutes;
       if (saveAs || !path) {
-        path = await this.#fs.saveFileAs(JSON.stringify(minutes, null, 2), {
-          defaultPath: path,
-          filters: [{ extensions: ['json'], name: 'Minutes' }],
-          title: 'Save Minutes'
-        });
+        path = await this.#fs.saveFileAs(
+          JSON.stringify(minutes, null, 2),
+          {
+            defaultPath: path,
+            filters: [{ extensions: ['json'], name: 'Minutes' }],
+            title: 'Save Minutes'
+          },
+          wait
+        );
         if (path) this.#store.dispatch(new SetPathToMinutes(path));
-      } else await this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
+      } else
+        await this.#fs.saveFile(path, JSON.stringify(minutes, null, 2), wait);
     }
   }
 
@@ -525,7 +530,10 @@ export class ControllerService {
   #monitorAppQuit(): void {
     // 👇 save the minutes before quitting
     ipc.on(Channels.appBeforeQuit, async () => {
-      await this.saveMinutes();
+      await this.saveMinutes(
+        false /* 👈 saveAs only if needed */,
+        true /* 👈 wait until complete */
+      );
       ipc.send(Channels.appQuit);
     });
   }

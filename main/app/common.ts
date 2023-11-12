@@ -115,7 +115,7 @@ export const Constants = {
   openaiImageGenerationDefaults,
   openaiModels,
   rephraseStrategy,
-  saveFileThrottleInterval: 1000,
+  saveFileThrottleInterval: 2000,
   sentryDSN:
     'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
   summaryStrategy,

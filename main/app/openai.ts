@@ -97,14 +97,11 @@ export async function imageGeneration(
   });
   // 👇 ready to call OpenAI
   let response: OpenAIImageGenerationResponse;
-  const dflts = Constants.openaiImageGenerationDefaults;
   try {
     const _response = await backOff(
       () =>
-        // @ts-ignore 🔥 type not properly defined for dall-e-3
         openai.images.generate({
-          ...dflts,
-          ...{ n: request.model === 'dall-e-3' ? 1 : dflts.n },
+          ...Constants.openaiImageGenerationDefaults[request.model],
           ...request
         }),
       backoffOptions()

@@ -94,11 +94,18 @@ export const Constants = {
     top_p: 1
   },
   openaiImageGenerationDefaults: {
-    n: 4,
-    quality: 'hd',
-    response_format: 'b64_json',
-    size: '1024x1024',
-    style: 'vivid'
+    'dall-e-2': {
+      n: 4,
+      response_format: 'b64_json',
+      size: '512x512'
+    },
+    'dall-e-3': {
+      n: 1,
+      quality: 'hd',
+      response_format: 'b64_json',
+      size: '1024x1024',
+      style: 'vivid'
+    }
   },
   openaiModels,
   rephraseStrategy,

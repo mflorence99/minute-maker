@@ -140,6 +140,6 @@
     "typescript": "^5",
     "uuid": "^9",
     "wavesurfer.js": "^7",
-    "zone.js": "~0.14.0"
+    "zone.js": "~0.14.2"
   }
 }

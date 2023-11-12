@@ -89,7 +89,6 @@
     "@taiga-ui/styles": "^3",
     "@tinkoff/ng-event-plugins": "^3",
     "@types/jest": "^29",
-    "@types/marked": "^6",
     "@types/nunjucks": "^3",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",

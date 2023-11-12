@@ -16,22 +16,22 @@ import { inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-summary',
   template: `
-    <table *ngIf="minutes.summary?.length > 0; else noSummary">
+    @if (minutes.summary?.length > 0) {
+    <table>
       <tbody>
+        @for ( summ of minutes.summary; track ix; let ix = $index) {
         <tr
           #row="hydrated"
-          *ngFor="
-            let summ of minutes.summary;
-            let ix = index;
-            trackBy: trackByIx
-          "
           (click)="selected.emit((summIndex = ix))"
           [mmHydrated]="'IX' + ix"
           [ngClass]="{ selected: ix === summIndex }">
-          <td *ngIf="row.isHydrated" width="100%">
-            <article *ngIf="summ.section" class="heading">
+          @if (row.isHydrated) {
+          <td width="100%">
+            @if (summ.section) {
+            <article class="heading">
               {{ summ.section }}
             </article>
+            }
 
             <textarea
               #summText
@@ -45,45 +45,48 @@ import { inject } from '@angular/core';
               style="width: calc(100% - 1rem)"
               wrap="soft"></textarea>
           </td>
+          }
         </tr>
+        }
       </tbody>
     </table>
+    } @else {
 
-    <ng-template #noSummary>
-      <tui-block-status>
-        <img tuiSlot="top" src="./assets/meeting.png" />
+    <tui-block-status>
+      <img tuiSlot="top" src="./assets/meeting.png" />
 
-        <h4>
-          The transcription has not yet
-          <br />
-          been summarized ...
-        </h4>
+      <h4>
+        The transcription has not yet
+        <br />
+        been summarized ...
+      </h4>
 
-        <p>
-          It can be re-summarized later from the
-          <b>Run</b>
-          menu.
-        </p>
+      <p>
+        It can be re-summarized later from the
+        <b>Run</b>
+        menu.
+      </p>
 
-        <tui-loader [showLoader]="status.working?.on === 'summary'">
-          <button
-            (click)="summarizeMinutes('bullets')"
-            [appearance]="status.working?.on === 'summary' ? 'mono' : 'primary'"
-            size="m"
-            tuiButton>
-            Summarize Transcription into Bullet Points
-          </button>
+      <tui-loader [showLoader]="status.working?.on === 'summary'">
+        <button
+          (click)="summarizeMinutes('bullets')"
+          [appearance]="status.working?.on === 'summary' ? 'mono' : 'primary'"
+          size="m"
+          tuiButton>
+          Summarize Transcription into Bullet Points
+        </button>
 
-          <button
-            (click)="summarizeMinutes('paragraphs')"
-            [appearance]="status.working?.on === 'summary' ? 'mono' : 'accent'"
-            size="m"
-            tuiButton>
-            Summarize Transcription into Paragraphs
-          </button>
-        </tui-loader>
-      </tui-block-status>
-    </ng-template>
+        <button
+          (click)="summarizeMinutes('paragraphs')"
+          [appearance]="status.working?.on === 'summary' ? 'mono' : 'accent'"
+          size="m"
+          tuiButton>
+          Summarize Transcription into Paragraphs
+        </button>
+      </tui-loader>
+    </tui-block-status>
+
+    }
   `
 })
 export class SummaryComponent {
@@ -103,11 +106,6 @@ export class SummaryComponent {
 
   summarizeMinutes(summaryStrategy: SummaryStrategy): void {
     this.#controller.summarizeMinutes(summaryStrategy);
-  }
-
-  // 👇 can't insert/remove summaries
-  trackByIx(ix: number): number {
-    return ix;
   }
 
   updateSummary(update: any, ix: number): void {

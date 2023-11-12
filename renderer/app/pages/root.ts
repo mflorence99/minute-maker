@@ -49,7 +49,8 @@ import deepCopy from 'deep-copy';
 @Component({
   selector: 'mm-root',
   template: `
-    <tui-root *ngIf="minutes$ | async as minutes; else getStarted">
+    @if (minutes$ | async; as minutes) {
+    <tui-root>
       <main>
         <header class="header">
           <h2>
@@ -67,111 +68,104 @@ import deepCopy from 'deep-copy';
           class="wavesurfer">
           <mm-wavesurfer-regions>
             <!-- 👇 only one region that we update -->
+            @if (currentTx) {
             <mm-wavesurfer-region
-              *ngIf="currentTx"
               [params]="{
                 end: currentTx.end,
                 id: 'singleton',
                 start: currentTx.start
               }" />
+            }
           </mm-wavesurfer-regions>
         </mm-wavesurfer>
 
-        <ng-container
-          *ngIf="status.working?.on !== 'transcription'; else transcribing">
-          <nav class="tabs">
-            <!-- 🔥 tabs can only be referenced by number, not name so be sure to change the TabIndex enum if you change the tab order -->
-            <tui-tabs
-              (activeItemIndexChange)="onSwitchTab($event)"
-              [(activeItemIndex)]="componentState.tabIndex">
-              <button [disabled]="!configured" tuiTab>Details</button>
-              <button [disabled]="!configured" tuiTab>Badges</button>
-              <button [disabled]="!configured" tuiTab>
-                Transcription
-                <tui-badge
-                  class="tui-space_bottom-2"
-                  size="xs"
-                  status="primary"
-                  [value]="minutes.numSpeakers"></tui-badge>
-              </button>
-              <button [disabled]="!configured" tuiTab>Summary</button>
-              <button [disabled]="!configured" tuiTab>Preview</button>
-              <div style="flex: 2"></div>
-              <button tuiTab>
-                <tui-svg src="tuiIconSettings"></tui-svg>
-                Settings
-              </button>
-            </tui-tabs>
-          </nav>
+        @if (status.working?.on !== 'transcription') {
 
-          <mm-metadata
-            [ngClass]="{
-              data: true,
-              showing:
-                configured && componentState.tabIndex === TabIndex.details
-            }"
-            [minutes]="minutes" />
+        <nav class="tabs">
+          <!-- 🔥 tabs can only be referenced by number, not name so be sure to change the TabIndex enum if you change the tab order -->
+          <tui-tabs
+            (activeItemIndexChange)="onSwitchTab($event)"
+            [(activeItemIndex)]="componentState.tabIndex">
+            <button [disabled]="!configured" tuiTab>Details</button>
+            <button [disabled]="!configured" tuiTab>Badges</button>
+            <button [disabled]="!configured" tuiTab>
+              Transcription
+              <tui-badge
+                class="tui-space_bottom-2"
+                size="xs"
+                status="primary"
+                [value]="minutes.numSpeakers"></tui-badge>
+            </button>
+            <button [disabled]="!configured" tuiTab>Summary</button>
+            <button [disabled]="!configured" tuiTab>Preview</button>
+            <div style="flex: 2"></div>
+            <button tuiTab>
+              <tui-svg src="tuiIconSettings"></tui-svg>
+              Settings
+            </button>
+          </tui-tabs>
+        </nav>
 
-          <mm-badges
-            [ngClass]="{
-              data: true,
-              showing: configured && componentState.tabIndex === TabIndex.badges
-            }"
-            [config]="config$ | async"
-            [minutes]="minutes"
-            [status]="status" />
+        <mm-metadata
+          [ngClass]="{
+            data: true,
+            showing: configured && componentState.tabIndex === TabIndex.details
+          }"
+          [minutes]="minutes" />
 
-          <mm-transcription
-            (selected)="onTranscription($event)"
-            [currentTx]="currentTx"
-            [duration]="minutes.audio.duration"
-            [match]="match"
-            [minutes]="minutes$ | async"
-            [ngClass]="{
-              data: true,
-              showing:
-                configured && componentState.tabIndex === TabIndex.transcription
-            }"
-            [status]="status"
-            mmHydrator />
+        <mm-badges
+          [ngClass]="{
+            data: true,
+            showing: configured && componentState.tabIndex === TabIndex.badges
+          }"
+          [config]="config$ | async"
+          [minutes]="minutes"
+          [status]="status" />
 
-          <!-- 🔥 we don't strictly need to make the symmary hydrateable, but it makes autosize work on the textareas -->
+        <mm-transcription
+          (selected)="onTranscription($event)"
+          [currentTx]="currentTx"
+          [duration]="minutes.audio.duration"
+          [match]="match"
+          [minutes]="minutes$ | async"
+          [ngClass]="{
+            data: true,
+            showing:
+              configured && componentState.tabIndex === TabIndex.transcription
+          }"
+          [status]="status"
+          mmHydrator />
 
-          <tui-loader
-            [ngClass]="{
-              data: true,
-              showing:
-                configured && componentState.tabIndex === TabIndex.summary
-            }"
-            [showLoader]="status.working?.on === 'summary'"
-            mmHydrator>
-            <mm-summary [minutes]="minutes$ | async" [status]="status" />
-          </tui-loader>
+        <!-- 🔥 we don't strictly need to make the symmary hydrateable, but it makes autosize work on the textareas -->
 
-          <mm-preview
-            [ngClass]="{
-              data: true,
-              showing:
-                configured && componentState.tabIndex === TabIndex.preview
-            }"
-            [config]="config$ | async"
-            [minutes]="minutes" />
+        <tui-loader
+          [ngClass]="{
+            data: true,
+            showing: configured && componentState.tabIndex === TabIndex.summary
+          }"
+          [showLoader]="status.working?.on === 'summary'"
+          mmHydrator>
+          <mm-summary [minutes]="minutes$ | async" [status]="status" />
+        </tui-loader>
 
-          <mm-config
-            [ngClass]="{
-              data: true,
-              showing:
-                !configured || componentState.tabIndex === TabIndex.settings
-            }"
-            [config]="config$ | async" />
-        </ng-container>
+        <mm-preview
+          [ngClass]="{
+            data: true,
+            showing: configured && componentState.tabIndex === TabIndex.preview
+          }"
+          [config]="config$ | async"
+          [minutes]="minutes" />
 
-        <ng-container *ngTemplateOutlet="progress"></ng-container>
-      </main>
+        <mm-config
+          [ngClass]="{
+            data: true,
+            showing:
+              !configured || componentState.tabIndex === TabIndex.settings
+          }"
+          [config]="config$ | async" />
 
-      <ng-template #transcribing>
-        <tui-block-status
-          *ngIf="transcriptionRate$ | async as transcriptionRate">
+        } @else { @if (transcriptionRate$ | async; as transcriptionRate) {
+        <tui-block-status>
           <img tuiSlot="top" src="./assets/meeting.png" />
 
           <h4>Transcription in progress ...</h4>
@@ -213,51 +207,48 @@ import deepCopy from 'deep-copy';
             below.
           </p>
         </tui-block-status>
-      </ng-template>
-    </tui-root>
-
-    <ng-template #getStarted>
-      <main>
-        <tui-block-status>
-          <img tuiSlot="top" src="./assets/meeting.png" />
-
-          <h4>To get started ...</h4>
-
-          <p>
-            These actions can be performed at anytime from the
-            <b>File</b>
-            menu.
-          </p>
-
-          <button
-            (click)="newMinutes()"
-            appearance="primary"
-            size="m"
-            tuiButton>
-            New Minutes from MP3 Audio
-          </button>
-
-          <button
-            (click)="openMinutes()"
-            appearance="accent"
-            size="m"
-            tuiButton>
-            Open Minutes JSON File
-          </button>
-        </tui-block-status>
+        } }
 
         <ng-container *ngTemplateOutlet="progress"></ng-container>
       </main>
-    </ng-template>
+    </tui-root>
+    } @else {
+
+    <main>
+      <tui-block-status>
+        <img tuiSlot="top" src="./assets/meeting.png" />
+
+        <h4>To get started ...</h4>
+
+        <p>
+          These actions can be performed at anytime from the
+          <b>File</b>
+          menu.
+        </p>
+
+        <button (click)="newMinutes()" appearance="primary" size="m" tuiButton>
+          New Minutes from MP3 Audio
+        </button>
+
+        <button (click)="openMinutes()" appearance="accent" size="m" tuiButton>
+          Open Minutes JSON File
+        </button>
+      </tui-block-status>
+
+      <ng-container *ngTemplateOutlet="progress"></ng-container>
+    </main>
+
+    }
 
     <ng-template #progress>
-      <footer *ngIf="!!status.working" class="footer">
+      @if (!!status.working) {
+      <footer class="footer">
         <label class="progress" tuiProgressLabel>
           {{ status.status }}
           <progress tuiProgressBar [max]="100"></progress>
         </label>
+        @if (status.working.canceledBy) {
         <button
-          *ngIf="status.working.canceledBy"
           (click)="onCancelAction()"
           appearance="mono"
           class="canceler"
@@ -266,7 +257,9 @@ import deepCopy from 'deep-copy';
           tuiButton>
           Cancel
         </button>
+        }
       </footer>
+      }
     </ng-template>
   `
 })

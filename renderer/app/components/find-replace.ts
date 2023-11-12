@@ -35,7 +35,8 @@ export type FindReplaceMatch = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-find-replace',
   template: `
-    <article *ngIf="minutes$ | async as minutes">
+    @if (minutes$ | async; as minutes) {
+    <article>
       <input
         #finder
         (input.throttled)="onFind(finder.value)"
@@ -45,13 +46,12 @@ export type FindReplaceMatch = {
         style="border: 1px solid var(--tui-text-01)" />
 
       <span style="display: inline-block; padding-left: 0.5rem; width: 6rem">
-        <ng-container
-          *ngIf="numMatches(minutes) as count; else noMatches"
-          [ngPlural]="count">
+        @if (numMatches(minutes); as count) {
+        <ng-container [ngPlural]="count">
           <ng-template ngPluralCase="=1">One match</ng-template>
           <ng-template ngPluralCase="other">{{ count }} matches</ng-template>
         </ng-container>
-        <ng-template #noMatches>No matches</ng-template>
+        } @else { No matches }
       </span>
 
       <button
@@ -72,6 +72,7 @@ export type FindReplaceMatch = {
         tuiIconButton
         type="button"></button>
     </article>
+    }
   `
 })
 export class FindReplaceComponent {

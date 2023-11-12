@@ -76,17 +76,17 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "minute-maker:build"
+            "buildTarget": "minute-maker:build"
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "minute-maker:build:development"
+              "buildTarget": "minute-maker:build:development"
             },
             "production": {
-              "browserTarget": "minute-maker:build:production"
+              "buildTarget": "minute-maker:build:production"
             }
           },
           "defaultConfiguration": "development"

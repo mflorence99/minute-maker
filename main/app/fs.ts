@@ -65,7 +65,7 @@ export async function openFile(
 
 ipcMain.handle(Channels.fsSaveFile, saveFile);
 
-let pendingWrite: Promise<void> = Promise.resolve();
+let pendingWriteFile: Promise<void> = Promise.resolve();
 
 export async function saveFile(
   event,
@@ -79,8 +79,13 @@ export async function saveFile(
     throw new Error('Writing empty data!!');
   // 👇 this allows us to write without waiting -- at least until
   //    the next write request
-  await pendingWrite;
-  pendingWrite = writeFile(path, data, { encoding: 'utf8' });
+  await pendingWriteFile;
+  pendingWriteFile = writeFile(path, data, { encoding: 'utf8' });
+  // 👇 but ... we may have been commanded to wait this time
+  if (wait) {
+    await pendingWriteFile;
+    pendingWriteFile = Promise.resolve();
+  }
 }
 
 // //////////////////////////////////////////////////////////////////////////

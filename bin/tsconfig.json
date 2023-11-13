@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "outDir": "./out",
     "target": "esnext"
   }
 }

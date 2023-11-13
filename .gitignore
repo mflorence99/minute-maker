@@ -3,6 +3,7 @@
 
 /.angular
 /.postcss-angular
+/bin/out
 /coverage
 /dist
 /installers

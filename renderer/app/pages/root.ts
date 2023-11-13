@@ -50,215 +50,232 @@ import deepCopy from 'deep-copy';
   selector: 'mm-root',
   template: `
     @if (minutes$ | async; as minutes) {
-    <tui-root>
-      <main>
-        <header class="header">
-          <h2>
-            {{ minutes.subject }} &bull;
-            {{ dayjs(minutes.date).format('MMMM D, YYYY') }}
-          </h2>
-          <pre>{{ (app$ | async).pathToMinutes }}</pre>
-        </header>
+      <tui-root>
+        <main>
+          <header class="header">
+            <h2>
+              {{ minutes.subject }} &bull;
+              {{ dayjs(minutes.date).format('MMMM D, YYYY') }}
+            </h2>
+            <pre>{{ (app$ | async).pathToMinutes }}</pre>
+          </header>
 
-        <mm-wavesurfer
-          #wavesurfer
-          (timeupdate)="onTimeUpdate($event)"
-          [audioFile]="minutes.audio.url"
-          [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }"
-          class="wavesurfer">
-          <mm-wavesurfer-regions>
-            <!-- 👇 only one region that we update -->
-            @if (currentTx) {
-            <mm-wavesurfer-region
-              [params]="{
-                end: currentTx.end,
-                id: 'singleton',
-                start: currentTx.start
-              }" />
+          <mm-wavesurfer
+            #wavesurfer
+            (timeupdate)="onTimeUpdate($event)"
+            [audioFile]="minutes.audio.url"
+            [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }"
+            class="wavesurfer">
+            <mm-wavesurfer-regions>
+              <!-- 👇 only one region that we update -->
+              @if (currentTx) {
+                <mm-wavesurfer-region
+                  [params]="{
+                    end: currentTx.end,
+                    id: 'singleton',
+                    start: currentTx.start
+                  }" />
+              }
+            </mm-wavesurfer-regions>
+          </mm-wavesurfer>
+
+          @if (status.working?.on !== 'transcription') {
+            <nav class="tabs">
+              <!-- 🔥 tabs can only be referenced by number, not name so be sure to change the TabIndex enum if you change the tab order -->
+              <tui-tabs
+                (activeItemIndexChange)="onSwitchTab($event)"
+                [(activeItemIndex)]="componentState.tabIndex">
+                <button [disabled]="!configured" tuiTab>Details</button>
+                <button [disabled]="!configured" tuiTab>Badges</button>
+                <button [disabled]="!configured" tuiTab>
+                  Transcription
+                  <tui-badge
+                    class="tui-space_bottom-2"
+                    size="xs"
+                    status="primary"
+                    [value]="minutes.numSpeakers"></tui-badge>
+                </button>
+                <button [disabled]="!configured" tuiTab>Summary</button>
+                <button [disabled]="!configured" tuiTab>Preview</button>
+                <div style="flex: 2"></div>
+                <button tuiTab>
+                  <tui-svg src="tuiIconSettings"></tui-svg>
+                  Settings
+                </button>
+              </tui-tabs>
+            </nav>
+
+            <mm-metadata
+              [ngClass]="{
+                data: true,
+                showing:
+                  configured && componentState.tabIndex === TabIndex.details
+              }"
+              [minutes]="minutes" />
+
+            <mm-badges
+              [ngClass]="{
+                data: true,
+                showing:
+                  configured && componentState.tabIndex === TabIndex.badges
+              }"
+              [config]="config$ | async"
+              [minutes]="minutes"
+              [status]="status" />
+
+            <mm-transcription
+              (selected)="onTranscription($event)"
+              [currentTx]="currentTx"
+              [duration]="minutes.audio.duration"
+              [match]="match"
+              [minutes]="minutes$ | async"
+              [ngClass]="{
+                data: true,
+                showing:
+                  configured &&
+                  componentState.tabIndex === TabIndex.transcription
+              }"
+              [status]="status"
+              mmHydrator />
+
+            <!-- 🔥 we don't strictly need to make the symmary hydrateable, but it makes autosize work on the textareas -->
+
+            <tui-loader
+              [ngClass]="{
+                data: true,
+                showing:
+                  configured && componentState.tabIndex === TabIndex.summary
+              }"
+              [showLoader]="status.working?.on === 'summary'"
+              mmHydrator>
+              <mm-summary [minutes]="minutes$ | async" [status]="status" />
+            </tui-loader>
+
+            <mm-preview
+              [ngClass]="{
+                data: true,
+                showing:
+                  configured && componentState.tabIndex === TabIndex.preview
+              }"
+              [config]="config$ | async"
+              [minutes]="minutes" />
+
+            <mm-config
+              [ngClass]="{
+                data: true,
+                showing:
+                  !configured || componentState.tabIndex === TabIndex.settings
+              }"
+              [config]="config$ | async" />
+          } @else {
+            @if (transcriptionRate$ | async; as transcriptionRate) {
+              <tui-block-status>
+                <img tuiSlot="top" src="./assets/meeting.png" />
+
+                <h4>Transcription in progress ...</h4>
+
+                <p>
+                  Speech-to-text transcription typically processes audio at
+                  {{ transcriptionRate }}x realtime, although performance is not
+                  linear for very short or very long recordings.
+                </p>
+
+                <p>
+                  This transcription should take about
+                  <b>
+                    {{
+                      dayjs()
+                        .add(
+                          minutes.audio.duration / transcriptionRate,
+                          'second'
+                        )
+                        .fromNow(true)
+                    }}
+                  </b>
+                  and complete at approximately
+                  <b>
+                    {{
+                      dayjs(minutes.transcriptionStart)
+                        .add(
+                          minutes.audio.duration / transcriptionRate,
+                          'second'
+                        )
+                        .format('hh:mm a')
+                    }}
+                  </b>
+                  .
+                </p>
+
+                <p>
+                  While it is running, the app can be closed or work can be
+                  performed on another set of minutes. When these minutes are
+                  opened again, the current progress will be shown.
+                </p>
+
+                <p>
+                  The transcription can be canceled at anytime from the status
+                  bar below.
+                </p>
+              </tui-block-status>
             }
-          </mm-wavesurfer-regions>
-        </mm-wavesurfer>
+          }
 
-        @if (status.working?.on !== 'transcription') {
-
-        <nav class="tabs">
-          <!-- 🔥 tabs can only be referenced by number, not name so be sure to change the TabIndex enum if you change the tab order -->
-          <tui-tabs
-            (activeItemIndexChange)="onSwitchTab($event)"
-            [(activeItemIndex)]="componentState.tabIndex">
-            <button [disabled]="!configured" tuiTab>Details</button>
-            <button [disabled]="!configured" tuiTab>Badges</button>
-            <button [disabled]="!configured" tuiTab>
-              Transcription
-              <tui-badge
-                class="tui-space_bottom-2"
-                size="xs"
-                status="primary"
-                [value]="minutes.numSpeakers"></tui-badge>
-            </button>
-            <button [disabled]="!configured" tuiTab>Summary</button>
-            <button [disabled]="!configured" tuiTab>Preview</button>
-            <div style="flex: 2"></div>
-            <button tuiTab>
-              <tui-svg src="tuiIconSettings"></tui-svg>
-              Settings
-            </button>
-          </tui-tabs>
-        </nav>
-
-        <mm-metadata
-          [ngClass]="{
-            data: true,
-            showing: configured && componentState.tabIndex === TabIndex.details
-          }"
-          [minutes]="minutes" />
-
-        <mm-badges
-          [ngClass]="{
-            data: true,
-            showing: configured && componentState.tabIndex === TabIndex.badges
-          }"
-          [config]="config$ | async"
-          [minutes]="minutes"
-          [status]="status" />
-
-        <mm-transcription
-          (selected)="onTranscription($event)"
-          [currentTx]="currentTx"
-          [duration]="minutes.audio.duration"
-          [match]="match"
-          [minutes]="minutes$ | async"
-          [ngClass]="{
-            data: true,
-            showing:
-              configured && componentState.tabIndex === TabIndex.transcription
-          }"
-          [status]="status"
-          mmHydrator />
-
-        <!-- 🔥 we don't strictly need to make the symmary hydrateable, but it makes autosize work on the textareas -->
-
-        <tui-loader
-          [ngClass]="{
-            data: true,
-            showing: configured && componentState.tabIndex === TabIndex.summary
-          }"
-          [showLoader]="status.working?.on === 'summary'"
-          mmHydrator>
-          <mm-summary [minutes]="minutes$ | async" [status]="status" />
-        </tui-loader>
-
-        <mm-preview
-          [ngClass]="{
-            data: true,
-            showing: configured && componentState.tabIndex === TabIndex.preview
-          }"
-          [config]="config$ | async"
-          [minutes]="minutes" />
-
-        <mm-config
-          [ngClass]="{
-            data: true,
-            showing:
-              !configured || componentState.tabIndex === TabIndex.settings
-          }"
-          [config]="config$ | async" />
-
-        } @else { @if (transcriptionRate$ | async; as transcriptionRate) {
+          <ng-container *ngTemplateOutlet="progress"></ng-container>
+        </main>
+      </tui-root>
+    } @else {
+      <main>
         <tui-block-status>
           <img tuiSlot="top" src="./assets/meeting.png" />
 
-          <h4>Transcription in progress ...</h4>
+          <h4>To get started ...</h4>
 
           <p>
-            Speech-to-text transcription typically processes audio at
-            {{ transcriptionRate }}x realtime, although performance is not
-            linear for very short or very long recordings.
+            These actions can be performed at anytime from the
+            <b>File</b>
+            menu.
           </p>
 
-          <p>
-            This transcription should take about
-            <b>
-              {{
-                dayjs()
-                  .add(minutes.audio.duration / transcriptionRate, 'second')
-                  .fromNow(true)
-              }}
-            </b>
-            and complete at approximately
-            <b>
-              {{
-                dayjs(minutes.transcriptionStart)
-                  .add(minutes.audio.duration / transcriptionRate, 'second')
-                  .format('hh:mm a')
-              }}
-            </b>
-            .
-          </p>
+          <button
+            (click)="newMinutes()"
+            appearance="primary"
+            size="m"
+            tuiButton>
+            New Minutes from MP3 Audio
+          </button>
 
-          <p>
-            While it is running, the app can be closed or work can be performed
-            on another set of minutes. When these minutes are opened again, the
-            current progress will be shown.
-          </p>
-
-          <p>
-            The transcription can be canceled at anytime from the status bar
-            below.
-          </p>
+          <button
+            (click)="openMinutes()"
+            appearance="accent"
+            size="m"
+            tuiButton>
+            Open Minutes JSON File
+          </button>
         </tui-block-status>
-        } }
 
         <ng-container *ngTemplateOutlet="progress"></ng-container>
       </main>
-    </tui-root>
-    } @else {
-
-    <main>
-      <tui-block-status>
-        <img tuiSlot="top" src="./assets/meeting.png" />
-
-        <h4>To get started ...</h4>
-
-        <p>
-          These actions can be performed at anytime from the
-          <b>File</b>
-          menu.
-        </p>
-
-        <button (click)="newMinutes()" appearance="primary" size="m" tuiButton>
-          New Minutes from MP3 Audio
-        </button>
-
-        <button (click)="openMinutes()" appearance="accent" size="m" tuiButton>
-          Open Minutes JSON File
-        </button>
-      </tui-block-status>
-
-      <ng-container *ngTemplateOutlet="progress"></ng-container>
-    </main>
-
     }
 
     <ng-template #progress>
       @if (!!status.working) {
-      <footer class="footer">
-        <label class="progress" tuiProgressLabel>
-          {{ status.status }}
-          <progress tuiProgressBar [max]="100"></progress>
-        </label>
-        @if (status.working.canceledBy) {
-        <button
-          (click)="onCancelAction()"
-          appearance="mono"
-          class="canceler"
-          size="xs"
-          icon="tuiIconClose"
-          tuiButton>
-          Cancel
-        </button>
-        }
-      </footer>
+        <footer class="footer">
+          <label class="progress" tuiProgressLabel>
+            {{ status.status }}
+            <progress tuiProgressBar [max]="100"></progress>
+          </label>
+          @if (status.working.canceledBy) {
+            <button
+              (click)="onCancelAction()"
+              appearance="mono"
+              class="canceler"
+              size="xs"
+              icon="tuiIconClose"
+              tuiButton>
+              Cancel
+            </button>
+          }
+        </footer>
       }
     </ng-template>
   `

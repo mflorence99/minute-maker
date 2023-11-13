@@ -23,10 +23,11 @@ import { inject } from '@angular/core';
     <form [formGroup]="badgesForm">
       <article class="badges">
         @for (badge of minutes.badges; track ix; let ix = $index) {
-        <article [ngClass]="{ badge: true, multi: minutes.badges.length > 1 }">
-          <img src="data:image/png;base64,{{ badge }}" />
-          <tui-radio [item]="ix" formControlName="badgeNum" size="l" />
-        </article>
+          <article
+            [ngClass]="{ badge: true, multi: minutes.badges.length > 1 }">
+            <img src="data:image/png;base64,{{ badge }}" />
+            <tui-radio [item]="ix" formControlName="badgeNum" size="l" />
+          </article>
         }
       </article>
 

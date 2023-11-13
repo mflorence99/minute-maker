@@ -27,128 +27,125 @@ import scrollIntoView from 'scroll-into-view-if-needed';
   selector: 'mm-transcription',
   template: `
     @if (minutes.transcription?.length > 0) {
-    <table>
-      <tbody>
-        @for ( tx of minutes.transcription; track tx.id; let ix = $index) {
+      <table>
+        <tbody>
+          @for (tx of minutes.transcription; track tx.id; let ix = $index) {
+            <tr
+              #row="hydrated"
+              (click)="onSelected(tx)"
+              [mmHydrated]="'TX' + tx.id"
+              [ngClass]="{ selected: tx.id === currentTx?.id }"
+              [id]="'TX' + tx.id">
+              @if (tx.type === 'AG' && row.isHydrated) {
+                <td colspan="3" width="100%">
+                  <textarea
+                    #agendaItemTitle
+                    (input.throttled)="
+                      updateAgendaItem(agendaItemTitle.value, ix)
+                    "
+                    [mmFindReplaceMatchFld]="'title'"
+                    [mmFindReplaceMatchID]="tx.id"
+                    [mmFindReplaceMatch]="match"
+                    [mmHighlight]="searchString()"
+                    [mmRemovable]="ix"
+                    [value]="tx.title"
+                    autocomplete="off"
+                    autocorrect="on"
+                    autosize
+                    class="heading"
+                    spellcheck="true"
+                    style="width: calc(100% - 1rem)"
+                    wrap="soft"></textarea>
+                </td>
+              }
+              @if (tx.type === 'TX' && row.isHydrated) {
+                <td
+                  style="font-family: monospace; font-size: smaller; padding-top: 0.15rem">
+                  {{
+                    dayjs({ second: tx.start }).format(
+                      duration > 60 * 60 ? 'HH:mm:ss' : 'mm:ss'
+                    )
+                  }}
+                </td>
+                <td>
+                  <input
+                    #transcriptionSpeaker
+                    (change)="updateSpeaker(transcriptionSpeaker.value, ix)"
+                    [mmFindReplaceMatchFld]="'speaker'"
+                    [mmFindReplaceMatchID]="tx.id"
+                    [mmFindReplaceMatch]="match"
+                    [mmHighlight]="searchString()"
+                    [value]="tx.speaker"
+                    style="font-weight: bold; width: 7rem" />
+                </td>
 
-        <tr
-          #row="hydrated"
-          (click)="onSelected(tx)"
-          [mmHydrated]="'TX' + tx.id"
-          [ngClass]="{ selected: tx.id === currentTx?.id }"
-          [id]="'TX' + tx.id">
-          @if (tx.type === 'AG' && row.isHydrated) {
-
-          <td colspan="3" width="100%">
-            <textarea
-              #agendaItemTitle
-              (input.throttled)="updateAgendaItem(agendaItemTitle.value, ix)"
-              [mmFindReplaceMatchFld]="'title'"
-              [mmFindReplaceMatchID]="tx.id"
-              [mmFindReplaceMatch]="match"
-              [mmHighlight]="searchString()"
-              [mmRemovable]="ix"
-              [value]="tx.title"
-              autocomplete="off"
-              autocorrect="on"
-              autosize
-              class="heading"
-              spellcheck="true"
-              style="width: calc(100% - 1rem)"
-              wrap="soft"></textarea>
-          </td>
-
-          } @if (tx.type === 'TX' && row.isHydrated) {
-
-          <td
-            style="font-family: monospace; font-size: smaller; padding-top: 0.15rem">
-            {{
-              dayjs({ second: tx.start }).format(
-                duration > 60 * 60 ? 'HH:mm:ss' : 'mm:ss'
-              )
-            }}
-          </td>
-          <td>
-            <input
-              #transcriptionSpeaker
-              (change)="updateSpeaker(transcriptionSpeaker.value, ix)"
-              [mmFindReplaceMatchFld]="'speaker'"
-              [mmFindReplaceMatchID]="tx.id"
-              [mmFindReplaceMatch]="match"
-              [mmHighlight]="searchString()"
-              [value]="tx.speaker"
-              style="font-weight: bold; width: 7rem" />
-          </td>
-
-          <td width="100%">
-            <tui-loader
-              [showLoader]="
-                status.working?.on === 'rephrase' && status.ix === ix
-              ">
-              <textarea
-                #transcriptionSpeech
-                (input.throttled)="updateSpeech(transcriptionSpeech.value, ix)"
-                [class.disabled]="
-                  status.working?.on === 'rephrase' && status.ix === ix
-                "
-                [mmFindReplaceMatchFld]="'speech'"
-                [mmFindReplaceMatchID]="tx.id"
-                [mmFindReplaceMatch]="match"
-                [mmHighlight]="searchString()"
-                [mmInsertable]="ix"
-                [mmJoinable]="
-                  minutes.transcription[ix + 1]?.type === 'TX' ? ix : null
-                "
-                [mmRephraseable]="ix"
-                [mmRemovable]="ix"
-                [mmSplittable]="ix"
-                [useImportant]="true"
-                [value]="tx.speech"
-                autocomplete="off"
-                autocorrect="on"
-                autosize
-                spellcheck="true"
-                style="width: calc(100% - 1rem)"
-                wrap="soft"></textarea>
-            </tui-loader>
-          </td>
-
+                <td width="100%">
+                  <tui-loader
+                    [showLoader]="
+                      status.working?.on === 'rephrase' && status.ix === ix
+                    ">
+                    <textarea
+                      #transcriptionSpeech
+                      (input.throttled)="
+                        updateSpeech(transcriptionSpeech.value, ix)
+                      "
+                      [class.disabled]="
+                        status.working?.on === 'rephrase' && status.ix === ix
+                      "
+                      [mmFindReplaceMatchFld]="'speech'"
+                      [mmFindReplaceMatchID]="tx.id"
+                      [mmFindReplaceMatch]="match"
+                      [mmHighlight]="searchString()"
+                      [mmInsertable]="ix"
+                      [mmJoinable]="
+                        minutes.transcription[ix + 1]?.type === 'TX' ? ix : null
+                      "
+                      [mmRephraseable]="ix"
+                      [mmRemovable]="ix"
+                      [mmSplittable]="ix"
+                      [useImportant]="true"
+                      [value]="tx.speech"
+                      autocomplete="off"
+                      autocorrect="on"
+                      autosize
+                      spellcheck="true"
+                      style="width: calc(100% - 1rem)"
+                      wrap="soft"></textarea>
+                  </tui-loader>
+                </td>
+              }
+            </tr>
           }
-        </tr>
-
-        }
-      </tbody>
-    </table>
+        </tbody>
+      </table>
     } @else {
+      <tui-block-status>
+        <img tuiSlot="top" src="./assets/meeting.png" />
 
-    <tui-block-status>
-      <img tuiSlot="top" src="./assets/meeting.png" />
+        <h4>
+          The audio file has not yet
+          <br />
+          been transcribed ...
+        </h4>
 
-      <h4>
-        The audio file has not yet
-        <br />
-        been transcribed ...
-      </h4>
+        <p>
+          It can be re-transcribed later from the
+          <b>Run</b>
+          menu.
+        </p>
 
-      <p>
-        It can be re-transcribed later from the
-        <b>Run</b>
-        menu.
-      </p>
-
-      <tui-loader [showLoader]="status.working?.on === 'transcription'">
-        <button
-          (click)="transcribeAudio()"
-          [appearance]="
-            status.working?.on === 'transcription' ? 'mono' : 'primary'
-          "
-          size="m"
-          tuiButton>
-          Transcribe Audio
-        </button>
-      </tui-loader>
-    </tui-block-status>
-
+        <tui-loader [showLoader]="status.working?.on === 'transcription'">
+          <button
+            (click)="transcribeAudio()"
+            [appearance]="
+              status.working?.on === 'transcription' ? 'mono' : 'primary'
+            "
+            size="m"
+            tuiButton>
+            Transcribe Audio
+          </button>
+        </tui-loader>
+      </tui-block-status>
     }
   `
 })

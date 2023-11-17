@@ -351,7 +351,8 @@ export const MinutesSchema = z.object({
     encoding: z.string(),
     gcsuri: z.string().url(),
     sampleRateHertz: z.number(),
-    url: z.string().url()
+    url: z.string().url(),
+    wavelength: z.number().optional()
   }),
   badgeNum: z.number(),
   badges: z.string().array(),

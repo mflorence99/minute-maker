@@ -261,12 +261,18 @@ export class MinutesState {
 
   // 👇 NOTE: utility action, as not all have to be set at once
   @Action(SetMinutes) setMinutes(
-    { patchState, setState },
+    { getState, patchState, setState },
     { minutes }: SetMinutes
   ): void {
-    if (minutes.audio) patchState({ audio: patch(minutes.audio) });
-    if (minutes.findReplace) patchState({ findReplace: patch(minutes.audio) });
-    setState(patch(minutes));
+    const state = getState();
+    if (!state) setState(minutes);
+    else {
+      const { audio, findReplace, ...rest } = minutes;
+      if (audio) patchState({ audio: { ...state.audio, ...audio } });
+      if (findReplace)
+        patchState({ findReplace: { ...state.findReplace, ...findReplace } });
+      setState(patch(rest));
+    }
   }
 
   // //////////////////////////////////////////////////////////////////////////

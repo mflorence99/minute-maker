@@ -20,6 +20,7 @@ import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { Redo } from '#mm/state/undo';
 import { Select } from '@ngxs/store';
 import { SetComponentState } from '#mm/state/component';
+import { SetMinutes } from '#mm/state/minutes';
 import { StatusState } from '#mm/state/status';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
@@ -62,6 +63,7 @@ import deepCopy from 'deep-copy';
 
           <mm-wavesurfer
             #wavesurfer
+            (audioFileLoaded)="onAudioFileLoaded($event)"
             (timeupdate)="onTimeUpdate($event)"
             [audioFile]="minutes.audio.url"
             [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }"
@@ -339,6 +341,13 @@ export class RootPage {
 
   newMinutes(): void {
     this.#controller.newMinutes();
+  }
+
+  onAudioFileLoaded(audio: HTMLAudioElement): void {
+    console.log({ duration: audio.duration });
+    this.#store.dispatch(
+      new SetMinutes({ audio: { wavelength: audio.duration } })
+    );
   }
 
   onCancelAction(): void {

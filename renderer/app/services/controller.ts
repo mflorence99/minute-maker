@@ -479,8 +479,9 @@ export class ControllerService {
       )
       .subscribe(({ tx }) => {
         let nextTranscriptionID = minutes.nextTranscriptionID ?? 0;
-        // 👇 make sure they're typed right and propery ID'd
+        // 👇 for each item in the transcription ...
         tx.transcription.forEach((t) => {
+          // 👇 make sure it's typed right and propery ID'd
           t.id = ++nextTranscriptionID;
           t.type = 'TX';
         });

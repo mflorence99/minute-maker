@@ -7,6 +7,7 @@ import { ComponentState } from '#mm/state/component';
 import { ComponentStateModel } from '#mm/state/component';
 import { ContentChildren } from '@angular/core';
 import { ElementRef } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { Input } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Output } from '@angular/core';
@@ -121,6 +122,8 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
   @Output() timeupdate = new WatchableEventEmitter<number>();
   @Output() zoom = new WatchableEventEmitter<number>();
 
+  @Output() audioFileLoaded = new EventEmitter<HTMLAudioElement>();
+
   @ViewChild('media') media: ElementRef<HTMLMediaElement>;
   @ViewChild('wave') wave: ElementRef<HTMLElement>;
   @ViewChild('zoomer') zoomer: ElementRef<HTMLInputElement>;
@@ -167,6 +170,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     // 👇 create the WaveSurfer
     this.wavesurfer = WaveSurfer.create({
+      backend: 'WebAudio',
       container: this.wave.nativeElement,
       media: this.media.nativeElement,
       minPxPerSec: this.componentState.wavesurfer.minPxPerSec,
@@ -222,6 +226,8 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
       const audio = this.media.nativeElement;
       audio.playbackRate = this.componentState.audio.playbackRate;
       this.#store.dispatch(new ClearStatus(working));
+      // 👇 tell the world we're loaded
+      this.audioFileLoaded.emit(audio);
     });
     this.wavesurfer.load(this.#audioFile);
   }

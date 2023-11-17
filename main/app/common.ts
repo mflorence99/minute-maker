@@ -352,6 +352,7 @@ export const MinutesSchema = z.object({
     gcsuri: z.string().url(),
     sampleRateHertz: z.number(),
     url: z.string().url(),
+    // 👇 duration of waveform
     wavelength: z.number().optional()
   }),
   badgeNum: z.number(),

@@ -479,11 +479,20 @@ export class ControllerService {
       )
       .subscribe(({ tx }) => {
         let nextTranscriptionID = minutes.nextTranscriptionID ?? 0;
+        // 🔥 the time base in the audio control appears slighty different
+        //    and must be corrected
+        const adjustment = minutes.audio.wavelength
+          ? minutes.audio.wavelength / minutes.audio.duration
+          : 1;
         // 👇 for each item in the transcription ...
         tx.transcription.forEach((t) => {
-          // 👇 make sure it's typed right and propery ID'd
+          // 👇 make sure it's typed right and properly ID'd
           t.id = ++nextTranscriptionID;
           t.type = 'TX';
+          // 👇 adjust timestamps to account for timebase difference between
+          //    waveform in wavesurfer and actual audio file
+          t.start *= adjustment;
+          t.end *= adjustment;
         });
         // 👇 finally
         this.#store.dispatch([

@@ -12,13 +12,15 @@ console.log(chalk.yellow(`👈 reading ${path}`));
 const minutes = JSON.parse(readFileSync(path).toString());
 
 // 👇 correct for the wrong offset
-const offset = 9 * 60;
+const adjustment = minutes.audio.wavelength
+  ? minutes.audio.wavelength / minutes.audio.duration
+  : 1;
 
 // 👇 reset the timestamp of each Transcription
 minutes.transcription.forEach((tx) => {
   if (tx.type === 'TX' && tx.id >= 230) {
-    tx.start += offset;
-    tx.end += offset;
+    tx.start *= adjustment;
+    tx.end *= adjustment;
   }
 });
 

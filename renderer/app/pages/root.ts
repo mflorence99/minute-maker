@@ -344,8 +344,9 @@ export class RootPage {
   }
 
   onAudioFileLoaded(audio: HTMLAudioElement): void {
-    console.log({ duration: audio.duration });
     this.#store.dispatch(
+      // 👇 this is the duration of the waveform -- the time base
+      //    in the audio control appears slighty different and must be corrected
       new SetMinutes({ audio: { wavelength: audio.duration } })
     );
   }

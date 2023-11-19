@@ -38,6 +38,7 @@ import { filter } from 'rxjs';
 import { inject } from '@angular/core';
 import { map } from 'rxjs';
 import { of } from 'rxjs';
+import { pluckTranscription } from '#mm/state/minutes';
 import { takeWhile } from 'rxjs';
 import { tap } from 'rxjs';
 import { throttleTime } from 'rxjs';
@@ -266,7 +267,7 @@ export class ControllerService {
       })
     );
     try {
-      const speech = this.#pluckTranscription(minutes, ix).speech;
+      const speech = pluckTranscription(minutes, ix).speech;
       const response = await this.#openai.chatCompletion({
         model: config.openaiChatCompletionModel,
         prompt: `${config.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`
@@ -546,12 +547,6 @@ export class ControllerService {
       );
       ipc.send(Channels.appQuit);
     });
-  }
-
-  #pluckTranscription(minutes: Minutes, ix: number): Transcription {
-    if (minutes.transcription[ix].type === 'TX')
-      return minutes.transcription[ix] as Transcription;
-    else throw new Error(`🔥 Operation not supported for item #${ix}`);
   }
 
   #ready(): void {

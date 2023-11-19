@@ -210,8 +210,8 @@ export class MinutesState {
   ): void {
     // 👇 capture the new speech
     const state = getState();
-    const tx1 = this.#pluckTranscription(state, ix);
-    const tx2 = this.#pluckTranscription(state, ix + 1);
+    const tx1 = pluckTranscription(state, ix);
+    const tx2 = pluckTranscription(state, ix + 1);
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#store.dispatch(
@@ -285,7 +285,7 @@ export class MinutesState {
   ): void {
     // 👇 capture the original
     const state = getState();
-    const original: Transcription = { ...this.#pluckTranscription(state, ix) };
+    const original: Transcription = { ...pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#store.dispatch(
@@ -350,7 +350,7 @@ export class MinutesState {
   ): void {
     // 👇 capture the original
     const state = getState();
-    const original: AgendaItem = { ...this.#pluckAgendaItem(state, ix) };
+    const original: AgendaItem = { ...pluckAgendaItem(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#store.dispatch(
@@ -464,7 +464,7 @@ export class MinutesState {
   ): void {
     // 👇 capture the original
     const state = getState();
-    const original: Transcription = { ...this.#pluckTranscription(state, ix) };
+    const original: Transcription = { ...pluckTranscription(state, ix) };
     // 👇 put the inverse action onto the undo stack
     if (!undoing)
       this.#store.dispatch(
@@ -476,20 +476,26 @@ export class MinutesState {
     // 👇 now do the action
     setState(patch({ transcription: updateItem(ix, patch(transcription)) }));
   }
+}
 
-  // //////////////////////////////////////////////////////////////////////////
-  // 🟦 helper methods
-  // //////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
+// 🟦 helper functions
+// //////////////////////////////////////////////////////////////////////////
 
-  #pluckAgendaItem(state: MinutesStateModel, ix: number): AgendaItem {
-    if (state.transcription[ix].type === 'AG')
-      return state.transcription[ix] as any as AgendaItem;
-    else throw new Error(`🔥 Operation not supported for item #${ix}`);
-  }
+export function pluckAgendaItem(
+  state: MinutesStateModel,
+  ix: number
+): AgendaItem {
+  if (state.transcription[ix].type === 'AG')
+    return state.transcription[ix] as any as AgendaItem;
+  else throw new Error(`🔥 Operation not supported for item #${ix}`);
+}
 
-  #pluckTranscription(state: MinutesStateModel, ix: number): Transcription {
-    if (state.transcription[ix].type === 'TX')
-      return state.transcription[ix] as any as Transcription;
-    else throw new Error(`🔥 Operation not supported for item #${ix}`);
-  }
+export function pluckTranscription(
+  state: MinutesStateModel,
+  ix: number
+): Transcription {
+  if (state.transcription[ix].type === 'TX')
+    return state.transcription[ix] as any as Transcription;
+  else throw new Error(`🔥 Operation not supported for item #${ix}`);
 }

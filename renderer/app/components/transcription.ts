@@ -18,6 +18,7 @@ import { UpdateTranscription } from '#mm/state/minutes';
 import { WINDOW } from '@ng-web-apis/common';
 
 import { inject } from '@angular/core';
+import { pluckTranscription } from '#mm/state/minutes';
 
 import dayjs from 'dayjs';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -209,7 +210,7 @@ export class TranscriptionComponent {
   }
 
   async updateSpeaker(speaker: string, ix: number): Promise<void> {
-    const original = this.#pluckTranscription(this.minutes, ix).speaker;
+    const original = pluckTranscription(this.minutes, ix).speaker;
     // 👇 need to show change dialog?
     //    if original is blank, don't show the dialog because
     //    we will ALWAYS only change this occurrence
@@ -240,11 +241,5 @@ export class TranscriptionComponent {
 
   updateSpeech(speech: string, ix: number): void {
     this.#store.dispatch(new UpdateTranscription({ speech }, ix));
-  }
-
-  #pluckTranscription(minutes: Minutes, ix: number): Transcription {
-    if (minutes.transcription[ix].type === 'TX')
-      return minutes.transcription[ix] as any as Transcription;
-    else throw new Error(`🔥 Operation not supported for item #${ix}`);
   }
 }

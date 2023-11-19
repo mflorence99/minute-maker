@@ -484,12 +484,12 @@ export class MinutesState {
   #pluckAgendaItem(state: MinutesStateModel, ix: number): AgendaItem {
     if (state.transcription[ix].type === 'AG')
       return state.transcription[ix] as any as AgendaItem;
-    else throw new Error(`Operation not supported for item #${ix}`);
+    else throw new Error(`🔥 Operation not supported for item #${ix}`);
   }
 
   #pluckTranscription(state: MinutesStateModel, ix: number): Transcription {
     if (state.transcription[ix].type === 'TX')
       return state.transcription[ix] as any as Transcription;
-    else throw new Error(`Operation not supported for item #${ix}`);
+    else throw new Error(`🔥 Operation not supported for item #${ix}`);
   }
 }

@@ -35,6 +35,7 @@ import { ViewChild } from '@angular/core';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 
 import { combineLatest } from 'rxjs';
+import { defaultStatus } from '#mm/state/status';
 import { delay } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs';
 import { filter } from 'rxjs';
@@ -299,7 +300,7 @@ export class RootPage {
   currentTx: Partial<Transcription>;
   dayjs = dayjs;
   match: FindReplaceMatch;
-  status: StatusStateModel = StatusState.defaultStatus();
+  status: StatusStateModel = defaultStatus();
 
   // 👇 just to reference the enum in the template
   // eslint-disable-next-line @typescript-eslint/member-ordering

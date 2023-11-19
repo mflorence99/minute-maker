@@ -73,10 +73,10 @@ export async function saveFile(
   data: string,
   wait: boolean
 ): Promise<void> {
-  jsome(`👈  writeFile ${path} wait:${wait} <-- ${trunc(data)}`);
   // 🔥 failsafe for bugs!!
   if (!data || data === 'null' || data === '{}')
-    throw new Error('Writing empty data!!');
+    throw new Error(`🔥 Attempt to write empty data ${data}`);
+  jsome(`👈  writeFile ${path} wait:${wait} <-- ${trunc(data)}`);
   // 👇 this allows us to write without waiting -- at least until
   //    the next write request
   await pendingWriteFile;

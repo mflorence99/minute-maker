@@ -1,13 +1,13 @@
 import 'jest-extended';
 
 import { Constants } from '#mm/common';
-import { InsertTranscriptionItem } from '#mm/state/minutes';
 import { InsertTranscription } from '#mm/state/minutes';
+import { InsertTranscriptionItem } from '#mm/state/minutes';
 import { JoinTranscriptions } from '#mm/state/minutes';
 import { MinutesState } from '#mm/state/minutes';
 import { NgxsModule } from '@ngxs/store';
-import { RemoveTranscriptionItem } from '#mm/state/minutes';
 import { RemoveTranscription } from '#mm/state/minutes';
+import { RemoveTranscriptionItem } from '#mm/state/minutes';
 import { SetMinutes } from '#mm/state/minutes';
 import { SplitTranscription } from '#mm/state/minutes';
 import { Store } from '@ngxs/store';

@@ -38,22 +38,22 @@ export class Working {
   ) {}
 }
 
+export function defaultStatus(): StatusStateModel {
+  return {
+    error: null,
+    ix: null,
+    status: null,
+    working: null
+  };
+}
+
 @State<StatusStateModel>({
   name: 'status',
-  defaults: StatusState.defaultStatus()
+  defaults: defaultStatus()
 })
 @Injectable()
 export class StatusState {
   #dialog = inject(DialogService);
-
-  static defaultStatus(): StatusStateModel {
-    return {
-      error: null,
-      ix: null,
-      status: null,
-      working: null
-    };
-  }
 
   // //////////////////////////////////////////////////////////////////////////
   // 🟩 ClearStatus
@@ -66,7 +66,7 @@ export class StatusState {
     const status = getState();
     // 👇 only clear the status if it still "belongs" to me
     if (!working || !status.working || working.on === status.working.on)
-      setState(StatusState.defaultStatus());
+      setState(defaultStatus());
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@ export class StatusState {
         'An error occured. Please retry.',
         status.error.message
       );
-      setState(StatusState.defaultStatus());
+      setState(defaultStatus());
       console.error(`🔥 ${status.error.message}`);
       Sentry.captureException(status.error);
     } else setState(patch(status));

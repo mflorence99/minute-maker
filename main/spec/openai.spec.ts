@@ -1,5 +1,4 @@
 import { chatCompletion } from '../app/openai';
-import { completion } from '../app/openai';
 import { listModels } from '../app/openai';
 
 import 'jest-extended';

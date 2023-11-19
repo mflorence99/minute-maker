@@ -59,7 +59,7 @@ export async function transcriberPoll(
   while (true) {
     // 👇 have we been cancelled?
     if (cancellations.has(transcriptionName))
-      throw new Error('Transcription cancelled');
+      throw new Error('🔥 Transcription cancelled');
     // 👇 how far along are we?
     const transcript = await client.transcripts.get(transcriptionName);
     // 👇 formulate transcription if done

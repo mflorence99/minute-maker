@@ -272,7 +272,7 @@ export class ControllerService {
         prompt: `${config.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`
       });
       if (response.finish_reason === 'length')
-        throw new Error('This speech is too long to rephrase');
+        throw new Error('🔥 This speech is too long to rephrase');
       else if (response.finish_reason !== 'stop')
         throw new Error(response.finish_reason);
       else
@@ -372,7 +372,7 @@ export class ControllerService {
           }:\n\n${texts.join('\n')}`
         });
         if (response.finish_reason === 'length')
-          throw new Error('This section is too long to rephrase');
+          throw new Error('🔥 This section is too long to rephrase');
         else if (response.finish_reason !== 'stop')
           throw new Error(response.finish_reason);
         else summary.push({ section, summary: response.text });
@@ -551,7 +551,7 @@ export class ControllerService {
   #pluckTranscription(minutes: Minutes, ix: number): Transcription {
     if (minutes.transcription[ix].type === 'TX')
       return minutes.transcription[ix] as Transcription;
-    else throw new Error(`Operation not supported for item #${ix}`);
+    else throw new Error(`🔥 Operation not supported for item #${ix}`);
   }
 
   #ready(): void {

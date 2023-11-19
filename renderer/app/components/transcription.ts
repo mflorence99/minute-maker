@@ -245,6 +245,6 @@ export class TranscriptionComponent {
   #pluckTranscription(minutes: Minutes, ix: number): Transcription {
     if (minutes.transcription[ix].type === 'TX')
       return minutes.transcription[ix] as any as Transcription;
-    else throw new Error(`Operation not supported for item #${ix}`);
+    else throw new Error(`🔥 Operation not supported for item #${ix}`);
   }
 }

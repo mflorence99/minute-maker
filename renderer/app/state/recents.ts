@@ -17,6 +17,7 @@ import { removeItem } from '@ngxs/store/operators';
 
 // 👇 we SHOULD be calling FSService, but we can't inject it
 //    here as the "minutes" selector must be static
+
 declare const ipc /* 👈 typeof ipcRenderer */;
 
 export class AddRecent {

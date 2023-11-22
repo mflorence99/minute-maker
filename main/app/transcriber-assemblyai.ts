@@ -95,20 +95,16 @@ export async function transcriberRequest(
   jsome([`👉  ASSEMBLYAI ${Channels.transcriberRequest}`, request]);
   const client = new AssemblyAI({ apiKey: theCredentials });
   // 👇 call AssemblyAI to begin transcription
-  const transcript = await client.transcripts.create(
-    {
-      audio_url: request.audio.url,
-      disfluencies: false,
-      format_text: true,
-      punctuate: true,
-      speakers_expected: request.numSpeakers,
-      speaker_labels: true,
-      // 👇 phrases can't be empty
-      word_boost: request.phrases.filter((phrase) => !!phrase)
-    },
-    // 👇 We'll do our own polling, thank you!
-    { poll: false }
-  );
+  const transcript = await client.transcripts.submit({
+    audio: request.audio.url,
+    disfluencies: false,
+    format_text: true,
+    punctuate: true,
+    speakers_expected: request.numSpeakers,
+    speaker_labels: true,
+    // 👇 phrases can't be empty
+    word_boost: request.phrases.filter((phrase) => !!phrase)
+  });
   // 👇 with the ID, clients can now poll for completion
   jsome([`👈  ASSEMBLYAI ${Channels.transcriberRequest}`, transcript.id]);
   return transcript.id;

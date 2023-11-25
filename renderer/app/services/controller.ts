@@ -270,7 +270,8 @@ export class ControllerService {
       const speech = pluckTranscription(minutes, ix).speech;
       const response = await this.#openai.chatCompletion({
         model: config.openaiChatCompletionModel,
-        prompt: `${config.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`
+        prompt: `${config.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`,
+        temperature: config.openaiChatTemperature
       });
       if (response.finish_reason === 'length')
         throw new Error('🔥 This speech is too long to rephrase');
@@ -370,7 +371,8 @@ export class ControllerService {
           model: config.openaiChatCompletionModel,
           prompt: `${
             config.summaryStrategyPrompts[summaryStrategy]
-          }:\n\n${texts.join('\n')}`
+          }:\n\n${texts.join('\n')}`,
+          temperature: config.openaiChatTemperature
         });
         if (response.finish_reason === 'length')
           throw new Error('🔥 This section is too long to rephrase');

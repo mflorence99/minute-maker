@@ -44,7 +44,6 @@ const corsOptions: Cors[] = [
 ];
 
 const openaiChatCompletionDefaults: Partial<OpenAIChatCompletionRequest> = {
-  temperature: 0.5,
   top_p: 1
 };
 
@@ -249,7 +248,7 @@ export type OpenAIModel =
 export type OpenAIChatCompletionRequest = {
   model: OpenAIModel;
   prompt: string;
-  temperature?: number;
+  temperature: number;
   top_p?: number;
 };
 

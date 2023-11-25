@@ -50,6 +50,18 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
       <article class="row">
         <div></div>
 
+        <tui-input-slider
+          formControlName="openaiChatTemperature"
+          [max]="2"
+          [min]="0"
+          [quantum]="0.1">
+          Chat Temperature
+        </tui-input-slider>
+      </article>
+
+      <article class="row">
+        <div></div>
+
         <label tuiLabel="OpenAI image model">
           <tui-radio-block
             formControlName="openaiImageGenerationModel"
@@ -179,6 +191,7 @@ export class ConfigComponent implements OnChanges, OnInit {
       openaiChatCompletionModel: new FormControl(
         this.config.openaiChatCompletionModel
       ),
+      openaiChatTemperature: new FormControl(this.config.openaiChatTemperature),
       openaiImageGenerationModel: new FormControl(
         this.config.openaiImageGenerationModel
       ),

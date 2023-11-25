@@ -51,6 +51,7 @@ export type ConfigStateModel = {
   bucketName: string;
   googleCredentials: string;
   openaiChatCompletionModel: OpenAIModel;
+  openaiChatTemperature: number;
   openaiCredentials: string;
   openaiImageGenerationModel: OpenAIModel;
   rephraseStrategyPrompts: RephraseStrategyPrompts;
@@ -68,6 +69,7 @@ export type ConfigStateModel = {
     googleCredentials: null, // 👈 of course!
     openaiCredentials: null, // 👈 of course!
     openaiChatCompletionModel: 'gpt-4-1106-preview',
+    openaiChatTemperature: 0.5,
     openaiImageGenerationModel: 'dall-e-3',
     rephraseStrategyPrompts: {
       accuracy:

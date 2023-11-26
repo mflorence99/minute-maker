@@ -1,4 +1,5 @@
 import { AddRecent } from '#mm/state/recents';
+import { AnalyzeMinutes } from '#mm/state/issues';
 import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
 import { AudioMetadataService } from '#mm/services/audio-metadata';
@@ -70,7 +71,7 @@ export class ControllerService {
     else this.#ready();
     // 👇 monitor state changes
     this.#monitorAppQuit();
-    this.#saveMinutesPeriodically();
+    this.#saveMinutesWhenChanged();
   }
 
   // //////////////////////////////////////////////////////////////////////////
@@ -243,8 +244,6 @@ export class ControllerService {
       this.#store.dispatch(new SetPathToMinutes(null));
       const minutes = await this.#loadMinutes(path);
       if (minutes) this.#store.dispatch(new SetPathToMinutes(path));
-      // 👇 clear the undo stacks as this is new data
-      this.#store.dispatch(new ClearUndoStacks());
     }
   }
 
@@ -297,6 +296,7 @@ export class ControllerService {
     const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
     // 👇 only save valid minutes!
     if (minutes && MinutesSchema.safeParse(minutes).success) {
+      this.#store.dispatch(new AnalyzeMinutes(minutes));
       let path = app.pathToMinutes;
       if (saveAs || !path) {
         path = await this.#fs.saveFileAs(
@@ -521,7 +521,9 @@ export class ControllerService {
       if (minutes) {
         this.#store.dispatch([
           new SetMinutes({ ...emptyMinutes(), ...minutes }),
-          new AddRecent(path)
+          new AddRecent(path),
+          new ClearUndoStacks(),
+          new AnalyzeMinutes(minutes)
         ]);
         // 👇 in case transcription was in progress, poll for its completion
         this.transcribeAudioPoll();
@@ -571,7 +573,7 @@ export class ControllerService {
     return resolved ?? speaker;
   }
 
-  #saveMinutesPeriodically(): void {
+  #saveMinutesWhenChanged(): void {
     const minutes$ = this.#store.select(MinutesState);
     minutes$
       .pipe(
@@ -591,6 +593,7 @@ export class ControllerService {
         })
       )
       .subscribe(([minutes, path]) => {
+        this.#store.dispatch(new AnalyzeMinutes(minutes));
         this.#fs.saveFile(path, JSON.stringify(minutes, null, 2));
       });
   }

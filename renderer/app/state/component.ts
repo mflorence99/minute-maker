@@ -25,7 +25,8 @@ export enum TabIndex {
   transcription = 2,
   summary = 3,
   preview = 4,
-  settings = 5
+  issues = 5,
+  settings = 6
 }
 
 export type WavesurferState = {

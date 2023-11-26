@@ -11,6 +11,8 @@ import { DestroyRef } from '@angular/core';
 import { FindReplaceComponent } from '#mm/components/find-replace';
 import { FindReplaceMatch } from '#mm/components/find-replace';
 import { HostListener } from '@angular/core';
+import { IssuesState } from '#mm/state/issues';
+import { IssuesStateModel } from '#mm/state/issues';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
@@ -66,7 +68,6 @@ import deepCopy from 'deep-copy';
             (audioFileLoaded)="onAudioFileLoaded($event)"
             (timeupdate)="onTimeUpdate($event)"
             [audioFile]="minutes.audio.url"
-            [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }"
             class="wavesurfer">
             <mm-wavesurfer-regions>
               <!-- 👇 only one region that we update -->
@@ -89,16 +90,19 @@ import deepCopy from 'deep-copy';
                 [(activeItemIndex)]="componentState.tabIndex">
                 <button [disabled]="!configured" tuiTab>Details</button>
                 <button [disabled]="!configured" tuiTab>Badges</button>
-                <button [disabled]="!configured" tuiTab>
-                  Transcription
-                  <tui-badge
-                    class="tui-space_bottom-2"
-                    size="xs"
-                    status="primary"
-                    [value]="minutes.numSpeakers"></tui-badge>
-                </button>
+                <button [disabled]="!configured" tuiTab>Transcription</button>
                 <button [disabled]="!configured" tuiTab>Summary</button>
                 <button [disabled]="!configured" tuiTab>Preview</button>
+                <button [disabled]="!configured" tuiTab>
+                  Issues
+                  @if ((issues$ | async).length; as numIssues) {
+                    <tui-badge
+                      class="tui-space_bottom-2"
+                      size="xs"
+                      status="primary"
+                      [value]="numIssues"></tui-badge>
+                  }
+                </button>
                 <div style="flex: 2"></div>
                 <button tuiTab>
                   <tui-svg src="tuiIconSettings"></tui-svg>
@@ -140,7 +144,7 @@ import deepCopy from 'deep-copy';
               [status]="status"
               mmHydrator />
 
-            <!-- 🔥 we don't strictly need to make the symmary hydrateable, but it makes autosize work on the textareas -->
+            <!-- 🔥 we don't strictly need to make the summary hydrateable, but it makes autosize work on the textareas -->
 
             <tui-loader
               [ngClass]="{
@@ -161,6 +165,14 @@ import deepCopy from 'deep-copy';
               }"
               [config]="config$ | async"
               [minutes]="minutes" />
+
+            <mm-issues
+              [ngClass]="{
+                data: true,
+                showing:
+                  configured && componentState.tabIndex === TabIndex.issues
+              }"
+              [issues]="issues$ | async" />
 
             <mm-config
               [ngClass]="{
@@ -287,6 +299,7 @@ export class RootPage {
   @Select(ComponentState) component$: Observable<ComponentStateModel>;
   @Select(ConfigState) config$: Observable<ConfigStateModel>;
   @Select(ConfigState.configured) configured$: Observable<boolean>;
+  @Select(IssuesState) issues$: Observable<IssuesStateModel>;
   @Select(MinutesState) minutes$: Observable<MinutesStateModel>;
   @Select(StatusState) status$: Observable<StatusStateModel>;
   @Select(ConfigState.transcriptionRate)

@@ -176,7 +176,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
       minPxPerSec: this.componentState.wavesurfer.minPxPerSec,
       plugins: this.plugins$.map((plugin: WaveSurferPlugin) => plugin.create()),
       progressColor: '#c0c0c0',
-      waveColor: '#880e4f', // 👈 --tui-accent
+      waveColor: '#ff6f0040', // 👈 --tui-accent
       ...this.options
     });
     // 👇 load the audio file

@@ -22,6 +22,8 @@ import { HighlightDirective } from '#mm/directives/highlight';
 import { HydratedDirective } from '#mm/directives/hydrated';
 import { HydratorDirective } from '#mm/directives/hydrator';
 import { InsertableDirective } from '#mm/directives/insertable';
+import { IssuesComponent } from '#mm/components/issues';
+import { IssuesState } from '#mm/state/issues';
 import { JoinableDirective } from '#mm/directives/joinable';
 import { MarkdownModule } from 'ngx-markdown';
 import { MenuService } from '#mm/services/menu';
@@ -91,6 +93,7 @@ const COMPONENTS = [
   BadgesComponent,
   ConfigComponent,
   FindReplaceComponent,
+  IssuesComponent,
   MetadataComponent,
   PreviewComponent,
   SummaryComponent,
@@ -156,6 +159,7 @@ const STATES = [
   AppState,
   ComponentState,
   ConfigState,
+  IssuesState,
   MinutesState,
   RecentsState,
   StatusState,

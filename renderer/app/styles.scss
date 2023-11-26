@@ -23,13 +23,13 @@
 }
 
 :root {
-  --tui-primary: #004d40;
-  --tui-primary-hover: #004d40c0;
-  --tui-primary-active: #004d40;
+  --tui-primary: #1976d2;
+  --tui-primary-hover: #1976d2c0;
+  --tui-primary-active: #1976d2;
 
-  --tui-accent: #880e4f;
-  --tui-accent-hover: #880e4fc0;
-  --tui-accent-active: #880e4f;
+  --tui-accent: #ff6f00;
+  --tui-accent-hover: #ff6f00c0;
+  --tui-accent-active: #ff6f00;
 
   --tui-negative: #b71c1c;
 }
@@ -90,7 +90,7 @@ main {
   height: 100%;
   left: calc((100% - 40rem) / 2);
   position: absolute;
-  width: 40rem;
+  width: 42rem;
 
   .data {
     display: none;

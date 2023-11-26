@@ -1,6 +1,5 @@
 import { AppState } from '#mm/state/app';
 import { AppStateModel } from '#mm/state/app';
-import { Clear as ClearUndoStacks } from '#mm/state/undo';
 import { Component } from '@angular/core';
 import { ComponentState } from '#mm/state/component';
 import { ComponentStateModel } from '#mm/state/component';
@@ -362,10 +361,7 @@ export class RootPage {
   }
 
   onSwitchTab(tabIndex: number): void {
-    this.#store.dispatch([
-      new ClearUndoStacks(), // 👈 don't undo what isn't showing
-      new SetComponentState({ tabIndex })
-    ]);
+    this.#store.dispatch(new SetComponentState({ tabIndex }));
   }
 
   onTimeUpdate(ts: number): void {

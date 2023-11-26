@@ -93,7 +93,14 @@ export class UndoState {
       setState(
         patch({ undoStack: removeItem(getState().undoStack.length - 1) })
       );
-    setState(patch({ undoStack: insertItem(this.withType(undoable), 0) }));
+    undoable = this.withType(undoable);
+    // 👇 trickery! we want to ckear the undo stack if we are starting a
+    //    new type of undoable action -- this helps prevent undoing
+    //    actions on tabs we can no longer see
+    const pfx1 = undoable[0].type.match(/\[[^]*\]/)[0];
+    const pfx2 = getState().undoStack[0]?.[0].type.match(/\[[^]*\]/)[0];
+    if (pfx1 !== pfx2) setState(patch({ undoStack: [undoable] }));
+    else setState(patch({ undoStack: insertItem(undoable, 0) }));
     this.#store.dispatch(new CanDo(this.cando()));
   }
 

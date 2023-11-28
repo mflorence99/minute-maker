@@ -2,13 +2,19 @@ import { Action } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { State } from '@ngxs/store';
+import { TabIndex } from '#mm/state/component';
 
 export class AnalyzeMinutes {
   static readonly type = '[Issues] AnalyzeMinutes';
   constructor(public minutes: Minutes) {}
 }
 
-export type Issue = {};
+export type Issue = {
+  message: string;
+  severity: 'error' | 'warning';
+  tabIndex: TabIndex;
+  txid: number;
+};
 
 export type IssuesStateModel = Issue[];
 
@@ -28,6 +34,19 @@ export class IssuesState {
     { setState },
     { minutes }: AnalyzeMinutes
   ): void {
-    setState([]);
+    setState([
+      {
+        message: 'Unidentified speaker `Speaker_A`',
+        severity: 'error',
+        tabIndex: TabIndex.transcription,
+        txid: 14
+      },
+      {
+        message: 'Organization not specified',
+        severity: 'warning',
+        tabIndex: TabIndex.details,
+        txid: 14
+      }
+    ]);
   }
 }

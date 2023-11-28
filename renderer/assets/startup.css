@@ -14,7 +14,8 @@
 
 .startup-loading {
   align-items: center;
-  background-color: white;
+  background-color: #222222;
+  color: white;
   display: flex;
   flex-direction: column;
   font-family: sans-serif;

@@ -27,7 +27,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-transcription',
   template: `
-    @if (minutes.transcription?.length > 0) {
+    @if (minutes.transcription.length > 0) {
       <table>
         <tbody>
           @for (tx of minutes.transcription; track tx.id; let ix = $index) {

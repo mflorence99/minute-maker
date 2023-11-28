@@ -16,7 +16,7 @@ import { inject } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-summary',
   template: `
-    @if (minutes.summary?.length > 0) {
+    @if (minutes.summary.length > 0) {
       <table>
         <tbody>
           @for (summ of minutes.summary; track ix; let ix = $index) {

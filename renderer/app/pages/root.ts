@@ -11,6 +11,7 @@ import { DestroyRef } from '@angular/core';
 import { FindReplaceComponent } from '#mm/components/find-replace';
 import { FindReplaceMatch } from '#mm/components/find-replace';
 import { HostListener } from '@angular/core';
+import { Issue } from '#mm/state/issues';
 import { IssuesState } from '#mm/state/issues';
 import { IssuesStateModel } from '#mm/state/issues';
 import { Minutes } from '#mm/common';
@@ -30,6 +31,7 @@ import { Subscription } from 'rxjs';
 import { TabIndex } from '#mm/state/component';
 import { Transcription } from '#mm/common';
 import { TuiAlertService } from '@taiga-ui/core';
+import { TuiTabsComponent } from '@taiga-ui/kit';
 import { Undo } from '#mm/state/undo';
 import { UpdateFindReplace } from '#mm/state/minutes';
 import { ViewChild } from '@angular/core';
@@ -52,6 +54,7 @@ import deepCopy from 'deep-copy';
 @Component({
   selector: 'mm-root',
   template: `
+    <tui-theme-night />
     @if (minutes$ | async; as minutes) {
       <tui-root>
         <main>
@@ -68,6 +71,7 @@ import deepCopy from 'deep-copy';
             (audioFileLoaded)="onAudioFileLoaded($event)"
             (timeupdate)="onTimeUpdate($event)"
             [audioFile]="minutes.audio.url"
+            [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }"
             class="wavesurfer">
             <mm-wavesurfer-regions>
               <!-- 👇 only one region that we update -->
@@ -86,6 +90,7 @@ import deepCopy from 'deep-copy';
             <nav class="tabs">
               <!-- 🔥 tabs can only be referenced by number, not name so be sure to change the TabIndex enum if you change the tab order -->
               <tui-tabs
+                #tabs
                 (activeItemIndexChange)="onSwitchTab($event)"
                 [(activeItemIndex)]="componentState.tabIndex">
                 <button [disabled]="!configured" tuiTab>Details</button>
@@ -167,6 +172,7 @@ import deepCopy from 'deep-copy';
               [minutes]="minutes" />
 
             <mm-issues
+              (selected)="onIssue($event)"
               [ngClass]="{
                 data: true,
                 showing:
@@ -214,7 +220,7 @@ import deepCopy from 'deep-copy';
                           minutes.audio.duration / transcriptionRate,
                           'second'
                         )
-                        .format('hh:mm a')
+                        .format('hh:mma')
                     }}
                   </b>
                   .
@@ -305,6 +311,8 @@ export class RootPage {
   @Select(ConfigState.transcriptionRate)
   transcriptionRate$: Observable<number>;
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  @ViewChild(TuiTabsComponent) tabs;
   @ViewChild(WaveSurferComponent) wavesurfer;
 
   componentState: ComponentStateModel;
@@ -315,7 +323,6 @@ export class RootPage {
   status: StatusStateModel = defaultStatus();
 
   // 👇 just to reference the enum in the template
-  // eslint-disable-next-line @typescript-eslint/member-ordering
   TabIndex: typeof TabIndex = TabIndex;
 
   #alerts = inject(TuiAlertService);
@@ -371,6 +378,10 @@ export class RootPage {
   onFindReplaceMatch(match: FindReplaceMatch): void {
     this.currentTx = { id: match.id };
     this.match = match;
+  }
+
+  onIssue(issue: Issue): void {
+    this.tabs.activeItemIndex = issue.tabIndex;
   }
 
   onSwitchTab(tabIndex: number): void {

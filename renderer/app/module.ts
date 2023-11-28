@@ -81,6 +81,7 @@ import { TuiSvgModule } from '@taiga-ui/core';
 import { TuiTabsModule } from '@taiga-ui/kit';
 import { TuiTextAreaModule } from '@taiga-ui/kit';
 import { TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiThemeNightModule } from '@taiga-ui/core';
 import { UndoState } from '#mm/state/undo';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
@@ -220,7 +221,8 @@ const MODULES = [
   TuiSvgModule,
   TuiTabsModule,
   TuiTextAreaModule,
-  TuiTextfieldControllerModule
+  TuiTextfieldControllerModule,
+  TuiThemeNightModule
 ];
 
 @NgModule({

@@ -31,11 +31,11 @@ import { Subscription } from 'rxjs';
 import { TabIndex } from '#mm/state/component';
 import { Transcription } from '#mm/common';
 import { TuiAlertService } from '@taiga-ui/core';
-import { TuiTabsComponent } from '@taiga-ui/kit';
 import { Undo } from '#mm/state/undo';
 import { UpdateFindReplace } from '#mm/state/minutes';
 import { ViewChild } from '@angular/core';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
+import { WINDOW } from '@ng-web-apis/common';
 
 import { combineLatest } from 'rxjs';
 import { defaultStatus } from '#mm/state/status';
@@ -78,6 +78,7 @@ import deepCopy from 'deep-copy';
               @if (currentTx) {
                 <mm-wavesurfer-region
                   [params]="{
+                    color: 'rgba(100, 100, 100, 0.5)',
                     end: currentTx.end,
                     id: 'singleton',
                     start: currentTx.start
@@ -311,8 +312,6 @@ export class RootPage {
   @Select(ConfigState.transcriptionRate)
   transcriptionRate$: Observable<number>;
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  @ViewChild(TuiTabsComponent) tabs;
   @ViewChild(WaveSurferComponent) wavesurfer;
 
   componentState: ComponentStateModel;
@@ -323,6 +322,7 @@ export class RootPage {
   status: StatusStateModel = defaultStatus();
 
   // 👇 just to reference the enum in the template
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   TabIndex: typeof TabIndex = TabIndex;
 
   #alerts = inject(TuiAlertService);
@@ -331,6 +331,7 @@ export class RootPage {
   #findReplace$: Subscription;
   #store = inject(Store);
   #timeupdate$ = new Subject<number>();
+  #window = inject(WINDOW);
 
   constructor() {
     // 👇 initialize the component state
@@ -381,7 +382,13 @@ export class RootPage {
   }
 
   onIssue(issue: Issue): void {
-    this.tabs.activeItemIndex = issue.tabIndex;
+    // 🔥 no programmatic way of setting tab!
+    const buttons: NodeListOf<HTMLButtonElement> =
+      this.#window.document.querySelectorAll('tui-tabs > button');
+    buttons[issue.tabIndex].click();
+    // 🔥 HACK -- we can;'t scroll to the transcription until
+    //    the tab is switched properly
+    if (issue.tx) setTimeout(() => this.onTranscription(issue.tx), 500);
   }
 
   onSwitchTab(tabIndex: number): void {

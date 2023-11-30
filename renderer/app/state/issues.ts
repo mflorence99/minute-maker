@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { State } from '@ngxs/store';
 import { TabIndex } from '#mm/state/component';
+import { Transcription } from '#mm/common';
 
 export class AnalyzeMinutes {
   static readonly type = '[Issues] AnalyzeMinutes';
@@ -13,7 +14,7 @@ export type Issue = {
   message: string;
   severity: 'error' | 'warning';
   tabIndex: TabIndex;
-  txid: number;
+  tx?: Transcription;
 };
 
 export type IssuesStateModel = Issue[];
@@ -39,13 +40,12 @@ export class IssuesState {
         message: 'Unidentified speaker `Speaker_A`',
         severity: 'error',
         tabIndex: TabIndex.transcription,
-        txid: 14
+        tx: minutes.transcription[0]
       },
       {
         message: 'Organization not specified',
         severity: 'warning',
-        tabIndex: TabIndex.details,
-        txid: 14
+        tabIndex: TabIndex.details
       }
     ]);
   }

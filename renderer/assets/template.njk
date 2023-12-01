@@ -50,10 +50,10 @@
       }
 
       body {
-         background-color: #ffffff;
-       font-family: "Roboto";
+        background-color: #ffffff;
+        font-family: "Roboto";
         font-size: 14px;
-        margin: 2rem;
+        margin: 2rem 4rem;
         zoom: {{ zoom }};
       }
 
@@ -243,14 +243,19 @@
       </tr>
     </table>
 
-    <h2>Summary</h2>
+    {% if minutes.summary.length %}
 
-    {% for summ in minutes.summary %} 
-      {% if summ.section %}
-        <h4>{{ summ.section }}</h4>
-      {% endif %} 
-      {{ fromMarkdown(summ.summary) }} 
-    {% endfor %}
+      <h2>Summary</h2>
+
+      {% for summ in minutes.summary %} 
+        {% if summ.section %}
+          <h4>{{ summ.section }}</h4>
+        {% endif %} 
+        {{ fromMarkdown(summ.summary) }} 
+      {% endfor %}
+
+    {% endif %}
+
 
     {# if the first item is a transcription, 
         spacing is a lot better if we keep the heading outside the table #}

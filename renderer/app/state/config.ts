@@ -59,9 +59,8 @@ export type ConfigStateModel = {
   transcriptionImpl: TranscriptionImpl;
 };
 
-@State<ConfigStateModel>({
-  name: 'config',
-  defaults: {
+export function defaultConfig(): ConfigStateModel {
+  return {
     assemblyaiCredentials: null, // 👈 of course!
     badgeGenerationPrompt:
       'Show an adult member of the public addressing at a meeting of a modern New England town Planning Board in the style of Norman Rockwell, but without words or lettering',
@@ -83,7 +82,12 @@ export type ConfigStateModel = {
         'TThe intended audience is a professional reader. Summarize the following discussion into no more than three paragraphs by using the past tense'
     },
     transcriptionImpl: 'google'
-  }
+  };
+}
+
+@State<ConfigStateModel>({
+  name: 'config',
+  defaults: defaultConfig()
 })
 @Injectable()
 export class ConfigState implements NgxsOnInit {

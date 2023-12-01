@@ -39,9 +39,8 @@ export type ComponentStateModel = {
   wavesurfer: WavesurferState;
 };
 
-@State<ComponentStateModel>({
-  name: 'component',
-  defaults: {
+export function defaultComponentState(): ComponentStateModel {
+  return {
     audio: {
       muted: false,
       playbackRate: 1,
@@ -51,7 +50,12 @@ export type ComponentStateModel = {
     wavesurfer: {
       minPxPerSec: 1
     }
-  }
+  };
+}
+
+@State<ComponentStateModel>({
+  name: 'component',
+  defaults: defaultComponentState()
 })
 @Injectable()
 export class ComponentState {

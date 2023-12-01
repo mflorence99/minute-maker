@@ -157,9 +157,13 @@ export class UpdateTranscription extends UndoableAction {
 
 export type MinutesStateModel = Minutes;
 
+export function defaultMinutes(): Minutes {
+  return null;
+}
+
 @State<MinutesStateModel>({
   name: 'minutes',
-  defaults: null
+  defaults: defaultMinutes()
 })
 @Injectable()
 export class MinutesState {

@@ -42,6 +42,7 @@ import { RephraseableDirective } from '#mm/directives/rephraseable';
 import { RootPage } from '#mm/pages/root';
 import { SecurityContext } from '@angular/core';
 import { SelectOnFocusDirective } from '#mm/directives/select-on-focus';
+import { SinkComponent } from '#mm/pages/sink';
 import { SplittableDirective } from '#mm/directives/splittable';
 import { StatusState } from '#mm/state/status';
 import { STORAGE_ENGINE } from '@ngxs/storage-plugin';
@@ -97,6 +98,7 @@ const COMPONENTS = [
   IssuesComponent,
   MetadataComponent,
   PreviewComponent,
+  SinkComponent,
   SummaryComponent,
   TranscriptionComponent,
   WaveSurferComponent,

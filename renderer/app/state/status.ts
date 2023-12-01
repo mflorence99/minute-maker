@@ -33,8 +33,7 @@ export class Working {
       | 'rephrase'
       | 'summary'
       | 'transcription'
-      | 'upload',
-    public canceledBy: Function = null
+      | 'upload'
   ) {}
 }
 

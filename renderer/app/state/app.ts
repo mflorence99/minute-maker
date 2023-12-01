@@ -12,11 +12,15 @@ export type AppStateModel = {
   pathToMinutes: string;
 };
 
+export function defaultApp(): AppStateModel {
+  return {
+    pathToMinutes: null
+  };
+}
+
 @State<AppStateModel>({
   name: 'app',
-  defaults: {
-    pathToMinutes: null
-  }
+  defaults: defaultApp()
 })
 @Injectable()
 export class AppState {

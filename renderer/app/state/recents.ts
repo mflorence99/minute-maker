@@ -32,9 +32,13 @@ export class ClearRecents {
 
 export type RecentsStateModel = string[];
 
+export function defaultRecents(): RecentsStateModel {
+  return [];
+}
+
 @State<RecentsStateModel>({
   name: 'recents',
-  defaults: []
+  defaults: defaultRecents()
 })
 @Injectable()
 export class RecentsState {

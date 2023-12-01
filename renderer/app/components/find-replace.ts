@@ -35,48 +35,45 @@ export type FindReplaceMatch = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-find-replace',
   template: `
-    @if (minutes$ | async; as minutes) {
-      <article>
-        <input
-          #finder
-          (input.throttled)="onFind(finder.value)"
-          [mmAutofocus]="true"
-          [mmSelectOnFocus]="true"
-          [value]="minutes.findReplace?.searchString ?? ''"
-          style="border: 1px solid var(--tui-text-01)" />
+    <mm-sink #mm [minutes]="minutes$ | async" />
+    <article>
+      <input
+        #finder
+        (input.throttled)="onFind(finder.value)"
+        [mmAutofocus]="true"
+        [mmSelectOnFocus]="true"
+        [value]="mm.minutes.findReplace?.searchString ?? ''"
+        style="border: 1px solid var(--tui-text-01)" />
 
-        <span style="display: inline-block; padding-left: 0.5rem; width: 6rem">
-          @if (numMatches(minutes); as count) {
-            <ng-container [ngPlural]="count">
-              <ng-template ngPluralCase="=1">One match</ng-template>
-              <ng-template ngPluralCase="other">
-                {{ count }} matches
-              </ng-template>
-            </ng-container>
-          } @else {
-            No matches
-          }
-        </span>
+      <span style="display: inline-block; padding-left: 0.5rem; width: 6rem">
+        @if (numMatches(mm.minutes); as count) {
+          <ng-container [ngPlural]="count">
+            <ng-template ngPluralCase="=1">One match</ng-template>
+            <ng-template ngPluralCase="other">{{ count }} matches</ng-template>
+          </ng-container>
+        } @else {
+          No matches
+        }
+      </span>
 
-        <button
-          (click.silent)="emitMatch(-1)"
-          [disabled]="!this.canEmitMatch()"
-          appearance="mono"
-          icon="tuiIconArrowUp"
-          size="xs"
-          tuiIconButton
-          type="button"></button>
+      <button
+        (click.silent)="emitMatch(-1)"
+        [disabled]="!this.canEmitMatch()"
+        appearance="mono"
+        icon="tuiIconArrowUp"
+        size="xs"
+        tuiIconButton
+        type="button"></button>
 
-        <button
-          (click.silent)="emitMatch(+1)"
-          [disabled]="!this.canEmitMatch()"
-          appearance="mono"
-          icon="tuiIconArrowDown"
-          size="xs"
-          tuiIconButton
-          type="button"></button>
-      </article>
-    }
+      <button
+        (click.silent)="emitMatch(+1)"
+        [disabled]="!this.canEmitMatch()"
+        appearance="mono"
+        icon="tuiIconArrowDown"
+        size="xs"
+        tuiIconButton
+        type="button"></button>
+    </article>
   `
 })
 export class FindReplaceComponent {

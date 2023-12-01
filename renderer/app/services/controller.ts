@@ -92,28 +92,6 @@ export class ControllerService {
   }
 
   // //////////////////////////////////////////////////////////////////////////
-  // 🟩 CancelWorking
-  // //////////////////////////////////////////////////////////////////////////
-
-  async cancelWorking(working: Working): Promise<void> {
-    const { response: button } = await this.#dialog.showMessageBox({
-      buttons: ['Proceed', 'Cancel'],
-      message: `This action will cancel the ${working.on} currently running in the background. Are you sure you wish to proceed?`,
-      title: 'Minute Maker',
-      type: 'question'
-    });
-    if (button === 1) return;
-    try {
-      await working.canceledBy();
-    } catch (error) {
-      this.#store.dispatch(new SetStatus({ error }));
-    } finally {
-      // 🔥 maybe rely on canceledBy implementation to clear status?
-      // this.#store.dispatch(new ClearStatus());
-    }
-  }
-
-  // //////////////////////////////////////////////////////////////////////////
   // 🟩 CloseMinutes
   // //////////////////////////////////////////////////////////////////////////
 
@@ -451,7 +429,7 @@ export class ControllerService {
     this.#store.dispatch(
       new SetStatus({
         status: 'Transcribing audio',
-        working: new Working('transcription', () => this.cancelTranscription())
+        working: new Working('transcription')
       })
     );
     // 👇 poll transcription and note progress as status
@@ -472,9 +450,7 @@ export class ControllerService {
           this.#store.dispatch([
             new SetStatus({
               status: `Transcribing audio: ${tx.progressPercent}% complete`,
-              working: new Working('transcription', () =>
-                this.cancelTranscription()
-              )
+              working: new Working('transcription')
             })
           ]);
         }),

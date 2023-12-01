@@ -47,12 +47,16 @@ export type UndoStateModel = {
   undoStack: Undoable[];
 };
 
-@State<UndoStateModel>({
-  name: 'undo',
-  defaults: {
+export function defaultUndo(): UndoStateModel {
+  return {
     redoStack: [],
     undoStack: []
-  }
+  };
+}
+
+@State<UndoStateModel>({
+  name: 'undo',
+  defaults: defaultUndo()
 })
 @Injectable()
 export class UndoState {

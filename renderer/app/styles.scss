@@ -87,31 +87,30 @@ input {
 }
 
 main {
+  --w: 42rem;
+
   display: block;
   height: 100%;
-  left: calc((100% - 40rem) / 2);
+  left: calc((100% - var(--w)) / 2);
+  overflow-x: hidden;
+  overflow-y: auto;
   position: absolute;
-  width: 42rem;
+  width: var(--w);
 
-  .data {
-    display: none;
+  .panels {
     height: calc(100% - 25rem);
-    overflow: auto;
     position: absolute;
     top: 22rem;
-    width: 100%;
+    transition: transform 0.25s ease-in-out;
+    width: var(--w);
 
-    table {
-      margin-bottom: 50vh;
+    .panel {
+      height: 100%;
+      left: calc(var(--ix) * var(--w));
+      overflow: auto;
+      position: absolute;
+      width: 100%;
     }
-  }
-
-  .data.showing {
-    display: block;
-  }
-
-  tui-loader.data.showing {
-    display: flex;
   }
 
   .footer {

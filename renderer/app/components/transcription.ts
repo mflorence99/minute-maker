@@ -28,7 +28,8 @@ import scrollIntoView from 'scroll-into-view-if-needed';
   selector: 'mm-transcription',
   template: `
     @if (minutes.transcription.length > 0) {
-      <table>
+      <!-- 🔥 breathing room for hydration  -->
+      <table style="margin-bottom: 50vh">
         <tbody>
           @for (tx of minutes.transcription; track tx.id; let ix = $index) {
             <tr

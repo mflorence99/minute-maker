@@ -17,7 +17,8 @@ import { inject } from '@angular/core';
   selector: 'mm-summary',
   template: `
     @if (minutes.summary.length > 0) {
-      <table>
+      <!-- 🔥 breathing room for hydration  -->
+      <table style="margin-bottom: 50vh">
         <tbody>
           @for (summ of minutes.summary; track ix; let ix = $index) {
             <tr

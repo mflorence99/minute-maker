@@ -112,7 +112,13 @@ import dayjs from 'dayjs';
                 <button [disabled]="!mm.configured" tuiTab>
                   Transcription
                 </button>
-                <button [disabled]="!mm.configured" tuiTab>Summary</button>
+                <button
+                  [disabled]="
+                    !mm.configured || !mm.minutes.transcription.length
+                  "
+                  tuiTab>
+                  Summary
+                </button>
                 <button [disabled]="!mm.configured" tuiTab>Preview</button>
                 <button [disabled]="!mm.configured" tuiTab>
                   Issues
@@ -164,14 +170,16 @@ import dayjs from 'dayjs';
                 class="panel"
                 mmHydrator />
 
-              <!-- 🔥 we don't strictly need to make the summary hydrateable, but it makes autosize work on the textareas -->
+              <!-- 🔥 we don't strictly need to make the summary hydrateable, but it makes autosize work on the textareas - also not perfect to eliminate summary if no transcription, but good enough -->
 
               <tui-loader
                 [ngStyle]="{ '--ix': TabIndex.summary }"
                 [showLoader]="mm.status.working?.on === 'summary'"
                 class="panel"
                 mmHydrator>
-                <mm-summary [minutes]="mm.minutes" [status]="mm.status" />
+                @if (mm.minutes.transcription.length) {
+                  <mm-summary [minutes]="mm.minutes" [status]="mm.status" />
+                }
               </tui-loader>
 
               <mm-preview

@@ -235,8 +235,8 @@ export class MenuService {
           componentState.tabIndex === TabIndex.transcription && !!minutes,
         [MenuID.save]: !!minutes,
         [MenuID.saveAs]: !!minutes,
-        [MenuID.summarizeBullets]: !!minutes,
-        [MenuID.summarizeParagraphs]: !!minutes,
+        [MenuID.summarizeBullets]: !!minutes?.transcription.length,
+        [MenuID.summarizeParagraphs]: !!minutes?.transcription.length,
         [MenuID.transcribe]: !!minutes
       });
     });

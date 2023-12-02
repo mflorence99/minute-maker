@@ -18,6 +18,7 @@ import { Output } from '@angular/core';
               class="issue"
               tuiHint="Click to fix issue"
               tuiHintAppearance="onDark">
+              <td class="numeric">{{ ix + 8 }}.</td>
               <td>
                 <tui-svg
                   src="tuiIconThumbsDown"

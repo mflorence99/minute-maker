@@ -157,7 +157,6 @@ import dayjs from 'dayjs';
               <mm-transcription
                 (selected)="onTranscription($event)"
                 [currentTx]="currentTx"
-                [duration]="mm.minutes.audio.duration"
                 [match]="match"
                 [minutes]="mm.minutes"
                 [ngStyle]="{ '--ix': TabIndex.transcription }"

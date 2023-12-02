@@ -65,7 +65,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                   style="font-family: monospace; font-size: smaller; padding-top: 0.15rem">
                   {{
                     dayjs({ second: tx.start }).format(
-                      duration > 60 * 60 ? 'HH:mm:ss' : 'mm:ss'
+                      minutes.audio.duration > 60 * 60 ? 'HH:mm:ss' : 'mm:ss'
                     )
                   }}
                 </td>
@@ -154,7 +154,6 @@ import scrollIntoView from 'scroll-into-view-if-needed';
 export class TranscriptionComponent {
   /* eslint-disable @typescript-eslint/member-ordering */
 
-  @Input({ required: true }) duration: number;
   @Input({ required: true }) match: FindReplaceMatch;
   @Input({ required: true }) minutes: Minutes;
   @Input({ required: true }) status: StatusStateModel;

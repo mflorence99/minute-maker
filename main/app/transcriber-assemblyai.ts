@@ -117,7 +117,7 @@ export async function transcriberRequest(
 function makeTranscription(utterances): Transcription[] {
   return utterances.map((utterance) => ({
     end: utterance.end / 1000,
-    speaker: `Speaker_${utterance.speaker}`,
+    speaker: `${Constants.speakerPfx}${utterance.speaker}`,
     speech: utterance.text,
     start: utterance.start / 1000
   }));

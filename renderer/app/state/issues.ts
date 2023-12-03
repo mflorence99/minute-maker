@@ -43,7 +43,7 @@ const rules: Rule[] = [
   },
   {
     checker: (minutes, rule) => (minutes.date ? null : rule),
-    message: 'Date and time not specified or is invalid',
+    message: 'Date and time not specified',
     severity: 'error',
     tabIndex: TabIndex.details
   },
@@ -89,7 +89,8 @@ const rules: Rule[] = [
     tabIndex: TabIndex.transcription
   },
   {
-    checker: (minutes, rule) => (minutes.summary.length ? null : rule),
+    checker: (minutes, rule) =>
+      minutes.summary.length || !minutes.transcription.length ? null : rule,
     message: `No summary created`,
     severity: 'warning',
     tabIndex: TabIndex.summary

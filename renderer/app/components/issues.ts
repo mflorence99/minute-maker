@@ -18,14 +18,12 @@ import { Output } from '@angular/core';
               class="issue"
               tuiHint="Click to fix issue"
               tuiHintAppearance="onDark">
-              <td class="numeric">{{ ix + 8 }}.</td>
+              <td class="numeric">{{ ix + 1 }}.</td>
               <td>
                 <tui-svg
                   src="tuiIconThumbsDown"
                   [style.color]="
-                    issue.severity === 'error'
-                      ? 'var(--tui-error-fill)'
-                      : 'var(--tui-warning-fill)'
+                    'var(--tui-' + issue.severity + '-fill)'
                   "></tui-svg>
               </td>
               <td>{{ issue.message }}</td>

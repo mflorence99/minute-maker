@@ -14,12 +14,10 @@ export class DateTimeTransformer extends AbstractTuiValueTransformer<
 > {
   //
 
-  fromControlValue(controlValue: Date): DateTime {
-    const from = controlValue ?? new Date();
-    return [
-      TuiDay.fromLocalNativeDate(from),
-      TuiTime.fromLocalNativeDate(from)
-    ];
+  fromControlValue(date: Date): DateTime {
+    return date
+      ? [TuiDay.fromLocalNativeDate(date), TuiTime.fromLocalNativeDate(date)]
+      : null;
   }
 
   toControlValue([day, time]: DateTime): Date {

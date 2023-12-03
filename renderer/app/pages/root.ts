@@ -66,7 +66,7 @@ import dayjs from 'dayjs';
 
     <!-- 🟦 MINUTES AVAILABLE -->
     @if (mm.minutes) {
-      <tui-root>
+      <tui-root tuiMode="onDark">
         <main>
           <header class="header">
             <h2>
@@ -417,7 +417,7 @@ export class RootPage {
         ),
         distinctUntilChanged()
       )
-      .subscribe((show) => this.#showHideReplace(show));
+      .subscribe((show) => this.#showFindReplace(show));
   }
 
   // 👇 update the current tx as the waveform plays
@@ -447,7 +447,7 @@ export class RootPage {
       });
   }
 
-  #showHideReplace(show: boolean): void {
+  #showFindReplace(show: boolean): void {
     // 👇 never more than one showing -- none at all if hiding!
     if (this.#findReplace$) this.#findReplace$.unsubscribe();
     if (show) {

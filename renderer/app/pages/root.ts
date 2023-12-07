@@ -258,37 +258,39 @@ import dayjs from 'dayjs';
 
       <!-- 🟥 MINUTES NOT YET READY -->
     } @else {
-      <main>
-        <tui-block-status>
-          <img tuiSlot="top" src="./assets/meeting.png" />
+      <tui-root tuiMode="onDark">
+        <main>
+          <tui-block-status>
+            <img tuiSlot="top" src="./assets/meeting.png" />
 
-          <h4>To get started ...</h4>
+            <h4>To get started ...</h4>
 
-          <p>
-            These actions can be performed at anytime from the
-            <b>File</b>
-            menu.
-          </p>
+            <p>
+              These actions can be performed at anytime from the
+              <b>File</b>
+              menu.
+            </p>
 
-          <button
-            (click)="newMinutes()"
-            appearance="primary"
-            size="m"
-            tuiButton>
-            New Minutes from MP3 Audio
-          </button>
+            <button
+              (click)="newMinutes()"
+              appearance="primary"
+              size="m"
+              tuiButton>
+              New Minutes from MP3 Audio
+            </button>
 
-          <button
-            (click)="openMinutes()"
-            appearance="accent"
-            size="m"
-            tuiButton>
-            Open Minutes JSON File
-          </button>
-        </tui-block-status>
+            <button
+              (click)="openMinutes()"
+              appearance="accent"
+              size="m"
+              tuiButton>
+              Open Minutes JSON File
+            </button>
+          </tui-block-status>
 
-        <ng-container *ngTemplateOutlet="progress"></ng-container>
-      </main>
+          <ng-container *ngTemplateOutlet="progress"></ng-container>
+        </main>
+      </tui-root>
     }
 
     <!-- 🟥 REUSABLE PROGRESSBAR -->

@@ -111,7 +111,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                       autocorrect="on"
                       autosize
                       spellcheck="true"
-                      style="width: calc(100% - 1rem)"
+                      style="left: 1px; position: relative; top: 1px; width: calc(100% - 1rem)"
                       wrap="soft"></textarea>
                   </tui-loader>
                 </td>

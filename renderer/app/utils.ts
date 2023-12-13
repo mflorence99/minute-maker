@@ -45,20 +45,6 @@ export function kebabasize(camelCase: string): any {
 }
 
 // //////////////////////////////////////////////////////////////////////////
-// 🟦 objectsHaveSameKeys
-// //////////////////////////////////////////////////////////////////////////
-
-// 🙈 https://stackoverflow.com/questions/14368596/how-can-i-check-that-two-objects-have-the-same-set-of-property-names
-export function objectsHaveSameKeys(...objects): boolean {
-  const allKeys = objects.reduce(
-    (keys, object) => keys.concat(Object.keys(object)),
-    []
-  );
-  const union = new Set(allKeys);
-  return objects.every((object) => union.size === Object.keys(object).length);
-}
-
-// //////////////////////////////////////////////////////////////////////////
 // 🟦 pluckOriginalFromChanges
 // //////////////////////////////////////////////////////////////////////////
 

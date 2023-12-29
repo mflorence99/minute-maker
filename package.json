@@ -52,7 +52,7 @@
     "jsome": "^2",
     "music-metadata": "^7",
     "openai": "^4",
-    "sharp": "^0.33.0",
+    "sharp": "^0.33.1",
     "zod": "^3"
   },
   "devDependencies": {
@@ -131,7 +131,7 @@
     "rxjs": "^7",
     "scroll-into-view-if-needed": "^3",
     "stylelint": "^16",
-    "stylelint-config-standard": "^35",
+    "stylelint-config-standard": "^36",
     "stylelint-order": "^6",
     "ts-jest": "^29",
     "tslib": "^2",

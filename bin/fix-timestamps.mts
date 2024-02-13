@@ -12,7 +12,7 @@ console.log(chalk.yellow(`👈 reading ${path}`));
 const minutes = JSON.parse(readFileSync(path).toString());
 
 // 👇 correct for the wrong offset
-const adjustment = 7 * 60 + 5;
+const adjustment = 90.52379796072492;
 
 // 👇 reset the timestamp of each Transcription
 minutes.transcription.forEach((tx) => {

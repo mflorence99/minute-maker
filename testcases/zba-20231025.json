@@ -1,0 +1,1730 @@
+{
+  "audio": {
+    "duration": 5421.348571428572,
+    "encoding": "MP3",
+    "gcsuri": "gs://washington-app-319514.appspot.com/93846352-6e64-470c-9d00-f52559e9f41b.mp3",
+    "sampleRateHertz": 22050,
+    "url": "https://storage.googleapis.com/washington-app-319514.appspot.com/93846352-6e64-470c-9d00-f52559e9f41b.mp3"
+  },
+  "findReplace": {
+    "doFind": false,
+    "searchString": "Jed Tapp"
+  },
+  "absent": [
+    "Andrew Hatch - Board Member",
+    "Deb DeFosse - Executive Administrator"
+  ],
+  "date": "2023-10-25T23:00:00.000Z",
+  "hideSpeakerUpdateDialog": true,
+  "nextTranscriptionID": 359,
+  "numSpeakers": 7,
+  "present": [
+    "Gary Carney - Vice-chair",
+    "Joe Tapp - Board Member",
+    "Linda Marshall - Board Member",
+    "Mark Florence - Chair"
+  ],
+  "subject": "Public Hearing",
+  "subtitle": "Meeting Minutes",
+  "summary": [
+    {
+      "section": "Motion to Allow Applicant to Join by Phone",
+      "summary": "The October meeting of the Washington Zoning Board of Adjustment (ZBA) was called to order at 7pm by Mark Florence. Board member Carney made a motion to allow Chris Stratton to join the public meeting via phone to present his application, which was seconded by Florence. The motion was unanimously approved with a 4-0 vote. \n\nTapp then connected Stratton to the meeting via speakerphone. Florence greeted Stratton and informed him that the board had approved his participation by phone. He then provided Stratton, as well as other attendees, with an overview of the meeting's procedures. Florence explained that the meeting was divided into two segments: a public hearing and a deliberative session. \n\nDuring the public hearing, Stratton and other members of the public would have the opportunity to express their views. The board would listen attentively to ensure everyone's views were heard before concluding this segment. The deliberative session would then follow, during which the board would review all presented evidence, consider arguments, and take into account public comments. The board would then deliberate on the variances Stratton had requested and vote on whether to approve or deny them. While the public could observe this session, their participation would be limited to listening only. Stratton confirmed that he understood the process."
+    },
+    {
+      "section": "Roll Call",
+      "summary": "Chairperson Mark Florence initiated the meeting by performing a roll call, noting that he, Vice-Chair Gary Carney, and board members Linda Marshall and Joe Tapp were present. Unfortunately, one board member was absent. Florence pointed out that any action required at least three concurring votes. He gave Mr. Stratton the option to either proceed with the meeting or wait until all five members were present. Stratton decided to proceed with the meeting. Florence also acknowledged the presence of members of the public, Jed and Nan Schwartz, and Arin Mills, who attended the meeting as concerned citizens."
+    },
+    {
+      "section": "Approval of Minutes",
+      "summary": "Florence proposed the next item on the agenda which was the approval of the previous month's minutes. He suggested that they approve the minutes as they were published on their website. Carney supported Florence's proposal. Florence then asked for a vote on the approval of the minutes. Everyone in the meeting agreed with the approval. Florence confirmed that the minutes were unanimously approved with a 4-0 vote."
+    },
+    {
+      "section": "Public Hearing",
+      "summary": "During a public hearing, Chris Stratton, the owner of the property at 131 Adams, shared his plan to build a one-bedroom house with a walkout basement. Due to concerns about the poorly drained soil on the lower half of the property, Stratton had collaborated with Tom Dombrowski, a licensed septic designer and surveyor, to create a layout that took into account the setbacks from the street, property line, and poorly drained soil. Stratton also mentioned plans to use metal siding and a metal roof for the house and the measures to protect the environment during construction, such as silt barriers.\n\nStratton had conducted two test digs on the site with Dombrowski and another engineer, revealing well-drained loamy sand, among other findings. He had received an approved septic design from the state of New Hampshire. However, the board members did not have the septic design at the time of the hearing. Stratton also mentioned a propane tank ordinance, which he believed was not an issue if the tanks were screened.\n\nThe discussion then focused on the necessary variances based on the building plan. The first variance pertained to LUO 202, requiring a front setback of 40ft where 50ft is required. The second variance was from LUO 312, involving a well setback that is closer than 50ft to the right of way. The third variance was from LUO 202, requiring a wetland setback. The board measured a distance of 13ft, even though 50ft was required. \n\nArin Mills raised concerns about the identification of the wetlands on the property and whether a certified wetland scientist had examined the area. Stratton confirmed that he did not have a plan stamped by a certified wetland scientist. The board decided to refer to the Land Use Ordinance (LUO) for the definition of a wetland.\n\nFlorence brought up LUO 303.1, which states that an authorized town agent must observe a test pit and a PERC test. Stratton confirmed that he had requested a PERC test but believed that soil studies were gradually replacing them. He confirmed that the state had approved the septic design based on the soil study.\n\nFlorence initiated a discussion with Mr. Tapp and Mr. Stratton about the location of test pits for a proposed leach field. Tapp expressed concern about the distance between the test pits and the planned leach field, suggesting that they should be closer according to New Hampshire regulations. Stratton was unsure about the exact location of the leach field, but confirmed that soil expert Tom Dombrowski believed the soil was suitable.\n\nTapp also raised questions about the staking of the house, noting that he only found three pins and that the distance between them did not match the expected measurements. Carney confirmed that the lot had not been cleared when they visited, which may have affected the measurements. Stratton explained that he had marked the area for the septic leach field, but admitted that the house had not been pinned.\n\nCarney then brought up concerns about the proximity of the deck to the wetlands and the location of the leach field. Stratton responded by mentioning waivers that he had received, but Florence clarified that the ZBA could not base any variance on state approvals. Stratton then explained that the waivers were related to the distance from the septic system to the nearest water source.\n\nSchwartz, a concerned citizen, voiced concerns about the practice of granting variances to wetland setbacks, fearing it could set a dangerous precedent. Mills, another concerned citizen, questioned the delineation of the wetlands and whether it was performed by a certified wetland scientist. She also raised concerns about stormwater management and the potential impact on the community's water bodies.\n\nStratton responded to Mills' points by stating his willingness to construct a retention area to manage surface water runoff and his preference for a natural yard over a traditional lawn. He also mentioned past issues with a dishonest contractor and his commitment to preventing water contamination.\n\nFinally, Florence asked Stratton if he had considered a layout that would require fewer variances. Stratton explained that his current layout was based on the expertise of his septic designer and that any changes could bring the leach field closer to poorly drained soil. Stratton concluded by stating his intention to build a cottage and enhance the quality of the neighborhood."
+    },
+    {
+      "section": "Motion to Enter Non-public Session",
+      "summary": "Florence proposed that a non-public session be held to address an issue that arose prior to the public hearing. He requested that members of the public present leave briefly and assured them that the process would not take long. Florence also stated that he would be recording the minutes of the session using a template obtained from the NHMA, which would be made public within 72 hours on the Town's website.\n\nFlorence then initiated a motion to enter a non-public session, which was seconded by Carney. The motion was unanimously passed with a 4-0 vote. Florence thanked everyone and informed Mr. Stratton that they would disconnect the call and reconnect with him in about four or five minutes."
+    },
+    {
+      "section": "Resumption of Public Hearing",
+      "summary": "During a meeting, Florence, the Board's chair, gave Stratton the opportunity to make any final comments before the conclusion of the public hearing. Stratton expressed his willingness to modify his design if it would benefit the environment. Florence clarified the role of the Zoning Board of Adjustment (ZBA), emphasizing that their authority was limited to either granting or denying variances. Stratton acknowledged this, and Florence suggested that the Select Board could provide further assistance. Stratton confirmed that he had already met with them and found them helpful.\n\nMills, another participant in the discussion, expressed her concerns about the permanent implications of granting the variances. She noted that while Stratton had agreed to make certain accommodations, there was no guarantee that these measures would be maintained indefinitely. Florence concurred, stating that any granted variances would be permanent and would apply to the property, not just the current owner. Carney seconded this point. The public hearing concluded with the motion passing with a unanimous vote of 4-0."
+    },
+    {
+      "section": "Deliberative Session",
+      "summary": "During a Deliberative Session, Florence encouraged all members of the public to stay, especially Mr. Stratton, as the board would be considering evidence and arguments presented and casting votes on requested variances. Carney expressed concerns about a 13ft issue, finding it excessive and struggled with the discrepancy in measurements taken near the leach field. Florence inquired about a laser beam to measure horizontal distance, which Carney suggested could be purchased by the Select Board or donated by the Conservation Commission. \n\nTapp provided clarification about his earlier discussion regarding test pits approximately 70ft away, and his concerns about the close proximity of the proposed construction to a stream. Marshall agreed that the property should be drained better. Carney expressed concerns about the impact of construction on the natural landscape, potentially disrupting the ecosystem. Tapp and Carney discussed issues with water flow and the potential location for a parking area.\n\nFlorence proposed to focus on two main concerns: the wetland setback of 13ft, where 50ft is required, and the septic system setback, which is less than the required 75ft. Florence and Carney agreed that it was not their job to suggest solutions. Florence proposed to grant variances one and two and to disregard variance number five as irrelevant. Carney agreed but expressed concerns about the 13ft and 75ft issues. \n\nFlorence proposed two separate motions: to approve variances one and two and withdraw variance number five from consideration, and to deny variances number three and four. The board unanimously approved the motions. Finally, Florence thanked Mr. Stratton for his participation and adjourned the meeting."
+    }
+  ],
+  "title": "Zoning Board of Adjustment",
+  "transcription": [
+    {
+      "id": 339,
+      "title": "Motion to Allow Applicant to Join by Phone",
+      "type": "AG"
+    },
+    {
+      "end": 1.1240000000000236,
+      "id": 1,
+      "speaker": "Florence",
+      "speech": "Good evening, everyone. It is 7pm and the October meeting of the Washington ZBA is called to order.",
+      "start": 0,
+      "type": "TX"
+    },
+    {
+      "end": 16.708,
+      "id": 2,
+      "speaker": "Carney",
+      "speech": " Mr. Chairman, I'd like to make a motion that we allow Chris Stratton to join the public meeting by phone in order to make the case for his application.",
+      "start": 1.1620000000000061,
+      "type": "TX"
+    },
+    {
+      "end": 19.79600000000002,
+      "id": 5,
+      "speaker": "Florence",
+      "speech": "I second that. All those in favor?",
+      "start": 16.874000000000024,
+      "type": "TX"
+    },
+    {
+      "end": 20.660000000000025,
+      "id": 6,
+      "speaker": "All",
+      "speech": "Aye.",
+      "start": 19.898000000000025,
+      "type": "TX"
+    },
+    {
+      "end": 26.124000000000024,
+      "id": 7,
+      "speaker": "Florence",
+      "speech": "The motion passes 4-0, and we can now make that call to XXX-XXX-XXXX.",
+      "start": 21.04000000000002,
+      "type": "TX"
+    },
+    {
+      "end": 51.940000000000026,
+      "id": 8,
+      "speaker": "Tapp",
+      "speech": "I have Mr. Stratton on speaker.",
+      "start": 26.162000000000006,
+      "type": "TX"
+    },
+    {
+      "end": 58.864000000000004,
+      "id": 18,
+      "speaker": "Stratton",
+      "speech": "Hello? It's Chris.",
+      "start": 57.56000000000003,
+      "type": "TX"
+    },
+    {
+      "end": 179.64400000000003,
+      "id": 19,
+      "speaker": "Florence",
+      "speech": "Hello, Mr. Stratton. This is Mark Florence from the Washington ZBA speaking. Earlier today, I reached out to you to confirm this meeting. I'm pleased to inform you that we've held a vote and approved your participation via phone, so we're ready to commence the meeting. I appreciate your presence.\n\nBefore we start, let me briefly explain how our meeting operates, primarily for your benefit, Mr. Stratton. We do have some visitors who are likely already familiar with our process, but allow me to clarify it nonetheless. Essentially, our meeting is divided into two segments.\n\nThe first segment is a public hearing, where you and any other attending members of the public are given the opportunity to speak. We will remain attentive, ensuring everyone has the chance to express their views. We won't conclude the public hearing until you've shared everything you wish to.\n\nFollowing the public hearing, we transition into the deliberative session. During this session, the board will review all the presented evidence, consider your arguments, and take into account any comments made by the public. We will then deliberate on the variances you've requested and vote on whether to approve or deny them.\n\nWhile the deliberative session is open for public observation, your participation will be limited to listening. Unfortunately, you won't be allowed to comment during this session. Therefore, I cannot stress enough the importance of fully expressing your views during the public hearing before it concludes. I hope this explanation is clear.",
+      "start": 58.99199999999999,
+      "type": "TX"
+    },
+    {
+      "end": 180.54,
+      "id": 20,
+      "speaker": "Stratton",
+      "speech": "Yes.",
+      "start": 179.842,
+      "type": "TX"
+    },
+    {
+      "id": 340,
+      "title": "Roll Call",
+      "type": "AG"
+    },
+    {
+      "end": 227.63000000000002,
+      "id": 21,
+      "speaker": "Florence",
+      "speech": "Alright, excellent. I'm going to proceed with the agenda now. The first item we have is the roll call. Tonight, we have Mark Florence present. That's me, the chairperson. We also have Gary Carney, who is the vice-chair, and board members Linda Marshall and Joe Tapp. That makes four out of five of us. Unfortunately, one member couldn't make it tonight. \n\nIt's important to note that any action requires the concurring vote of at least three of us. At this point, you have the right to say if you prefer to wait until all five members are present. Alternatively, we can proceed with just the four of us.",
+      "start": 180.69000000000003,
+      "type": "TX"
+    },
+    {
+      "end": 230.74800000000002,
+      "id": 22,
+      "speaker": "Stratton",
+      "speech": "Let's go ahead.",
+      "start": 229.04,
+      "type": "TX"
+    },
+    {
+      "end": 230.83400000000003,
+      "id": 23,
+      "speaker": "Florence",
+      "speech": "We have members of the public here. We have Jed and Nan Schwartz and Arin Mills, who are concerned citizens, I think would be a fair description of why they're here tonight. ",
+      "start": 230.83400000000003,
+      "type": "TX"
+    },
+    {
+      "id": 342,
+      "title": "Approval of Minutes",
+      "type": "AG"
+    },
+    {
+      "end": 800.328,
+      "id": 341,
+      "speaker": "Florence",
+      "speech": "The next item on the agenda is the approval of last month's minutes. I move that we approve the minutes as they were published on our website.",
+      "start": 770.8340000000001,
+      "type": "TX"
+    },
+    {
+      "end": 261.688,
+      "id": 24,
+      "speaker": "Carney",
+      "speech": "I'll second it.",
+      "start": 260.494,
+      "type": "TX"
+    },
+    {
+      "end": 262.856,
+      "id": 25,
+      "speaker": "Florence",
+      "speech": "All those in favor?",
+      "start": 261.774,
+      "type": "TX"
+    },
+    {
+      "end": 262.95799999999997,
+      "id": 26,
+      "speaker": "All",
+      "speech": "Aye.",
+      "start": 262.95799999999997,
+      "type": "TX"
+    },
+    {
+      "end": 804.1,
+      "id": 344,
+      "speaker": "Florence",
+      "speech": "The minutes are approved 4-0.",
+      "start": 802.958,
+      "type": "TX"
+    },
+    {
+      "id": 343,
+      "title": "Public Hearing (Part I)",
+      "type": "AG"
+    },
+    {
+      "end": 287.25,
+      "id": 27,
+      "speaker": "Florence",
+      "speech": "Now it's time to roll into the public hearing, Mr. Stratton. Why don't I hand it over to you now to say what you want to say about your property, the variances that you're asking for and anything else you want to discuss.",
+      "start": 264.18000000000006,
+      "type": "TX"
+    },
+    {
+      "end": 355.9100000000001,
+      "id": 28,
+      "speaker": "Stratton",
+      "speech": "I'm Chris Stratton. My wife and I bought the property at 131 Adams, intending to build a small one-bedroom house with a walkout basement. However, we're worried about the poorly drained soil on the lower half of the three-quarter acre property. I've collaborated with Tom Dombrowski, a licensed septic designer and surveyor, to determine the best layout considering the setbacks from the street, property line, and poorly drained soil. Tom has drafted a plan that's been submitted, and I believe you have copies of it.",
+      "start": 288.9,
+      "type": "TX"
+    },
+    {
+      "end": 359.30000000000007,
+      "id": 29,
+      "speaker": "Florence",
+      "speech": "Copies of what, Mr. Stratton?",
+      "start": 357.96000000000004,
+      "type": "TX"
+    },
+    {
+      "end": 378.15600000000006,
+      "id": 30,
+      "speaker": "Stratton",
+      "speech": "There should be a map or a plot in the submissions showing the relative distances from the street, for example, from the poorly drained soil. Is that available to you?",
+      "start": 359.38,
+      "type": "TX"
+    },
+    {
+      "end": 380.2700000000001,
+      "id": 31,
+      "speaker": "Florence",
+      "speech": "Yes, we all have that. Thank you.",
+      "start": 378.178,
+      "type": "TX"
+    },
+    {
+      "end": 555.5400000000001,
+      "id": 32,
+      "speaker": "Stratton",
+      "speech": "Alright. As I've previously mentioned, our plan is somewhat limited. However, we are committed to adhering to all fire safety precautions. Currently, we are considering using both metal siding and a metal roof for the construction. I've had a discussion with Nathan Bradco, a developer and excavator who came highly recommended by Mike Morin, a well-respected local builder. Bradco provided detailed information about the measures he takes to protect the environment during construction, such as silt barriers and other methods to prevent any disturbance to the local environment.\n\nTom Dombrowski, a licensed engineer, along with another gentleman, conducted two test digs on the site. They dug two separate plots to a depth of 5 feet and discovered well-drained loamy sand, among other things. I believe a copy of their findings is included in the documents you have. Dombrowski also prepared the plans that you currently have in your possession.\n\nThe necessary setbacks are from the road. The building should be 43 feet from the road, which is actually 30 feet from our property boundary. The road appears to have a 13-foot right of way, or easement, which is a somewhat grassy, wooded area that separates the edge of the road from our property boundary on the northwest side. So, the building would be 30 feet from our property boundary and 43 feet from the road. The nearest neighbor is 37 feet away, which is the second variance. It appears there are no other buildings for several hundred feet. There is a house, but it is located far to the north and east of our property. I can't recall the owner's name at the moment, but it should be listed on the document in front of you. Therefore, the northeast corner of our house would be 37 feet away.",
+      "start": 380.64,
+      "type": "TX"
+    },
+    {
+      "end": 582.9100000000001,
+      "id": 36,
+      "speaker": "Florence",
+      "speech": "Mr. Stratton, may I interrupt you just for a second? Were you asking for a side setback variance or a variance for the distance between your house and your neighbors. Did I mishear you?",
+      "start": 557.4000000000001,
+      "type": "TX"
+    },
+    {
+      "end": 595.0680000000001,
+      "id": 40,
+      "speaker": "Stratton",
+      "speech": "No, I don't think so. I believe should it be a 50 foot, if I'm not mistaken.",
+      "start": 585.7,
+      "type": "TX"
+    },
+    {
+      "end": 637.9480000000001,
+      "id": 41,
+      "speaker": "Florence",
+      "speech": "No, it's a 35 foot setback from the lot line and a 35 foot separation between your building and your neighbor's building is what's needed. So if you're 37ft away, you are safe in that respect and such a variance is not before us tonight.",
+      "start": 595.164,
+      "type": "TX"
+    },
+    {
+      "end": 666.0680000000001,
+      "id": 46,
+      "speaker": "Stratton",
+      "speech": "Okay, good. And then there is a distance of 28ft between the northeast corner of the property of the home and a line of poorly drained soil. So that might also be a variance, unless I'm mistaken in that requirement.",
+      "start": 638.124,
+      "type": "TX"
+    },
+    {
+      "end": 681.5,
+      "id": 47,
+      "speaker": "Florence",
+      "speech": "Yes, you do need a variance for that. We measured it as 13ft, but we'll get back to that later.",
+      "start": 666.244,
+      "type": "TX"
+    },
+    {
+      "end": 698.784,
+      "id": 50,
+      "speaker": "Stratton",
+      "speech": "Yesterday I did receive an approved septic design from the state of New Hampshire, and I forwarded that to you yesterday or the day before, and I believe that is now in your possession.",
+      "start": 683.3000000000001,
+      "type": "TX"
+    },
+    {
+      "end": 698.912,
+      "id": 51,
+      "speaker": "Florence",
+      "speech": "Did anybody on the board get it? I didn't.",
+      "start": 698.912,
+      "type": "TX"
+    },
+    {
+      "end": 1243.008,
+      "id": 345,
+      "speaker": "All",
+      "speech": "No.",
+      "start": 1238.912,
+      "type": "TX"
+    },
+    {
+      "end": 705.1560000000001,
+      "id": 52,
+      "speaker": "Carney",
+      "speech": "It must have gone to Ms. DeFosse, but she was not in yesterday.",
+      "start": 703.104,
+      "type": "TX"
+    },
+    {
+      "end": 719.13,
+      "id": 54,
+      "speaker": "Florence",
+      "speech": "None of us have seen that. We might circle back later and talk to you about the details in that septic design. ",
+      "start": 705.178,
+      "type": "TX"
+    },
+    {
+      "end": 734.48,
+      "id": 56,
+      "speaker": "Stratton",
+      "speech": "Of course. I believe that there is a propane tank ordinance, but if I correctly read it, propane tanks are not an issue. If they're screened.",
+      "start": 719.82,
+      "type": "TX"
+    },
+    {
+      "end": 750.4200000000001,
+      "id": 57,
+      "speaker": "Florence",
+      "speech": "You did read that correctly. That setback requirement for the propane tanks was repealed in March of 2023. You wrote that down as a potential variance. But that's not before us either tonight.",
+      "start": 736.1800000000001,
+      "type": "TX"
+    },
+    {
+      "end": 769.8000000000001,
+      "id": 58,
+      "speaker": "Stratton",
+      "speech": "I hope that I have addressed each of the aspects of the variances that I've requested and would invite any questions regarding elaboration or things of clarification that might help the board in its deliberations.",
+      "start": 752.84,
+      "type": "TX"
+    },
+    {
+      "end": 828.6039999999999,
+      "id": 59,
+      "speaker": "Florence",
+      "speech": "Mr. Tapp, Ms. Marshall, Mr. Carney, any questions on the five criteria? On the five criteria that Mr. Stratton has written down on the variance application? He wrote down his justifications.     ",
+      "start": 775.2800000000001,
+      "type": "TX"
+    },
+    {
+      "end": 832.0280000000001,
+      "id": 65,
+      "speaker": "Tapp",
+      "speech": "I have questions about distances and about where the marker pins are located, once I locate my notes.",
+      "start": 828.6419999999999,
+      "type": "TX"
+    },
+    {
+      "end": 966.0080000000002,
+      "id": 66,
+      "speaker": "Florence",
+      "speech": "Yes, I do too. What I want to focus on at the moment are the necessary variances based on the building plan. I would also like to invite those of us who have been to the location to share their measurements and observations. I plan to review and rephrase the variances that you, Mr. Stratton, have noted and we'll determine if we are in agreement. \n\nThe first variance pertains to LUO 202. My colleague Mr. Carney and I took measurements and determined that a front setback of 40ft is needed, where 50ft is required. This measurement is plus or minus 3ft from what you have noted, and we won't be debating this discrepancy in this meeting. \n\nThe second variance you've noted is from LUO 312, which involves a well setback that is closer than 50ft to the right of way. As you've pointed out in the LUO, it is redundantly stated that a waiver can be sought. However, if a waiver is granted, any contamination of the well from road runoff will be your responsibility. I believe this is a fair statement. \n\nWe did not take measurements for the well location, and correct me if I'm wrong, but it wasn't marked on your plot. We do however acknowledge that it needs to be less than 50ft from the road. \n\nThe third variance is again from LUO 202, which requires a wetland setback. We measured a distance of 13ft, even though 50ft is required. This measurement was taken from the corner of your deck to the wetland boundary line. This is the measurement that Vice Chair Carney and I agreed upon. \n\nMs. Marshall, Mr. Tapp, did you also take this measurement and if so, did you come up with different numbers?",
+      "start": 832.1140000000001,
+      "type": "TX"
+    },
+    {
+      "end": 970.8840000000001,
+      "id": 67,
+      "speaker": "Tapp",
+      "speech": "No, that's what I was measuring by myself, and I was within 2ft of you.",
+      "start": 966.0939999999999,
+      "type": "TX"
+    },
+    {
+      "end": 1009.1899999999999,
+      "id": 68,
+      "speaker": "Florence",
+      "speech": "Alright, it's about 2 feet. However, it's somewhat challenging to measure accurately due to the unevenness of the terrain. The rules are quite clear that it's not about the land's contour, but the horizontal distance that should be measured. Therefore, when dealing with an undulating landscape, it's always an approximation. I believe we should consider a distance of 13 feet for our discussions. I would like to ask if any members of the public present have any insights on this distance. Would anyone care to comment on this?",
+      "start": 970.9420000000001,
+      "type": "TX"
+    },
+    {
+      "end": 1015.4600000000002,
+      "id": 69,
+      "speaker": "Mills",
+      "speech": "Yes, this is Arin Mills I have a bunch of comments that I'd like to make in general regarding the wetlands.",
+      "start": 1009.7200000000001,
+      "type": "TX"
+    },
+    {
+      "end": 1020.408,
+      "id": 70,
+      "speaker": "Florence",
+      "speech": "Can I go through the variances first and just nail those down? And then I'll open it up.",
+      "start": 1015.62,
+      "type": "TX"
+    },
+    {
+      "end": 1067.3999999999999,
+      "id": 71,
+      "speaker": "Mills",
+      "speech": "I have a significant question about the wetlands, specifically in relation to the mention of poorly drained soils. I noticed that the land use ordinance refers to wetlands and cites the RSA statute concerning soils. Therefore, I'm curious to know if a certified wetland scientist has visited the site to delineate the wetlands as opposed to merely identifying poorly drained soil.\n\nThe LUO does not address the issue of poorly drained soils directly. A wetland is defined by a combination of hydrological soils and vegetation, and a scientist certified in wetland studies in New Hampshire would have the expertise to determine and flag this. I'm wondering whether this process has been carried out, rather than just a basic determination of the soil's nature.",
+      "start": 1020.494,
+      "type": "TX"
+    },
+    {
+      "end": 1089.6,
+      "id": 72,
+      "speaker": "Florence",
+      "speech": "Well, certainly there are flags along the boundary line, and that line matches the line that's on the building plan. There are flags there that read \"wetland boundary\". I don't know who put those flags up, but is it not also true that in the LUO, in the definitions, the definition of a wetland is poorly drained soil?",
+      "start": 1067.98,
+      "type": "TX"
+    },
+    {
+      "end": 1146,
+      "id": 73,
+      "speaker": "Mills",
+      "speech": "I'm partially referring to a wetland in this context. There are three criteria that the U.S. Army Corps of Engineers has established, which are also included in the statute of the State of New Hampshire, though I'm unable to recall the exact details at the moment. I'm not sure what specific statute it references in the LUO, but a certified wetland scientist would apply the Army Corps' methodology and criteria to this situation. \n\nThese criteria include the presence of vegetation that supports wetland plants, hydric soil conditions, and evidence of hydrology. I would like to confirm that a certified wetland scientist has examined the area in question. I want to ensure that the identified location of the wetlands, as per the LUO and the statute, is accurate. This does not refer to the poorly drained soils, but specifically to the wetlands as identified in the LUO and the statute.",
+      "start": 1090.34,
+      "type": "TX"
+    },
+    {
+      "end": 1151.268,
+      "id": 74,
+      "speaker": "Florence",
+      "speech": "Now, are you asking the Board that question, or are you asking Mr. Stratton that question?",
+      "start": 1146.74,
+      "type": "TX"
+    },
+    {
+      "end": 1162.4399999999998,
+      "id": 75,
+      "speaker": "Mills",
+      "speech": "I would request that the board acknowledge that, but I would ask Mr. Stratton, do you have a plan stamped by a certified wetland scientist that reflects those flags?",
+      "start": 1151.434,
+      "type": "TX"
+    },
+    {
+      "end": 1192.1599999999999,
+      "id": 76,
+      "speaker": "Stratton",
+      "speech": "No, I don't. When I bought the property, those flags were in place. There was no paperwork in the sale which I would think would have been required. So if it had been done by a scientist, then I have no proof that it was done by a scientist.",
+      "start": 1163.82,
+      "type": "TX"
+    },
+    {
+      "end": 1233.6299999999999,
+      "id": 79,
+      "speaker": "Mills",
+      "speech": "I am under the impression that the statute and the LUO necessitate this in relation to the statute. Additionally, I conducted an online search and discovered the property listing from when you made the purchase. It appears that you acquired the property in May 2023, based on information I extracted from the Zillow website. \n\nThe final line of the Zillow listing, which I obtained from their website, indicates that the seller had marked the boundaries and wetland. There is also a sketch of the building envelope that can be provided upon request. It is highly probable that the property will require a wetland variance approved by the town. Can you confirm whether you have received this?",
+      "start": 1193.06,
+      "type": "TX"
+    },
+    {
+      "end": 1238.144,
+      "id": 80,
+      "speaker": "Stratton",
+      "speech": "Did I receive what?",
+      "start": 1236.34,
+      "type": "TX"
+    },
+    {
+      "end": 1244.4499999999998,
+      "id": 81,
+      "speaker": "Mills",
+      "speech": "Well, in the listing it says that there was a map available. Did you request it? Do you have it?",
+      "start": 1238.3419999999999,
+      "type": "TX"
+    },
+    {
+      "end": 1252.6399999999999,
+      "id": 82,
+      "speaker": "Stratton",
+      "speech": "Yes. And this is based on that.",
+      "start": 1245.22,
+      "type": "TX"
+    },
+    {
+      "end": 1259.8799999999999,
+      "id": 83,
+      "speaker": "Mills",
+      "speech": "But you don't know if it was done by a certified wetland scientist?",
+      "start": 1256.4399999999998,
+      "type": "TX"
+    },
+    {
+      "end": 1262.6499999999999,
+      "id": 84,
+      "speaker": "Stratton",
+      "speech": "That's correct. ",
+      "start": 1260.3,
+      "type": "TX"
+    },
+    {
+      "end": 1277.356,
+      "id": 86,
+      "speaker": "Florence",
+      "speech": "I would certainly be interested in circling back on the statute from my perspective. Particularly, I'm examining the LUO and the definition of a wetland.",
+      "start": 1264.62,
+      "type": "TX"
+    },
+    {
+      "end": 1288.21,
+      "id": 87,
+      "speaker": "Mills",
+      "speech": "If you go to the statute RSA. 483:42, I'm not sure it's going to be the Army Corps standard.",
+      "start": 1277.378,
+      "type": "TX"
+    },
+    {
+      "end": 1290.1799999999998,
+      "id": 88,
+      "speaker": "Florence",
+      "speech": "I am uncertain if it is necessary for us to refer to the statute at this point, given that the Land Use Ordinance (LUO) is addressing a wetland setback. The definition of the wetland is provided within the LUO. \n\nAt this stage, I am unclear if the board needs to delve deeper than what is already outlined in the LUO. To ensure clarity, I will now read out the relevant section of the LUO for everyone's reference.",
+      "start": 1290.1799999999998,
+      "type": "TX"
+    },
+    {
+      "end": 1830.1799999999998,
+      "id": 346,
+      "speaker": "",
+      "speech": "> WETLAND Means any area that is inundated or saturated by surface water or groundwater at a frequency and duration sufficient to support, and that under normal conditions does support, a prevalence of vegetation typically adapted for life in saturated soil conditions.",
+      "start": 1300,
+      "type": "TX"
+    },
+    {
+      "end": 1881.97,
+      "id": 347,
+      "speaker": "",
+      "speech": "When we get to our deliberative session, obviously there'll be more talk about this. Then we'll see whether we need to look further than that. ",
+      "start": 1320,
+      "type": "TX"
+    },
+    {
+      "end": 1418.33,
+      "id": 90,
+      "speaker": "",
+      "speech": "Let's first clarify the variances needed before we proceed with our discussion. We've already addressed the first and second variances. The third variance pertains to the wetland setback, which is currently at 13ft, whereas the requirement is 50ft. Our measurements indicate that the distance from the deck's corner to the line demarcating the wetland's start is 13ft. \n\nI've removed the propane setback from our list since it's not necessary. Based on our measurements, I believe we need a variance from LUO 303.1. This regulation stipulates that the septic system setback from surface water should be 75ft. \n\nWe weren't entirely certain of its exact location, but our measurements showed it was no more than 60ft from your building plan. In other words, the septic system was not more than 60ft away from the wetland. ",
+      "start": 1343.78,
+      "type": "TX"
+    },
+    {
+      "end": 1438.6399999999999,
+      "id": 92,
+      "speaker": "",
+      "speech": "I have another matter that requires me to pose a question to Mr. Stratton. Regarding the test pit that was dug and subsequently reported in the soil report you submitted, I'm curious about who was present at the time of its excavation.",
+      "start": 1418.6999999999998,
+      "type": "TX"
+    },
+    {
+      "end": 1489.12,
+      "id": 93,
+      "speaker": "Stratton",
+      "speech": "I am aware of Tom Dombrowski and another gentleman, whose name escapes me. I believe the crux of the matter was whether water was poured into it or if the soil was examined by a certified engineer. To delve into the technical details for a moment, I believe that the traditional PERC test is gradually being phased out in favor of defining the soil stratifications, or the layers of the soil. Tom Dombrowski was there together with another gentleman.",
+      "start": 1440.6599999999999,
+      "type": "TX"
+    },
+    {
+      "end": 1502.07,
+      "id": 96,
+      "speaker": "Florence",
+      "speech": "Was that somebody from the town? Was it an assistant to Tom Dombrowski? What capacity were they acting in?",
+      "start": 1491.9399999999998,
+      "type": "TX"
+    },
+    {
+      "end": 1509.764,
+      "id": 97,
+      "speaker": "Stratton",
+      "speech": "I do not know if it was a town employee.",
+      "start": 1505.56,
+      "type": "TX"
+    },
+    {
+      "end": 1580.4299999999998,
+      "id": 98,
+      "speaker": "Florence",
+      "speech": "Alright, let's move on to discussing the fifth potential variance. LUO 303.1 states that an authorized town agent must observe a test pit and a PERC test. I'm not sure where this leads us, but I believe it's a point worth considering. Before I conclude my line of questioning, I have one last query. \n\nOn October 16, Ms DeFosse asked you for the PERC test results. You briefly mentioned this earlier. However, you provided us with the soil test and the test pit report, which are not the same as the PERC test. From my understanding, both are necessary for septic design. So, did you conduct a PERC test, or did you only compile a soil report?",
+      "start": 1509.8919999999998,
+      "type": "TX"
+    },
+    {
+      "end": 1614.2479999999998,
+      "id": 99,
+      "speaker": "Stratton",
+      "speech": "I have requested a PERC test. From my understanding and the research I've conducted, it seems that PERC tests are gradually being phased out. They are being replaced by the soil study that you possess. I am aware of the differences between the two testing methods, which is why I have chosen to request a PERC test.",
+      "start": 1581.36,
+      "type": "TX"
+    },
+    {
+      "end": 1619.1599999999999,
+      "id": 102,
+      "speaker": "Florence",
+      "speech": "Well, what did you have to submit to the state to get your septic design approved?",
+      "start": 1614.3339999999998,
+      "type": "TX"
+    },
+    {
+      "end": 1637.08,
+      "id": 103,
+      "speaker": "Stratton",
+      "speech": "I'm looking now for the septic design. I didn't personally submit it. It was submitted by the designer and I believe that the soil study was sufficient because the state approved it.",
+      "start": 1623.1,
+      "type": "TX"
+    },
+    {
+      "end": 1648.704,
+      "id": 104,
+      "speaker": "Florence",
+      "speech": "Okay, fair enough.  I can see there's other questions. I've asked plenty. I'm going to pass it off. Mr. Tapp, you were up first.",
+      "start": 1637.1699999999998,
+      "type": "TX"
+    },
+    {
+      "end": 1683.97,
+      "id": 106,
+      "speaker": "Tapp",
+      "speech": "I do have a query, Mr. Stratton. I wouldn't claim to be an expert on this matter, but my understanding was that the test pits should be located near the proposed leach field site.\n\nWhen I visited the property, I noticed that the test pit was situated on one side of the house, which is not where the leach field is planned to be. There was no sign of any disturbed land in the area where the leach field is proposed to be located.",
+      "start": 1648.822,
+      "type": "TX"
+    },
+    {
+      "end": 1739.1519999999998,
+      "id": 109,
+      "speaker": "Stratton",
+      "speech": "I can't confirm that. I know Tom Dombrowski believed the soil was perfect for it. I'm unsure if the location was exactly where the leach field is because my sense of direction there was bad, but I understand the question.  ",
+      "start": 1692.02,
+      "type": "TX"
+    },
+    {
+      "end": 1777.47,
+      "id": 113,
+      "speaker": "Tapp",
+      "speech": "Indeed, I am not entirely certain about this, nor am I claiming to be an expert. However, my understanding was that, according to Mr. Stratton and New Hampshire regulations, the test pit must be situated within a specific area of the leach field. \n\nWhen I looked at where the test pit was located, I noticed two spots right next to each other, possibly around 10 feet apart. I then measured the distance from these spots to approximately where your leach field was intended to be. If my measurements are correct, the distance was around 70 to 80 feet, at the very least.",
+      "start": 1739.2859999999998,
+      "type": "TX"
+    },
+    {
+      "end": 1786.8799999999999,
+      "id": 114,
+      "speaker": "Stratton",
+      "speech": "I'm not sure that it would be that distant.",
+      "start": 1779.1999999999998,
+      "type": "TX"
+    },
+    {
+      "end": 1811.6899999999998,
+      "id": 115,
+      "speaker": "Tapp",
+      "speech": "If I were to follow your plot plan, the first test pit would be approximately 13ft plus the 35ft for the house, adding up to around 47ft. Your plot plan also seems to have a scale, which I used as a reference. From there, I estimated an additional 20ft, which means the total distance was nearly 70ft.",
+      "start": 1789.22,
+      "type": "TX"
+    },
+    {
+      "end": 1832.4299999999998,
+      "id": 116,
+      "speaker": "Stratton",
+      "speech": "I can't argue with you. I didn't measure it myself.  I do trust that Mr. Dombrowski, who's been at this for a long time, is an expert in this field.",
+      "start": 1814.22,
+      "type": "TX"
+    },
+    {
+      "end": 1849.092,
+      "id": 119,
+      "speaker": "Tapp",
+      "speech": "The other question I had was, on your staking of the house, I only found three pins, and I was three little tiny orange stakes. I didn't find anything else. I don't know what anybody else found.",
+      "start": 1834.7399999999998,
+      "type": "TX"
+    },
+    {
+      "end": 1859.6399999999999,
+      "id": 120,
+      "speaker": "Carney",
+      "speech": "We didn't, because when we went there, the lot wasn't cleared. It is now cleared. ",
+      "start": 1849.1459999999997,
+      "type": "TX"
+    },
+    {
+      "end": 1905.3759999999997,
+      "id": 122,
+      "speaker": "Tapp",
+      "speech": " I found three small fiberglass stakes. Upon measuring the distance between the three, I found it to be 35ft. So, I thought to myself, that must be it. However, I also questioned the placement of these stakes. I believe I found the pins marking the backside of the property. From the edge of what I assumed was the correct property, the distance wasn't 37ft as expected, but rather, it was approximately 70ft. I went to the first pin that was placed. Therefore, if you guys completed your measurements before the area was cleared, then you wouldn't have the accurate measurements.",
+      "start": 1859.71,
+      "type": "TX"
+    },
+    {
+      "end": 1910.8559999999998,
+      "id": 123,
+      "speaker": "Florence",
+      "speech": "We did the measurements before it was cleared, and we did everything from the dimensions on the plan.",
+      "start": 1905.408,
+      "type": "TX"
+    },
+    {
+      "end": 1925.31,
+      "id": 124,
+      "speaker": "Tapp",
+      "speech": "Absolutely, Mr. Stratton. What I'm doing here is comparing what was previously present to what we have now. It's possible that there may not have been anything there at all. I noticed that the trees were marked, so I took a look around. However, I was unable to locate four of them. I could only find three.",
+      "start": 1910.958,
+      "type": "TX"
+    },
+    {
+      "end": 1946.4699999999998,
+      "id": 128,
+      "speaker": "Stratton",
+      "speech": "I personally cut the fiberglass items that you discovered. I did this to reinforce the location that Mr. Dombrowski had pointed out. He had marked this area as benchmarks for the septic leach field.",
+      "start": 1926.88,
+      "type": "TX"
+    },
+    {
+      "end": 1965.9499999999998,
+      "id": 129,
+      "speaker": "Tapp",
+      "speech": "But they were exactly 35ft. So that's why I'm a little confused on the location of what was what.",
+      "start": 1950.54,
+      "type": "TX"
+    },
+    {
+      "end": 1985.44,
+      "id": 130,
+      "speaker": "Stratton",
+      "speech": "I had also contacted another company, David Mellon. Are we now discussing the property boundaries? Are we discussing the fiberglass pins that I put in the ground?",
+      "start": 1968.48,
+      "type": "TX"
+    },
+    {
+      "end": 2019.3899999999999,
+      "id": 131,
+      "speaker": "Tapp",
+      "speech": "Regarding the property, I discovered three pins. I specifically took note of the one where the excavator had entered. I decided to pull from that back pin, as that was the location where the excavator had made its entrance. I reasoned that an excavator would not venture onto someone else's property to conduct a test pit. \n\nHence, I proceeded to pull from that pin. When I pulled to the first pin that I observed of the 35ft, it was approximately 70ft away. This was surprising to me.",
+      "start": 1987.96,
+      "type": "TX"
+    },
+    {
+      "end": 2022.152,
+      "id": 132,
+      "speaker": "Florence",
+      "speech": "What's in dispute to your mind, Mr. Tapp?",
+      "start": 2019.92,
+      "type": "TX"
+    },
+    {
+      "end": 2039.4099999999999,
+      "id": 133,
+      "speaker": "Tapp",
+      "speech": "I was unsure of the exact locations of the pins because one was 30ft away from the other. I saw an excavator had gone between the two pins, which added to my confusion.",
+      "start": 2022.2959999999998,
+      "type": "TX"
+    },
+    {
+      "end": 2058.97,
+      "id": 135,
+      "speaker": "Stratton",
+      "speech": "Those pins I put in to keep the guy with the chainsaw from removing Mr. Dombrowski's septic planning, he was very specific. He did not want to disturb that location.",
+      "start": 2040.2799999999997,
+      "type": "TX"
+    },
+    {
+      "end": 2069.0699999999997,
+      "id": 136,
+      "speaker": "Tapp",
+      "speech": "Alright, I must admit that I'm unsure about the location indicated in that statement. I don't know where the house is pinpointed.",
+      "start": 2063.2799999999997,
+      "type": "TX"
+    },
+    {
+      "end": 2097.52,
+      "id": 137,
+      "speaker": "Stratton",
+      "speech": "I'm sorry the house was not pinned. I know it should have been, but at the time I was there, we didn't have the plans to do it. I live in Florida, and it sounds as if some of the other board members were able to look at the plans and to establish where the house is going to be and also the septic system.",
+      "start": 2071.6,
+      "type": "TX"
+    },
+    {
+      "end": 2112.264,
+      "id": 138,
+      "speaker": "Florence",
+      "speech": "I felt pretty confident, but we didn't see any pins, we didn't really look for any pins. There was no cutting done when we were there. We measured everything from the dimensions on the plan.",
+      "start": 2097.68,
+      "type": "TX"
+    },
+    {
+      "end": 2125.648,
+      "id": 139,
+      "speaker": "Tapp",
+      "speech": "If your information is correct, I was measuring because I assumed that was the house. That's why I asked questions about the leach field and other things, since you have test pits over there.",
+      "start": 2112.302,
+      "type": "TX"
+    },
+    {
+      "end": 2135.104,
+      "id": 144,
+      "speaker": "Florence",
+      "speech": "So that was the nexus of your question: from what you could see, the test pits didn't line up with the plan. ",
+      "start": 2125.734,
+      "type": "TX"
+    },
+    {
+      "end": 2141.27,
+      "id": 146,
+      "speaker": "Tapp",
+      "speech": "Yes, because when I measured from pin to pin, it was exactly 35ft, so I assumed that was the house. ",
+      "start": 2135.2219999999998,
+      "type": "TX"
+    },
+    {
+      "end": 2142.836,
+      "id": 150,
+      "speaker": "Florence",
+      "speech": "Do you have more questions?",
+      "start": 2142.04,
+      "type": "TX"
+    },
+    {
+      "end": 2142.8579999999997,
+      "id": 151,
+      "speaker": "Tapp",
+      "speech": "No.",
+      "start": 2142.8579999999997,
+      "type": "TX"
+    },
+    {
+      "end": 2769.0099999999998,
+      "id": 352,
+      "speaker": "Carney",
+      "speech": "For now, I'm all set here. However, I need to return to that corner. The corner of the deck that is adjacent to the wetlands. It appears to be approximately 13ft away, which seems quite close. \n\nNow, it's important to remember that the deck is part of the house. You can't just measure from the corner of the house and then extend the deck an additional 12 to 13ft. The measurement needs to be taken from the corner of the deck to the wetlands, which brings us back to the 13ft distance. \n\nFurthermore, we need to consider the location of the leach field. It's crucial to assess the distance between the leaching field and the wetlands. This is something we have already done.",
+      "start": 2682.8579999999997,
+      "type": "TX"
+    },
+    {
+      "end": 2236.47,
+      "id": 161,
+      "speaker": "Florence",
+      "speech": "We couldn't be sure whether it was 50ft or 60ft. It was somewhere in between the two. ",
+      "start": 2229.62,
+      "type": "TX"
+    },
+    {
+      "end": 2239.508,
+      "id": 163,
+      "speaker": "Carney",
+      "speech": "But definitely wasn't 75.",
+      "start": 2237,
+      "type": "TX"
+    },
+    {
+      "end": 2240.23,
+      "id": 164,
+      "speaker": "Florence",
+      "speech": "Correct.",
+      "start": 2239.594,
+      "type": "TX"
+    },
+    {
+      "end": 2287.17,
+      "id": 165,
+      "speaker": "Stratton",
+      "speech": "I'm reviewing a waiver exempting other conditions. He received three such waivers. If you had seen my email to Ms. DeFosse, you'd understand our discussion about this issue concerning New Hampshire.",
+      "start": 2248.41,
+      "type": "TX"
+    },
+    {
+      "end": 2299.5099999999998,
+      "id": 166,
+      "speaker": "Florence",
+      "speech": "We don't have any waivers in front of us. What waivers are these? Who's giving these waivers? And on what conditions?",
+      "start": 2289.11,
+      "type": "TX"
+    },
+    {
+      "end": 2311.43,
+      "id": 167,
+      "speaker": "Stratton",
+      "speech": "It was signed by Darren K. King rom the Subsurface Systems Bureau, Department of Environmental Services, State of New Hampshire.",
+      "start": 2300.17,
+      "type": "TX"
+    },
+    {
+      "end": 2312.97,
+      "id": 170,
+      "speaker": "Florence",
+      "speech": "And what are they waiving?",
+      "start": 2311.5099999999998,
+      "type": "TX"
+    },
+    {
+      "end": 2370.86,
+      "id": 171,
+      "speaker": "Stratton",
+      "speech": "There are three rules, namely A, B, and C. Unfortunately, I'm not exactly sure what these rules entail. However, I can confirm that I have an approved stamped septic design, considering the locations and focusing on the point regarding distance. I'm going to need a magnifying glass to read this properly, bear with me for a moment. It's a bit hard to decipher. Ah, I believe I may have a larger version of this somewhere. I must apologize once again for your not receiving the septic plan.",
+      "start": 2316.69,
+      "type": "TX"
+    },
+    {
+      "end": 2373.09,
+      "id": 172,
+      "speaker": "Florence",
+      "speech": "While you're looking for that, one comment I'm going to make is that the ZBA cannot predicate the granting of any variance on State approvals. You might have a DES approval, for example, for this or that, but you still need an approval from us to grant you a variance.",
+      "start": 2373.09,
+      "type": "TX"
+    },
+    {
+      "end": 2987.96,
+      "id": 353,
+      "speaker": "Stratton",
+      "speech": "Currently, I am examining the merits of my particular case and I want to ensure that you are privy to the same information that I have. The data I have pertains to a distance of 65ft. To be more specific, this is the distance from the corner of the septic system to the nearest water source. This water source is a culvert that drains from the property located above and to the left.      ",
+      "start": 2913.09,
+      "type": "TX"
+    },
+    {
+      "end": 2461.61,
+      "id": 180,
+      "speaker": "Florence",
+      "speech": "I'm moving on. We're taking turns asking questions. Jed Schwartz, a concerned citizen, do you have any questions for Mr. Stratton?",
+      "start": 2449.69,
+      "type": "TX"
+    },
+    {
+      "end": 2561.98,
+      "id": 181,
+      "speaker": "Schwartz, J",
+      "speech": "I don't have a specific issue in mind. My comment is more about the practice of granting variances to wetland setbacks. I'm voicing my concerns as a citizen and as a participant in the Conservation Commission. I am not representing the views of the Conservation Commission, but I am speaking out of concern for our town's diverse landscape. \n\nWe have numerous lakes and streams, and over the years, we've established Land Use Ordinances (LUOs) to protect the clean water resources that we all value in our town. So, when I noticed a 13 foot setback where a 50 foot setback is usually required, I perceived it as a 37 foot waiver. \n\nI believe this could set a dangerous precedent and lead us down a slippery slope. As far as I know, I haven't seen such a waiver in our town before. I'm not entirely sure, though, so perhaps the board members could clarify if they have seen one.",
+      "start": 2463.0699999999997,
+      "type": "TX"
+    },
+    {
+      "end": 2563.638,
+      "id": 182,
+      "speaker": "Carney",
+      "speech": "No, I haven't.",
+      "start": 2562.35,
+      "type": "TX"
+    },
+    {
+      "end": 2607.43,
+      "id": 183,
+      "speaker": "Schwartz, J",
+      "speech": "A few years ago, when I was serving on the Board of Selectmen, I remember we were examining a particular case with Arin Mills from the Conservation Commission. There was an individual who, if I recall correctly, was seeking permission for a 23 or 24-foot setback. However, we decided not to approve it.\n\nThe property was ultimately deemed, regrettably, as one of the many lots of record in our town that are simply not suitable for construction as they currently stand. It's unfortunate for Mr. Stratton if he ended up with one of these lots. I don't have much more to add on this matter.   ",
+      "start": 2563.814,
+      "type": "TX"
+    },
+    {
+      "end": 2612.778,
+      "id": 187,
+      "speaker": "Florence",
+      "speech": "Mr. Stratton, next up is Linda Marshall, another Board member. Ms. Marshall, do you have any questions?",
+      "start": 2608.09,
+      "type": "TX"
+    },
+    {
+      "end": 2623.8379999999997,
+      "id": 188,
+      "speaker": "Marshall",
+      "speech": "I found the whole property to be wet, and so I don't have any questions.",
+      "start": 2612.864,
+      "type": "TX"
+    },
+    {
+      "end": 2642.2419999999997,
+      "id": 189,
+      "speaker": "Florence",
+      "speech": "Mr. Stratton, next up is Arin Mills, another concerned citizen, also of the Conservation Commission.",
+      "start": 2624.004,
+      "type": "TX"
+    },
+    {
+      "end": 2750.022,
+      "id": 190,
+      "speaker": "Mills",
+      "speech": "I reside within the same community as the property in question, but I am not an abutter. I am however concerned about the potential impact on the community as I am both a resident and a member of the Conservation Commission. My background in environmental science and my professional work in the field provide me with a certain level of expertise, particularly in regards to wetlands and their delineation. I have several points I'd like to discuss, which I will do in the order I've prepared them. \n\nI understand that the conversation may have become somewhat disjointed, but I have provided the board with several items of note. Unfortunately, Mr. Stratton, I am unable to provide you with these materials as you are in Florida. One of these items is the Zillow listing for the property. The listing was active at the time of your purchase and clearly indicated the need for potential variances and the presence of wetlands. This information should have been available to you prior to the purchase and it seems you were aware of it, which is commendable. I want to ensure the board recognizes that you were informed of these issues before buying the property. \n\nI've already raised this, but I am questioning the delineation of the wetlands and whether this was performed by a certified wetland scientist. Section 205 of the land use ordinance, which we have located, refers to Chapter 483 of the New Hampshire Statute or the land use ordinance, whichever is stricter, for the delineation of wetlands. Perhaps you could take a look at that, Mr. Florence.",
+      "start": 2642.3759999999997,
+      "type": "TX"
+    },
+    {
+      "end": 2760.94,
+      "id": 191,
+      "speaker": "Florence",
+      "speech": "I will read that section now for the minutes.    ",
+      "start": 2750.156,
+      "type": "TX"
+    },
+    {
+      "end": 2785.8379999999997,
+      "id": 196,
+      "speaker": "",
+      "speech": "> WETLANDS All construction shall comply with the Shoreland Water Quality Protection Act (RSA 483-B:1 thru 483-B:22), the wetland regulations defined in Chapter 483 of the State of New Hampshire RSA, or the Town of Washington LUO, **whichever is stricter**. All structures and supporting utilities are prohibited from being built on wetland. ",
+      "start": 2761.47,
+      "type": "TX"
+    },
+    {
+      "end": 2856.33,
+      "id": 197,
+      "speaker": "Mills",
+      "speech": "Thank you for the reference. I understand that this isn't under the jurisdiction of the shoreland. It would be closer to the lake, but this area is outside the shoreland jurisdiction. However, I do believe that it's necessary to take a closer look at this to ensure that the boundary delineated on the site and the flags that have been hung are accurate. There have been ongoing discussions about the proximity of this area. Is it closer or not? It's crucial to verify that the boundary was correctly delineated.\n\nThe stricter of the two standards, the statue, would likely involve adhering to the Army Corps standards and having the delineation done by a certified wetland scientist. I have reason to believe that a certified wetland scientist has already done this. It's possible to obtain the plan that has been stamped by the certified wetland scientist to ensure that the boundary is correct.\n\nI have some concerns that the wetlands may not be accurately depicted on the plan. I want to ensure that all the measurements for the well, the leach field, and the home are correct. \n\nAdditionally, I'm interested in understanding how the applicant is complying with number 206 of the land use ordinance, which pertains to stormwater. Mr. Florence, you might want to read that.",
+      "start": 2786.014,
+      "type": "TX"
+    },
+    {
+      "end": 2856.842,
+      "id": 198,
+      "speaker": "Florence",
+      "speech": "I will read that section now for the minutes.    ",
+      "start": 2856.48,
+      "type": "TX"
+    },
+    {
+      "end": 2893.65,
+      "id": 199,
+      "speaker": "",
+      "speech": "> The total storm water runoff from a lot, after construction, shall not increase from the natural condition, ensuring that the rate of surface water runoff from the site does not exceed predevelopment conditions and that the quality of such runoff will not be less than pre-development conditions. This applies to all new and existing lots including non-conforming lots of record. Note: Storm water discharge must be dealt with on-site using mechanisms such as rain gardens, infiltration trenches or bio-retention ponds.",
+      "start": 2856.8959999999997,
+      "type": "TX"
+    },
+    {
+      "end": 3198.198,
+      "id": 200,
+      "speaker": "Mills",
+      "speech": "So, I understand that you, Mr. Stratton, are seeking a waiver from the setback from these wetlands, which now appears to be within 13ft of the wetlands. I am curious as to what measures you plan to implement to ensure no additional stormwater enters this wetland from such a close distance. The purpose of these setbacks is to provide a buffer for the wetlands, which play a critical role in preserving our water quality by infiltrating stormwater before it enters surface waters. This is the reason we have the land use ordinance and these setbacks in place. \n\nWith your property now coming within 13ft of the wetlands, it's crucial to consider how pollutants will be removed. There's a possibility that your yard might contribute lawn pollutants. It's a common occurrence in most yards. The buffers are designed to protect and remove these pollutants before they enter surface waters. They also help to control high flows during flooding events and provide habitat for wildlife. My main concerns, however, are related to the pollutants and stormwater infiltration. I have reservations about these issues and your request for this variance. \n\nThere are a couple of points in your variance request that I have concerns with. One of them is the spirit of the Land Use Ordinance, which I believe is not being fully observed. The last bullet point states that it should ensure the proper use of natural resources and other public requirements. I don't think your plan aligns with the proper use of natural resources as outlined in the land use ordinance. I don't see any stormwater treatment plan. I am interested in hearing your comments on this or any stormwater treatment plan you might have in mind. \n\nThe pressure you're placing on this small 0.75-acre lot is excessive, considering you're asking for multiple variances and potential waivers for setbacks from state regulations. I am concerned about this. I also question whether your plan promotes health and general welfare, as required by the land use ordinance, considering the multiple variances you're requesting. \n\nThe test pit results you provided don't seem to show a viable leach field location. I have shared with the board communications from Meridian Engineering, which suggest that the land might not be buildable. I am concerned about the variance from the well setbacks, which I believe could pose a risk to your well and cause additional hardships for your neighbors. \n\nAnother point of concern is related to the unnecessary hardship you're placing on this land by requesting multiple variances to construct on such a small lot. This lot was considered unbuildable and required variances before your purchase. \n\nLastly, I would like to draw your attention to the flow of the stream and the wetlands behind your property. The last page of the information I provided shows the perennial stream identified by both the National Wetlands Inventory and the National Hydrography Data Set. This stream runs behind your property and eventually enters Lake Ashuelot, a protected water body. The setbacks and runoff and pollutants that could potentially enter these water bodies are a concern not only for you but for the community as a whole.",
+      "start": 2894.39,
+      "type": "TX"
+    },
+    {
+      "end": 3229.46,
+      "id": 201,
+      "speaker": "Florence",
+      "speech": "Thanks, Ms. Mills. That was a lot, Mr. Stratton. I've decided to bypass the rule that all questions must be asked through the Chair for efficiency. I hope you're okay with this, Mr. Stratton. Any thoughts on this?",
+      "start": 3198.364,
+      "type": "TX"
+    },
+    {
+      "end": 3447.078,
+      "id": 202,
+      "speaker": "Stratton",
+      "speech": "Yes, I am more than willing to construct a retention area to potentially alleviate any surface water runoff resulting from the impervious nature of the house. I apologize as the exact term eludes me, but it was something akin to a rain garden. This would ideally be situated between the deck and the poorly drained soil or wetlands, if you prefer. I have no intention of promoting runoff into that poorly drained area. \n\nFrom my understanding, there is no interaction between the poorly drained soil and the stream, as water entering it doesn't seem to flow into the stream. Therefore, the claim that water from the house would end up in the stream appears to be unsupported. Despite this, I am fully prepared to contain the water.\n\nI don't plan on having a traditional, grassy yard. I prefer a more natural setting. My goal is to look out onto the woods, not a manicured lawn. I feel that we, as a nation, don't need more lawns or grass. I would rather have a natural area. If a berm or similar structure would help keep this natural area separate from the wetlands, I am all for it. I am more than willing to comply with any restrictions that prevent runoff from our house into the wetlands area.\n\nAs a side note, I believe there may be some animosity stemming from a previous contractor who wasn't honest with me. He hired a former Meridian employee and they were unable to accurately locate the property boundaries. They assumed the boundary was in line with Lincoln Drive, which was inconsistent with both the tax records and the actual pins on the ground. As a result, I terminated their services.\n\nHowever, returning to the main issue at hand, I am fully committed to building a berm or similar area to redirect any runoff into a location where it can be naturally absorbed into the soil. We all share the common goal of preventing our drinking water from becoming contaminated. This is my brief response to the numerous points raised.",
+      "start": 3230.31,
+      "type": "TX"
+    },
+    {
+      "end": 3462.09,
+      "id": 203,
+      "speaker": "Florence",
+      "speech": "Okay, thank you. Unless you want to say more right now, I'm going to pass it on to Nan Schwartz, also a Concerned Citizen and Conservation Commission member sitting here, who may have some questions for you.",
+      "start": 3447.244,
+      "type": "TX"
+    },
+    {
+      "end": 3471.23,
+      "id": 205,
+      "speaker": "Schwartz, N",
+      "speech": "No, I don't have any questions. I think Mr. Schwartz and Ms. Mills covered it pretty well.  The concern of all of us is with the wetlands.",
+      "start": 3462.24,
+      "type": "TX"
+    },
+    {
+      "end": 3525.87,
+      "id": 208,
+      "speaker": "Florence",
+      "speech": "Ms. Mills, a thought occurred to me regarding your comments about hardship under the fifth prong of our considerations. It seems there might be a misunderstanding. We're not looking at the hardship that the variances will impose on the land, which was my initial interpretation of your statement. \n\nRather, we're considering the inverse - how the conditions on the property impose a hardship on what the applicant intends to do with the property. A classic example would be a large piece of ledge in the middle of the property. This could prevent the front setback and side setback distances from being honored. So, in essence, we're looking at it from the opposite perspective. I just wanted to clarify that point.",
+      "start": 3472.29,
+      "type": "TX"
+    },
+    {
+      "end": 3540.2,
+      "id": 209,
+      "speaker": "Mills",
+      "speech": "I agree that the wetlands are creating an obstacle, which is why Mr. Stratton is seeking approval for the varainces he has requested.    ",
+      "start": 3526.02,
+      "type": "TX"
+    },
+    {
+      "end": 3607.58,
+      "id": 214,
+      "speaker": "Florence",
+      "speech": "Mr. Stratton, a question has resurfaced in my mind. We, the ZBA, are not in a position to suggest that you move the structure 15ft in one direction or 14ft in another to potentially reduce the number of variances required. However, we can inquire about the measures you've taken. Have you considered a layout that would not necessitate these variances, or at the very least, would require fewer of them?\n\nI'm asking this quite naively, but if you were to look at your current plan and create a mirror image of it - with the house located on the southwest corner instead of the northeast, and the septic system reversed accordingly - would that result in fewer variances? I'm not suggesting that this is a viable solution, but I'm simply curious.\n\nLastly, did you make any attempts to alter the plan in any way to lessen the number of variances you're requesting?",
+      "start": 3542.09,
+      "type": "TX"
+    },
+    {
+      "end": 3668.24,
+      "id": 215,
+      "speaker": "Stratton",
+      "speech": " If I did what you suggest, it would place the leach field much closer to the poorly drained soil, which is something I've been avoiding.\n\nAs for the rest of the project, I heavily relied on the expertise of the septic designer. He's a 74-year-old professional who has been working in this area for a long time. He resides in Claremont, which is nearby, and I didn't dare to challenge his experience and knowledge. I trusted his judgment in the layout he proposed. ",
+      "start": 3610.43,
+      "type": "TX"
+    },
+    {
+      "end": 3682.5,
+      "id": 217,
+      "speaker": "Florence",
+      "speech": " Does anybody else have any more questions? And, Mr. Stratton, do you have anything more that you would like to say?",
+      "start": 3670.5299999999997,
+      "type": "TX"
+    },
+    {
+      "end": 3712.2999999999997,
+      "id": 218,
+      "speaker": "Stratton",
+      "speech": "No. I think you have a concept of who we are and what we're trying to do, which is build a cottage for use for a few months to get out of the heat of Florida and enjoy the wilderness, the woods there. We're certainly not looking to diminish the quality of the neighborhood. We're looking to enhance it.   ",
+      "start": 3684.87,
+      "type": "TX"
+    },
+    {
+      "id": 348,
+      "title": "Motion to Enter Non-public Session",
+      "type": "AG"
+    },
+    {
+      "end": 3783.122,
+      "id": 222,
+      "speaker": "Florence",
+      "speech": "Before we proceed to the main deliberation, an issue has arisen during our preparatory research that I propose we address in a non-public session, briefly. This implies that I will need to halt the recording of this public hearing. I kindly request the members of the public present here to step outside for a short while. This won't take too long.\n\nWe are obligated to keep a record of our discussions, so I will be taking minutes. I have obtained a template from the NHMA on how to document the minutes of a non-public session, which I will write separately. These minutes must be made public within 72 hours from this moment, and they will be posted on our website. I assure you that this process won't take more than a few minutes. So, if you could kindly excuse us.  \n\nLet me make the motion first. I move that we enter a non public session. Do I have a second?",
+      "start": 3713.31,
+      "type": "TX"
+    },
+    {
+      "end": 3784.098,
+      "id": 225,
+      "speaker": "Carney",
+      "speech": "I'll second that.",
+      "start": 3783.176,
+      "type": "TX"
+    },
+    {
+      "end": 3786.686,
+      "id": 226,
+      "speaker": "Florence",
+      "speech": "All those in favor say aye. ",
+      "start": 3784.1839999999997,
+      "type": "TX"
+    },
+    {
+      "end": 3786.962,
+      "id": 227,
+      "speaker": "All",
+      "speech": "Aye.",
+      "start": 3786.718,
+      "type": "TX"
+    },
+    {
+      "end": 3799.4,
+      "id": 228,
+      "speaker": "Florence",
+      "speech": "The motion passes, 4-0. Thank you very much. Mr. Stratton, we're going to hang up, and we're going to call you back in about four or five minutes.",
+      "start": 3787.016,
+      "type": "TX"
+    },
+    {
+      "id": 349,
+      "title": "Resumption of Public Hearing",
+      "type": "AG"
+    },
+    {
+      "end": 4345.817999999999,
+      "id": 230,
+      "speaker": "Stratton",
+      "speech": "Hello?",
+      "start": 4345.3099999999995,
+      "type": "TX"
+    },
+    {
+      "end": 4366.67,
+      "id": 231,
+      "speaker": "Florence",
+      "speech": "Hello, Mr. Stratton. This is the Board speaking once more. We appreciate your patience during our brief pause. I haven't officially concluded the public hearing yet. I plan to propose a motion to do so momentarily. However, before proceeding, we want to offer one final opportunity for any further comments. If there is anything else you've considered or wish to add, Mr. Stratton, we're all ears.",
+      "start": 4345.904,
+      "type": "TX"
+    },
+    {
+      "end": 4388.598,
+      "id": 234,
+      "speaker": "Stratton",
+      "speech": "I'm not unwilling to turn the design around if anybody thinks that is better, but that's fine. I'm I'm quite happy to work with whatever might best benefit the environment. So let's leave it at that.",
+      "start": 4373.83,
+      "type": "TX"
+    },
+    {
+      "end": 4420.13,
+      "id": 235,
+      "speaker": "Florence",
+      "speech": "Okay, I would like to clarify that our role as the ZBA does not permit us to request you to make specific changes. Our authority is limited to either granting or denying variances.\n\nIf we happen to deny some variances, you may choose to revise your plan. You could then resubmit a new proposal, equipped with the insights you've gained from this hearing about potential objections to your current plan. However, I want to reiterate that our role is solely to grant or deny variances.",
+      "start": 4388.764,
+      "type": "TX"
+    },
+    {
+      "end": 4422.546,
+      "id": 236,
+      "speaker": "Stratton",
+      "speech": "Yes, I understand.",
+      "start": 4421.51,
+      "type": "TX"
+    },
+    {
+      "end": 4437,
+      "id": 237,
+      "speaker": "Florence",
+      "speech": "The Select Board is definitely there to provide assistance. If you have any inquiries, they are the individuals you can approach. You can ask them questions like, \"What would happen if I did this?\" or \"What would be your advice about this?\" They are present to listen to such queries.",
+      "start": 4422.648,
+      "type": "TX"
+    },
+    {
+      "end": 4441.11,
+      "id": 238,
+      "speaker": "Stratton",
+      "speech": "Yes, I met with them briefly and they were very helpful.",
+      "start": 4438.09,
+      "type": "TX"
+    },
+    {
+      "end": 4446.38,
+      "id": 239,
+      "speaker": "Florence",
+      "speech": "I see we have one other comment. Please go ahead, Ms. Mills.",
+      "start": 4441.45,
+      "type": "TX"
+    },
+    {
+      "end": 4491.366,
+      "id": 240,
+      "speaker": "Mills",
+      "speech": "My primary concern is what happens if we grant these variances. Mr. Stratton said  that there would be no lawn. I'm fine with that. However, it's important to remember that this is a permanent situation. The house will always be here. It's not as if there will be a condition attached to the property that prohibits lawns or tree cutting. \n\nHe has also offered to potentially make accommodations for additional stormwater treatment in the future, depending on how things work out. However, this doesn't necessarily mean these measures will be maintained indefinitely. Any concessions he makes now may not be upheld in the future. The area could potentially be turned into a lawn, which could be treated with fertilizers and other chemicals. I just wanted to acknowledge this possibility.",
+      "start": 4450.03,
+      "type": "TX"
+    },
+    {
+      "end": 4491.468,
+      "id": 241,
+      "speaker": "Florence",
+      "speech": "It's certainly true that the variances, any variances that we grant, go with the property and not the current owner. The variances are forever.",
+      "start": 4491.468,
+      "type": "TX"
+    },
+    {
+      "end": 4514.6539999999995,
+      "id": 355,
+      "speaker": "",
+      "speech": "I move that at 8:15 pm we close the Public Hearing and move on to the Deliberative Session. Do I have a second?",
+      "start": 4491.468,
+      "type": "TX"
+    },
+    {
+      "end": 4515.742,
+      "id": 242,
+      "speaker": "Carney",
+      "speech": "I second that.",
+      "start": 4514.772,
+      "type": "TX"
+    },
+    {
+      "end": 4517.434,
+      "id": 243,
+      "speaker": "Florence",
+      "speech": "All those in favor say aye.",
+      "start": 4515.796,
+      "type": "TX"
+    },
+    {
+      "end": 4517.9619999999995,
+      "id": 244,
+      "speaker": "All",
+      "speech": "Aye.",
+      "start": 4517.482,
+      "type": "TX"
+    },
+    {
+      "end": 4518.026,
+      "id": 245,
+      "speaker": "Florence",
+      "speech": "The motion passes 4-0.",
+      "start": 4518.026,
+      "type": "TX"
+    },
+    {
+      "id": 351,
+      "title": "Deliberative Session",
+      "type": "AG"
+    },
+    {
+      "end": 4550.62,
+      "id": 350,
+      "speaker": "Florence",
+      "speech": "We are currently in the Deliberative Session. I encourage all members of the public to stay. Mr. Stratton, I especially hope that you will remain with us. \n\nDuring this Deliberative Session, it's important for you to know that we will be considering all the evidence and the arguments that have been presented to us. Ultimately, we will be casting our votes on the variances that you've requested.   ",
+      "start": 4518.026,
+      "type": "TX"
+    },
+    {
+      "end": 4666.126,
+      "id": 249,
+      "speaker": "Carney",
+      "speech": "The 13ft issue is a major concern for me, it's like a thorn in my side. I find it challenging to comprehend why the 13ft is necessary. It's not just about understanding the degrees of wetlands, it's about recognizing that it is a wetland. Even as someone without a science background, I can clearly see this. It's as if someone arbitrarily drew a line there. It's clear as day, there's no room for doubt. However, in my opinion, 13ft is excessive.\n\nIf we were discussing a 50ft or 48ft requirement, that would be a different story. I could engage in a conversation about needing an additional 2ft. But this 13ft issue is a struggle for me. \n\nThe same goes for when we were out there measuring the supposed 70ft. It didn't even come close to 75ft near the leach field. Granted, measuring wasn't easy. I would have preferred to measure it straight, but the terrain was challenging, with ups and downs, trees, logs, and other obstacles. Despite this, I believe I added some extra feet to compensate, but we still fell significantly short. This discrepancy is another issue that I'm struggling with.",
+      "start": 4552.43,
+      "type": "TX"
+    },
+    {
+      "end": 4675.94,
+      "id": 254,
+      "speaker": "Florence",
+      "speech": "Just an aside, is there some kind of laser beam that you can measure horizontal distance? ",
+      "start": 4666.148,
+      "type": "TX"
+    },
+    {
+      "end": 4687.72,
+      "id": 256,
+      "speaker": "Carney",
+      "speech": "Maybe the Select Board will buy us one, or maybe the Conservation Commission will donate one to us.",
+      "start": 4677.75,
+      "type": "TX"
+    },
+    {
+      "end": 4693.32,
+      "id": 257,
+      "speaker": "Florence",
+      "speech": "We don't have a budget. Mr. Tapp, go ahead.",
+      "start": 4689.53,
+      "type": "TX"
+    },
+    {
+      "end": 4723.018,
+      "id": 258,
+      "speaker": "Tapp",
+      "speech": "I would like to add some clarification to what I was discussing earlier. I had inquired about the test pits that were approximately 70ft away. \n\nIf I was measuring from the back line and the area that was staked off, which I believe is the leach field, it seems that those test pits are quite close to that leach field.",
+      "start": 4694.01,
+      "type": "TX"
+    },
+    {
+      "end": 4737.734,
+      "id": 259,
+      "speaker": "Florence",
+      "speech": "You were measuring from the northeast sideline, moving in a southwesterly direction towards the leach field.",
+      "start": 4723.044,
+      "type": "TX"
+    },
+    {
+      "end": 4815.69,
+      "id": 262,
+      "speaker": "Tapp",
+      "speech": "Initially, I assumed it was a house because when I took measurements, there were only three pins. The dimensions I measured were approximately 35ft by 20ft or 25ft, which led me to believe it was indeed a house. This was the reason for my initial assumption.\n\nHowever, when I looked closer, I noticed that the edge of the house was about 70ft from where I was standing. If you subtract the distance, everything does seem to add up, assuming that my initial assumption was correct. Despite this, I'm still considering the deck as it is incredibly close to the house.\n\nThe proximity to the stream is unmistakable. When you walk the property, the sound of the stream is very evident. It is right there. I recall that on Sunday, the ground was quite wet. I even found myself sliding down the hill. The terrain slopes from the road downwards.\n\nThe ground becomes particularly slick when it rains. I remember thinking to myself, \"Wow, it gets really slippery here when it's wet.\" Ms. Marshall was correct in saying that the entire property is consistently damp.",
+      "start": 4737.852,
+      "type": "TX"
+    },
+    {
+      "end": 4826.66,
+      "id": 270,
+      "speaker": "Marshall",
+      "speech": "From what I could see, of course, it had been after the rain.  But it should be drained better than that, I think.",
+      "start": 4815.7699999999995,
+      "type": "TX"
+    },
+    {
+      "end": 4856.446,
+      "id": 273,
+      "speaker": "Tapp",
+      "speech": "Can he add anything else? Even if Mr. Stratton installs drainage or water filtration, I'm still concerned about the house being so close.",
+      "start": 4828.95,
+      "type": "TX"
+    },
+    {
+      "end": 4945.91,
+      "id": 275,
+      "speaker": "Carney",
+      "speech": "I recall having a conversation with a gentleman about the proximity of a property to the wetlands. This individual was accompanied by a designer, who had outlined plans for the area, including the variety of plant life to be introduced. They also discussed a proposed rain garden, designed to control water flow in the area. However, I have yet to see any of these plans come to fruition.\n\nWe can't dictate what people choose to do with their property, but I can't help but wonder if perhaps this land isn't suitable for construction. I'm not certain, but it's a thought that lingers in my mind. \n\nWhen a building is erected so close to a natural landscape like this, it's inevitable that the environment will be altered. The process of construction, by its very nature, tends to smooth out the terrain. Whether the finished property includes a lawn or not, the rate at which water flows across the land will be significantly increased. This could potentially disrupt the natural ecosystem and cause unforeseen issues.",
+      "start": 4856.468,
+      "type": "TX"
+    },
+    {
+      "end": 4955.53,
+      "id": 276,
+      "speaker": "Tapp",
+      "speech": "I was looking at the 30 x 30 parking area. I was trying to determine where it would be located. It's quite a large area. ",
+      "start": 4946.07,
+      "type": "TX"
+    },
+    {
+      "end": 4992.906,
+      "id": 278,
+      "speaker": "Carney",
+      "speech": "Water is constantly flowing off my property. It seems like all the water on the street ends up coming down my way. There's the edge of the street and that little 13-foot strip of land, which was actually an easement for the Light and Power company. \n\nIf my house happens to be on the side of the street with the poles, I'm the one who ends up with the easement. That's a situation that isn't likely to change. However, the real issue is the significant amount of water that continues to flow down my driveway.",
+      "start": 4955.6,
+      "type": "TX"
+    },
+    {
+      "end": 5170.03,
+      "id": 279,
+      "speaker": "Florence",
+      "speech": "I'm going to propose a line in the sand that I believe we will all agree on. Let's consider variance number one, the front setback of 40ft, or 37ft, or whatever it may be. Let's assume it's 40ft. This is not an issue for me. I'm not voting for it or anything of that nature yet, but I'm willing to remove it from our discussion right now.\n\nMoving on to variance number two, the well being less than 50ft from the right of way, it's a bit more contentious based on the comments we've received. However, I'm somewhat comfortable with this. The person who establishes the first well essentially has the rights. The next person, the neighbour, must then consider the 75ft rule. This is standard for any building lot, so I don't see this lot as being any different. Mr. Stratton will have the first choice of where to place his well, and the surrounding property owners will have to adapt, just like any other situation. I don't see this as a problem because any contamination of the well will be Mr. Stratton's issue, not anyone else's.\n\nThen there's the hypothetical variance number five that I suggested, which I believe is technically a violation. The test pit should have been inspected by a town representative. I see this as a matter between Mr. Stratton and the Select Board. Even if we were to grant a variance for this, what would it accomplish? A do-over? I don't see the point, and I don't believe the Select Board considers it a pressing issue. That's my take on it.\n\nSo, in my view, and I believe this is the consensus, I'm concentrating on the wetland setback of 13ft, where 50ft is required, and the septic system setback, which is less than the required 75ft. These are my main concerns. I'm okay with the other variances. We're not voting on it yet, but these are the issues that I'm focusing on, and I believe that's what everyone else here is saying too. I share the concerns about the close proximity to the wetland, and I'm uncertain how this can be resolved.",
+      "start": 4993.008,
+      "type": "TX"
+    },
+    {
+      "end": 5172.222,
+      "id": 284,
+      "speaker": "Carney",
+      "speech": "Well, that's not our job.",
+      "start": 5170.93,
+      "type": "TX"
+    },
+    {
+      "end": 5175.266,
+      "id": 285,
+      "speaker": "Florence",
+      "speech": "It's not our job. It's not our job to suggest, no.",
+      "start": 5172.276,
+      "type": "TX"
+    },
+    {
+      "end": 5179.678,
+      "id": 286,
+      "speaker": "Carney",
+      "speech": "That's why there are professionals in this world.",
+      "start": 5175.288,
+      "type": "TX"
+    },
+    {
+      "end": 5237.33,
+      "id": 287,
+      "speaker": "Florence",
+      "speech": "In my opinion, we have received some compelling testimonies expressing concern about construction activities so close to the wetlands in our town. I am seriously considering these testimonies as a member of the board. \n\nLet's focus on the five key prongs that we need to consider in this situation. Particularly, let's pay attention to the proximity of the proposed construction to the wetlands. The first two prongs are that any variances granted must not be contrary to public interest and that the spirit of the land use ordinance should be respected.\n\nConsidering these two aspects, I believe that building this close to the wetlands would be a violation.",
+      "start": 5179.784,
+      "type": "TX"
+    },
+    {
+      "end": 5245.05,
+      "id": 288,
+      "speaker": "Carney",
+      "speech": "Of course it is. The ordinance is clear.",
+      "start": 5237.67,
+      "type": "TX"
+    },
+    {
+      "end": 5260.538,
+      "id": 291,
+      "speaker": "Florence",
+      "speech": "Now, the fact that somebody needs a variance cannot be a reason for us to deny the variance. People come to us literally because what they want to do is contrary to the LUO.",
+      "start": 5246.03,
+      "type": "TX"
+    },
+    {
+      "end": 5261.28,
+      "id": 292,
+      "speaker": "Carney",
+      "speech": "Correct.",
+      "start": 5260.634,
+      "type": "TX"
+    },
+    {
+      "end": 5329.586,
+      "id": 293,
+      "speaker": "Florence",
+      "speech": "In my opinion, the variances are contrary to the public interest. Are we aiming to promote health and general welfare? If so, I believe that being in close proximity to the wetlands undermines this objective. \n\nFurthermore, we should be making adequate provisions for water and so on. However, I fear that we may face issues with the safe disposal of solid waste and sewage. \n\nAdditionally, we need to ensure the proper use of natural resources and meet other public requirements. Again, I see potential problems in this area. Therefore, in my view, these two critical aspects are not being adequately addressed. \n\nMr. Stratton suggests that substantial justice will be done, and I believe he raises a valid point. He argues that if the proposal is denied, the property will be rendered worthless. I may have paraphrased his words, but that's the essence of his argument, and I find it difficult to dispute. \n\nAs for the claim that the values of the surrounding properties will not be diminished, I find this a challenging assertion for us to confirm.",
+      "start": 5262.05,
+      "type": "TX"
+    },
+    {
+      "end": 5346.3,
+      "id": 294,
+      "speaker": "Carney",
+      "speech": "Not really. For all practical purposes, the values of neighboring properties will clearly not be affected to my mind.",
+      "start": 5329.608,
+      "type": "TX"
+    },
+    {
+      "end": 5372.818,
+      "id": 295,
+      "speaker": "Florence",
+      "speech": "Yes, in a proximate sense, this proposal will not affect the property values of any of his neighbors. In an ultimate sense, if the wetlands get polluted, then obviously it will affect people's property values. But I don't think that's what this prong number four is addressing. So it would be redundant to say that they will be diminished because we've already addressed the danger to the wetlands in prongs one and two.",
+      "start": 5346.83,
+      "type": "TX"
+    },
+    {
+      "end": 5455.63,
+      "id": 296,
+      "speaker": "",
+      "speech": "The fifth prong is known as the hardship prong. One aspect we can take into account is a self-created hardship. After doing some research, I believe there is a self-created hardship present here. I've come to this conclusion because the property was purchased in May of this year, and we noticed from the Zillow listing that it was clearly advertised as requiring wetland setbacks and so on. Thus, I believe there is a self-created hardship in this case.\n\nHowever, we cannot make a self-created hardship the determining factor. If it's the sole reason for rejecting the variance, then it won't hold up. But we've already identified the first and second prongs as reasons to deny the variance. And under the fifth prong, which addresses hardship, we can point out that there is a self-created hardship here.\n\nIt's undeniable that the land imposes a hardship on what the applicant wants to do with it, but that hardship is self-inflicted. The property was purchased in May with the full understanding that these issues were evident.",
+      "start": 5372.984,
+      "type": "TX"
+    },
+    {
+      "end": 5459.6,
+      "id": 298,
+      "speaker": "Carney",
+      "speech": "Yeah, I agree with that.",
+      "start": 5457.8099999999995,
+      "type": "TX"
+    },
+    {
+      "end": 5525.03,
+      "id": 299,
+      "speaker": "Florence",
+      "speech": "I'm thinking out loud here, considering the possibility of making a motion. The motion I have in mind would be to grant variances one and two and to disregard variance number five as irrelevant. This is the variance concerning the test pit that was not witnessed. \n\nI haven't formally proposed this motion yet, so there's no need to vote on it at this time. I'm merely sharing my thoughts. My intention behind this potential motion is to allow Mr. Stratton some flexibility to possibly devise an alternative plan. I'm not certain whether he will be able to come up with one, but that's my thought process behind this proposal. \n\nI'm interested to hear the board's thoughts on this potential motion. What do you all think about this proposal?",
+      "start": 5465.92,
+      "type": "TX"
+    },
+    {
+      "end": 5527.37,
+      "id": 304,
+      "speaker": "Carney",
+      "speech": "I agree with that. We already debated about the first few issues regarding the setback from the street into the well. Those are some aspects I can accommodate. However, I have some concerns about the 13ft and the 75ft. Please, remind me not to overlook the 75ft from the well, which is actually 60ft, but requires 70ft from the leach field.",
+      "start": 5527.37,
+      "type": "TX"
+    },
+    {
+      "end": 5590.84,
+      "id": 356,
+      "speaker": "Florence",
+      "speech": "In my mind, I'm considering two separate motions. The first one is to approve variances one and two and then to withdraw variance number five from consideration. The second motion is to deny variances number three and four. Ms. Marshall, I'd like to know your thoughts on this.",
+      "start": 5527.37,
+      "type": "TX"
+    },
+    {
+      "end": 5608.15,
+      "id": 306,
+      "speaker": "Marshall",
+      "speech": "If we approve two and deny two and one doesn't count, where do we stand?",
+      "start": 5600.84,
+      "type": "TX"
+    },
+    {
+      "end": 5671.22,
+      "id": 307,
+      "speaker": "Florence",
+      "speech": "Mr. Stratton would be able to build within 40ft of the road, even though the requirement is 50ft. He can also place his well within 50ft of the road. However, he is not allowed to build close to the wetland. \n\nThis isn't a two to two split. I am proposing two separate motions that could potentially pass unanimously. They could pass in any manner. My only thought is to be fair to Mr. Stratton and allow him some freedom to potentially come up with another plan.",
+      "start": 5610.84,
+      "type": "TX"
+    },
+    {
+      "end": 5718.26,
+      "id": 309,
+      "speaker": "",
+      "speech": "You may recall, Ms. Marshall and Mr. Carney, an earlier case where we chose to defer on two setback variances. Our primary focus at that time was on the building coverage variances. I won't mention the specific case by name at this moment, for the sake of the record, but it may be familiar to you. \n\nAt the time, it seemed like the right course of action. However, there were objections raised suggesting that we ought to make a decision. We cannot leave this meeting without making a decision; it's not acceptable to claim ignorance or indecision.",
+      "start": 5674.68,
+      "type": "TX"
+    },
+    {
+      "end": 5733.924,
+      "id": 310,
+      "speaker": "Tapp",
+      "speech": "You are making a decision with what you want to do, because if we did what you were talking about, it would either be a yes or no on certain ones. It would be it would still be making a decision.",
+      "start": 5718.76,
+      "type": "TX"
+    },
+    {
+      "end": 5774.26,
+      "id": 311,
+      "speaker": "Florence",
+      "speech": "I have no desire to repeat our actions from the previous case, where we declared the two setback variances as irrelevant. The reasoning behind this was that construction couldn't proceed without the coverage variances. As a result, we decided not to vote on the setback variances. \n\nLooking back, I'm not entirely convinced that was the correct decision. This is because we genuinely weren't concerned about the setback variances, but rather, we were bothered by the building coverage. \n\nSimilarly, in this current case, I believe we're fine with the front setback and the well location. Personally, I have no issues with these aspects. However, I do have reservations about the wetland proximity and the septic system. ",
+      "start": 5733.972,
+      "type": "TX"
+    },
+    {
+      "end": 5781.624,
+      "id": 315,
+      "speaker": "Marshall",
+      "speech": "I agree with all of that.   ",
+      "start": 5775,
+      "type": "TX"
+    },
+    {
+      "end": 5803.6,
+      "id": 319,
+      "speaker": "Florence",
+      "speech": "I move then that the board approve Mr. Stratton's variance, number one and number two. Do I have a second?",
+      "start": 5781.822,
+      "type": "TX"
+    },
+    {
+      "end": 5804.896,
+      "id": 320,
+      "speaker": "Carney",
+      "speech": "I'll second that.",
+      "start": 5803.67,
+      "type": "TX"
+    },
+    {
+      "end": 5806.256,
+      "id": 321,
+      "speaker": "Florence",
+      "speech": "All those in favor?",
+      "start": 5804.998,
+      "type": "TX"
+    },
+    {
+      "end": 5807.42,
+      "id": 322,
+      "speaker": "All",
+      "speech": "Aye.",
+      "start": 5806.438,
+      "type": "TX"
+    },
+    {
+      "end": 5834.1359999999995,
+      "id": 323,
+      "speaker": "Florence",
+      "speech": "That motion passes 4-0 and the front setback and the well setback variances are granted. \n\nI move now that the board deny the wetland setback of 13 foot where 50ft is required and also deny the variance asking for the septic system to be placed closer than 75ft to the wetland. Do I have a second?",
+      "start": 5807.58,
+      "type": "TX"
+    },
+    {
+      "end": 5835.144,
+      "id": 324,
+      "speaker": "Carney",
+      "speech": "I second that.",
+      "start": 5834.238,
+      "type": "TX"
+    },
+    {
+      "end": 5836.584,
+      "id": 325,
+      "speaker": "Florence",
+      "speech": "All those in favor?",
+      "start": 5835.262,
+      "type": "TX"
+    },
+    {
+      "end": 5837.3,
+      "id": 326,
+      "speaker": "All",
+      "speech": "Aye.",
+      "start": 5836.782,
+      "type": "TX"
+    },
+    {
+      "end": 5837.38,
+      "id": 327,
+      "speaker": "Florence",
+      "speech": "The motion passes 4-0, and those variances are denied.",
+      "start": 5837.38,
+      "type": "TX"
+    },
+    {
+      "end": 5837.38,
+      "id": 357,
+      "speaker": "",
+      "speech": "Mr. Stratton, we will ensure the minutes are published within five working days. Additionally, the minutes from the non-public session will be published within 72 hours. Also within the five working day period  a written Notice of Decision will be provided, detailing what has been granted, what has been denied, and the reasons for the denials.",
+      "start": 5837.38,
+      "type": "TX"
+    },
+    {
+      "end": 5912.784,
+      "id": 358,
+      "speaker": "",
+      "speech": "All that remains is for me to move to adjourn the meeting and thank everybody for attending, especially you, Mr. Stratton, for this hour and a half by the phone. If you have any questions, you should approach Ms. DeFosse. I don't know what her schedule is, but she should be in the office tomorrow, as far as I understand. If you've got any questions, please talk to her. I move then that at 8:35 pm we adjourn this meeting. Do I have a second?",
+      "start": 5837.38,
+      "type": "TX"
+    },
+    {
+      "end": 5913.276,
+      "id": 328,
+      "speaker": "Tapp",
+      "speech": "I'll second that.",
+      "start": 5912.902,
+      "type": "TX"
+    },
+    {
+      "end": 5915.4039999999995,
+      "id": 329,
+      "speaker": "Florence",
+      "speech": "All those in favor say aye.",
+      "start": 5913.308,
+      "type": "TX"
+    },
+    {
+      "end": 5915.756,
+      "id": 330,
+      "speaker": "All",
+      "speech": "Aye.",
+      "start": 5915.452,
+      "type": "TX"
+    },
+    {
+      "end": 5922.87,
+      "id": 331,
+      "speaker": "Florence",
+      "speech": "The motion passes 4-0, and we are adjourned. Thank you very much, Mr. Stratton. ",
+      "start": 5915.788,
+      "type": "TX"
+    },
+    {
+      "end": 5926.704,
+      "id": 333,
+      "speaker": "Stratton",
+      "speech": "Thank you all for your careful consideration of my case.",
+      "start": 5923.4,
+      "type": "TX"
+    },
+    {
+      "end": 5959.79,
+      "id": 334,
+      "speaker": "Florence",
+      "speech": "I appreciate it. Thank you very much. Good night.    ",
+      "start": 5926.762,
+      "type": "TX"
+    }
+  ],
+  "visitors": [
+    "Arin Mills - Conservation Commision",
+    "Chris Stratton - Applicant (by phone)",
+    "Jed Schwartz - Conservation Commision",
+    "Nan Schwartz - Conservation Commision"
+  ],
+  "speakerUpdateButton": 1,
+  "transcriptionName": null,
+  "transcriptionStart": "2023-10-27T11:14:20.921Z"
+}

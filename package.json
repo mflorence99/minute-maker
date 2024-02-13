@@ -25,8 +25,8 @@
     "fix:speaker": "npm run build:bin && node bin/out/fix-speaker.mjs",
     "fix:timestamps": "npm run build:bin && node bin/out/fix-timestamps.mjs",
     "fix:txid": "npm run build:bin && node bin/out/fix-txid.mjs",
-    "postinstall": "rm -rf node_modules/@types/rimraf node_modules/@types/cacheable-request",
     "lint": "npm run eslint && npm run prettier && npm run stylelint",
+    "postinstall": "rm -rf node_modules/@types/glob node_modules/@types/rimraf node_modules/@types/cacheable-request",
     "prettier": "prettier --write .",
     "serve:main": "npm run build:main -- --incremental && electron .",
     "serve:renderer": "ng serve",
@@ -115,7 +115,7 @@
     "jest": "^29",
     "jest-extended": "^4",
     "jest-junit": "^16",
-    "jest-preset-angular": "^13",
+    "jest-preset-angular": "^14",
     "marked": "^10",
     "material-design-icons": "^3",
     "ng-mocks": "^14",
@@ -139,6 +139,6 @@
     "typescript": "^5",
     "uuid": "^9",
     "wavesurfer.js": "^7",
-    "zone.js": "~0.14.2"
+    "zone.js": "~0.14.3"
   }
 }

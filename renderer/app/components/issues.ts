@@ -1,18 +1,19 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { Input } from '@angular/core';
 import { Issue } from '#mm/state/issues';
 import { Output } from '@angular/core';
+
+import { input } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-issues',
   template: `
-    @if (issues.length > 0) {
+    @if (issues().length > 0) {
       <table>
         <tbody>
-          @for (issue of issues; track ix; let ix = $index) {
+          @for (issue of issues(); track ix; let ix = $index) {
             <tr
               (click)="onSelected(issue)"
               class="issue"
@@ -48,9 +49,9 @@ import { Output } from '@angular/core';
   ]
 })
 export class IssuesComponent {
-  @Input({ required: true }) issues: Issue[];
-
   @Output() selected = new EventEmitter<Issue>();
+
+  issues = input.required<Issue[]>();
 
   onSelected(issue: Issue): void {
     this.selected.emit(issue);

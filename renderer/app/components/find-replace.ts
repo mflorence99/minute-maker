@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { Directive } from '@angular/core';
 import { ElementRef } from '@angular/core';
-import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { MinutesState } from '#mm/state/minutes';
 import { MinutesStateModel } from '#mm/state/minutes';
@@ -14,7 +13,9 @@ import { Store } from '@ngxs/store';
 import { Transcription } from '#mm/common';
 import { UpdateFindReplace } from '#mm/state/minutes';
 
+import { effect } from '@angular/core';
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
 
 // 🔥 1. this ONLY works for transcriptions!
 //    2. replace is not yet implemented (and may never be)
@@ -157,27 +158,27 @@ export class FindReplaceComponent {
     'mm-transcription input[mmFindReplaceMatch], mm-transcription textarea[mmFindReplaceMatch]'
 })
 export class FindReplaceMatchDirective {
-  @Input({ required: true }) mmFindReplaceMatchFld: string;
-  @Input({ required: true }) mmFindReplaceMatchID: number;
+  mmFindReplaceMatch = input<FindReplaceMatch>();
+  mmFindReplaceMatchFld = input.required<string>();
+  mmFindReplaceMatchID = input.required<number>();
 
-  #mmFindReplaceMatch: FindReplaceMatch;
   #textarea = inject(ElementRef).nativeElement; // 👈 textarea or input
 
-  @Input() get mmFindReplaceMatch(): FindReplaceMatch {
-    return this.#mmFindReplaceMatch;
-  }
-
-  set mmFindReplaceMatch(match: FindReplaceMatch) {
-    this.#mmFindReplaceMatch = match;
-    if (
-      match?.id === this.mmFindReplaceMatchID &&
-      match?.fld === this.mmFindReplaceMatchFld
-    ) {
-      // 👇 we need to let any scroll / hydrate take place first
-      setTimeout(() => {
-        this.#textarea.setSelectionRange(match.start, match.end);
-        this.#textarea.focus();
-      }, 0);
-    }
+  constructor() {
+    effect(() => {
+      if (
+        this.mmFindReplaceMatch()?.id === this.mmFindReplaceMatchID() &&
+        this.mmFindReplaceMatch()?.fld === this.mmFindReplaceMatchFld()
+      ) {
+        // 👇 we need to let any scroll / hydrate take place first
+        setTimeout(() => {
+          this.#textarea.setSelectionRange(
+            this.mmFindReplaceMatch().start,
+            this.mmFindReplaceMatch().end
+          );
+          this.#textarea.focus();
+        }, 0);
+      }
+    });
   }
 }

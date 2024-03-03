@@ -4,17 +4,16 @@ import { ConfigStateModel } from '#mm/state/config';
 import { ControllerService } from '#mm/services/controller';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
-import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { SetMinutes } from '#mm/state/minutes';
-import { SimpleChanges } from '@angular/core';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { UpdateChanges as UpdateConfigChanges } from '#mm/state/config';
 
+import { effect } from '@angular/core';
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,9 +21,9 @@ import { inject } from '@angular/core';
   template: `
     <form [formGroup]="badgesForm">
       <article class="badges">
-        @for (badge of minutes.badges; track ix; let ix = $index) {
+        @for (badge of minutes().badges; track ix; let ix = $index) {
           <article
-            [ngClass]="{ badge: true, multi: minutes.badges.length > 1 }">
+            [ngClass]="{ badge: true, multi: minutes().badges.length > 1 }">
             <img src="data:image/png;base64,{{ badge }}" />
             <tui-radio [item]="ix" formControlName="badgeNum" size="l" />
           </article>
@@ -41,10 +40,10 @@ import { inject } from '@angular/core';
       </article>
     </form>
 
-    <tui-loader [showLoader]="status.working?.on === 'badge'">
+    <tui-loader [showLoader]="status().working?.on === 'badge'">
       <button
         (click)="generateBadges()"
-        [appearance]="status.working?.on === 'badge' ? 'mono' : 'primary'"
+        [appearance]="status().working?.on === 'badge' ? 'mono' : 'primary'"
         size="m"
         tuiButton>
         Generate Badges
@@ -91,35 +90,38 @@ import { inject } from '@angular/core';
     `
   ]
 })
-export class BadgesComponent implements OnChanges, OnInit {
-  @Input({ required: true }) config: ConfigStateModel;
-  @Input({ required: true }) minutes: Minutes;
-  @Input({ required: true }) status: StatusStateModel;
-
+export class BadgesComponent implements OnInit {
   badgesForm: FormGroup;
+  config = input.required<ConfigStateModel>();
+  minutes = input.required<Minutes>();
+  status = input.required<StatusStateModel>();
 
   #controller = inject(ControllerService);
   #store = inject(Store);
+
+  constructor() {
+    // 👇 watch for changes in inputs and update accordingly
+    effect(() => {
+      this.badgesForm?.patchValue(
+        { ...this.config(), ...this.minutes() },
+        { emitEvent: false }
+      );
+    });
+  }
 
   generateBadges(): void {
     this.#controller.generateBadges();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (Object.values(changes).some((change) => !change.firstChange))
-      this.badgesForm.patchValue(
-        { ...this.config, ...this.minutes },
-        { emitEvent: false }
-      );
-  }
-
   ngOnInit(): void {
     // 👇 create the form
     this.badgesForm = new FormGroup({
-      badgeGenerationPrompt: new FormControl(this.config.badgeGenerationPrompt),
-      badgeNum: new FormControl(this.minutes.badgeNum)
+      badgeGenerationPrompt: new FormControl(
+        this.config().badgeGenerationPrompt
+      ),
+      badgeNum: new FormControl(this.minutes().badgeNum)
     });
-    // 👇 watch for changes and update accordingly
+    // 👇 watch for changes in form and update accordingly
     this.badgesForm.valueChanges.subscribe((changes) => {
       this.#store.dispatch([
         new UpdateConfigChanges({

@@ -1,20 +1,19 @@
 import { Directive } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { HostListener } from '@angular/core';
-import { Input } from '@angular/core';
-import { OnChanges } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { SimpleChanges } from '@angular/core';
 import { WINDOW } from '@ng-web-apis/common';
 
+import { effect } from '@angular/core';
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
 
 @Directive({
   selector: 'input[mmHighlight], textarea[mmHighlight]'
 })
-export class HighlightDirective implements OnChanges, OnDestroy, OnInit {
-  @Input() mmHighlight: string;
+export class HighlightDirective implements OnDestroy, OnInit {
+  mmHighlight = input<string>();
 
   #observer: ResizeObserver;
   #textarea = inject(ElementRef).nativeElement; // 👈 textarea or input
@@ -23,15 +22,13 @@ export class HighlightDirective implements OnChanges, OnDestroy, OnInit {
 
   constructor() {
     this.#observer = this.#makeResizeObserver();
+    effect(() => {
+      this.#underlay.innerHTML = this.#toHTML(this.#textarea.value);
+    });
   }
 
   @HostListener('input') onInput(): void {
     this.#underlay.innerHTML = this.#toHTML(this.#textarea.value);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (Object.values(changes).some((change) => !change.firstChange))
-      this.#underlay.innerHTML = this.#toHTML(this.#textarea.value);
   }
 
   ngOnDestroy(): void {
@@ -80,13 +77,13 @@ export class HighlightDirective implements OnChanges, OnDestroy, OnInit {
 
   #toHTML(text: string): string {
     let html = text.replaceAll('\n', '<br />');
-    if (this.mmHighlight) {
+    if (this.mmHighlight()) {
       const regex = new RegExp(
         // 🔥 really need to DRY this!
-        this.mmHighlight.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&'),
+        this.mmHighlight().replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&'),
         'gi'
       );
-      html = html.replaceAll(regex, `<mark>${this.mmHighlight}</mark>`);
+      html = html.replaceAll(regex, `<mark>${this.mmHighlight()}</mark>`);
     }
     return html;
   }

@@ -179,27 +179,27 @@ export class MenuService {
 
   #getInsertableIndex(element: HTMLElement): number {
     const insertable = element?.['mmInsertable'] as InsertableDirective;
-    return Number(insertable?.mmInsertable ?? NaN);
+    return Number(insertable?.mmInsertable() ?? NaN);
   }
 
   #getJoinableIndex(element: HTMLElement): number {
     const joinable = element?.['mmJoinable'] as JoinableDirective;
-    return Number(joinable?.mmJoinable ?? NaN);
+    return Number(joinable?.mmJoinable() ?? NaN);
   }
 
   #getRemovableIndex(element: HTMLElement): number {
     const removable = element?.['mmRemovable'] as RemovableDirective;
-    return Number(removable?.mmRemovable ?? NaN);
+    return Number(removable?.mmRemovable() ?? NaN);
   }
 
   #getRephraseableIndex(element: HTMLElement): number {
     const rephraseable = element?.['mmRephraseable'] as RephraseableDirective;
-    return Number(rephraseable?.mmRephraseable ?? NaN);
+    return Number(rephraseable?.mmRephraseable() ?? NaN);
   }
 
   #getSplittableIndex(element: HTMLElement): number {
     const splittable = element?.['mmSplittable'] as SplittableDirective;
-    return Number(splittable?.mmSplittable ?? NaN);
+    return Number(splittable?.mmSplittable() ?? NaN);
   }
 
   #monitorElementState(): void {

@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ControllerService } from '#mm/services/controller';
 import { EventEmitter } from '@angular/core';
-import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Output } from '@angular/core';
 import { StatusStateModel } from '#mm/state/status';
@@ -11,16 +10,17 @@ import { SummaryStrategy } from '#mm/common';
 import { UpdateSummary } from '#mm/state/minutes';
 
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-summary',
   template: `
-    @if (minutes.summary.length > 0) {
+    @if (minutes().summary.length > 0) {
       <!-- 🔥 breathing room for hydration  -->
       <table style="margin-bottom: 50vh">
         <tbody>
-          @for (summ of minutes.summary; track ix; let ix = $index) {
+          @for (summ of minutes().summary; track ix; let ix = $index) {
             <tr
               #row="hydrated"
               (click)="selected.emit((summIndex = ix))"
@@ -69,10 +69,12 @@ import { inject } from '@angular/core';
           menu.
         </p>
 
-        <tui-loader [showLoader]="status.working?.on === 'summary'">
+        <tui-loader [showLoader]="status().working?.on === 'summary'">
           <button
             (click)="summarizeMinutes('bullets')"
-            [appearance]="status.working?.on === 'summary' ? 'mono' : 'primary'"
+            [appearance]="
+              status().working?.on === 'summary' ? 'mono' : 'primary'
+            "
             size="m"
             tuiButton>
             Summarize Transcription into Bullet Points
@@ -80,7 +82,9 @@ import { inject } from '@angular/core';
 
           <button
             (click)="summarizeMinutes('paragraphs')"
-            [appearance]="status.working?.on === 'summary' ? 'mono' : 'accent'"
+            [appearance]="
+              status().working?.on === 'summary' ? 'mono' : 'accent'
+            "
             size="m"
             tuiButton>
             Summarize Transcription into Paragraphs
@@ -91,15 +95,10 @@ import { inject } from '@angular/core';
   `
 })
 export class SummaryComponent {
-  /* eslint-disable @typescript-eslint/member-ordering */
-
-  @Input({ required: true }) minutes: Minutes;
-  @Input({ required: true }) status: StatusStateModel;
-
   @Output() selected = new EventEmitter<number>();
 
-  /* eslint-enable @typescript-eslint/member-ordering */
-
+  minutes = input<Minutes>();
+  status = input<StatusStateModel>();
   summIndex = 0;
 
   #controller = inject(ControllerService);

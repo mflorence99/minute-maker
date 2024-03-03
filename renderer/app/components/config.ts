@@ -3,15 +3,14 @@ import { Component } from '@angular/core';
 import { ConfigStateModel } from '#mm/state/config';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { Input } from '@angular/core';
-import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { SimpleChanges } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { UpdateChanges } from '#mm/state/config';
 import { Validators } from '@angular/forms';
 
+import { effect } from '@angular/core';
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
 import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
 
 @Component({
@@ -151,16 +150,18 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
     </form>
   `
 })
-export class ConfigComponent implements OnChanges, OnInit {
-  @Input({ required: true }) config: ConfigStateModel;
+export class ConfigComponent implements OnInit {
+  config = input.required<ConfigStateModel>();
 
   configForm: FormGroup;
 
   #store = inject(Store);
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (Object.values(changes).some((change) => !change.firstChange))
-      this.configForm.setValue({ ...this.config }, { emitEvent: false });
+  constructor() {
+    // 👇 watch for changes in inputs and update accordingly
+    effect(() => {
+      this.configForm?.setValue({ ...this.config() }, { emitEvent: false });
+    });
   }
 
   ngOnInit(): void {
@@ -172,44 +173,50 @@ export class ConfigComponent implements OnChanges, OnInit {
     // 👇 create the form
     this.configForm = new FormGroup({
       assemblyaiCredentials: new FormControl(
-        this.config.assemblyaiCredentials,
+        this.config().assemblyaiCredentials,
         [Validators.required, credentialsValidator]
       ),
-      badgeGenerationPrompt: new FormControl(this.config.badgeGenerationPrompt),
-      bucketName: new FormControl(this.config.bucketName, [
+      badgeGenerationPrompt: new FormControl(
+        this.config().badgeGenerationPrompt
+      ),
+      bucketName: new FormControl(this.config().bucketName, [
         Validators.required,
         credentialsValidator
       ]),
-      googleCredentials: new FormControl(this.config.googleCredentials, [
+      googleCredentials: new FormControl(this.config().googleCredentials, [
         Validators.required,
         credentialsValidator
       ]),
-      openaiCredentials: new FormControl(this.config.openaiCredentials, [
+      openaiCredentials: new FormControl(this.config().openaiCredentials, [
         Validators.required,
         credentialsValidator
       ]),
       openaiChatCompletionModel: new FormControl(
-        this.config.openaiChatCompletionModel
+        this.config().openaiChatCompletionModel
       ),
-      openaiChatTemperature: new FormControl(this.config.openaiChatTemperature),
+      openaiChatTemperature: new FormControl(
+        this.config().openaiChatTemperature
+      ),
       openaiImageGenerationModel: new FormControl(
-        this.config.openaiImageGenerationModel
+        this.config().openaiImageGenerationModel
       ),
       rephraseStrategyPrompts: new FormGroup({
-        accuracy: new FormControl(this.config.rephraseStrategyPrompts.accuracy),
-        brevity: new FormControl(this.config.rephraseStrategyPrompts.brevity)
+        accuracy: new FormControl(
+          this.config().rephraseStrategyPrompts.accuracy
+        ),
+        brevity: new FormControl(this.config().rephraseStrategyPrompts.brevity)
       }),
       summaryStrategyPrompts: new FormGroup({
-        bullets: new FormControl(this.config.summaryStrategyPrompts.bullets),
+        bullets: new FormControl(this.config().summaryStrategyPrompts.bullets),
         paragraphs: new FormControl(
-          this.config.summaryStrategyPrompts.paragraphs
+          this.config().summaryStrategyPrompts.paragraphs
         )
       }),
-      transcriptionImpl: new FormControl(this.config.transcriptionImpl)
+      transcriptionImpl: new FormControl(this.config().transcriptionImpl)
     });
     // 👇 mark the critical required fields invalid right away
     tuiMarkControlAsTouchedAndValidate(this.configForm);
-    // 👇 watch for changes and update accordingly
+    // 👇 watch for changes in form and update accordingly
     this.configForm.valueChanges.subscribe((changes) =>
       this.#store.dispatch(new UpdateChanges(changes))
     );

@@ -3,19 +3,19 @@ import { Component } from '@angular/core';
 import { ConfigStateModel } from '#mm/state/config';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ExporterService } from '#mm/services/exporter';
-import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
-import { OnChanges } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 
+import { computed } from '@angular/core';
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-preview',
   template: `
     <article>
-      <iframe [attr.srcdoc]="rendering"></iframe>
+      <iframe [attr.srcdoc]="rendering()"></iframe>
       <button
         (click)="export()"
         appearance="mono"
@@ -42,21 +42,18 @@ import { inject } from '@angular/core';
     `
   ]
 })
-export class PreviewComponent implements OnChanges {
-  @Input({ required: true }) config: ConfigStateModel;
-  @Input({ required: true }) minutes: Minutes;
-
-  rendering: SafeHtml;
+export class PreviewComponent {
+  config = input.required<ConfigStateModel>();
+  minutes = input.required<Minutes>();
+  rendering = computed<SafeHtml>(() => {
+    const raw = this.#exporter.render(this.config(), this.minutes(), 0.8);
+    return this.#sanitizer.bypassSecurityTrustHtml(raw);
+  });
 
   #exporter = inject(ExporterService);
   #sanitizer = inject(DomSanitizer);
 
   export(): void {
-    this.#exporter.export(this.config, this.minutes);
-  }
-
-  ngOnChanges(): void {
-    const raw = this.#exporter.render(this.config, this.minutes, 0.8);
-    this.rendering = this.#sanitizer.bypassSecurityTrustHtml(raw);
+    this.#exporter.export(this.config(), this.minutes());
   }
 }

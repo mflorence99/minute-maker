@@ -38,7 +38,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
               [mmHydrated]="'TX' + tx.id"
               [ngClass]="{ selected: tx.id === currentTx?.id }"
               [id]="'TX' + tx.id">
-              @if (tx.type === 'AG' && row.isHydrated) {
+              @if (tx.type === 'AG' && row.isHydrated()) {
                 <td colspan="3" width="100%">
                   <textarea
                     #agendaItemTitle
@@ -60,7 +60,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                     wrap="soft"></textarea>
                 </td>
               }
-              @if (tx.type === 'TX' && row.isHydrated) {
+              @if (tx.type === 'TX' && row.isHydrated()) {
                 <td
                   style="font-family: monospace; font-size: smaller; padding-top: 0.15rem">
                   {{

@@ -2,43 +2,42 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Directive } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { HydratorDirective } from '#mm/directives//hydrator';
-import { Input } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { Signal } from '@angular/core';
+import { WritableSignal } from '@angular/core';
 
+import { effect } from '@angular/core';
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
+import { signal } from '@angular/core';
 
 @Directive({
   exportAs: 'hydrated',
   selector: '[mmHydrated]'
 })
 export class HydratedDirective implements Hydrateable, OnDestroy, OnInit {
-  @Input() hydratedHeight = 200;
-  @Input({ required: true }) mmHydrated: string;
+  hydratedHeight = input<number>(200);
+  isHydrated = signal<boolean>(false);
+  mmHydrated = input.required<string>();
 
   #cdf = inject(ChangeDetectorRef);
   #host = inject(ElementRef);
   #hydrator = inject(HydratorDirective);
-  #isHydrated = false;
 
-  get isHydrated(): boolean {
-    return this.#isHydrated;
-  }
-
-  set isHydrated(isHydrated: boolean) {
-    if (this.#isHydrated !== isHydrated) {
-      this.#isHydrated = isHydrated;
+  constructor() {
+    effect(() => {
       const element = this.#host.nativeElement;
       // 👇 if hydrating, let the element take its natural height
-      if (this.isHydrated) element.style = '';
+      if (this.isHydrated()) element.style = '';
       // 👇
       else {
-        const height = element.offsetHeight || this.hydratedHeight;
+        const height = element.offsetHeight || this.hydratedHeight();
         element.style = `height: ${height}px`;
       }
       // 👇 force Angular to redraw
       this.#cdf.markForCheck();
-    }
+    });
   }
 
   ngOnDestroy(): void {
@@ -51,8 +50,9 @@ export class HydratedDirective implements Hydrateable, OnDestroy, OnInit {
     const element = this.#host.nativeElement;
     // 👇 set initial height for unhydrated elements
     //    just an approximation for the scrollbars to work!
-    if (!this.isHydrated) element.style = `height: ${this.hydratedHeight}px`;
-    // 👇 back pointer to firective for use by hydrator
+    if (!this.isHydrated())
+      element.style = `height: ${this.hydratedHeight()}px`;
+    // 👇 back pointer to directive for use by hydrator
     element['mmHydrated'] = this;
     // 👇 add element to hydrateables
     this.#hydrator.registerHydrateable(element);
@@ -62,6 +62,6 @@ export class HydratedDirective implements Hydrateable, OnDestroy, OnInit {
 // 👇 avoid circular dependency in HydratorDirective
 
 export interface Hydrateable {
-  isHydrated: boolean;
-  mmHydrated: string;
+  isHydrated: WritableSignal<boolean>;
+  mmHydrated: Signal<string>;
 }

@@ -1,10 +1,10 @@
 import { Directive } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { Hydrateable } from '#mm/directives//hydrated';
-import { Input } from '@angular/core';
 import { OnInit } from '@angular/core';
 
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
 
 import isDev from '#mm/is-dev';
 
@@ -12,8 +12,8 @@ import isDev from '#mm/is-dev';
   selector: '[mmHydrator]'
 })
 export class HydratorDirective implements OnInit {
-  @Input() hydratorMargin = 100;
-  @Input() hydratorTrace = isDev;
+  hydratorMargin = input<number>(100);
+  hydratorTrace = input<boolean>(isDev);
 
   #host = inject(ElementRef);
   #observer: IntersectionObserver;
@@ -21,7 +21,7 @@ export class HydratorDirective implements OnInit {
   ngOnInit(): void {
     this.#observer = new IntersectionObserver(this.#callback.bind(this), {
       root: this.#host.nativeElement,
-      rootMargin: `${this.hydratorMargin}px`,
+      rootMargin: `${this.hydratorMargin()}px`,
       threshold: [0]
     });
   }
@@ -42,12 +42,12 @@ export class HydratorDirective implements OnInit {
       const hydrateable: Hydrateable = entry.target['mmHydrated'];
       if (hydrateable) {
         const isNow = entry.isIntersecting;
-        const was = hydrateable.isHydrated;
+        const was = hydrateable.isHydrated();
         if (was !== isNow) {
-          if (this.hydratorTrace) {
-            hydrateable.isHydrated = isNow;
+          if (this.hydratorTrace()) {
+            hydrateable.isHydrated.set(isNow);
             // 👇 trace hydration
-            const uuid = hydrateable.mmHydrated;
+            const uuid = hydrateable.mmHydrated();
             if (isNow)
               console.log(
                 `%cHydrate %c${uuid}`,

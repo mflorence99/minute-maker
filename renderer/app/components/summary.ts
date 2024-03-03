@@ -26,7 +26,7 @@ import { input } from '@angular/core';
               (click)="selected.emit((summIndex = ix))"
               [mmHydrated]="'IX' + ix"
               [ngClass]="{ selected: ix === summIndex }">
-              @if (row.isHydrated) {
+              @if (row.isHydrated()) {
                 <td width="100%">
                   @if (summ.section) {
                     <article class="heading">

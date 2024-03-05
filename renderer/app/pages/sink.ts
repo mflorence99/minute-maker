@@ -21,6 +21,10 @@ import { defaultStatus } from '#mm/state/status';
   template: ``
 })
 export class SinkComponent {
+  // 👇 all these inputs are nicely resolved from Observables
+  //    via the async pipe, so no need for another level of
+  //    indirection via signals
+
   @Input() app: AppStateModel = defaultApp();
   @Input() componentState: ComponentStateModel = defaultComponentState();
   @Input() config: ConfigStateModel = defaultConfig();

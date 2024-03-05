@@ -82,20 +82,7 @@ import dayjs from 'dayjs';
             (timeupdate)="onTimeUpdate($event)"
             [audioFile]="mm.minutes.audio.url"
             [options]="{ barGap: 2, barRadius: 2, barWidth: 2 }"
-            class="wavesurfer">
-            <mm-wavesurfer-regions>
-              <!-- 👇 only one region that we update -->
-              @if (currentTx) {
-                <mm-wavesurfer-region
-                  [params]="{
-                    color: 'rgba(100, 100, 100, 0.5)',
-                    end: currentTx.end,
-                    id: 'singleton',
-                    start: currentTx.start
-                  }" />
-              }
-            </mm-wavesurfer-regions>
-          </mm-wavesurfer>
+            class="wavesurfer"></mm-wavesurfer>
 
           <!-- 🟫 NOT CURRENTLY TRANSCRIBING -->
           @if (mm.status.working?.on !== 'transcription') {

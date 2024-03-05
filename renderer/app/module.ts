@@ -85,8 +85,6 @@ import { TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiThemeNightModule } from '@taiga-ui/core';
 import { UndoState } from '#mm/state/undo';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
-import { WaveSurferRegionComponent } from '#mm/components/wavesurfer-region';
-import { WaveSurferRegionsComponent } from '#mm/components/wavesurfer-regions';
 import { WaveSurferTimelineComponent } from '#mm/components/wavesurfer-timeline';
 
 import isDev from '#mm/is-dev';
@@ -102,8 +100,6 @@ const COMPONENTS = [
   SummaryComponent,
   TranscriptionComponent,
   WaveSurferComponent,
-  WaveSurferRegionComponent,
-  WaveSurferRegionsComponent,
   WaveSurferTimelineComponent
 ];
 

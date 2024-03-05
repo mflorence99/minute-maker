@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { GenericPlugin } from 'wavesurfer.js/dist/base-plugin';
-import { Input } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Output } from '@angular/core';
@@ -13,6 +12,7 @@ import { WaveSurferPluginComponent } from '#mm/components/wavesurfer-plugin';
 
 import { forwardRef } from '@angular/core';
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
 import { kebabasize } from '#mm/utils';
 
 import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline';
@@ -31,10 +31,9 @@ import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline';
 export class WaveSurferTimelineComponent
   implements OnDestroy, OnInit, WaveSurferPlugin
 {
-  @Input() options: Partial<TimelinePluginOptions> = {};
-
   @Output() ready = new WatchableEventEmitter<void>();
 
+  options = input<Partial<TimelinePluginOptions>>({});
   plugin: TimelinePlugin;
 
   #host = inject(ElementRef);
@@ -51,7 +50,7 @@ export class WaveSurferTimelineComponent
     // 👇 create the plugin
     this.plugin = TimelinePlugin.create({
       container: this.#host.nativeElement,
-      ...this.options
+      ...this.options()
     });
     // 👇 bind any events
     Object.getOwnPropertyNames(this)

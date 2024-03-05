@@ -8,7 +8,6 @@ import { ComponentStateModel } from '#mm/state/component';
 import { ContentChildren } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { Input } from '@angular/core';
 import { OnDestroy } from '@angular/core';
 import { Output } from '@angular/core';
 import { QueryList } from '@angular/core';
@@ -22,7 +21,9 @@ import { WaveSurferPlugin } from '#mm/components/wavesurfer-plugin';
 import { WaveSurferPluginComponent } from '#mm/components/wavesurfer-plugin';
 import { Working } from '#mm/state/status';
 
+import { effect } from '@angular/core';
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
 import { kebabasize } from '#mm/utils';
 
 import deepCopy from 'deep-copy';
@@ -133,11 +134,11 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
 
   /* eslint-enable @typescript-eslint/member-ordering */
 
+  audioFile = input<string>();
   componentState: ComponentStateModel;
+  options = input<Partial<WaveSurferOptions>>({});
   wavesurfer: WaveSurfer;
 
-  #audioFile: string;
-  #options: Partial<WaveSurferOptions> = {};
   #store = inject(Store);
 
   constructor() {
@@ -145,24 +146,14 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     this.componentState = deepCopy(
       this.#store.selectSnapshot<ComponentStateModel>(ComponentState)
     );
-  }
-
-  @Input() get audioFile(): string {
-    return this.#audioFile;
-  }
-
-  @Input() get options(): Partial<WaveSurferOptions> {
-    return this.#options;
-  }
-
-  set audioFile(audioFile: string) {
-    this.#audioFile = audioFile;
-    if (this.wavesurfer && this.#audioFile) this.#loadAudioFile();
-  }
-
-  set options(options: Partial<WaveSurferOptions>) {
-    this.#options = options;
-    if (this.wavesurfer) this.wavesurfer.setOptions(this.#options);
+    // 👇 handle changes in audioFile
+    effect(() => {
+      if (this.wavesurfer && this.audioFile()) this.#loadAudioFile();
+    });
+    // 👇 handle changes in options
+    effect(() => {
+      if (this.wavesurfer) this.wavesurfer.setOptions(this.options());
+    });
   }
 
   // 👇 ngAfterViewInit FOLLOWS ngAfterContentInit
@@ -177,10 +168,8 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
       plugins: this.plugins$.map((plugin: WaveSurferPlugin) => plugin.create()),
       progressColor: '#c0c0c0',
       waveColor: '#8bc34a', // 👈 --tui-accent
-      ...this.options
+      ...this.options()
     });
-    // 👇 load the audio file
-    if (this.#audioFile) this.#loadAudioFile();
     // 👇 bind any events
     Object.getOwnPropertyNames(this)
       .filter(
@@ -229,6 +218,6 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
       // 👇 tell the world we're loaded
       this.audioFileLoaded.emit(audio);
     });
-    this.wavesurfer.load(this.#audioFile);
+    this.wavesurfer.load(this.audioFile());
   }
 }

@@ -5,7 +5,6 @@ import { ControllerService } from '#mm/services/controller';
 import { DialogService } from '#mm/services/dialog';
 import { EventEmitter } from '@angular/core';
 import { FindReplaceMatch } from '#mm/components/find-replace';
-import { Input } from '@angular/core';
 import { Minutes } from '#mm/common';
 import { Output } from '@angular/core';
 import { SetMinutes } from '#mm/state/minutes';
@@ -17,7 +16,9 @@ import { UpdateSpeakers } from '#mm/state/minutes';
 import { UpdateTranscription } from '#mm/state/minutes';
 import { WINDOW } from '@ng-web-apis/common';
 
+import { effect } from '@angular/core';
 import { inject } from '@angular/core';
+import { input } from '@angular/core';
 import { pluckTranscription } from '#mm/state/minutes';
 
 import dayjs from 'dayjs';
@@ -27,16 +28,16 @@ import scrollIntoView from 'scroll-into-view-if-needed';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'mm-transcription',
   template: `
-    @if (minutes.transcription.length > 0) {
+    @if (minutes().transcription.length > 0) {
       <!-- 🔥 breathing room for hydration  -->
       <table style="margin-bottom: 50vh">
         <tbody>
-          @for (tx of minutes.transcription; track tx.id; let ix = $index) {
+          @for (tx of minutes().transcription; track tx.id; let ix = $index) {
             <tr
               #row="hydrated"
               (click)="onSelected(tx)"
               [mmHydrated]="'TX' + tx.id"
-              [ngClass]="{ selected: tx.id === currentTx?.id }"
+              [ngClass]="{ selected: tx.id === currentTx()?.id }"
               [id]="'TX' + tx.id">
               @if (tx.type === 'AG' && row.isHydrated()) {
                 <td colspan="3" width="100%">
@@ -47,7 +48,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                     "
                     [mmFindReplaceMatchFld]="'title'"
                     [mmFindReplaceMatchID]="tx.id"
-                    [mmFindReplaceMatch]="match"
+                    [mmFindReplaceMatch]="match()"
                     [mmHighlight]="searchString()"
                     [mmRemovable]="ix"
                     [value]="tx.title"
@@ -65,7 +66,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                   style="font-family: monospace; font-size: smaller; padding-top: 0.15rem">
                   {{
                     dayjs({ second: tx.start }).format(
-                      minutes.audio.duration > 60 * 60 ? 'HH:mm:ss' : 'mm:ss'
+                      minutes().audio.duration > 60 * 60 ? 'HH:mm:ss' : 'mm:ss'
                     )
                   }}
                 </td>
@@ -75,7 +76,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                     (change)="updateSpeaker(transcriptionSpeaker.value, ix)"
                     [mmFindReplaceMatchFld]="'speaker'"
                     [mmFindReplaceMatchID]="tx.id"
-                    [mmFindReplaceMatch]="match"
+                    [mmFindReplaceMatch]="match()"
                     [mmHighlight]="searchString()"
                     [value]="tx.speaker"
                     style="font-weight: bold; width: 7rem" />
@@ -84,7 +85,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                 <td width="100%">
                   <tui-loader
                     [showLoader]="
-                      status.working?.on === 'rephrase' && status.ix === ix
+                      status().working?.on === 'rephrase' && status().ix === ix
                     ">
                     <textarea
                       #transcriptionSpeech
@@ -92,15 +93,18 @@ import scrollIntoView from 'scroll-into-view-if-needed';
                         updateSpeech(transcriptionSpeech.value, ix)
                       "
                       [class.disabled]="
-                        status.working?.on === 'rephrase' && status.ix === ix
+                        status().working?.on === 'rephrase' &&
+                        status().ix === ix
                       "
                       [mmFindReplaceMatchFld]="'speech'"
                       [mmFindReplaceMatchID]="tx.id"
-                      [mmFindReplaceMatch]="match"
+                      [mmFindReplaceMatch]="match()"
                       [mmHighlight]="searchString()"
                       [mmInsertable]="ix"
                       [mmJoinable]="
-                        minutes.transcription[ix + 1]?.type === 'TX' ? ix : null
+                        minutes().transcription[ix + 1]?.type === 'TX'
+                          ? ix
+                          : null
                       "
                       [mmRephraseable]="ix"
                       [mmRemovable]="ix"
@@ -136,11 +140,11 @@ import scrollIntoView from 'scroll-into-view-if-needed';
           menu.
         </p>
 
-        <tui-loader [showLoader]="status.working?.on === 'transcription'">
+        <tui-loader [showLoader]="status().working?.on === 'transcription'">
           <button
             (click)="transcribeAudio()"
             [appearance]="
-              status.working?.on === 'transcription' ? 'mono' : 'primary'
+              status().working?.on === 'transcription' ? 'mono' : 'primary'
             "
             size="m"
             tuiButton>
@@ -152,43 +156,37 @@ import scrollIntoView from 'scroll-into-view-if-needed';
   `
 })
 export class TranscriptionComponent {
-  /* eslint-disable @typescript-eslint/member-ordering */
-
-  @Input({ required: true }) match: FindReplaceMatch;
-  @Input({ required: true }) minutes: Minutes;
-  @Input({ required: true }) status: StatusStateModel;
-
   @Output() selected = new EventEmitter<Transcription>();
 
-  /* eslint-enable @typescript-eslint/member-ordering */
-
+  currentTx = input<Partial<Transcription>>();
   dayjs = dayjs;
+  match = input.required<FindReplaceMatch>();
+  minutes = input.required<Minutes>();
+  status = input.required<StatusStateModel>();
 
   #controller = inject(ControllerService);
-  #currentTx: Transcription;
   #dialog = inject(DialogService);
   #store = inject(Store);
   #window = inject(WINDOW);
 
-  @Input() get currentTx(): Partial<Transcription> {
-    return this.#currentTx;
-  }
-
-  set currentTx(currentTx: Partial<Transcription>) {
-    this.#currentTx = currentTx;
-    if (currentTx) {
-      const row = this.#window.document.querySelector(`#TX${currentTx.id}`);
-      if (row)
-        scrollIntoView(row, {
-          // 👇 smooth won't work for us, as it is too cumbersome to wait
-          //    until the scroll -- and hydration -- is complete -- normal
-          //    looks better anyway
-          // behavior: 'smooth',
-          block: 'end',
-          inline: 'nearest',
-          scrollMode: 'if-needed'
-        });
-    }
+  constructor() {
+    effect(() => {
+      if (this.currentTx()) {
+        const row = this.#window.document.querySelector(
+          `#TX${this.currentTx().id}`
+        );
+        if (row)
+          scrollIntoView(row, {
+            // 👇 smooth won't work for us, as it is too cumbersome to wait
+            //    until the scroll -- and hydration -- is complete -- normal
+            //    looks better anyway
+            // behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest',
+            scrollMode: 'if-needed'
+          });
+      }
+    });
   }
 
   onSelected(tx: AgendaItem | Transcription): void {
@@ -196,8 +194,8 @@ export class TranscriptionComponent {
   }
 
   searchString(): string {
-    return this.minutes.findReplace?.doFind
-      ? this.minutes.findReplace?.searchString
+    return this.minutes().findReplace?.doFind
+      ? this.minutes().findReplace?.searchString
       : '';
   }
 
@@ -210,16 +208,16 @@ export class TranscriptionComponent {
   }
 
   async updateSpeaker(speaker: string, ix: number): Promise<void> {
-    const original = pluckTranscription(this.minutes, ix).speaker;
+    const original = pluckTranscription(this.minutes(), ix).speaker;
     // 👇 need to show change dialog?
     //    if original is blank, don't show the dialog because
     //    we will ALWAYS only change this occurrence
     let button = 1; // 👈 safety valve if button doesn't get set
-    if (original && !this.minutes.hideSpeakerUpdateDialog) {
+    if (original && !this.minutes().hideSpeakerUpdateDialog) {
       const { checkboxChecked, response } = await this.#dialog.showMessageBox({
         buttons: ['Yes, change all', 'No, just this one'],
         checkboxLabel: `Don't show this message again for these minutes`,
-        detail: `If "don't show this message again" is checked, the action will be honored for all future changes to these minutes. This can be reversed from the details tab.`,
+        detail: `If "don't show this message again" is checked, the action will be honored for all future changes to these minutes(). This can be reversed from the details tab.`,
         message: `Change all occurences of "${original}" to "${speaker}" from here onwards?`,
         title: 'Minute Maker',
         type: 'question'
@@ -231,7 +229,7 @@ export class TranscriptionComponent {
           speakerUpdateButton: button
         })
       );
-    } else button = this.minutes.speakerUpdateButton;
+    } else button = this.minutes().speakerUpdateButton;
     // 👇 yes, change all -- but only if the original wasn't blank
     if (original && button === 0)
       this.#store.dispatch(new UpdateSpeakers(original, speaker, ix));

@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
+import { ConfigState } from '#mm/state/config';
+import { ConfigStateModel } from '#mm/state/config';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Minutes } from '#mm/common';
@@ -88,6 +90,33 @@ import { input } from '@angular/core';
           </span>
         </article>
       </label>
+
+      <article>
+        <label tuiLabel="Badge generation prompt">
+          <tui-text-area
+            [expandable]="true"
+            formControlName="badgeGenerationPrompt"
+            size="m" />
+        </label>
+      </article>
+
+      <article class="row" formGroupName="rephraseStrategyPrompts">
+        <label tuiLabel="Rephrase strategy for accuracy">
+          <tui-text-area [expandable]="true" formControlName="accuracy" />
+        </label>
+        <label tuiLabel="... for brevity">
+          <tui-text-area [expandable]="true" formControlName="brevity" />
+        </label>
+      </article>
+
+      <article class="row" formGroupName="summaryStrategyPrompts">
+        <label tuiLabel="Summary strategy as bullet points">
+          <tui-text-area [expandable]="true" formControlName="bullets" />
+        </label>
+        <label tuiLabel="... into paragraphs">
+          <tui-text-area [expandable]="true" formControlName="paragraphs" />
+        </label>
+      </article>
     </form>
   `
 })
@@ -101,10 +130,14 @@ export class MetadataComponent implements OnInit {
   constructor() {
     // 👇 watch for changes in inputs and update accordingly
     effect(() => {
+      const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
       const dflt = emptyMinutes();
       this.metadata?.setValue(
         {
           absent: this.minutes().absent ?? dflt.absent,
+          badgeGenerationPrompt:
+            this.minutes().badgeGenerationPrompt ||
+            config.badgeGenerationPrompt,
           date: this.minutes().date ?? dflt.date,
           hideSpeakerUpdateDialog:
             this.minutes().hideSpeakerUpdateDialog ??
@@ -112,9 +145,15 @@ export class MetadataComponent implements OnInit {
           numSpeakers: this.minutes().numSpeakers || dflt.numSpeakers,
           organization: this.minutes().organization ?? dflt.subject,
           present: this.minutes().present ?? dflt.present,
+          rephraseStrategyPrompts:
+            this.minutes().rephraseStrategyPrompts ||
+            config.rephraseStrategyPrompts,
           speakerUpdateButton:
             this.speakerUpdateActions[this.minutes().speakerUpdateButton],
           subject: this.minutes().subject ?? dflt.subject,
+          summaryStrategyPrompts:
+            this.minutes().summaryStrategyPrompts ||
+            config.summaryStrategyPrompts,
           visitors: this.minutes().visitors ?? dflt.visitors
         },
         { emitEvent: false }
@@ -126,6 +165,9 @@ export class MetadataComponent implements OnInit {
     // 👇 create the form
     this.metadata = new FormGroup({
       absent: new FormControl(this.minutes().absent),
+      badgeGenerationPrompt: new FormControl(
+        this.minutes().badgeGenerationPrompt
+      ),
       date: new FormControl(this.minutes().date, Validators.required),
       hideSpeakerUpdateDialog: new FormControl(
         this.minutes().hideSpeakerUpdateDialog
@@ -139,10 +181,22 @@ export class MetadataComponent implements OnInit {
         Validators.required
       ),
       present: new FormControl(this.minutes().present),
+      rephraseStrategyPrompts: new FormGroup({
+        accuracy: new FormControl(
+          this.minutes().rephraseStrategyPrompts.accuracy
+        ),
+        brevity: new FormControl(this.minutes().rephraseStrategyPrompts.brevity)
+      }),
       speakerUpdateButton: new FormControl(
         this.speakerUpdateActions[this.minutes().speakerUpdateButton]
       ),
       subject: new FormControl(this.minutes().subject),
+      summaryStrategyPrompts: new FormGroup({
+        bullets: new FormControl(this.minutes().summaryStrategyPrompts.bullets),
+        paragraphs: new FormControl(
+          this.minutes().summaryStrategyPrompts.paragraphs
+        )
+      }),
       visitors: new FormControl(this.minutes().visitors)
     });
     // 👇 watch for changes in form and update accordingly

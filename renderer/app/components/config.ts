@@ -122,7 +122,7 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
       </article>
 
       <article>
-        <label tuiLabel="Badge generation prompt">
+        <label tuiLabel="Default badge generation prompt">
           <tui-text-area
             [expandable]="true"
             formControlName="badgeGenerationPrompt"
@@ -131,7 +131,7 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
       </article>
 
       <article class="row" formGroupName="rephraseStrategyPrompts">
-        <label tuiLabel="Transcription rephrase strategy for accuracy">
+        <label tuiLabel="Default rephrase strategy for accuracy">
           <tui-text-area [expandable]="true" formControlName="accuracy" />
         </label>
         <label tuiLabel="... for brevity">
@@ -140,7 +140,7 @@ import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk';
       </article>
 
       <article class="row" formGroupName="summaryStrategyPrompts">
-        <label tuiLabel="Transcription summary strategy as bullet points">
+        <label tuiLabel="Default summary strategy as bullet points">
           <tui-text-area [expandable]="true" formControlName="bullets" />
         </label>
         <label tuiLabel="... into paragraphs">

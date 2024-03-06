@@ -142,7 +142,6 @@ import dayjs from 'dayjs';
 
               <mm-badges
                 [ngStyle]="{ '--ix': TabIndex.badges }"
-                [config]="mm.config"
                 [minutes]="mm.minutes"
                 [status]="mm.status"
                 class="panel" />

@@ -123,6 +123,7 @@ export class ControllerService {
   async generateBadges(): Promise<void> {
     const working = new Working('badge');
     const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
+    const minutes = this.#store.selectSnapshot<Minutes>(MinutesState);
     // 👇 prepare to generate badge
     this.#store.dispatch(
       new SetStatus({
@@ -134,7 +135,7 @@ export class ControllerService {
     try {
       const response = await this.#openai.imageGeneration({
         model: config.openaiImageGenerationModel,
-        prompt: config.badgeGenerationPrompt
+        prompt: minutes.badgeGenerationPrompt
       });
       if (response.error) throw new Error(response.error);
       this.#store.dispatch(
@@ -188,7 +189,10 @@ export class ControllerService {
             gcsuri: upload.gcsuri,
             sampleRateHertz: metadata.sampleRate,
             url: upload.url
-          }
+          },
+          badgeGenerationPrompt: config.badgeGenerationPrompt,
+          rephraseStrategyPrompts: config.rephraseStrategyPrompts,
+          summaryStrategyPrompts: config.summaryStrategyPrompts
         };
         this.#store.dispatch([
           new SetPathToMinutes(null),
@@ -247,7 +251,7 @@ export class ControllerService {
       const speech = pluckTranscription(minutes, ix).speech;
       const response = await this.#openai.chatCompletion({
         model: config.openaiChatCompletionModel,
-        prompt: `${config.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`,
+        prompt: `${minutes.rephraseStrategyPrompts[rephraseStrategy]}:\n\n${speech}`,
         temperature: config.openaiChatTemperature
       });
       if (response.finish_reason === 'length')
@@ -348,7 +352,7 @@ export class ControllerService {
         const response = await this.#openai.chatCompletion({
           model: config.openaiChatCompletionModel,
           prompt: `${
-            config.summaryStrategyPrompts[summaryStrategy]
+            minutes.summaryStrategyPrompts[summaryStrategy]
           }:\n\n${texts.join('\n')}`,
           temperature: config.openaiChatTemperature
         });
@@ -492,11 +496,18 @@ export class ControllerService {
   async #loadMinutes(path: string): Promise<Minutes> {
     let minutes: Minutes;
     try {
+      const config = this.#store.selectSnapshot<ConfigStateModel>(ConfigState);
       const raw = await this.#fs.loadFile(path);
       minutes = MinutesSchema.parse(JSON.parse(raw));
       if (minutes) {
         this.#store.dispatch([
-          new SetMinutes({ ...emptyMinutes(), ...minutes }),
+          new SetMinutes({
+            ...emptyMinutes(),
+            badgeGenerationPrompt: config.badgeGenerationPrompt,
+            rephraseStrategyPrompts: config.rephraseStrategyPrompts,
+            summaryStrategyPrompts: config.summaryStrategyPrompts,
+            ...minutes
+          }),
           new AddRecent(path),
           new ClearUndoStacks(),
           new AnalyzeMinutes(minutes)

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
-import { ConfigStateModel } from '#mm/state/config';
 import { ControllerService } from '#mm/services/controller';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -9,7 +8,6 @@ import { OnInit } from '@angular/core';
 import { SetMinutes } from '#mm/state/minutes';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
-import { UpdateChanges as UpdateConfigChanges } from '#mm/state/config';
 
 import { effect } from '@angular/core';
 import { inject } from '@angular/core';
@@ -92,7 +90,6 @@ import { input } from '@angular/core';
 })
 export class BadgesComponent implements OnInit {
   badgesForm: FormGroup;
-  config = input.required<ConfigStateModel>();
   minutes = input.required<Minutes>();
   status = input.required<StatusStateModel>();
 
@@ -102,10 +99,7 @@ export class BadgesComponent implements OnInit {
   constructor() {
     // 👇 watch for changes in inputs and update accordingly
     effect(() => {
-      this.badgesForm?.patchValue(
-        { ...this.config(), ...this.minutes() },
-        { emitEvent: false }
-      );
+      this.badgesForm?.patchValue({ ...this.minutes() }, { emitEvent: false });
     });
   }
 
@@ -117,17 +111,17 @@ export class BadgesComponent implements OnInit {
     // 👇 create the form
     this.badgesForm = new FormGroup({
       badgeGenerationPrompt: new FormControl(
-        this.config().badgeGenerationPrompt
+        this.minutes().badgeGenerationPrompt
       ),
       badgeNum: new FormControl(this.minutes().badgeNum)
     });
     // 👇 watch for changes in form and update accordingly
     this.badgesForm.valueChanges.subscribe((changes) => {
       this.#store.dispatch([
-        new UpdateConfigChanges({
-          badgeGenerationPrompt: changes.badgeGenerationPrompt
-        }),
-        new SetMinutes({ badgeNum: changes.badgeNum })
+        new SetMinutes({
+          badgeGenerationPrompt: changes.badgeGenerationPrompt,
+          badgeNum: changes.badgeNum
+        })
       ]);
     });
   }

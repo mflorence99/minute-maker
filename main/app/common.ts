@@ -328,24 +328,20 @@ export const FindReplaceSchema = z.object({
   withReplace: z.boolean().optional()
 });
 
-export const RephraseStrategyPromptsSchema = z.object(
-  rephraseStrategies.reduce(
-    (acc, strategy) => ({ ...acc, [strategy]: z.string() }),
-    {}
-  )
-);
+export const RephraseStrategyPromptsSchema = z.object({
+  accuracy: z.string(),
+  brevity: z.string()
+} satisfies Record<RephraseStrategy, any>);
 
 export const SummarySchema = z.object({
   section: z.string(),
   summary: z.string()
 });
 
-export const SummaryStrategyPromptsSchema = z.object(
-  summaryStrategies.reduce(
-    (acc, strategy) => ({ ...acc, [strategy]: z.string() }),
-    {}
-  )
-);
+export const SummaryStrategyPromptsSchema = z.object({
+  bullets: z.string(),
+  paragraphs: z.string()
+} satisfies Record<SummaryStrategy, any>);
 
 export const TranscriptionSchema = z.object({
   end: z.number(),
@@ -396,21 +392,15 @@ export type FindReplace = z.infer<typeof FindReplaceSchema>;
 
 export type Minutes = z.infer<typeof MinutesSchema>;
 
-export type RephraseStrategyPrompts = Record<RephraseStrategy, string>;
-
-// 🔥 why is this not identical to above?
-// export type RephraseStrategyPrompts = z.infer<
-//   typeof RephraseStrategyPromptsSchema
-// >;
+export type RephraseStrategyPrompts = z.infer<
+  typeof RephraseStrategyPromptsSchema
+>;
 
 export type Summary = z.infer<typeof SummarySchema>;
 
-export type SummaryStrategyPrompts = Record<SummaryStrategy, string>;
-
-// 🔥 why is this not identical to above?
-// export type SummaryStrategyPrompts = z.infer<
-//   typeof SummaryStrategyPromptsSchema
-// >;
+export type SummaryStrategyPrompts = z.infer<
+  typeof SummaryStrategyPromptsSchema
+>;
 
 export type Transcription = z.infer<typeof TranscriptionSchema>;
 

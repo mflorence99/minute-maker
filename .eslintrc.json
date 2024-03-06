@@ -1,10 +1,5 @@
 {
-  "extends": [
-    "eslint-config-mflorence99",
-    "eslint-config-prettier",
-    "plugin:jest/all",
-    "plugin:jest-extended/all"
-  ],
+  "extends": ["eslint-config-mflorence99", "eslint-config-prettier"],
   "parserOptions": {
     "project": [
       "bin/tsconfig.json",
@@ -17,8 +12,6 @@
   "plugins": [
     "eslint-plugin-import",
     "eslint-plugin-import-splitnsort",
-    "eslint-plugin-jest",
-    "eslint-plugin-jest-extended",
     "eslint-plugin-prefer-arrow",
     "eslint-plugin-prettier"
   ],
@@ -50,18 +43,6 @@
     ],
     "@typescript-eslint/no-duplicate-type-constituents": "off",
     "@typescript-eslint/unbound-method": "off",
-    "jest/max-expects": "off",
-    "jest/no-conditional-expect": "off",
-    "jest/no-disabled-tests": "off",
-    "jest/no-done-callback": "off",
-    "jest/no-hooks": "off",
-    "jest/no-test-return-statement": "off",
-    "jest/no-untyped-mock-factory": "off",
-    "jest/prefer-spy-on": "off",
-    "jest/require-hook": "off",
-    "jest/prefer-expect-assertions": "off",
-    "jest/prefer-lowercase-title": ["error", { "ignore": ["describe"] }],
-    "jest/unbound-method": "off",
     "no-constant-condition": ["error", { "checkLoops": false }],
     "no-unused-private-class-members": "error"
   }

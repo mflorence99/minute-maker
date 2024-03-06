@@ -5,13 +5,13 @@ import { NgxsOnInit } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { OpenAIModel } from '#mm/common';
 import { OpenAIService } from '#mm/services/openai';
-import { RephraseStrategy } from '#mm/common';
+import { RephraseStrategyPrompts } from '#mm/common';
 import { Select } from '@ngxs/store';
 import { Selector } from '@ngxs/store';
 import { Stack as StackUndoable } from '#mm/state/undo';
 import { State } from '@ngxs/store';
 import { Store } from '@ngxs/store';
-import { SummaryStrategy } from '#mm/common';
+import { SummaryStrategyPrompts } from '#mm/common';
 import { TranscriberService } from '#mm/services/transcriber';
 import { TranscriptionImpl } from '#mm/common';
 import { UndoableAction } from '#mm/state/undo';
@@ -42,12 +42,9 @@ export class UpdateChanges extends UndoableAction {
   }
 }
 
-type RephraseStrategyPrompts = Record<RephraseStrategy, string>;
-type SummaryStrategyPrompts = Record<SummaryStrategy, string>;
-
 export type ConfigStateModel = {
   assemblyaiCredentials: string;
-  badgeGenerationPrompt;
+  badgeGenerationPrompt: string;
   bucketName: string;
   googleCredentials: string;
   openaiChatCompletionModel: OpenAIModel;

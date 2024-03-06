@@ -76,12 +76,10 @@ const openaiModels: Record<OpenAIModel, string> = {
 // 👇 all this so we can access the strategy at runtime eg: in UI
 export const rephraseStrategies = ['brevity', 'accuracy'] as const;
 export type RephraseStrategy = (typeof rephraseStrategies)[number];
-const rephraseStrategy: RephraseStrategy = 'accuracy';
 
 // 👇 all this so we can access the strategy at runtime eg: in UI
 export const summaryStrategies = ['bullets', 'paragraphs'] as const;
 export type SummaryStrategy = (typeof summaryStrategies)[number];
-const summaryStrategy: SummaryStrategy = 'paragraphs';
 
 export type TranscriptionImpl = 'assemblyai' | 'google';
 
@@ -113,12 +111,12 @@ export const Constants = {
   openaiChatCompletionDefaults,
   openaiImageGenerationDefaults,
   openaiModels,
-  rephraseStrategy,
+  rephraseStrategy: 'accuracy',
   saveFileThrottleInterval: 2000,
   sentryDSN:
     'https://c4cd041a16584464b8c0f6b2c984b516@o918490.ingest.sentry.io/5861734',
   speakerPfx: 'Speaker_',
-  summaryStrategy,
+  summaryStrategy: 'paragraphs',
   throttledEventInterval: 1500,
   timeupdateThrottleInterval: 250,
   transcriberPollInterval: 10000,
@@ -330,10 +328,24 @@ export const FindReplaceSchema = z.object({
   withReplace: z.boolean().optional()
 });
 
+export const RephraseStrategyPromptsSchema = z.object(
+  rephraseStrategies.reduce(
+    (acc, strategy) => ({ ...acc, [strategy]: z.string() }),
+    {}
+  )
+);
+
 export const SummarySchema = z.object({
   section: z.string(),
   summary: z.string()
 });
+
+export const SummaryStrategyPromptsSchema = z.object(
+  summaryStrategies.reduce(
+    (acc, strategy) => ({ ...acc, [strategy]: z.string() }),
+    {}
+  )
+);
 
 export const TranscriptionSchema = z.object({
   end: z.number(),
@@ -355,6 +367,7 @@ export const MinutesSchema = z.object({
     // 👇 duration of waveform
     wavelength: z.number().optional()
   }),
+  badgeGenerationPrompt: z.string().optional(),
   badgeNum: z.number(),
   badges: z.string().array(),
   date: z.coerce.date().nullable(),
@@ -364,9 +377,11 @@ export const MinutesSchema = z.object({
   numSpeakers: z.number(),
   organization: z.string(),
   present: z.string().array(),
+  rephraseStrategyPrompts: RephraseStrategyPromptsSchema.optional(),
   speakerUpdateButton: z.number(),
   subject: z.string(),
   summary: SummarySchema.array(),
+  summaryStrategyPrompts: SummaryStrategyPromptsSchema.optional(),
   transcription: z
     .discriminatedUnion('type', [AgendaItemSchema, TranscriptionSchema])
     .array(),
@@ -381,7 +396,21 @@ export type FindReplace = z.infer<typeof FindReplaceSchema>;
 
 export type Minutes = z.infer<typeof MinutesSchema>;
 
+export type RephraseStrategyPrompts = Record<RephraseStrategy, string>;
+
+// 🔥 why is this not identical to above?
+// export type RephraseStrategyPrompts = z.infer<
+//   typeof RephraseStrategyPromptsSchema
+// >;
+
 export type Summary = z.infer<typeof SummarySchema>;
+
+export type SummaryStrategyPrompts = Record<SummaryStrategy, string>;
+
+// 🔥 why is this not identical to above?
+// export type SummaryStrategyPrompts = z.infer<
+//   typeof SummaryStrategyPromptsSchema
+// >;
 
 export type Transcription = z.infer<typeof TranscriptionSchema>;
 

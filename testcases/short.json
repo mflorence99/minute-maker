@@ -73,6 +73,15 @@
     }
   ],
   "visitors": [],
+  "badgeGenerationPrompt": "Show six citizens discussing documents gathered around a round table in the style of Norman Rockwell. Do not show any signs.",
+  "rephraseStrategyPrompts": {
+    "accuracy": "I made the following statement. Rephrase it using grammatical sentences and paragraphs",
+    "brevity": "I made the following statement. Simplify and summarize it"
+  },
+  "summaryStrategyPrompts": {
+    "bullets": "The intended audience is a professional reader. Summarize the following discussion into bullet points by using the past tense",
+    "paragraphs": "The intended audience is a professional reader. Summarize the following discussion into no more than three paragraphs by using the past tense"
+  },
   "transcriptionName": null,
   "transcriptionStart": "2023-11-10T10:31:17.572Z"
 }

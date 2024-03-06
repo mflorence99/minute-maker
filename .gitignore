@@ -4,11 +4,8 @@
 /.angular
 /.postcss-angular
 /bin/out
-/coverage
 /dist
 /installers
-/main/coverage
 /node_modules
 /package
-/renderer/coverage
 /temp

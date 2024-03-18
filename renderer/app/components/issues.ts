@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
-import { EventEmitter } from '@angular/core';
 import { Issue } from '#mm/state/issues';
-import { Output } from '@angular/core';
 
 import { input } from '@angular/core';
+import { output } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,9 +48,8 @@ import { input } from '@angular/core';
   ]
 })
 export class IssuesComponent {
-  @Output() selected = new EventEmitter<Issue>();
-
   issues = input.required<Issue[]>();
+  selected = output<Issue>();
 
   onSelected(issue: Issue): void {
     this.selected.emit(issue);

@@ -4,16 +4,14 @@ import { ElementRef } from '@angular/core';
 import { GenericPlugin } from 'wavesurfer.js/dist/base-plugin';
 import { OnDestroy } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { Output } from '@angular/core';
 import { TimelinePluginOptions } from 'wavesurfer.js/dist/plugins/timeline';
-import { WatchableEventEmitter } from '#mm/utils';
 import { WaveSurferPlugin } from '#mm/components/wavesurfer-plugin';
 import { WaveSurferPluginComponent } from '#mm/components/wavesurfer-plugin';
 
 import { forwardRef } from '@angular/core';
 import { inject } from '@angular/core';
 import { input } from '@angular/core';
-import { kebabasize } from '#mm/utils';
+import { output } from '@angular/core';
 
 import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline';
 
@@ -31,10 +29,9 @@ import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline';
 export class WaveSurferTimelineComponent
   implements OnDestroy, OnInit, WaveSurferPlugin
 {
-  @Output() ready = new WatchableEventEmitter<void>();
-
   options = input<Partial<TimelinePluginOptions>>({});
   plugin: TimelinePlugin;
+  ready = output();
 
   #host = inject(ElementRef);
 
@@ -52,15 +49,7 @@ export class WaveSurferTimelineComponent
       container: this.#host.nativeElement,
       ...this.options()
     });
-    // 👇 bind any events
-    Object.getOwnPropertyNames(this)
-      .filter(
-        (prop) =>
-          this[prop] instanceof WatchableEventEmitter &&
-          this[prop].subscriberCount > 0
-      )
-      .forEach((prop) => {
-        this.plugin.on(kebabasize(prop), (args) => this[prop].emit(args));
-      });
+    // 👇 bind to events
+    this.plugin.on('ready', () => this.ready.emit());
   }
 }

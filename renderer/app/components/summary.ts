@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ControllerService } from '#mm/services/controller';
-import { EventEmitter } from '@angular/core';
 import { Minutes } from '#mm/common';
-import { Output } from '@angular/core';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
 import { SummaryStrategy } from '#mm/common';
@@ -11,6 +9,7 @@ import { UpdateSummary } from '#mm/state/minutes';
 
 import { inject } from '@angular/core';
 import { input } from '@angular/core';
+import { output } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -95,9 +94,8 @@ import { input } from '@angular/core';
   `
 })
 export class SummaryComponent {
-  @Output() selected = new EventEmitter<number>();
-
   minutes = input<Minutes>();
+  selected = output<number>();
   status = input<StatusStateModel>();
   summIndex = 0;
 

@@ -3,10 +3,8 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { Component } from '@angular/core';
 import { ControllerService } from '#mm/services/controller';
 import { DialogService } from '#mm/services/dialog';
-import { EventEmitter } from '@angular/core';
 import { FindReplaceMatch } from '#mm/components/find-replace';
 import { Minutes } from '#mm/common';
-import { Output } from '@angular/core';
 import { SetMinutes } from '#mm/state/minutes';
 import { StatusStateModel } from '#mm/state/status';
 import { Store } from '@ngxs/store';
@@ -19,6 +17,7 @@ import { WINDOW } from '@ng-web-apis/common';
 import { effect } from '@angular/core';
 import { inject } from '@angular/core';
 import { input } from '@angular/core';
+import { output } from '@angular/core';
 import { pluckTranscription } from '#mm/state/minutes';
 
 import dayjs from 'dayjs';
@@ -156,12 +155,11 @@ import scrollIntoView from 'scroll-into-view-if-needed';
   `
 })
 export class TranscriptionComponent {
-  @Output() selected = new EventEmitter<Transcription>();
-
   currentTx = input<Partial<Transcription>>();
   dayjs = dayjs;
   match = input.required<FindReplaceMatch>();
   minutes = input.required<Minutes>();
+  selected = output<Transcription>();
   status = input.required<StatusStateModel>();
 
   #controller = inject(ControllerService);

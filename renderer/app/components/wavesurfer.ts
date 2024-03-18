@@ -5,26 +5,22 @@ import { ClearStatus } from '#mm/state/status';
 import { Component } from '@angular/core';
 import { ComponentState } from '#mm/state/component';
 import { ComponentStateModel } from '#mm/state/component';
-import { ContentChildren } from '@angular/core';
 import { ElementRef } from '@angular/core';
-import { EventEmitter } from '@angular/core';
 import { OnDestroy } from '@angular/core';
-import { Output } from '@angular/core';
-import { QueryList } from '@angular/core';
 import { SetComponentState } from '#mm/state/component';
 import { SetStatus } from '#mm/state/status';
 import { Store } from '@ngxs/store';
-import { ViewChild } from '@angular/core';
-import { WatchableEventEmitter } from '#mm/utils';
 import { WaveSurferOptions } from 'wavesurfer.js';
 import { WaveSurferPlugin } from '#mm/components/wavesurfer-plugin';
 import { WaveSurferPluginComponent } from '#mm/components/wavesurfer-plugin';
 import { Working } from '#mm/state/status';
 
+import { contentChildren } from '@angular/core';
 import { effect } from '@angular/core';
 import { inject } from '@angular/core';
 import { input } from '@angular/core';
-import { kebabasize } from '#mm/utils';
+import { output } from '@angular/core';
+import { viewChild } from '@angular/core';
 
 import deepCopy from 'deep-copy';
 import WaveSurfer from 'wavesurfer.js';
@@ -104,40 +100,30 @@ import WaveSurfer from 'wavesurfer.js';
   ]
 })
 export class WaveSurferComponent implements OnDestroy, AfterViewInit {
-  /* eslint-disable @typescript-eslint/member-ordering */
-
-  @Output() audioprocess = new WatchableEventEmitter<number>();
-  @Output() click = new WatchableEventEmitter<number>();
-  @Output() decode = new WatchableEventEmitter<number>();
-  @Output() destroy = new WatchableEventEmitter<void>();
-  @Output() drag = new WatchableEventEmitter<number>();
-  @Output() finish = new WatchableEventEmitter<void>();
-  @Output() interaction = new WatchableEventEmitter<void>();
-  @Output() load = new WatchableEventEmitter<string>();
-  @Output() pause = new WatchableEventEmitter<void>();
-  @Output() play = new WatchableEventEmitter<void>();
-  @Output() ready = new WatchableEventEmitter<number>();
-  @Output() redraw = new WatchableEventEmitter<void>();
-  @Output() scroll = new WatchableEventEmitter<Event>();
-  @Output() seeking = new WatchableEventEmitter<number>();
-  @Output() timeupdate = new WatchableEventEmitter<number>();
-  @Output() zoom = new WatchableEventEmitter<number>();
-
-  @Output() audioFileLoaded = new EventEmitter<HTMLAudioElement>();
-
-  @ViewChild('media') media: ElementRef<HTMLMediaElement>;
-  @ViewChild('wave') wave: ElementRef<HTMLElement>;
-  @ViewChild('zoomer') zoomer: ElementRef<HTMLInputElement>;
-
-  @ContentChildren(WaveSurferPluginComponent)
-  plugins$: QueryList<WaveSurferPluginComponent>;
-
-  /* eslint-enable @typescript-eslint/member-ordering */
-
   audioFile = input<string>();
+  audioFileLoaded = output<HTMLAudioElement>();
+  audioprocess = output<number>();
+  click = output<number>();
   componentState: ComponentStateModel;
+  decode = output<number>();
+  destroy = output<void>();
+  drag = output<number>();
+  finish = output<void>();
+  interaction = output<void>();
+  load = output<string>();
+  media = viewChild<ElementRef<HTMLMediaElement>>('media');
   options = input<Partial<WaveSurferOptions>>({});
+  pause = output<void>();
+  play = output<void>();
+  plugins = contentChildren(WaveSurferPluginComponent);
+  ready = output<number>();
+  redraw = output<void>();
+  scroll = output<number>();
+  seeking = output<number>();
+  timeupdate = output<number>();
+  wave = viewChild<ElementRef<HTMLElement>>('wave');
   wavesurfer: WaveSurfer;
+  zoom = output<number>();
 
   #store = inject(Store);
 
@@ -162,24 +148,33 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     // 👇 create the WaveSurfer
     this.wavesurfer = WaveSurfer.create({
       backend: 'WebAudio',
-      container: this.wave.nativeElement,
-      media: this.media.nativeElement,
+      container: this.wave().nativeElement,
+      media: this.media().nativeElement,
       minPxPerSec: this.componentState.wavesurfer.minPxPerSec,
-      plugins: this.plugins$.map((plugin: WaveSurferPlugin) => plugin.create()),
+      plugins: this.plugins().map((plugin: WaveSurferPlugin) =>
+        plugin.create()
+      ),
       progressColor: '#c0c0c0',
       waveColor: '#8bc34a', // 👈 --tui-accent
       ...this.options()
     });
-    // 👇 bind any events
-    Object.getOwnPropertyNames(this)
-      .filter(
-        (prop) =>
-          this[prop] instanceof WatchableEventEmitter &&
-          this[prop].subscriberCount > 0
-      )
-      .forEach((prop) => {
-        this.wavesurfer.on(kebabasize(prop), (args) => this[prop].emit(args));
-      });
+    // 👇 bind to events
+    this.wavesurfer.on('audioprocess', (args) => this.audioprocess.emit(args));
+    this.wavesurfer.on('click', (args) => this.click.emit(args));
+    this.wavesurfer.on('decode', (args) => this.decode.emit(args));
+    this.wavesurfer.on('destroy', () => this.destroy.emit());
+    this.wavesurfer.on('drag', (args) => this.drag.emit(args));
+    this.wavesurfer.on('finish', () => this.finish.emit());
+    this.wavesurfer.on('interaction', () => this.interaction.emit());
+    this.wavesurfer.on('load', (args) => this.load.emit(args));
+    this.wavesurfer.on('pause', () => this.pause.emit());
+    this.wavesurfer.on('play', () => this.play.emit());
+    this.wavesurfer.on('ready', (args) => this.ready.emit(args));
+    this.wavesurfer.on('redraw', () => this.redraw.emit());
+    this.wavesurfer.on('scroll', (args) => this.scroll.emit(args));
+    this.wavesurfer.on('seeking', (args) => this.seeking.emit(args));
+    this.wavesurfer.on('timeupdate', (args) => this.timeupdate.emit(args));
+    this.wavesurfer.on('zoom', (args) => this.zoom.emit(args));
   }
 
   ngOnDestroy(): void {
@@ -212,7 +207,7 @@ export class WaveSurferComponent implements OnDestroy, AfterViewInit {
     this.wavesurfer.once('ready', () => {
       // 👇 set the media state
       //    NOTE: can't set the playback rate until audio is loaded!
-      const audio = this.media.nativeElement;
+      const audio = this.media().nativeElement;
       audio.playbackRate = this.componentState.audio.playbackRate;
       this.#store.dispatch(new ClearStatus(working));
       // 👇 tell the world we're loaded

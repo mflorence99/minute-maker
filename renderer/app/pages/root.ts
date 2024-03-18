@@ -33,7 +33,6 @@ import { Transcription } from '#mm/common';
 import { TuiAlertService } from '@taiga-ui/core';
 import { Undo } from '#mm/state/undo';
 import { UpdateFindReplace } from '#mm/state/minutes';
-import { ViewChild } from '@angular/core';
 import { WaveSurferComponent } from '#mm/components/wavesurfer';
 import { WINDOW } from '@ng-web-apis/common';
 
@@ -45,6 +44,7 @@ import { map } from 'rxjs';
 import { startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { throttleTime } from 'rxjs';
+import { viewChild } from '@angular/core';
 
 import dayjs from 'dayjs';
 
@@ -303,11 +303,10 @@ export class RootPage {
   @Select(ConfigState.transcriptionRate)
   transcriptionRate$: Observable<number>;
 
-  @ViewChild(WaveSurferComponent) wavesurfer;
-
   currentTx: Partial<Transcription>;
   dayjs = dayjs;
   match: FindReplaceMatch;
+  wavesurfer = viewChild(WaveSurferComponent);
 
   // 👇 just to reference the enum in the template
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -378,7 +377,7 @@ export class RootPage {
 
   onTranscription(tx: Transcription): void {
     this.currentTx = tx;
-    this.wavesurfer.wavesurfer.setTime(tx.start);
+    this.wavesurfer().wavesurfer.setTime(tx.start);
   }
 
   openMinutes(): void {

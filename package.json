@@ -113,6 +113,7 @@
     "postcss-angular": "^1",
     "postcss-scss": "^4",
     "prettier": "^3",
+    "prettier-eslint": "^16.3.0",
     "prettier-plugin-css-order": "^2",
     "prettier-plugin-package": "^1",
     "rxjs": "^7",

@@ -35,9 +35,9 @@ export function chooseFile(event, options: OpenDialogOptions): string {
 
 ipcMain.handle(Channels.fsLoadFile, loadFile);
 
-export async function loadFile(event, path: string): Promise<string> {
+export async function loadFile(event, path: string): Promise {
   const data = await readFile(path, { encoding: 'utf8' });
-  jsome(`👈  readFile ${path} --> ${trunc(data)}`);
+  // jsome(`👈  readFile ${path} --> ${trunc(data)}`);
   return data;
 }
 
@@ -47,10 +47,7 @@ export async function loadFile(event, path: string): Promise<string> {
 
 ipcMain.handle(Channels.fsOpenFile, openFile);
 
-export async function openFile(
-  event,
-  options: OpenDialogOptions
-): Promise<OpenFileResponse> {
+export async function openFile(event, options: OpenDialogOptions): Promise {
   cleanOptions(options);
   const path = chooseFile(event, options);
   if (path) {
@@ -65,14 +62,14 @@ export async function openFile(
 
 ipcMain.handle(Channels.fsSaveFile, saveFile);
 
-let pendingWriteFile: Promise<void> = Promise.resolve();
+let pendingWriteFile: Promise = Promise.resolve();
 
 export async function saveFile(
   event,
   path: string,
   data: string,
   wait: boolean
-): Promise<void> {
+): Promise {
   // 🔥 failsafe for bugs!!
   if (!data || data === 'null' || data === '{}')
     throw new Error(`🔥 Attempt to write empty data ${data}`);

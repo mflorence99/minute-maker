@@ -5,17 +5,7 @@ import { writeFileSync } from 'fs';
 import chalk from 'chalk';
 import got from 'got';
 
-const paths = [
-  '/home/mflo/Downloads/pb-20230801.json',
-  '/home/mflo/Downloads/zba-20230628.json',
-  '/home/mflo/Downloads/pb-20230801.bak.json',
-  '/home/mflo/Downloads/short.json',
-  '/home/mflo/Downloads/cyn.json',
-  '/home/mflo/Downloads/zba-20230628.bak.json',
-  '/home/mflo/Downloads/washington-app-319514-3740581feaee.json',
-  '/home/mflo/mflorence99/minute-maker/testcases/pb-20230801.json',
-  '/home/mflo/mflorence99/minute-maker/testcases/zba-20230628.json'
-];
+const paths = [];
 
 async function main(): Promise<void> {
   for (const path of paths) {
